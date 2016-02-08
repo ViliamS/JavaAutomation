@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
+    <parent>
+        <artifactId>aut-leveris-root</artifactId>
+        <groupId>com.r2development.leveris.qa</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.r2development.leveris.qa.utils</groupId>
+    <artifactId>Environment</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <!--<properties>-->
+        <!--<current.environment>st1</current.environment>-->
+    <!--</properties>-->
+
+    <repositories>
+        <repository>
+            <id>nexus.loftkeys.com</id>
+            <name>loftkeys</name>
+            <url>https://nexus.loftkeys.com</url>
+        </repository>
+        <repository>
+            <id>nexus.thirdparty.loftkeys.com</id>
+            <name>thirdparty loftkeys</name>
+            <url>https://nexus.loftkeys.com/content/repositories/thirdparty</url>
+        </repository>
+        <repository>
+            <id>nexus.qa.loftkeys.com</id>
+            <name>QA loftkeys</name>
+            <url>https://nexus.loftkeys.com/content/repositories/qa</url>
+        </repository>
+    </repositories>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-remote-resources-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>bundle</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <includes>
+                        <include>**/*.properties</include>
+                    </includes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

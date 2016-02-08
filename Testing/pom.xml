@@ -1,0 +1,761 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>aut-leveris-root</artifactId>
+        <groupId>com.r2development.leveris.qa</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--<groupId>com.r2development.leveris.qa</groupId>-->
+    <artifactId>Testing</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <environment>st1</environment>
+        <domain>loftkeys.com</domain>
+        <borrower>https://st1app.loftkeys.com/borrower</borrower>
+        <underwriter>https://st1app.loftkeys.com/underwriter</underwriter>
+        <partner>https://st1app.loftkeys.com/partner</partner>
+        <database>jdbc:oracle:thin:@ST0000D</database>
+        <apollo.client>https://st1apl.loftkeys.com/client</apollo.client>
+        <apollo.payment>https://st1apl.loftkeys.com/payment</apollo.payment>
+        <apollo.auth>https://st1apl.loftkeys.com/sso</apollo.auth>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>nexus.loftkeys.com</id>
+            <name>loftkeys</name>
+            <url>https://nexus.loftkeys.com</url>
+        </repository>
+        <repository>
+            <id>nexus.qa.loftkeys.com</id>
+            <name>QA loftkeys</name>
+            <url>https://nexus.loftkeys.com/content/repositories/qa</url>
+        </repository>
+    </repositories>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <configuration>
+                    <pathSeparator>;</pathSeparator>
+                    <outputAbsoluteArtifactFilename>true</outputAbsoluteArtifactFilename>
+                    <outputFile>target/classpath</outputFile>
+                    <artifactItems/>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>build-classpath</goal>
+                        </goals>
+                        <phase>prepare-package</phase>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.4.3</version>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <executions>
+                    <execution>
+                        <id>load environment</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <files>
+                                <!--<file>${basedir}/target/classes/${current.environment}.properties</file>-->
+                                <file>${project.build.directory}/maven-shared-archive-resources/${environment}.properties</file>
+                            </files>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-remote-resources-plugin</artifactId>
+                <version>1.5</version>
+                <configuration>
+                    <resourceBundles>
+                        <resourceBundle>com.r2development.leveris.qa.utils:Environment:${com-r2development-leveris-qa.utils.environment.version}</resourceBundle>
+                    </resourceBundles>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>process</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.12.4</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <environment>${environment}</environment>
+                        <domain>loftkeys.com</domain>
+                        <!--suppress MavenModelInspection -->
+                        <borrower>${borrower.url}</borrower>
+                        <!--suppress MavenModelInspection -->
+                        <underwriter>${underwriter.url}</underwriter>
+                        <!--suppress MavenModelInspection -->
+                        <partner>${partner.url}</partner>
+                        <!--suppress MavenModelInspection -->
+                        <database>${database.instance}</database>
+                        <!--suppress MavenModelInspection -->
+                        <apollo.client>${apollo.client.url}</apollo.client>
+                        <!--suppress MavenModelInspection -->
+                        <apollo.payment>${apollo.payment.url}</apollo.payment>
+                        <!--suppress MavenModelInspection -->
+                        <apollo.auth>${apollo.auth.url}</apollo.auth>
+                        <!--crm.url=https://st1crm.loftkeys.com-->
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <dependencies>
+
+        <!--<dependency>-->
+            <!--<groupId>com.r2development.leveris.qa.utils</groupId>-->
+            <!--<artifactId>Environment</artifactId>-->
+            <!--<version>${com-r2development-leveris-qa.utils.environment.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.r2development.leveris.qa.utils</groupId>-->
+            <!--<artifactId>AcmExcel</artifactId>-->
+            <!--<version>${com-r2development-leveris-qa.utils.acmexcel.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.r2development.leveris.qa.utils</groupId>-->
+            <!--<artifactId>OraSql</artifactId>-->
+            <!--<version>${com-r2development-leveris-qa.utils.orasql.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.r2development.leveris.qa.utils</groupId>-->
+            <!--<artifactId>DataValidator</artifactId>-->
+            <!--<version>${com-r2development-leveris-qa.data-validator.version}</version>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>com.r2development.leveris.qa</groupId>
+            <artifactId>Borrower</artifactId>
+            <version>${com-r2development-leveris-qa.borrower.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.r2development.leveris.qa</groupId>
+            <artifactId>Underwriter</artifactId>
+            <version>${com-r2development-leveris-qa.underwriter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.r2development.leveris.qa</groupId>
+            <artifactId>Apollo</artifactId>
+            <version>${com-r2development-leveris-qa.apollo.version}</version>
+        </dependency>
+
+        <!-- Testing -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${org-seleniumhq-selenium.selenium-java.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.junit.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-junit</artifactId>
+            <version>${org-hamcrest.hamcrest-junit.version}</version>
+        </dependency>
+
+        <!-- Cucumber -->
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-guice</artifactId>
+            <version>${info-cukes.cucumber-guice.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>${info-cukes.cucumber-guice.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-java8</artifactId>
+            <version>${info-cukes.cucumber-guice.version}</version>
+        </dependency>
+
+        <!-- for cucumber reporting -->
+        <dependency>
+            <groupId>net.masterthought</groupId>
+            <artifactId>cucumber-reporting</artifactId>
+            <version>${net-masterthought.cucumber-reporting.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>${com-google-inject.guice.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>${org-jsoup.jsoup.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.commons-io.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.1</version>
+        </dependency>
+
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>SingleBorrower</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.18.1</version>
+                        <configuration>
+                            <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                            <testFailureIgnore>true</testFailureIgnore>
+
+                            <forkCount>5</forkCount>
+                            <reuseForks>false</reuseForks>
+                            <useFile>false</useFile>
+                            <includes>
+                                <include>**/gui/borrower/SingleBorrowerL1Test.class</include>
+                            </includes>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>net.masterthought</groupId>
+                        <artifactId>maven-cucumber-reporting</artifactId>
+                        <version>0.1.0</version>
+                        <executions>
+                            <execution>
+                                <id>execution</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <projectName>cucumber-jvm-example</projectName>
+                                    <outputDirectory>${project.build.directory}/borrower/gui/SingleBorrowerL1-Cucumber-NativeReports</outputDirectory>
+                                    <cucumberOutput>${project.build.directory}/borrower/gui/SingleBorrowerL1-Cucumber-Json</cucumberOutput>
+                                    <enableFlashCharts>true</enableFlashCharts>
+                                    <skippedFails>false</skippedFails>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>DoubleBorrower</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.18.1</version>
+                        <configuration>
+                            <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                            <testFailureIgnore>true</testFailureIgnore>
+
+                            <forkCount>5</forkCount>
+                            <reuseForks>false</reuseForks>
+                            <useFile>false</useFile>
+                            <includes>
+                                <include>**/gui/borrower/DoubleBorrowerL1Test.class</include>
+                            </includes>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>net.masterthought</groupId>
+                        <artifactId>maven-cucumber-reporting</artifactId>
+                        <version>0.1.0</version>
+                        <executions>
+                            <execution>
+                                <id>execution</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <projectName>cucumber-jvm-example</projectName>
+                                    <outputDirectory>${project.build.directory}/borrower/gui/DoubleBorrowerL1-Cucumber-NativeReports</outputDirectory>
+                                    <cucumberOutput>${project.build.directory}/borrower/gui/DoubleBorrowerL1-Cucumber-Json</cucumberOutput>
+                                    <enableFlashCharts>true</enableFlashCharts>
+                                    <skippedFails>false</skippedFails>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>ApiSingleBorrower</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.18.1</version>
+                        <configuration>
+
+                            <systemPropertyVariables>
+                                <environment>${environment}</environment>
+                            </systemPropertyVariables>
+
+                            <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                            <testFailureIgnore>true</testFailureIgnore>
+
+                            <forkCount>5</forkCount>
+                            <reuseForks>false</reuseForks>
+                            <useFile>false</useFile>
+                            <includes>
+                                <include>**/api/borrower/ApiSingleBorrowerL1Test.class</include>
+                            </includes>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>net.masterthought</groupId>
+                        <artifactId>maven-cucumber-reporting</artifactId>
+                        <version>0.1.0</version>
+                        <executions>
+                            <execution>
+                                <id>execution</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <projectName>cucumber-jvm-example</projectName>
+                                    <outputDirectory>${project.build.directory}/borrower/api/ApiSingleBorrowerL1-Cucumber-NativeReports</outputDirectory>
+                                    <cucumberOutput>${project.build.directory}/borrower/api/ApiSingleBorrowerL1-Cucumber-Json</cucumberOutput>
+                                    <enableFlashCharts>true</enableFlashCharts>
+                                    <skippedFails>false</skippedFails>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>ApiDoubleBorrower</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.18.1</version>
+                        <configuration>
+                            <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                            <testFailureIgnore>true</testFailureIgnore>
+
+                            <forkCount>5</forkCount>
+                            <reuseForks>false</reuseForks>
+                            <useFile>false</useFile>
+                            <includes>
+                                <include>**/api/borrower/ApiDoubleBorrowerL1Test.class</include>
+                            </includes>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>net.masterthought</groupId>
+                        <artifactId>maven-cucumber-reporting</artifactId>
+                        <version>0.1.0</version>
+                        <executions>
+                            <execution>
+                                <id>execution</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <projectName>cucumber-jvm-example</projectName>
+                                    <outputDirectory>${project.build.directory}/borrower/api/ApiDoubleBorrowerL1-Cucumber-NativeReports</outputDirectory>
+                                    <cucumberOutput>${project.build.directory}/borrower/api/ApiDoubleBorrowerL1-Cucumber-Json</cucumberOutput>
+                                    <enableFlashCharts>true</enableFlashCharts>
+                                    <skippedFails>false</skippedFails>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>BorrowerLowLevel</id>
+            <build>
+                <plugins>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.18.1</version>
+                        <configuration>
+                            <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                            <testFailureIgnore>true</testFailureIgnore>
+
+                            <forkCount>5</forkCount>
+                            <reuseForks>false</reuseForks>
+                            <useFile>false</useFile>
+                            <includes>
+                                <include>**/BorrowerLowLevelTest*.class</include>
+                            </includes>
+
+                            <!--<argLine>-Duser.language=en</argLine>-->
+                            <!--<argLine>-Xmx1024m</argLine>-->
+                            <!--<argLine>-XX:MaxPermSize=256m</argLine>-->
+                            <!--<argLine>-Dfile.encoding=UTF-8</argLine>-->
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>net.masterthought</groupId>
+                        <artifactId>maven-cucumber-reporting</artifactId>
+                        <version>0.1.0</version>
+                        <executions>
+                            <execution>
+                                <id>execution</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <projectName>cucumber-jvm-example</projectName>
+                                    <outputDirectory>${project.build.directory}/Borrower-LowLevel-Cucumber-Reports</outputDirectory>
+                                    <cucumberOutput>${project.build.directory}/Borrower-LowLevel-Cucumber-Json</cucumberOutput>
+                                    <enableFlashCharts>true</enableFlashCharts>
+                                    <skippedFails>false</skippedFails>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>CalQuote</id>
+            <build>
+                <plugins>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.18.1</version>
+                        <configuration>
+                            <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                            <testFailureIgnore>true</testFailureIgnore>
+
+                            <forkCount>5</forkCount>
+                            <reuseForks>false</reuseForks>
+                            <useFile>false</useFile>
+                            <includes>
+                                <include>**/CalQuoteSingleBorrowerMoverTest.class</include>
+                                <include>**/CalQuoteSingleBorrowerFirstTimeBuyerTest.class</include>
+                                <include>**/CalQuoteTwoBorrowersFirstTimeBuyersTest.class</include>
+                                <include>**/CalQuoteTwoBorrowersMoversTest.class</include>
+                            </includes>
+
+                            <!--<argLine>-Duser.language=en</argLine>-->
+                            <!--<argLine>-Xmx1024m</argLine>-->
+                            <!--<argLine>-XX:MaxPermSize=256m</argLine>-->
+                            <!--<argLine>-Dfile.encoding=UTF-8</argLine>-->
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>net.masterthought</groupId>
+                        <artifactId>maven-cucumber-reporting</artifactId>
+                        <version>0.1.0</version>
+                        <executions>
+                            <execution>
+                                <id>execution</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <projectName>cucumber-jvm-example</projectName>
+                                    <outputDirectory>${project.build.directory}/Borrower/Gui/CalQuote-Cucumber-Reports</outputDirectory>
+                                    <cucumberOutput>${project.build.directory}/Borrower/Gui/CalQuote-Cucumber-Json</cucumberOutput>
+                                    <enableFlashCharts>true</enableFlashCharts>
+                                    <skippedFails>false</skippedFails>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>ApiCalQuote</id>
+            <build>
+                <plugins>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.18.1</version>
+                        <configuration>
+                            <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                            <testFailureIgnore>false</testFailureIgnore>
+
+                            <forkCount>5</forkCount>
+                            <reuseForks>false</reuseForks>
+                            <useFile>false</useFile>
+                            <includes>
+                                <include>**/ApiCalQuoteSingleBorrowerMoverTest.class</include>
+                                <include>**/ApiCalQuoteSingleBorrowerFirstTimeBuyerTest.class</include>
+                                <include>**/ApiCalQuoteTwoBorrowersFirstTimeBuyersTest.class</include>
+                                <include>**/ApiCalQuoteTwoBorrowersMoversTest.class</include>
+                            </includes>
+
+                            <!--<argLine>-Duser.language=en</argLine>-->
+                            <!--<argLine>-Xmx1024m</argLine>-->
+                            <!--<argLine>-XX:MaxPermSize=256m</argLine>-->
+                            <!--<argLine>-Dfile.encoding=UTF-8</argLine>-->
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>net.masterthought</groupId>
+                        <artifactId>maven-cucumber-reporting</artifactId>
+                        <version>0.1.0</version>
+                        <executions>
+                            <execution>
+                                <id>execution</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <projectName>cucumber-jvm-example</projectName>
+                                    <outputDirectory>${project.build.directory}/Borrower/Api/ApiCalQuote-Cucumber-Reports</outputDirectory>
+                                    <cucumberOutput>${project.build.directory}/Borrower/Api/CalQuote-Cucumber-Json</cucumberOutput>
+                                    <enableFlashCharts>true</enableFlashCharts>
+                                    <skippedFails>true</skippedFails>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>ApiAllCalQuote</id>
+            <build>
+                <plugins>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.18.1</version>
+                        <configuration>
+                            <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                            <testFailureIgnore>false</testFailureIgnore>
+
+                            <forkCount>5</forkCount>
+                            <reuseForks>false</reuseForks>
+                            <useFile>false</useFile>
+                            <includes>
+                                <include>**/ApiAllCalQuoteTest.class</include>
+                            </includes>
+
+                            <!--<argLine>-Duser.language=en</argLine>-->
+                            <!--<argLine>-Xmx1024m</argLine>-->
+                            <!--<argLine>-XX:MaxPermSize=256m</argLine>-->
+                            <!--<argLine>-Dfile.encoding=UTF-8</argLine>-->
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>net.masterthought</groupId>
+                        <artifactId>maven-cucumber-reporting</artifactId>
+                        <version>0.1.0</version>
+                        <executions>
+                            <execution>
+                                <id>execution</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <projectName>cucumber-jvm-example</projectName>
+                                    <outputDirectory>${project.build.directory}/Borrower/Api/ApiAllCalQuote-Cucumber-Reports</outputDirectory>
+                                    <cucumberOutput>${project.build.directory}/Borrower/Api/ApiAllCalQuote-Cucumber-Json</cucumberOutput>
+                                    <enableFlashCharts>true</enableFlashCharts>
+                                    <skippedFails>true</skippedFails>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>QuickRegression</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.18.1</version>
+                        <configuration>
+                            <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                            <testFailureIgnore>false</testFailureIgnore>
+                            <forkCount>5</forkCount>
+                            <reuseForks>false</reuseForks>
+                            <useFile>false</useFile>
+                            <includes>
+                                <include>**/ApiSingleBorrowerL1Test.class</include>
+                                <include>**/ApiDoubleBorrowerL1Test.class</include>
+                                <include>**/SingleBorrowerL1Test.class</include>
+                                <include>**/DoubleBorrowerL1Test.class</include>
+                            </includes>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>net.masterthought</groupId>
+                        <artifactId>maven-cucumber-reporting</artifactId>
+                        <version>0.1.0</version>
+                        <executions>
+                            <execution>
+                                <id>execution</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <projectName>cucumber-jvm-example</projectName>
+                                    <outputDirectory>${project.build.directory}/SmokeTest-Cucumber-Reports</outputDirectory>
+                                    <cucumberOutput>${project.build.directory}/SmokeTest-Cucumber-Json</cucumberOutput>
+                                    <enableFlashCharts>true</enableFlashCharts>
+                                    <skippedFails>false</skippedFails>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                </plugins>
+            </build>
+        </profile>
+
+
+        <profile>
+            <id>ApiBorrowerUnderwriter</id>
+            <build>
+                <plugins>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.18.1</version>
+                        <configuration>
+                            <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                            <testFailureIgnore>false</testFailureIgnore>
+
+                            <forkCount>5</forkCount>
+                            <reuseForks>false</reuseForks>
+                            <useFile>false</useFile>
+                            <includes>
+                                <include>**/SingleBorrowerUnderwriterL1Test.class</include>
+                            </includes>
+
+                            <!--<argLine>-Duser.language=en</argLine>-->
+                            <!--<argLine>-Xmx1024m</argLine>-->
+                            <!--<argLine>-XX:MaxPermSize=256m</argLine>-->
+                            <!--<argLine>-Dfile.encoding=UTF-8</argLine>-->
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>net.masterthought</groupId>
+                        <artifactId>maven-cucumber-reporting</artifactId>
+                        <version>0.1.0</version>
+                        <executions>
+                            <execution>
+                                <id>execution</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <projectName>cucumber-jvm-example</projectName>
+                                    <outputDirectory>${project.build.directory}/Borrower/Api/ApiCalQuote-Cucumber-Reports</outputDirectory>
+                                    <cucumberOutput>${project.build.directory}/Borrower/Api/CalQuote-Cucumber-Json</cucumberOutput>
+                                    <enableFlashCharts>true</enableFlashCharts>
+                                    <skippedFails>true</skippedFails>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                </plugins>
+            </build>
+        </profile>
+
+    </profiles>
+
+</project>

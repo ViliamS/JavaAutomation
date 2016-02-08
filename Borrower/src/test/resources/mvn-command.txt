@@ -1,0 +1,11 @@
+mvn -Dtest=SmokeTest test -DBorrowerEnv=ST1 -DApp=Borrower -DAutomationMode=Prod -DBrowser=Chrome -DExcelName=Borrower_UI_Automation.xls -DActiveScreenshot=true
+mvn -Dtest=BorrowerTest test -DBorrowerEnv=ST1 -DApp=Borrower -DAutomationMode=Prod -DBrowser=Chrome -DExcelName=Borrower_UI_Automation.xls -DActiveScreenshot=true
+
+mvn clean install -DBorrowerEnv=ST1 -DAutomationMode=Prod -DBrowser=Chrome -DActiveScreenshot=true -PMultiParallelRun
+mvn clean install -DBorrowerEnv=ST1 -DAutomationMode=Prod -DBrowser=Chrome -DActiveScreenshot=true -POneBorrowerHighLevel
+mvn clean install -DBorrowerEnv=ST1 -DAutomationMode=Prod -DBrowser=Chrome -DActiveScreenshot=true -PBorrowerHighLevel
+
+mvn clean install -DBorrowerEnv=ST1 -DAutomationMode=Prod -DBrowser=Chrome -DActiveScreenshot=true -PCalQuote
+
+
+

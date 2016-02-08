@@ -1,0 +1,144 @@
+package com.r2development.leveris.selenium.borrower.pageobjects;
+
+import com.r2development.leveris.Borrower;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import java.util.List;
+import java.util.Map;
+
+public class LoginPage extends Borrower implements ILoginPage {
+
+    private static final Log log = LogFactory.getLog(LoginPage.class);
+
+    @FindBy( xpath = CLOSE_LOGIN_XPATH)
+    protected WebElement weCloseLogin;
+
+    @FindBy( xpath = LOGIN_TITLE_XPATH)
+    protected WebElement weTitle;
+
+    @FindBy( xpath = EMAIL_ADDRESS_XPATH)
+    protected WebElement weEmailAddress;
+
+    @FindBy( xpath = PASSWORD_XPATH)
+    protected WebElement wePassword;
+
+    @FindBy( xpath = SHOW_PASSWORD_XPATH)
+    protected WebElement weShowHidePassword;
+
+    @FindBy( xpath = FORGOT_PASSWORD_XPATH)
+    protected WebElement weForgotPassword;
+
+    @FindBy( xpath = LOGIN_BUTTON_XPATH)
+    protected WebElement weLoginButton;
+
+    public LoginPage(WebDriver webDriver) {
+        super(webDriver);
+        PageFactory.initElements(webDriver, this);
+    }
+
+    @Override
+    public IWelcomePage closeLogin() {
+        isVisible(CLOSE_LOGIN_XPATH, true);
+        weCloseLogin.click();
+        return new WelcomePage(webDriver);
+    }
+
+    @Override
+    public ILoginPage setEmailAddress(String emailAddress) {
+        isVisible(EMAIL_ADDRESS_XPATH, true);
+        weEmailAddress.clear();
+        weEmailAddress.sendKeys(emailAddress);
+        return this;
+    }
+
+    @Override
+    public String getEmailAddress() {
+        return null;
+    }
+
+    @Override
+    public ILoginPage setPassword(String password) {
+        isVisible(PASSWORD_XPATH, true);
+        wePassword.clear();
+        wePassword.sendKeys(password);
+        return this;
+    }
+
+    @Override
+    public String getPassword() {
+        return null;
+    }
+
+    @Override
+    public INewPasswordPage clickForgotPassword() {
+        return null;
+    }
+
+    @Override
+    public ILoginPage clickShowPassword() {
+        return null;
+    }
+
+    @Override
+    public ILoginPage clickHidePassword() {
+        return null;
+    }
+
+    @Override
+    public IBorrowerHomePage clickLogin() {
+        isVisible(LOGIN_BUTTON_XPATH, true);
+        weLoginButton.click();
+        return new BorrowerHomePage(webDriver);
+    }
+
+    @Override
+    public boolean isLoaded() {
+        isVisible(LOGIN_TITLE_XPATH, true);
+        isVisible(EMAIL_ADDRESS_XPATH, true);
+        isVisible(PASSWORD_XPATH, true);
+        isVisible(SHOW_PASSWORD_XPATH, true);
+        isVisible(FORGOT_PASSWORD_XPATH, true);
+        isVisible(LOGIN_BUTTON_XPATH, true);
+        return true;
+    }
+
+    @Override
+    public boolean isErrorBox() {
+        return false;
+    }
+
+    @Override
+    public List<String> getErrorBoxMessage() {
+        return null;
+    }
+
+    @Override
+    public Map<String, String> getErrorForms() {
+        return null;
+    }
+
+    @Override
+    public boolean isErrorEmailAddress() {
+        return false;
+    }
+
+    @Override
+    public String getErrorEmailAddressMessage() {
+        return null;
+    }
+
+    @Override
+    public boolean isErrorPassword() {
+        return false;
+    }
+
+    @Override
+    public String getErrorPasswordMessage() {
+        return null;
+    }
+}
