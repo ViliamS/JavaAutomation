@@ -17,7 +17,8 @@
     <properties>
         <version.maven.surefire>2.18.1</version.maven.surefire>
         <version.exec.maven.plugin>1.3</version.exec.maven.plugin>
-        <data.validator.main.Path>com.r2development.leveris.qa.utils.datamodelvalidator.borrowerloanapp.ExcelDataMavenCycleValidator</data.validator.main.Path>
+        <!--<data.validator.main.Path>com.r2development.leveris.qa.utils.datamodelvalidator.borrowerloanapp.ExcelDataMavenCycleValidator</data.validator.main.Path>-->
+        <data.validator.main.Path>DataModelValidator.borrowerLoanApp.ExcelDataMavenCycleValidator</data.validator.main.Path>
     </properties>
 
     <repositories>
@@ -49,7 +50,7 @@
         <dependency>
             <groupId>com.r2development.leveris.qa.utils</groupId>
             <artifactId>AcmExcel</artifactId>
-            <version>${com-r2development-leveris-qa.utils.acmexcel.version}</version>
+            <version>${com-r2development-leveris-qa-utils.acmexcel.version}</version>
         </dependency>
 
         <dependency>

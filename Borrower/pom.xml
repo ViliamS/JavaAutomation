@@ -113,7 +113,7 @@
                 <version>1.5</version>
                 <configuration>
                     <resourceBundles>
-                        <resourceBundle>com.r2development.leveris.qa.utils:Environment:${com-r2development-leveris-qa.utils.environment.version}</resourceBundle>
+                        <resourceBundle>com.r2development.leveris.qa.utils:Environment:${com-r2development-leveris-qa-utils.environment.version}</resourceBundle>
                     </resourceBundles>
                 </configuration>
                 <executions>
@@ -159,17 +159,17 @@
         <dependency>
             <groupId>com.r2development.leveris.qa.utils</groupId>
             <artifactId>Environment</artifactId>
-            <version>${com-r2development-leveris-qa.utils.environment.version}</version>
+            <version>${com-r2development-leveris-qa-utils.environment.version}</version>
         </dependency>
         <dependency>
             <groupId>com.r2development.leveris.qa.utils</groupId>
             <artifactId>AcmExcel</artifactId>
-            <version>${com-r2development-leveris-qa.utils.acmexcel.version}</version>
+            <version>${com-r2development-leveris-qa-utils.acmexcel.version}</version>
         </dependency>
         <dependency>
             <groupId>com.r2development.leveris.qa.utils</groupId>
             <artifactId>OraSql</artifactId>
-            <version>${com-r2development-leveris-qa.utils.orasql.version}</version>
+            <version>${com-r2development-leveris-qa-utils.orasql.version}</version>
         </dependency>
         <dependency>
             <groupId>com.r2development.leveris.qa.utils</groupId>
