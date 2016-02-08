@@ -120,12 +120,12 @@
             <dependency>
                 <groupId>com.r2development.leveris.qa.utils</groupId>
                 <artifactId>AcmExcel</artifactId>
-                <version>${com-r2development-leveris-qa-utils.acmexcel.version}</version>
+                <version>${com-r2development-leveris-qa.utils.acmexcel.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.r2development.leveris.qa.utils</groupId>
                 <artifactId>OraSql</artifactId>
-                <version>${com-r2development-leveris-qa-utils.orasql.version}</version>
+                <version>${com-r2development-leveris-qa.utils.orasql.version}</version>
             </dependency>
 
             <!--===========-->

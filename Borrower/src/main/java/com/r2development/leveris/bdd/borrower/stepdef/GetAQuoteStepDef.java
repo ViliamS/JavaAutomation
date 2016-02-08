@@ -1,10 +1,9 @@
 package com.r2development.leveris.bdd.borrower.stepdef;
 
-import DataModelValidator.borrowerLoanApp.ExcelSheetVerificator;
-//import com.r2development.leveris.qa.utils.datamodelvalidator.borrowerloanapp.*;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.QuoteData;
 import com.r2development.leveris.qa.utils.ACMExcel;
+import com.r2development.leveris.qa.utils.datamodelvalidator.borrowerloanapp.ExcelSheetVerificator;
 import com.r2development.leveris.selenium.borrower.pageobjects.BorrowerHomePage;
 import com.r2development.leveris.selenium.borrower.pageobjects.BuildQuotationPage;
 import com.r2development.leveris.selenium.borrower.pageobjects.FormsMenu;
