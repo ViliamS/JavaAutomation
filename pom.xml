@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.r2development.leveris.qa</groupId>
+    <artifactId>aut-leveris-root</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>automation-leveris-root</name>
+
+    <modules>
+        <module>Environment</module>
+        <module>ORAsql</module>
+        <module>ACMExcel</module>
+        <module>DataValidator</module>
+        <module>Borrower</module>
+        <module>Underwriter</module>
+        <module>Apollo</module>
+        <module>Testing</module>
+    </modules>
+
+    <properties>
+        <com-r2development-leveris-qa.autleveris.version>1.0-SNAPSHOT</com-r2development-leveris-qa.autleveris.version>
+        <com-r2development-leveris-qa.utils.orasql.version>1.0-SNAPSHOT</com-r2development-leveris-qa.utils.orasql.version>
+        <com-r2development-leveris-qa.utils.acmexcel.version>1.0-SNAPSHOT</com-r2development-leveris-qa.utils.acmexcel.version>
+        <com-r2development-leveris-qa.data-validator.version>1.0-SNAPSHOT</com-r2development-leveris-qa.data-validator.version>
+        <com-r2development-leveris-qa.borrower.version>1.0-SNAPSHOT</com-r2development-leveris-qa.borrower.version>
+        <com-r2development-leveris-qa.underwriter.version>1.0-SNAPSHOT</com-r2development-leveris-qa.underwriter.version>
+        <com-r2development-leveris-qa.apollo.version>1.0-SNAPSHOT</com-r2development-leveris-qa.apollo.version>
+        <com-r2development-leveris-qa.utils.environment.version>1.0-SNAPSHOT</com-r2development-leveris-qa.utils.environment.version>
+
+        <environment>st1</environment>
+        <domain>loftkeys.com</domain>
+        <borrower>https://st1app.loftkeys.com/borrower</borrower>
+        <underwriter>https://st1app.loftkeys.com/underwriter</underwriter>
+        <partner>https://st1app.loftkeys.com/partner</partner>
+        <apollo.client>https://st1apl.loftkeys.com/client</apollo.client>
+        <apollo.payment>https://st1apl.loftkeys.com/payment</apollo.payment>
+        <apollo.auth>https://st1apl.loftkeys.com/auth</apollo.auth>
+
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <maven.build.timestamp.format>yyyyMMddHHmmssSSS</maven.build.timestamp.format>
+
+        <org-seleniumhq-selenium.selenium-java.version>2.48.2</org-seleniumhq-selenium.selenium-java.version>
+        <info-cukes.cucumber-guice.version>1.2.4</info-cukes.cucumber-guice.version>
+        <info-cukes.cucumber-junit.version>1.2.4</info-cukes.cucumber-junit.version>
+        <info-cukes.cucumber-java8.version>1.2.4</info-cukes.cucumber-java8.version>
+        <com-google-inject.guice.version>4.0</com-google-inject.guice.version>
+        <net-masterthought.cucumber-reporting.version>1.1.0</net-masterthought.cucumber-reporting.version>
+        <com-oracle.ojdbc7.version>12.1.0.2.0_collectionPatch</com-oracle.ojdbc7.version>
+        <org-apache-poi.poi.version>3.13</org-apache-poi.poi.version>
+        <junit.junit.version>4.12</junit.junit.version>
+        <org-hamcrest.hamcrest-junit.version>2.0.0.0</org-hamcrest.hamcrest-junit.version>
+        <commons-logging.commons-logging.version>1.2</commons-logging.commons-logging.version>
+        <com-google-guava.guava.version>19.0</com-google-guava.guava.version>
+        <org-apache-commons.commons-lang3.version>3.4</org-apache-commons.commons-lang3.version>
+        <commons-io.commons-io.version>2.4</commons-io.commons-io.version>
+        <org-jsoup.jsoup.version>1.8.3</org-jsoup.jsoup.version>
+        <commons-collections.commons-collections.version>3.2.2</commons-collections.commons-collections.version>
+        <org-apache-commons.commons-collections4.version>4.1</org-apache-commons.commons-collections4.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <jenkins.workspace/>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>nexus.loftkeys.com</id>
+            <name>loftkeys</name>
+            <url>https://nexus.loftkeys.com</url>
+        </repository>
+        <repository>
+            <id>nexus.thirdparty.loftkeys.com</id>
+            <name>thirdparty loftkeys</name>
+            <url>https://nexus.loftkeys.com/content/repositories/thirdparty</url>
+        </repository>
+        <repository>
+            <id>nexus.qa.loftkeys.com</id>
+            <name>QA loftkeys</name>
+            <url>https://nexus.loftkeys.com/content/repositories/qa</url>
+        </repository>
+    </repositories>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <!--===========-->
+            <!-- Modules   -->
+            <!--===========-->
+
+            <dependency>
+                <groupId>com.r2development.leveris.qa.utils</groupId>
+                <artifactId>Environment</artifactId>
+                <version>${com-leveris-qa.utils.environment.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.r2development.leveris.qa.utils</groupId>
+                <artifactId>DataValidator</artifactId>
+                <version>${com-leveris-qa.data-validator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.r2development.leveris.qa</groupId>
+                <artifactId>Borrower</artifactId>
+                <version>${com-leveris-qa.borrower.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.r2development.leveris.qa</groupId>
+                <artifactId>Underwriter</artifactId>
+                <version>${com-r2development-leveris-qa.underwriter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.r2development.leveris.qa</groupId>
+                <artifactId>Apollo</artifactId>
+                <version>${com-r2development-leveris-qa.apollo.version.version}</version>
+            </dependency>
+
+            <!-- QA Utils -->
+            <dependency>
+                <groupId>com.r2development.leveris.qa.utils</groupId>
+                <artifactId>AcmExcel</artifactId>
+                <version>${com-r2development-leveris-qa-utils.acmexcel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.r2development.leveris.qa.utils</groupId>
+                <artifactId>OraSql</artifactId>
+                <version>${com-r2development-leveris-qa-utils.orasql.version}</version>
+            </dependency>
+
+            <!--===========-->
+            <!-- Libraries -->
+            <!--===========-->
+
+            <!-- GUI Testing -->
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-java</artifactId>
+                <version>${org-seleniumhq-selenium.selenium-java.version}</version>
+            </dependency>
+
+            <!-- Cucumber -->
+            <dependency>
+                <groupId>info.cukes</groupId>
+                <artifactId>cucumber-guice</artifactId>
+                <version>${info-cukes.cucumber-guice.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>info.cukes</groupId>
+                <artifactId>cucumber-junit</artifactId>
+                <version>${info-cukes.cucumber-junit.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>info.cukes</groupId>
+                <artifactId>cucumber-java8</artifactId>
+                <version>${info-cukes.cucumber-java8.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.inject</groupId>
+                <artifactId>guice</artifactId>
+                <version>${com-google-inject.guice.version}</version>
+            </dependency>
+
+            <!-- for cucumber reporting -->
+            <dependency>
+                <groupId>net.masterthought</groupId>
+                <artifactId>cucumber-reporting</artifactId>
+                <version>${net-masterthought.cucumber-reporting.version}</version>
+            </dependency>
+
+            <!-- Oracle Ojdbc -->
+            <dependency>
+                <groupId>com.oracle</groupId>
+                <artifactId>ojdbc7</artifactId>
+                <version>${com-oracle.ojdbc7.version}</version>
+            </dependency>
+
+            <!-- ACMExcel Utils -->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>${org-apache-poi.poi.version}</version>
+                <!--<exclusions>-->
+                    <!--<exclusion>-->
+                        <!--<artifactId>commons-codec</artifactId>-->
+                        <!--<groupId/>-->
+                    <!--</exclusion>-->
+                <!--</exclusions>-->
+            </dependency>
+
+            <!-- Assertion Testing -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.junit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-junit</artifactId>
+                <version>${org-hamcrest.hamcrest-junit.version}</version>
+            </dependency>
+
+            <!-- Log Utils -->
+            <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>${commons-logging.commons-logging.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>1.7.12</version>
+            </dependency>
+
+            <!-- String, Collection Utils -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${com-google-guava.guava.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${org-apache-commons.commons-lang3.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.commons-io.version}</version>
+            </dependency>
+
+            <!--<dependency>-->
+                <!--<groupId>commons-collections</groupId>-->
+                <!--<artifactId>commons-collections</artifactId>-->
+                <!--<version>${commons-collections.commons-collections.version$}</version>-->
+                <!--<scope>test</scope>-->
+            <!--</dependency>-->
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>4.1</version>
+            </dependency>
+
+            <!-- Html Parser -->
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>${org-jsoup.jsoup.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>2.3.2</version>
+                </plugin>
+
+<!--                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <configuration>
+                        <pathSeparator>;</pathSeparator>
+                        <outputAbsoluteArtifactFilename>true</outputAbsoluteArtifactFilename>
+                        <outputFile>target/classpath</outputFile>
+                        <artifactItems/>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>build-classpath</goal>
+                            </goals>
+                            <phase>prepare-package</phase>
+                        </execution>
+                    </executions>
+                </plugin>-->
+
+                <!-- Using maven-dependency-plugin to copy dependencies to lib -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>2.1</version>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>copy-dependencies</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!--<plugin>-->
+                    <!--<groupId>org.codehaus.mojo</groupId>-->
+                    <!--<artifactId>properties-maven-plugin</artifactId>-->
+                    <!--<version>1.0.0</version>-->
+                    <!--<executions>-->
+                        <!--<execution>-->
+                            <!--<goals>-->
+                                <!--<goal>read-project-properties</goal>-->
+                            <!--</goals>-->
+                            <!--<configuration>-->
+                                <!--<files>-->
+                                    <!--<file>${basedir}/${environment}.properties</file>-->
+                                <!--</files>-->
+                            <!--</configuration>-->
+                        <!--</execution>-->
+                    <!--</executions>-->
+                <!--</plugin>-->
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.12.4</version>
+                    <configuration>
+                        <systemPropertyVariables>
+                            <environment>${environment}</environment>
+                        </systemPropertyVariables>
+                    </configuration>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <compilerArguments>         
+                        <verbose/>
+                    </compilerArguments>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.4.3</version>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.1.2</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>attach-test-sources</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>test-jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+    </build>
+
+</project>
