@@ -14,7 +14,7 @@ import org.openqa.selenium.TimeoutException;
 import java.util.Map;
 
 @Singleton
-public class PersonalDetailsStepDef extends AbakusBorrowerStepDef implements CLV312Workaround {
+public class PersonalDetailsStepDef extends BorrowerStepDef implements CLV312Workaround {
 
     private static final Log log = LogFactory.getLog(PersonalDetailsStepDef.class);
 

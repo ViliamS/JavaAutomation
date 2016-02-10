@@ -21,7 +21,7 @@ import java.sql.Statement;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @Singleton
-public class LoginPageStepDef extends AbakusBorrowerStepDef {
+public class LoginPageStepDef extends BorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(LoginPageStepDef.class);
 

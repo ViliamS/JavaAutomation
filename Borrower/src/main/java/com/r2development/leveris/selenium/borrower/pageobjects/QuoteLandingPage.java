@@ -1,45 +1,45 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.r2development.leveris.Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 
 /**
  * todo Page Object Specific Implementation
  */
-public class QuoteLandingPage extends TopBannerMenu implements IQuoteLandingPage, IQuoteLandingSubSection {
-
-    protected IQuoteLandingSubSection quoteLandingSection;
-    protected ITopBannerMenu topBannerMenu;
+public class QuoteLandingPage extends Borrower implements IQuoteLandingPage, IQuoteLandingSection {
 
     private static final Log log = LogFactory.getLog(QuoteLandingPage.class.getName());
 
-    public QuoteLandingPage(WebDriver webDriver) {
-        super(webDriver);
+    IQuoteLandingSection quoteLandingSection;
 
-        if ( System.getProperty("borrower") == null )
-            System.setProperty("borrower", "https://st1app.loftkeys.com/borrower");
+    public QuoteLandingPage( WebDriver webDriver ) {
+        super( webDriver );
+
+        if (System.getProperty(DEFAULT_ENVIRONMENT_VARIABLE) == null)
+            System.setProperty(DEFAULT_ENVIRONMENT_VARIABLE, DEFAULT_ENVIRONMENT);
 
         get(System.getProperty("borrower"));
-
-        quoteLandingSection = new QuoteLandingSubSection(webDriver);
-        topBannerMenu = new TopBannerMenu(webDriver);
+        PageFactory.initElements( webDriver, this );
+        quoteLandingSection = new QuoteLandingSection( webDriver );
     }
 
     @Override
-    public QuoteLandingPage goToBorrowerQuoteLandingPage(){
+    public IQuoteLandingPage goToBorrowerQuoteLandingPage(){
         get(System.getProperty("borrower"));
         return this;
     }
 
     @Override
-    public QuickLoanPage clickContinueTealButton(){
-        return quoteLandingSection.clickContinueTealButton();
+    public IQuoteQuickLoanPage clickContinuePaydayLoanTealButton(){
+        return quoteLandingSection.clickContinuePaydayLoanTealButton();
     }
 
     @Override
-    public QuickLoanPage clickContinueRedButton(){
-        return quoteLandingSection.clickContinueRedButton();
+    public IQuoteQuickLoanPage clickContinueUnsecuredLoanRedButton(){
+        return quoteLandingSection.clickContinueUnsecuredLoanRedButton();
     }
 
     @Override
@@ -90,5 +90,10 @@ public class QuoteLandingPage extends TopBannerMenu implements IQuoteLandingPage
     @Override
     public String getFromAmountPerMonthValue() {
         return quoteLandingSection.getFromAmountPerMonthValue();
+    }
+
+    @Override
+    public boolean isFromAmountPerMonthEqualToValue( String fromAmountPerMonth ) {
+        return quoteLandingSection.isFromAmountPerMonthEqualToValue( fromAmountPerMonth );
     }
 }

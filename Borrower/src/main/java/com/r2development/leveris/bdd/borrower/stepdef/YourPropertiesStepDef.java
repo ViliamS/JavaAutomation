@@ -11,7 +11,7 @@ import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.TimeoutException;
 
 @Singleton
-public class YourPropertiesStepDef extends AbakusBorrowerStepDef implements CLV312Workaround {
+public class YourPropertiesStepDef extends BorrowerStepDef implements CLV312Workaround {
 
     private static final Log log = LogFactory.getLog(YourPropertiesStepDef.class);
 

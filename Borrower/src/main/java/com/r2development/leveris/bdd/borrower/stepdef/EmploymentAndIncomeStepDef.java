@@ -19,7 +19,7 @@ import java.util.Map;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @Singleton
-public class EmploymentAndIncomeStepDef extends AbakusBorrowerStepDef implements CLV312Workaround {
+public class EmploymentAndIncomeStepDef extends BorrowerStepDef implements CLV312Workaround {
 
     private static final Log log = LogFactory.getLog(EmploymentAndIncomeStepDef.class);
 

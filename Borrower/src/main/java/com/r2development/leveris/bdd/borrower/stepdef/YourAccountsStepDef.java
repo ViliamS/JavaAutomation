@@ -14,7 +14,7 @@ import org.openqa.selenium.WebDriverException;
 import java.util.Map;
 
 @Singleton
-public class YourAccountsStepDef extends AbakusBorrowerStepDef implements CLV312Workaround {
+public class YourAccountsStepDef extends BorrowerStepDef implements CLV312Workaround {
 
     private static final Log log = LogFactory.getLog(YourAccountsStepDef.class);
 

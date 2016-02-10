@@ -9,7 +9,6 @@ import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.joda.time.DateTime;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -51,20 +50,20 @@ public class WebDriverService {
 //            capabilities.setCapability(CapabilityType.PROXY, seleniumProxy);
         }
 
-        if ( StringUtils.isEmpty(System.getProperty("environment")))
-            System.setProperty("environment", "st1");
-
-        if ( StringUtils.isEmpty(System.getProperty("domain")))
-            System.setProperty("domain", "st1app.loftkeys.com");
-
-        if ( StringUtils.isEmpty(System.getProperty("borrower")))
-            System.setProperty("borrower", "https://st1app.loftkeys.com/borrower");
-
+//        if ( StringUtils.isEmpty(System.getProperty("environment")))
+//            System.setProperty("environment", "st1");
+//
+//        if ( StringUtils.isEmpty(System.getProperty("domain")))
+//            System.setProperty("domain", "st1app.loftkeys.com");
+//
+//        if ( StringUtils.isEmpty(System.getProperty("borrower")))
+//            System.setProperty("borrower", "https://st1app.loftkeys.com/borrower");
+//
         if ( System.getProperty("browser") == null)
             System.setProperty("browser", "chrome");
-
-        if ( StringUtils.isEmpty(System.getProperty("timestamp")))
-            System.setProperty("timestamp", DateTime.now().toString("yyyyMMddHHmmssSSS"));
+//
+//        if ( StringUtils.isEmpty(System.getProperty("timestamp")))
+//            System.setProperty("timestamp", DateTime.now().toString("yyyyMMddHHmmssSSS"));
 
         switch (BROWSER_TYPE.getBrowser(System.getProperty("browser"))) {
             case CHROME:

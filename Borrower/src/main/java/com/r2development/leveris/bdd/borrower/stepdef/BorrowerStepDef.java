@@ -8,9 +8,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 @Singleton
-public class AbakusBorrowerStepDef /*extends Abakus*/ /*implements IBorrower*/ {
+public class BorrowerStepDef /*extends Abakus*/ /*implements IBorrower*/ {
 
-    private static final Log log = LogFactory.getLog(AbakusBorrowerStepDef.class);
+    private static final Log log = LogFactory.getLog(BorrowerStepDef.class);
 
     IWelcomePage welcomePage;
     IRegisterPage registerPage;
@@ -35,12 +35,22 @@ public class AbakusBorrowerStepDef /*extends Abakus*/ /*implements IBorrower*/ {
     IDocumentUploadPage documentUploadPage;
     IFormsMenu currentPage;
 
+    IQuoteLandingPage landingPage;
+    IQuoteQuickLoanPage quickLoanPage;
+    IQuoteConfigurationPage quoteConfigurationPage;
+
+    ITopBannerMenu topBannerMenu;
+
     @Inject
     User user;
 //    @Inject
 //    WebDriver webDriver;
 
-    public AbakusBorrowerStepDef() {
+    public BorrowerStepDef() {
+        landingPage = new QuoteLandingPage(WebDriverService.getWebDriverInstance());
+        //quickLoanPage = new QuoteQuickLoanPage(WebDriverService.getWebDriverInstance());
+        //quoteConfigurationPage = new QuoteConfigurationPage(WebDriverService.getWebDriverInstance());
+
         welcomePage = new WelcomePage(WebDriverService.getWebDriverInstance());
         registerPage = new RegisterPage(WebDriverService.getWebDriverInstance());
         loginPage = new LoginPage(WebDriverService.getWebDriverInstance());
@@ -64,7 +74,7 @@ public class AbakusBorrowerStepDef /*extends Abakus*/ /*implements IBorrower*/ {
     }
 
     @Inject
-    public AbakusBorrowerStepDef(User user) {
+    public BorrowerStepDef(User user) {
 //        super(webDriver);
         this.user = user;
     }

@@ -21,7 +21,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 @Singleton
-public class RegisterPageStepDef extends AbakusBorrowerStepDef {
+public class RegisterPageStepDef extends BorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(RegisterPageStepDef.class);
 

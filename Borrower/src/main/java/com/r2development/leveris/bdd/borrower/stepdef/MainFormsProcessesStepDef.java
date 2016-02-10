@@ -9,7 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 @Singleton
-public class MainFormsProcessesStepDef extends AbakusBorrowerStepDef implements CLV312Workaround {
+public class MainFormsProcessesStepDef extends BorrowerStepDef implements CLV312Workaround {
 
     private static final Log log = LogFactory.getLog(MainFormsProcessesStepDef.class);
 
