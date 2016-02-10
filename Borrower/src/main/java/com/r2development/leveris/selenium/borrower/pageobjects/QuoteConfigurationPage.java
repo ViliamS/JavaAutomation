@@ -4,7 +4,6 @@ import com.r2development.leveris.Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 
 /**
  * todo Page Object Specific Implementation
@@ -17,7 +16,6 @@ public class QuoteConfigurationPage extends Borrower implements IQuoteConfigurat
 
     public QuoteConfigurationPage(WebDriver webDriver) {
         super(webDriver);
-        PageFactory.initElements(webDriver, this);
         quotationConfigurationSection = new QuoteConfigurationSection(webDriver);
     }
 
@@ -32,23 +30,23 @@ public class QuoteConfigurationPage extends Borrower implements IQuoteConfigurat
     }
 
     @Override
-    public IQuoteConfigurationPage setAmountToBorrowInput(String amountToBorrow) {
-        return quotationConfigurationSection.setAmountToBorrowInput(amountToBorrow);
+    public IQuoteConfigurationPage setLoanAmountInput(String amountToBorrow) {
+        return quotationConfigurationSection.setLoanAmountInput(amountToBorrow);
     }
 
 //    @Override
-//    public String getAmountToBorrow (){
-//        return quotationConfigurationSection.getAmountToBorrow();
+//    public String getLoanAmount (){
+//        return quotationConfigurationSection.getLoanAmount();
 //    }
 
     @Override
-    public IQuoteConfigurationPage setMonthlyRepaymentInput(String monthlyRepayment) {
-        return quotationConfigurationSection.setMonthlyRepaymentInput(monthlyRepayment);
+    public IQuoteConfigurationPage setMonthlyInstalmentInput(String monthlyRepayment) {
+        return quotationConfigurationSection.setMonthlyInstalmentInput(monthlyRepayment);
     }
 }
 //    @Override
-//    public String getMonthlyRepayment(){
-//        return quotationConfigurationSection.getMonthlyRepayment();
+//    public String getMonthlyInstalmentAmount(){
+//        return quotationConfigurationSection.getMonthlyInstalmentAmount();
 //    }
 
 //    @Override

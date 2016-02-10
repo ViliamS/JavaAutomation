@@ -22,13 +22,13 @@ public class LandingPageData /* extends DataModel */ {
 
     public String getLoanPurpose() { return quotationData.get("LoanPurpose"); }
 
-    public String getNetMonthlyIncome() { return quotationData.get("NetMothlyIncome"); }
+    public String getNetMonthlyIncome() { return quotationData.get("NetMonthlyIncome"); }
 
     public String getMonthlyExpenses() { return quotationData.get("MonthlyExpenses"); }
 
     public String getNumberOfDependents() { return quotationData.get("NumberOfDependents"); }
 
-    public String getAmountToBorrow() { return quotationData.get("AmountToBorrow"); }
+    public String getLoanAmount() { return quotationData.get("AmountToBorrow"); }
 
-    public String getMonthlyRepayment() { return quotationData.get("MonthlyRepayment"); }
+    public String getMonthlyInstalmentAmount() { return quotationData.get("MonthlyRepayment"); }
 }

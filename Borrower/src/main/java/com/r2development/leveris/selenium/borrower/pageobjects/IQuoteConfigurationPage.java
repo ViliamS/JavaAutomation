@@ -5,13 +5,13 @@ package com.r2development.leveris.selenium.borrower.pageobjects;
  */
 public interface IQuoteConfigurationPage {
 
-    IQuoteConfigurationPage setAmountToBorrowInput(String amountToBorrow);
+    IQuoteConfigurationPage setLoanAmountInput(String amountToBorrow);
 
-//    String getAmountToBorrow();
+//    String getLoanAmount();
 
-    IQuoteConfigurationPage setMonthlyRepaymentInput(String monthlyRepayment);
+    IQuoteConfigurationPage setMonthlyInstalmentInput(String monthlyRepayment);
 
-//    String getMonthlyRepayment();
+//    String getMonthlyInstalmentAmount();
 //
 //    boolean isHeaderGreatAndQuickLoanPresent();
 //

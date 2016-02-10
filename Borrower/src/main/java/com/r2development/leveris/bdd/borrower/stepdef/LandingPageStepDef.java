@@ -63,25 +63,23 @@ public class LandingPageStepDef extends BorrowerStepDef {
 
     @Given("^User types into Monthly instalment field a (.*)$")
     public void user_types_value_into_monthly_repayment_field(String monthlyRepayment) {
-        quoteConfigurationPage.setMonthlyRepaymentInput( monthlyRepayment );
-      //  check_that_value_is_in_monthly_repayment_field(monthlyRepayment);
+        quoteConfigurationPage.setMonthlyInstalmentInput( monthlyRepayment );
     }
 
     @Given("^User types into Loan amount field a (.*)$")
     public void user_types_value_into_loan_amount_field( String amountToBorrow ) {
-        quoteConfigurationPage.setAmountToBorrowInput( amountToBorrow );
-       // check_that_value_is_in_in_amount_to_borrow_field( amountToBorrow );
+        quoteConfigurationPage.setLoanAmountInput( amountToBorrow );
     }
 
     private void check_that_value_is_in_in_amount_to_borrow_field(String expectedAmountToBorrow) {
-//        String actualAmountToBorrow = quoteConfigurationPage.getAmountToBorrow();
+//        String actualAmountToBorrow = quoteConfigurationPage.getLoanAmount();
 //        System.out.println("Amount to borrow Expected : '" + expectedAmountToBorrow + "'\n" +
 //                "                 Actual   : '" + actualAmountToBorrow + "'");
 //        Assert.assertTrue("Amount to borrow doesn't match expected value", actualAmountToBorrow.equalsIgnoreCase( expectedAmountToBorrow ) );
     }
 
     private void check_that_value_is_in_monthly_repayment_field(String expectedMonthlyRepaymentField) {
-//        String actualMonthlyRepayment = quoteConfigurationPage.getMonthlyRepayment();
+//        String actualMonthlyRepayment = quoteConfigurationPage.getMonthlyInstalmentAmount();
 //        System.out.println("Monthly repayment Expected : '" + expectedMonthlyRepaymentField + "'\n" +
 //                "                  Actual   : '" + actualMonthlyRepayment + "'");
 //        Assert.assertTrue("Monthly repayment doesn't match expected value", actualMonthlyRepayment.equalsIgnoreCase( expectedMonthlyRepaymentField ) );
@@ -94,9 +92,9 @@ public class LandingPageStepDef extends BorrowerStepDef {
         open_leveris_quote_landing_page();
 
         //getting and checking the page is more less self-test of page xpaths
-        checkUpToValue( landingPageData.getUpToAmount() );
+        /*checkUpToValue( landingPageData.getUpToAmount() );
         checkFromAmountPerMonth( landingPageData.getFromAmountPerMonth() );
-        check_that_payday_value_is_displayed( landingPageData.getPayDayLoanAmount() );
+        check_that_payday_value_is_displayed( landingPageData.getPayDayLoanAmount() );*/
 
         user_click_on_red_continue_button();
 
@@ -104,14 +102,12 @@ public class LandingPageStepDef extends BorrowerStepDef {
         user_types_value_into_net_monthly_income_field( landingPageData.getNetMonthlyIncome() );
         user_types_value_into_monthly_expenses_field( landingPageData.getMonthlyExpenses() );
         user_types_value_into_number_of_dependents_field( landingPageData.getNumberOfDependents() );
-        user_types_value_into_amount_to_borrow_field( landingPageData.getAmountToBorrow() );
+        user_types_value_into_amount_to_borrow_field( landingPageData.getLoanAmount() );
 
         user_click_on_continue_button();
 
-        user_types_value_into_amount_to_borrow_field( landingPageData.getAmountToBorrow() );
-        check_that_value_is_in_monthly_repayment_field( landingPageData.getMonthlyRepayment() );
-        check_that_value_is_in_in_amount_to_borrow_field( landingPageData.getMonthlyRepayment() );
-        check_that_value_is_in_monthly_repayment_field( landingPageData.getMonthlyRepayment() );
+        user_types_value_into_loan_amount_field( landingPageData.getLoanAmount() );
+        user_types_value_into_loan_amount_field( landingPageData.getMonthlyInstalmentAmount() );
 
         user_clicks_on_apply_online();
     }

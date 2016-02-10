@@ -36,13 +36,13 @@ public interface IQuoteConfigurationSection {
           //  TITLE_TOTAL_COST_OF_LOAN =                      DIV,
          //   AMOUNT_TOTAL_COST_OF_LOAN =                     DIV;
 
-    IQuoteConfigurationPage setAmountToBorrowInput(String amountToBorrow);
+    IQuoteConfigurationPage setLoanAmountInput(String amountToBorrow);
 
-//    String getAmountToBorrow();
+//    String getLoanAmount();
 
-    IQuoteConfigurationPage setMonthlyRepaymentInput(String monthlyRepayment);
+    IQuoteConfigurationPage setMonthlyInstalmentInput(String monthlyRepayment);
 
-//    String getMonthlyRepayment();
+//    String getMonthlyInstalmentAmount();
 
 //    boolean isHeaderGreatAndQuickLoanPresent();
 //

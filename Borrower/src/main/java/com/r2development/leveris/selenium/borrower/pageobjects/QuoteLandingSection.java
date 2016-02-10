@@ -3,7 +3,6 @@ package com.r2development.leveris.selenium.borrower.pageobjects;
 import com.r2development.leveris.Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -75,16 +74,17 @@ public class QuoteLandingSection extends Borrower implements IQuoteLandingSectio
 
     @Override
     public IQuoteQuickLoanPage clickContinuePaydayLoanTealButton() {
+/*
         log.info( "Clicking 1" );
 
         clickElement("//a[@wicketpath='main_c_form_form_root_c_w_pnlUnsecuredLoan_c_w_pnlPaydayLoan_c_w_btnContinue_submit']");
         log.info( "Clicking 2" );
-
+*/
+        log.info( "Clicking javascript" );
         clickElementViaJavascript("//a[@wicketpath='main_c_form_form_root_c_w_pnlUnsecuredLoan_c_w_pnlPaydayLoan_c_w_btnContinue_submit']");
-        log.info( "Clicking 3" );
 
-        webDriver.findElement(By.xpath("//a[@wicketpath='main_c_form_form_root_c_w_pnlUnsecuredLoan_c_w_pnlPaydayLoan_c_w_btnContinue_submit']")).submit();
-        log.info( "Clicking 4" );
+        /*webDriver.findElement(By.xpath("//a[@wicketpath='main_c_form_form_root_c_w_pnlUnsecuredLoan_c_w_pnlPaydayLoan_c_w_btnContinue_submit']")).submit();
+        log.info( "Clicking 4" );*/
 
 
         return new QuoteQuickLoanPage(webDriver);  // TODO: 05/02/16 Check te PageObject return is valid

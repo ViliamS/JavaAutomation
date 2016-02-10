@@ -3,6 +3,8 @@ package com.r2development.leveris.selenium.borrower.pageobjects;
 import com.r2development.leveris.Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -18,8 +20,9 @@ public class QuoteConfigurationSection extends Borrower implements IQuoteConfigu
         isHeaderGreatAndQuickLoanPresent();
         isTitleUnsecuredLoanCalculatorPresent();
         isTitleConfigureYourLoanPresent();*/
-        isVisible(INPUT_AMOUNT_TO_BORROW_SLIDER_CONTROL_XPATH);
-        isVisible(INPUT_MONTHLY_REPAYMENT_SLIDER_CONTROL_XPATH);
+        isVisible(INPUT_AMOUNT_TO_BORROW_SLIDER_CONTROL_XPATH, true);
+        isVisible(INPUT_MONTHLY_REPAYMENT_SLIDER_CONTROL_XPATH, true);
+        isVisible(APPLY_ONLINE_TEAL_BUTTON_XPATH, true);
        /* isVisible(APPLY_ONLINE_TEAL_BUTTON_XPATH);
         isChangeProductPresent();
         isTitleNumberOfRepaymentsPresent();
@@ -35,7 +38,7 @@ public class QuoteConfigurationSection extends Borrower implements IQuoteConfigu
     @Override
     public IRegisterPage clickApplyOnline(){
         isVisible(APPLY_ONLINE_TEAL_BUTTON_XPATH);
-        //clickElement(APPLY_ONLINE_TEAL_BUTTON_XPATH);
+        clickElementViaJavascript(APPLY_ONLINE_TEAL_BUTTON_XPATH);
         return new RegisterPage(webDriver);
     }
 
@@ -47,25 +50,28 @@ public class QuoteConfigurationSection extends Borrower implements IQuoteConfigu
     }
 
     @Override
-    public IQuoteConfigurationPage setAmountToBorrowInput(String amountToBorrow) {
+    public IQuoteConfigurationPage setLoanAmountInput(String amountToBorrow) {
         isVisible(INPUT_AMOUNT_TO_BORROW_SLIDER_CONTROL_XPATH);
+        webDriver.findElement(By.xpath(INPUT_AMOUNT_TO_BORROW_SLIDER_CONTROL_XPATH)).sendKeys(Keys.TAB);
         type(INPUT_AMOUNT_TO_BORROW_SLIDER_CONTROL_XPATH, amountToBorrow);
         return new QuoteConfigurationPage(webDriver);
     }
 
 //    @Override
-//    public String getAmountToBorrow (){
+//    public String getLoanAmount (){
 //        return weInputAmountToBorrowSliderControl.getAttribute("value");
 //    }
 
     @Override
-    public IQuoteConfigurationPage setMonthlyRepaymentInput(String monthlyRepayment){
+    public IQuoteConfigurationPage setMonthlyInstalmentInput(String monthlyRepayment){
+        isVisible(INPUT_MONTHLY_REPAYMENT_SLIDER_CONTROL_XPATH);
+        webDriver.findElement(By.xpath(INPUT_MONTHLY_REPAYMENT_SLIDER_CONTROL_XPATH)).sendKeys(Keys.TAB);
         type(INPUT_MONTHLY_REPAYMENT_SLIDER_CONTROL_XPATH, monthlyRepayment);
         return new QuoteConfigurationPage(webDriver);
     }
 
 //    @Override
-//    public String getMonthlyRepayment(){
+//    public String getMonthlyInstalmentAmount(){
 //        return weInputMonthlyRepaymentSliderControl.getAttribute("value");
 //    }
 

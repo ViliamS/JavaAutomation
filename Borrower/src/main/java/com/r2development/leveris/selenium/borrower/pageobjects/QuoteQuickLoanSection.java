@@ -72,7 +72,8 @@ public class QuoteQuickLoanSection extends Borrower implements IQuoteQuickLoanSe
 
     @Override
     public IQuoteConfigurationPage clickContinue() {
-        clickElement(CONTINUE_TEAL_BUTTON_XPATH);
+        isVisible(CONTINUE_TEAL_BUTTON_XPATH, true);
+        clickElementViaJavascript(CONTINUE_TEAL_BUTTON_XPATH);
         return new QuoteConfigurationPage( webDriver );
     }
 
