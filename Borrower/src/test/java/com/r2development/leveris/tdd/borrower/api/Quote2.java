@@ -37,7 +37,7 @@ public class Quote2 {
 
         requestHttpPost(
                 httpClient,
-                "http://dv2app.opoqodev.com/stable-borrower/form.1?wicket:interface=:1:main:c:form:form:root:c:w:pnlUnsecuredLoan:c:w:pnlPaydayLoan:c:w:btnContinue:submit::IBehaviorListener:0:",
+                "http://dv2app.opoqodev.com/stable-borrower/form.1?wicket:interface=:1:main:c:form:form:root:c:w:pnlUnsecuredLoan:c:w:pnlUnsecuredLoan1:c:w:btnContinue1:submit::IBehaviorListener:0:",
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -53,7 +53,7 @@ public class Quote2 {
         );
 
         Map<String, String> quote1Parameters = new LinkedHashMap<>();
-        quote1Parameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:cmbLoanPurpose:combobox", "PERSONAL");
+        quote1Parameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:cmbLoanPurpose:combobox", "PAYDAY");
         quote1Parameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:crbNetMonthlyIncome:tb", "1");
         quote1Parameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:crbMonthlyExpenses:tb", "2");
         quote1Parameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:txtNumberOfDependents:tb", "3");
@@ -113,6 +113,7 @@ public class Quote2 {
         String firstName = "Anthony";
         registrationParameters.put("root:c:w:pnlMain:c:w:txtName:tb", "Anthony");
         String email = "anthony.mottot.test0001" + DateTime.now().toString("yyyyMMddhhmmssSSS")+"@abakus.com";
+        System.out.println("Email : " + email);
         registrationParameters.put("root:c:w:pnlMain:c:w:txtEmailAddress:tb", email);
         String phoneNumber = "123456789";
         registrationParameters.put("root:c:w:pnlMain:c:w:txtPhoneNumber:tb", phoneNumber);

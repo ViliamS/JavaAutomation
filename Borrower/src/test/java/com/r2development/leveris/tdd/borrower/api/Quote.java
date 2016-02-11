@@ -37,7 +37,7 @@ public class Quote {
 
         requestHttpPost(
                 httpClient,
-                "http://dv2app.opoqodev.com/stable-borrower/form.1?wicket:interface=:1:main:c:form:form:root:c:w:pnlUnsecuredLoan:c:w:pnlUnsecuredLoanSmall:c:w:btnContinue1:submit::IBehaviorListener:0:",
+                "http://dv2app.opoqodev.com/stable-borrower/form.1?wicket:interface=:1:main:c:form:form:root:c:w:pnlUnsecuredLoan:c:w:pnlUnsecuredLoan0:c:w:btnContinue0:submit::IBehaviorListener:0:",
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
