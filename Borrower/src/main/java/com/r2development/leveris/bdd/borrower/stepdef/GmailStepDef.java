@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 @Singleton
-public class GmailStepDef extends AbakusBorrowerStepDef {
+public class GmailStepDef extends BorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(GmailStepDef.class);
 

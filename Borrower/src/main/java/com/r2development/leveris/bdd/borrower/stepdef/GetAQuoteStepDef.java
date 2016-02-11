@@ -29,7 +29,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 @Singleton
-public class GetAQuoteStepDef extends AbakusBorrowerStepDef {
+public class GetAQuoteStepDef extends BorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(GetAQuoteStepDef.class);
 

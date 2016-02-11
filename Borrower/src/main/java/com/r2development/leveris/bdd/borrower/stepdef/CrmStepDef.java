@@ -20,7 +20,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Singleton
-public class CrmStepDef extends AbakusBorrowerStepDef {
+public class CrmStepDef extends BorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(CrmStepDef.class);
 

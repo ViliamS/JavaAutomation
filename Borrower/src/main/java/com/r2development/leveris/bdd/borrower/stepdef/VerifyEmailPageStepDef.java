@@ -9,7 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 @Singleton
-public class VerifyEmailPageStepDef extends AbakusBorrowerStepDef {
+public class VerifyEmailPageStepDef extends BorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(VerifyEmailPageStepDef.class);
 

@@ -12,7 +12,7 @@ import org.junit.Assert;
 import java.util.Map;
 
 @Singleton
-public class AutomaticRegistrationStepDef extends AbakusBorrowerStepDef {
+public class AutomaticRegistrationStepDef extends BorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(AutomaticRegistrationStepDef.class.getName());
 
