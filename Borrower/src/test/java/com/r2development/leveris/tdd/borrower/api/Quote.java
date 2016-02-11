@@ -46,6 +46,7 @@ public class Quote {
                 new LinkedHashMap<String, String>() {
                     {
                         put("stepToken", "1");
+                        put("root:c:w:pnlUnsecuredLoan:c:w:pnlUnsecuredLoan0:c:w:btnContinue0:submit", "1");
                     }
                 },
                 localContext,
@@ -53,11 +54,12 @@ public class Quote {
         );
 
         Map<String, String> quote1Parameters = new LinkedHashMap<>();
+
         quote1Parameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:cmbLoanPurpose:combobox", "PERSONAL");
         quote1Parameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:crbNetMonthlyIncome:tb", "1");
         quote1Parameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:crbMonthlyExpenses:tb", "2");
         quote1Parameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:txtNumberOfDependents:tb", "3");
-        quote1Parameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:crbAmountToBorrow:tb", "4");
+        quote1Parameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:pnlAmountToBorrowUnsecured:c:w:crbAmountToBorrowUnsecured:tb", "4000");
         quote1Parameters.put("stepToken", "2");
         quote1Parameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:btnContinue:submit", "1");
 
@@ -96,7 +98,7 @@ public class Quote {
 
         String applyResponse = requestHttpPost(
                 httpClient,
-                "http://dv2app.opoqodev.com/stable-borrower/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlUnsecuredLoanCalculator:c:w:btnApply:submit::IBehaviorListener:0:-1",
+                "http://dv2app.opoqodev.com/stable-borrower/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnApplyOnline:submit::IBehaviorListener:0:-1",
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");

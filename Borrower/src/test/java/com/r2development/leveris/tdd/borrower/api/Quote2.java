@@ -57,7 +57,7 @@ public class Quote2 {
         quote1Parameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:crbNetMonthlyIncome:tb", "1");
         quote1Parameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:crbMonthlyExpenses:tb", "2");
         quote1Parameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:txtNumberOfDependents:tb", "3");
-        quote1Parameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:crbAmountToBorrow:tb", "4");
+        quote1Parameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:pnlAmountToBorrowPayday:c:w:crbcrbAmountToBorrowPayday:tb", "525");
         quote1Parameters.put("stepToken", "2");
         quote1Parameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:btnContinue:submit", "1");
 
@@ -71,7 +71,7 @@ public class Quote2 {
 
         String quote1Response = requestHttpPost(
                 httpClient,
-                "http://dv2app.opoqodev.com/stable-borrower/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlUnsecuredLoanQuotation:c:w:btnContinue:submit::IBehaviorListener:0:-1",
+                "http://dv2app.opoqodev.com/stable-borrower/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlUnsecuredLoanQuotation:c:w:btnContinue:submit::IBehaviorListener:0:",
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -84,10 +84,14 @@ public class Quote2 {
         );
 
         Map<String, String> applyParameters = new LinkedHashMap<>();
-        applyParameters.put("root:c:w:pnlUnsecuredLoanCalculator:c:w:pnlCalculator:c:w:txtAmount:tb", "1");
-        applyParameters.put("root:c:w:pnlUnsecuredLoanCalculator:c:w:pnlCalculator:c:w:txtMonthlyInstalment:tb", "2");
-        applyParameters.put("stepToken", "3");
-        applyParameters.put("root:c:w:pnlUnsecuredLoanCalculator:c:w:btnApply:submit", "1");
+        applyParameters.put("root:c:w:pnlMain:c:w:pnlMortgageCalc:data", "{\"loanValue\":525,\"repaymentValue\":533.7500000000031,\"changedParam\":\"\"}");
+        applyParameters.put("stepToken","3");
+        applyParameters.put("root:c:w:btnApplyOnline:submit","1");
+
+//        applyParameters.put("root:c:w:pnlUnsecuredLoanCalculator:c:w:pnlCalculator:c:w:txtAmount:tb", "1");
+//        applyParameters.put("root:c:w:pnlUnsecuredLoanCalculator:c:w:pnlCalculator:c:w:txtMonthlyInstalment:tb", "2");
+//        applyParameters.put("stepToken", "3");
+//        applyParameters.put("root:c:w:pnlUnsecuredLoanCalculator:c:w:btnApply:submit", "1");
 
 //        root:c:w:pnlUnsecuredLoanCalculator:c:w:pnlCalculator:c:w:txtAmount:tb:1
 //        root:c:w:pnlUnsecuredLoanCalculator:c:w:pnlCalculator:c:w:txtMonthlyInstalment:tb:2
@@ -96,7 +100,7 @@ public class Quote2 {
 
         String applyResponse = requestHttpPost(
                 httpClient,
-                "http://dv2app.opoqodev.com/stable-borrower/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlUnsecuredLoanCalculator:c:w:btnApply:submit::IBehaviorListener:0:-1",
+                "http://dv2app.opoqodev.com/stable-borrower/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnApplyOnline:submit::IBehaviorListener:0:-1",
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
