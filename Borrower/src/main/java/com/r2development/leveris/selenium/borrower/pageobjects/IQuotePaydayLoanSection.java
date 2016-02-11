@@ -43,10 +43,11 @@ public interface IQuotePaydayLoanSection {
     LOAN_PURPOSE_XPATH =            UNSECURED_LOAN_SPACE    + LOAN_PURPOSE_WICKET           + INPUT        + LOAN_PURPOSE_WICKET + NOT_DISABLED,
     NET_MONTHLY_INCOME_INPUT =      UNSECURED_LOAN_SPACE    + NET_MONTHLY_INCOME_WICKET     + DIRECT_INPUT + NOT_DISABLED,
     MONTHLY_EXPENSES_INPUT =        UNSECURED_LOAN_SPACE    + MONTHLY_EXPENSES_WICKET       + DIRECT_INPUT + NOT_DISABLED,
-    NUMBER_OF_DEPENDENTS_INPUT =    UNSECURED_LOAN_SPACE    + NUMBER_OF_DEPENDENTS_WICKET   + DIRECT_INPUT + NOT_DISABLED,
+//    NUMBER_OF_DEPENDENTS_INPUT =    UNSECURED_LOAN_SPACE    + NUMBER_OF_DEPENDENTS_WICKET   + DIRECT_INPUT + NOT_DISABLED,
+    NUMBER_OF_DEPENDENTS_INPUT =    "//input[@wicketpath='main_c_form_form_root_c_w_pnlUnsecuredLoanQuotation_c_w_txtNumberOfDependents_tb']",
     AMOUNT_TO_BORROW_INPUT =        UNSECURED_LOAN_SPACE    + AMOUNT_TO_BORROW_WICKET       + DIRECT_INPUT + NOT_DISABLED,
-
     CONTINUE_TEAL_BUTTON_XPATH =    UNSECURED_LOAN_SPACE    + BTN_CONTINUE_WICKET + DIRECT_A + BTN_CONTINUE_WICKET + SUBMIT_WICKET + DIRECT_SPAN + TEXT_CONTINUE;
+//    CONTINUE_TEAL_BUTTON_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlUnsecuredLoanQuotation_c_w_btnContinue_submit']";
 
     //boolean isHeaderYesIWouldLikeGreatAndQuickLoanPresent();
 
@@ -54,15 +55,15 @@ public interface IQuotePaydayLoanSection {
 
     //  boolean isSubTitleBasicInfoAboutYouShouldGiveUsPresent();
 
-    IQuotePaydayLoanPage setLoanPurpose(String loanPurposeType);
+    IQuotePaydayLoanSection setLoanPurpose(String loanPurposeType);
 
-    IQuotePaydayLoanPage setNetMonthlyIncome(String netMonthlyIncome);
+    IQuotePaydayLoanSection setNetMonthlyIncome(String netMonthlyIncome);
 
-    IQuotePaydayLoanPage setMonthlyExpenses(String monthlyExpenses);
+    IQuotePaydayLoanSection setMonthlyExpenses(String monthlyExpenses);
 
-    IQuotePaydayLoanPage setNumberOfDependents(String numberOfDependents);
+    IQuotePaydayLoanSection setNumberOfDependents(String numberOfDependents);
 
-    IQuotePaydayLoanPage setAmountToBorrow(String amountToBorrow);
+    IQuotePaydayLoanSection setAmountToBorrow(String amountToBorrow);
 
     IQuoteConfigurationPage clickContinue();
 

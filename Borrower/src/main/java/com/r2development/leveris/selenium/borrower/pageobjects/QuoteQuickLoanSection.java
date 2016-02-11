@@ -14,12 +14,12 @@ public class QuoteQuickLoanSection extends Borrower implements IQuoteQuickLoanSe
       //  isHeaderYesIWouldLikeGreatAndQuickLoanPresent();
       //  isSubTitleBasicInfoAboutYouShouldGiveUsPresent();
 
-        isVisible(LOAN_PURPOSE_XPATH, true);
-        isVisible(CONTINUE_TEAL_BUTTON_XPATH, true);
-        isVisible(NET_MONTHLY_INCOME_INPUT, true);
-        isVisible(MONTHLY_EXPENSES_INPUT, true);
-        isVisible(NUMBER_OF_DEPENDENTS_INPUT, true);
-        isVisible(AMOUNT_TO_BORROW_INPUT, true);
+//        isVisible(LOAN_PURPOSE_XPATH, true);
+//        isVisible(CONTINUE_TEAL_BUTTON_XPATH, true);
+//        isVisible(NET_MONTHLY_INCOME_INPUT, true);
+//        isVisible(MONTHLY_EXPENSES_INPUT, true);
+//        isVisible(NUMBER_OF_DEPENDENTS_INPUT, true);
+//        isVisible(AMOUNT_TO_BORROW_INPUT, true);
     }
 
 //    @Override

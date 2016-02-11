@@ -11,12 +11,12 @@ public class QuotePaydayLoanSection extends Borrower implements IQuotePaydayLoan
         //  isHeaderYesIWouldLikeGreatAndQuickLoanPresent();
         //  isSubTitleBasicInfoAboutYouShouldGiveUsPresent();
 
-        isVisible(LOAN_PURPOSE_XPATH, true);
-        isVisible(CONTINUE_TEAL_BUTTON_XPATH, true);
-        isVisible(NET_MONTHLY_INCOME_INPUT, true);
-        isVisible(MONTHLY_EXPENSES_INPUT, true);
-        isVisible(NUMBER_OF_DEPENDENTS_INPUT, true);
-        isVisible(AMOUNT_TO_BORROW_INPUT, true);
+//        isVisible(LOAN_PURPOSE_XPATH, true);
+//        isVisible(CONTINUE_TEAL_BUTTON_XPATH, true);
+//        isVisible(NET_MONTHLY_INCOME_INPUT, true);
+//        isVisible(MONTHLY_EXPENSES_INPUT, true);
+//        isVisible(NUMBER_OF_DEPENDENTS_INPUT, true);
+//        isVisible(AMOUNT_TO_BORROW_INPUT, true);
     }
 
 //    @Override
@@ -35,36 +35,36 @@ public class QuotePaydayLoanSection extends Borrower implements IQuotePaydayLoan
 //    }
 
     @Override
-    public IQuotePaydayLoanPage setLoanPurpose(String loanPurposeType) {
+    public IQuotePaydayLoanSection setLoanPurpose(String loanPurposeType) {
         isVisible(LOAN_PURPOSE_XPATH, true);
         clickElement(LOAN_PURPOSE_XPATH);
         isVisible(DROP_DOWN_LIST + "/a[text()='" + loanPurposeType + "']");
         clickElement(DROP_DOWN_LIST + "/a[text()='" + loanPurposeType + "']");
-        return new QuotePaydayLoanPage(webDriver);
+        return this;
     }
 
     @Override
-    public IQuotePaydayLoanPage setNetMonthlyIncome(String netMonthlyIncome) {
+    public IQuotePaydayLoanSection setNetMonthlyIncome(String netMonthlyIncome) {
         type(NET_MONTHLY_INCOME_INPUT, netMonthlyIncome);
-        return new QuotePaydayLoanPage(webDriver);
+        return this;
     }
 
     @Override
-    public IQuotePaydayLoanPage setMonthlyExpenses(String monthlyExpenses) {
+    public IQuotePaydayLoanSection setMonthlyExpenses(String monthlyExpenses) {
         type(MONTHLY_EXPENSES_INPUT, monthlyExpenses);
-        return new QuotePaydayLoanPage(webDriver);
+        return this;
     }
 
     @Override
-    public IQuotePaydayLoanPage setNumberOfDependents(String numberOfDependents) {
+    public IQuotePaydayLoanSection setNumberOfDependents(String numberOfDependents) {
         type(NUMBER_OF_DEPENDENTS_INPUT, numberOfDependents);
-        return new QuotePaydayLoanPage(webDriver);
+        return this;
     }
 
     @Override
-    public IQuotePaydayLoanPage setAmountToBorrow(String amountToBorrow) {
-        type(AMOUNT_TO_BORROW_INPUT, amountToBorrow);
-        return new QuotePaydayLoanPage(webDriver);
+    public IQuotePaydayLoanSection setAmountToBorrow(String amountToBorrow) {
+        type(AMOUNT_TO_BORROW_INPUT, amountToBorrow, false);
+        return this;
     }
 
     @Override

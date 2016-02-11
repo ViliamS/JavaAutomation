@@ -52,14 +52,14 @@ public class WebDriverService {
 //            capabilities.setCapability(CapabilityType.PROXY, seleniumProxy);
         }
 //
-//        if ( StringUtils.isEmpty(System.getProperty("environment")))
-//            System.setProperty("environment", "st1");
+        if ( StringUtils.isEmpty(System.getProperty("environment")))
+            System.setProperty("environment", "dev2");
 //
-//        if ( StringUtils.isEmpty(System.getProperty("domain")))
-//            System.setProperty("domain", "st1app.loftkeys.com");
+        if ( StringUtils.isEmpty(System.getProperty("domain")))
+            System.setProperty("domain", "http://dv2app.opoqodev.com/");
 //
-//        if ( StringUtils.isEmpty(System.getProperty("borrower")))
-//            System.setProperty("borrower", "https://st1app.loftkeys.com/borrower");
+        if ( StringUtils.isEmpty(System.getProperty("borrower")))
+            System.setProperty("borrower", "http://dv2app.opoqodev.com/stable-borrower");
 
         if ( System.getProperty("browser") == null)
             System.setProperty("browser", "chrome");
@@ -71,7 +71,7 @@ public class WebDriverService {
             case CHROME:
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("ui-prioritize-in-gpu-process");
-                userdata = "--user-data-dir=./target/" + System.getProperty("timestamp") + "-" + RandomStringUtils.random(5, true, true);
+                userdata = "user-data-dir=/target/" + System.getProperty("timestamp") + RandomStringUtils.random(5, true, true);
 //                options.addArguments(userdata);
 //                options.addArguments("--start-maximized");
 //                options.addArguments("--window-position=200,50");
@@ -89,6 +89,8 @@ public class WebDriverService {
 
                     webDriver = new ChromeDriver(options);
 //                    webDriver = new ChromeDriver();
+                    if ( webDriver.toString().contains("(null)") )
+                        webDriver = new ChromeDriver(options);
                 }
 
                 break;
@@ -150,6 +152,8 @@ public class WebDriverService {
                 webDriver.quit();
                 webDriver = null;
             }
+
+//            Thread.sleep(5000);
 //            }
 //            injector = null;
         }

@@ -1,13 +1,11 @@
 package com.r2development.leveris.bdd.borrower.stepdef;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import com.r2development.leveris.di.User;
 import com.r2development.leveris.selenium.borrower.pageobjects.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-@Singleton
 public class BorrowerStepDef /*extends Abakus*/ /*implements IBorrower*/ {
 
     private static final Log log = LogFactory.getLog(BorrowerStepDef.class);
@@ -35,11 +33,11 @@ public class BorrowerStepDef /*extends Abakus*/ /*implements IBorrower*/ {
     IDocumentUploadPage documentUploadPage;
     IFormsMenu currentPage;
 
-    IQuoteLandingPage landingPage;
-    IQuoteQuickLoanPage quickLoanPage;
-    IQuotePaydayLoanPage paydayLoanPage;
+    IQuoteLandingPage quoteLandingPage;
+    IQuoteQuickLoanPage quoteQuickLoanPage;
+    IQuotePaydayLoanPage quotePaydayLoanPage;
     IQuoteConfigurationPage quoteConfigurationPage;
-    IRegisterPage iRegisterPage;
+//    IRegisterPage registerPage;
 
     ITopBannerMenu topBannerMenu;
 
@@ -49,9 +47,10 @@ public class BorrowerStepDef /*extends Abakus*/ /*implements IBorrower*/ {
 //    WebDriver webDriver;
 
     public BorrowerStepDef() {
-        landingPage = new QuoteLandingPage(WebDriverService.getWebDriverInstance());
-        //quickLoanPage = new QuoteQuickLoanPage(WebDriverService.getWebDriverInstance());
-        //quoteConfigurationPage = new QuoteConfigurationPage(WebDriverService.getWebDriverInstance());
+        quoteLandingPage = new QuoteLandingPage(WebDriverService.getWebDriverInstance());
+        quoteQuickLoanPage = new QuoteQuickLoanPage(WebDriverService.getWebDriverInstance());
+        quotePaydayLoanPage = new QuotePaydayLoanPage(WebDriverService.getWebDriverInstance());
+        quoteConfigurationPage = new QuoteConfigurationPage(WebDriverService.getWebDriverInstance());
 
         welcomePage = new WelcomePage(WebDriverService.getWebDriverInstance());
         registerPage = new RegisterPage(WebDriverService.getWebDriverInstance());

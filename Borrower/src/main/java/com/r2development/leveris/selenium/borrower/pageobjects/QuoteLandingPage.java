@@ -1,26 +1,29 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
 import com.r2development.leveris.Borrower;
+import com.r2development.leveris.bdd.borrower.stepdef.WebDriverService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
 
-/**
- * todo Page Object Specific Implementation
- */
 public class QuoteLandingPage extends Borrower implements IQuoteLandingPage {
 
     private static final Log log = LogFactory.getLog(QuoteLandingPage.class.getName());
 
     IQuoteLandingSection quoteLandingSection;
 
+    public QuoteLandingPage() {
+        super(WebDriverService.getWebDriverInstance());
+        quoteLandingSection = new QuoteLandingSection(webDriver);
+    }
+
     public QuoteLandingPage( WebDriver webDriver ) {
         super( webDriver );
+        quoteLandingSection = new QuoteLandingSection(webDriver);
     }
 
     @Override
     public IQuoteLandingPage goToBorrowerQuoteLandingPage(){
-        //System.setProperty("borrower", "http://dv2app.opoqodev.com/stable-borrower/");
         get(System.getProperty("borrower"));
         quoteLandingSection = new QuoteLandingSection( webDriver );
         return this;

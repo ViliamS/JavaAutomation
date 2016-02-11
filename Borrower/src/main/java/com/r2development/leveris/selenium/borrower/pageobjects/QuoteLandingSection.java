@@ -1,6 +1,7 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
 import com.r2development.leveris.Borrower;
+import com.r2development.leveris.bdd.borrower.stepdef.WebDriverService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -11,6 +12,10 @@ import org.openqa.selenium.WebDriver;
 public class QuoteLandingSection extends Borrower implements IQuoteLandingSection {
 
     private static final Log log = LogFactory.getLog(QuoteLandingSection.class.getName());
+
+    public QuoteLandingSection() {
+        super(WebDriverService.getWebDriverInstance());
+    }
 
     public QuoteLandingSection(WebDriver webDriver) {
         super(webDriver);
@@ -25,8 +30,8 @@ public class QuoteLandingSection extends Borrower implements IQuoteLandingSectio
         isHeaderMortgagePresent();
         isHeaderDebitConsolidationPresent();*/
 
-        isVisible(PAYDAY_LOAN_CONTINUE_BUTTON_XPATH, true);
-        isVisible(UNSECURED_LOAN_CONTINUE_BUTTON_XPATH, true);
+//        isVisible(PAYDAY_LOAN_CONTINUE_BUTTON_XPATH, true);
+//        isVisible(UNSECURED_LOAN_CONTINUE_BUTTON_XPATH, true);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.r2development.leveris;
 
-import com.google.inject.Inject;
 import com.r2development.leveris.selenium.borrower.pageobjects.IEmploymentIncomeSection;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -19,7 +18,7 @@ public class Borrower /*implements IBorrower*/ {
 //    @Inject
     protected WebDriver /*final*/ webDriver;
 
-    @Inject
+//    @Inject
     protected Borrower(WebDriver webDriver) {
         this.webDriver = webDriver;
     }
@@ -498,7 +497,19 @@ public class Borrower /*implements IBorrower*/ {
         moveTo(currentBy);
 //        webDriver.findElement(currentBy).clear();
         webDriver.findElement(currentBy).sendKeys(valueToType);
-        webDriver.findElement(currentBy).sendKeys(Keys.ENTER);
+//        webDriver.findElement(currentBy).sendKeys(Keys.ENTER);
+        log.info("type on xpath: " + xpath + " with value: " + valueToType);
+    }
+
+    protected void type(String xpath, String valueToType, boolean sendKeyEnter) {
+        log.info("Typing this value: " + valueToType + ", on this xpath: " + xpath);
+        By currentBy = By.xpath(xpath);
+        waitForVisibility(currentBy);
+        moveTo(currentBy);
+//        webDriver.findElement(currentBy).clear();
+        webDriver.findElement(currentBy).sendKeys(valueToType);
+        if ( sendKeyEnter )
+            webDriver.findElement(currentBy).sendKeys(Keys.ENTER);
         log.info("type on xpath: " + xpath + " with value: " + valueToType);
     }
 

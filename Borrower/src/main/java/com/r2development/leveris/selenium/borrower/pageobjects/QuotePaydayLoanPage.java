@@ -1,6 +1,7 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
 import com.r2development.leveris.Borrower;
+import com.r2development.leveris.bdd.borrower.stepdef.WebDriverService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -10,6 +11,11 @@ public class QuotePaydayLoanPage extends Borrower implements IQuotePaydayLoanPag
     public IQuotePaydayLoanSection quotePaydayLoanSection;
 
     private static final Log log = LogFactory.getLog( QuoteQuickLoanPage.class.getName() );
+
+    public QuotePaydayLoanPage() {
+        super(WebDriverService.getWebDriverInstance());
+        quotePaydayLoanSection = new QuotePaydayLoanSection(webDriver);
+    }
 
     public QuotePaydayLoanPage(WebDriver webDriver ) {
         super( webDriver );
@@ -34,27 +40,32 @@ public class QuotePaydayLoanPage extends Borrower implements IQuotePaydayLoanPag
     @Override
     public IQuotePaydayLoanPage setLoanPurpose(String loanPurposeType){
         log.info("selecting loan");
-        return quotePaydayLoanSection.setLoanPurpose( loanPurposeType );
+        quotePaydayLoanSection.setLoanPurpose( loanPurposeType );
+        return this;
     }
 
     @Override
     public IQuotePaydayLoanPage setNetMonthlyIncome(String netMonthlyIncome){
-        return quotePaydayLoanSection.setNetMonthlyIncome( netMonthlyIncome );
+        quotePaydayLoanSection.setNetMonthlyIncome( netMonthlyIncome );
+        return this;
     }
 
     @Override
     public IQuotePaydayLoanPage setMonthlyExpenses(String monthlyExpenses){
-        return quotePaydayLoanSection.setMonthlyExpenses( monthlyExpenses );
+        quotePaydayLoanSection.setMonthlyExpenses( monthlyExpenses );
+        return this;
     }
 
     @Override
     public IQuotePaydayLoanPage setNumberOfDependents(String numberOfDependents){
-        return quotePaydayLoanSection.setNumberOfDependents( numberOfDependents );
+        quotePaydayLoanSection.setNumberOfDependents( numberOfDependents );
+        return this;
     }
 
     @Override
     public IQuotePaydayLoanPage setAmountToBorrow(String amountToBorrow) {
-        return quotePaydayLoanSection.setAmountToBorrow( amountToBorrow );
+        quotePaydayLoanSection.setAmountToBorrow( amountToBorrow );
+        return this;
     }
 
     @Override

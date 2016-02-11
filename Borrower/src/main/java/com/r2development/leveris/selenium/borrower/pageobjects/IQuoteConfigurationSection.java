@@ -45,7 +45,9 @@ public interface IQuoteConfigurationSection {
          //   SUB_TITLE_CONFIGURE_YOUR_LOAN_XPATH =           DIV,
             INPUT_AMOUNT_TO_BORROW_SLIDER_CONTROL_XPATH =   DIV + MAIN_WICKET + MORTGAGE_CALC_WICKET + DIV + MAIN_WICKET + MORTGAGE_CALC_WICKET + INPUT + CLASS_LOAN_VALID,
             INPUT_MONTHLY_REPAYMENT_SLIDER_CONTROL_XPATH =  DIV + MAIN_WICKET + MORTGAGE_CALC_WICKET + DIV + MAIN_WICKET + MORTGAGE_CALC_WICKET + INPUT + CLASS_REPAYMENT_VALID,
-            APPLY_ONLINE_TEAL_BUTTON_XPATH =                DIV + MAIN_WICKET + MORTGAGE_CALC_WICKET + DIV + MAIN_WICKET + MORTGAGE_CALC_WICKET + A + ON_CLICK;
+            APPLY_ONLINE_TEAL_BUTTON_XPATH =                DIV + MAIN_WICKET + MORTGAGE_CALC_WICKET + DIV + MAIN_WICKET + MORTGAGE_CALC_WICKET + A + ON_CLICK,
+            APPLY_ONLINE_TEAL_BUTTON_XPATH2 =                "//a[contains(.,'Apply online') and contains(@onclick, 'clickToWidget')]",
+            APPLY_ONLINE_TEAL_BUTTON_XPATH3 =               "//a[@wicketpath='main_c_form_form_root_c_w_btnApplyOnline_submit']";
          //   CHANGE_PRODUCT_XPATH =                          DIV,
          //   TITLE_NUMBER_OF_REPAYMENTS_XPATH =              DIV,
           //  AMOUNT_NUMBER_OF_REPAYMENTS_XPATH =             DIV,

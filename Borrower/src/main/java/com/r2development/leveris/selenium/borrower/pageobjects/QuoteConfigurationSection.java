@@ -20,12 +20,12 @@ public class QuoteConfigurationSection extends Borrower implements IQuoteConfigu
         isHeaderGreatAndQuickLoanPresent();
         isTitleUnsecuredLoanCalculatorPresent();
         isTitleConfigureYourLoanPresent();*/
-        isVisible(TITLE_UNSECURED_LOAN_CALCULATOR_XPATH, true);
+//        //isVisible(TITLE_UNSECURED_LOAN_CALCULATOR_XPATH, true);
 //        isVisible(TITLE_UNSECURED_LOAN_CALCULATOR_XPATH + "[text()='" + TITLE_UNSECURED_LOAN_CALCULATOR_TEXT + "']");
 
-        isVisible(INPUT_AMOUNT_TO_BORROW_SLIDER_CONTROL_XPATH, true);
-        isVisible(INPUT_MONTHLY_REPAYMENT_SLIDER_CONTROL_XPATH, true);
-        isVisible(APPLY_ONLINE_TEAL_BUTTON_XPATH, true);
+//        //isVisible(INPUT_AMOUNT_TO_BORROW_SLIDER_CONTROL_XPATH, true);
+//        //isVisible(INPUT_MONTHLY_REPAYMENT_SLIDER_CONTROL_XPATH, true);
+//        //isVisible(APPLY_ONLINE_TEAL_BUTTON_XPATH, true);
        /* isVisible(APPLY_ONLINE_TEAL_BUTTON_XPATH);
         isChangeProductPresent();
         isTitleNumberOfRepaymentsPresent();
@@ -42,7 +42,7 @@ public class QuoteConfigurationSection extends Borrower implements IQuoteConfigu
     public IRegisterPage clickApplyOnline(){
         log.info("APPLY ONLINE");
         log.info(APPLY_ONLINE_TEAL_BUTTON_XPATH);
-        clickElementViaJavascript(APPLY_ONLINE_TEAL_BUTTON_XPATH, true);
+        clickElementViaJavascript(APPLY_ONLINE_TEAL_BUTTON_XPATH2, true);
 
 
         return new RegisterPage(webDriver);

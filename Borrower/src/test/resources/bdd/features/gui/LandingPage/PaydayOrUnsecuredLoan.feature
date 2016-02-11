@@ -21,7 +21,7 @@
 
     Then Payday Loan User clicks on Continue button
 
-    Then User clicks on Apply Online
+    When User clicks on Apply Online
 
     Then User is forwarded to the Registration Page
 
@@ -40,7 +40,7 @@
 
       Then Unsecured Loan User clicks on Continue button
 
-      Then User clicks on Apply Online
+      When User clicks on Apply Online
 
       Then User is forwarded to the Registration Page
 
@@ -69,7 +69,7 @@
         | NetMonthlyIncome    | 2,500.00  |
         | MonthlyExpenses     | 1,500.00  |
         | NumberOfDependents  | 10        |
-        | AmountToBorrow      | 10,000.00 |
+        | AmountToBorrow      | 525       |
         | LoanAmount          | 10,000.00 |
         | MonthlyRepayment    | 296       |
 
