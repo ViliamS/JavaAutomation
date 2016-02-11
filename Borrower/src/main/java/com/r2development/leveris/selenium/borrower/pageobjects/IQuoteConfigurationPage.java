@@ -9,7 +9,7 @@ public interface IQuoteConfigurationPage {
 
 //    String getLoanAmount();
 
-    IQuoteConfigurationPage setMonthlyInstalmentInput(String monthlyRepayment);
+    IQuoteConfigurationPage setMonthlyInstallmentInput(String monthlyRepayment);
 
 //    String getMonthlyInstalmentAmount();
 //

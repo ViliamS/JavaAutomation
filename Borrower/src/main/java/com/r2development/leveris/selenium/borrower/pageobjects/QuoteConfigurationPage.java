@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 /**
  * todo Page Object Specific Implementation
  */
-public class QuoteConfigurationPage extends Borrower implements IQuoteConfigurationSection, IQuoteConfigurationPage {
+public class QuoteConfigurationPage extends Borrower implements IQuoteConfigurationPage {
 
     IQuoteConfigurationSection quotationConfigurationSection;
 
@@ -40,8 +40,8 @@ public class QuoteConfigurationPage extends Borrower implements IQuoteConfigurat
 //    }
 
     @Override
-    public IQuoteConfigurationPage setMonthlyInstalmentInput(String monthlyRepayment) {
-        return quotationConfigurationSection.setMonthlyInstalmentInput(monthlyRepayment);
+    public IQuoteConfigurationPage setMonthlyInstallmentInput(String monthlyRepayment) {
+        return quotationConfigurationSection.setMonthlyInstallmentInput(monthlyRepayment);
     }
 }
 //    @Override

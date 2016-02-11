@@ -13,6 +13,7 @@
     <artifactId>Borrower</artifactId>
     <packaging>jar</packaging>
 
+<!--
     <properties>
         <environment>st1</environment>
         <domain>st1app.loftkeys.com</domain>
@@ -27,6 +28,22 @@
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyyMMddHHmmssSSS</maven.build.timestamp.format>
     </properties>
+-->
+    <properties>
+        <environment>dev2</environment>
+        <domain>dv2app.opoqodev.com</domain>
+        <borrower>http://dv2app.opoqodev.com/stable-borrower</borrower>
+        <underwriter>http://dv2app.opoqodev.com/underwriter</underwriter>
+        <partner>http://dv2app.opoqodev.com/partner</partner>
+        <database>jdbc:oracle:thin:@DV20000D</database>
+        <automation.mode>dev</automation.mode>
+        <active.screenshot>false</active.screenshot>
+        <browser>chrome</browser>
+        <excel.filename>tdb.xls</excel.filename>
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <maven.build.timestamp.format>yyyyMMddHHmmssSSS</maven.build.timestamp.format>
+    </properties>
+
 
     <repositories>
         <repository>

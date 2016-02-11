@@ -1,6 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
-public interface IQuoteQuickLoanSection {
+public interface IQuotePaydayLoanSection {
 
     String
 
@@ -32,10 +32,10 @@ public interface IQuoteQuickLoanSection {
     UNSECURED_LOAN_AREA =   DIV + UNSECURED_LOAN_WICKET + DIRECT_DIV    + UNSECURED_LOAN_WICKET,
     UNSECURED_LOAN_SPACE =  DIV + UNSECURED_LOAN_WICKET + DIV           + UNSECURED_LOAN_WICKET,
 
-//HEADER_TITLE_YES_I_LIKE_LOAN = UNSECURED_LOAN_AREA, // TODO: 09/02/16 is Missing in conflict with specification
+    //HEADER_TITLE_YES_I_LIKE_LOAN = UNSECURED_LOAN_AREA, // TODO: 09/02/16 is Missing in conflict with specification
 
     UNSECURED_LOAN_TITLE =          UNSECURED_LOAN_AREA     + DIRECT_SPAN                   + TEXT_UNSECURED_LOAN,
-            BASIC_INFO_TITLE =              UNSECURED_LOAN_AREA     + BASIC_INFO_WICKET             + DIRECT_SPAN + TEXT_BASIC_INFO,
+    BASIC_INFO_TITLE =              UNSECURED_LOAN_AREA     + BASIC_INFO_WICKET             + DIRECT_SPAN + TEXT_BASIC_INFO,
 
 
     DROP_DOWN_LIST = "//ul[contains(@style,'display: block')][not(contains(@style,'display: none'))]/li[@class='ui-menu-item']",
@@ -54,15 +54,15 @@ public interface IQuoteQuickLoanSection {
 
     //  boolean isSubTitleBasicInfoAboutYouShouldGiveUsPresent();
 
-    IQuoteQuickLoanPage setLoanPurpose(String loanPurposeType);
+    IQuotePaydayLoanPage setLoanPurpose(String loanPurposeType);
 
-    IQuoteQuickLoanPage setNetMonthlyIncome(String netMonthlyIncome);
+    IQuotePaydayLoanPage setNetMonthlyIncome(String netMonthlyIncome);
 
-    IQuoteQuickLoanPage setMonthlyExpenses(String monthlyExpenses);
+    IQuotePaydayLoanPage setMonthlyExpenses(String monthlyExpenses);
 
-    IQuoteQuickLoanPage setNumberOfDependents(String numberOfDependents);
+    IQuotePaydayLoanPage setNumberOfDependents(String numberOfDependents);
 
-    IQuoteQuickLoanPage setAmountToBorrow(String amountToBorrow);
+    IQuotePaydayLoanPage setAmountToBorrow(String amountToBorrow);
 
     IQuoteConfigurationPage clickContinue();
 

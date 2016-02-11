@@ -6,9 +6,11 @@ import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import org.apache.commons.lang.BooleanUtils;
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.joda.time.DateTime;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -49,7 +51,7 @@ public class WebDriverService {
 //            capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 //            capabilities.setCapability(CapabilityType.PROXY, seleniumProxy);
         }
-
+//
 //        if ( StringUtils.isEmpty(System.getProperty("environment")))
 //            System.setProperty("environment", "st1");
 //
@@ -58,19 +60,19 @@ public class WebDriverService {
 //
 //        if ( StringUtils.isEmpty(System.getProperty("borrower")))
 //            System.setProperty("borrower", "https://st1app.loftkeys.com/borrower");
-//
+
         if ( System.getProperty("browser") == null)
             System.setProperty("browser", "chrome");
-//
-//        if ( StringUtils.isEmpty(System.getProperty("timestamp")))
-//            System.setProperty("timestamp", DateTime.now().toString("yyyyMMddHHmmssSSS"));
+
+        if ( StringUtils.isEmpty(System.getProperty("timestamp")))
+            System.setProperty("timestamp", DateTime.now().toString("yyyyMMddHHmmssSSS"));
 
         switch (BROWSER_TYPE.getBrowser(System.getProperty("browser"))) {
             case CHROME:
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("ui-prioritize-in-gpu-process");
-                userdata = "--user-data-dir=./target/" + System.getProperty("timestamp");
-                options.addArguments(userdata);
+                userdata = "--user-data-dir=./target/" + System.getProperty("timestamp") + "-" + RandomStringUtils.random(5, true, true);
+//                options.addArguments(userdata);
 //                options.addArguments("--start-maximized");
 //                options.addArguments("--window-position=200,50");
 //                options.addArguments("--window-size=1440,900");
@@ -78,11 +80,15 @@ public class WebDriverService {
 
                 if ( System.getProperty("Proxy") != null && BooleanUtils.toBoolean(System.getProperty("Proxy"))) {
                     //noinspection ConstantConditions
-                    capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+//                    capabilities.setCapability(ChromeOptions.CAPABILITY, options);
                     webDriver = new ChromeDriver(capabilities);
 //                    proxyServer.newHar(new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date()));
                 } else {
+                    if ( webDriver != null)
+                        webDriver = null;
+
                     webDriver = new ChromeDriver(options);
+//                    webDriver = new ChromeDriver();
                 }
 
                 break;
@@ -140,8 +146,9 @@ public class WebDriverService {
 //            if (StringUtils.equals(System.getProperty("automation.mode"), "prod")) {
 //            if (AUTOMATION_MODE.compareTo(AUTOMATION_MODE.PROD)==0) {
             if ( webDriver != null ) {
-                webDriver.manage().deleteAllCookies();
+//                webDriver.manage().deleteAllCookies();
                 webDriver.quit();
+                webDriver = null;
             }
 //            }
 //            injector = null;

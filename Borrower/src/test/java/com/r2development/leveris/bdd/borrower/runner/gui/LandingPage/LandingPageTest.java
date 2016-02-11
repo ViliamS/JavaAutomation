@@ -14,7 +14,7 @@ import org.junit.runner.RunWith;
                 "json:target/Gui/LandingPageTest-Json/LandingPageTest.json"
         },
         strict = false,
-        features = "classpath:bdd/features/gui/LandingPage/Leveris.feature"
+        features = "classpath:bdd/features/gui/LandingPage/PaydayOrUnsecuredLoan.feature"
 )
 public class LandingPageTest {
 }

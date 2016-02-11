@@ -20,6 +20,9 @@ public class QuoteConfigurationSection extends Borrower implements IQuoteConfigu
         isHeaderGreatAndQuickLoanPresent();
         isTitleUnsecuredLoanCalculatorPresent();
         isTitleConfigureYourLoanPresent();*/
+        isVisible(TITLE_UNSECURED_LOAN_CALCULATOR_XPATH, true);
+//        isVisible(TITLE_UNSECURED_LOAN_CALCULATOR_XPATH + "[text()='" + TITLE_UNSECURED_LOAN_CALCULATOR_TEXT + "']");
+
         isVisible(INPUT_AMOUNT_TO_BORROW_SLIDER_CONTROL_XPATH, true);
         isVisible(INPUT_MONTHLY_REPAYMENT_SLIDER_CONTROL_XPATH, true);
         isVisible(APPLY_ONLINE_TEAL_BUTTON_XPATH, true);
@@ -37,8 +40,11 @@ public class QuoteConfigurationSection extends Borrower implements IQuoteConfigu
 
     @Override
     public IRegisterPage clickApplyOnline(){
-        isVisible(APPLY_ONLINE_TEAL_BUTTON_XPATH);
-        clickElementViaJavascript(APPLY_ONLINE_TEAL_BUTTON_XPATH);
+        log.info("APPLY ONLINE");
+        log.info(APPLY_ONLINE_TEAL_BUTTON_XPATH);
+        clickElementViaJavascript(APPLY_ONLINE_TEAL_BUTTON_XPATH, true);
+
+
         return new RegisterPage(webDriver);
     }
 
@@ -63,7 +69,7 @@ public class QuoteConfigurationSection extends Borrower implements IQuoteConfigu
 //    }
 
     @Override
-    public IQuoteConfigurationPage setMonthlyInstalmentInput(String monthlyRepayment){
+    public IQuoteConfigurationPage setMonthlyInstallmentInput(String monthlyRepayment){
         isVisible(INPUT_MONTHLY_REPAYMENT_SLIDER_CONTROL_XPATH);
         webDriver.findElement(By.xpath(INPUT_MONTHLY_REPAYMENT_SLIDER_CONTROL_XPATH)).sendKeys(Keys.TAB);
         type(INPUT_MONTHLY_REPAYMENT_SLIDER_CONTROL_XPATH, monthlyRepayment);

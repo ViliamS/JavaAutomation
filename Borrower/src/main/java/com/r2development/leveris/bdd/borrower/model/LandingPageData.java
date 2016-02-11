@@ -1,10 +1,11 @@
 package com.r2development.leveris.bdd.borrower.model;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class LandingPageData /* extends DataModel */ {
+public class LandingPageData extends DataModel {
 
-    private Map<String, String> quotationData;
+    public Map<String, String> quotationData = new LinkedHashMap<>();
 
     public LandingPageData(Map<String, String> quotationData){
         this.quotationData.putAll(quotationData);

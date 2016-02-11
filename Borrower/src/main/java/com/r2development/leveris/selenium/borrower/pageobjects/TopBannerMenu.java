@@ -16,8 +16,8 @@ public class TopBannerMenu extends Borrower implements ITopBannerMenu {
     public TopBannerMenu(WebDriver webDriver){
         super(webDriver);
         isVisible(TOP_BANNER_SIGN_IN_XPATH, true);
-        isVisible(TOP_BANNER_SIGN_IN_XPATH, true);
-        isVisible(TOP_BANNER_SIGN_IN_XPATH, true);
+        isVisible(TOP_BANNER_REGISTER_XPATH, true);
+        isVisible(TOP_BANNER_CHAT_NOW_XPATH, true);
 
     }
 

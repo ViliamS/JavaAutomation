@@ -2,15 +2,16 @@ Feature: Lever.is Draft Happy path walk-through
 
   Background:
 
-    Given Open Lever.is Quote Landing page
+    Given Open Leveris Quote Landing page
 
-  Scenario: Lever.is draft Quotation test
+  Scenario: Leveris draft Quotation test
 
 #    When Check that Up to £35,000 is displayed
 #    When Check that from £174.77 per month is displayed
 #    When Check that Payday £500-£2,000 is displayed
 
-    And User clicks on red continue button
+#    And User clicks on red continue button
+    And Payday Loan User clicks on Continue button
 
     Then User selects Loan purpose PERSONAL
     Then User selects Loan purpose PAYDAY
@@ -26,7 +27,3 @@ Feature: Lever.is Draft Happy path walk-through
     And User types into Loan amount field a 500,000.00
 
     Then User clicks on Apply Online
-
-
-
-

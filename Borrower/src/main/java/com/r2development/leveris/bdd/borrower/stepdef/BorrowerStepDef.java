@@ -37,7 +37,9 @@ public class BorrowerStepDef /*extends Abakus*/ /*implements IBorrower*/ {
 
     IQuoteLandingPage landingPage;
     IQuoteQuickLoanPage quickLoanPage;
+    IQuotePaydayLoanPage paydayLoanPage;
     IQuoteConfigurationPage quoteConfigurationPage;
+    IRegisterPage iRegisterPage;
 
     ITopBannerMenu topBannerMenu;
 

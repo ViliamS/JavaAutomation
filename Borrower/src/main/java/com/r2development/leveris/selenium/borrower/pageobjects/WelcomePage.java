@@ -25,10 +25,10 @@ public class WelcomePage extends Borrower implements IWelcomePage {
         super(webDriver);
 //        get(ABAKUS_ENVIRONMENT.get(ENVIRONMENT_RUN).get(APPLICATION_RUN));
 
-        if ( System.getProperty("borrower") == null )
-            System.setProperty("borrower", "https://st1app.loftkeys.com/borrower");
-
-        get(System.getProperty("borrower"));
+//        if ( System.getProperty("borrower") == null )
+//            System.setProperty("borrower", "https://st1app.loftkeys.com/borrower");
+//
+//        get(System.getProperty("borrower"));
         PageFactory.initElements(webDriver, this);
     }
 
