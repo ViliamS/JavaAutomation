@@ -1,13 +1,12 @@
 package com.r2development.leveris.bdd.borrower.stepdef;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.QuoteData;
+import com.r2development.leveris.di.IUser;
 import com.r2development.leveris.qa.utils.ACMExcel;
 import com.r2development.leveris.qa.utils.datamodelvalidator.borrowerloanapp.ExcelSheetVerificator;
-import com.r2development.leveris.selenium.borrower.pageobjects.BorrowerHomePage;
-import com.r2development.leveris.selenium.borrower.pageobjects.BuildQuotationPage;
-import com.r2development.leveris.selenium.borrower.pageobjects.FormsMenu;
-import com.r2development.leveris.selenium.borrower.pageobjects.WelcomePage;
+import com.r2development.leveris.selenium.borrower.pageobjects.*;
 import com.r2development.leveris.utils.ExcelUtils;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -19,6 +18,7 @@ import org.apache.commons.logging.LogFactory;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.Is;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 
 import java.io.IOException;
 import java.util.List;
@@ -29,14 +29,23 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 @Singleton
-public class GetAQuoteStepDef extends BorrowerStepDef {
+public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
 
     private static final Log log = LogFactory.getLog(GetAQuoteStepDef.class);
 
     private boolean toSkip = false;
+    private final WebDriver webDriver;
+    IUser user;
+    IBorrowerHomePage borrowerHomePage;
+    IWelcomePage welcomePage;
+    IBuildQuotationPage buildQuotationPage;
+    IAddYourCoapplicantPage addYourCoapplicantPage;
 
-    GetAQuoteStepDef() {
-        formsMenu = new FormsMenu(WebDriverService.getWebDriverInstance());
+    @Inject
+    GetAQuoteStepDef(WebDriver webDriver) {
+//        formsMenu = new FormsMenu(WebDriverService.getWebDriverInstance());
+//        super(webDriver);
+        this.webDriver = webDriver;
     }
 
     @Given("^user processes \"Get a Quote\" \\(format1\\)$")
@@ -106,13 +115,15 @@ public class GetAQuoteStepDef extends BorrowerStepDef {
 
     @When("^user clicks on Get a quote or Get Started$")
     public void user_clicks_to_get_a_quote_or_get_started() throws Exception {
-        borrowerHomePage = new BorrowerHomePage(WebDriverService.getWebDriverInstance());
+//        borrowerHomePage = new BorrowerHomePage(WebDriverService.getWebDriverInstance());
+        borrowerHomePage = new BorrowerHomePage(webDriver);
         borrowerHomePage.clickGetQuoteOrGetStarted();
     }
 
     @When("^user creates a quote")
     public void user_create_a_quote() {
-        welcomePage = new WelcomePage(WebDriverService.getWebDriverInstance());
+//        welcomePage = new WelcomePage(WebDriverService.getWebDriverInstance());
+        welcomePage = new WelcomePage(webDriver);
 //        buildQuotationPage = welcomePage.clickQuote();
 //        buildQuotationPage.clickGetQuoteNow();
     }
@@ -141,7 +152,8 @@ public class GetAQuoteStepDef extends BorrowerStepDef {
 //        }
 
         borrowerHomePage.clickGetOneNow();
-        buildQuotationPage = new BuildQuotationPage(WebDriverService.getWebDriverInstance());
+//        buildQuotationPage = new BuildQuotationPage(WebDriverService.getWebDriverInstance());
+        buildQuotationPage = new BuildQuotationPage(webDriver);
         buildQuotationPage.clickGetQuoteNow();
     }
 
@@ -366,35 +378,35 @@ public class GetAQuoteStepDef extends BorrowerStepDef {
 
     @And("^user fills in \"ADD YOUR CO-APPLICANT\"$")
     public void user_fills_in_add_your_coapplicant_form() {
-        String firstNameCoApplicant = "Anthony Mottot co-applicant";
-//        String emailCoApplicant = "anthonymottot-co-applicant" + DateTime.now().toString("yyyyMMddHHmmssSSS") + "@abakus.com";
-        String emailCoApplicant = "anthonymottot-co-applicant" + System.getProperty("timestamp") + "@abakus.com";
-        addYourCoapplicantPage.fillInAddYourCoapplicantPage(firstNameCoApplicant, emailCoApplicant);
-        user.setFirstNameCoApplicant(firstNameCoApplicant);
-        user.setEmailCoApplicant(emailCoApplicant);
+//        String firstNameCoApplicant = "Anthony Mottot co-applicant";
+////        String emailCoApplicant = "anthonymottot-co-applicant" + DateTime.now().toString("yyyyMMddHHmmssSSS") + "@abakus.com";
+//        String emailCoApplicant = "anthonymottot-co-applicant" + System.getProperty("timestamp") + "@abakus.com";
+//        addYourCoapplicantPage.fillInAddYourCoapplicantPage(firstNameCoApplicant, emailCoApplicant);
+////        user.setFirstNameCoApplicant(firstNameCoApplicant);
+//        user.setEmailCoApplicant(emailCoApplicant);
     }
 
     private void user_fills_in_add_your_coapplicant_form(Map<String, String> coapplicantDataMap) {
-        String firstNameCoApplicant = coapplicantDataMap.get("firstName");
-//        String emailCoApplicant = "anthony.mottot.applicant.test0001" + DateTime.now().toString("yyyyMMddHHmmssSSS") + "@abakus.com";
-        String emailCoApplicant = "anthony.mottot.applicant.test0001" + System.getProperty("timestamp") + "@abakus.com"; // TODO Test_automation email
-        addYourCoapplicantPage.fillInAddYourCoapplicantPage(firstNameCoApplicant, emailCoApplicant);
-        user.setFirstNameCoApplicant(firstNameCoApplicant);
-        user.setEmailCoApplicant(emailCoApplicant);
+//        String firstNameCoApplicant = coapplicantDataMap.get("firstName");
+////        String emailCoApplicant = "anthony.mottot.applicant.test0001" + DateTime.now().toString("yyyyMMddHHmmssSSS") + "@abakus.com";
+//        String emailCoApplicant = "anthony.mottot.applicant.test0001" + System.getProperty("timestamp") + "@abakus.com"; // TODO Test_automation email
+//        addYourCoapplicantPage.fillInAddYourCoapplicantPage(firstNameCoApplicant, emailCoApplicant);
+//        user.setFirstNameCoApplicant(firstNameCoApplicant);
+//        user.setEmailCoApplicant(emailCoApplicant);
     }
 
     @And("^user sets FirstName Co-Applicant$")
     public void user_sets_firstname_coapplicant() {
-        addYourCoapplicantPage.setFirstName("Anthony Mottot co-applicant");
-        user.setFirstNameCoApplicant("Anthony Mottot co-applicant");
+//        addYourCoapplicantPage.setFirstName("Anthony Mottot co-applicant");
+//        user.setFirstNameCoApplicant("Anthony Mottot co-applicant");
     }
 
     @And("^user sets Email Co-Applicant$")
     public void user_sets_email_coapplicant() {
-//        addYourCoapplicantPage.setEmail("anthonymottot-co-applicant" + DateTime.now().toString("yyyyMMddHHmmssSSS") + "@abakus.com");
-        addYourCoapplicantPage.setEmail("anthonymottot-co-applicant" + System.getProperty("timestamp") + "@abakus.com");
-//        user.setEmailCoApplicant("anthonymottot-co-applicant" + DateTime.now().toString("yyyyMMddHHmmssSSS") + "@abakus.com");
-        user.setEmailCoApplicant("anthonymottot-co-applicant" + System.getProperty("timestamp") + "@abakus.com");
+////        addYourCoapplicantPage.setEmail("anthonymottot-co-applicant" + DateTime.now().toString("yyyyMMddHHmmssSSS") + "@abakus.com");
+//        addYourCoapplicantPage.setEmail("anthonymottot-co-applicant" + System.getProperty("timestamp") + "@abakus.com");
+////        user.setEmailCoApplicant("anthonymottot-co-applicant" + DateTime.now().toString("yyyyMMddHHmmssSSS") + "@abakus.com");
+//        user.setEmailCoApplicant("anthonymottot-co-applicant" + System.getProperty("timestamp") + "@abakus.com");
     }
 
     @When("^user clicks \"INVITE NOW\"$")

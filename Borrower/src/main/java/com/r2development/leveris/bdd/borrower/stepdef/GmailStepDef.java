@@ -1,6 +1,8 @@
 package com.r2development.leveris.bdd.borrower.stepdef;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.r2development.leveris.di.IUser;
 import cucumber.api.java.en.Given;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -9,13 +11,22 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 @Singleton
-public class GmailStepDef extends BorrowerStepDef {
+public class GmailStepDef /*extends BorrowerStepDef*/ {
 
     private static final Log log = LogFactory.getLog(GmailStepDef.class);
+    private WebDriver webDriver;
+    IUser user;
+
+    @Inject
+    GmailStepDef(WebDriver webDriver) {
+//        super(webDriver);
+        this.webDriver = webDriver;
+    }
 
     @Given("^user goes to gmail$")
     public void user_goes_to_gmail() {
-        WebDriver webDriver = WebDriverService.getWebDriverInstance();
+//        WebDriver webDriver = WebDriverService.getWebDriverInstance();
+//        WebDriver webDriver = webDriver;
         webDriver.get("http://www.gmail.com");
         WebDriverWait webDriverWait = new WebDriverWait(webDriver, 30);
 

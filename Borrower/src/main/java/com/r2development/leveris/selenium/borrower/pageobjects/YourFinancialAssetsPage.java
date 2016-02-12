@@ -1,5 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.google.inject.Inject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -9,7 +10,8 @@ public class YourFinancialAssetsPage extends HeaderAndBottomAndFormsMenuSection 
     private static final Log log = LogFactory.getLog(YourFinancialAssetsPage.class);
 
     protected IYourFinancialAssetsSection yourFinancialAssetsSection;
-    
+
+    @Inject
     public YourFinancialAssetsPage(WebDriver webDriver) {
         super(webDriver);
         headerSection = new HeaderSection(webDriver);

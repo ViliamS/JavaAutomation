@@ -1,5 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -30,6 +31,7 @@ public class AutomaticRegistrationSection extends Borrower implements IAutomatic
     @FindBy( xpath = LINK_CREATE_NEW_USER_XPATH )
     protected WebElement CreateNewUser;
 
+    @Inject
     public AutomaticRegistrationSection(WebDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);

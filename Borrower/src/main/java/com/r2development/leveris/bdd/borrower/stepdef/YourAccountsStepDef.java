@@ -1,14 +1,15 @@
 package com.r2development.leveris.bdd.borrower.stepdef;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.AccountData;
 import com.r2development.leveris.selenium.borrower.pageobjects.IFormsMenu;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 
 import java.util.Map;
@@ -18,7 +19,9 @@ public class YourAccountsStepDef extends BorrowerStepDef implements CLV312Workar
 
     private static final Log log = LogFactory.getLog(YourAccountsStepDef.class);
 
-    public YourAccountsStepDef() {
+    @Inject
+    public YourAccountsStepDef(WebDriver webDriver) {
+        super(webDriver);
 //        yourAccountsPage = new YourAccountsPage(ApiSupportWebDriverStepDef.getWebDriverInstance());
     }
 
@@ -33,8 +36,6 @@ public class YourAccountsStepDef extends BorrowerStepDef implements CLV312Workar
         user_types_current_iban(accountData.get("IBAN"));
 //        user_types_current_account_balance(accountData.getAccountBalance());
         user_types_current_account_balance(accountData.get("accountBalance"));
-        if ( StringUtils.isNotEmpty(user.getFirstNameCoApplicant()) )
-            this_account_is_applied_to(accountData.get("appliedTo"));
         user_clicks_add_this_account();
     }
 
@@ -51,10 +52,7 @@ public class YourAccountsStepDef extends BorrowerStepDef implements CLV312Workar
         boolean toGoOn = false;
         while ( !toGoOn ) {
             try {
-                if (StringUtils.isEmpty(user.getFirstNameCoApplicant()))
-                    borrowerPersonalDetailsPage.clickAccount();
-                else
-                    ((IFormsMenu)borrowerPersonalDetailsPage).clickAccount("double");
+                ((IFormsMenu)borrowerPersonalDetailsPage).clickAccount("double");
 //                yourAccountsPage.clickAddAccount();
 //                yourAccountsPage.clickAddAccountManually();
                 yourAccountsPage.getTitle();
@@ -75,17 +73,10 @@ public class YourAccountsStepDef extends BorrowerStepDef implements CLV312Workar
     @When("^user clicks Accounts \"NEXT\"$")
     public void user_clicks_next() {
         yourAccountsPage.clickNext();
-        if ( StringUtils.isEmpty(user.getFirstNameCoApplicant())) {
-            if (!((IFormsMenu) yourAccountsPage).isAccountFormDone("single")) {
-                ((IFormsMenu) yourAccountsPage).clickAccount("single");
-                yourAccountsPage.clickNext();
-            }
-        }
-        else {
-            if (!((IFormsMenu) yourAccountsPage).isAccountFormDone("double")) {
-                ((IFormsMenu) yourAccountsPage).clickAccount("double");
-                yourAccountsPage.clickNext();
-            }
+
+        if (!((IFormsMenu) yourAccountsPage).isAccountFormDone("single")) {
+            ((IFormsMenu) yourAccountsPage).clickAccount("single");
+            yourAccountsPage.clickNext();
         }
     }
 
@@ -104,22 +95,9 @@ public class YourAccountsStepDef extends BorrowerStepDef implements CLV312Workar
         yourAccountsPage.selectSourceOfFunds(sourceOfFund);
     }
 
-    @And("^this account is applied to (borrower|coapplicant|both)$")
+    @And("^this account is applied to (borrower)$")
     public void this_account_is_applied_to(String toWhom) {
-        switch (toWhom) {
-            case "borrower":
-                yourAccountsPage.checkAccountAppliesToBorrower(user.getFirstName());
-                break;
-            case "coapplicant":
-                yourAccountsPage.checkAccountAppliesToCoapplicant(user.getFirstNameCoApplicant());
-                break;
-            case "both":
-                yourAccountsPage.checkAccountAppliesToBorrower(user.getFirstName());
-//                yourAccountsPage.checkAccountAppliesToCoapplicant(user.getFirstNameCoApplicant());
-                yourAccountsPage.checkAccountAppliesToCoapplicant("AutomationCoapplicant");
-                break;
-            default:
-        }
+        yourAccountsPage.checkAccountAppliesToBorrower(user.getFirstName());
     }
 
     @And("^user types his (Current|Savings) account provider: (.)$")

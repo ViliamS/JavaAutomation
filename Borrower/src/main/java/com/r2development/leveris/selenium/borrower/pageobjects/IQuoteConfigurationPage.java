@@ -6,39 +6,22 @@ package com.r2development.leveris.selenium.borrower.pageobjects;
 public interface IQuoteConfigurationPage {
 
     IQuoteConfigurationPage setLoanAmountInput(String amountToBorrow);
-
 //    String getLoanAmount();
-
-    IQuoteConfigurationPage setMonthlyInstalmentInput(String monthlyRepayment);
-
+    IQuoteConfigurationPage setMonthlyInstallmentInput(String monthlyRepayment);
 //    String getMonthlyInstalmentAmount();
-//
 //    boolean isHeaderGreatAndQuickLoanPresent();
-//
 //    boolean isTitleUnsecuredLoanCalculatorPresent();
-//
 //    boolean isTitleConfigureYourLoanPresent();
-//
 //    boolean isTitleNumberOfRepaymentsPresent();
-
 //    String getNumberOfRepayments();
-
 //    boolean isTitleLastRepaymentAmountPresent();
-//
-////    String getLastRepaymentAmount();
-//
+//    String getLastRepaymentAmount();
 //    boolean isTitleAprPresent();
-//
-////    String getApr();
-//
+//    String getApr();
 //    boolean isTitleTotalCostOfLoanPresent();
-//
-////    String getTotalCostOfLoan();
-
+//    String getTotalCostOfLoan();
     IRegisterPage clickApplyOnline();
-
     IQuoteConfigurationPage clickChangeProduct();
-
 //    boolean isChangeProductPresent();
 
 }

@@ -1,22 +1,25 @@
 package com.r2development.leveris.bdd.borrower.stepdef;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.selenium.borrower.pageobjects.IFormsMenu;
-import com.r2development.leveris.selenium.borrower.pageobjects.YourPropertiesPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 
 @Singleton
 public class YourPropertiesStepDef extends BorrowerStepDef implements CLV312Workaround {
 
     private static final Log log = LogFactory.getLog(YourPropertiesStepDef.class);
 
-    public YourPropertiesStepDef() {
-        yourPropertiesPage = new YourPropertiesPage(WebDriverService.getWebDriverInstance());
+    @Inject
+    public YourPropertiesStepDef(WebDriver webDriver) {
+        super(webDriver);
+//        yourPropertiesPage = new YourPropertiesPage(WebDriverService.getWebDriverInstance());
     }
 
     // TODO HANDLE NUMBER mortgage by order created property and by property category
@@ -26,16 +29,10 @@ public class YourPropertiesStepDef extends BorrowerStepDef implements CLV312Work
         workaroundCLV312(null);
 
         if (hasProperties == null) {
-            if (StringUtils.isNotEmpty(user.getFirstNameCoApplicant()))
-                yourPropertiesPage.clickCoupleYes();
-            else
-                yourPropertiesPage.clickSingleYes();
+            yourPropertiesPage.clickSingleYes();
         }
         else {
-            if (StringUtils.isNotEmpty(user.getFirstNameCoApplicant()))
-                yourPropertiesPage.clickCoupleNo();
-            else
-                yourPropertiesPage.clickSingleNo();
+            yourPropertiesPage.clickSingleNo();
         }
     }
 
@@ -46,10 +43,7 @@ public class YourPropertiesStepDef extends BorrowerStepDef implements CLV312Work
         boolean toGoOn = false;
         while ( !toGoOn ) {
             try {
-                if ( StringUtils.isEmpty(user.getFirstNameCoApplicant()))
-                    borrowerPersonalDetailsPage.clickProperties();
-                else
-                    ((IFormsMenu)borrowerPersonalDetailsPage).clickProperties("double");
+                ((IFormsMenu)borrowerPersonalDetailsPage).clickProperties("double");
                 yourPropertiesPage.getYourPropertiesTitle();
                 toGoOn = true;
             } catch (TimeoutException te) {
@@ -61,36 +55,18 @@ public class YourPropertiesStepDef extends BorrowerStepDef implements CLV312Work
     @When("^user has(n't)? a property in the past$")
     public void user_has_properties_in_the_past(String hasPropertyInThePast) {
         if (hasPropertyInThePast == null) {
-            if (user.getFirstNameCoApplicant() != null && StringUtils.isNotEmpty(user.getFirstNameCoApplicant()))
-                yourPropertiesPage.clickPastCoupleYes();
-            else
-                yourPropertiesPage.clickPastSingleYes();
+            yourPropertiesPage.clickPastSingleYes();
         }
         else {
-            if (user.getFirstNameCoApplicant() != null && StringUtils.isNotEmpty(user.getFirstNameCoApplicant()))
-                yourPropertiesPage.clickPastCoupleNo();
-            else
-                yourPropertiesPage.clickPastSingleNo();
+            yourPropertiesPage.clickPastSingleNo();
             yourPropertiesPage.clickNext();
             yourPropertiesPage.clickNextSection();
         }
     }
 
-    @And("^this property is applied to (borrower|coapplicant|both)$")
+    @And("^this property is applied to (borrower)$")
     public void this_property_is_applied_to(String toWhom) {
-        switch (toWhom) {
-            case "borrower":
-                yourPropertiesPage.checkThisPropertyAppliesToBorrower(user.getFirstName());
-                break;
-            case "coapplicant":
-                yourPropertiesPage.checkThisPropertyAppliedToCoapplicant(user.getFirstNameCoApplicant());
-                break;
-            case "both":
-                yourPropertiesPage.checkThisPropertyAppliesToBorrower(user.getFirstName());
-                yourPropertiesPage.checkThisPropertyAppliedToCoapplicant(user.getFirstNameCoApplicant());
-                break;
-            default:
-        }
+        yourPropertiesPage.checkThisPropertyAppliesToBorrower(user.getFirstName());
     }
 
     @And("^other party has(n't)? an interest in this property$")

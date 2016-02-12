@@ -10,7 +10,7 @@ public interface IQuoteLandingPage {
 
     IQuoteLandingPage goToBorrowerQuoteLandingPage();
 
-    IQuoteQuickLoanPage clickContinuePaydayLoanTealButton();
+    IQuotePaydayLoanPage clickContinuePaydayLoanTealButton();
 
     IQuoteQuickLoanPage clickContinueUnsecuredLoanRedButton();
 

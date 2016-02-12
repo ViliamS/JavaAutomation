@@ -1,9 +1,11 @@
 package com.r2development.leveris.bdd.borrower.stepdef;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.RegistrationData;
+import com.r2development.leveris.di.IUser;
 import com.r2development.leveris.qa.utils.ACMExcel;
-import com.r2development.leveris.selenium.borrower.pageobjects.WelcomePage;
+import com.r2development.leveris.selenium.borrower.pageobjects.*;
 import com.r2development.leveris.utils.ExcelUtils;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -11,6 +13,7 @@ import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hamcrest.core.Is;
+import org.openqa.selenium.WebDriver;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,14 +24,30 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 @Singleton
-public class RegisterPageStepDef extends BorrowerStepDef {
+public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
 
     private static final Log log = LogFactory.getLog(RegisterPageStepDef.class);
+
+    private WebDriver webDriver;
+    IWelcomePage welcomePage;
+    IRegisterPage registerPage;
+    IVerifyEmailPage verifyEmailPage;
+    ILoginPage loginPage;
+
+    @Inject
+    IUser user;
+
+    @Inject
+    RegisterPageStepDef(WebDriver webDriver) {
+//        super(webDriver);
+        this.webDriver = webDriver;
+    }
 
     @Given("user goes to Registration page$")
     public void user_goes_to_registration_page() {
 
-        welcomePage = new WelcomePage(WebDriverService.getWebDriverInstance());
+//        welcomePage = new WelcomePage(WebDriverService.getWebDriverInstance());
+        welcomePage = new WelcomePage(webDriver);
         registerPage = welcomePage.clickRegister();
     }
 

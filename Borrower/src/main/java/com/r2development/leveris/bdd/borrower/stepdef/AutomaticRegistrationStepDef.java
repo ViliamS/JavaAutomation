@@ -1,23 +1,31 @@
 package com.r2development.leveris.bdd.borrower.stepdef;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.AutomaticRegistrationData;
-import com.r2development.leveris.selenium.borrower.pageobjects.AutomaticRegistrationPage;
+import com.r2development.leveris.selenium.borrower.pageobjects.IAutomaticRegistrationPage;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
 
 import java.util.Map;
 
 @Singleton
-public class AutomaticRegistrationStepDef extends BorrowerStepDef {
+public class AutomaticRegistrationStepDef /*extends BorrowerStepDef*/ {
 
     private static final Log log = LogFactory.getLog(AutomaticRegistrationStepDef.class.getName());
 
-    AutomaticRegistrationStepDef() {
-        automaticRegistrationPage = new AutomaticRegistrationPage(WebDriverService.getWebDriverInstance());
+    IAutomaticRegistrationPage automaticRegistrationPage;
+    private final WebDriver webDriver;
+
+    @Inject
+    AutomaticRegistrationStepDef(WebDriver webDriver) {
+//        super(webDriver);
+//        automaticRegistrationPage = new AutomaticRegistrationPage(WebDriverService.getWebDriverInstance());
+        this.webDriver = webDriver;
     }
 
     @Given("^user goes to Automatic Registration page$")

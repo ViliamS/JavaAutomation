@@ -1,5 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -8,12 +9,13 @@ import org.openqa.selenium.WebDriver;
 /**
  * todo Page Object Specific Implementation
  */
-public class QuoteConfigurationPage extends Borrower implements IQuoteConfigurationSection, IQuoteConfigurationPage {
+public class QuoteConfigurationPage extends Borrower implements IQuoteConfigurationPage {
 
     IQuoteConfigurationSection quotationConfigurationSection;
 
     private static final Log log = LogFactory.getLog(QuoteConfigurationPage.class.getName());
 
+    @Inject
     public QuoteConfigurationPage(WebDriver webDriver) {
         super(webDriver);
         quotationConfigurationSection = new QuoteConfigurationSection(webDriver);
@@ -31,7 +33,8 @@ public class QuoteConfigurationPage extends Borrower implements IQuoteConfigurat
 
     @Override
     public IQuoteConfigurationPage setLoanAmountInput(String amountToBorrow) {
-        return quotationConfigurationSection.setLoanAmountInput(amountToBorrow);
+        quotationConfigurationSection.setLoanAmountInput(amountToBorrow);
+        return this;
     }
 
 //    @Override
@@ -40,10 +43,11 @@ public class QuoteConfigurationPage extends Borrower implements IQuoteConfigurat
 //    }
 
     @Override
-    public IQuoteConfigurationPage setMonthlyInstalmentInput(String monthlyRepayment) {
-        return quotationConfigurationSection.setMonthlyInstalmentInput(monthlyRepayment);
+    public IQuoteConfigurationPage setMonthlyInstallmentInput(String monthlyRepayment) {
+        quotationConfigurationSection.setMonthlyInstallmentInput(monthlyRepayment);
+        return this;
     }
-}
+
 //    @Override
 //    public String getMonthlyInstalmentAmount(){
 //        return quotationConfigurationSection.getMonthlyInstalmentAmount();
@@ -99,13 +103,13 @@ public class QuoteConfigurationPage extends Borrower implements IQuoteConfigurat
 //        return quotationConfigurationSection.isTitleTotalCostOfLoanPresent();
 //    }
 //
-////    @Override
-////    public String getTotalCostOfLoan(){
-////        return quotationConfigurationSection.getTotalCostOfLoan();
-////    }
+//    @Override
+//    public String getTotalCostOfLoan(){
+//        return quotationConfigurationSection.getTotalCostOfLoan();
+//    }
 //
 //    @Override
 //    public boolean isChangeProductPresent(){
 //        return quotationConfigurationSection.isChangeProductPresent();
 //    }
-//}
+}

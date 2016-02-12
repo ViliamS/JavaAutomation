@@ -1,21 +1,37 @@
 package com.r2development.leveris.bdd.borrower.stepdef;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.r2development.leveris.selenium.borrower.pageobjects.WelcomePage;
+import com.r2development.leveris.selenium.borrower.pageobjects.*;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openqa.selenium.WebDriver;
 
 @Singleton
-public class WelcomePageStepDef extends BorrowerStepDef {
+public class WelcomePageStepDef /*extends BorrowerStepDef*/ {
 
     private static final Log log = LogFactory.getLog(WelcomePageStepDef.class);
 
+    IWelcomePage welcomePage;
+    IRegisterPage registerPage;
+    ILoginPage loginPage;
+    IBuildQuotationPage buildQuotationPage;
+
+    private final WebDriver webDriver;
+
+    @Inject
+    WelcomePageStepDef(WebDriver webDriver) {
+//        super(webDriver);
+        this.webDriver = webDriver;
+    }
+
     @Given("^user is on Abakus Borrower homepage$")
     public void user_is_on_Abakus_Borrower_homepage() {
-        welcomePage = new WelcomePage(WebDriverService.getWebDriverInstance());
+//        welcomePage = new WelcomePage(WebDriverService.getWebDriverInstance());
+        welcomePage = new WelcomePage(webDriver);
         welcomePage.isLoaded();
     }
 

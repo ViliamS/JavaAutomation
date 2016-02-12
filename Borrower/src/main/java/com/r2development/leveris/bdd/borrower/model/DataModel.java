@@ -1,6 +1,7 @@
 package com.r2development.leveris.bdd.borrower.model;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DataModel extends LinkedHashMap {
@@ -12,6 +13,14 @@ public class DataModel extends LinkedHashMap {
      */
     public DataModel(Map<String, String> data) {
         this.data.putAll(data);
+    }
+
+    public DataModel(List<String> dataList) {
+        int i=0;
+        do {
+            data.put(dataList.get(i), dataList.get(i+1));
+            i=i+2;
+        } while (i<(dataList.size()-1));
     }
 
     public DataModel() {

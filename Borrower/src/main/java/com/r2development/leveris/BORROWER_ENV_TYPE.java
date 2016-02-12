@@ -9,7 +9,7 @@ import org.apache.commons.logging.LogFactory;
 public enum BORROWER_ENV_TYPE {
 
     TUNNING ( "Tunning" ),
-    DEV1 ( "Dev1" ),
+    DEV2 ( "Dev2" ),
     APPTEST ( "AppTest" ),
     APPINT ( "AppInt" ),
     IT1 ( "IT1" ),

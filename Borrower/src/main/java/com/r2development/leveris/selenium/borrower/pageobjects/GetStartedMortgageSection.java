@@ -1,5 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -15,6 +16,7 @@ public class GetStartedMortgageSection extends Borrower implements IGetStartedMo
     @FindBy( xpath = GET_STARTED_BUTTON_XPATH )
     protected WebElement weGetStarted;
 
+    @Inject
     public GetStartedMortgageSection(WebDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);

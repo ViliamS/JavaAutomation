@@ -1,5 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -103,6 +104,7 @@ public class YourFinancialAssetsSection extends Borrower implements IYourFinanci
     @FindBy ( xpath = YOUR_FINANCIAL_ASSET_TOTAL_XPATH )
     protected WebElement weYourFinancialAssetsTotal;
 
+    @Inject
     YourFinancialAssetsSection(WebDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);

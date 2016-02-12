@@ -1,5 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -23,6 +24,7 @@ public class BuildQuoteSection extends Borrower implements IBuildQuoteSection {
     @FindBy( xpath = BUILD_QUOTE_GET_MY_QUOTE_FAILURE_XPATH )
     protected WebElement weGetQuoteFailure;
 
+    @Inject
     public BuildQuoteSection(WebDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);

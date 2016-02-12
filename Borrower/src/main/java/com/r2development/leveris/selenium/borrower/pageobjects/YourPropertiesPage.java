@@ -1,5 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.google.inject.Inject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -10,6 +11,7 @@ public class YourPropertiesPage extends HeaderAndBottomAndFormsMenuSection imple
 
     protected IYourPropertiesSection yourPropertiesSection;
 
+    @Inject
     public YourPropertiesPage(WebDriver webDriver) {
         super(webDriver);
         headerSection = new HeaderSection(webDriver);

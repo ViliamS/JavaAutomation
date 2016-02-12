@@ -1,5 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -21,14 +22,15 @@ public class WelcomePage extends Borrower implements IWelcomePage {
     @FindBy(xpath = REGISTER_XPATH)
     protected  WebElement weRegister;
 
+    @Inject
     public WelcomePage(WebDriver webDriver) {
         super(webDriver);
 //        get(ABAKUS_ENVIRONMENT.get(ENVIRONMENT_RUN).get(APPLICATION_RUN));
 
-        if ( System.getProperty("borrower") == null )
-            System.setProperty("borrower", "https://st1app.loftkeys.com/borrower");
-
-        get(System.getProperty("borrower"));
+//        if ( System.getProperty("borrower") == null )
+//            System.setProperty("borrower", "https://st1app.loftkeys.com/borrower");
+//
+//        get(System.getProperty("borrower"));
         PageFactory.initElements(webDriver, this);
     }
 

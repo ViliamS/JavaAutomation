@@ -1,5 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -63,6 +64,7 @@ public class FormsMenu extends Borrower implements IFormsMenu {
     @FindBy ( xpath = DOCUMENT_UPLOAD_XPATH )
     protected WebElement weDocumentUpload;
 
+    @Inject
     public FormsMenu(WebDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);

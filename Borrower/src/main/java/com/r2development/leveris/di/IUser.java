@@ -10,10 +10,8 @@ public interface IUser {
     void setEmail(String email);
     String getPwd();
     void setPwd(String pwd);
-    String getFirstNameCoApplicant();
-    void setFirstNameCoApplicant(String firstNameCoApplicant);
-    String getEmailCoApplicant();
-    void setEmailCoApplicant(String emailCoApplicant);
+    String getPhoneNumber();
+    void setPhoneNumber(String phoneNumber);
 //    boolean isMortgageType(MORTGAGE_TYPE mortgageType);
 //    MORTGAGE_TYPE getMortgageType();
 //    void setMortgageType(MORTGAGE_TYPE mortgageType);

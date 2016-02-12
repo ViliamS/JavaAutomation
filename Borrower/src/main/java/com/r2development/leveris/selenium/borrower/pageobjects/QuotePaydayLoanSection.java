@@ -4,36 +4,30 @@ import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
 import org.openqa.selenium.WebDriver;
 
-/**
- * todo Page Object Specific Implementation
- */
-public class QuoteQuickLoanSection extends Borrower implements IQuoteQuickLoanSection {
+public class QuotePaydayLoanSection extends Borrower implements IQuotePaydayLoanSection{
 
     @Inject
-    public QuoteQuickLoanSection(WebDriver webDriver){
+    public QuotePaydayLoanSection(WebDriver webDriver){
         super( webDriver );
     }
 
     @Override
     public boolean isHeaderYesIWouldLikeGreatAndQuickLoanPresent() {
-        //isVisible(HEADER_TITLE_YES_I_LIKE_LOAN_XPATH);
-        return true;
+        return true;//isVisible(HEADER_TITLE_YES_I_LIKE_LOAN);
     }
 
     @Override
     public boolean isSubHeaderUnsecuredLoanPresent() {
-        //isVisible(UNSECURED_LOAN_TITLE_XPATH);
-        return true;
+        return true;//isVisible(UNSECURED_LOAN_TITLE);
     }
 
     @Override
     public boolean isSubTitleBasicInfoAboutYouShouldGiveUsPresent() {
-        //isVisible(BASIC_INFO_TITLE_XPATH);
-        return true;
+        return true;//isVisible(BASIC_INFO_TITLE);
     }
 
     @Override
-    public IQuoteQuickLoanSection setLoanPurpose(String loanPurposeType) {
+    public IQuotePaydayLoanSection setLoanPurpose(String loanPurposeType) {
         isVisible(LOAN_PURPOSE_XPATH, true);
         clickElement(LOAN_PURPOSE_XPATH);
         isVisible(DROP_DOWN_LIST + "/a[text()='" + loanPurposeType + "']");
@@ -42,26 +36,26 @@ public class QuoteQuickLoanSection extends Borrower implements IQuoteQuickLoanSe
     }
 
     @Override
-    public IQuoteQuickLoanSection setNetMonthlyIncome(String netMonthlyIncome) {
+    public IQuotePaydayLoanSection setNetMonthlyIncome(String netMonthlyIncome) {
         type(NET_MONTHLY_INCOME_INPUT, netMonthlyIncome);
         return this;
     }
 
     @Override
-    public IQuoteQuickLoanSection setMonthlyExpenses(String monthlyExpenses) {
+    public IQuotePaydayLoanSection setMonthlyExpenses(String monthlyExpenses) {
         type(MONTHLY_EXPENSES_INPUT, monthlyExpenses);
         return this;
     }
 
     @Override
-    public IQuoteQuickLoanSection setNumberOfDependents(String numberOfDependents) {
+    public IQuotePaydayLoanSection setNumberOfDependents(String numberOfDependents) {
         type(NUMBER_OF_DEPENDENTS_INPUT, numberOfDependents);
         return this;
     }
 
     @Override
-    public IQuoteQuickLoanSection setAmountToBorrow(String amountToBorrow) {
-        type(AMOUNT_TO_BORROW_INPUT, amountToBorrow);
+    public IQuotePaydayLoanSection setAmountToBorrow(String amountToBorrow) {
+        type(AMOUNT_TO_BORROW_INPUT, amountToBorrow, false);
         return this;
     }
 
@@ -71,5 +65,4 @@ public class QuoteQuickLoanSection extends Borrower implements IQuoteQuickLoanSe
         clickElementViaJavascript(CONTINUE_TEAL_BUTTON_XPATH);
         return new QuoteConfigurationPage( webDriver );
     }
-
 }

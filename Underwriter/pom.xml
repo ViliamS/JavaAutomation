@@ -205,12 +205,14 @@
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-junit</artifactId>
-            <version>${info-cukes.cucumber-guice.version}</version>
+            <version>${info-cukes.cucumber-junit.version}</version>
         </dependency>
         <dependency>
             <groupId>info.cukes</groupId>
-            <artifactId>cucumber-java8</artifactId>
-            <version>${info-cukes.cucumber-guice.version}</version>
+            <artifactId>cucumber-java</artifactId>
+            <!--<artifactId>cucumber-java8</artifactId>-->
+            <version>${info-cukes.cucumber-java.version}</version>
+            <!--<version>${info-cukes.cucumber-java8.version}</version>-->
         </dependency>
 
         <!-- for cucumber reporting -->

@@ -1,52 +1,44 @@
 package com.r2development.leveris.di;
 
-import com.google.inject.Binder;
-import com.google.inject.Module;
-import com.google.inject.Provides;
-import com.r2development.leveris.selenium.borrower.pageobjects.DocumentUploadSection;
+import com.google.inject.AbstractModule;
+import org.apache.commons.lang3.StringUtils;
+import org.joda.time.DateTime;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class BorrowerDependenciesModule /*extends AbstractModule*/ implements Module {
-//    @Override
-//    protected void configure() {
-////        bind(IBorrower.class).to(Abakus.class);
-//        bind(WebDriver.class).to(ChromeDriver.class);
-//        bind(IUser.class).to(User.class);
-//    }
+public class BorrowerDependenciesModule extends AbstractModule /*implements Module*/ {
 
-    /**
-     * Contributes bindings and other configurations for this module to {@code binder}.
-     * <p>
-     * <p><strong>Do not invoke this method directly</strong> to install submodules. Instead use
-     * {@link Binder#install(Module)}, which ensures that {@link Provides provider methods} are
-     * discovered.
-     *
-     * @param binder -
-     */
+    private IUser user;
+    private WebDriver webDriver;
+
     @Override
-    public void configure(Binder binder) {
-        binder.bind(IUser.class).to(User.class).asEagerSingleton();
-        binder.bind(IHttpResponse.class).to(HttpResponse.class).asEagerSingleton();
-//        binder.bind(User.class).toConstructor(DocumentUploadSection.class);
-//        binder.bind(IDocumentUploadSection.class).to(DocumentUploadSection.class).asEagerSingleton();
-//        binder.requestInjection(DocumentUploadSection.class);
+    protected void configure() {
 
-        try {
-            binder.bind(User.class).toConstructor(
-                User.class.getConstructor(DocumentUploadSection.class)
-            );
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
+        if ( StringUtils.isEmpty(System.getProperty("environment")))
+            System.setProperty("environment", "dev2");
+        if ( StringUtils.isEmpty(System.getProperty("domain")))
+            System.setProperty("domain", "http://dv2app.opoqodev.com/");
+        if ( StringUtils.isEmpty(System.getProperty("borrower")))
+            System.setProperty("borrower", "http://dv2app.opoqodev.com/stable-borrower");
+        if ( System.getProperty("browser") == null)
+            System.setProperty("browser", "chrome");
+        if ( StringUtils.isEmpty(System.getProperty("timestamp")))
+            System.setProperty("timestamp", DateTime.now().toString("yyyyMMddHHmmssSSS"));
 
         switch (System.getProperty("browser")) {
-            case "Chrome":
-                binder.bind(WebDriver.class).to(ChromeDriver.class);
+            case "chrome":
+                webDriver = new ChromeDriver();
+                bind(WebDriver.class).toInstance(webDriver);
                 break;
-            case "Firefox":
-//                binder.bind(WebDriver.class).to(FirefoxDriver.class);
+            case "firefox":
+                webDriver = new FirefoxDriver();
+                bind(WebDriver.class).to(FirefoxDriver.class);
                 break;
         }
+
+        user = new User();
+        bind(IUser.class).toInstance(user);
     }
+
 }

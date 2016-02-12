@@ -1,22 +1,25 @@
 package com.r2development.leveris.bdd.borrower.stepdef;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.selenium.borrower.pageobjects.IFormsMenu;
-import com.r2development.leveris.selenium.borrower.pageobjects.YourFinancialCommitmentsPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 
 @Singleton
 public class YourFinancialCommitmentsStepDef extends BorrowerStepDef implements CLV312Workaround{
 
     private static final Log log = LogFactory.getLog(YourFinancialCommitmentsStepDef.class);
 
-    public YourFinancialCommitmentsStepDef() {
-        yourFinancialCommitmentsPage = new YourFinancialCommitmentsPage(WebDriverService.getWebDriverInstance());
+    @Inject
+    public YourFinancialCommitmentsStepDef(WebDriver webDriver) {
+        super(webDriver);
+//        yourFinancialCommitmentsPage = new YourFinancialCommitmentsPage(WebDriverService.getWebDriverInstance());
     }
 
     @When("^user selects (Personal Loan|Credit Card|Maintenance Payment|Other|Car Loan|Student Loan) as financial commitment type$")
@@ -28,18 +31,11 @@ public class YourFinancialCommitmentsStepDef extends BorrowerStepDef implements 
     public void user_has_financial_commitments(String hasCommitments) throws InterruptedException {
         workaroundCLV312(null);
 
-
         if (hasCommitments == null) {
-            if (StringUtils.isNotEmpty(user.getFirstNameCoApplicant()))
-                yourFinancialCommitmentsPage.clickCoupleYes();
-            else
-                yourFinancialCommitmentsPage.clickSingleYes();
+            yourFinancialCommitmentsPage.clickSingleYes();
         }
         else {
-            if (StringUtils.isNotEmpty(user.getFirstNameCoApplicant()))
-                yourFinancialCommitmentsPage.clickCoupleNo();
-            else
-                yourFinancialCommitmentsPage.clickSingleNo();
+            yourFinancialCommitmentsPage.clickSingleNo();
             yourFinancialCommitmentsPage.clickNext();
         }
     }
@@ -51,10 +47,7 @@ public class YourFinancialCommitmentsStepDef extends BorrowerStepDef implements 
         boolean toGoOn = false;
         while ( !toGoOn ) {
             try {
-                if ( StringUtils.isEmpty(user.getFirstNameCoApplicant()))
-                    borrowerPersonalDetailsPage.clickFinancialCommitments();
-                else
-                    ((IFormsMenu)borrowerPersonalDetailsPage).clickFinancialCommitments("double");
+                ((IFormsMenu)borrowerPersonalDetailsPage).clickFinancialCommitments("double");
                 yourFinancialCommitmentsPage.getTitle();
                 toGoOn = true;
             } catch (TimeoutException te) {
@@ -63,21 +56,9 @@ public class YourFinancialCommitmentsStepDef extends BorrowerStepDef implements 
         }
     }
 
-    @And("^this commitment is applied to (borrower|coapplicant|both)$")
+    @And("^this commitment is applied to (borrower)$")
     public void this_commitment_is_applied_to(String toWhom) {
-        switch (toWhom) {
-            case "borrower":
-                yourFinancialCommitmentsPage.checkFinancialCommitmentAppliesToBorrower(user.getFirstName());
-                break;
-            case "coapplicant":
-                yourFinancialCommitmentsPage.checkFinancialCommitmentAppliesToCoapplicant(user.getFirstNameCoApplicant());
-                break;
-            case "both":
-                yourFinancialCommitmentsPage.checkFinancialCommitmentAppliesToBorrower(user.getFirstName());
-                yourFinancialCommitmentsPage.checkFinancialCommitmentAppliesToCoapplicant(user.getFirstNameCoApplicant());
-                break;
-            default:
-        }
+        yourFinancialCommitmentsPage.checkFinancialCommitmentAppliesToBorrower(user.getFirstName());
     }
 
     @And("^user clicks Financial Commitment \"CANCEL\"$")

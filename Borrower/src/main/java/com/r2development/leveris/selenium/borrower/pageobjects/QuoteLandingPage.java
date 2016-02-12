@@ -1,39 +1,38 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 
-/**
- * todo Page Object Specific Implementation
- */
-public class QuoteLandingPage extends Borrower implements IQuoteLandingPage, IQuoteLandingSection {
+public class QuoteLandingPage extends Borrower implements IQuoteLandingPage {
 
     private static final Log log = LogFactory.getLog(QuoteLandingPage.class.getName());
 
     IQuoteLandingSection quoteLandingSection;
 
+//    public QuoteLandingPage() {
+//        super(WebDriverService.getWebDriverInstance());
+//        quoteLandingSection = new QuoteLandingSection(webDriver);
+//    }
+
+    @Inject
     public QuoteLandingPage( WebDriver webDriver ) {
         super( webDriver );
-
-        if (System.getProperty(DEFAULT_ENVIRONMENT_VARIABLE) == null)
-            System.setProperty(DEFAULT_ENVIRONMENT_VARIABLE, DEFAULT_ENVIRONMENT);
-
-        get(System.getProperty("borrower"));
-        PageFactory.initElements( webDriver, this );
-        quoteLandingSection = new QuoteLandingSection( webDriver );
+        quoteLandingSection = new QuoteLandingSection(webDriver);
     }
 
     @Override
     public IQuoteLandingPage goToBorrowerQuoteLandingPage(){
         get(System.getProperty("borrower"));
+//        get("google.fr");
+//        quoteLandingSection = new QuoteLandingSection( webDriver );
         return this;
     }
 
     @Override
-    public IQuoteQuickLoanPage clickContinuePaydayLoanTealButton(){
+    public IQuotePaydayLoanPage clickContinuePaydayLoanTealButton(){
         return quoteLandingSection.clickContinuePaydayLoanTealButton();
     }
 

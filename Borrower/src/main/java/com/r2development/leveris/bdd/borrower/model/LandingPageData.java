@@ -1,34 +1,39 @@
 package com.r2development.leveris.bdd.borrower.model;
 
+import java.util.List;
 import java.util.Map;
 
-public class LandingPageData /* extends DataModel */ {
+public class LandingPageData extends DataModel {
 
-    private Map<String, String> quotationData;
+//    public Map<String, String> quotationData = new LinkedHashMap<>();
 
     public LandingPageData(Map<String, String> quotationData){
-        this.quotationData.putAll(quotationData);
+        this.data.putAll(quotationData);
+    }
+
+    public LandingPageData(List<String> quotationData) {
+        super(quotationData);
     }
 
     public Map<String, String> getQuotationData(){
-        return quotationData;
+        return getData();
     }
 
-    public String getUpToAmount(){ return quotationData.get("UpToAmount"); }
+    public String getUpToAmount(){ return data.get("UpToAmount"); }
 
-    public String  getFromAmountPerMonth() { return quotationData.get("FromAmountPerMonth"); }
+    public String  getFromAmountPerMonth() { return data.get("FromAmountPerMonth"); }
 
-    public String getPayDayLoanAmount() { return quotationData.get("PayDayLoanAmount"); }
+    public String getPayDayLoanAmount() { return data.get("PayDayLoanAmount"); }
 
-    public String getLoanPurpose() { return quotationData.get("LoanPurpose"); }
+    public String getLoanPurpose() { return data.get("LoanPurpose"); }
 
-    public String getNetMonthlyIncome() { return quotationData.get("NetMonthlyIncome"); }
+    public String getNetMonthlyIncome() { return data.get("NetMonthlyIncome"); }
 
-    public String getMonthlyExpenses() { return quotationData.get("MonthlyExpenses"); }
+    public String getMonthlyExpenses() { return data.get("MonthlyExpenses"); }
 
-    public String getNumberOfDependents() { return quotationData.get("NumberOfDependents"); }
+    public String getNumberOfDependents() { return data.get("NumberOfDependents"); }
 
-    public String getLoanAmount() { return quotationData.get("AmountToBorrow"); }
+    public String getLoanAmount() { return data.get("AmountToBorrow"); }
 
-    public String getMonthlyInstalmentAmount() { return quotationData.get("MonthlyRepayment"); }
+    public String getMonthlyInstalmentAmount() { return data.get("MonthlyRepayment"); }
 }

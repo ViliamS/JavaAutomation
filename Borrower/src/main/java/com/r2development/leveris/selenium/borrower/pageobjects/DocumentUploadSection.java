@@ -2,6 +2,7 @@ package com.r2development.leveris.selenium.borrower.pageobjects;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.Borrower;
 import com.r2development.leveris.di.IUser;
@@ -24,7 +25,7 @@ import java.util.*;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
 @Singleton
-public class DocumentUploadSection extends Borrower implements IDocumentUploadSection/*, Provider<User>*/ {
+public class DocumentUploadSection extends Borrower implements IDocumentUploadSection {
 
     public static Log log = LogFactory.getLog(DocumentUploadSection.class);
 
@@ -54,12 +55,14 @@ public class DocumentUploadSection extends Borrower implements IDocumentUploadSe
     protected WebElement weSubmitUpload;
 
     protected IUser user;
-    
+
+    @Inject
     public DocumentUploadSection(WebDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);
     }
 
+//    @Inject
     public DocumentUploadSection(WebDriver webDriver, IUser user) {
         super(webDriver);
         this.user = user;
@@ -291,27 +294,9 @@ public class DocumentUploadSection extends Borrower implements IDocumentUploadSe
             }
             if ( uploadName.contains(user.getFirstName()) )
                 toReturn.put("Borrower", uploadName.replace(user.getFirstName() + " - ", ""), i+1);
-            if ( uploadName.contains(user.getFirstNameCoApplicant()) )
-                toReturn.put("Coapplicant", uploadName.replace(user.getFirstNameCoApplicant() + " - ", ""), i+1);
-            if ( uploadName.contains(user.getFirstName() + ", " + user.getFirstNameCoApplicant()) )
-                toReturn.put("Borrower and Coapplicant", uploadName.replace(user.getFirstName() + ", " + user.getFirstNameCoApplicant() + " - ", ""), i+1);
-            if ( !uploadName.contains(user.getFirstName()) && !uploadName.contains(user.getFirstNameCoApplicant()) )
-                toReturn.put("Borrower", uploadName, i+1);
         }
 
         return toReturn;
     }
-
-//    private Set<String> getRemainingDocumentTable() {
-//        Set<String> toReturn = new LinkedHashSet<>();
-//        List<WebElement> bugs =  getWebElements(REPORTS_LIST_NOT_UPLOADED_DOCUMENTS_XPATH);
-//        for( int i=0; i < bugs.size(); i++) {
-//            WebElement currentWebElement = bugs.get(i);
-//            String dataPathText = getAttributeText(currentWebElement, "data-path");
-//            toReturn.add(dataPathText.split(" ")[2]);
-//        }
-//
-//        return toReturn;
-//    }
 
 }

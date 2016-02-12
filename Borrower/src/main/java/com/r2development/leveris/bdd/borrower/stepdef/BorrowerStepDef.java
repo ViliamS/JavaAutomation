@@ -1,13 +1,12 @@
 package com.r2development.leveris.bdd.borrower.stepdef;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import com.r2development.leveris.di.User;
 import com.r2development.leveris.selenium.borrower.pageobjects.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openqa.selenium.WebDriver;
 
-@Singleton
 public class BorrowerStepDef /*extends Abakus*/ /*implements IBorrower*/ {
 
     private static final Log log = LogFactory.getLog(BorrowerStepDef.class);
@@ -35,47 +34,90 @@ public class BorrowerStepDef /*extends Abakus*/ /*implements IBorrower*/ {
     IDocumentUploadPage documentUploadPage;
     IFormsMenu currentPage;
 
-    IQuoteLandingPage landingPage;
-    IQuoteQuickLoanPage quickLoanPage;
+    IQuoteLandingPage quoteLandingPage;
+    IQuoteQuickLoanPage quoteQuickLoanPage;
+    IQuotePaydayLoanPage quotePaydayLoanPage;
     IQuoteConfigurationPage quoteConfigurationPage;
+//    IRegisterPage registerPage;
 
     ITopBannerMenu topBannerMenu;
 
-    @Inject
+//    @Inject
     User user;
 //    @Inject
-//    WebDriver webDriver;
+    WebDriver webDriver;
 
-    public BorrowerStepDef() {
-        landingPage = new QuoteLandingPage(WebDriverService.getWebDriverInstance());
-        //quickLoanPage = new QuoteQuickLoanPage(WebDriverService.getWebDriverInstance());
-        //quoteConfigurationPage = new QuoteConfigurationPage(WebDriverService.getWebDriverInstance());
+//    public BorrowerStepDef() {
+//
+//    }
 
-        welcomePage = new WelcomePage(WebDriverService.getWebDriverInstance());
-        registerPage = new RegisterPage(WebDriverService.getWebDriverInstance());
-        loginPage = new LoginPage(WebDriverService.getWebDriverInstance());
-        verifyEmailPage = new VerifyEmailPage(WebDriverService.getWebDriverInstance());
-        buildQuotationPage = new BuildQuotationPage(WebDriverService.getWebDriverInstance());
-        addYourCoapplicantPage = new AddYourCoapplicantPage(WebDriverService.getWebDriverInstance());
-        borrowerHomePage = new BorrowerHomePage(WebDriverService.getWebDriverInstance());
-        newPasswordPage = new NewPasswordPage(WebDriverService.getWebDriverInstance());
-        //IFormsPage formsPage;
-//        formsMenu = new FormsMenu(WebDriverStepDef.getWebDriverInstance());
-        borrowerPersonalDetailsPage = new PersonalDetailsPage(WebDriverService.getWebDriverInstance());
-        coapplicantPersonalDetailsPage = new PersonalDetailsPage(WebDriverService.getWebDriverInstance());
-        borrowerEmploymentIncomesPage = new EmploymentIncomesPage(WebDriverService.getWebDriverInstance());
-        coapplicantEmploymentIncomesPage = new EmploymentIncomesPage(WebDriverService.getWebDriverInstance());
-        yourAccountsPage = new YourAccountsPage(WebDriverService.getWebDriverInstance());
-        yourDependentsPage = new YourDependentsPage(WebDriverService.getWebDriverInstance());
-        yourFinancialAssetsPage = new YourFinancialAssetsPage(WebDriverService.getWebDriverInstance());
-        yourFundingPage = new YourFundingPage(WebDriverService.getWebDriverInstance());
-        yourFinancialCommitmentsPage = new YourFinancialCommitmentsPage(WebDriverService.getWebDriverInstance());
-        documentUploadPage = new DocumentUploadPage(WebDriverService.getWebDriverInstance(), user);
-    }
+//    public BorrowerStepDef() {
+//        quoteLandingPage = new QuoteLandingPage(WebDriverService.getWebDriverInstance());
+//        quoteQuickLoanPage = new QuoteQuickLoanPage(WebDriverService.getWebDriverInstance());
+//        quotePaydayLoanPage = new QuotePaydayLoanPage(WebDriverService.getWebDriverInstance());
+//        quoteConfigurationPage = new QuoteConfigurationPage(WebDriverService.getWebDriverInstance());
+//
+//        welcomePage = new WelcomePage(WebDriverService.getWebDriverInstance());
+//        registerPage = new RegisterPage(WebDriverService.getWebDriverInstance());
+//        loginPage = new LoginPage(WebDriverService.getWebDriverInstance());
+//        verifyEmailPage = new VerifyEmailPage(WebDriverService.getWebDriverInstance());
+//        buildQuotationPage = new BuildQuotationPage(WebDriverService.getWebDriverInstance());
+//        addYourCoapplicantPage = new AddYourCoapplicantPage(WebDriverService.getWebDriverInstance());
+//        borrowerHomePage = new BorrowerHomePage(WebDriverService.getWebDriverInstance());
+//        newPasswordPage = new NewPasswordPage(WebDriverService.getWebDriverInstance());
+//        //IFormsPage formsPage;
+////        formsMenu = new FormsMenu(WebDriverStepDef.getWebDriverInstance());
+//        borrowerPersonalDetailsPage = new PersonalDetailsPage(WebDriverService.getWebDriverInstance());
+//        coapplicantPersonalDetailsPage = new PersonalDetailsPage(WebDriverService.getWebDriverInstance());
+//        borrowerEmploymentIncomesPage = new EmploymentIncomesPage(WebDriverService.getWebDriverInstance());
+//        coapplicantEmploymentIncomesPage = new EmploymentIncomesPage(WebDriverService.getWebDriverInstance());
+//        yourAccountsPage = new YourAccountsPage(WebDriverService.getWebDriverInstance());
+//        yourDependentsPage = new YourDependentsPage(WebDriverService.getWebDriverInstance());
+//        yourFinancialAssetsPage = new YourFinancialAssetsPage(WebDriverService.getWebDriverInstance());
+//        yourFundingPage = new YourFundingPage(WebDriverService.getWebDriverInstance());
+//        yourFinancialCommitmentsPage = new YourFinancialCommitmentsPage(WebDriverService.getWebDriverInstance());
+//        documentUploadPage = new DocumentUploadPage(WebDriverService.getWebDriverInstance(), user);
+//    }
+
+//    @Inject
+//    public BorrowerStepDef(User user) {
+////        super(webDriver);
+//        this.user = user;
+//    }
 
     @Inject
-    public BorrowerStepDef(User user) {
+//    BorrowerStepDef(WebDriver webDriver, User user) {
+    BorrowerStepDef(WebDriver webDriver) {
 //        super(webDriver);
-        this.user = user;
+//        this.user = user;
+
+        this.webDriver = webDriver;
+
+        quoteLandingPage = new QuoteLandingPage(webDriver);
+        quoteQuickLoanPage = new QuoteQuickLoanPage(webDriver);
+        quotePaydayLoanPage = new QuotePaydayLoanPage(webDriver);
+        quoteConfigurationPage = new QuoteConfigurationPage(webDriver);
+
+        welcomePage = new WelcomePage(webDriver);
+        registerPage = new RegisterPage(webDriver);
+        loginPage = new LoginPage(webDriver);
+        verifyEmailPage = new VerifyEmailPage(webDriver);
+        buildQuotationPage = new BuildQuotationPage(webDriver);
+        addYourCoapplicantPage = new AddYourCoapplicantPage(webDriver);
+        borrowerHomePage = new BorrowerHomePage(webDriver);
+        newPasswordPage = new NewPasswordPage(webDriver);
+        //IFormsPage formsPage;
+//        formsMenu = new FormsMenu(WebDriverStepDef.getWebDriverInstance());
+        borrowerPersonalDetailsPage = new PersonalDetailsPage(webDriver);
+        coapplicantPersonalDetailsPage = new PersonalDetailsPage(webDriver);
+        borrowerEmploymentIncomesPage = new EmploymentIncomesPage(webDriver);
+        coapplicantEmploymentIncomesPage = new EmploymentIncomesPage(webDriver);
+        yourAccountsPage = new YourAccountsPage(webDriver);
+        yourDependentsPage = new YourDependentsPage(webDriver);
+        yourFinancialAssetsPage = new YourFinancialAssetsPage(webDriver);
+        yourFundingPage = new YourFundingPage(webDriver);
+        yourFinancialCommitmentsPage = new YourFinancialCommitmentsPage(webDriver);
+//        documentUploadPage = new DocumentUploadPage(webDriver, user);
     }
+
 }

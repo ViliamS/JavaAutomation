@@ -1,5 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -24,6 +25,7 @@ public class SubMenuSection extends Borrower implements ISubMenuSection {
     @FindBy ( xpath = SUB_MENU_FINAL_LOAN_SETUP_XPATH )
     protected WebElement weFinalLoanSetup;
 
+    @Inject
     public SubMenuSection(WebDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);

@@ -1,5 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -50,7 +51,7 @@ public class YourDependentsSection extends Borrower implements IYourDependentsSe
     @FindBy ( xpath = YOUR_DEPENDENTS_NEXT_DEPENDENT_XPATH )
     protected WebElement weYourDependentsNextDependent;
 
-
+    @Inject
     YourDependentsSection(WebDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);

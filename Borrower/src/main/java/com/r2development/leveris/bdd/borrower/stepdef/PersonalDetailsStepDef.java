@@ -1,28 +1,38 @@
 package com.r2development.leveris.bdd.borrower.stepdef;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.PersonalDetailsData;
-import com.r2development.leveris.selenium.borrower.pageobjects.IFormsMenu;
-import com.r2development.leveris.selenium.borrower.pageobjects.PersonalDetailsPage;
+import com.r2development.leveris.di.IUser;
+import com.r2development.leveris.selenium.borrower.pageobjects.IBorrowerHomePage;
+import com.r2development.leveris.selenium.borrower.pageobjects.IPersonalDetailsPage;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 
 import java.util.Map;
 
 @Singleton
-public class PersonalDetailsStepDef extends BorrowerStepDef implements CLV312Workaround {
+public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV312Workaround {
 
     private static final Log log = LogFactory.getLog(PersonalDetailsStepDef.class);
 
     private PersonalDetailsData personalDetailsData;
+    private final WebDriver webDriver;
+    IUser user;
+    IBorrowerHomePage borrowerHomePage;
+    IPersonalDetailsPage borrowerPersonalDetailsPage;
+    IPersonalDetailsPage coapplicantPersonalDetailsPage;
 
-    PersonalDetailsStepDef() {
-        borrowerPersonalDetailsPage = new PersonalDetailsPage(WebDriverService.getWebDriverInstance());
-        coapplicantPersonalDetailsPage = new PersonalDetailsPage(WebDriverService.getWebDriverInstance());
+    @Inject
+    PersonalDetailsStepDef(WebDriver webDriver) {
+        this.webDriver = webDriver;
+//        super(webDriver);
+//        borrowerPersonalDetailsPage = new PersonalDetailsPage(WebDriverService.getWebDriverInstance());
+//        coapplicantPersonalDetailsPage = new PersonalDetailsPage(WebDriverService.getWebDriverInstance());
     }
 
     @When("^(borrower|coapplicant) fills in \"Personal Details\"$")
@@ -50,11 +60,6 @@ public class PersonalDetailsStepDef extends BorrowerStepDef implements CLV312Wor
         boolean toGoOn = false;
         while ( !toGoOn ) {
             try {
-                if (borrowerOrCoapplicant.equals("coapplicant") && StringUtils.isNotEmpty(user.getFirstNameCoApplicant())) {
-                    ((IFormsMenu)borrowerPersonalDetailsPage).clickCoapplicantPersonalDetails(user.getFirstNameCoApplicant());
-//                    borrowerPersonalDetailsPage.clickBorrowerEmploymentIncome(user.getFirstNameCoApplicant());
-                    coapplicantPersonalDetailsPage.isTitle(user.getFirstNameCoApplicant());
-                }
 //                else if ( borrowerOrCoapplicant.equals("borrower")) {
 //                    if ( StringUtils.isEmpty(user.getFirstNameCoApplicant()))
 //                        ((IFormsMenu)borrowerPersonalDetailsPage).clickBorrowerPersonalDetails(user.getFirstName());
@@ -100,30 +105,6 @@ public class PersonalDetailsStepDef extends BorrowerStepDef implements CLV312Wor
 
     @When("^user fills in \"Coapplicant's personal details\"$")
     public void user_fills_in_coapplicant_personal_details() {
-        coapplicantPersonalDetailsPage
-                .setFirstname(user.getFirstNameCoApplicant())
-                .setLastname("Mottot")
-                .checkGender("Male")
-                .setDateOfBirth("20/10/1978")
-                .selectMaritalStatus("single")
-                .selectNationality("French")
-                .setResidentYears("3")
-                .setResidencyAddressLine1("Prague, Czech Republic")
-                .setResidencyAddressLine2("Hlavní město Praha")
-                .setResidencyTownCity("Prague")
-                .setResidencyPostcodeZip("14000")
-//                .selectResidencyCountyState()
-                .selectResidencyCountry("Czech Republic")
-                .selectResidencyAccommodation("Rented on contract")
-                .setResidencyRent("200")
-                .checkLivedLast3Years(false)
-                .setPreviousResidencyAddressLine1("Dijon, France")
-                .setPreviousResidencyAddressLine2("Burgundy")
-                .setPreviousResidencyTownCity("Dijon")
-                .setPreviousResidencyPostcodeZip("21000")
-//                .selectPreviousResidencyCountry("France")
-                .setPreviousResidencyCountry("France")
-                .clickSave();
     }
 
 //    private void fillInPersonalDetails(String whichBorrower) {
@@ -165,16 +146,13 @@ public class PersonalDetailsStepDef extends BorrowerStepDef implements CLV312Wor
 //                .clickSave();
 //    }
 
-    @Given("^(borrower|coapplicant) user sees his name in the Personal Details title$")
+    @Given("^(borrower) user sees his name in the Personal Details title$")
     public void borrower_coapplicant_user_sees_his_name_in_the_title(String borrowerOrCoapplicant) {
 //        workaroundCLV312(borrowerOrCoapplicant);
         switch (borrowerOrCoapplicant) {
             case "borrower":
 //                assertThat("user\'s firstname should be in the title !", borrowerPersonalDetailsPage.isTitle(user.getFirstName()), is(true));
                 borrowerPersonalDetailsPage.isTitle(user.getFirstName());
-                break;
-            case "coapplicant":
-                coapplicantPersonalDetailsPage.isTitle(user.getFirstNameCoApplicant());
                 break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
@@ -197,18 +175,6 @@ public class PersonalDetailsStepDef extends BorrowerStepDef implements CLV312Wor
                 }
 //                user.setFirstName(firstName + now.toString("yyyyDDmmHH"));
                 user.setFirstName(firstName + System.getProperty("timestamp"));
-                break;
-            case "coapplicant":
-                if ( firstName.isEmpty()) {
-//                    coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setFirstname(user.getFirstName() + now.toString("yyyyDDmmHH"));
-                    coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setFirstname(user.getFirstName() + System.getProperty("timestamp"));
-                }
-                else {
-//                    coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setFirstname(firstName + now.toString("yyyyDDmmHH"));
-                    coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setFirstname(firstName + System.getProperty("timestamp"));
-                }
-//                user.setFirstNameCoApplicant(firstName + now.toString("yyyyDDmmHH"));
-                user.setFirstNameCoApplicant(firstName + System.getProperty("timestamp"));
                 break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
@@ -560,21 +526,21 @@ public class PersonalDetailsStepDef extends BorrowerStepDef implements CLV312Wor
 //                formsPage = new FormsPage(ApiSupportWebDriverStepDef.getWebDriverInstance());
 //                formsPage.isLoaded();
 //                formsPage.isBorrowerPersonalDetailsValid(user.getFirstName());
-                if ( StringUtils.isNotEmpty(user.getEmailCoApplicant()) )
-                    borrowerPersonalDetailsPage.isBorrowerPersonalDetailsValid(user.getFirstName());
+//                if ( StringUtils.isNotEmpty(user.getEmailCoApplicant()) )
+//                    borrowerPersonalDetailsPage.isBorrowerPersonalDetailsValid(user.getFirstName());
                 break;
-            case "coapplicant":
-
-                // TODO create CLV bug ... if it fixed the issues
-                borrower_coapplicant_user_types_his_lastname(borrowerOrCoapplicant, personalDetailsData.getLastName());
-                borrower_coapplicant_user_checks_his_gender(borrowerOrCoapplicant, personalDetailsData.getGender());
-
-                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.clickSave();
-//                formsPage = new FormsPage(ApiSupportWebDriverStepDef.getWebDriverInstance());
-//                formsPage.isLoaded();
-//                formsPage.isCoapplicantPersonalDetailsValid(user.getFirstNameCoApplicant());
-                coapplicantPersonalDetailsPage.isCoapplicantPersonalDetailsValid(user.getFirstNameCoApplicant());
-                break;
+//            case "coapplicant":
+//
+//                // TODO create CLV bug ... if it fixed the issues
+//                borrower_coapplicant_user_types_his_lastname(borrowerOrCoapplicant, personalDetailsData.getLastName());
+//                borrower_coapplicant_user_checks_his_gender(borrowerOrCoapplicant, personalDetailsData.getGender());
+//
+//                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.clickSave();
+////                formsPage = new FormsPage(ApiSupportWebDriverStepDef.getWebDriverInstance());
+////                formsPage.isLoaded();
+////                formsPage.isCoapplicantPersonalDetailsValid(user.getFirstNameCoApplicant());
+//                coapplicantPersonalDetailsPage.isCoapplicantPersonalDetailsValid(user.getFirstNameCoApplicant());
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }

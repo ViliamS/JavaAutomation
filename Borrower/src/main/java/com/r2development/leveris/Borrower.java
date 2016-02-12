@@ -16,9 +16,10 @@ public class Borrower /*implements IBorrower*/ {
 
     private static final Log log = LogFactory.getLog(Borrower.class.getName());
 
-    @Inject
+//    @Inject
     protected WebDriver /*final*/ webDriver;
 
+    @Inject
     protected Borrower(WebDriver webDriver) {
         this.webDriver = webDriver;
     }
@@ -173,6 +174,21 @@ public class Borrower /*implements IBorrower*/ {
         log.info("click on element with by: " + by.toString());
     }
 
+    protected void clickElementViaJavascript(String xpath, boolean toGoOn) {
+
+        try {
+            isVisible(xpath, true, 5);
+            JavascriptExecutor executor = (JavascriptExecutor) webDriver;
+            executor.executeScript("arguments[0].click();", findBy(xpath));
+            if ( xpath.equals(IEmploymentIncomeSection.EMPLOYMENT_INCOMES_ADD_EMPLOYMENT_XPATH))
+                isVisible("//div[@wicketpath='main_c_form_dialogWrapper']", true, 5);
+            log.info(("click via javascript injection with xpath: " + xpath));
+        } catch ( NoSuchElementException | TimeoutException ignored) {
+            log.info("Huston ! we have a problem !!!");
+        }
+
+    }
+
     protected void clickElementViaJavascript(String xpath) {
 
         boolean toGoOn = false;
@@ -186,7 +202,7 @@ public class Borrower /*implements IBorrower*/ {
                 log.info(("click via javascript injection with xpath: " + xpath));
                 toGoOn = true;
             } catch ( NoSuchElementException | TimeoutException ignored) {
-                log.debug("Huston ! we have a problem !!!");
+                log.info("Huston ! we have a problem !!!");
             }
         }
 
@@ -482,7 +498,19 @@ public class Borrower /*implements IBorrower*/ {
         moveTo(currentBy);
 //        webDriver.findElement(currentBy).clear();
         webDriver.findElement(currentBy).sendKeys(valueToType);
-        webDriver.findElement(currentBy).sendKeys(Keys.ENTER);
+//        webDriver.findElement(currentBy).sendKeys(Keys.ENTER);
+        log.info("type on xpath: " + xpath + " with value: " + valueToType);
+    }
+
+    protected void type(String xpath, String valueToType, boolean sendKeyEnter) {
+        log.info("Typing this value: " + valueToType + ", on this xpath: " + xpath);
+        By currentBy = By.xpath(xpath);
+        waitForVisibility(currentBy);
+        moveTo(currentBy);
+//        webDriver.findElement(currentBy).clear();
+        webDriver.findElement(currentBy).sendKeys(valueToType);
+        if ( sendKeyEnter )
+            webDriver.findElement(currentBy).sendKeys(Keys.ENTER);
         log.info("type on xpath: " + xpath + " with value: " + valueToType);
     }
 

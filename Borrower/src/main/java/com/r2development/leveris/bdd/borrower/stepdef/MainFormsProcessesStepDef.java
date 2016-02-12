@@ -1,20 +1,40 @@
 package com.r2development.leveris.bdd.borrower.stepdef;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.r2development.leveris.selenium.borrower.pageobjects.IFormsMenu;
+import com.r2development.leveris.di.User;
+import com.r2development.leveris.selenium.borrower.pageobjects.*;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openqa.selenium.WebDriver;
 
 @Singleton
-public class MainFormsProcessesStepDef extends BorrowerStepDef implements CLV312Workaround {
+public class MainFormsProcessesStepDef /*extends BorrowerStepDef*/ implements CLV312Workaround {
 
     private static final Log log = LogFactory.getLog(MainFormsProcessesStepDef.class);
+    private final WebDriver webDriver;
+    User user;
+    IBorrowerHomePage borrowerHomePage;
+    IPersonalDetailsPage borrowerPersonalDetailsPage;
+    IEmploymentIncomesPage borrowerEmploymentIncomesPage;
+    IPersonalDetailsPage coapplicantPersonalDetailsPage;
+    IEmploymentIncomesPage coapplicantEmploymentIncomesPage;
+    IYourAccountsPage yourAccountsPage;
+    IFormsMenu currentPage;
+    IDocumentUploadPage documentUploadPage;
+    IYourFundingPage yourFundingPage;
+    IYourFinancialAssetsPage yourFinancialAssetsPage;
+    IYourFinancialCommitmentsPage yourFinancialCommitmentsPage;
+    IYourDependentsPage yourDependentsPage;
+    IYourPropertiesPage yourPropertiesPage;
 
-    public MainFormsProcessesStepDef() {
-
+    @Inject
+    public MainFormsProcessesStepDef(WebDriver webDriver) {
+//        super(webDriver);
+        this.webDriver = webDriver;
     }
 
     // "proxy page"
@@ -38,42 +58,23 @@ public class MainFormsProcessesStepDef extends BorrowerStepDef implements CLV312
     @When("^user clicks \"Borrower Personal Details\"$")
     public void user_clicks_Borrower_Personal_Details() {
         workaroundCLV312("borrower");
-        if ( StringUtils.isNotEmpty(user.getFirstNameCoApplicant()) ) {
-            currentPage.clickCoupleBorrowerPersonalDetails();
-            currentPage = (IFormsMenu) borrowerPersonalDetailsPage;
-        }
-        else {
-            currentPage.clickSingleBorrowerPersonalDetails();
-            currentPage = (IFormsMenu) borrowerPersonalDetailsPage;
-        }
-
+        currentPage.clickSingleBorrowerPersonalDetails();
+        currentPage = (IFormsMenu) borrowerPersonalDetailsPage;
     }
 
     @When("^user clicks \"Borrower Employment Income\"$")
     public void clickBorrowerEmploymentIncome() throws InterruptedException {
         // TODO to redesign as Borrower_Personal_Details
-        if ( StringUtils.isNotEmpty(user.getFirstNameCoApplicant()) ) {
-            currentPage.clickBorrowerEmploymentIncome(user.getFirstName());
-            currentPage = (IFormsMenu) borrowerPersonalDetailsPage;
-        }
-        else {
-            Thread.sleep(1000);
-            currentPage.clickBorrowerEmploymentIncome();
-            currentPage = (IFormsMenu) borrowerEmploymentIncomesPage;
-        }
+        currentPage.clickBorrowerEmploymentIncome();
+        currentPage = (IFormsMenu) borrowerEmploymentIncomesPage;
     }
 
     @When("^user clicks \"Coapplicant Personal Details\"$")
     public void clickCoapplicantPersonalDetails() {
-        currentPage.clickCoapplicantPersonalDetails(user.getFirstNameCoApplicant());
-        currentPage = (IFormsMenu) coapplicantPersonalDetailsPage;
     }
 
     @When("^user clicks \"Coapplicant Employment Income\"$")
     public void clickCoapplicantEmploymentIncome() {
-//        workaroundCLV312(null);
-        currentPage.clickCoapplicantEmploymentIncome(user.getFirstNameCoApplicant());
-        currentPage = (IFormsMenu) coapplicantEmploymentIncomesPage;
     }
 
     @When("^user clicks \"Account\"$")
