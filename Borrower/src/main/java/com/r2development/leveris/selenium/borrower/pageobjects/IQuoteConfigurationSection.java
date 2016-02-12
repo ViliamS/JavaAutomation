@@ -58,11 +58,11 @@ public interface IQuoteConfigurationSection {
           //  TITLE_TOTAL_COST_OF_LOAN =                      DIV,
          //   AMOUNT_TOTAL_COST_OF_LOAN =                     DIV;
 
-    IQuoteConfigurationPage setLoanAmountInput(String amountToBorrow);
+    IQuoteConfigurationSection setLoanAmountInput(String amountToBorrow);
 
 //    String getLoanAmount();
 
-    IQuoteConfigurationPage setMonthlyInstallmentInput(String monthlyRepayment);
+    IQuoteConfigurationSection setMonthlyInstallmentInput(String monthlyRepayment);
 
 //    String getMonthlyInstalmentAmount();
 

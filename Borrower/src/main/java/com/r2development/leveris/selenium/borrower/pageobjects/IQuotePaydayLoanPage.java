@@ -2,21 +2,21 @@ package com.r2development.leveris.selenium.borrower.pageobjects;
 
 public interface IQuotePaydayLoanPage {
 
-    // boolean isHeaderYesIWouldLikeGreatAndQuickLoanPresent();
+    boolean isHeaderYesIWouldLikeGreatAndQuickLoanPresent();
 
-    // boolean isSubHeaderUnsecuredLoanPresent();
+    boolean isSubHeaderUnsecuredLoanPresent();
 
-    // boolean isSubTitleBasicInfoAboutYouShouldGiveUsPresent();
+    boolean isSubTitleBasicInfoAboutYouShouldGiveUsPresent();
 
-    IQuotePaydayLoanPage setLoanPurpose(String loanPurposeType);
+    IQuotePaydayLoanSection setLoanPurpose(String loanPurposeType);
 
-    IQuotePaydayLoanPage setNetMonthlyIncome(String netMonthlyIncome);
+    IQuotePaydayLoanSection setNetMonthlyIncome(String netMonthlyIncome);
 
-    IQuotePaydayLoanPage setMonthlyExpenses(String monthlyExpenses);
+    IQuotePaydayLoanSection setMonthlyExpenses(String monthlyExpenses);
 
-    IQuotePaydayLoanPage setNumberOfDependents(String numberOfDependents);
+    IQuotePaydayLoanSection setNumberOfDependents(String numberOfDependents);
 
-    IQuotePaydayLoanPage setAmountToBorrow(String amountToBorrow);
+    IQuotePaydayLoanSection setAmountToBorrow(String amountToBorrow);
 
     IQuoteConfigurationPage clickContinue();
 }

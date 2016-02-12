@@ -35,8 +35,7 @@ public interface IQuoteQuickLoanSection {
 //HEADER_TITLE_YES_I_LIKE_LOAN = UNSECURED_LOAN_AREA, // TODO: 09/02/16 is Missing in conflict with specification
 
     UNSECURED_LOAN_TITLE =          UNSECURED_LOAN_AREA     + DIRECT_SPAN                   + TEXT_UNSECURED_LOAN,
-            BASIC_INFO_TITLE =              UNSECURED_LOAN_AREA     + BASIC_INFO_WICKET             + DIRECT_SPAN + TEXT_BASIC_INFO,
-
+    BASIC_INFO_TITLE =              UNSECURED_LOAN_AREA     + BASIC_INFO_WICKET             + DIRECT_SPAN + TEXT_BASIC_INFO,
 
     DROP_DOWN_LIST = "//ul[contains(@style,'display: block')][not(contains(@style,'display: none'))]/li[@class='ui-menu-item']",
 
@@ -48,21 +47,21 @@ public interface IQuoteQuickLoanSection {
 
     CONTINUE_TEAL_BUTTON_XPATH =    UNSECURED_LOAN_SPACE    + BTN_CONTINUE_WICKET + DIRECT_A + BTN_CONTINUE_WICKET + SUBMIT_WICKET + DIRECT_SPAN + TEXT_CONTINUE;
 
-    //boolean isHeaderYesIWouldLikeGreatAndQuickLoanPresent();
+    boolean isHeaderYesIWouldLikeGreatAndQuickLoanPresent();
 
-    // boolean isSubHeaderUnsecuredLoanPresent();
+    boolean isSubHeaderUnsecuredLoanPresent();
 
-    //  boolean isSubTitleBasicInfoAboutYouShouldGiveUsPresent();
+    boolean isSubTitleBasicInfoAboutYouShouldGiveUsPresent();
 
-    IQuoteQuickLoanPage setLoanPurpose(String loanPurposeType);
+    IQuoteQuickLoanSection setLoanPurpose(String loanPurposeType);
 
-    IQuoteQuickLoanPage setNetMonthlyIncome(String netMonthlyIncome);
+    IQuoteQuickLoanSection setNetMonthlyIncome(String netMonthlyIncome);
 
-    IQuoteQuickLoanPage setMonthlyExpenses(String monthlyExpenses);
+    IQuoteQuickLoanSection setMonthlyExpenses(String monthlyExpenses);
 
-    IQuoteQuickLoanPage setNumberOfDependents(String numberOfDependents);
+    IQuoteQuickLoanSection setNumberOfDependents(String numberOfDependents);
 
-    IQuoteQuickLoanPage setAmountToBorrow(String amountToBorrow);
+    IQuoteQuickLoanSection setAmountToBorrow(String amountToBorrow);
 
     IQuoteConfigurationPage clickContinue();
 

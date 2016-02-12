@@ -19,44 +19,44 @@ public class QuoteQuickLoanPage extends Borrower implements IQuoteQuickLoanPage 
         quickLoanSection = new QuoteQuickLoanSection(webDriver);
     }
 
-//    @Override
-//    public boolean isHeaderYesIWouldLikeGreatAndQuickLoanPresent(){
-//        return quickLoanSection.isHeaderYesIWouldLikeGreatAndQuickLoanPresent();
-//    }
-//
-//    @Override
-//    public boolean isSubHeaderUnsecuredLoanPresent(){
-//        return quickLoanSection.isSubHeaderUnsecuredLoanPresent();
-//    }
-//
-//    @Override
-//    public boolean isSubTitleBasicInfoAboutYouShouldGiveUsPresent(){
-//        return quickLoanSection.isSubTitleBasicInfoAboutYouShouldGiveUsPresent();
-//    }
+    @Override
+    public boolean isHeaderYesIWouldLikeGreatAndQuickLoanPresent(){
+        return quickLoanSection.isHeaderYesIWouldLikeGreatAndQuickLoanPresent();
+    }
 
     @Override
-    public IQuoteQuickLoanPage setLoanPurpose(String loanPurposeType){
+    public boolean isSubHeaderUnsecuredLoanPresent(){
+        return quickLoanSection.isSubHeaderUnsecuredLoanPresent();
+    }
+
+    @Override
+    public boolean isSubTitleBasicInfoAboutYouShouldGiveUsPresent(){
+        return quickLoanSection.isSubTitleBasicInfoAboutYouShouldGiveUsPresent();
+    }
+
+    @Override
+    public IQuoteQuickLoanSection setLoanPurpose(String loanPurposeType){
         log.info("selecting loan");
         return quickLoanSection.setLoanPurpose( loanPurposeType );
     }
 
     @Override
-    public IQuoteQuickLoanPage setNetMonthlyIncome(String netMonthlyIncome){
+    public IQuoteQuickLoanSection setNetMonthlyIncome(String netMonthlyIncome){
         return quickLoanSection.setNetMonthlyIncome( netMonthlyIncome );
     }
 
     @Override
-    public IQuoteQuickLoanPage setMonthlyExpenses(String monthlyExpenses){
+    public IQuoteQuickLoanSection setMonthlyExpenses(String monthlyExpenses){
         return quickLoanSection.setMonthlyExpenses( monthlyExpenses );
     }
 
     @Override
-    public IQuoteQuickLoanPage setNumberOfDependents(String numberOfDependents){
+    public IQuoteQuickLoanSection setNumberOfDependents(String numberOfDependents){
         return quickLoanSection.setNumberOfDependents( numberOfDependents );
     }
 
     @Override
-    public IQuoteQuickLoanPage setAmountToBorrow(String amountToBorrow) {
+    public IQuoteQuickLoanSection setAmountToBorrow(String amountToBorrow) {
         return quickLoanSection.setAmountToBorrow( amountToBorrow );
     }
 

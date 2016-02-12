@@ -1,27 +1,22 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
-/**
- * todo Page Object Specific Implementation
- */
 public interface IQuoteQuickLoanPage {
 
+    boolean isHeaderYesIWouldLikeGreatAndQuickLoanPresent();
 
+    boolean isSubHeaderUnsecuredLoanPresent();
 
-//    boolean isHeaderYesIWouldLikeGreatAndQuickLoanPresent();
-//
-//    boolean isSubHeaderUnsecuredLoanPresent();
+    boolean isSubTitleBasicInfoAboutYouShouldGiveUsPresent();
 
-   // boolean isSubTitleBasicInfoAboutYouShouldGiveUsPresent();
+    IQuoteQuickLoanSection setLoanPurpose(String loanPurposeType);
 
-    IQuoteQuickLoanPage setLoanPurpose(String loanPurposeType);
+    IQuoteQuickLoanSection setNetMonthlyIncome(String netMonthlyIncome);
 
-    IQuoteQuickLoanPage setNetMonthlyIncome(String netMonthlyIncome);
+    IQuoteQuickLoanSection setMonthlyExpenses(String monthlyExpenses);
 
-    IQuoteQuickLoanPage setMonthlyExpenses(String monthlyExpenses);
+    IQuoteQuickLoanSection setNumberOfDependents(String numberOfDependents);
 
-    IQuoteQuickLoanPage setNumberOfDependents(String numberOfDependents);
-
-    IQuoteQuickLoanPage setAmountToBorrow(String amountToBorrow);
+    IQuoteQuickLoanSection setAmountToBorrow(String amountToBorrow);
 
     IQuoteConfigurationPage clickContinue();
 }

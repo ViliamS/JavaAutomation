@@ -5,7 +5,7 @@
 #
 #    Given Open Leveris Quote Landing page
 
-#    Medium Level
+#    Medium Level or Form Level
 
   Scenario: WalkThrough Payday Loan Section
       Given Open Leveris Quote Landing page
@@ -44,7 +44,7 @@
 
       Then User is forwarded to the Registration Page
 
-#    High Level
+#    High level or Feature level
   Scenario: WalkThrough Whole Unsecured Loan Process at once
 
       Given Open Leveris Quote Landing page

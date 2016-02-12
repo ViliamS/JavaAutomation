@@ -30,7 +30,7 @@ public class QuoteConfigurationPage extends Borrower implements IQuoteConfigurat
     }
 
     @Override
-    public IQuoteConfigurationPage setLoanAmountInput(String amountToBorrow) {
+    public IQuoteConfigurationSection setLoanAmountInput(String amountToBorrow) {
         return quotationConfigurationSection.setLoanAmountInput(amountToBorrow);
     }
 
@@ -40,7 +40,7 @@ public class QuoteConfigurationPage extends Borrower implements IQuoteConfigurat
 //    }
 
     @Override
-    public IQuoteConfigurationPage setMonthlyInstallmentInput(String monthlyRepayment) {
+    public IQuoteConfigurationSection setMonthlyInstallmentInput(String monthlyRepayment) {
         return quotationConfigurationSection.setMonthlyInstallmentInput(monthlyRepayment);
     }
 }

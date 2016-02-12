@@ -6,9 +6,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
 
-/**
- * todo Page Object Specific Implementation
- */
 public class QuoteLandingSection extends Borrower implements IQuoteLandingSection {
 
     private static final Log log = LogFactory.getLog(QuoteLandingSection.class.getName());
@@ -19,39 +16,22 @@ public class QuoteLandingSection extends Borrower implements IQuoteLandingSectio
 
     public QuoteLandingSection(WebDriver webDriver) {
         super(webDriver);
-
-        //   isVisible(HEADER_GREAT_AND_QUICK_LOAN_XPATH);
-        /*isVisible(UNSEC_LOAN_XPATH, true);
-
-        isHeaderGreatAndQuickLoanPresent();
-        isSubHeaderUnsecuredLoanPresent();
-        isTitleFromAmountPerMonthPresent();
-        isLoanUpToLoanAmountPresent();
-        isHeaderMortgagePresent();
-        isHeaderDebitConsolidationPresent();*/
-
-//        isVisible(PAYDAY_LOAN_CONTINUE_BUTTON_XPATH, true);
-//        isVisible(UNSECURED_LOAN_CONTINUE_BUTTON_XPATH, true);
     }
 
     @Override
     public IQuotePaydayLoanPage clickContinuePaydayLoanTealButton() {
-        log.info( "Clicking javascript" );
         clickElementViaJavascript(PAYDAY_LOAN_CONTINUE_BUTTON_XPATH, true);
         return new QuotePaydayLoanPage(webDriver);
     }
 
     @Override
     public IQuoteQuickLoanPage clickContinueUnsecuredLoanRedButton(){
-        log.info( "Clicking javascript" );
         clickElementViaJavascript(UNSECURED_LOAN_CONTINUE_BUTTON_XPATH, true);
         return new QuoteQuickLoanPage(webDriver);
     }
 
     @Override
     public boolean isHeaderGreatAndQuickLoanPresent(){
-//        log.info( "Executing class" + this.getClass().toString() + "will this display methodName : " + this.getClass().getEnclosingMethod().toString() );
-        log.info( "testing...." );
         return true;//isVisible(HEADER_GREAT_AND_QUICK_LOAN_XPATH);
     }
 

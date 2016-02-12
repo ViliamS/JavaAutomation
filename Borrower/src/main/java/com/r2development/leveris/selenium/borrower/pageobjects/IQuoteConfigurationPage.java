@@ -5,11 +5,11 @@ package com.r2development.leveris.selenium.borrower.pageobjects;
  */
 public interface IQuoteConfigurationPage {
 
-    IQuoteConfigurationPage setLoanAmountInput(String amountToBorrow);
+    IQuoteConfigurationSection setLoanAmountInput(String amountToBorrow);
 
 //    String getLoanAmount();
 
-    IQuoteConfigurationPage setMonthlyInstallmentInput(String monthlyRepayment);
+    IQuoteConfigurationSection setMonthlyInstallmentInput(String monthlyRepayment);
 
 //    String getMonthlyInstalmentAmount();
 //

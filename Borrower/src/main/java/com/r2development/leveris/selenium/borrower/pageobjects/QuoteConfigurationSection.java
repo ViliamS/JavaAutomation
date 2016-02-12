@@ -41,10 +41,7 @@ public class QuoteConfigurationSection extends Borrower implements IQuoteConfigu
     @Override
     public IRegisterPage clickApplyOnline(){
         log.info("APPLY ONLINE");
-        log.info(APPLY_ONLINE_TEAL_BUTTON_XPATH);
         clickElementViaJavascript(APPLY_ONLINE_TEAL_BUTTON_XPATH2, true);
-
-
         return new RegisterPage(webDriver);
     }
 
@@ -56,11 +53,11 @@ public class QuoteConfigurationSection extends Borrower implements IQuoteConfigu
     }
 
     @Override
-    public IQuoteConfigurationPage setLoanAmountInput(String amountToBorrow) {
+    public IQuoteConfigurationSection setLoanAmountInput(String amountToBorrow) {
         isVisible(INPUT_AMOUNT_TO_BORROW_SLIDER_CONTROL_XPATH);
         webDriver.findElement(By.xpath(INPUT_AMOUNT_TO_BORROW_SLIDER_CONTROL_XPATH)).sendKeys(Keys.TAB);
         type(INPUT_AMOUNT_TO_BORROW_SLIDER_CONTROL_XPATH, amountToBorrow);
-        return new QuoteConfigurationPage(webDriver);
+        return this;
     }
 
 //    @Override
@@ -69,11 +66,11 @@ public class QuoteConfigurationSection extends Borrower implements IQuoteConfigu
 //    }
 
     @Override
-    public IQuoteConfigurationPage setMonthlyInstallmentInput(String monthlyRepayment){
+    public IQuoteConfigurationSection setMonthlyInstallmentInput(String monthlyRepayment){
         isVisible(INPUT_MONTHLY_REPAYMENT_SLIDER_CONTROL_XPATH);
         webDriver.findElement(By.xpath(INPUT_MONTHLY_REPAYMENT_SLIDER_CONTROL_XPATH)).sendKeys(Keys.TAB);
         type(INPUT_MONTHLY_REPAYMENT_SLIDER_CONTROL_XPATH, monthlyRepayment);
-        return new QuoteConfigurationPage(webDriver);
+        return this;
     }
 
 //    @Override

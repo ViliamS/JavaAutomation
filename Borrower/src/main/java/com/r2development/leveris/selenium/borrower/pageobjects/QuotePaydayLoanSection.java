@@ -7,32 +7,22 @@ public class QuotePaydayLoanSection extends Borrower implements IQuotePaydayLoan
 
     public QuotePaydayLoanSection(WebDriver webDriver){
         super( webDriver );
-        //  isSubHeaderUnsecuredLoanPresent();
-        //  isHeaderYesIWouldLikeGreatAndQuickLoanPresent();
-        //  isSubTitleBasicInfoAboutYouShouldGiveUsPresent();
-
-//        isVisible(LOAN_PURPOSE_XPATH, true);
-//        isVisible(CONTINUE_TEAL_BUTTON_XPATH, true);
-//        isVisible(NET_MONTHLY_INCOME_INPUT, true);
-//        isVisible(MONTHLY_EXPENSES_INPUT, true);
-//        isVisible(NUMBER_OF_DEPENDENTS_INPUT, true);
-//        isVisible(AMOUNT_TO_BORROW_INPUT, true);
     }
 
-//    @Override
-//    public boolean isHeaderYesIWouldLikeGreatAndQuickLoanPresent() {
-//        return isVisible(HEADER_TITLE_YES_I_LIKE_LOAN);
-//    }
+    @Override
+    public boolean isHeaderYesIWouldLikeGreatAndQuickLoanPresent() {
+        return true;//isVisible(HEADER_TITLE_YES_I_LIKE_LOAN);
+    }
 
-//    @Override
-//    public boolean isSubHeaderUnsecuredLoanPresent() {
-//        return isVisible(UNSECURED_LOAN_TITLE);
-//    }
+    @Override
+    public boolean isSubHeaderUnsecuredLoanPresent() {
+        return true;//isVisible(UNSECURED_LOAN_TITLE);
+    }
 
-//    @Override
-//    public boolean isSubTitleBasicInfoAboutYouShouldGiveUsPresent() {
-//        return isVisible(BASIC_INFO_TITLE);
-//    }
+    @Override
+    public boolean isSubTitleBasicInfoAboutYouShouldGiveUsPresent() {
+        return true;//isVisible(BASIC_INFO_TITLE);
+    }
 
     @Override
     public IQuotePaydayLoanSection setLoanPurpose(String loanPurposeType) {

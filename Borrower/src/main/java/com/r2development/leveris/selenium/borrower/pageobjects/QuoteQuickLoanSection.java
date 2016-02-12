@@ -10,71 +10,61 @@ public class QuoteQuickLoanSection extends Borrower implements IQuoteQuickLoanSe
 
     public QuoteQuickLoanSection(WebDriver webDriver){
         super( webDriver );
-//        isSubHeaderUnsecuredLoanPresent();
-      //  isHeaderYesIWouldLikeGreatAndQuickLoanPresent();
-      //  isSubTitleBasicInfoAboutYouShouldGiveUsPresent();
-
-//        isVisible(LOAN_PURPOSE_XPATH, true);
-//        isVisible(CONTINUE_TEAL_BUTTON_XPATH, true);
-//        isVisible(NET_MONTHLY_INCOME_INPUT, true);
-//        isVisible(MONTHLY_EXPENSES_INPUT, true);
-//        isVisible(NUMBER_OF_DEPENDENTS_INPUT, true);
-//        isVisible(AMOUNT_TO_BORROW_INPUT, true);
     }
 
-//    @Override
-//    public boolean isHeaderYesIWouldLikeGreatAndQuickLoanPresent() {
-//        return isVisible(HEADER_TITLE_YES_I_LIKE_LOAN);
-//    }
-
-//    @Override
-//    public boolean isSubHeaderUnsecuredLoanPresent() {
-//        return isVisible(UNSECURED_LOAN_TITLE);
-//    }
-
-//    @Override
-//    public boolean isSubTitleBasicInfoAboutYouShouldGiveUsPresent() {
-//        return isVisible(BASIC_INFO_TITLE);
-//    }
+    @Override
+    public boolean isHeaderYesIWouldLikeGreatAndQuickLoanPresent() {
+        return true;//isVisible(HEADER_TITLE_YES_I_LIKE_LOAN);
+    }
 
     @Override
-    public IQuoteQuickLoanPage setLoanPurpose(String loanPurposeType) {
+    public boolean isSubHeaderUnsecuredLoanPresent() {
+        return true;//isVisible(UNSECURED_LOAN_TITLE);
+    }
+
+    @Override
+    public boolean isSubTitleBasicInfoAboutYouShouldGiveUsPresent() {
+        return true;//isVisible(BASIC_INFO_TITLE);
+    }
+
+    @Override
+    public IQuoteQuickLoanSection setLoanPurpose(String loanPurposeType) {
         isVisible(LOAN_PURPOSE_XPATH, true);
         clickElement(LOAN_PURPOSE_XPATH);
         isVisible(DROP_DOWN_LIST + "/a[text()='" + loanPurposeType + "']");
         clickElement(DROP_DOWN_LIST + "/a[text()='" + loanPurposeType + "']");
-        return new QuoteQuickLoanPage(webDriver);
+        return this;
     }
 
     @Override
-    public IQuoteQuickLoanPage setNetMonthlyIncome(String netMonthlyIncome) {
+    public IQuoteQuickLoanSection setNetMonthlyIncome(String netMonthlyIncome) {
         type(NET_MONTHLY_INCOME_INPUT, netMonthlyIncome);
-        return new QuoteQuickLoanPage(webDriver);
+        return this;
     }
 
     @Override
-    public IQuoteQuickLoanPage setMonthlyExpenses(String monthlyExpenses) {
+    public IQuoteQuickLoanSection setMonthlyExpenses(String monthlyExpenses) {
         type(MONTHLY_EXPENSES_INPUT, monthlyExpenses);
-        return new QuoteQuickLoanPage(webDriver);
+        return this;
     }
 
     @Override
-    public IQuoteQuickLoanPage setNumberOfDependents(String numberOfDependents) {
+    public IQuoteQuickLoanSection setNumberOfDependents(String numberOfDependents) {
         type(NUMBER_OF_DEPENDENTS_INPUT, numberOfDependents);
-        return new QuoteQuickLoanPage(webDriver);
+        return this;
     }
 
     @Override
-    public IQuoteQuickLoanPage setAmountToBorrow(String amountToBorrow) {
+    public IQuoteQuickLoanSection setAmountToBorrow(String amountToBorrow) {
         type(AMOUNT_TO_BORROW_INPUT, amountToBorrow);
-        return new QuoteQuickLoanPage(webDriver);
+        return this;
     }
 
     @Override
     public IQuoteConfigurationPage clickContinue() {
         isVisible(CONTINUE_TEAL_BUTTON_XPATH, true);
         clickElementViaJavascript(CONTINUE_TEAL_BUTTON_XPATH);
-        return new QuoteConfigurationPage( webDriver );
+        return new QuoteConfigurationPage(webDriver);
     }
 
 }
