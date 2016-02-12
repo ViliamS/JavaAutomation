@@ -44,8 +44,9 @@
         <maven.build.timestamp.format>yyyyMMddHHmmssSSS</maven.build.timestamp.format>
 
         <org-seleniumhq-selenium.selenium-java.version>2.48.2</org-seleniumhq-selenium.selenium-java.version>
-        <info-cukes.cucumber-guice.version>1.2.4</info-cukes.cucumber-guice.version>
-        <info-cukes.cucumber-junit.version>1.2.4</info-cukes.cucumber-junit.version>
+        <info-cukes.cucumber-guice.version>1.1.1</info-cukes.cucumber-guice.version>
+        <info-cukes.cucumber-junit.version>1.1.1</info-cukes.cucumber-junit.version>
+        <info-cukes.cucumber-java.version>1.1.1</info-cukes.cucumber-java.version>
         <info-cukes.cucumber-java8.version>1.2.4</info-cukes.cucumber-java8.version>
         <com-google-inject.guice.version>4.0</com-google-inject.guice.version>
         <net-masterthought.cucumber-reporting.version>1.1.0</net-masterthought.cucumber-reporting.version>

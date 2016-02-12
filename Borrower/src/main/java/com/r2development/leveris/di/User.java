@@ -10,18 +10,21 @@ public class User implements IUser {
     private String email;
     private String pwd;
     private String phoneNumber;
-    private String firstNameCoApplicant;
-    private String emailCoApplicant;
 //    private MORTGAGE_TYPE mortgageType;
 
+    User(IUser user) {
+        this.firstName = user.getFirstName();
+        this.email = user.getEmail();
+        this.pwd = user.getPwd();
+        this.phoneNumber = user.getPhoneNumber();
+    }
+
     @Inject
-    public User(String firstName, String email, String pwd, String phoneNumber, String firstNameCoApplicant, String emailCoApplicant/*, MORTGAGE_TYPE mortgageType*/) {
+    public User(String firstName, String email, String pwd, String phoneNumber /*, MORTGAGE_TYPE mortgageType*/) {
         this.firstName = firstName;
         this.email = email;
         this.pwd = pwd;
         this.phoneNumber = phoneNumber;
-        this.firstNameCoApplicant = firstNameCoApplicant;
-        this.emailCoApplicant = emailCoApplicant;
 //        this.mortgageType = mortgageType;
     }
 
@@ -53,26 +56,6 @@ public class User implements IUser {
     @Override
     public void setFirstName(String firstName) {
         this.firstName = firstName;
-    }
-
-    @Override
-    public String getFirstNameCoApplicant() {
-        return firstNameCoApplicant;
-    }
-
-    @Override
-    public void setFirstNameCoApplicant(String firstNameCoApplicant) {
-        this.firstNameCoApplicant = firstNameCoApplicant;
-    }
-
-    @Override
-    public String getEmailCoApplicant() {
-        return emailCoApplicant;
-    }
-
-    @Override
-    public void setEmailCoApplicant(String emailCoApplicant) {
-        this.emailCoApplicant = emailCoApplicant;
     }
 
     public String getPhoneNumber() {

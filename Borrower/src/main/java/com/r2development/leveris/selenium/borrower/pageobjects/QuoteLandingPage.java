@@ -1,7 +1,7 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
-import com.r2development.leveris.bdd.borrower.stepdef.WebDriverService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -12,11 +12,12 @@ public class QuoteLandingPage extends Borrower implements IQuoteLandingPage {
 
     IQuoteLandingSection quoteLandingSection;
 
-    public QuoteLandingPage() {
-        super(WebDriverService.getWebDriverInstance());
-        quoteLandingSection = new QuoteLandingSection(webDriver);
-    }
+//    public QuoteLandingPage() {
+//        super(WebDriverService.getWebDriverInstance());
+//        quoteLandingSection = new QuoteLandingSection(webDriver);
+//    }
 
+    @Inject
     public QuoteLandingPage( WebDriver webDriver ) {
         super( webDriver );
         quoteLandingSection = new QuoteLandingSection(webDriver);
@@ -25,7 +26,8 @@ public class QuoteLandingPage extends Borrower implements IQuoteLandingPage {
     @Override
     public IQuoteLandingPage goToBorrowerQuoteLandingPage(){
         get(System.getProperty("borrower"));
-        quoteLandingSection = new QuoteLandingSection( webDriver );
+//        get("google.fr");
+//        quoteLandingSection = new QuoteLandingSection( webDriver );
         return this;
     }
 

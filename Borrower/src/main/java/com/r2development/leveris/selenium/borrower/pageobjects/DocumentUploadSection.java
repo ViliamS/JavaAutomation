@@ -2,6 +2,7 @@ package com.r2development.leveris.selenium.borrower.pageobjects;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.Borrower;
 import com.r2development.leveris.di.IUser;
@@ -54,7 +55,8 @@ public class DocumentUploadSection extends Borrower implements IDocumentUploadSe
     protected WebElement weSubmitUpload;
 
     protected IUser user;
-    
+
+    @Inject
     public DocumentUploadSection(WebDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);

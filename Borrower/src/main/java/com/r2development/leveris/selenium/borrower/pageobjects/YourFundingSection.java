@@ -1,5 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -70,6 +71,7 @@ public class YourFundingSection extends Borrower implements IYourFundingSection 
     @FindBy ( xpath = YOUR_FUNDING_CANCEL_XPATH )
     protected WebElement weYourFundingCancel;
 
+    @Inject
     YourFundingSection(WebDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);

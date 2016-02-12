@@ -1,5 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
 import org.openqa.selenium.WebDriver;
 
@@ -8,23 +9,27 @@ import org.openqa.selenium.WebDriver;
  */
 public class QuoteQuickLoanSection extends Borrower implements IQuoteQuickLoanSection {
 
+    @Inject
     public QuoteQuickLoanSection(WebDriver webDriver){
         super( webDriver );
     }
 
     @Override
     public boolean isHeaderYesIWouldLikeGreatAndQuickLoanPresent() {
-        return true;//isVisible(HEADER_TITLE_YES_I_LIKE_LOAN);
+        //isVisible(HEADER_TITLE_YES_I_LIKE_LOAN_XPATH);
+        return true;
     }
 
     @Override
     public boolean isSubHeaderUnsecuredLoanPresent() {
-        return true;//isVisible(UNSECURED_LOAN_TITLE);
+        //isVisible(UNSECURED_LOAN_TITLE_XPATH);
+        return true;
     }
 
     @Override
     public boolean isSubTitleBasicInfoAboutYouShouldGiveUsPresent() {
-        return true;//isVisible(BASIC_INFO_TITLE);
+        //isVisible(BASIC_INFO_TITLE_XPATH);
+        return true;
     }
 
     @Override
@@ -64,7 +69,7 @@ public class QuoteQuickLoanSection extends Borrower implements IQuoteQuickLoanSe
     public IQuoteConfigurationPage clickContinue() {
         isVisible(CONTINUE_TEAL_BUTTON_XPATH, true);
         clickElementViaJavascript(CONTINUE_TEAL_BUTTON_XPATH);
-        return new QuoteConfigurationPage(webDriver);
+        return new QuoteConfigurationPage( webDriver );
     }
 
 }

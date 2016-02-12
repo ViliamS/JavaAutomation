@@ -1,14 +1,21 @@
 package com.r2development.leveris.bdd.borrower.stepdef;
 
-import com.google.inject.Singleton;
+import com.google.inject.Inject;
+import com.r2development.leveris.di.User;
 import com.r2development.leveris.selenium.borrower.pageobjects.DocumentUploadPage;
+import com.r2development.leveris.selenium.borrower.pageobjects.IBorrowerHomePage;
+import com.r2development.leveris.selenium.borrower.pageobjects.IDocumentUploadPage;
+import com.r2development.leveris.selenium.borrower.pageobjects.IPersonalDetailsPage;
 import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 
-@Singleton
-public class DocumentUploadStepDef extends BorrowerStepDef implements CLV312Workaround {
+//@Singleton
+public class DocumentUploadStepDef /*extends BorrowerStepDef*/ implements CLV312Workaround {
+
+    private static final Log log = LogFactory.getLog(DocumentUploadStepDef.class);
 
     enum DOCUMENT {
         PROOF_IDENTITY,
@@ -23,12 +30,19 @@ public class DocumentUploadStepDef extends BorrowerStepDef implements CLV312Work
         CONFIRMATION_TAX_AFFAIRS,
         CURRENT_ACCOUNT,
         CREDIT_CARD_PROVIDER
+
     }
+    User user;
+    IDocumentUploadPage documentUploadPage;
+    IBorrowerHomePage borrowerHomePage;
+    IPersonalDetailsPage borrowerPersonalDetailsPage;
+    private final WebDriver webDriver;
 
-    private static final Log log = LogFactory.getLog(DocumentUploadStepDef.class);
-
-    DocumentUploadStepDef() {
-        documentUploadPage = new DocumentUploadPage(WebDriverService.getWebDriverInstance(), user);
+    @Inject
+    DocumentUploadStepDef(WebDriver webDriver) {
+//        super(webDriver);
+//        documentUploadPage = new DocumentUploadPage(WebDriverService.getWebDriverInstance(), user);
+        this.webDriver = webDriver;
     }
 
     @When("^user clicks on \"documents list\"$")
@@ -50,7 +64,8 @@ public class DocumentUploadStepDef extends BorrowerStepDef implements CLV312Work
     @When("^Upload all documents$")
     public void upload_all_documents() throws InterruptedException {
         workaroundCLV312(null);
-        documentUploadPage = new DocumentUploadPage(WebDriverService.getWebDriverInstance(), user);
+//        documentUploadPage = new DocumentUploadPage(WebDriverService.getWebDriverInstance(), user);
+        documentUploadPage = new DocumentUploadPage(webDriver, user);
 //        documentUploadPage.uploadAllDocuments(user);
         documentUploadPage.uploadAllDocuments();
     }

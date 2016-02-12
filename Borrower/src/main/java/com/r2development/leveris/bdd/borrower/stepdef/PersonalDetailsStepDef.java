@@ -1,28 +1,40 @@
 package com.r2development.leveris.bdd.borrower.stepdef;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.PersonalDetailsData;
+import com.r2development.leveris.di.User;
+import com.r2development.leveris.selenium.borrower.pageobjects.IBorrowerHomePage;
 import com.r2development.leveris.selenium.borrower.pageobjects.IFormsMenu;
-import com.r2development.leveris.selenium.borrower.pageobjects.PersonalDetailsPage;
+import com.r2development.leveris.selenium.borrower.pageobjects.IPersonalDetailsPage;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 
 import java.util.Map;
 
 @Singleton
-public class PersonalDetailsStepDef extends BorrowerStepDef implements CLV312Workaround {
+public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV312Workaround {
 
     private static final Log log = LogFactory.getLog(PersonalDetailsStepDef.class);
 
     private PersonalDetailsData personalDetailsData;
+    private final WebDriver webDriver;
+    User user;
+    IBorrowerHomePage borrowerHomePage;
+    IPersonalDetailsPage borrowerPersonalDetailsPage;
+    IPersonalDetailsPage coapplicantPersonalDetailsPage;
 
-    PersonalDetailsStepDef() {
-        borrowerPersonalDetailsPage = new PersonalDetailsPage(WebDriverService.getWebDriverInstance());
-        coapplicantPersonalDetailsPage = new PersonalDetailsPage(WebDriverService.getWebDriverInstance());
+    @Inject
+    PersonalDetailsStepDef(WebDriver webDriver) {
+        this.webDriver = webDriver;
+//        super(webDriver);
+//        borrowerPersonalDetailsPage = new PersonalDetailsPage(WebDriverService.getWebDriverInstance());
+//        coapplicantPersonalDetailsPage = new PersonalDetailsPage(WebDriverService.getWebDriverInstance());
     }
 
     @When("^(borrower|coapplicant) fills in \"Personal Details\"$")

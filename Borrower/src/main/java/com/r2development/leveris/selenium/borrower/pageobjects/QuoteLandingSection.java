@@ -1,5 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
 import com.r2development.leveris.bdd.borrower.stepdef.WebDriverService;
 import org.apache.commons.logging.Log;
@@ -10,10 +11,11 @@ public class QuoteLandingSection extends Borrower implements IQuoteLandingSectio
 
     private static final Log log = LogFactory.getLog(QuoteLandingSection.class.getName());
 
-    public QuoteLandingSection() {
-        super(WebDriverService.getWebDriverInstance());
-    }
+//    public QuoteLandingSection() {
+//        super(WebDriverService.getWebDriverInstance());
+//    }
 
+    @Inject
     public QuoteLandingSection(WebDriver webDriver) {
         super(webDriver);
     }

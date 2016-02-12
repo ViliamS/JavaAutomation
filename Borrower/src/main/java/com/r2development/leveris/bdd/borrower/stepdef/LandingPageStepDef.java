@@ -1,29 +1,50 @@
 package com.r2development.leveris.bdd.borrower.stepdef;
 
+import com.google.inject.Inject;
 import com.r2development.leveris.bdd.borrower.model.LandingPageData;
-import com.r2development.leveris.selenium.borrower.pageobjects.QuoteLandingPage;
+import com.r2development.leveris.selenium.borrower.pageobjects.*;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
 
-import java.util.Map;
+import java.util.List;
 
 /**
  * todo LandingPageStepDef Specific Implementation
  */
-public class LandingPageStepDef extends BorrowerStepDef {
+public class LandingPageStepDef /*extends BorrowerStepDef*/ {
 
+    IQuoteLandingPage quoteLandingPage;
+    IQuotePaydayLoanPage quotePaydayLoanPage;
+    IQuoteQuickLoanPage quoteQuickLoanPage;
+    IQuoteConfigurationPage quoteConfigurationPage;
+    IRegisterPage registerPage;
     LandingPageData loanData;
 
-    public LandingPageStepDef() {
-        quoteLandingPage = new QuoteLandingPage(WebDriverService.getWebDriverInstance());
+//    public LandingPageStepDef() {
+//        quoteLandingPage = new QuoteLandingPage(WebDriverService.getWebDriverInstance());
+//    }
+
+    private WebDriver webDriver;
+
+    @Inject
+    public LandingPageStepDef(WebDriver webDriver) {
+//        super(webDriver);
+//        this.webDriver = webDriver;
+        quoteLandingPage = new QuoteLandingPage(webDriver);
     }
 
+//    @Given("^I am running Chrome WebDriver$")
+//    public void I_am_running_Chrome_WebDriver() {
+//        webDriver.navigate().to("http://www.google.fr");
+//    }
 
     @Given("^Open Leveris Quote Landing page$")
     public void open_leveris_quote_landing_page() {
+//        webDriver.navigate().to("http.google.fr");
         quoteLandingPage.goToBorrowerQuoteLandingPage();
     }
 
@@ -58,8 +79,10 @@ public class LandingPageStepDef extends BorrowerStepDef {
 
 
     @And("^User fills whole form (Payday Loan|Unsecured Loan)$")
-    public void user_fills_form (String loanType, Map<String, String> rawData){
+//    public void user_fills_form (String loanType, Map<String, String> rawData){
+    public void user_fills_form ( String loanType, List<String> rawData) {
 
+        System.out.println(rawData);
         this.loanData = new LandingPageData( rawData );
 
         user_selects_loan_purpose( loanType, loanData.getLoanPurpose() );
@@ -240,7 +263,7 @@ public class LandingPageStepDef extends BorrowerStepDef {
     }
 
     @When("^User walk-through (Payday Loan|Unsecured Loan) Quotation process$")
-    public void userWalkThroughTheQuotationProcessFillingAllMandatoryData(String loanType, Map<String, String> rawQuotationData) {
+    public void userWalkThroughTheQuotationProcessFillingAllMandatoryData(String loanType, List<String> rawQuotationData) {
 
         this.loanData = new LandingPageData( rawQuotationData );
 

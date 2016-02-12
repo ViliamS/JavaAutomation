@@ -1,20 +1,40 @@
 package com.r2development.leveris.bdd.borrower.stepdef;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.r2development.leveris.selenium.borrower.pageobjects.IFormsMenu;
+import com.r2development.leveris.di.User;
+import com.r2development.leveris.selenium.borrower.pageobjects.*;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openqa.selenium.WebDriver;
 
 @Singleton
-public class MainFormsProcessesStepDef extends BorrowerStepDef implements CLV312Workaround {
+public class MainFormsProcessesStepDef /*extends BorrowerStepDef*/ implements CLV312Workaround {
 
     private static final Log log = LogFactory.getLog(MainFormsProcessesStepDef.class);
+    private final WebDriver webDriver;
+    User user;
+    IBorrowerHomePage borrowerHomePage;
+    IPersonalDetailsPage borrowerPersonalDetailsPage;
+    IEmploymentIncomesPage borrowerEmploymentIncomesPage;
+    IPersonalDetailsPage coapplicantPersonalDetailsPage;
+    IEmploymentIncomesPage coapplicantEmploymentIncomesPage;
+    IYourAccountsPage yourAccountsPage;
+    IFormsMenu currentPage;
+    IDocumentUploadPage documentUploadPage;
+    IYourFundingPage yourFundingPage;
+    IYourFinancialAssetsPage yourFinancialAssetsPage;
+    IYourFinancialCommitmentsPage yourFinancialCommitmentsPage;
+    IYourDependentsPage yourDependentsPage;
+    IYourPropertiesPage yourPropertiesPage;
 
-    public MainFormsProcessesStepDef() {
-
+    @Inject
+    public MainFormsProcessesStepDef(WebDriver webDriver) {
+//        super(webDriver);
+        this.webDriver = webDriver;
     }
 
     // "proxy page"

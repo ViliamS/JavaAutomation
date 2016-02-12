@@ -1,5 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -14,6 +15,7 @@ public class QuoteQuickLoanPage extends Borrower implements IQuoteQuickLoanPage 
 
     private static final Log log = LogFactory.getLog( QuoteQuickLoanPage.class.getName() );
 
+    @Inject
     public QuoteQuickLoanPage(WebDriver webDriver ) {
         super( webDriver );
         quickLoanSection = new QuoteQuickLoanSection(webDriver);
@@ -35,29 +37,34 @@ public class QuoteQuickLoanPage extends Borrower implements IQuoteQuickLoanPage 
     }
 
     @Override
-    public IQuoteQuickLoanSection setLoanPurpose(String loanPurposeType){
+    public IQuoteQuickLoanPage setLoanPurpose(String loanPurposeType){
         log.info("selecting loan");
-        return quickLoanSection.setLoanPurpose( loanPurposeType );
+        quickLoanSection.setLoanPurpose( loanPurposeType );
+        return this;
     }
 
     @Override
-    public IQuoteQuickLoanSection setNetMonthlyIncome(String netMonthlyIncome){
-        return quickLoanSection.setNetMonthlyIncome( netMonthlyIncome );
+    public IQuoteQuickLoanPage setNetMonthlyIncome(String netMonthlyIncome){
+        quickLoanSection.setNetMonthlyIncome( netMonthlyIncome );
+        return this;
     }
 
     @Override
-    public IQuoteQuickLoanSection setMonthlyExpenses(String monthlyExpenses){
-        return quickLoanSection.setMonthlyExpenses( monthlyExpenses );
+    public IQuoteQuickLoanPage setMonthlyExpenses(String monthlyExpenses){
+        quickLoanSection.setMonthlyExpenses( monthlyExpenses );
+        return this;
     }
 
     @Override
-    public IQuoteQuickLoanSection setNumberOfDependents(String numberOfDependents){
-        return quickLoanSection.setNumberOfDependents( numberOfDependents );
+    public IQuoteQuickLoanPage setNumberOfDependents(String numberOfDependents){
+        quickLoanSection.setNumberOfDependents( numberOfDependents );
+        return this;
     }
 
     @Override
-    public IQuoteQuickLoanSection setAmountToBorrow(String amountToBorrow) {
-        return quickLoanSection.setAmountToBorrow( amountToBorrow );
+    public IQuoteQuickLoanPage setAmountToBorrow(String amountToBorrow) {
+        quickLoanSection.setAmountToBorrow( amountToBorrow );
+        return this;
     }
 
     @Override

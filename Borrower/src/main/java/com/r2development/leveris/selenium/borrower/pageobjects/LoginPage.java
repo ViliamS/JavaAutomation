@@ -1,5 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -36,6 +37,7 @@ public class LoginPage extends Borrower implements ILoginPage {
     @FindBy( xpath = LOGIN_BUTTON_XPATH)
     protected WebElement weLoginButton;
 
+    @Inject
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);

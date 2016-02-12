@@ -1,5 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.google.inject.Inject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hamcrest.core.Is;
@@ -19,6 +20,7 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
 
     private static final Log log = LogFactory.getLog(YourAccountsSection.class);
 
+    @Inject
     public YourAccountsSection(WebDriver webDriver) {
         super(webDriver);
         headerSection = new HeaderSection(webDriver);

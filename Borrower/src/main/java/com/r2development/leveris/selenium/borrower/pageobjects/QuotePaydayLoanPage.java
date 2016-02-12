@@ -1,5 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
 import com.r2development.leveris.bdd.borrower.stepdef.WebDriverService;
 import org.apache.commons.logging.Log;
@@ -12,60 +13,61 @@ public class QuotePaydayLoanPage extends Borrower implements IQuotePaydayLoanPag
 
     private static final Log log = LogFactory.getLog( QuoteQuickLoanPage.class.getName() );
 
-    public QuotePaydayLoanPage() {
-        super(WebDriverService.getWebDriverInstance());
-        quotePaydayLoanSection = new QuotePaydayLoanSection(webDriver);
-    }
+//    public QuotePaydayLoanPage() {
+//        super(WebDriverService.getWebDriverInstance());
+//        quotePaydayLoanSection = new QuotePaydayLoanSection(webDriver);
+//    }
 
+    @Inject
     public QuotePaydayLoanPage(WebDriver webDriver ) {
         super( webDriver );
         quotePaydayLoanSection = new QuotePaydayLoanSection(webDriver);
     }
 
     @Override
-    public boolean isHeaderYesIWouldLikeGreatAndQuickLoanPresent(){
-        return quotePaydayLoanSection.isHeaderYesIWouldLikeGreatAndQuickLoanPresent();
+    public boolean isHeaderYesIWouldLikeGreatAndQuickLoanPresent() {
+        return false;
     }
 
     @Override
-    public boolean isSubHeaderUnsecuredLoanPresent(){
-        return quotePaydayLoanSection.isSubHeaderUnsecuredLoanPresent();
+    public boolean isSubHeaderUnsecuredLoanPresent() {
+        return false;
     }
 
     @Override
-    public boolean isSubTitleBasicInfoAboutYouShouldGiveUsPresent(){
-        return quotePaydayLoanSection.isSubTitleBasicInfoAboutYouShouldGiveUsPresent();
+    public boolean isSubTitleBasicInfoAboutYouShouldGiveUsPresent() {
+        return false;
     }
 
     @Override
-    public IQuotePaydayLoanSection setLoanPurpose(String loanPurposeType){
+    public IQuotePaydayLoanPage setLoanPurpose(String loanPurposeType){
         log.info("selecting loan");
         quotePaydayLoanSection.setLoanPurpose( loanPurposeType );
-        return new QuotePaydayLoanSection(webDriver);
+        return this;
     }
 
     @Override
-    public IQuotePaydayLoanSection setNetMonthlyIncome(String netMonthlyIncome){
+    public IQuotePaydayLoanPage setNetMonthlyIncome(String netMonthlyIncome){
         quotePaydayLoanSection.setNetMonthlyIncome( netMonthlyIncome );
-        return new QuotePaydayLoanSection(webDriver);
+        return this;
     }
 
     @Override
-    public IQuotePaydayLoanSection setMonthlyExpenses(String monthlyExpenses){
+    public IQuotePaydayLoanPage setMonthlyExpenses(String monthlyExpenses){
         quotePaydayLoanSection.setMonthlyExpenses( monthlyExpenses );
-        return new QuotePaydayLoanSection(webDriver);
+        return this;
     }
 
     @Override
-    public IQuotePaydayLoanSection setNumberOfDependents(String numberOfDependents){
+    public IQuotePaydayLoanPage setNumberOfDependents(String numberOfDependents){
         quotePaydayLoanSection.setNumberOfDependents( numberOfDependents );
-        return new QuotePaydayLoanSection(webDriver);
+        return this;
     }
 
     @Override
-    public IQuotePaydayLoanSection setAmountToBorrow(String amountToBorrow) {
+    public IQuotePaydayLoanPage setAmountToBorrow(String amountToBorrow) {
         quotePaydayLoanSection.setAmountToBorrow( amountToBorrow );
-        return new QuotePaydayLoanSection(webDriver);
+        return this;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -18,6 +19,7 @@ public class MessageSection extends Borrower implements IMessageSection {
     @FindBy( xpath = GET_ONE_NOW_XPATH )
     protected WebElement weGetOneNow;
 
+    @Inject
     MessageSection(WebDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);

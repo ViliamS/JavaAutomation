@@ -32,37 +32,25 @@ public interface IQuoteQuickLoanSection {
     UNSECURED_LOAN_AREA =   DIV + UNSECURED_LOAN_WICKET + DIRECT_DIV    + UNSECURED_LOAN_WICKET,
     UNSECURED_LOAN_SPACE =  DIV + UNSECURED_LOAN_WICKET + DIV           + UNSECURED_LOAN_WICKET,
 
-//HEADER_TITLE_YES_I_LIKE_LOAN = UNSECURED_LOAN_AREA, // TODO: 09/02/16 is Missing in conflict with specification
-
+    //HEADER_TITLE_YES_I_LIKE_LOAN = UNSECURED_LOAN_AREA, // TODO: 09/02/16 is Missing in conflict with specification
     UNSECURED_LOAN_TITLE =          UNSECURED_LOAN_AREA     + DIRECT_SPAN                   + TEXT_UNSECURED_LOAN,
     BASIC_INFO_TITLE =              UNSECURED_LOAN_AREA     + BASIC_INFO_WICKET             + DIRECT_SPAN + TEXT_BASIC_INFO,
-
     DROP_DOWN_LIST = "//ul[contains(@style,'display: block')][not(contains(@style,'display: none'))]/li[@class='ui-menu-item']",
-
     LOAN_PURPOSE_XPATH =            UNSECURED_LOAN_SPACE    + LOAN_PURPOSE_WICKET           + INPUT        + LOAN_PURPOSE_WICKET + NOT_DISABLED,
     NET_MONTHLY_INCOME_INPUT =      UNSECURED_LOAN_SPACE    + NET_MONTHLY_INCOME_WICKET     + DIRECT_INPUT + NOT_DISABLED,
     MONTHLY_EXPENSES_INPUT =        UNSECURED_LOAN_SPACE    + MONTHLY_EXPENSES_WICKET       + DIRECT_INPUT + NOT_DISABLED,
     NUMBER_OF_DEPENDENTS_INPUT =    UNSECURED_LOAN_SPACE    + NUMBER_OF_DEPENDENTS_WICKET   + DIRECT_INPUT + NOT_DISABLED,
     AMOUNT_TO_BORROW_INPUT =        UNSECURED_LOAN_SPACE    + AMOUNT_TO_BORROW_WICKET       + DIRECT_INPUT + NOT_DISABLED,
-
     CONTINUE_TEAL_BUTTON_XPATH =    UNSECURED_LOAN_SPACE    + BTN_CONTINUE_WICKET + DIRECT_A + BTN_CONTINUE_WICKET + SUBMIT_WICKET + DIRECT_SPAN + TEXT_CONTINUE;
 
     boolean isHeaderYesIWouldLikeGreatAndQuickLoanPresent();
-
     boolean isSubHeaderUnsecuredLoanPresent();
-
     boolean isSubTitleBasicInfoAboutYouShouldGiveUsPresent();
-
     IQuoteQuickLoanSection setLoanPurpose(String loanPurposeType);
-
     IQuoteQuickLoanSection setNetMonthlyIncome(String netMonthlyIncome);
-
     IQuoteQuickLoanSection setMonthlyExpenses(String monthlyExpenses);
-
     IQuoteQuickLoanSection setNumberOfDependents(String numberOfDependents);
-
     IQuoteQuickLoanSection setAmountToBorrow(String amountToBorrow);
-
     IQuoteConfigurationPage clickContinue();
 
 }

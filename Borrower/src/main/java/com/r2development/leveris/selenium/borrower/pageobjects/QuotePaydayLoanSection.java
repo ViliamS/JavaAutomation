@@ -1,10 +1,12 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
 import org.openqa.selenium.WebDriver;
 
 public class QuotePaydayLoanSection extends Borrower implements IQuotePaydayLoanSection{
 
+    @Inject
     public QuotePaydayLoanSection(WebDriver webDriver){
         super( webDriver );
     }

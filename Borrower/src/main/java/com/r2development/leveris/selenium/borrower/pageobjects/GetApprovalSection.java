@@ -1,5 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -77,6 +78,7 @@ public class GetApprovalSection extends Borrower implements IGetApprovalSection 
     @FindBy( xpath = GET_APPROVAL_CONFIRMATION_XPATH )
     protected WebElement weConfirmation;
 
+    @Inject
     public GetApprovalSection(WebDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);

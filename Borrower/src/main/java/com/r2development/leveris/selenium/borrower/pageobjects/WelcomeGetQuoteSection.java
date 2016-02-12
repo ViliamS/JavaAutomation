@@ -1,5 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -21,6 +22,7 @@ public class WelcomeGetQuoteSection extends Borrower implements IWelcomeGetQuote
     @FindBy( xpath = CLOSE_XPATH )
     protected WebElement weClose;
 
+    @Inject
     public WelcomeGetQuoteSection(WebDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);

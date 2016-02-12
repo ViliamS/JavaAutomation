@@ -1,9 +1,9 @@
 package com.r2development.leveris.bdd.borrower.stepdef;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.r2development.leveris.selenium.borrower.pageobjects.BorrowerHomePage;
-import com.r2development.leveris.selenium.borrower.pageobjects.BuildQuotationPage;
-import com.r2development.leveris.selenium.borrower.pageobjects.LoginPage;
+import com.r2development.leveris.di.User;
+import com.r2development.leveris.selenium.borrower.pageobjects.*;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hamcrest.core.Is;
+import org.openqa.selenium.WebDriver;
 
 import java.io.File;
 import java.sql.Connection;
@@ -21,12 +22,21 @@ import java.sql.Statement;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @Singleton
-public class LoginPageStepDef extends BorrowerStepDef {
+public class LoginPageStepDef /*extends BorrowerStepDef*/ {
 
     private static final Log log = LogFactory.getLog(LoginPageStepDef.class);
+    private final WebDriver webDriver;
+    User user;
+    ILoginPage loginPage;
+    IBorrowerHomePage borrowerHomePage;
+    IWelcomePage welcomePage;
+    IBuildQuotationPage buildQuotationPage;
 
-    LoginPageStepDef() {
-        loginPage = new LoginPage(WebDriverService.getWebDriverInstance());
+    @Inject
+    LoginPageStepDef(WebDriver webDriver) {
+//        super(webDriver);
+//        loginPage = new LoginPage(WebDriverService.getWebDriverInstance());
+        this.webDriver = webDriver;
     }
 
     @Given("^User types his email login (.*) in Login page$")
@@ -62,13 +72,15 @@ public class LoginPageStepDef extends BorrowerStepDef {
     @Then("^Home Borrower Page is loaded$")
     public void home_borrower_page_is_loaded() {
         try {
-            borrowerHomePage = new BorrowerHomePage(WebDriverService.getWebDriverInstance());
+//            borrowerHomePage = new BorrowerHomePage(WebDriverService.getWebDriverInstance());
+            borrowerHomePage = new BorrowerHomePage(webDriver);
             borrowerHomePage.clickGetQuoteOrGetStarted();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        buildQuotationPage = new BuildQuotationPage(WebDriverService.getWebDriverInstance());
+//        buildQuotationPage = new BuildQuotationPage(WebDriverService.getWebDriverInstance());
+        buildQuotationPage = new BuildQuotationPage(webDriver);
         buildQuotationPage.isLoaded();
     }
 

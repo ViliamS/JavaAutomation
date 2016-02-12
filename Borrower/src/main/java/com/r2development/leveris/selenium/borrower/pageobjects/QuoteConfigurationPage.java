@@ -1,5 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -14,6 +15,7 @@ public class QuoteConfigurationPage extends Borrower implements IQuoteConfigurat
 
     private static final Log log = LogFactory.getLog(QuoteConfigurationPage.class.getName());
 
+    @Inject
     public QuoteConfigurationPage(WebDriver webDriver) {
         super(webDriver);
         quotationConfigurationSection = new QuoteConfigurationSection(webDriver);
@@ -30,8 +32,9 @@ public class QuoteConfigurationPage extends Borrower implements IQuoteConfigurat
     }
 
     @Override
-    public IQuoteConfigurationSection setLoanAmountInput(String amountToBorrow) {
-        return quotationConfigurationSection.setLoanAmountInput(amountToBorrow);
+    public IQuoteConfigurationPage setLoanAmountInput(String amountToBorrow) {
+        quotationConfigurationSection.setLoanAmountInput(amountToBorrow);
+        return this;
     }
 
 //    @Override
@@ -40,10 +43,11 @@ public class QuoteConfigurationPage extends Borrower implements IQuoteConfigurat
 //    }
 
     @Override
-    public IQuoteConfigurationSection setMonthlyInstallmentInput(String monthlyRepayment) {
-        return quotationConfigurationSection.setMonthlyInstallmentInput(monthlyRepayment);
+    public IQuoteConfigurationPage setMonthlyInstallmentInput(String monthlyRepayment) {
+        quotationConfigurationSection.setMonthlyInstallmentInput(monthlyRepayment);
+        return this;
     }
-}
+
 //    @Override
 //    public String getMonthlyInstalmentAmount(){
 //        return quotationConfigurationSection.getMonthlyInstalmentAmount();
@@ -99,13 +103,13 @@ public class QuoteConfigurationPage extends Borrower implements IQuoteConfigurat
 //        return quotationConfigurationSection.isTitleTotalCostOfLoanPresent();
 //    }
 //
-////    @Override
-////    public String getTotalCostOfLoan(){
-////        return quotationConfigurationSection.getTotalCostOfLoan();
-////    }
+//    @Override
+//    public String getTotalCostOfLoan(){
+//        return quotationConfigurationSection.getTotalCostOfLoan();
+//    }
 //
 //    @Override
 //    public boolean isChangeProductPresent(){
 //        return quotationConfigurationSection.isChangeProductPresent();
 //    }
-//}
+}

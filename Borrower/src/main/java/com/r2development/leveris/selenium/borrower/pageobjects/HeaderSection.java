@@ -1,5 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -27,6 +28,7 @@ public class HeaderSection extends Borrower implements IHeaderSection {
     @FindBy( xpath = CLOSE_CHAT_XPATH )
     protected WebElement weCloseChat;
 
+    @Inject
     public HeaderSection(WebDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);

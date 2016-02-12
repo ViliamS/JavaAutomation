@@ -1,5 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -96,6 +97,7 @@ public class PersonalDetailsSection extends Borrower implements IPersonalDetails
     @FindBy( xpath = SAVE_BUTTON_XPATH )
     protected WebElement weSaveButton;
 
+    @Inject
     public PersonalDetailsSection(WebDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);

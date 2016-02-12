@@ -1,22 +1,25 @@
 package com.r2development.leveris.bdd.borrower.stepdef;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.selenium.borrower.pageobjects.IFormsMenu;
-import com.r2development.leveris.selenium.borrower.pageobjects.YourFinancialAssetsPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 
 @Singleton
 public class YourFinancialAssetsStepDef extends BorrowerStepDef implements CLV312Workaround {
 
     private static final Log log = LogFactory.getLog(YourFinancialAssetsStepDef.class);
 
-    public YourFinancialAssetsStepDef() {
-        yourFinancialAssetsPage = new YourFinancialAssetsPage(WebDriverService.getWebDriverInstance());
+    @Inject
+    public YourFinancialAssetsStepDef(WebDriver webDriver) {
+        super(webDriver);
+//        yourFinancialAssetsPage = new YourFinancialAssetsPage(WebDriverService.getWebDriverInstance());
     }
 
     @When("^user has(n't)? financial assets$")

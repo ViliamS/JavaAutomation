@@ -1,7 +1,9 @@
 package com.r2development.leveris.bdd.borrower.stepdef;
 
 import com.google.common.base.Predicate;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.r2development.leveris.di.User;
 import cucumber.api.java.en.Given;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -20,9 +22,18 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Singleton
-public class CrmStepDef extends BorrowerStepDef {
+public class CrmStepDef /*extends BorrowerStepDef*/ {
 
     private static final Log log = LogFactory.getLog(CrmStepDef.class);
+
+    User user;
+    private final WebDriver webDriver;
+
+    @Inject
+    CrmStepDef(WebDriver webDriver) {
+//        super(webDriver);
+        this.webDriver = webDriver;
+    }
 
     @Given("^user goes to CRM$")
     public void user_goes_tp_CRM() {
@@ -75,7 +86,8 @@ public class CrmStepDef extends BorrowerStepDef {
             log.info("Potential Code: " + potentialCode);
         }
 
-        WebDriver chromeWebDriver = WebDriverService.getWebDriverInstance();
+//        WebDriver chromeWebDriver = WebDriverService.getWebDriverInstance();
+        WebDriver chromeWebDriver = webDriver;
         WebDriverWait chromeWebDriverWait = new WebDriverWait(chromeWebDriver, 60);
         chromeWebDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@wicketpath='main_c_form_form_root_c_w_pnlMain_c_w_txtVerificationCode_tb']")));
         chromeWebDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//em[@wicketpath='main_c_form_form_root_c_w_pnlMain_c_w_btnConfirmRegistration_submit']")));

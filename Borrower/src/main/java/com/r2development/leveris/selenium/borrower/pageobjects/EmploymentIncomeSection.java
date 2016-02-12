@@ -1,9 +1,12 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.*;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -149,6 +152,7 @@ public class EmploymentIncomeSection extends Borrower implements IEmploymentInco
     @FindBy ( xpath = EMPLOYMENT_INCOMES_DONE_XPATH )
     protected WebElement weEmploymentIncomesDone;
 
+    @Inject
     public EmploymentIncomeSection(WebDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);

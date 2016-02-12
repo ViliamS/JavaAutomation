@@ -1,5 +1,6 @@
 package com.r2development.leveris;
 
+import com.google.inject.Inject;
 import com.r2development.leveris.selenium.borrower.pageobjects.IEmploymentIncomeSection;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -18,7 +19,7 @@ public class Borrower /*implements IBorrower*/ {
 //    @Inject
     protected WebDriver /*final*/ webDriver;
 
-//    @Inject
+    @Inject
     protected Borrower(WebDriver webDriver) {
         this.webDriver = webDriver;
     }

@@ -1,5 +1,6 @@
 package com.r2development.leveris.bdd.borrower.stepdef;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.AccountData;
 import com.r2development.leveris.selenium.borrower.pageobjects.IFormsMenu;
@@ -9,6 +10,7 @@ import cucumber.api.java.en.When;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 
 import java.util.Map;
@@ -18,7 +20,9 @@ public class YourAccountsStepDef extends BorrowerStepDef implements CLV312Workar
 
     private static final Log log = LogFactory.getLog(YourAccountsStepDef.class);
 
-    public YourAccountsStepDef() {
+    @Inject
+    public YourAccountsStepDef(WebDriver webDriver) {
+        super(webDriver);
 //        yourAccountsPage = new YourAccountsPage(ApiSupportWebDriverStepDef.getWebDriverInstance());
     }
 

@@ -51,28 +51,17 @@ public interface IQuoteLandingSection {
             DEBT_CONSOLIDATION_HEADER_XPATH =       DEBT_CONSOLIDATION_PANEL_XPATH  + SPAN_TEXT_DEBT_CONSOLIDATION;*/
 
     IQuotePaydayLoanPage clickContinuePaydayLoanTealButton();
-
     IQuoteQuickLoanPage clickContinueUnsecuredLoanRedButton();
-
     boolean isHeaderGreatAndQuickLoanPresent();
-
     boolean isSubHeaderUnsecuredLoanPresent();
-
     boolean isLoanUpToLoanAmountPresent();
-
     boolean isHeaderPayDayLoanPresent();
-
     boolean isHeaderMortgagePresent();
-
     boolean isHeaderDebitConsolidationPresent();
-
     boolean isTitleFromAmountPerMonthPresent();
-
     boolean isFromAmountPerMonthEqualToValue(String expectedFromAmountPerMonth);
-
     String getValueLoanUpTo();
-
     String getPayDayLoanAmount();
-
     String getFromAmountPerMonthValue();
+
 }

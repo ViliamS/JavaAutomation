@@ -1,5 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -14,6 +15,7 @@ public class QuoteConfigurationSection extends Borrower implements IQuoteConfigu
 
     private static final Log log = LogFactory.getLog(QuoteConfigurationSection.class.getName());
 
+    @Inject
     public QuoteConfigurationSection(WebDriver webDriver){
         super(webDriver);
 /*        PageFactory.initElements(webDriver, this);
@@ -41,6 +43,7 @@ public class QuoteConfigurationSection extends Borrower implements IQuoteConfigu
     @Override
     public IRegisterPage clickApplyOnline(){
         log.info("APPLY ONLINE");
+        log.info(APPLY_ONLINE_TEAL_BUTTON_XPATH);
         clickElementViaJavascript(APPLY_ONLINE_TEAL_BUTTON_XPATH2, true);
         return new RegisterPage(webDriver);
     }
@@ -70,6 +73,7 @@ public class QuoteConfigurationSection extends Borrower implements IQuoteConfigu
         isVisible(INPUT_MONTHLY_REPAYMENT_SLIDER_CONTROL_XPATH);
         webDriver.findElement(By.xpath(INPUT_MONTHLY_REPAYMENT_SLIDER_CONTROL_XPATH)).sendKeys(Keys.TAB);
         type(INPUT_MONTHLY_REPAYMENT_SLIDER_CONTROL_XPATH, monthlyRepayment);
+//        return new QuoteConfigurationPage(webDriver);
         return this;
     }
 

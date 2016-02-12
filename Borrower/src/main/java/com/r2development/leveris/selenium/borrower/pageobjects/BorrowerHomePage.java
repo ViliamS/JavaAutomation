@@ -1,5 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.google.inject.Inject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -14,6 +15,7 @@ public class BorrowerHomePage extends HeaderAndBottomAndFormsMenuSection impleme
     protected IGetStartedMortgageSection getStartedMortgageSection;
     protected IBuildQuotationPage buildQuotationPage;
 
+    @Inject
     public BorrowerHomePage(WebDriver webDriver) {
         super(webDriver);
         headerSection = new HeaderSection(webDriver);
