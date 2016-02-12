@@ -45,10 +45,7 @@ public class YourFundingStepDef extends BorrowerStepDef implements CLV312Workaro
         boolean toGoOn = false;
         while ( !toGoOn ) {
             try {
-                if (StringUtils.isEmpty(user.getFirstNameCoApplicant()))
-                    borrowerPersonalDetailsPage.clickFunding();
-                else
-                    ((IFormsMenu)borrowerPersonalDetailsPage).clickFunding("double");
+                ((IFormsMenu)borrowerPersonalDetailsPage).clickFunding("double");
                 yourFundingPage.getTitle();
                 toGoOn = true;
             } catch (TimeoutException te) {
@@ -64,19 +61,7 @@ public class YourFundingStepDef extends BorrowerStepDef implements CLV312Workaro
 
     @And("^this funding is applied to (borrower|coapplicant|both)$")
     public void this_funding_is_applied_to(String toWhom) {
-        switch (toWhom) {
-            case "borrower":
-                yourFundingPage.checkFundingAppliesToBorrower(user.getFirstName());
-                break;
-            case "coapplicant":
-                yourFundingPage.checkFundingAppliedToCoapplicant(user.getFirstNameCoApplicant());
-                break;
-            case "both":
-                yourFundingPage.checkFundingAppliesToBorrower(user.getFirstName());
-                yourFundingPage.checkFundingAppliedToCoapplicant(user.getFirstNameCoApplicant());
-                break;
-            default:
-        }
+        yourFundingPage.checkFundingAppliesToBorrower(user.getFirstName());
     }
 
     @And("^user types Gift description: (.*)$")

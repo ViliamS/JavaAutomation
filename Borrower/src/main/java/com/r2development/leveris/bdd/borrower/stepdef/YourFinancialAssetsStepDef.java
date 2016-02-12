@@ -5,7 +5,6 @@ import com.google.inject.Singleton;
 import com.r2development.leveris.selenium.borrower.pageobjects.IFormsMenu;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.TimeoutException;
@@ -27,16 +26,10 @@ public class YourFinancialAssetsStepDef extends BorrowerStepDef implements CLV31
         workaroundCLV312(null);
 
         if (hasFinancialAsset == null) {
-            if (StringUtils.isNotEmpty(user.getFirstNameCoApplicant()))
-                yourFinancialAssetsPage.clickCoupleYes();
-            else
-                yourFinancialAssetsPage.clickSingleYes();
+            yourFinancialAssetsPage.clickSingleYes();
         }
         else {
-            if (StringUtils.isNotEmpty(user.getFirstNameCoApplicant()))
-                yourFinancialAssetsPage.clickCoupleNo();
-            else
-                yourFinancialAssetsPage.clickSingleNo();
+            yourFinancialAssetsPage.clickSingleNo();
             yourFinancialAssetsPage.clickNext();
         }
     }
@@ -47,10 +40,7 @@ public class YourFinancialAssetsStepDef extends BorrowerStepDef implements CLV31
         boolean toGoOn = false;
         while ( !toGoOn ) {
             try {
-                if ( StringUtils.isEmpty(user.getFirstNameCoApplicant()))
-                    borrowerPersonalDetailsPage.clickFinancialAssets();
-                else
-                    ((IFormsMenu)borrowerPersonalDetailsPage).clickFinancialAssets("double");
+                ((IFormsMenu)borrowerPersonalDetailsPage).clickFinancialAssets("double");
                 yourFinancialAssetsPage.getTitle();
                 toGoOn = true;
             } catch (TimeoutException te) {
@@ -66,19 +56,7 @@ public class YourFinancialAssetsStepDef extends BorrowerStepDef implements CLV31
 
     @And("^this financial assets is applied to (borrower|coapplicant|both)$")
     public void this_financial_assets_is_applied_to(String toWhom) {
-        switch (toWhom) {
-            case "borrower":
-                yourFinancialAssetsPage.checkFinancialAssetAppliedToBorrower(user.getFirstName());
-                break;
-            case "coapplicant":
-                yourFinancialAssetsPage.checkFinancialAssetAppliedToCoapplicant(user.getFirstNameCoApplicant());
-                break;
-            case "both":
-                yourFinancialAssetsPage.checkFinancialAssetAppliedToBorrower(user.getFirstName());
-                yourFinancialAssetsPage.checkFinancialAssetAppliedToCoapplicant(user.getFirstNameCoApplicant());
-                break;
-            default:
-        }
+        yourFinancialAssetsPage.checkFinancialAssetAppliedToBorrower(user.getFirstName());
     }
 
     @And("^user types Funds/Bonds investment value: (.*)$")

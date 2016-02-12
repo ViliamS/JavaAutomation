@@ -5,7 +5,6 @@ import com.google.inject.Singleton;
 import com.r2development.leveris.selenium.borrower.pageobjects.IFormsMenu;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.TimeoutException;
@@ -27,16 +26,10 @@ public class YourDependentsStepDef extends BorrowerStepDef implements CLV312Work
         workaroundCLV312(null);
 
         if (hasDependents == null) {
-            if (StringUtils.isNotEmpty(user.getFirstNameCoApplicant()))
-                yourDependentsPage.clickCoupleYes();
-            else
-                yourDependentsPage.clickSingleYes();
+            yourDependentsPage.clickSingleYes();
         }
         else {
-            if (StringUtils.isNotEmpty(user.getFirstNameCoApplicant()))
-                yourDependentsPage.clickCoupleNo();
-            else
-                yourDependentsPage.clickSingleNo();
+            yourDependentsPage.clickSingleNo();
             yourDependentsPage.clickNext();
         }
     }
@@ -48,10 +41,7 @@ public class YourDependentsStepDef extends BorrowerStepDef implements CLV312Work
         boolean toGoOn = false;
         while ( !toGoOn ) {
             try {
-                if ( StringUtils.isEmpty(user.getFirstNameCoApplicant()) )
-                    borrowerPersonalDetailsPage.clickDependents();
-                else
-                    ((IFormsMenu)borrowerPersonalDetailsPage).clickDependents("double");
+                ((IFormsMenu)borrowerPersonalDetailsPage).clickDependents("double");
                 yourDependentsPage.getTitle();
                 toGoOn = true;
             } catch ( TimeoutException te ) {
@@ -60,21 +50,9 @@ public class YourDependentsStepDef extends BorrowerStepDef implements CLV312Work
         }
     }
 
-    @And("^this dependent is applied to (borrower|coapplicant|both)$")
+    @And("^this dependent is applied to (borrower)$")
     public void this_dependent_is_applied_to(String toWhom) {
-        switch (toWhom) {
-            case "borrower":
-                yourDependentsPage.checkAccountAppliesToBorrower(user.getFirstName());
-                break;
-            case "coapplicant":
-                yourDependentsPage.checkAccountAppliesToCoapplicant(user.getFirstNameCoApplicant());
-                break;
-            case "both":
-                yourDependentsPage.checkAccountAppliesToBorrower(user.getFirstName());
-                yourDependentsPage.checkAccountAppliesToCoapplicant(user.getFirstNameCoApplicant());
-                break;
-            default:
-        }
+        yourDependentsPage.checkAccountAppliesToBorrower(user.getFirstName());
     }
 
     @And("^user types the Dependent date of birth: (.*)$")

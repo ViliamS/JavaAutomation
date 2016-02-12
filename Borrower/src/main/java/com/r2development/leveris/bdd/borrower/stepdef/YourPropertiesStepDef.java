@@ -29,16 +29,10 @@ public class YourPropertiesStepDef extends BorrowerStepDef implements CLV312Work
         workaroundCLV312(null);
 
         if (hasProperties == null) {
-            if (StringUtils.isNotEmpty(user.getFirstNameCoApplicant()))
-                yourPropertiesPage.clickCoupleYes();
-            else
-                yourPropertiesPage.clickSingleYes();
+            yourPropertiesPage.clickSingleYes();
         }
         else {
-            if (StringUtils.isNotEmpty(user.getFirstNameCoApplicant()))
-                yourPropertiesPage.clickCoupleNo();
-            else
-                yourPropertiesPage.clickSingleNo();
+            yourPropertiesPage.clickSingleNo();
         }
     }
 
@@ -49,10 +43,7 @@ public class YourPropertiesStepDef extends BorrowerStepDef implements CLV312Work
         boolean toGoOn = false;
         while ( !toGoOn ) {
             try {
-                if ( StringUtils.isEmpty(user.getFirstNameCoApplicant()))
-                    borrowerPersonalDetailsPage.clickProperties();
-                else
-                    ((IFormsMenu)borrowerPersonalDetailsPage).clickProperties("double");
+                ((IFormsMenu)borrowerPersonalDetailsPage).clickProperties("double");
                 yourPropertiesPage.getYourPropertiesTitle();
                 toGoOn = true;
             } catch (TimeoutException te) {
@@ -64,36 +55,18 @@ public class YourPropertiesStepDef extends BorrowerStepDef implements CLV312Work
     @When("^user has(n't)? a property in the past$")
     public void user_has_properties_in_the_past(String hasPropertyInThePast) {
         if (hasPropertyInThePast == null) {
-            if (user.getFirstNameCoApplicant() != null && StringUtils.isNotEmpty(user.getFirstNameCoApplicant()))
-                yourPropertiesPage.clickPastCoupleYes();
-            else
-                yourPropertiesPage.clickPastSingleYes();
+            yourPropertiesPage.clickPastSingleYes();
         }
         else {
-            if (user.getFirstNameCoApplicant() != null && StringUtils.isNotEmpty(user.getFirstNameCoApplicant()))
-                yourPropertiesPage.clickPastCoupleNo();
-            else
-                yourPropertiesPage.clickPastSingleNo();
+            yourPropertiesPage.clickPastSingleNo();
             yourPropertiesPage.clickNext();
             yourPropertiesPage.clickNextSection();
         }
     }
 
-    @And("^this property is applied to (borrower|coapplicant|both)$")
+    @And("^this property is applied to (borrower)$")
     public void this_property_is_applied_to(String toWhom) {
-        switch (toWhom) {
-            case "borrower":
-                yourPropertiesPage.checkThisPropertyAppliesToBorrower(user.getFirstName());
-                break;
-            case "coapplicant":
-                yourPropertiesPage.checkThisPropertyAppliedToCoapplicant(user.getFirstNameCoApplicant());
-                break;
-            case "both":
-                yourPropertiesPage.checkThisPropertyAppliesToBorrower(user.getFirstName());
-                yourPropertiesPage.checkThisPropertyAppliedToCoapplicant(user.getFirstNameCoApplicant());
-                break;
-            default:
-        }
+        yourPropertiesPage.checkThisPropertyAppliesToBorrower(user.getFirstName());
     }
 
     @And("^other party has(n't)? an interest in this property$")

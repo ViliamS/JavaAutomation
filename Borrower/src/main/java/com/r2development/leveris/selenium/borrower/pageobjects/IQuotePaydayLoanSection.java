@@ -49,11 +49,11 @@ public interface IQuotePaydayLoanSection {
             CONTINUE_TEAL_BUTTON_XPATH =    UNSECURED_LOAN_SPACE    + BTN_CONTINUE_WICKET + DIRECT_A + BTN_CONTINUE_WICKET + SUBMIT_WICKET + DIRECT_SPAN + TEXT_CONTINUE;
 //    CONTINUE_TEAL_BUTTON_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlUnsecuredLoanQuotation_c_w_btnContinue_submit']";
 
-    //boolean isHeaderYesIWouldLikeGreatAndQuickLoanPresent();
+    boolean isHeaderYesIWouldLikeGreatAndQuickLoanPresent();
 
-    // boolean isSubHeaderUnsecuredLoanPresent();
+     boolean isSubHeaderUnsecuredLoanPresent();
 
-    //  boolean isSubTitleBasicInfoAboutYouShouldGiveUsPresent();
+      boolean isSubTitleBasicInfoAboutYouShouldGiveUsPresent();
 
     IQuotePaydayLoanSection setLoanPurpose(String loanPurposeType);
 

@@ -25,8 +25,9 @@ public class DocumentUploadPage extends HeaderAndBottomAndFormsMenuSection imple
     }
 
 //    @Inject
-    public DocumentUploadPage(WebDriver webDriver, User user) {
+    public DocumentUploadPage(WebDriver webDriver, IUser user) {
         super(webDriver);
+        this.user = user;
         headerSection = new HeaderSection(webDriver);
         documentUploadSection = new DocumentUploadSection(webDriver, user);
         formsMenu = new FormsMenu(webDriver);

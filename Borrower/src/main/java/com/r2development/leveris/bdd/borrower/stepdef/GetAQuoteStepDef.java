@@ -378,35 +378,35 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
 
     @And("^user fills in \"ADD YOUR CO-APPLICANT\"$")
     public void user_fills_in_add_your_coapplicant_form() {
-        String firstNameCoApplicant = "Anthony Mottot co-applicant";
-//        String emailCoApplicant = "anthonymottot-co-applicant" + DateTime.now().toString("yyyyMMddHHmmssSSS") + "@abakus.com";
-        String emailCoApplicant = "anthonymottot-co-applicant" + System.getProperty("timestamp") + "@abakus.com";
-        addYourCoapplicantPage.fillInAddYourCoapplicantPage(firstNameCoApplicant, emailCoApplicant);
-        user.setFirstNameCoApplicant(firstNameCoApplicant);
-        user.setEmailCoApplicant(emailCoApplicant);
+//        String firstNameCoApplicant = "Anthony Mottot co-applicant";
+////        String emailCoApplicant = "anthonymottot-co-applicant" + DateTime.now().toString("yyyyMMddHHmmssSSS") + "@abakus.com";
+//        String emailCoApplicant = "anthonymottot-co-applicant" + System.getProperty("timestamp") + "@abakus.com";
+//        addYourCoapplicantPage.fillInAddYourCoapplicantPage(firstNameCoApplicant, emailCoApplicant);
+////        user.setFirstNameCoApplicant(firstNameCoApplicant);
+//        user.setEmailCoApplicant(emailCoApplicant);
     }
 
     private void user_fills_in_add_your_coapplicant_form(Map<String, String> coapplicantDataMap) {
-        String firstNameCoApplicant = coapplicantDataMap.get("firstName");
-//        String emailCoApplicant = "anthony.mottot.applicant.test0001" + DateTime.now().toString("yyyyMMddHHmmssSSS") + "@abakus.com";
-        String emailCoApplicant = "anthony.mottot.applicant.test0001" + System.getProperty("timestamp") + "@abakus.com"; // TODO Test_automation email
-        addYourCoapplicantPage.fillInAddYourCoapplicantPage(firstNameCoApplicant, emailCoApplicant);
-        user.setFirstNameCoApplicant(firstNameCoApplicant);
-        user.setEmailCoApplicant(emailCoApplicant);
+//        String firstNameCoApplicant = coapplicantDataMap.get("firstName");
+////        String emailCoApplicant = "anthony.mottot.applicant.test0001" + DateTime.now().toString("yyyyMMddHHmmssSSS") + "@abakus.com";
+//        String emailCoApplicant = "anthony.mottot.applicant.test0001" + System.getProperty("timestamp") + "@abakus.com"; // TODO Test_automation email
+//        addYourCoapplicantPage.fillInAddYourCoapplicantPage(firstNameCoApplicant, emailCoApplicant);
+//        user.setFirstNameCoApplicant(firstNameCoApplicant);
+//        user.setEmailCoApplicant(emailCoApplicant);
     }
 
     @And("^user sets FirstName Co-Applicant$")
     public void user_sets_firstname_coapplicant() {
-        addYourCoapplicantPage.setFirstName("Anthony Mottot co-applicant");
-        user.setFirstNameCoApplicant("Anthony Mottot co-applicant");
+//        addYourCoapplicantPage.setFirstName("Anthony Mottot co-applicant");
+//        user.setFirstNameCoApplicant("Anthony Mottot co-applicant");
     }
 
     @And("^user sets Email Co-Applicant$")
     public void user_sets_email_coapplicant() {
-//        addYourCoapplicantPage.setEmail("anthonymottot-co-applicant" + DateTime.now().toString("yyyyMMddHHmmssSSS") + "@abakus.com");
-        addYourCoapplicantPage.setEmail("anthonymottot-co-applicant" + System.getProperty("timestamp") + "@abakus.com");
-//        user.setEmailCoApplicant("anthonymottot-co-applicant" + DateTime.now().toString("yyyyMMddHHmmssSSS") + "@abakus.com");
-        user.setEmailCoApplicant("anthonymottot-co-applicant" + System.getProperty("timestamp") + "@abakus.com");
+////        addYourCoapplicantPage.setEmail("anthonymottot-co-applicant" + DateTime.now().toString("yyyyMMddHHmmssSSS") + "@abakus.com");
+//        addYourCoapplicantPage.setEmail("anthonymottot-co-applicant" + System.getProperty("timestamp") + "@abakus.com");
+////        user.setEmailCoApplicant("anthonymottot-co-applicant" + DateTime.now().toString("yyyyMMddHHmmssSSS") + "@abakus.com");
+//        user.setEmailCoApplicant("anthonymottot-co-applicant" + System.getProperty("timestamp") + "@abakus.com");
     }
 
     @When("^user clicks \"INVITE NOW\"$")

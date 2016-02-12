@@ -31,18 +31,11 @@ public class YourFinancialCommitmentsStepDef extends BorrowerStepDef implements 
     public void user_has_financial_commitments(String hasCommitments) throws InterruptedException {
         workaroundCLV312(null);
 
-
         if (hasCommitments == null) {
-            if (StringUtils.isNotEmpty(user.getFirstNameCoApplicant()))
-                yourFinancialCommitmentsPage.clickCoupleYes();
-            else
-                yourFinancialCommitmentsPage.clickSingleYes();
+            yourFinancialCommitmentsPage.clickSingleYes();
         }
         else {
-            if (StringUtils.isNotEmpty(user.getFirstNameCoApplicant()))
-                yourFinancialCommitmentsPage.clickCoupleNo();
-            else
-                yourFinancialCommitmentsPage.clickSingleNo();
+            yourFinancialCommitmentsPage.clickSingleNo();
             yourFinancialCommitmentsPage.clickNext();
         }
     }
@@ -54,10 +47,7 @@ public class YourFinancialCommitmentsStepDef extends BorrowerStepDef implements 
         boolean toGoOn = false;
         while ( !toGoOn ) {
             try {
-                if ( StringUtils.isEmpty(user.getFirstNameCoApplicant()))
-                    borrowerPersonalDetailsPage.clickFinancialCommitments();
-                else
-                    ((IFormsMenu)borrowerPersonalDetailsPage).clickFinancialCommitments("double");
+                ((IFormsMenu)borrowerPersonalDetailsPage).clickFinancialCommitments("double");
                 yourFinancialCommitmentsPage.getTitle();
                 toGoOn = true;
             } catch (TimeoutException te) {
@@ -66,21 +56,9 @@ public class YourFinancialCommitmentsStepDef extends BorrowerStepDef implements 
         }
     }
 
-    @And("^this commitment is applied to (borrower|coapplicant|both)$")
+    @And("^this commitment is applied to (borrower)$")
     public void this_commitment_is_applied_to(String toWhom) {
-        switch (toWhom) {
-            case "borrower":
-                yourFinancialCommitmentsPage.checkFinancialCommitmentAppliesToBorrower(user.getFirstName());
-                break;
-            case "coapplicant":
-                yourFinancialCommitmentsPage.checkFinancialCommitmentAppliesToCoapplicant(user.getFirstNameCoApplicant());
-                break;
-            case "both":
-                yourFinancialCommitmentsPage.checkFinancialCommitmentAppliesToBorrower(user.getFirstName());
-                yourFinancialCommitmentsPage.checkFinancialCommitmentAppliesToCoapplicant(user.getFirstNameCoApplicant());
-                break;
-            default:
-        }
+        yourFinancialCommitmentsPage.checkFinancialCommitmentAppliesToBorrower(user.getFirstName());
     }
 
     @And("^user clicks Financial Commitment \"CANCEL\"$")

@@ -58,42 +58,23 @@ public class MainFormsProcessesStepDef /*extends BorrowerStepDef*/ implements CL
     @When("^user clicks \"Borrower Personal Details\"$")
     public void user_clicks_Borrower_Personal_Details() {
         workaroundCLV312("borrower");
-        if ( StringUtils.isNotEmpty(user.getFirstNameCoApplicant()) ) {
-            currentPage.clickCoupleBorrowerPersonalDetails();
-            currentPage = (IFormsMenu) borrowerPersonalDetailsPage;
-        }
-        else {
-            currentPage.clickSingleBorrowerPersonalDetails();
-            currentPage = (IFormsMenu) borrowerPersonalDetailsPage;
-        }
-
+        currentPage.clickSingleBorrowerPersonalDetails();
+        currentPage = (IFormsMenu) borrowerPersonalDetailsPage;
     }
 
     @When("^user clicks \"Borrower Employment Income\"$")
     public void clickBorrowerEmploymentIncome() throws InterruptedException {
         // TODO to redesign as Borrower_Personal_Details
-        if ( StringUtils.isNotEmpty(user.getFirstNameCoApplicant()) ) {
-            currentPage.clickBorrowerEmploymentIncome(user.getFirstName());
-            currentPage = (IFormsMenu) borrowerPersonalDetailsPage;
-        }
-        else {
-            Thread.sleep(1000);
-            currentPage.clickBorrowerEmploymentIncome();
-            currentPage = (IFormsMenu) borrowerEmploymentIncomesPage;
-        }
+        currentPage.clickBorrowerEmploymentIncome();
+        currentPage = (IFormsMenu) borrowerEmploymentIncomesPage;
     }
 
     @When("^user clicks \"Coapplicant Personal Details\"$")
     public void clickCoapplicantPersonalDetails() {
-        currentPage.clickCoapplicantPersonalDetails(user.getFirstNameCoApplicant());
-        currentPage = (IFormsMenu) coapplicantPersonalDetailsPage;
     }
 
     @When("^user clicks \"Coapplicant Employment Income\"$")
     public void clickCoapplicantEmploymentIncome() {
-//        workaroundCLV312(null);
-        currentPage.clickCoapplicantEmploymentIncome(user.getFirstNameCoApplicant());
-        currentPage = (IFormsMenu) coapplicantEmploymentIncomesPage;
     }
 
     @When("^user clicks \"Account\"$")

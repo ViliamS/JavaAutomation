@@ -6,12 +6,10 @@ import com.r2development.leveris.bdd.borrower.model.EmploymentIncomeData;
 import com.r2development.leveris.di.User;
 import com.r2development.leveris.selenium.borrower.pageobjects.IBorrowerHomePage;
 import com.r2development.leveris.selenium.borrower.pageobjects.IEmploymentIncomesPage;
-import com.r2development.leveris.selenium.borrower.pageobjects.IFormsMenu;
 import com.r2development.leveris.selenium.borrower.pageobjects.IPersonalDetailsPage;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hamcrest.core.Is;
@@ -71,16 +69,8 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ implements C
             boolean toGoOn = false;
             while (!toGoOn) {
                 try {
-                    if (borrowerOrCoapplicant.equals("coapplicant") && StringUtils.isNotEmpty(user.getFirstNameCoApplicant())) {
-                        ((IFormsMenu) borrowerPersonalDetailsPage).clickCoapplicantEmploymentIncome(user.getFirstNameCoApplicant());
-                        //                    borrowerPersonalDetailsPage.clickBorrowerEmploymentIncome(user.getFirstNameCoApplicant());
-//                        coapplicantEmploymentIncomesPage.isTitle(user.getFirstNameCoApplicant());
-                        coapplicantEmploymentIncomesPage.isTitle("Automation");
-                    } else if (borrowerOrCoapplicant.equals("borrower")) {
-                        if (StringUtils.isEmpty(user.getFirstNameCoApplicant()))
-                            borrowerPersonalDetailsPage.clickBorrowerEmploymentIncome();
-                        else
-                            borrowerPersonalDetailsPage.clickBorrowerEmploymentIncome(user.getFirstName());
+                    if (borrowerOrCoapplicant.equals("borrower")) {
+                        borrowerPersonalDetailsPage.clickBorrowerEmploymentIncome(user.getFirstName());
 //                        borrowerEmploymentIncomesPage.isTitle(user.getFirstName());
                         borrowerEmploymentIncomesPage.isTitle("Automation");
                     }
@@ -100,9 +90,6 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ implements C
         switch (borrowerOrCoapplicant) {
             case "borrower":
                 borrowerEmploymentIncomesPage.isTitle(user.getFirstName());
-                break;
-            case "coapplicant":
-                coapplicantEmploymentIncomesPage.isTitle(user.getFirstNameCoApplicant());
                 break;
             default:
                 assertThat("....", false, Is.is(true));

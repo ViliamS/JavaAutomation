@@ -186,7 +186,7 @@ public class ApiPersonalDetailsStepDef extends ApiAbakusBorrowerStepDef {
 //                user.setFirstName(firstName + now.toString("yyyyDDmmHH"));
                 user.setFirstName(firstName + System.getProperty("timestamp"));
                 break;
-            case "coapplicant":
+//            case "coapplicant":
 //                if ( firstName.isEmpty()) {
 //                    coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setFirstname(user.getFirstName());
 //                }
@@ -194,10 +194,10 @@ public class ApiPersonalDetailsStepDef extends ApiAbakusBorrowerStepDef {
 //                    coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setFirstname(firstName);
 //                }
 //                coapplicantPersonalDetailsParameters.put("root:c:w:txtFirstName:tb", firstName + now.toString("yyyyDDmmHH"));
-                coapplicantPersonalDetailsParameters.put("root:c:w:txtFirstName:tb", firstName + System.getProperty("timestamp"));
+//                coapplicantPersonalDetailsParameters.put("root:c:w:txtFirstName:tb", firstName + System.getProperty("timestamp"));
 //                user.setFirstNameCoApplicant(firstName + now.toString("yyyyDDmmHH"));
-                user.setFirstNameCoApplicant(firstName + System.getProperty("timestamp"));
-                break;
+//                user.setFirstNameCoApplicant(firstName + System.getProperty("timestamp"));
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }

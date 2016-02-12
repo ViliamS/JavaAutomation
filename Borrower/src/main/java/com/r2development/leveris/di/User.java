@@ -2,6 +2,7 @@ package com.r2development.leveris.di;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import org.apache.commons.lang3.StringUtils;
 
 @Singleton
 public class User implements IUser {
@@ -11,6 +12,13 @@ public class User implements IUser {
     private String pwd;
     private String phoneNumber;
 //    private MORTGAGE_TYPE mortgageType;
+
+    User() {
+        this.firstName = StringUtils.EMPTY;
+        this.email = StringUtils.EMPTY;
+        this.pwd = StringUtils.EMPTY;
+        this.phoneNumber = StringUtils.EMPTY;
+    }
 
     User(IUser user) {
         this.firstName = user.getFirstName();
