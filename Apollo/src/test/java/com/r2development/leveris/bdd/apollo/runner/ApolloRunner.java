@@ -1,13 +1,13 @@
 package com.r2development.leveris.bdd.apollo.runner;
 
-import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(
+//@CucumberOptions(
+@Cucumber.Options(
     glue = { "classpath:com.r2development.leveris.bdd.apollo.stepdef" },
     monochrome = true,
     format = { "pretty",

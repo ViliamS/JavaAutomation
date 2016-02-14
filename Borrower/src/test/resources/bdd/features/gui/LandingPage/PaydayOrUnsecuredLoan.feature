@@ -11,7 +11,7 @@
   Scenario: WalkThrough Payday Loan Section
 #      Given Open Leveris Quote Landing page
       When User clicks on continue to get Payday Loan
-      Then User fills whole form Payday Loan
+      Then User fills in Payday Loan form
       | LoanPurpose        | PAYDAY    |
       | NetMonthlyIncome   | 21,000.00 |
       | MonthlyExpenses    | 1,000.00  |
@@ -24,7 +24,7 @@
   Scenario: WalkThrough Unsecured Loan Section
 #      Given Open Leveris Quote Landing page
       When User clicks on continue to get Unsecured Loan
-      Then User fills whole form Unsecured Loan
+      Then User fills in Unsecured Loan form
         | LoanPurpose        | PERSONAL  |
         | NetMonthlyIncome   | 44,000.00 |
         | MonthlyExpenses    | 5,000.00  |

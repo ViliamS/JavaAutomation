@@ -128,7 +128,7 @@ public class Quote2 {
         registrationParameters.put("stepToken", "4");
         registrationParameters.put("root:c:w:pnlMain:c:w:btnRegister:submit", "1");
 
-        User user = new User(firstName, email, pwd, phoneNumber, "", "");
+        User user = new User(firstName, email, pwd, phoneNumber);
         user.setFirstName(firstName);
         user.setEmail(email);
         user.setPhoneNumber(phoneNumber);

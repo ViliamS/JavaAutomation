@@ -2,7 +2,7 @@ package com.r2development.leveris.bdd.apollo.stepdef;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.r2development.leveris.di.User;
+import com.r2development.leveris.di.IUser;
 import com.r2development.leveris.selenium.apollo.pageobjects.ILoginPage;
 import com.r2development.leveris.selenium.apollo.pageobjects.IRecordPage;
 import com.r2development.leveris.selenium.apollo.pageobjects.ISearchPage;
@@ -13,6 +13,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openqa.selenium.WebDriver;
 
 import java.util.Map;
 
@@ -23,21 +24,24 @@ public class DemoApollo {
 
     private static final Log log = LogFactory.getLog(DemoApollo.class);
 
-    @Inject
-    private WebDriverService webDriverService;
-
-    @Inject
-    protected User user;
+    private WebDriver webDriver;
+    protected IUser user;
 
     protected ILoginPage loginPage;
     protected ISearchPage searchPage;
     protected IRecordPage recordPage;
     protected ClientData clientData = new ClientData();
 
+    @Inject
+    DemoApollo(WebDriver webDriver, IUser user) {
+        this.webDriver = webDriver;
+        this.user = user;
+    }
+
     @Given("^user is on Apollo homepage$")
     public void user_is_on_Apollo_homepage() {
         loginPage = LoginPage
-                .getLoginPageInstance(webDriverService.getWebDriver())
+                .getLoginPageInstance(webDriver)
                 .setUsername("harry.potter@abakus.com")
                 .setPassword("heslo");
         searchPage = loginPage.clickSubmit();
