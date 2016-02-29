@@ -1,11 +1,16 @@
 package com.r2development.leveris.bdd.borrower.model;
 
+import java.util.List;
 import java.util.Map;
 
 public class RegistrationData extends DataModel {
 
     public RegistrationData(Map<String, String> registrationDataMap) {
         super(registrationDataMap);
+    }
+
+    public RegistrationData(List<String> registrationDataList) {
+        super((registrationDataList));
     }
 
     public String getFirstName() {

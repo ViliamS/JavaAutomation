@@ -19,6 +19,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.LaxRedirectStrategy;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 import org.joda.time.DateTime;
 import org.joda.time.Instant;
@@ -29,7 +30,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class HttpUtils {
 
@@ -49,7 +50,7 @@ public class HttpUtils {
         BasicClientCookie cookieScUnload = new BasicClientCookie("sc-unload", "obu");
 //        cookieScUnload.setDomain("st1app.loftkeys.com");
         cookieScUnload.setDomain(System.getProperty("domain"));
-        cookieScUnload.setPath("/borrower");
+        cookieScUnload.setPath("/stable-borrower");
         cookieStore.addCookie(cookieScUnload);
         localContext.setCookieStore(cookieStore);
 
@@ -89,7 +90,7 @@ public class HttpUtils {
     }
 
 
-    public static String requestHttpGet(HttpClient httpClient, String url, Map<String, String> headers/*, Map<String, String> urlParameters*/, HttpClientContext localContext, boolean consumeQuietly) throws IOException {
+    public static String requestHttpGet(HttpClient httpClient, String url, Map<String, String> headers/*, Map<String, String> urlParameters*/, HttpContext localContext, boolean consumeQuietly) throws IOException {
         String toReturn = StringUtils.EMPTY;
         Instant begin_timestamp = DateTime.now().toInstant();
         log.info("\n= Begin Request :" + url);
@@ -127,7 +128,7 @@ public class HttpUtils {
         return toReturn;
     }
 
-    public static String requestHttpPost(HttpClient httpClient, String url, Map<String, String> headers, Map<String, String> urlParameters, HttpClientContext localContext, boolean consumeQuietly) throws IOException {
+    public static String requestHttpPost(HttpClient httpClient, String url, Map<String, String> headers, Map<String, String> urlParameters, HttpContext localContext, boolean consumeQuietly) throws IOException {
         String toReturn = StringUtils.EMPTY;
         Instant begin_timestamp = DateTime.now().toInstant();
         log.info("\n= Begin Request :" + url);

@@ -10,12 +10,18 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
 
+import java.io.IOException;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+
+import static com.r2development.leveris.utils.HttpUtils.requestHttpGet;
+import static com.r2development.leveris.utils.HttpUtils.requestHttpPost;
 
 /**
  * todo LandingPageStepDef Specific Implementation
  */
-public class ApiLandingPageStepDef /*extends BorrowerStepDef*/ {
+public class ApiLandingPageStepDef extends ApiAbakusBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiLandingPageStepDef.class.getName());
 
@@ -25,27 +31,59 @@ public class ApiLandingPageStepDef /*extends BorrowerStepDef*/ {
 //    IQuoteConfigurationPage quoteConfigurationPage;
 //    IRegisterPage registerPage;
     LandingPageData loanData;
+//    Map<String, String> paydayParameters = new LinkedHashMap<String, String>();
 
-//    public LandingPageStepDef() {
-//        quoteLandingPage = new QuoteLandingPage(WebDriverService.getWebDriverInstance());
+//    private HttpClient httpClient;
+//    private HttpContext localContext;
+
+//    @Inject
+//    public ApiLandingPageStepDef(HttpClient httpClient, HttpContext localContext) {
+//        this.httpClient = httpClient;
+//        this.localContext = provideNewLocalContext();
+//
 //    }
 
-    public ApiLandingPageStepDef() {
-//        super(webDriver);
-//        this.webDriver = webDriver;
-//        quoteLandingPage = new QuoteLandingPage(webDriver);
-    }
-
     @Given("^Open Leveris Quote Landing page$")
-    public void open_leveris_quote_landing_page() {
+    public void open_leveris_quote_landing_page() throws IOException {
 //        quoteLandingPage.goToBorrowerQuoteLandingPage();
+
+        requestHttpGet(
+                httpClient,
+                "http://dv2app.opoqodev.com/stable-borrower/",
+                new LinkedHashMap<String, String>() {
+                    {
+                        put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+                    }
+                },
+                localContext,
+                false
+        );
+
     }
 
     @Given("^User clicks on continue to get (Payday Loan|Unsecured Loan)$")
-    public void user_click_on_continue_button(String loanType) {
+    public void user_click_on_continue_button(String loanType) throws IOException {
         switch (loanType) {
             case "Payday Loan":
 //                quotePaydayLoanPage = quoteLandingPage.clickContinuePaydayLoanTealButton();
+
+                requestHttpPost(
+                        httpClient,
+                        "http://dv2app.opoqodev.com/stable-borrower/form.1?wicket:interface=:1:main:c:form:form:root:c:w:pnlUnsecuredLoan:c:w:pnlUnsecuredLoan1:c:w:btnContinue1:submit::IBehaviorListener:0:",
+                        new LinkedHashMap<String, String>() {
+                            {
+                                put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+                            }
+                        },
+                        new LinkedHashMap<String, String>() {
+                            {
+                                put("stepToken", "1");
+                            }
+                        },
+                        localContext,
+                        false
+                );
+
                 break;
             case "Unsecured Loan":
 //                quoteQuickLoanPage = quoteLandingPage.clickContinueUnsecuredLoanRedButton();
@@ -80,6 +118,7 @@ public class ApiLandingPageStepDef /*extends BorrowerStepDef*/ {
         switch (loanType) {
             case "Payday Loan":
 //                quotePaydayLoanPage.setLoanPurpose(loanPurpose);
+                paydayParameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:cmbLoanPurpose:combobox", loanPurpose);
                 break;
             case "Unsecured Loan":
 //                quoteQuickLoanPage.setLoanPurpose( loanPurpose );
@@ -92,6 +131,7 @@ public class ApiLandingPageStepDef /*extends BorrowerStepDef*/ {
         switch (switchCase) {
             case "Payday Loan":
 //                quotePaydayLoanPage.setNetMonthlyIncome( netMonthlyIncome );
+                paydayParameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:crbNetMonthlyIncome:tb", netMonthlyIncome);
                 break;
             case "Unsecured Loan":
 //                quoteQuickLoanPage.setNetMonthlyIncome( netMonthlyIncome );
@@ -104,6 +144,7 @@ public class ApiLandingPageStepDef /*extends BorrowerStepDef*/ {
         switch (switchCase) {
             case "Payday Loan":
 //                quotePaydayLoanPage.setMonthlyExpenses( monthlyExpenses );
+                paydayParameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:crbMonthlyExpenses:tb", monthlyExpenses);
                 break;
             case "Unsecured Loan":
 //                quoteQuickLoanPage.setMonthlyExpenses( monthlyExpenses );
@@ -116,6 +157,7 @@ public class ApiLandingPageStepDef /*extends BorrowerStepDef*/ {
         switch (switchCase) {
             case "Payday Loan":
 //                quotePaydayLoanPage.setNumberOfDependents( numberOfDependents );
+                paydayParameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:txtNumberOfDependents:tb", numberOfDependents);
                 break;
             case "Unsecured Loan":
 //                quoteQuickLoanPage.setNumberOfDependents( numberOfDependents );
@@ -128,6 +170,7 @@ public class ApiLandingPageStepDef /*extends BorrowerStepDef*/ {
         switch (switchCase) {
             case "Payday Loan":
 //                quotePaydayLoanPage.setAmountToBorrow( amountToBorrow );
+                paydayParameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:pnlAmountToBorrowPayday:c:w:crbcrbAmountToBorrowPayday:tb", amountToBorrow);
                 break;
             case "Unsecured Loan":
 //                quoteQuickLoanPage.setAmountToBorrow( amountToBorrow );
@@ -136,10 +179,26 @@ public class ApiLandingPageStepDef /*extends BorrowerStepDef*/ {
     }
 
     @Then("^(Payday Loan|Unsecured Loan) User clicks on Continue button$")
-    public void user_clicks_on_continue_button(String switchCase) {
+    public void user_clicks_on_continue_button(String switchCase) throws IOException {
         switch (switchCase) {
             case "Payday Loan":
 //                quoteConfigurationPage = quotePaydayLoanPage.clickContinue();
+                paydayParameters.put("stepToken", "2");
+                paydayParameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:btnContinue:submit", "1");
+
+                String form1Response = requestHttpPost(
+                        httpClient,
+                        "http://dv2app.opoqodev.com/stable-borrower/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlUnsecuredLoanQuotation:c:w:btnContinue:submit::IBehaviorListener:0:",
+                        new LinkedHashMap<String, String>() {
+                            {
+                                put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+                                put("Content-Type", "application/x-www-form-urlencoded");
+                            }
+                        },
+                        paydayParameters,
+                        localContext,
+                        false
+                );
                 break;
             case "Unsecured Loan":
 //                quoteConfigurationPage = quoteQuickLoanPage.clickContinue();
@@ -147,7 +206,7 @@ public class ApiLandingPageStepDef /*extends BorrowerStepDef*/ {
         }
     }
 
-    @Given("^User types into Monthly instalment field a (.*)$")
+    @Given("^User types into Monthly installment field a (.*)$")
     public void user_types_value_into_monthly_repayment_field(String monthlyRepayment) {
 //        quoteConfigurationPage.setMonthlyInstallmentInput( monthlyRepayment );
     }
@@ -172,7 +231,7 @@ public class ApiLandingPageStepDef /*extends BorrowerStepDef*/ {
     }
 
     @When("^User walk-through (Payday Loan|Unsecured Loan) Quotation process$")
-    public void userWalkThroughTheQuotationProcessFillingAllMandatoryData(String loanType, List<String> rawQuotationData) {
+    public void userWalkThroughTheQuotationProcessFillingAllMandatoryData(String loanType, List<String> rawQuotationData) throws IOException {
 
         this.loanData = new LandingPageData( rawQuotationData );
         user_click_on_continue_button(loanType);
@@ -231,8 +290,25 @@ public class ApiLandingPageStepDef /*extends BorrowerStepDef*/ {
     }
 
     @Then("^User clicks on Apply Online$")
-    public void user_clicks_on_apply_online() {
-//        registerPage = quoteConfigurationPage.clickApplyOnline();
+    public void user_clicks_on_apply_online() throws IOException {
+        Map<String, String> applyParameters = new LinkedHashMap<>();
+        applyParameters.put("root:c:w:pnlMain:c:w:pnlMortgageCalc:data", "{\"loanValue\":1000,\"repaymentValue\":1016.6666666666725,\"changedParam\":\"\"}");
+        applyParameters.put("stepToken","3");
+        applyParameters.put("root:c:w:btnApplyOnline:submit","1");
+
+        String applyResponse = requestHttpPost(
+                httpClient,
+                "http://dv2app.opoqodev.com/stable-borrower/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnApplyOnline:submit::IBehaviorListener:0:-1",
+                new LinkedHashMap<String, String>() {
+                    {
+                        put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+                        put("Content-Type", "application/x-www-form-urlencoded");
+                    }
+                },
+                applyParameters,
+                localContext,
+                false
+        );
     }
 
     @Then("^User is forwarded to the Registration Page$")

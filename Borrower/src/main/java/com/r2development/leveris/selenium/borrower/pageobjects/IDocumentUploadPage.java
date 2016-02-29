@@ -1,5 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.r2development.leveris.di.IUser;
 import com.r2development.leveris.di.User;
 
 public interface IDocumentUploadPage {
@@ -20,7 +21,7 @@ public interface IDocumentUploadPage {
     boolean getStatus(int i);
 
     IDocumentUploadPage uploadDocument(int i, String filename);
-    IDocumentUploadPage uploadDocument(User user, String userType, String filename, String documentType);
+    IDocumentUploadPage uploadDocument(IUser user, String userType, String filename, String documentType);
     IDocumentUploadPage uploadDocument(String userType, String filename, String documentType);
     IDocumentUploadPage uploadAllDocuments();
     IDocumentUploadPage uploadAllDocuments(User user);

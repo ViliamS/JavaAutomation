@@ -17,9 +17,6 @@ public class ApiYourFinancialAssetsStepDef extends ApiAbakusBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiYourFinancialAssetsStepDef.class);
 
-    public ApiYourFinancialAssetsStepDef() {
-    }
-
     @When("^user has(n't)? financial assets$")
     public void user_has_financial_assets(String hasFinancialAsset) throws IOException {
         if (hasFinancialAsset == null) {

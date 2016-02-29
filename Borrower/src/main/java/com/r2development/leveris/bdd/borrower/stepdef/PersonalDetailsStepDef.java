@@ -6,6 +6,7 @@ import com.r2development.leveris.bdd.borrower.model.PersonalDetailsData;
 import com.r2development.leveris.di.IUser;
 import com.r2development.leveris.selenium.borrower.pageobjects.IBorrowerHomePage;
 import com.r2development.leveris.selenium.borrower.pageobjects.IPersonalDetailsPage;
+import com.r2development.leveris.selenium.borrower.pageobjects.PersonalDetailsPage;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;
@@ -13,43 +14,43 @@ import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 
-import java.util.Map;
+import java.util.List;
 
 @Singleton
 public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV312Workaround {
 
     private static final Log log = LogFactory.getLog(PersonalDetailsStepDef.class);
 
-    private PersonalDetailsData personalDetailsData;
     private final WebDriver webDriver;
     IUser user;
     IBorrowerHomePage borrowerHomePage;
     IPersonalDetailsPage borrowerPersonalDetailsPage;
-    IPersonalDetailsPage coapplicantPersonalDetailsPage;
 
     @Inject
-    PersonalDetailsStepDef(WebDriver webDriver) {
+    PersonalDetailsStepDef(WebDriver webDriver, IUser user) {
         this.webDriver = webDriver;
-//        super(webDriver);
-//        borrowerPersonalDetailsPage = new PersonalDetailsPage(WebDriverService.getWebDriverInstance());
-//        coapplicantPersonalDetailsPage = new PersonalDetailsPage(WebDriverService.getWebDriverInstance());
+        this.user = user;
+        borrowerPersonalDetailsPage = new PersonalDetailsPage(webDriver);
     }
 
     @When("^(borrower|coapplicant) fills in \"Personal Details\"$")
-    public void user_fills_in_borrower_personal_details(String borrowerOrCoapplicant, Map<String, String> personalDetailsDataMap) {
-        workaroundCLV312(borrowerOrCoapplicant);
-        /*PersonalDetailsData */personalDetailsData = new PersonalDetailsData(personalDetailsDataMap);
+//    public void user_fills_in_borrower_personal_details(String borrowerOrCoapplicant, Map<String, String> personalDetailsDataMap) {
+    public void user_fills_in_borrower_personal_details(String borrowerOrCoapplicant, List<String> personalDetailsDataMap) {
+//        workaroundCLV312(borrowerOrCoapplicant);
+        PersonalDetailsData personalDetailsData = new PersonalDetailsData(personalDetailsDataMap);
         borrower_coapplicant_user_sees_his_name_in_the_title(borrowerOrCoapplicant);
         borrower_coapplicant_user_types_his_firstname(borrowerOrCoapplicant, personalDetailsData.getFirstName());
         borrower_coapplicant_user_types_his_lastname(borrowerOrCoapplicant, personalDetailsData.getLastName());
         borrower_coapplicant_user_checks_his_gender(borrowerOrCoapplicant, personalDetailsData.getGender());
-        borrower_coapplicant_user_selects_his_marital_status(borrowerOrCoapplicant, personalDetailsData.get("maritalStatus"));
         borrower_coapplicant_user_types_his_date_of_birth(borrowerOrCoapplicant, personalDetailsData.getDateOfBirth());
+        borrower_coapplicant_user_selects_his_marital_status(borrowerOrCoapplicant, personalDetailsData.get("maritalStatus"));
+        borrower_coapplicant_user_selects_his_nationality(borrowerOrCoapplicant, personalDetailsData.get("nationality"));
         borrower_coapplicant_user_types_his_residency_address_line_1(borrowerOrCoapplicant, personalDetailsData.getAddressLine1());
         borrower_coapplicant_user_types_his_residency_towncity(borrowerOrCoapplicant, personalDetailsData.getTownCity());
+        borrower_coapplicant_user_selects_his_residency_country(borrowerOrCoapplicant, personalDetailsData.get("country"));
         borrower_coapplicant_user_selects_his_residency_countystate(borrowerOrCoapplicant, personalDetailsData.getCountyState());
-        borrower_coapplicant_user_selects_his_residency_accommodation(borrowerOrCoapplicant, personalDetailsData.getAccommodation());
-        borrower_coapplicant_user_checks_if_he_is_living_since_3_years(borrowerOrCoapplicant, (personalDetailsData.isLivingSince3years() ? "is" : "is not" ));
+//        borrower_coapplicant_user_selects_his_residency_accommodation(borrowerOrCoapplicant, personalDetailsData.getAccommodation());
+//        borrower_coapplicant_user_checks_if_he_is_living_since_3_years(borrowerOrCoapplicant, (personalDetailsData.isLivingSince3years() ? "is" : "is not" ));
     }
 
     @Override
@@ -74,38 +75,38 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
         }
     }
 
-    @When("^user fills in \"Borrower's personal details\"$")
-    public void user_fills_in_borrower_personal_details() {
-        borrowerPersonalDetailsPage
-                .setFirstname(user.getFirstName())
-                .setLastname("Mottot")
-                .checkGender("Male")
-                .setDateOfBirth("20/10/1978")
-                .selectMaritalStatus("single")
-                .selectNationality("French")
-                .setResidentYears("3")
-//                .checkRequiredVisa(false)
-                .setResidencyAddressLine1("Prague, Czech Republic")
-                .setResidencyAddressLine2("Hlavní město Praha")
-                .setResidencyTownCity("Prague")
-                .setResidencyPostcodeZip("14000")
-//                .selectResidencyCountyState()
-                .selectResidencyCountry("Czech Republic")
-                .selectResidencyAccommodation("Rented on contract")
-                .setResidencyRent("200")
-                .checkLivedLast3Years(false)
-                .setPreviousResidencyAddressLine1("Dijon, France")
-                .setPreviousResidencyAddressLine2("Burgundy")
-                .setPreviousResidencyTownCity("Dijon")
-                .setPreviousResidencyPostcodeZip("21000")
-//                .selectPreviousResidencyCountry("France")
-                .setPreviousResidencyCountry("France")
-                .clickSave();
-    }
+//    @When("^user fills in \"Borrower's personal details\"$")
+//    public void user_fills_in_borrower_personal_details() {
+//        borrowerPersonalDetailsPage
+//                .setFirstname(user.getFirstName())
+//                .setLastname("Mottot")
+//                .checkGender("Male")
+//                .setDateOfBirth("20/10/1978")
+//                .selectMaritalStatus("single")
+//                .selectNationality("French")
+//                .setResidentYears("3")
+////                .checkRequiredVisa(false)
+//                .setResidencyAddressLine1("Prague, Czech Republic")
+//                .setResidencyAddressLine2("Hlavní město Praha")
+//                .setResidencyTownCity("Prague")
+//                .setResidencyPostcodeZip("14000")
+////                .selectResidencyCountyState()
+//                .selectResidencyCountry("Czech Republic")
+//                .selectResidencyAccommodation("Rented on contract")
+//                .setResidencyRent("200")
+//                .checkLivedLast3Years(false)
+//                .setPreviousResidencyAddressLine1("Dijon, France")
+//                .setPreviousResidencyAddressLine2("Burgundy")
+//                .setPreviousResidencyTownCity("Dijon")
+//                .setPreviousResidencyPostcodeZip("21000")
+////                .selectPreviousResidencyCountry("France")
+//                .setPreviousResidencyCountry("France")
+//                .clickSave();
+//    }
 
-    @When("^user fills in \"Coapplicant's personal details\"$")
-    public void user_fills_in_coapplicant_personal_details() {
-    }
+//    @When("^user fills in \"Coapplicant's personal details\"$")
+//    public void user_fills_in_coapplicant_personal_details() {
+//    }
 
 //    private void fillInPersonalDetails(String whichBorrower) {
 //
@@ -187,9 +188,9 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
             case "borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setLastname(lastname);
                 break;
-            case "coapplicant":
-                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setLastname(lastname);
-                break;
+//            case "coapplicant":
+//                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setLastname(lastname);
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
@@ -205,9 +206,9 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
             case "borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.checkGender(gender);
                 break;
-            case "coapplicant":
-                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.checkGender(gender);
-                break;
+//            case "coapplicant":
+//                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.checkGender(gender);
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
@@ -219,9 +220,9 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
             case "borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setDateOfBirth(dateOfBirth);
                 break;
-            case "coapplicant":
-                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setDateOfBirth(dateOfBirth);
-                break;
+//            case "coapplicant":
+//                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setDateOfBirth(dateOfBirth);
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
@@ -233,9 +234,9 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
             case "borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.selectMaritalStatus(maritalStatus);
                 break;
-            case "coapplicant":
-                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.selectMaritalStatus(maritalStatus);
-                break;
+//            case "coapplicant":
+//                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.selectMaritalStatus(maritalStatus);
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
@@ -247,9 +248,9 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
             case "borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.selectNationality(nationality);
                 break;
-            case "coapplicant":
-                coapplicantPersonalDetailsPage = borrowerPersonalDetailsPage.selectNationality(nationality);
-                break;
+//            case "coapplicant":
+//                coapplicantPersonalDetailsPage = borrowerPersonalDetailsPage.selectNationality(nationality);
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
@@ -261,14 +262,13 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
             case "borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setResidentYears(residentYear);
                 break;
-            case "coapplicant":
-                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setResidentYears(residentYear);
-                break;
+//            case "coapplicant":
+//                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setResidentYears(residentYear);
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
     }
-
 
 //    boolean isRequiredVisa();
 //    IPersonalDetailsPage checkRequiredVisaYes();
@@ -281,9 +281,9 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
             case "borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.checkRequiredVisa(bRequiredVisa);
                 break;
-            case "coapplicant":
-                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.checkRequiredVisa(bRequiredVisa);
-                break;
+//            case "coapplicant":
+//                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.checkRequiredVisa(bRequiredVisa);
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
@@ -295,9 +295,9 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
             case "borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setResidencyAddressLine1(residencyAddressLine1);
                 break;
-            case "coapplicant":
-                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setResidencyAddressLine1(residencyAddressLine1);
-                break;
+//            case "coapplicant":
+//                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setResidencyAddressLine1(residencyAddressLine1);
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
@@ -309,9 +309,9 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
             case "borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setResidencyAddressLine2(residencyAddressLine2);
                 break;
-            case "coapplicant":
-                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setResidencyAddressLine2(residencyAddressLine2);
-                break;
+//            case "coapplicant":
+//                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setResidencyAddressLine2(residencyAddressLine2);
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
@@ -323,9 +323,9 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
             case "borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setResidencyTownCity(residencyTownCity);
                 break;
-            case "coapplicant":
-                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setResidencyTownCity(residencyTownCity);
-                break;
+//            case "coapplicant":
+//                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setResidencyTownCity(residencyTownCity);
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
@@ -337,9 +337,9 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
             case "borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.selectResidencyCountyState(residencyCountyState);
                 break;
-            case "coapplicant":
-                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.selectResidencyCountyState(residencyCountyState);
-                break;
+//            case "coapplicant":
+//                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.selectResidencyCountyState(residencyCountyState);
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
@@ -351,23 +351,23 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
             case "borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setResidencyPostcodeZip(residencyPostcodeZip);
                 break;
-            case "coapplicant":
-                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setResidencyPostcodeZip(residencyPostcodeZip);
-                break;
+//            case "coapplicant":
+//                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setResidencyPostcodeZip(residencyPostcodeZip);
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
     }
 
     @Given("^(borrower|coapplicant) user selects his residency country : (.*)")
-    public void borrower_coapplicant_user_selects_his_residency_country(String borrowerOrCoapplicant, String residencyCountry$) {
+    public void borrower_coapplicant_user_selects_his_residency_country(String borrowerOrCoapplicant, String residencyCountry) {
         switch(borrowerOrCoapplicant) {
             case "borrower":
-                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.selectResidencyCountry(residencyCountry$);
+                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.selectResidencyCountry(residencyCountry);
                 break;
-            case "coapplicant":
-                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.selectResidencyCountry(residencyCountry$);
-                break;
+//            case "coapplicant":
+//                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.selectResidencyCountry(residencyCountry);
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
@@ -379,9 +379,9 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
             case "borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.selectResidencyAccommodation(residencyAccommodation);
                 break;
-            case "coapplicant":
-                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.selectResidencyAccommodation(residencyAccommodation);
-                break;
+//            case "coapplicant":
+//                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.selectResidencyAccommodation(residencyAccommodation);
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
@@ -393,9 +393,9 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
             case "borrower":
                 borrowerPersonalDetailsPage.setResidencyRent(residencyRent);
                 break;
-            case "coapplicant":
-                coapplicantPersonalDetailsPage.setResidencyRent(residencyRent);
-                break;
+//            case "coapplicant":
+//                coapplicantPersonalDetailsPage.setResidencyRent(residencyRent);
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
@@ -412,9 +412,9 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
             case "borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.checkLivedLast3Years(bLivedLast3Years);
                 break;
-            case "coapplicant":
-                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.checkLivedLast3Years(bLivedLast3Years);
-                break;
+//            case "coapplicant":
+//                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.checkLivedLast3Years(bLivedLast3Years);
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
@@ -426,9 +426,9 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
             case "borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setPreviousResidencyAddressLine1(previousResidencyAddressLine1);
                 break;
-            case "coapplicant":
-                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setPreviousResidencyAddressLine1(previousResidencyAddressLine1);
-                break;
+//            case "coapplicant":
+//                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setPreviousResidencyAddressLine1(previousResidencyAddressLine1);
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
@@ -440,9 +440,9 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
             case "borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setPreviousResidencyAddressLine2(previousResidencyAddressLine2);
                 break;
-            case "coapplicant":
-                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setPreviousResidencyAddressLine2(previousResidencyAddressLine2);
-                break;
+//            case "coapplicant":
+//                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setPreviousResidencyAddressLine2(previousResidencyAddressLine2);
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
@@ -454,9 +454,9 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
             case "borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setPreviousResidencyTownCity(previousResidencyTownCity);
                 break;
-            case "coapplicant":
-                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setPreviousResidencyTownCity(previousResidencyTownCity);
-                break;
+//            case "coapplicant":
+//                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setPreviousResidencyTownCity(previousResidencyTownCity);
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
@@ -468,9 +468,9 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
             case "borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.selectResidencyCountyState(residencyCountyState);
                 break;
-            case "coapplicant":
-                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.selectResidencyCountyState(residencyCountyState);
-                break;
+//            case "coapplicant":
+//                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.selectResidencyCountyState(residencyCountyState);
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
@@ -482,9 +482,9 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
             case "borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setPreviousResidencyPostcodeZip(previousResidencyPostcodeZip);
                 break;
-            case "coapplicant":
-                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setPreviousResidencyPostcodeZip(previousResidencyPostcodeZip);
-                break;
+//            case "coapplicant":
+//                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setPreviousResidencyPostcodeZip(previousResidencyPostcodeZip);
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
@@ -496,9 +496,9 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
             case "borrower":
                 borrowerPersonalDetailsPage.selectPreviousResidencyCountry(previousResidencyCountry);
                 break;
-            case "coapplicant":
-                coapplicantPersonalDetailsPage.selectPreviousResidencyCountry(previousResidencyCountry);
-                break;
+//            case "coapplicant":
+//                coapplicantPersonalDetailsPage.selectPreviousResidencyCountry(previousResidencyCountry);
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
@@ -510,9 +510,9 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
             case "borrower":
                 borrowerPersonalDetailsPage.setPreviousResidencyCountry(previousResidencyCountry);
                 break;
-            case "coapplicant":
-                coapplicantPersonalDetailsPage.setPreviousResidencyCountry(previousResidencyCountry);
-                break;
+//            case "coapplicant":
+//                coapplicantPersonalDetailsPage.setPreviousResidencyCountry(previousResidencyCountry);
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }

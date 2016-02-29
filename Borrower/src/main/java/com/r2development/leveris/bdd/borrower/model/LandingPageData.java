@@ -35,5 +35,5 @@ public class LandingPageData extends DataModel {
 
     public String getLoanAmount() { return data.get("AmountToBorrow"); }
 
-    public String getMonthlyInstalmentAmount() { return data.get("MonthlyRepayment"); }
+    public String getMonthlyInstallmentAmount() { return data.get("MonthlyRepayment"); }
 }

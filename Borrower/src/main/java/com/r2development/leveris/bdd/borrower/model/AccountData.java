@@ -1,10 +1,15 @@
 package com.r2development.leveris.bdd.borrower.model;
 
+import java.util.List;
 import java.util.Map;
 
 public class AccountData extends DataModel {
 
     public AccountData(Map<String, String> accountData) {
+        super(accountData);
+    }
+
+    public AccountData(List<String> accountData) {
         super(accountData);
     }
 

@@ -7,10 +7,13 @@ import cucumber.api.java.en.When;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.r2development.leveris.utils.HttpUtils.CONSUME_QUIETLY;
@@ -21,29 +24,29 @@ public class ApiPersonalDetailsStepDef extends ApiAbakusBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiPersonalDetailsStepDef.class);
 
-    ApiPersonalDetailsStepDef() {
-    }
+    PersonalDetailsData personalDetailsData;
 
     @When("^(borrower|coapplicant) fills in \"Personal Details\"$")
-    public void user_fills_in_borrower_personal_details(String borrowerOrCoapplicant, Map<String, String> personalDetailsDataMap) throws IOException {
+//    public void user_fills_in_borrower_personal_details(String borrowerOrCoapplicant, Map<String, String> personalDetailsDataMap) throws IOException {
+    public void user_fills_in_borrower_personal_details(String borrowerOrCoapplicant, List<String> personalDetailsDataMap) throws IOException {
 
-        if ( borrowerOrCoapplicant.equals("coapplicant") ) {
-            requestHttpPost(
-                    httpClient,
-                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:left:c:form:form:root:c:w:pnlBorrower2:c:w:rptBorrower2UncommonForms:c:rows:1:item:pnlBorrower2UncommonForms:c:w:btnBorrower2UncommonForms:submit::IBehaviorListener:0:",
-                    new LinkedHashMap<String, String>() {
-                        {
-                            put("Accept", "text/xml");
-                            put("Content-Type", "application/x-www-form-urlencoded");
-                        }
-                    },
-                    null,
-                    localContext,
-                    CONSUME_QUIETLY
-            );
-        }
+//        if ( borrowerOrCoapplicant.equals("coapplicant") ) {
+//            requestHttpPost(
+//                    httpClient,
+//                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:left:c:form:form:root:c:w:pnlBorrower2:c:w:rptBorrower2UncommonForms:c:rows:1:item:pnlBorrower2UncommonForms:c:w:btnBorrower2UncommonForms:submit::IBehaviorListener:0:",
+//                    new LinkedHashMap<String, String>() {
+//                        {
+//                            put("Accept", "text/xml");
+//                            put("Content-Type", "application/x-www-form-urlencoded");
+//                        }
+//                    },
+//                    null,
+//                    localContext,
+//                    CONSUME_QUIETLY
+//            );
+//        }
 
-        PersonalDetailsData personalDetailsData = new PersonalDetailsData(personalDetailsDataMap);
+        personalDetailsData = new PersonalDetailsData(personalDetailsDataMap);
 //        borrower_coapplicant_user_sees_his_name_in_the_title(borrowerOrCoapplicant);
         borrower_coapplicant_user_types_his_firstname(borrowerOrCoapplicant, personalDetailsData.getFirstName());
         borrower_coapplicant_user_types_his_lastname(borrowerOrCoapplicant, personalDetailsData.getLastName());
@@ -53,15 +56,15 @@ public class ApiPersonalDetailsStepDef extends ApiAbakusBorrowerStepDef {
         borrower_coapplicant_user_selects_his_nationality(borrowerOrCoapplicant, personalDetailsData.get("nationality"));
         borrower_coapplicant_user_types_his_residency_address_line_1(borrowerOrCoapplicant, personalDetailsData.getAddressLine1());
         borrower_coapplicant_user_types_his_residency_towncity(borrowerOrCoapplicant, personalDetailsData.getTownCity());
-        borrower_coapplicant_user_selects_his_residency_countystate(borrowerOrCoapplicant, personalDetailsData.getCountyState());
         borrower_coapplicant_user_selects_his_residency_country(borrowerOrCoapplicant, personalDetailsData.get("country"));
-        borrower_coapplicant_user_selects_his_residency_accommodation(borrowerOrCoapplicant, personalDetailsData.getAccommodation());
-        borrower_coapplicant_user_checks_if_he_is_living_since_3_years(borrowerOrCoapplicant, (personalDetailsData.isLivingSince3years() ? "yes" : "no"));
-        borrower_coapplicant_user_checks_if_requiring_visa(borrowerOrCoapplicant, personalDetailsData.get("requiredVisa"));
+        borrower_coapplicant_user_selects_his_residency_countystate(borrowerOrCoapplicant, personalDetailsData.getCountyState());
+//        borrower_coapplicant_user_selects_his_residency_accommodation(borrowerOrCoapplicant, personalDetailsData.getAccommodation());
+//        borrower_coapplicant_user_checks_if_he_is_living_since_3_years(borrowerOrCoapplicant, (personalDetailsData.isLivingSince3years() ? "yes" : "no"));
+//        borrower_coapplicant_user_checks_if_requiring_visa(borrowerOrCoapplicant, personalDetailsData.get("requiredVisa"));
     }
 
-    @When("^user fills in \"Borrower's personal details\"$")
-    public void user_fills_in_borrower_personal_details() {
+//    @When("^user fills in \"Borrower's personal details\"$")
+//    public void user_fills_in_borrower_personal_details() {
 //        borrowerPersonalDetailsPage
 //                .setFirstname(user.getFirstName())
 //                .setLastname("Mottot")
@@ -87,10 +90,10 @@ public class ApiPersonalDetailsStepDef extends ApiAbakusBorrowerStepDef {
 ////                .selectPreviousResidencyCountry("France")
 //                .setPreviousResidencyCountry("France")
 //                .clickSave();
-    }
+//    }
 
-    @When("^user fills in \"Coapplicant's personal details\"$")
-    public void user_fills_in_coapplicant_personal_details() {
+//    @When("^user fills in \"Coapplicant's personal details\"$")
+//    public void user_fills_in_coapplicant_personal_details() {
 //        coapplicantPersonalDetailsPage
 //                .setFirstname(user.getFirstNameCoApplicant())
 //                .setLastname("Mottot")
@@ -115,9 +118,9 @@ public class ApiPersonalDetailsStepDef extends ApiAbakusBorrowerStepDef {
 ////                .selectPreviousResidencyCountry("France")
 //                .setPreviousResidencyCountry("France")
 //                .clickSave();
-    }
+//    }
 
-    private void fillInPersonalDetails(String whichBorrower) {
+//    private void fillInPersonalDetails(String whichBorrower) {
 //
 //        IPersonalDetailsPage currentPersonalDetailsPage = null;
 //        switch (whichBorrower) {
@@ -154,14 +157,12 @@ public class ApiPersonalDetailsStepDef extends ApiAbakusBorrowerStepDef {
 ////                .selectPreviousResidencyCountry("France")
 //                .setPreviousResidencyCountry("France")
 //                .clickSave();
-    }
+//    }
 
-    @Given("^(borrower|coapplicant) user sees his name in the Personal Details title$")
+    @Given("^(borrower) user sees his name in the Personal Details title$")
     public void borrower_coapplicant_user_sees_his_name_in_the_title(String borrowerOrCoapplicant) {
         switch (borrowerOrCoapplicant) {
             case "borrower":
-                break;
-            case "coapplicant":
                 break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
@@ -210,16 +211,16 @@ public class ApiPersonalDetailsStepDef extends ApiAbakusBorrowerStepDef {
 //                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setLastname(lastname);
                 borrowerPersonalDetailsParameters.put("root:c:w:txtLastName:tb", lastname);
                 break;
-            case "coapplicant":
+//            case "coapplicant":
 //                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setLastname(lastname);
-                coapplicantPersonalDetailsParameters.put("root:c:w:txtLastName:tb", lastname);
-                break;
+//                coapplicantPersonalDetailsParameters.put("root:c:w:txtLastName:tb", lastname);
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
     }
 
-    @Given("^(borrower|coapplicant) user checks his gender : (Male|Female)$")
+    @Given("^(borrower) user checks his gender : (Male|Female)$")
     public void borrower_coapplicant_user_checks_his_gender(String borrowerOrCoapplicant, String gender) throws IOException {
         String parameterValue = ( gender.equals("Male") ? "radMale" : "radFemale" );
 
@@ -265,31 +266,31 @@ public class ApiPersonalDetailsStepDef extends ApiAbakusBorrowerStepDef {
 
         switch(borrowerOrCoapplicant) {
             case "borrower":
-                borrowerPersonalDetailsParameters.put("root:c:w:rgrGender:rg", parameterValue);
+                borrowerPersonalDetailsParameters.put("root:c:w:pnlGender:c:w:rgrGender:rg", parameterValue);
                 break;
-            case "coapplicant":
-                coapplicantPersonalDetailsParameters.put("root:c:w:rgrGender:rg", parameterValue);
-                break;
+//            case "coapplicant":
+//                coapplicantPersonalDetailsParameters.put("root:c:w:rgrGender:rg", parameterValue);
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
     }
 
-    @Given("^(borrower|coapplicant) user types his date of birth : (\\d\\d/\\d\\d/\\d\\d\\d\\d)$") // Date
+    @Given("^(borrower) user types his date of birth : (\\d\\d/\\d\\d/\\d\\d\\d\\d)$") // Date
     public void borrower_coapplicant_user_types_his_date_of_birth(String borrowerOrCoapplicant, String dateOfBirth) {
         switch(borrowerOrCoapplicant) {
             case "borrower":
                 borrowerPersonalDetailsParameters.put("root:c:w:txtDateOfBirth:tb", dateOfBirth);
                 break;
-            case "coapplicant":
-                coapplicantPersonalDetailsParameters.put("root:c:w:txtDateOfBirth:tb", dateOfBirth);
-                break;
+//            case "coapplicant":
+//                coapplicantPersonalDetailsParameters.put("root:c:w:txtDateOfBirth:tb", dateOfBirth);
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
     }
 
-    @Given("^(borrower|coapplicant) user selects his marital status : (single|separated|married/civil partner\\(s\\)|divorced/dissolved civil partnership|widowed)$")
+    @Given("^(borrower) user selects his marital status : (single|separated|married/civil partner\\(s\\)|divorced/dissolved civil partnership|widowed)$")
     public void borrower_coapplicant_user_selects_his_marital_status(String borrowerOrCoapplicant, String maritalStatus) {
 
         String parameterValue = StringUtils.EMPTY;
@@ -316,30 +317,31 @@ public class ApiPersonalDetailsStepDef extends ApiAbakusBorrowerStepDef {
             case "borrower":
                 borrowerPersonalDetailsParameters.put("root:c:w:cmbMaritalStatus:combobox", parameterValue);
                 break;
-            case "coapplicant":
-                coapplicantPersonalDetailsParameters.put("root:c:w:cmbMaritalStatus:combobox", parameterValue);
-                break;
+//            case "coapplicant":
+//                coapplicantPersonalDetailsParameters.put("root:c:w:cmbMaritalStatus:combobox", parameterValue);
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
     }
 
-    @Given("^(borrower|coapplicant) user selects his nationality : (.*)$")
+    @Given("^(borrower) user selects his nationality : (.*)$")
     public void borrower_coapplicant_user_selects_his_nationality(String borrowerOrCoapplicant, String nationality) {
         String parameterValue = (StringUtils.isEmpty(nationality) ? "IE" : nationality );
         switch(borrowerOrCoapplicant) {
             case "borrower":
-                borrowerPersonalDetailsParameters.put("root:c:w:cmbNationality:combobox", parameterValue);
+//                borrowerPersonalDetailsParameters.put("root:c:w:cmbNationality:combobox", parameterValue);
+                borrowerPersonalDetailsParameters.put("root:c:w:cmbNationality:combobox", "IE");
                 break;
-            case "coapplicant":
-                coapplicantPersonalDetailsParameters.put("root:c:w:cmbNationality:combobox", parameterValue);
-                break;
+//            case "coapplicant":
+//                coapplicantPersonalDetailsParameters.put("root:c:w:cmbNationality:combobox", parameterValue);
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
     }
 
-    @Given("^(borrower|coapplicant) user types the number of resident years : ([\\d]+)$")
+    @Given("^(borrower) user types the number of resident years : ([\\d]+)$")
     public void borrower_coapplicant_user_types_the_number_resident_years(String borrowerOrCoapplicant, String residentYear) {
         switch(borrowerOrCoapplicant) {
             case "borrower":
@@ -351,7 +353,7 @@ public class ApiPersonalDetailsStepDef extends ApiAbakusBorrowerStepDef {
         }
     }
 
-    @Given("^(borrower|coapplicant) user checks if he (is not|is) requiring a visa$")
+    @Given("^(borrower) user checks if he (is not|is) requiring a visa$")
     public void borrower_coapplicant_user_checks_if_requiring_visa(String borrowerOrCoapplicant, String sRequiringVisa) throws IOException {
 //        boolean bRequiredVisa = ( StringUtils.isEmpty(sRequiringVisa) ? false : ( sRequiringVisa.equals("is") ? true : false));
         boolean bRequiredVisa = (!StringUtils.isEmpty(sRequiringVisa) && sRequiringVisa.equals("is"));
@@ -397,8 +399,146 @@ public class ApiPersonalDetailsStepDef extends ApiAbakusBorrowerStepDef {
                     );
                 }
                 break;
-            case "coapplicant":
-                if ( !bRequiredVisa ) {
+//            case "coapplicant":
+//                if ( !bRequiredVisa ) {
+//                    requestHttpPost(
+//                            httpClient,
+//                            System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form::IFormChangeListener:2:-1",
+//                            new LinkedHashMap<String, String>() {
+//                                {
+//                                    put("Accept", "text/xml");
+//                                    put("Content-Type", "application/x-www-form-urlencoded");
+//                                }
+//                            },
+//                            new LinkedHashMap<String, String>() {
+//                                {
+//                                    put(
+//                                        "data",
+//                                        "{" +
+//                                            "\"widgets\": [" +
+//                                                "{" +
+//                                                    "\"widget\": \"pnlVisa\"," +
+//                                                    "\"data\": {" +
+//                                                        "\"visible\": false" +
+//                                                    "}," +
+//                                                    "\"delta\": -50," +
+//                                                    "\"visibleEvent\": \"hide\"" +
+//                                                "}," +
+//                                                "{" +
+//                                                    "\"widget\": \"pnlVisa\"," +
+//                                                    "\"data\": {" +
+//                                                        "\"enable\": false" +
+//                                                    "}" +
+//                                                "}," +
+//                                                "{" +
+//                                                    "\"widget\": \"pnlMaidenName\"," +
+//                                                    "\"data\": {" +
+//                                                        "\"enable\": false" +
+//                                                    "}" +
+//                                                "}," +
+//                                                "{" +
+//                                                    "\"widget\": \"pnlRent\"," +
+//                                                    "\"data\": {" +
+//                                                        "\"visible\": false" +
+//                                                    "}," +
+//                                                    "\"delta\": -80," +
+//                                                    "\"visibleEvent\": \"hide\"" +
+//                                                "}," +
+//                                                "{" +
+//                                                    "\"widget\": \"pnlRent\"," +
+//                                                    "\"data\": {" +
+//                                                        "\"enable\": false" +
+//                                                    "}" +
+//                                                "}" +
+//                                            "]" +
+//                                        "}"
+//                                    );
+//                                }
+//                            },
+//                            localContext,
+//                            CONSUME_QUIETLY
+//                    );
+//                }
+//                break;
+            default:
+                log.info("Huston, we have a problem !, Do we have a new user type ?");
+        }
+    }
+
+    @Given("^(borrower) user types his residency address in line 1 : (.*)$")
+    public void borrower_coapplicant_user_types_his_residency_address_line_1(String borrowerOrCoapplicant, String residencyAddressLine1) {
+        switch(borrowerOrCoapplicant) {
+            case "borrower":
+                break;
+//            case "coapplicant":
+//                break;
+            default:
+                log.info("Huston, we have a problem !, Do we have a new user type ?");
+        }
+    }
+
+    @Given("^(borrower) user types his residency address in line 2 : (.*)$")
+    public void borrower_coapplicant_user_types_his_residency_address_line_2(String borrowerOrCoapplicant, String residencyAddressLine2) {
+        switch(borrowerOrCoapplicant) {
+            case "borrower":
+                borrowerPersonalDetailsParameters.put("root:c:w:txtAddressLine2:tb", residencyAddressLine2);
+                break;
+//            case "coapplicant":
+//                coapplicantPersonalDetailsParameters.put("root:c:w:txtAddressLine2:tb", residencyAddressLine2);
+//                break;
+            default:
+                log.info("Huston, we have a problem !, Do we have a new user type ?");
+        }
+    }
+
+    @Given("^(borrower) user types his residency town/city : (.*)$")
+    public void borrower_coapplicant_user_types_his_residency_towncity(String borrowerOrCoapplicant, String residencyTownCity) {
+        switch(borrowerOrCoapplicant) {
+            case "borrower":
+                borrowerPersonalDetailsParameters.put("root:c:w:txtTownCity:tb", residencyTownCity);
+                break;
+//            case "coapplicant":
+//                coapplicantPersonalDetailsParameters.put("root:c:w:txtTownCity:tb", residencyTownCity);
+//                break;
+            default:
+                log.info("Huston, we have a problem !, Do we have a new user type ?");
+        }
+    }
+
+    @Given("^(borrower) user selects his residency county/state : (.*)$")
+    public void borrower_coapplicant_user_selects_his_residency_countystate(String borrowerOrCoapplicant, String residencyCountyState) {
+        switch(borrowerOrCoapplicant) {
+            case "borrower":
+                if ( StringUtils.isNotEmpty(personalDetailsData.getCountyState()) )
+                    borrowerPersonalDetailsParameters.put("root:c:w:pnlCounty:c:w:pnlIrelandCounty:c:w:cmbCountyState:combobox", "G");
+                break;
+//            case "coapplicant":
+//                coapplicantPersonalDetailsParameters.put("root:c:w:cmbCountyState:combobox", "G");
+//                break;
+            default:
+                log.info("Huston, we have a problem !, Do we have a new user type ?");
+        }
+    }
+
+    @Given("^(borrower) user types his postcode/zip : (.*)$")
+    public void borrower_coapplicant_user_types_his_postcode_zip(String borrowerOrCoapplicant, String residencyPostcodeZip) {
+        switch(borrowerOrCoapplicant) {
+            case "borrower":
+                borrowerPersonalDetailsParameters.put("root:c:w:cmbCountyState:combobox", residencyPostcodeZip);
+                break;
+//            case "coapplicant":
+//                coapplicantPersonalDetailsParameters.put("root:c:w:cmbCountyState:combobox", residencyPostcodeZip);
+//                break;
+            default:
+                log.info("Huston, we have a problem !, Do we have a new user type ?");
+        }
+    }
+
+    @Given("^(borrower) user selects his residency country : (.*)")
+    public void borrower_coapplicant_user_selects_his_residency_country(String borrowerOrCoapplicant, String residencyCountry) throws IOException {
+        switch(borrowerOrCoapplicant) {
+            case "borrower":
+                if ( StringUtils.isNotEmpty(personalDetailsData.get("country")) && personalDetailsData.get("country").equals("Ireland") ) {
                     requestHttpPost(
                             httpClient,
                             System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form::IFormChangeListener:2:-1",
@@ -411,45 +551,8 @@ public class ApiPersonalDetailsStepDef extends ApiAbakusBorrowerStepDef {
                             new LinkedHashMap<String, String>() {
                                 {
                                     put(
-                                        "data",
-                                        "{" +
-                                            "\"widgets\": [" +
-                                                "{" +
-                                                    "\"widget\": \"pnlVisa\"," +
-                                                    "\"data\": {" +
-                                                        "\"visible\": false" +
-                                                    "}," +
-                                                    "\"delta\": -50," +
-                                                    "\"visibleEvent\": \"hide\"" +
-                                                "}," +
-                                                "{" +
-                                                    "\"widget\": \"pnlVisa\"," +
-                                                    "\"data\": {" +
-                                                        "\"enable\": false" +
-                                                    "}" +
-                                                "}," +
-                                                "{" +
-                                                    "\"widget\": \"pnlMaidenName\"," +
-                                                    "\"data\": {" +
-                                                        "\"enable\": false" +
-                                                    "}" +
-                                                "}," +
-                                                "{" +
-                                                    "\"widget\": \"pnlRent\"," +
-                                                    "\"data\": {" +
-                                                        "\"visible\": false" +
-                                                    "}," +
-                                                    "\"delta\": -80," +
-                                                    "\"visibleEvent\": \"hide\"" +
-                                                "}," +
-                                                "{" +
-                                                    "\"widget\": \"pnlRent\"," +
-                                                    "\"data\": {" +
-                                                        "\"enable\": false" +
-                                                    "}" +
-                                                "}" +
-                                            "]" +
-                                        "}"
+                                            "data",
+                                            "{\"widgets\":[{\"widget\":\"pnlCounty pnlIrelandCounty cmbCountyState\",\"data\":{\"enable\":true}},{\"widget\":\"pnlCounty pnlIrelandCounty\",\"data\":{\"enable\":true}},{\"widget\":\"pnlCounty pnlIrelandCounty\",\"data\":{\"visible\":true},\"delta\":40,\"visibleEvent\":\"show\"}]}"
                                     );
                                 }
                             },
@@ -457,97 +560,20 @@ public class ApiPersonalDetailsStepDef extends ApiAbakusBorrowerStepDef {
                             CONSUME_QUIETLY
                     );
                 }
-                break;
-            default:
-                log.info("Huston, we have a problem !, Do we have a new user type ?");
-        }
-    }
-
-    @Given("^(borrower|coapplicant) user types his residency address in line 1 : (.*)$")
-    public void borrower_coapplicant_user_types_his_residency_address_line_1(String borrowerOrCoapplicant, String residencyAddressLine1) {
-        switch(borrowerOrCoapplicant) {
-            case "borrower":
-                break;
-            case "coapplicant":
-                break;
-            default:
-                log.info("Huston, we have a problem !, Do we have a new user type ?");
-        }
-    }
-
-    @Given("^(borrower|coapplicant) user types his residency address in line 2 : (.*)$")
-    public void borrower_coapplicant_user_types_his_residency_address_line_2(String borrowerOrCoapplicant, String residencyAddressLine2) {
-        switch(borrowerOrCoapplicant) {
-            case "borrower":
-                borrowerPersonalDetailsParameters.put("root:c:w:txtAddressLine2:tb", residencyAddressLine2);
-                break;
-            case "coapplicant":
-                coapplicantPersonalDetailsParameters.put("root:c:w:txtAddressLine2:tb", residencyAddressLine2);
-                break;
-            default:
-                log.info("Huston, we have a problem !, Do we have a new user type ?");
-        }
-    }
-
-    @Given("^(borrower|coapplicant) user types his residency town/city : (.*)$")
-    public void borrower_coapplicant_user_types_his_residency_towncity(String borrowerOrCoapplicant, String residencyTownCity) {
-        switch(borrowerOrCoapplicant) {
-            case "borrower":
-                borrowerPersonalDetailsParameters.put("root:c:w:txtTownCity:tb", residencyTownCity);
-                break;
-            case "coapplicant":
-                coapplicantPersonalDetailsParameters.put("root:c:w:txtTownCity:tb", residencyTownCity);
-                break;
-            default:
-                log.info("Huston, we have a problem !, Do we have a new user type ?");
-        }
-    }
-
-    @Given("^(borrower|coapplicant) user selects his residency county/state : (.*)$")
-    public void borrower_coapplicant_user_selects_his_residency_countystate(String borrowerOrCoapplicant, String residencyCountyState) {
-        switch(borrowerOrCoapplicant) {
-            case "borrower":
-                borrowerPersonalDetailsParameters.put("root:c:w:cmbCountyState:combobox", "G");
-                break;
-            case "coapplicant":
-                coapplicantPersonalDetailsParameters.put("root:c:w:cmbCountyState:combobox", "G");
-                break;
-            default:
-                log.info("Huston, we have a problem !, Do we have a new user type ?");
-        }
-    }
-
-    @Given("^(borrower|coapplicant) user types his postcode/zip : (.*)$")
-    public void borrower_coapplicant_user_types_his_postcode_zip(String borrowerOrCoapplicant, String residencyPostcodeZip) {
-        switch(borrowerOrCoapplicant) {
-            case "borrower":
-                borrowerPersonalDetailsParameters.put("root:c:w:cmbCountyState:combobox", residencyPostcodeZip);
-                break;
-            case "coapplicant":
-                coapplicantPersonalDetailsParameters.put("root:c:w:cmbCountyState:combobox", residencyPostcodeZip);
-                break;
-            default:
-                log.info("Huston, we have a problem !, Do we have a new user type ?");
-        }
-    }
-
-    @Given("^(borrower|coapplicant) user selects his residency country : (.*)")
-    public void borrower_coapplicant_user_selects_his_residency_country(String borrowerOrCoapplicant, String residencyCountry) {
-        switch(borrowerOrCoapplicant) {
-            case "borrower":
+                // TODO Enum country
                 borrowerPersonalDetailsParameters.put("root:c:w:cmbCountry:combobox", "IE");
 //                borrowerPersonalDetailsParameters.put("root:c:w:cmbCountry:combobox", residencyCountry);
                 break;
-            case "coapplicant":
-                coapplicantPersonalDetailsParameters.put("root:c:w:cmbCountry:combobox", "IE");
+//            case "coapplicant":
+//                coapplicantPersonalDetailsParameters.put("root:c:w:cmbCountry:combobox", "IE");
 //                coapplicantPersonalDetailsParameters.put("root:c:w:cmbCountry:combobox", residencyCountry);
-                break;
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
     }
 
-    @Given("^(borrower|coapplicant) user selects his residency accommodation : (Rented on contract|Rented from family/friends|Property owner|Others)$")
+    @Given("^(borrower) user selects his residency accommodation : (Rented on contract|Rented from family/friends|Property owner|Others)$")
     public void borrower_coapplicant_user_selects_his_residency_accommodation(String borrowerOrCoapplicant, String residencyAccommodation) throws IOException {
 
         switch (residencyAccommodation) {
@@ -604,27 +630,27 @@ public class ApiPersonalDetailsStepDef extends ApiAbakusBorrowerStepDef {
             case "borrower":
                 borrowerPersonalDetailsParameters.put("root:c:w:cmbAccomodation:combobox", "PO");
                 break;
-            case "coapplicant":
-                coapplicantPersonalDetailsParameters.put("root:c:w:cmbAccomodation:combobox", "PO");
-                break;
+//            case "coapplicant":
+//                coapplicantPersonalDetailsParameters.put("root:c:w:cmbAccomodation:combobox", "PO");
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
     }
 
-    @Given("^(borrower|coapplicant) user types his residency rent : (.*)$")
+    @Given("^(borrower) user types his residency rent : (.*)$")
     public void borrower_coapplicant_user_types_his_residency_rent(String borrowerOrCoapplicant, String residencyRent) {
         switch(borrowerOrCoapplicant) {
             case "borrower":
                 break;
-            case "coapplicant":
-                break;
+//            case "coapplicant":
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
     }
 
-    @Given("^(borrower|coapplicant) user checks if he (is not|is) living since 3 years$")
+    @Given("^(borrower) user checks if he (is not|is) living since 3 years$")
     public void borrower_coapplicant_user_checks_if_he_is_living_since_3_years(String borrowerOrCoapplicant, String sLivedLast3Years) throws IOException {
         boolean bLivedLast3Years = sLivedLast3Years.equals("yes");
         switch(borrowerOrCoapplicant) {
@@ -634,12 +660,12 @@ public class ApiPersonalDetailsStepDef extends ApiAbakusBorrowerStepDef {
                 else
                     borrowerPersonalDetailsParameters.put("root:c:w:rgrLast3Years:rg", "radNo");
                 break;
-            case "coapplicant":
-                if ( bLivedLast3Years )
-                    coapplicantPersonalDetailsParameters.put("root:c:w:rgrLast3Years:rg", "radYes");
-                else
-                    coapplicantPersonalDetailsParameters.put("root:c:w:rgrLast3Years:rg", "radNo");
-                break;
+//            case "coapplicant":
+//                if ( bLivedLast3Years )
+//                    coapplicantPersonalDetailsParameters.put("root:c:w:rgrLast3Years:rg", "radYes");
+//                else
+//                    coapplicantPersonalDetailsParameters.put("root:c:w:rgrLast3Years:rg", "radNo");
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
@@ -668,13 +694,13 @@ public class ApiPersonalDetailsStepDef extends ApiAbakusBorrowerStepDef {
         }
     }
 
-    @Given("^(borrower|coapplicant) user types his previous residency address in line 1 : (.*)$")
+    @Given("^(borrower) user types his previous residency address in line 1 : (.*)$")
     public void borrower_coapplicant_user_types_his_previous_residency_address_line1(String borrowerOrCoapplicant, String previousResidencyAddressLine1) {
         switch(borrowerOrCoapplicant) {
             case "borrower":
                 break;
-            case "coapplicant":
-                break;
+//            case "coapplicant":
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
@@ -692,67 +718,70 @@ public class ApiPersonalDetailsStepDef extends ApiAbakusBorrowerStepDef {
         }
     }
 
-    @Given("^(borrower|coapplicant) user types his previous residency town/city : (.*)$")
+    @Given("^(borrower) user types his previous residency town/city : (.*)$")
     public void borrower_coapplicant_user_types_his_previous_residency_towncity(String borrowerOrCoapplicant, String previousResidencyTownCity) {
         switch(borrowerOrCoapplicant) {
             case "borrower":
                 break;
-            case "coapplicant":
-                break;
+//            case "coapplicant":
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
     }
 
-    @Given("^(borrower|coapplicant) user selects his previous residency county/state : (.*)$")
+    @Given("^(borrower) user selects his previous residency county/state : (.*)$")
     public void borrower_coapplicant_user_selects_his_previous_residency_countystate(String borrowerOrCoapplicant, String residencyCountyState) {
         switch(borrowerOrCoapplicant) {
             case "borrower":
+                // TODO enum countyState !
+                if ( StringUtils.isEmpty(personalDetailsData.getCountyState()) &&  StringUtils.isEmpty(personalDetailsData.get("country")) &&  personalDetailsData.get("country").equals("Ireland"))
+                    borrowerPersonalDetailsParameters.put("root:c:w:pnlCounty:c:w:pnlIrelandCounty:c:w:cmbCountyState:combobox", personalDetailsData.getCountyState());
                 break;
-            case "coapplicant":
-                break;
+//            case "coapplicant":
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
     }
 
-    @Given("^(borrower|coapplicant) user types his previous residency postcode/zip : (.*)$")
+    @Given("^(borrower) user types his previous residency postcode/zip : (.*)$")
     public void borrower_coapplicant_user_types_his_previous_residency_postcodezip(String borrowerOrCoapplicant, String previousResidencyPostcodeZip) {
         switch(borrowerOrCoapplicant) {
             case "borrower":
                 break;
-            case "coapplicant":
-                break;
+//            case "coapplicant":
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
     }
 
-    @Given("^(borrower|coapplicant) user selects his previous residency country : (.*)$")
+    @Given("^(borrower) user selects his previous residency country : (.*)$")
     public void borrower_coapplicant_user_selects_his_previous_residency_country(String borrowerOrCoapplicant, String previousResidencyCountry) {
         switch(borrowerOrCoapplicant) {
             case "borrower":
                 break;
-            case "coapplicant":
-                break;
+//            case "coapplicant":
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
     }
 
-    @Given("^(borrower|coapplicant) user types his previous residency country : (.*)$")
+    @Given("^(borrower) user types his previous residency country : (.*)$")
     public void borrower_coapplicant_user_types_his_previous_residency_country(String borrowerOrCoapplicant, String previousResidencyCountry) {
         switch(borrowerOrCoapplicant) {
             case "borrower":
                 break;
-            case "coapplicant":
-                break;
+//            case "coapplicant":
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
     }
 
-    @Given("^(borrower|coapplicant) user saves his personal details data$")
+    @Given("^(borrower) user saves his personal details data$")
     public void borrower_coapplicant_user_saves(String borrowerOrCoapplicant) throws IOException{
 
         Map<String, String> finalPersonalDetailsParameters = new HashMap<>();
@@ -762,10 +791,10 @@ public class ApiPersonalDetailsStepDef extends ApiAbakusBorrowerStepDef {
 //                finalPersonalDetailsParameters = borrowerPersonalDetailsParameters;
                 finalPersonalDetailsParameters.putAll(borrowerPersonalDetailsParameters);
                 break;
-            case "coapplicant":
+//            case "coapplicant":
 //                finalPersonalDetailsParameters = coapplicantPersonalDetailsParameters;
-                finalPersonalDetailsParameters.putAll(coapplicantPersonalDetailsParameters);
-                break;
+//                finalPersonalDetailsParameters.putAll(coapplicantPersonalDetailsParameters);
+//                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
@@ -775,7 +804,10 @@ public class ApiPersonalDetailsStepDef extends ApiAbakusBorrowerStepDef {
         finalPersonalDetailsParameters.put("stepToken", "1");
         finalPersonalDetailsParameters.put("root:c:w:btnNext:submit", "1");
 
-        requestHttpPost(
+
+        Document jsoupFormResponse = Jsoup.parse(httpResponse.getHttpResponse());
+
+        String personalDetailsSaveDataResponse = requestHttpPost(
                 httpClient,
                 System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnNext:submit::IBehaviorListener:0:",
                 new LinkedHashMap<String, String>() {
@@ -788,6 +820,7 @@ public class ApiPersonalDetailsStepDef extends ApiAbakusBorrowerStepDef {
                 localContext,
                 CONSUME_QUIETLY
         );
+        httpResponse.setHttpResponse(personalDetailsSaveDataResponse);
     }
 
 }

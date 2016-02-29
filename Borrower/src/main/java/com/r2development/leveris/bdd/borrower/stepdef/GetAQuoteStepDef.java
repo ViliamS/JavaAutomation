@@ -39,7 +39,6 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
     IBorrowerHomePage borrowerHomePage;
     IWelcomePage welcomePage;
     IBuildQuotationPage buildQuotationPage;
-    IAddYourCoapplicantPage addYourCoapplicantPage;
 
     @Inject
     GetAQuoteStepDef(WebDriver webDriver) {
@@ -49,7 +48,7 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
     }
 
     @Given("^user processes \"Get a Quote\" \\(format1\\)$")
-    public void user_processes_get_quote(List<QuoteData> quoteDataList) {
+    public void user_processes_get_quote(List<QuoteData> quoteDataList, String... test) {
         assertEquals("System is expecting only one QuoteData occurrence", quoteDataList.size(), 1);
         user_wants_to_get_a_quote_now();
         fill_in_quote_step1(quoteDataList.get(0));
@@ -58,7 +57,8 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
     }
 
     @Given("^user processes \"Get a Quote\" \\(format2\\)$")
-    public void user_processes_get_quote(Map<String, String> quoteDataMap) {
+//    public void user_processes_get_quote(Map<String, String> quoteDataMap) {
+    public void user_processes_get_quote(List<String> quoteDataMap) {
         user_wants_to_get_a_quote_now();
         fill_in_quote_step1(new QuoteData(quoteDataMap));
         user_processes_2step3_to_get_a_quote();
@@ -337,89 +337,6 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
         buildQuotationPage.clickEditDetails();
     }
 
-    @And("^borrower goes solo$")
-    public void borrower_goes_solo() {
-        borrowerHomePage
-                .clickInviteCoapplicantStartTask()
-                .clickGoSolo();
-    }
-
-    @And("^borrower invites a co-applicant$")
-    public void borrower_invites_coapplicant(Map<String, String> coapplicantDataMap) {
-        user_clicks_invite_coapplicant_start_task();
-        user_clicks_invite_coapplicant_button();
-        user_fills_in_add_your_coapplicant_form(coapplicantDataMap);
-        user_clicks_invite_now();
-    }
-
-    @And("^user processes \"Invite a co-applicant\"$")
-    public void user_processes_invite_coapplicant() {
-        user_clicks_invite_coapplicant_start_task();
-        user_clicks_invite_coapplicant_button();
-        user_fills_in_add_your_coapplicant_form();
-        user_clicks_invite_now();
-        user_clicks_back_to_dashboard();
-    }
-
-    @And("^user clicks \"Invite a co-applicant\"$")
-    public void user_clicks_invite_coapplicant_start_task() {
-        borrowerHomePage.clickInviteCoapplicantStartTask();
-    }
-
-    @And("^user clicks \"INVITE CO-APPLICANT\"$")
-    public void user_clicks_invite_coapplicant_button() {
-        addYourCoapplicantPage = borrowerHomePage.clickInviteCoapplicantButton();
-    }
-
-    @And("^user clicks \"GO SOLO\"$")
-    public void user_clicks_go_solo() throws InterruptedException {
-        borrowerHomePage.clickGoSolo();
-    }
-
-    @And("^user fills in \"ADD YOUR CO-APPLICANT\"$")
-    public void user_fills_in_add_your_coapplicant_form() {
-//        String firstNameCoApplicant = "Anthony Mottot co-applicant";
-////        String emailCoApplicant = "anthonymottot-co-applicant" + DateTime.now().toString("yyyyMMddHHmmssSSS") + "@abakus.com";
-//        String emailCoApplicant = "anthonymottot-co-applicant" + System.getProperty("timestamp") + "@abakus.com";
-//        addYourCoapplicantPage.fillInAddYourCoapplicantPage(firstNameCoApplicant, emailCoApplicant);
-////        user.setFirstNameCoApplicant(firstNameCoApplicant);
-//        user.setEmailCoApplicant(emailCoApplicant);
-    }
-
-    private void user_fills_in_add_your_coapplicant_form(Map<String, String> coapplicantDataMap) {
-//        String firstNameCoApplicant = coapplicantDataMap.get("firstName");
-////        String emailCoApplicant = "anthony.mottot.applicant.test0001" + DateTime.now().toString("yyyyMMddHHmmssSSS") + "@abakus.com";
-//        String emailCoApplicant = "anthony.mottot.applicant.test0001" + System.getProperty("timestamp") + "@abakus.com"; // TODO Test_automation email
-//        addYourCoapplicantPage.fillInAddYourCoapplicantPage(firstNameCoApplicant, emailCoApplicant);
-//        user.setFirstNameCoApplicant(firstNameCoApplicant);
-//        user.setEmailCoApplicant(emailCoApplicant);
-    }
-
-    @And("^user sets FirstName Co-Applicant$")
-    public void user_sets_firstname_coapplicant() {
-//        addYourCoapplicantPage.setFirstName("Anthony Mottot co-applicant");
-//        user.setFirstNameCoApplicant("Anthony Mottot co-applicant");
-    }
-
-    @And("^user sets Email Co-Applicant$")
-    public void user_sets_email_coapplicant() {
-////        addYourCoapplicantPage.setEmail("anthonymottot-co-applicant" + DateTime.now().toString("yyyyMMddHHmmssSSS") + "@abakus.com");
-//        addYourCoapplicantPage.setEmail("anthonymottot-co-applicant" + System.getProperty("timestamp") + "@abakus.com");
-////        user.setEmailCoApplicant("anthonymottot-co-applicant" + DateTime.now().toString("yyyyMMddHHmmssSSS") + "@abakus.com");
-//        user.setEmailCoApplicant("anthonymottot-co-applicant" + System.getProperty("timestamp") + "@abakus.com");
-    }
-
-    @When("^user clicks \"INVITE NOW\"$")
-    public void user_clicks_invite_now() {
-        addYourCoapplicantPage.clickInviteNow();
-    }
-
-    @When("^user clicks \"BACK TO DASHBOARD\"$")
-    public void user_clicks_back_to_dashboard() {
-        borrowerHomePage = addYourCoapplicantPage.clickBackToDashboard();
-        borrowerHomePage.isLoaded();
-    }
-
     @Then("^user could buy a home up to the value of (.*) euros$")
     public void user_could_build_a_home_up_to_value(String maxLoanAmount) {
         if ( !toSkip ) {
@@ -455,6 +372,7 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
 
     @And("^user clicks \"Review and Submit\"$")
     public void user_clicks_review_and_submit() {
+        borrowerHomePage = new BorrowerHomePage(webDriver);
         borrowerHomePage.clickReviewAndSubmit();
     }
 

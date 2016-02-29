@@ -1,7 +1,6 @@
 package com.r2development.leveris;
 
 import com.google.inject.Inject;
-import com.r2development.leveris.selenium.borrower.pageobjects.IEmploymentIncomeSection;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.*;
@@ -180,8 +179,8 @@ public class Borrower /*implements IBorrower*/ {
             isVisible(xpath, true, 5);
             JavascriptExecutor executor = (JavascriptExecutor) webDriver;
             executor.executeScript("arguments[0].click();", findBy(xpath));
-            if ( xpath.equals(IEmploymentIncomeSection.EMPLOYMENT_INCOMES_ADD_EMPLOYMENT_XPATH))
-                isVisible("//div[@wicketpath='main_c_form_dialogWrapper']", true, 5);
+//            if ( xpath.equals(IEmploymentIncomeSection.EMPLOYMENT_INCOMES_ADD_EMPLOYMENT_XPATH))
+//                isVisible("//div[@wicketpath='main_c_form_dialogWrapper']", true, 5);
             log.info(("click via javascript injection with xpath: " + xpath));
         } catch ( NoSuchElementException | TimeoutException ignored) {
             log.info("Huston ! we have a problem !!!");
@@ -197,9 +196,25 @@ public class Borrower /*implements IBorrower*/ {
                 isVisible(xpath, true, 5);
                 JavascriptExecutor executor = (JavascriptExecutor) webDriver;
                 executor.executeScript("arguments[0].click();", findBy(xpath));
-                if ( xpath.equals(IEmploymentIncomeSection.EMPLOYMENT_INCOMES_ADD_EMPLOYMENT_XPATH))
-                    isVisible("//div[@wicketpath='main_c_form_dialogWrapper']", true, 5);
                 log.info(("click via javascript injection with xpath: " + xpath));
+                toGoOn = true;
+            } catch ( NoSuchElementException | TimeoutException ignored) {
+                log.info("Huston ! we have a problem !!!");
+            }
+        }
+
+    }
+
+    protected void clickElementViaJavascript(String xpath, String expectedXpath) {
+
+        boolean toGoOn = false;
+        while(!toGoOn) {
+            try {
+                isVisible(xpath, true, 10);
+                JavascriptExecutor executor = (JavascriptExecutor) webDriver;
+                executor.executeScript("arguments[0].click();", findBy(xpath));
+                log.info(("click via javascript injection with xpath: " + xpath));
+                isVisible(expectedXpath, true, 2);
                 toGoOn = true;
             } catch ( NoSuchElementException | TimeoutException ignored) {
                 log.info("Huston ! we have a problem !!!");
@@ -413,7 +428,7 @@ public class Borrower /*implements IBorrower*/ {
         return true;
     }
 
-    private boolean isNotVisible(String xpath, int timeout_in_seconds) {
+    protected boolean isNotVisible(String xpath, int timeout_in_seconds) {
 //        boolean toReturn = true;
         try {
             waitForInvisibility(xpath, timeout_in_seconds);
@@ -476,12 +491,31 @@ public class Borrower /*implements IBorrower*/ {
 
     protected void selectFromDropDown(String xpath, String valueToSelect) {
         log.info("Selecting this value: " + valueToSelect + ", on this xpath: " + xpath);
+        moveTo(By.xpath(xpath));
         By currentBy = By.xpath(xpath + "/following-sibling::button");
         waitForVisibility(currentBy);
         moveTo(currentBy);
         clickElement(currentBy);
 
         final String DROP_DOWN_LIST = "//ul[contains(@style, 'display: block')]/li/a";
+//        final String DROP_DOWN_LIST = "//ul[@role='listbox'][not(contains(@style,'display: none'))]/li[@class='ui-menu-item']/a";
+        // or //ul[contains(@style, 'display: block')]/li/a
+//        By dropDownLocator = By.xpath(DROP_DOWN_LIST + "[text()='" + valueToSelect + "']");
+//        By dropDownLocator = By.xpath(DROP_DOWN_LIST + "[contains(.,'" + valueToSelect + "')]");
+        By dropDownLocator = By.xpath(DROP_DOWN_LIST + "[.='" + valueToSelect + "']");
+        waitForVisibility(dropDownLocator, DEFAULT_TIMEOUT);
+        moveTo(dropDownLocator);
+        clickElement(dropDownLocator);
+    }
+
+    protected void selectFromDropDownIncludingBold(String xpath, String valueToSelect) {
+        log.info("Selecting this value: " + valueToSelect + ", on this xpath: " + xpath);
+        By currentBy = By.xpath(xpath + "/following-sibling::button");
+        waitForVisibility(currentBy);
+        moveTo(currentBy);
+        clickElement(currentBy);
+
+        final String DROP_DOWN_LIST = "//ul[contains(@style, 'display: block')]/li/a/b";
 //        final String DROP_DOWN_LIST = "//ul[@role='listbox'][not(contains(@style,'display: none'))]/li[@class='ui-menu-item']/a";
         // or //ul[contains(@style, 'display: block')]/li/a
         By dropDownLocator = By.xpath(DROP_DOWN_LIST + "[text()='" + valueToSelect + "']");

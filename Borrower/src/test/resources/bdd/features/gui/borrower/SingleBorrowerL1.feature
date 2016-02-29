@@ -1,6 +1,8 @@
 
 Feature: Single Borrower
 
+  /As Borrower I have to tell about myself any jobs I’ve held in the past 3 years include periods of unemployed./
+
   Background:
     Given user goes to Registration page
 

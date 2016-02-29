@@ -24,21 +24,15 @@ public interface IBorrowerHomePage {
     String getGetApprovalText();
     void clickWhatDocs();
     IBuildQuotationPage clickGetAQuote();
-    IBorrowerHomePage clickInviteCoapplicantBox();
-    IBorrowerHomePage clickInviteCoapplicantStartTask();
     IPersonalDetailsPage clickInfoUpload();
     void closeWhatDocs();
-
-    boolean isInviteCoapplicantLoaded();
-    IAddYourCoapplicantPage clickInviteCoapplicantButton();
-    IBorrowerHomePage clickGoSolo();
-    IBorrowerHomePage clickReviewAndSubmit();
 
     void clickContactUs();
     void clickHelpCenter();
     void clickWhatElse();
     void clickLegalTerm();
 
+    IBorrowerHomePage clickReviewAndSubmit();
     IBorrowerHomePage clickSubmitYourApplication();
     IBorrowerHomePage checkDistanceMarketing();
     IBorrowerHomePage checkStatutory();

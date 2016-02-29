@@ -6,7 +6,6 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.Borrower;
 import com.r2development.leveris.di.IUser;
-import com.r2development.leveris.di.User;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hamcrest.core.Is;
@@ -56,13 +55,13 @@ public class DocumentUploadSection extends Borrower implements IDocumentUploadSe
 
     protected IUser user;
 
-    @Inject
-    public DocumentUploadSection(WebDriver webDriver) {
-        super(webDriver);
-        PageFactory.initElements(webDriver, this);
-    }
-
 //    @Inject
+//    public DocumentUploadSection(WebDriver webDriver) {
+//        super(webDriver);
+//        PageFactory.initElements(webDriver, this);
+//    }
+
+    @Inject
     public DocumentUploadSection(WebDriver webDriver, IUser user) {
         super(webDriver);
         this.user = user;
@@ -172,7 +171,7 @@ public class DocumentUploadSection extends Borrower implements IDocumentUploadSe
     }
 
     @Override
-    public IDocumentUploadSection uploadDocument(User user, String userType, String filename, String documentType) {
+    public IDocumentUploadSection uploadDocument(IUser user, String userType, String filename, String documentType) {
         this.user = user;
         Table<String, String, Integer> tableDocumentUpload = getDocumentTable();
         clickAddMoreActions(tableDocumentUpload.get(userType, documentType));
@@ -225,7 +224,7 @@ public class DocumentUploadSection extends Borrower implements IDocumentUploadSe
     }
 
     @Override
-    public IDocumentUploadSection uploadAllDocuments(User user) {
+    public IDocumentUploadSection uploadAllDocuments(IUser user) {
         this.user = user;
         Table<String, String, Integer> tableDocumentUpload = getDocumentTable();
         List<Integer> listIndex = new LinkedList<>(tableDocumentUpload.values());
@@ -292,8 +291,9 @@ public class DocumentUploadSection extends Borrower implements IDocumentUploadSe
                 isVisible(REPORT_CONTAINER_XPATH.replace("${replaceIndex}$", String.valueOf(i+1)), true);
                 uploadName = getText(REPORT_CONTAINER_XPATH.replace("${replaceIndex}$", String.valueOf(i+1)));
             }
-            if ( uploadName.contains(user.getFirstName()) )
-                toReturn.put("Borrower", uploadName.replace(user.getFirstName() + " - ", ""), i+1);
+//            if ( uploadName.contains(user.getFirstName()) )
+//            toReturn.put("Borrower", uploadName.replace(user.getFirstName() + " - ", ""), i+1);
+            toReturn.put("Borrower", uploadName.replace(user.getFirstName() + " - ", ""), i+1);
         }
 
         return toReturn;

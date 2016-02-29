@@ -105,18 +105,6 @@ public class BorrowerHomePage extends HeaderAndBottomAndFormsMenuSection impleme
     }
 
     @Override
-    public IBorrowerHomePage clickInviteCoapplicantStartTask() {
-        getApprovalSection.clickInviteCoapplicantStartTask();
-        return this;
-    }
-
-    @Override
-    public IBorrowerHomePage clickInviteCoapplicantBox() {
-        getApprovalSection.clickInviteCoapplicantBox();
-        return this;
-    }
-
-    @Override
     public IPersonalDetailsPage clickInfoUpload() {
         return getApprovalSection.clickInfoUpload();
     }
@@ -124,22 +112,6 @@ public class BorrowerHomePage extends HeaderAndBottomAndFormsMenuSection impleme
     @Override
     public void closeWhatDocs() {
 
-    }
-
-    @Override
-    public boolean isInviteCoapplicantLoaded() {
-        return false;
-    }
-
-    @Override
-    public IAddYourCoapplicantPage clickInviteCoapplicantButton() {
-        return getApprovalSection.clickInviteCoapplicantButton();
-    }
-
-    @Override
-    public IBorrowerHomePage clickGoSolo() {
-        getApprovalSection.clickGoSolo();
-        return this;
     }
 
     @Override

@@ -6,27 +6,9 @@ Feature: Payday Loan
 
   Scenario: Payday Load
 
-    Given User clicks on continue to get Payday Loan
-    And User fills in Payday Loan form
-#      | LoanPurpose        | PAYDAY    |
-      | NetMonthlyIncome   | 21,000.00 |
-      | MonthlyExpenses    | 1,000.00  |
-      | NumberOfDependents | 1         |
-      | AmountToBorrow     | 1,000.00  |
-    When Payday Loan User clicks on Continue button
-    Then User clicks on Apply Online
-    And this registration data, user processes the registration (format2)
-      | firstName         | AutomationSBUI                                    |
-      | email             | test.automation.payday.ui.@test.finfactory.com    |
-      | phoneNumber       | +420123456789                                     |
-      | password          | Password1122                                     |
-      | termsBusiness     | accepts                                           |
-      | protectionPolicy  | accepts                                           |
-
-#    Then user goes to gmail
-#    And user goes to CRM
-    Then  user logs in as his account is activated
-    And user processes "Forms"
+    Given user logs in with these credentials
+      | email | test_automation.payday.ui.test000120160217192723839@abakus.com |
+      | pwd   | Password1122                                                   |
 
 #    PERSONAL DETAILS
 #    When user clicks "Borrower Personal Details"
@@ -55,19 +37,19 @@ Feature: Payday Loan
       | startDate           | 05/11/2013  |
       | isCurrentEmployment | yes         |
       | netMonthlyIncome    | 124000      |
-    And borrower user clicks "ADD EMPLOYMENT"
-    And borrower fills in "Employment Income"
-      | categoryIncome      | Self Employed      |
-      | occupation          | Artist             |
-      | businessName        | testBusinessName   |
-      | addressLine1        | 18 Woodquay        |
-      | townCity            | Galway             |
-      | country             | Ireland            |
-      | countyState         | Galway             |
-      | businessNature      | testNatureBusiness |
-      | startDate           | 05/11/2013         |
-      | isCurrentEmployment | yes                |
-      | netMonthlyIncome    | 124000             |
+#    And borrower user clicks "ADD EMPLOYMENT"
+#    And borrower fills in "Employment Income"
+#      | categoryIncome      | Self Employed      |
+#      | occupation          | Artist             |
+#      | businessName        | testBusinessName   |
+#      | addressLine1        | 18 Woodquay        |
+#      | townCity            | Galway             |
+#      | country             | Ireland            |
+#      | countyState         | Galway             |
+#      | businessNature      | testNatureBusiness |
+#      | startDate           | 05/11/2013         |
+#      | isCurrentEmployment | yes                |
+#      | netMonthlyIncome    | 124000             |
 #    And borrower user clicks "ADD EMPLOYMENT"
 #    And borrower fills in "Employment Income"
 #      | categoryIncome      | Civil Servant |
@@ -111,37 +93,35 @@ Feature: Payday Loan
       | overdraftLimit  | 2002                    |
       | sourceOfSaving  | Gift                    |
       | regularMonthlySaving | 200                |
-    And user clicks "ADD ACCOUNT"
-    And user clicks "Savings account"
-    And user fills in "Savings Account"
-      | statementDate   | 01/01/2000              |
-      | accountName     | test Current Account    |
-      | sortCode1       | 12                      |
-      | sortCode2       | 34                      |
-      | sortCode3       | 56                      |
-      | accountNumber   | 0987654321              |
-      | accountBalance  | 2001                    |
-#      | overdraftLimit  | 2002                    |
-      | sourceOfSaving  | Gift                    |
-      | regularMonthlySaving | 200                |
+#    And user clicks "ADD ACCOUNT"
+#    And user clicks "Savings account"
+#    And user fills in "Savings Account"
+#      | statementDate   | 01/01/2000              |
+#      | accountProvider | Central Bank of Ireland |
+#      | IBAN            | IE60BOFI90600516322733  |
+#      | accountBalance  | 20000                   |
+#      | sourceOfSaving  | Gift                    |
 #    And user clicks "ADD ACCOUNT"
 #    And user clicks "Account scraping"
 #    And user closes "scraping" form
     And user clicks Accounts "Done"
 
 #    YOUR DEPENDENT
-#    And user hasn't dependants
-    And user has dependants
-    And user fills in "Dependant form"
-    | date Of Birth | 01/01/2000 |
-    And user clicks "ADD DEPENDANT"
-    And user fills in "Dependant form"
-      | date Of Birth | 01/01/2000 |
-    And user clicks Dependants "Done"
+#    When user clicks "Dependents"
+    Then user hasn't dependents
+
+#    YOUR FINANCIAL ASSETS
+#    When user clicks "Financial Assets"
+#    Then user hasn't financial assets
+
+#    Properties
+#    When user clicks "Properties"
+#    Then user hasn't properties
+#    And user hasn't a property in the past
 
 #    Financial Commitments
 #    When user clicks "Financial Commitments"
-    And  user hasn't financial commitments
+    Then user hasn't financial commitments
 
 #    FUNDING
 #    When user clicks "Funding"
@@ -162,9 +142,9 @@ Feature: Payday Loan
 
 #    FINAL STAGE 1
 #    And borrower finalizes the Borrower Phase
-    And user clicks "Review and Submit"
-    And user checks "Distance Marketing"
-    And user checks "Statutory"
-    And user checks "Declaration"
+#    And user clicks "Review and Submit"
+#    And user checks "Distance Marketing"
+#    And user checks "Statutory"
+#    And user checks "Declaration"
 #    And user clicks "Submit your application"
-    And finally, user clicks "Submit Application"
+#    And finally, user clicks "Submit Application"

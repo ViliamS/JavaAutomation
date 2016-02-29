@@ -6,7 +6,6 @@ import com.r2development.leveris.di.User;
 import com.r2development.leveris.selenium.borrower.pageobjects.*;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -25,16 +24,14 @@ public class MainFormsProcessesStepDef /*extends BorrowerStepDef*/ implements CL
     IYourAccountsPage yourAccountsPage;
     IFormsMenu currentPage;
     IDocumentUploadPage documentUploadPage;
-    IYourFundingPage yourFundingPage;
-    IYourFinancialAssetsPage yourFinancialAssetsPage;
     IYourFinancialCommitmentsPage yourFinancialCommitmentsPage;
-    IYourDependentsPage yourDependentsPage;
-    IYourPropertiesPage yourPropertiesPage;
+    IYourDependantsPage yourDependentsPage;
 
     @Inject
     public MainFormsProcessesStepDef(WebDriver webDriver) {
 //        super(webDriver);
         this.webDriver = webDriver;
+        borrowerHomePage = new BorrowerHomePage(webDriver);
     }
 
     // "proxy page"
@@ -48,7 +45,6 @@ public class MainFormsProcessesStepDef /*extends BorrowerStepDef*/ implements CL
 //    public void user_clicks_Dashboard() {
 //        formsPage.clickDashboard();
 //    }
-
 
     @Override
     public void workaroundCLV312(String borrowerOrCoapplicant) {
@@ -95,22 +91,10 @@ public class MainFormsProcessesStepDef /*extends BorrowerStepDef*/ implements CL
         currentPage = (IFormsMenu) yourDependentsPage;
     }
 
-    @When("^user clicks \"Properties\"$")
-    public void clickProperties() {
-        currentPage.clickProperties();
-        currentPage = (IFormsMenu) yourPropertiesPage;
-    }
-
     @When("^user clicks \"Financial Commitments\"$")
     public void clickFinancialCommitments() {
         currentPage.clickFinancialCommitments();
         currentPage = (IFormsMenu) yourFinancialCommitmentsPage;
-    }
-
-    @When("^user clicks \"Funding\"$")
-    public void clickFunding() {
-        currentPage.clickFunding();
-        currentPage = (IFormsMenu) yourFundingPage;
     }
 
     @When("^user clicks \"Document Upload\"$")

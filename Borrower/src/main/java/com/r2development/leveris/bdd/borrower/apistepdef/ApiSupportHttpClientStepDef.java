@@ -9,7 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.protocol.HttpClientContext;
+import org.apache.http.protocol.HttpContext;
 import org.joda.time.DateTime;
 import org.junit.Assert;
 
@@ -19,19 +19,19 @@ public class ApiSupportHttpClientStepDef {
     private static final Log log = LogFactory.getLog(ApiSupportHttpClientStepDef.class);
 
     private static HttpClient httpClient;
-    private static HttpClientContext localContext;
+    private static HttpContext localContext;
 
     @Before
     public void setup() throws Exception {
 
         if ( StringUtils.isEmpty(System.getProperty("environment")))
-            System.setProperty("environment", "st1");
+            System.setProperty("environment", "dev2");
 
         if ( StringUtils.isEmpty(System.getProperty("domain")))
-            System.setProperty("domain", "st1app.loftkeys.com");
+            System.setProperty("domain", "dv2app.opoqodev.com");
 
         if ( StringUtils.isEmpty(System.getProperty("borrower")))
-            System.setProperty("borrower", "https://st1app.loftkeys.com/borrower");
+            System.setProperty("borrower", "http://dv2app.opoqodev.com/stable-borrower");
 
         if ( StringUtils.isEmpty(System.getProperty("timestamp")))
             System.setProperty("timestamp", DateTime.now().toString("yyyyMMddHHmmssSSS"));
@@ -42,7 +42,7 @@ public class ApiSupportHttpClientStepDef {
         Assert.assertNotNull("Maven didn't load the System property Domain", System.getProperty("domain"));
         Assert.assertNotNull("Maven didn't load the System property Borrower", System.getProperty("borrower"));
 
-        localContext = HttpUtils.initContext(System.getProperty("domain"), "/borrower");
+        localContext = HttpUtils.initContext(System.getProperty("domain"), "/stable-borrower");
 //        localContext = getNewInstanceHttpClientContext();
     }
 
@@ -68,15 +68,15 @@ public class ApiSupportHttpClientStepDef {
         return httpClient;
     }
 
-    public static HttpClientContext getInstanceHttpClientContext() {
+    public static HttpContext getInstanceHttpClientContext() {
         return localContext;
     }
 
-    public static HttpClientContext getNewInstanceHttpClientContext() {
+    public static HttpContext getNewInstanceHttpClientContext() {
         return ( localContext = HttpUtils.initContext() );
     }
 
-    public static HttpClientContext getNewInstanceHttpClientContext(String domain, String context) {
+    public static HttpContext getNewInstanceHttpClientContext(String domain, String context) {
         return ( localContext = HttpUtils.initContext(domain, context) );
     }
 

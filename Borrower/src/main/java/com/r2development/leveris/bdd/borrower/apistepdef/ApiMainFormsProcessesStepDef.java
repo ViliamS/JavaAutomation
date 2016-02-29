@@ -5,42 +5,62 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
 
 import static com.r2development.leveris.utils.HttpUtils.CONSUME_QUIETLY;
-import static com.r2development.leveris.utils.HttpUtils.requestHttpPost;
+import static com.r2development.leveris.utils.HttpUtils.requestHttpGet;
 
 @Singleton
 public class ApiMainFormsProcessesStepDef extends ApiAbakusBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiMainFormsProcessesStepDef.class);
 
-    public ApiMainFormsProcessesStepDef() {
-    }
+//    private HttpClient httpClient;
+//    private HttpContext localContext;
+
+//    @Inject
+//    public ApiMainFormsProcessesStepDef(HttpClient httpClient, HttpContext localContext) {
+//        this.httpClient = httpClient;
+//        this.localContext = localContext;
+//    }
 
     // "proxy page"
     @And("^user processes \"Forms\"$")
     public void user_processes_Forms() throws IOException {
 
-        requestHttpPost(
+//        requestHttpGet(
+//                httpClient,
+//                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnAppFormsHidden:cancel::IBehaviorListener:0:&stepToken=1",
+//                new LinkedHashMap<String, String>() {
+//                    {
+//                        put("Accept", "text/xml");
+//                    }
+//                },
+//                localContext,
+//                CONSUME_QUIETLY
+//        );
+
+        log.info("Going to Forms page");
+
+        Document loginResponse = Jsoup.parse(httpResponse.getHttpResponse());
+        Document loginResponse2 = Jsoup.parse(loginResponse.select("component[id~=main]").select("component[encoding~=wicket]").first().textNodes().get(0).text());
+
+        String formResponse = requestHttpGet(
                 httpClient,
-                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnAppFormsHidden:cancel::IBehaviorListener:0:",
+                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnAppFormsHidden:cancel::IBehaviorListener:0:&stepToken=1",
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");
-                        put("Content-Type", "application/x-www-form-urlencoded");
-                    }
-                },
-                new LinkedHashMap<String, String>() {
-                    {
-                        put("stepToken", "1");
                     }
                 },
                 localContext,
                 CONSUME_QUIETLY
         );
+        httpResponse.setHttpResponse(formResponse);
     }
 
     @When("^user clicks \"Dashboard\"$")

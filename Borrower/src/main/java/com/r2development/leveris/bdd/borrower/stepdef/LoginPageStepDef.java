@@ -2,7 +2,7 @@ package com.r2development.leveris.bdd.borrower.stepdef;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.r2development.leveris.di.User;
+import com.r2development.leveris.di.IUser;
 import com.r2development.leveris.selenium.borrower.pageobjects.*;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -26,17 +26,19 @@ public class LoginPageStepDef /*extends BorrowerStepDef*/ {
 
     private static final Log log = LogFactory.getLog(LoginPageStepDef.class);
     private final WebDriver webDriver;
-    User user;
+    IUser user;
     ILoginPage loginPage;
     IBorrowerHomePage borrowerHomePage;
     IWelcomePage welcomePage;
     IBuildQuotationPage buildQuotationPage;
 
     @Inject
-    LoginPageStepDef(WebDriver webDriver) {
+    LoginPageStepDef(WebDriver webDriver, IUser user) {
 //        super(webDriver);
 //        loginPage = new LoginPage(WebDriverService.getWebDriverInstance());
         this.webDriver = webDriver;
+        this.user = user;
+        welcomePage = new WelcomePage(webDriver);
     }
 
     @Given("^User types his email login (.*) in Login page$")
@@ -93,15 +95,11 @@ public class LoginPageStepDef /*extends BorrowerStepDef*/ {
 
         activateAccount(user.getEmail());
 
-        Thread.sleep(1000); // ??? without that we have white page
         log.info("Email : " + user.getEmail());
         user_types_his_login(user.getEmail());
-        Thread.sleep(1000); // ??? without that we have white page
         log.info("Pwd : " + user.getPwd());
         user_types_his_pwd(user.getPwd());
-        Thread.sleep(1000); // ??? without that we have white page
         user_logs_in();
-        Thread.sleep(1000); // ??? without that we have white page
     }
 
     // TODO ACMESQL or multi git jenkins plugins
@@ -114,11 +112,11 @@ public class LoginPageStepDef /*extends BorrowerStepDef*/ {
         System.setProperty("oracle.net.tns_admin", file.getParentFile().getAbsolutePath());
 
         if (StringUtils.isEmpty(System.getProperty("database")))
-            System.setProperty("database", "jdbc:oracle:thin:@ST0000D");
+            System.setProperty("database", "jdbc:oracle:thin:@DV2000.LEVERIS");
 
         Class.forName("oracle.jdbc.OracleDriver");
 //        Connection connection = DriverManager.getConnection(ABAKUS_ENVIRONMENT.get(ENVIRONMENT_RUN).get(APP_TYPE.DB), "anthony_mottot", "Heslo6897");
-        Connection connection = DriverManager.getConnection(System.getProperty("database"), "anthony_mottot", "Heslo6897");
+        Connection connection = DriverManager.getConnection(System.getProperty("database"), "STABLE_PXMCHUSER", "heslo");
         Statement statement = connection.createStatement();
 
         statement.execute("update mch_user set isemailaddressvalid = 'true', isphonenumbervalid = 'true', isregistrationcomplete = 'true' where userloginid = '" + emailAsUserLoginId + "'");

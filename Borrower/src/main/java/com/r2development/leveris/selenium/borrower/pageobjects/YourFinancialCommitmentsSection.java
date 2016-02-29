@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,111 +14,10 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
 
     private static final Log log = LogFactory.getLog(YourFinancialCommitmentsSection.class);
 
-    @FindBy( xpath = FINANCIAL_COMMITMENT_TITLE_XPATH )
-    protected WebElement weFinancialCommitmentTitle;
-    @FindBy( xpath = FINANCIAL_COMMITMENT_DESCRIPTION_XPATH )
-    protected WebElement weFinancialCommitmentDescription;
+    @FindBy ( xpath = FINANCIAL_COMMITMENT_NONE_XPATH )
+    protected WebElement weFinancialCommitmentNone;
 
-    @FindBy( xpath = FINANCIAL_COMMITMENT_SINGLE_NO_XPATH )
-    protected WebElement weFinancialCommitmentSingleNo;
-    @FindBy( xpath = FINANCIAL_COMMITMENT_SINGLE_YES_XPATH )
-    protected WebElement weFinancialCommitmentSingleYes;
-    @FindBy( xpath = FINANCIAL_COMMITMENT_COUPLE_NO_XPATH )
-    protected WebElement weFinancialCommitmentCoupleNo;
-    @FindBy( xpath = FINANCIAL_COMMITMENT_COUPLE_YES_XPATH )
-    protected WebElement weFinancialCommitmentCoupleYes;
-
-    //label[contains(., 'What is type of financial commitment?')]
-    // Personal Loan, Credit Card, Maintenance Payment, Other, Car Loan, Student Loan
-    @FindBy( xpath = FINANCIAL_COMMITMENT_WHICH_TYPE_XPATH )
-    protected WebElement weFinancialCommitmentWhichType;
-
-    @FindBy( xpath = FINANCIAL_COMMITMENT_APPLIES_TO_BORROWER_XPATH )
-    protected WebElement weFinancialCommitmentAppliesToBorrower;
-    @FindBy( xpath = FINANCIAL_COMMITMENT_APPLIES_TO_COAPPLICANT_XPATH )
-    protected WebElement weFinancialCommitmentAppliesToCoapplicant;
-
-    //div[contains(@id, 'pnlLiabilityList')]
-    //div[contains(@id, 'pnlLiabilityList')]//div[contains(@wicketpath, 'LiabilityType')]/span
-    //div[contains(@id, 'pnlLiabilityList')]//div[contains(@wicketpath, 'AmountHeader')]/span
-    //div[contains(@id, 'pnlLiabilityList')]//div[contains(@wicketpath, 'Borrowers')]/span
-    //div[contains(@id, 'pnlLiabilityList')]//div[contains(@wicketpath, 'LiabilityAmount')]/span
-
-    //div[contains(@id, 'Subtotal') and contains(., 'Subtotal:')]
-    //div[contains(@id, 'SubtotalValue')]//span
-
-    // Personal Loan
-    @FindBy( xpath = FINANCIAL_COMMITMENT_PERSONAL_LOAN_BALANCE_XPATH )      // wicketpath pnlOutstandingAmount
-    protected WebElement weFinancialCommitmentPersonalLoanBalance;
-    @FindBy( xpath = FINANCIAL_COMMITMENT_PERSONAL_LOAN_INSTITUTION_XPATH )             // wicketpath pnlPersonalLoan
-    protected WebElement weFinancialCommitmentPersonalLoanInstitution;
-    @FindBy( xpath = FINANCIAL_COMMITMENT_PERSONAL_LOAN_REPAYMENT_FREQUENCY_XPATH )               // wicketpath pnlPersonalLoan // Weekly, Fortnightly, Monthly, Yearly
-    protected WebElement weFinancialCommitmentPersonalLoanRepaymentFrequency;
-    @FindBy( xpath = FINANCIAL_COMMITMENT_PERSONAL_LOAN_PURPOSE_XPATH )               // wicketpath pnlPersonalLoan
-    protected WebElement weFinancialCommitmentPersonalLoanPurpose;
-    @FindBy( xpath = FINANCIAL_COMMITMENT_PERSONAL_LOAN_FINAL_REPAYMENT_DATE_XPATH )              // wicketpath pnlPersonalLoan
-    protected WebElement weFinancialCommitmentPersonalLoanFinalRepaymentDate;
-    @FindBy( xpath = FINANCIAL_COMMITMENT_PERSONAL_LOAN_REPAYMENT_AMOUNT_XPATH )                  // wicketpath pnlRepaymentAmount
-    protected WebElement weFinancialCommitmentPersonalLoanRepaymentAmount;
-
-    // Credit Card
-    @FindBy( xpath = FINANCIAL_COMMITMENT_CREDIT_CARD_REPAYMENT_AMOUNT_XPATH )                  // wicketpath pnlRepaymentAmount
-    protected WebElement weFinancialCommitmentCreditCardRepaymentAmount;
-    @FindBy( xpath = FINANCIAL_COMMITMENT_CREDIT_CARD_PROVIDER_XPATH )                     //div[contains(@wicketpath, 'CreditCard')]
-    protected WebElement weFinancialCommitmentCreditCardProvider;
-    // VISA, Mastercard, American Express, Store Card, Other
-    @FindBy( xpath = FINANCIAL_COMMITMENT_CREDIT_CARD_TYPE_XPATH )                         //div[contains(@wicketpath, 'CreditCard')]
-    protected WebElement weFinancialCommitmentCreditCardType;
-    @FindBy( xpath = FINANCIAL_COMMITMENT_CREDIT_CARD_LIMIT_XPATH )                        //div[contains(@wicketpath, 'CreditCard')]
-    protected WebElement weFinancialCommitmentCreditCardLimit;
-    @FindBy( xpath = FINANCIAL_COMMITMENT_CREDIT_CARD_BALANCE_XPATH )
-    protected WebElement weFinancialCommitmentCreditCardBalance;
-
-    // Maintenance Payment
-    @FindBy( xpath = FINANCIAL_COMMITMENT_MAINTENANCE_MONTHLY_PAYMENT_XPATH )
-    protected WebElement weFinancialCommitmentMaintenanceMonthlyPayment;
-
-    // Other
-    @FindBy( xpath = FINANCIAL_COMMITMENT_OTHER_REPAYMENT_AMOUNT_XPATH )
-    protected WebElement weFinancialCommitmentOtherRepaymentAmount;
-    @FindBy( xpath = FINANCIAL_COMMITMENT_OTHER_VALUE_XPATH )
-    protected WebElement weFinancialCommitmentOtherValue;
-    @FindBy( xpath = FINANCIAL_COMMITMENT_OTHER_DESCRIPTION_XPATH )
-    protected WebElement weFinancialCommitmentOtherDescription;
-
-    // Car Loan
-    @FindBy( xpath = FINANCIAL_COMMITMENT_CAR_LOAN_BALANCE_XPATH  )      // wicketpath pnlOutstandingAmount
-    protected WebElement weFinancialCommitmentCarLoanBalance;
-    @FindBy( xpath = FINANCIAL_COMMITMENT_CAR_LOAN_INSTITUTION_XPATH  )             // wicketpath pnlPersonalLoan
-    protected WebElement weFinancialCommitmentCarLoanInstitution;
-    @FindBy( xpath = FINANCIAL_COMMITMENT_CAR_LOAN_REPAYMENT_FREQUENCY_XPATH  )               // wicketpath pnlPersonalLoan
-    protected WebElement weFinancialCommitmentCarLoanRepaymentFrequency;
-    @FindBy( xpath = FINANCIAL_COMMITMENT_CAR_LOAN_FINAL_REPAYMENT_DATE_XPATH  )              // wicketpath pnlPersonalLoan
-    protected WebElement weFinancialCommitmentCarLoanFinalRepaymentDate;
-    @FindBy( xpath = FINANCIAL_COMMITMENT_CAR_LOAN_REPAYMENT_AMOUNT_XPATH  )                  // wicketpath pnlPersonalLoan
-    protected WebElement weFinancialCommitmentCarLoanRepaymentAmount;
-
-    // Student Loan
-    @FindBy( xpath = FINANCIAL_COMMITMENT_STUDENT_LOAN_BALANCE_XPATH  )      // wicketpath pnlOutstandingAmount
-    protected WebElement weFinancialCommitmentStudentLoanBalance;
-    @FindBy( xpath = FINANCIAL_COMMITMENT_STUDENT_LOAN_INSTITUTION_XPATH  )             // wicketpath pnlPersonalLoan
-    protected WebElement weFinancialCommitmentStudentLoanInstitution;
-    @FindBy( xpath = FINANCIAL_COMMITMENT_STUDENT_LOAN_REPAYMENT_FREQUENCY_XPATH  )               // wicketpath pnlPersonalLoan
-    protected WebElement weFinancialCommitmentStudentLoanRepaymentFrequency;
-    @FindBy( xpath = FINANCIAL_COMMITMENT_STUDENT_LOAN_FINAL_REPAYMENT_DATE_XPATH  )              // wicketpath pnlPersonalLoan
-    protected WebElement weFinancialCommitmentStudentLoanFinalRepaymentDate;
-    @FindBy( xpath = FINANCIAL_COMMITMENT_STUDENT_LOAN_REPAYMENT_AMOUNT_XPATH  )                  // wicketpath pnlRepaymentAmount
-    protected WebElement weFinancialCommitmentStudentLoanRepaymentAmount;
-
-    @FindBy( xpath = FINANCIAL_COMMITMENTS_ADD_LIABILITY_XPATH )
-    protected WebElement weFinancialCommitmentAddLiability;
-    @FindBy( xpath = FINANCIAL_COMMITMENTS_ADD_THIS_LIABILITY_XPATH  )
-    protected WebElement weFinancialCommitmentAddThisLiability;
-    @FindBy( xpath = FINANCIAL_COMMITMENTS_EDIT_THIS_LIABILITY_XPATH  )
-    protected WebElement weFinancialCommitmentEditThisLiability;
-    @FindBy( xpath = FINANCIAL_COMMITMENTS_CANCEL_XPATH  )
-    protected WebElement weFinancialCommitmentCancel;
-    @FindBy( xpath = FINANCIAL_COMMITMENTS_NEXT_XPATH  )
+    @FindBy( xpath = FINANCIAL_COMMITMENTS_NEXT_XPATH )
     protected WebElement weFinancialCommitmentNext;
 
     @Inject
@@ -128,297 +28,677 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
 
     @Override
     public String getTitle() {
-        isVisible(FINANCIAL_COMMITMENT_TITLE_XPATH, true, 10);
-        return getWebElement(FINANCIAL_COMMITMENT_TITLE_XPATH).getText();
-//        return weFinancialCommitmentTitle.getText();
+        return getWebElement(FINANCIAL_TITLE_XPATH).getText();
     }
 
     @Override
-    public String getDescription() {
-        return weFinancialCommitmentDescription.getText();
+    public String getDialogTitle() {
+        isVisible(FINANCIAL_CONTAINER_XPATH);
+        return getWebElement(FINANCIAL_DIALOG_TITLE_XPATH).getText();
     }
 
     @Override
-    public IYourFinancialCommitmentsSection clickSingleNo() {
-        isVisible(FINANCIAL_COMMITMENT_SINGLE_NO_XPATH, true);
-//        weFinancialCommitmentSingleNo.click();
-        clickElement(FINANCIAL_COMMITMENT_SINGLE_NO_XPATH);
+    public String getDialogDescription() {
+        isVisible(FINANCIAL_DIALOG_DESCRIPTION_XPATH);
+        return getWebElement(FINANCIAL_DIALOG_DESCRIPTION_XPATH).getText();
+    }
+
+    @Override
+    public String getDialogDescription2() {
+        isVisible(FINANCIAL_DIALOG_DESCRIPTION2_XPATH);
+        return getWebElement(FINANCIAL_DIALOG_DESCRIPTION2_XPATH).getText();
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection clickFinancialType(String financialType) {
+        switch (financialType) {
+            case "Personal":
+                this.clickAllPersonal();
+                break;
+            case "Credit Card":
+                this.clickAllCreditCard();
+                break;
+            case "Maintenance Payment":
+                this.clickAllMaintenancePayment();
+                break;
+            case "Other":
+                this.clickAllOther();
+                break;
+            case "Car":
+                this.clickAllCar();
+                break;
+            case "Student":
+                this.clickAllStudent();
+                break;
+            case "Rent":
+                this.clickAllRent();
+                break;
+            case "Utilities":
+                this.clickAllUtilities();
+                break;
+            case "Child Care":
+                this.clickAllChildCare();
+                break;
+            case "Mortgage":
+                this.clickAllMortgage();
+                break;
+            default:
+
+        }
         return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection clickSingleYes() {
-        isVisible(FINANCIAL_COMMITMENT_SINGLE_YES_XPATH, true);
-        weFinancialCommitmentSingleYes.click();
+    public IYourFinancialCommitmentsSection clickAllPersonal() {
+        try {
+            isNotVisibleDialog(true);
+            getWebElement(FINANCIAL_PERSONAL_LOAN_XPATH).click();
+        }
+        catch ( TimeoutException e) {
+            isVisibleDialog(true);
+            getWebElement(FINANCIAL_DIALOG_PERSONAL_LOAN_XPATH).click();
+        }
         return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection clickCoupleNo() {
-        isVisible(FINANCIAL_COMMITMENT_COUPLE_NO_XPATH, true);
-        weFinancialCommitmentCoupleNo.click();
+    public IYourFinancialCommitmentsSection clickPersonal() {
+        isNotVisibleDialog(false);
+        clickElement(FINANCIAL_PERSONAL_LOAN_XPATH);
         return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection clickCoupleYes() {
-        isVisible(FINANCIAL_COMMITMENT_COUPLE_YES_XPATH, true);
-        weFinancialCommitmentCoupleYes.click();
+    public IYourFinancialCommitmentsSection clickDialogPersonal() {
+        isVisibleDialog(true);
+        clickElement(FINANCIAL_DIALOG_PERSONAL_LOAN_XPATH);
         return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection selectFinancialCommitmentType(String type) {
-        isVisible(FINANCIAL_COMMITMENT_WHICH_TYPE_XPATH, true);
-        selectFromDropDown(FINANCIAL_COMMITMENT_WHICH_TYPE_XPATH, type);
+    public IYourFinancialCommitmentsSection clickAllCreditCard() {
+        try {
+            isNotVisibleDialog(true);
+            getWebElement(FINANCIAL_CREDIT_CARD_XPATH).click();
+        }
+        catch ( TimeoutException e) {
+            isVisibleDialog(true);
+            getWebElement(FINANCIAL_DIALOG_CREDIT_CARD_XPATH).click();
+        }
         return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection checkFinancialCommitmentAppliesToBorrower(String borrower) {
-        isVisible(FINANCIAL_COMMITMENT_APPLIES_TO_BORROWER_XPATH.replace("${replaceBorrower}$", borrower), true);
-        getWebElement(FINANCIAL_COMMITMENT_APPLIES_TO_BORROWER_XPATH.replace("${replaceBorrower}$", borrower)).click();
+    public IYourFinancialCommitmentsSection clickCreditCard() {
+        isNotVisibleDialog(false);
+        clickElement(FINANCIAL_CREDIT_CARD_XPATH);
         return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection checkFinancialCommitmentAppliesToCoapplicant(String coapplicant) {
-        isVisible(FINANCIAL_COMMITMENT_APPLIES_TO_COAPPLICANT_XPATH.replace("${replaceCoapplicant}$", coapplicant), true);
-        getWebElement(FINANCIAL_COMMITMENT_APPLIES_TO_COAPPLICANT_XPATH.replace("${replaceCoapplicant}$", coapplicant)).click();
+    public IYourFinancialCommitmentsSection clickDialogCreditCard() {
+        isVisibleDialog(true);
+        clickElement(FINANCIAL_DIALOG_CREDIT_CARD_XPATH);
         return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection typePersonalLoanBalance(String personalLoanBalance) {
-        isVisible(FINANCIAL_COMMITMENT_PERSONAL_LOAN_BALANCE_XPATH, true);
-        weFinancialCommitmentPersonalLoanBalance.clear();
-        weFinancialCommitmentPersonalLoanBalance.sendKeys(personalLoanBalance);
+    public IYourFinancialCommitmentsSection clickAllMaintenancePayment() {
+        try {
+            isNotVisibleDialog(true);
+            getWebElement(FINANCIAL_MAINTENANCE_PAYMENT_XPATH).click();
+        }
+        catch ( TimeoutException e) {
+            isVisibleDialog(true);
+            getWebElement(FINANCIAL_DIALOG_MAINTENANCE_PAYMENT_XPATH).click();
+        }
         return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection typePersonalLoanInstitution(String personalLoanInstitution) {
-        isVisible(FINANCIAL_COMMITMENT_PERSONAL_LOAN_INSTITUTION_XPATH, true);
-        weFinancialCommitmentPersonalLoanInstitution.clear();
-        weFinancialCommitmentPersonalLoanInstitution.sendKeys(personalLoanInstitution);
+    public IYourFinancialCommitmentsSection clickMaintenancePayment() {
+        isNotVisibleDialog(false);
+        clickElement(FINANCIAL_MAINTENANCE_PAYMENT_XPATH);
         return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection selectPersonalLoanRepaymentFrequency(String repaymentFrequency) {
-        isVisible(FINANCIAL_COMMITMENT_PERSONAL_LOAN_REPAYMENT_FREQUENCY_XPATH, true);
-        selectFromDropDown(FINANCIAL_COMMITMENT_PERSONAL_LOAN_REPAYMENT_FREQUENCY_XPATH, repaymentFrequency);
+    public IYourFinancialCommitmentsSection clickDialogMaintenancePayment() {
+        isVisibleDialog(true);
+        clickElement(FINANCIAL_DIALOG_MAINTENANCE_PAYMENT_XPATH);
         return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection typePersonalLoanPurpose(String purpose) {
-        isVisible(FINANCIAL_COMMITMENT_PERSONAL_LOAN_PURPOSE_XPATH, true);
-        weFinancialCommitmentPersonalLoanPurpose.clear();
-        weFinancialCommitmentPersonalLoanPurpose.sendKeys(purpose);
+    public IYourFinancialCommitmentsSection clickAllOther() {
+        try {
+            isNotVisibleDialog(true);
+            getWebElement(FINANCIAL_OTHER_XPATH).click();
+        }
+        catch ( TimeoutException e) {
+            isVisibleDialog(true);
+            getWebElement(FINANCIAL_DIALOG_OTHER_XPATH).click();
+        }
         return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection typePersonalLoanFinalRepaymentDate(String finalRepaymentDate) {
-        isVisible(FINANCIAL_COMMITMENT_PERSONAL_LOAN_FINAL_REPAYMENT_DATE_XPATH, true);
-        weFinancialCommitmentPersonalLoanFinalRepaymentDate.clear();
-        weFinancialCommitmentPersonalLoanFinalRepaymentDate.sendKeys(finalRepaymentDate);
+    public IYourFinancialCommitmentsSection clickOther() {
+        isNotVisibleDialog(false);
+        clickElement(FINANCIAL_OTHER_XPATH);
         return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection typePersonalLoanRepaymentAmount(String repaymentAmount) {
-        isVisible(FINANCIAL_COMMITMENT_PERSONAL_LOAN_REPAYMENT_AMOUNT_XPATH, true);
-        weFinancialCommitmentPersonalLoanRepaymentAmount.clear();
-        weFinancialCommitmentPersonalLoanRepaymentAmount.sendKeys(repaymentAmount);
+    public IYourFinancialCommitmentsSection clickDialogOther() {
+        isVisibleDialog(true);
+        clickElement(FINANCIAL_DIALOG_OTHER_XPATH);
         return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection typeCreditCardRepaymentAmount(String repaymentAmount) {
-        isVisible(FINANCIAL_COMMITMENT_CREDIT_CARD_REPAYMENT_AMOUNT_XPATH, true);
-        weFinancialCommitmentCreditCardRepaymentAmount.clear();
-        weFinancialCommitmentCreditCardRepaymentAmount.sendKeys(repaymentAmount);
+    public IYourFinancialCommitmentsSection clickAllCar() {
+        try {
+            isNotVisibleDialog(true);
+            getWebElement(FINANCIAL_CAR_LOAN_XPATH).click();
+        }
+        catch ( TimeoutException e) {
+            isVisibleDialog(true);
+            getWebElement(FINANCIAL_DIALOG_CAR_LOAN_XPATH).click();
+        }
         return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection typeCreditCardProvider(String provider) {
-        isVisible(FINANCIAL_COMMITMENT_CREDIT_CARD_PROVIDER_XPATH, true);
-        weFinancialCommitmentCreditCardProvider.clear();
-        weFinancialCommitmentCreditCardProvider.sendKeys(provider);
+    public IYourFinancialCommitmentsSection clickCar() {
+        isNotVisibleDialog(false);
+        clickElement(FINANCIAL_CAR_LOAN_XPATH);
         return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection selectCreditCardType(String type) {
-        isVisible(FINANCIAL_COMMITMENT_CREDIT_CARD_TYPE_XPATH, true);
-        selectFromDropDown(FINANCIAL_COMMITMENT_CREDIT_CARD_TYPE_XPATH, type);
+    public IYourFinancialCommitmentsSection clickDialogCar() {
+        isVisibleDialog(true);
+        clickElement(FINANCIAL_DIALOG_CAR_LOAN_XPATH);
         return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection typeCreditCardLimit(String limit) {
-        isVisible(FINANCIAL_COMMITMENT_CREDIT_CARD_LIMIT_XPATH, true);
-        weFinancialCommitmentCreditCardLimit.clear();
-        weFinancialCommitmentCreditCardLimit.sendKeys(limit);
+    public IYourFinancialCommitmentsSection clickAllStudent() {
+        try {
+            isNotVisibleDialog(true);
+            getWebElement(FINANCIAL_STUDENT_LOAN_XPATH).click();
+        }
+        catch ( TimeoutException e) {
+            isVisibleDialog(true);
+            getWebElement(FINANCIAL_DIALOG_STUDENT_LOAN_XPATH).click();
+        }
         return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection typeCreditCardBalance(String balance) {
-        isVisible(FINANCIAL_COMMITMENT_CREDIT_CARD_BALANCE_XPATH, true);
-        weFinancialCommitmentCreditCardBalance.clear();
-        weFinancialCommitmentCreditCardBalance.sendKeys(balance);
+    public IYourFinancialCommitmentsSection clickStudent() {
+        isNotVisibleDialog(false);
+        clickElement(FINANCIAL_STUDENT_LOAN_XPATH);
         return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection typeMaintenanceMonthlyPayment(String monthlyPayment) {
-        isVisible(FINANCIAL_COMMITMENT_MAINTENANCE_MONTHLY_PAYMENT_XPATH, true);
-        weFinancialCommitmentMaintenanceMonthlyPayment.clear();
-        weFinancialCommitmentMaintenanceMonthlyPayment.sendKeys(monthlyPayment);
+    public IYourFinancialCommitmentsSection clickDialogStudent() {
+        isVisibleDialog(true);
+        clickElement(FINANCIAL_DIALOG_STUDENT_LOAN_XPATH);
         return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection typeOtherRepaymentAmount(String repaymentAmount) {
-        isVisible(FINANCIAL_COMMITMENT_OTHER_REPAYMENT_AMOUNT_XPATH, true);
-        weFinancialCommitmentOtherRepaymentAmount.clear();
-        weFinancialCommitmentOtherRepaymentAmount.sendKeys(repaymentAmount);
+    public IYourFinancialCommitmentsSection clickAllRent() {
+        try {
+            isNotVisibleDialog(true);
+            getWebElement(FINANCIAL_RENT_XPATH).click();
+        }
+        catch ( TimeoutException e) {
+            isVisibleDialog(true);
+            getWebElement(FINANCIAL_DIALOG_RENT_XPATH).click();
+        }
         return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection typeOtherValue(String value) {
-        isVisible(FINANCIAL_COMMITMENT_OTHER_VALUE_XPATH, true);
-        weFinancialCommitmentOtherValue.clear();
-        weFinancialCommitmentOtherValue.sendKeys(value);
+    public IYourFinancialCommitmentsSection clickRent() {
+        isNotVisibleDialog(false);
+        clickElement(FINANCIAL_RENT_XPATH);
         return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection typeOtherDescription(String description) {
-        isVisible(FINANCIAL_COMMITMENT_OTHER_DESCRIPTION_XPATH, true);
-        weFinancialCommitmentOtherDescription.clear();
-        weFinancialCommitmentOtherDescription.sendKeys(description);
+    public IYourFinancialCommitmentsSection clickDialogRent() {
+        isVisibleDialog(true);
+        clickElement(FINANCIAL_DIALOG_RENT_XPATH);
         return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection typeCarLoanBalance(String balance) {
-        isVisible(FINANCIAL_COMMITMENT_CAR_LOAN_BALANCE_XPATH, true);
-        weFinancialCommitmentCarLoanBalance.clear();
-        weFinancialCommitmentCarLoanBalance.sendKeys(balance);
+    public IYourFinancialCommitmentsSection clickAllUtilities() {
+        try {
+            isNotVisibleDialog(true);
+            getWebElement(FINANCIAL_UTILITIES_XPATH).click();
+        }
+        catch ( TimeoutException e) {
+            isVisibleDialog(true);
+            getWebElement(FINANCIAL_DIALOG_UTILITIES_XPATH).click();
+        }
         return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection typeCarLoanInstitution(String institution) {
-        isVisible(FINANCIAL_COMMITMENT_CAR_LOAN_INSTITUTION_XPATH, true);
-        weFinancialCommitmentCarLoanInstitution.clear();
-        weFinancialCommitmentCarLoanInstitution.sendKeys(institution);
+    public IYourFinancialCommitmentsSection clickUtilities() {
+        isNotVisibleDialog(false);
+        clickElement(FINANCIAL_UTILITIES_XPATH);
         return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection selectCarLoanRepaymentFrequency(String repaymentFrequency) {
-        isVisible(FINANCIAL_COMMITMENT_CAR_LOAN_REPAYMENT_FREQUENCY_XPATH, true);
-        selectFromDropDown(FINANCIAL_COMMITMENT_CAR_LOAN_REPAYMENT_FREQUENCY_XPATH, repaymentFrequency);
+    public IYourFinancialCommitmentsSection clickDialogUtilities() {
+        isVisibleDialog(true);
+        clickElement(FINANCIAL_DIALOG_UTILITIES_XPATH);
         return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection typeCarLoanFinalRepaymentDate(String finalRepaymentDate) {
-        isVisible(FINANCIAL_COMMITMENT_CAR_LOAN_FINAL_REPAYMENT_DATE_XPATH, true);
-        weFinancialCommitmentCarLoanFinalRepaymentDate.clear();
-        weFinancialCommitmentCarLoanFinalRepaymentDate.sendKeys(finalRepaymentDate);
+    public IYourFinancialCommitmentsSection clickAllChildCare() {
+        try {
+            isNotVisibleDialog(true);
+            getWebElement(FINANCIAL_CHILDCARE_XPATH).click();
+        }
+        catch ( TimeoutException e) {
+            isVisibleDialog(true);
+            getWebElement(FINANCIAL_DIALOG_CHILD_CARE_XPATH).click();
+        }
         return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection typeCarLoanRepaymentAmount(String repaymentAmount) {
-        isVisible(FINANCIAL_COMMITMENT_CAR_LOAN_REPAYMENT_AMOUNT_XPATH, true);
-        weFinancialCommitmentCarLoanRepaymentAmount.clear();
-        weFinancialCommitmentCarLoanRepaymentAmount.sendKeys(repaymentAmount);
+    public IYourFinancialCommitmentsSection clickChildCare() {
+        isNotVisibleDialog(false);
+        clickElement(FINANCIAL_CHILDCARE_XPATH);
         return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection typeStudentLoanBalance(String balance) {
-        isVisible(FINANCIAL_COMMITMENT_STUDENT_LOAN_BALANCE_XPATH, true);
-        weFinancialCommitmentStudentLoanBalance.clear();
-        weFinancialCommitmentStudentLoanBalance.sendKeys(balance);
+    public IYourFinancialCommitmentsSection clickDialogChildCare() {
+        isVisibleDialog(true);
+        clickElement(FINANCIAL_DIALOG_CHILD_CARE_XPATH);
         return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection typeStudentLoanInstitution(String institution) {
-        isVisible(FINANCIAL_COMMITMENT_STUDENT_LOAN_INSTITUTION_XPATH, true);
-        weFinancialCommitmentStudentLoanInstitution.clear();
-        weFinancialCommitmentStudentLoanInstitution.sendKeys(institution);
+    public IYourFinancialCommitmentsSection clickAllMortgage() {
+        try {
+            isNotVisibleDialog(true);
+            getWebElement(FINANCIAL_MORTGAGE_XPATH).click();
+        }
+        catch ( TimeoutException e) {
+            isVisibleDialog(true);
+            getWebElement(FINANCIAL_DIALOG_MORTGAGE_XPATH).click();
+        }
         return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection selectStudentLoanRepaymentFrequency(String repaymentFrequency) {
-        isVisible(FINANCIAL_COMMITMENT_STUDENT_LOAN_REPAYMENT_FREQUENCY_XPATH, true);
-        selectFromDropDown(FINANCIAL_COMMITMENT_STUDENT_LOAN_REPAYMENT_FREQUENCY_XPATH, repaymentFrequency);
+    public IYourFinancialCommitmentsSection clickMortgage() {
+        isNotVisibleDialog(false);
+        clickElement(FINANCIAL_MORTGAGE_XPATH);
         return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection typeStudentLoanFinalRepaymentDate(String finalRepaymentDate) {
-        isVisible(FINANCIAL_COMMITMENT_STUDENT_LOAN_FINAL_REPAYMENT_DATE_XPATH, true);
-        weFinancialCommitmentStudentLoanFinalRepaymentDate.clear();
-        weFinancialCommitmentStudentLoanFinalRepaymentDate.sendKeys(finalRepaymentDate);
+    public IYourFinancialCommitmentsSection clickDialogMortgage() {
+        isVisibleDialog(true);
+        clickElement(FINANCIAL_DIALOG_MORTGAGE_XPATH);
         return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection typeStudentLoanRepaymentAmount(String repaymentAmount) {
-        isVisible(FINANCIAL_COMMITMENT_STUDENT_LOAN_REPAYMENT_AMOUNT_XPATH, true);
-        weFinancialCommitmentStudentLoanRepaymentAmount.clear();
-        weFinancialCommitmentStudentLoanRepaymentAmount.sendKeys(repaymentAmount);
-        return this;
+    public boolean isVisibleDialog(boolean throwException/*, int timeOut*/) {
+        return isVisible(FINANCIAL_CONTAINER_XPATH, true);
+//        return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection clickEditThisLiability() {
-        isVisible(FINANCIAL_COMMITMENTS_EDIT_THIS_LIABILITY_XPATH, true);
-        weFinancialCommitmentEditThisLiability.click();
-        return this;
+    public boolean isNotVisibleDialog(boolean throwException/*, int timeOut*/) {
+        return isNotVisible(FINANCIAL_CONTAINER_XPATH, 5);
+//        return this;
     }
 
     @Override
-    public IYourFinancialCommitmentsSection clickAddLiability() {
-        isVisible(FINANCIAL_COMMITMENTS_ADD_LIABILITY_XPATH, true);
-        weFinancialCommitmentAddLiability.click();
-        return this;
-    }
-
-    @Override
-    public IYourFinancialCommitmentsSection clickAddThisLiability() {
-        isVisible(FINANCIAL_COMMITMENTS_ADD_THIS_LIABILITY_XPATH, true);
-        weFinancialCommitmentAddThisLiability.click();
+    public YourFinancialCommitmentsSection clickNone() {
+        isVisible(FINANCIAL_COMMITMENT_NONE_XPATH);
+        weFinancialCommitmentNone.click();
         return this;
     }
 
     @Override
     public IYourFinancialCommitmentsSection clickCancel() {
-        isVisible(FINANCIAL_COMMITMENTS_CANCEL_XPATH, true);
-        weFinancialCommitmentCancel.click();
+        isVisible(FINANCIAL_CANCEL_XPATH, true);
+        clickElement(FINANCIAL_CANCEL_XPATH);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection clickSaveAndClose() {
+        isVisible(FINANCIAL_SAVE_AND_CLOSE_XPATH, true);
+        clickElement(FINANCIAL_SAVE_AND_CLOSE_XPATH);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection clickEdit() {
+        isVisible(FINANCIAL_EDIT_XPATH, true);
+        clickElement(FINANCIAL_EDIT_XPATH);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection clickDelete() {
+        isVisible(FINANCIAL_DELETE_XPATH, true);
+        clickElement(FINANCIAL_DELETE_XPATH);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection clickDone() {
+        isVisible(FINANCIAL_DONE_XPATH, true);
+        clickElement(FINANCIAL_DONE_XPATH);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection clickAdd() {
+        isVisible(FINANCIAL_ADD_XPATH, true);
+        clickElement(FINANCIAL_ADD_XPATH);
         return this;
     }
 
     @Override
     public IYourFinancialCommitmentsSection clickNext() {
-//        isVisible(FINANCIAL_COMMITMENTS_NEXT_XPATH, true);
+        isVisible(FINANCIAL_COMMITMENTS_NEXT_XPATH, true);
         clickElement(FINANCIAL_COMMITMENTS_NEXT_XPATH);
 //        weFinancialCommitmentNext.click();
 //        if(isVisible(INDICATOR_SMALL_ON, false, 5))
 //            isInvisible(INDICATOR_SMALL_OFF, 5);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection clickWaitIHave() {
+        isVisible(FINANCIAL_WAIT_I_HAVE, true);
+        clickElement(FINANCIAL_WAIT_I_HAVE);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection typePersonalOutstandingBalanceAmount(String outstandingBalanceAmount) {
+        isVisible(FINANCIAL_PERSONAL_OUTSTANDING_BALANCE_AMOUNT_XPATH, true);
+        sendKeysElement(FINANCIAL_PERSONAL_OUTSTANDING_BALANCE_AMOUNT_XPATH, outstandingBalanceAmount, 30);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection typePersonalFinancialInstitution(String financialInstitution) {
+        isVisible(FINANCIAL_PERSONAL_FINANCIAL_INSTITUTION_XPATH, true);
+        sendKeysElement(FINANCIAL_PERSONAL_FINANCIAL_INSTITUTION_XPATH, financialInstitution, 30);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection typePersonalLoanPurpose(String loanPurpose) {
+        isVisible(FINANCIAL_PERSONAL_LOAN_PURPOSE_XPATH, true);
+        sendKeysElement(FINANCIAL_PERSONAL_LOAN_PURPOSE_XPATH, loanPurpose, 30);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection typePersonalFinalRepaymentDate(String finalRepaymentDate) {
+        isVisible(FINANCIAL_PERSONAL_FINAL_REPAYMENT_DATE_XPATH, true);
+        sendKeysElement(FINANCIAL_PERSONAL_FINAL_REPAYMENT_DATE_XPATH, finalRepaymentDate, 30);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection selectPersonalPaymentFrequency(String paymentFrequency) {
+        isVisible(FINANCIAL_PERSONAL_PAYMENT_FREQUENCY_INPUT_XPATH, true);
+        selectFromDropDown(FINANCIAL_PERSONAL_PAYMENT_FREQUENCY_INPUT_XPATH, paymentFrequency);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection typePersonalRepaymentAmount(String repaymentAmount) {
+        isVisible(FINANCIAL_PERSONAL_REPAYMENT_AMOUNT_XPATH, true);
+        sendKeysElement(FINANCIAL_PERSONAL_REPAYMENT_AMOUNT_XPATH, repaymentAmount, 30);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection typeCreditcRepaymentAmount(String repaymentAmount) {
+        isVisible(FINANCIAL_CREDITC_REPAYMENT_AMOUNT_XPATH, true);
+        sendKeysElement(FINANCIAL_CREDITC_REPAYMENT_AMOUNT_XPATH, repaymentAmount, 30);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection typeCreditcProvider(String provider) {
+        isVisible(FINANCIAL_CREDITC_PROVIDER_XPATH, true);
+        sendKeysElement(FINANCIAL_CREDITC_PROVIDER_XPATH, provider, 30);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection selectCreditcType(String type) {
+        isVisible(FINANCIAL_CREDITC_CARD_TYPE_XPATH, true);
+        selectFromDropDown(FINANCIAL_CREDITC_CARD_TYPE_XPATH, type);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection typeCreditcLimit(String limit) {
+        isVisible(FINANCIAL_CREDITC_CARD_LIMIT_XPATH, true);
+        sendKeysElement(FINANCIAL_CREDITC_CARD_LIMIT_XPATH, limit, 30);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection typeCreditcBalance(String balance) {
+        isVisible(FINANCIAL_CREDITC_CARD_BALANCE_XPATH, true);
+        sendKeysElement(FINANCIAL_CREDITC_CARD_BALANCE_XPATH, balance, 30);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection typeMaintenancepPayment(String payment) {
+        isVisible(FINANCIAL_MAINTENANCEP_PAYMENT_XPATH, true);
+        sendKeysElement(FINANCIAL_MAINTENANCEP_PAYMENT_XPATH, payment, 30);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection typeOtherRepaymentAmount(String repaymentAmount) {
+        isVisible(FINANCIAL_OTHER_REPAYMENT_AMOUNT_XPATH, true);
+        sendKeysElement(FINANCIAL_OTHER_REPAYMENT_AMOUNT_XPATH, repaymentAmount, 30);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection typeOtherValue(String value) {
+        isVisible(FINANCIAL_OTHER_VALUE_XPATH, true);
+        sendKeysElement(FINANCIAL_OTHER_VALUE_XPATH, value, 30);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection typeOtherDescription(String description) {
+        isVisible(FINANCIAL_OTHER_DESCRIPTION_XPATH, true);
+        sendKeysElement(FINANCIAL_OTHER_DESCRIPTION_XPATH, description, 30);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection typeCarOutstandingBalanceAmount(String outstandingBalanceAmount) {
+        isVisible(FINANCIAL_CAR_OUTSTANDING_BALANCE_AMOUNT_XPATH, true);
+        sendKeysElement(FINANCIAL_CAR_OUTSTANDING_BALANCE_AMOUNT_XPATH, outstandingBalanceAmount, 30);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection typeCarFinancialInstitution(String financialInstitution) {
+        isVisible(FINANCIAL_CAR_FINANCIAL_INSTITUTION_XPATH, true);
+        sendKeysElement(FINANCIAL_CAR_FINANCIAL_INSTITUTION_XPATH, financialInstitution, 30);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection typeCarFinalRepaymentDate(String finalRepaymentDate) {
+        isVisible(FINANCIAL_CAR_FINAL_REPAYMENT_DATE_XPATH, true);
+        sendKeysElement(FINANCIAL_CAR_FINAL_REPAYMENT_DATE_XPATH, finalRepaymentDate, 30);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection selectCarPaymentFrequency(String paymentFrequency) {
+        isVisible(FINANCIAL_CAR_PAYMENT_FREQUENCY_INPUT_XPATH, true);
+        selectFromDropDown(FINANCIAL_CAR_PAYMENT_FREQUENCY_INPUT_XPATH, paymentFrequency);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection typeCarRepaymentAmount(String repaymentAmount) {
+        isVisible(FINANCIAL_CAR_REPAYMENT_AMOUNT_XPATH, true);
+        sendKeysElement(FINANCIAL_CAR_REPAYMENT_AMOUNT_XPATH, repaymentAmount, 30);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection typeStudentOutstandingBalanceAmount(String outstandingBalanceAmount) {
+        isVisible(FINANCIAL_STUDENT_OUTSTANDING_BALANCE_AMOUNT_XPATH, true);
+        sendKeysElement(FINANCIAL_STUDENT_OUTSTANDING_BALANCE_AMOUNT_XPATH, outstandingBalanceAmount, 30);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection typeStudentFinancialInstitution(String financialInstitution) {
+        isVisible(FINANCIAL_STUDENT_FINANCIAL_INSTITUTION_XPATH, true);
+        sendKeysElement(FINANCIAL_STUDENT_FINANCIAL_INSTITUTION_XPATH, financialInstitution, 30);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection typeStudentFinalRepaymentDate(String finalRepaymentDate) {
+        isVisible(FINANCIAL_STUDENT_FINAL_REPAYMENT_DATE_XPATH, true);
+        sendKeysElement(FINANCIAL_STUDENT_FINAL_REPAYMENT_DATE_XPATH, finalRepaymentDate, 30);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection selectStudentPaymentFrequency(String paymentFrequency) {
+        isVisible(FINANCIAL_STUDENT_PAYMENT_FREQUENCY_INPUT_XPATH, true);
+        sendKeysElement(FINANCIAL_STUDENT_PAYMENT_FREQUENCY_INPUT_XPATH, paymentFrequency, 30);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection typeStudentRepaymentAmount(String repaymentAmount) {
+        isVisible(FINANCIAL_STUDENT_REPAYMENT_AMOUNT_XPATH, true);
+        sendKeysElement(FINANCIAL_STUDENT_REPAYMENT_AMOUNT_XPATH, repaymentAmount, 30);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection selectRentPaymentFrequency(String repaymentFrequency) {
+        isVisible(FINANCIAL_RENT_PAYMENT_FREQUENCY_INPUT_XPATH, true);
+        selectFromDropDown(FINANCIAL_RENT_PAYMENT_FREQUENCY_INPUT_XPATH, repaymentFrequency);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection typeRentRepaymentAmount(String repaymentAmount) {
+        isVisible(FINANCIAL_RENT_REPAYMENT_AMOUNT_XPATH, true);
+        sendKeysElement(FINANCIAL_RENT_REPAYMENT_AMOUNT_XPATH, repaymentAmount, 30);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection typeRentNote(String note) {
+        isVisible(FINANCIAL_RENT_NOTE_XPATH, true);
+        sendKeysElement(FINANCIAL_RENT_NOTE_XPATH, note, 30);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection selectUtilitiesPaymentFrequency(String paymentFrequency) {
+        isVisible(FINANCIAL_UTILITIES_PAYMENT_FREQUENCY_INPUT_XPATH, true);
+        selectFromDropDown(FINANCIAL_UTILITIES_PAYMENT_FREQUENCY_INPUT_XPATH, paymentFrequency);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection typeUtilitiesRepaymentAmount(String repaymentAmount) {
+        isVisible(FINANCIAL_UTILITIES_REPAYMENT_AMOUNT_XPATH, true);
+        sendKeysElement(FINANCIAL_UTILITIES_REPAYMENT_AMOUNT_XPATH, repaymentAmount, 30);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection typeUtilitiesNote(String note) {
+        isVisible(FINANCIAL_UTILITIES_NOTE_XPATH, true);
+        sendKeysElement(FINANCIAL_UTILITIES_NOTE_XPATH, note, 30);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection selectChildCarePaymentFrequency(String paymentFrequency) {
+        isVisible(FINANCIAL_CHILDCARE_PAYMENT_FREQUENCY_INPUT_XPATH, true);
+        selectFromDropDown(FINANCIAL_CHILDCARE_PAYMENT_FREQUENCY_INPUT_XPATH, paymentFrequency);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection typeChildCareRepaymentAmount(String repaymentAmount) {
+        isVisible(FINANCIAL_CHILDCARE_REPAYMENT_AMOUNT_XPATH, true);
+        sendKeysElement(FINANCIAL_CHILDCARE_REPAYMENT_AMOUNT_XPATH, repaymentAmount, 30);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection typeChildCareNote(String note) {
+        isVisible(FINANCIAL_CHILDCARE_NOTE_XPATH, true);
+        sendKeysElement(FINANCIAL_CHILDCARE_NOTE_XPATH, note, 30);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection typeMortgageOutstandingBalanceAmount(String outstandingBalanceAmount) {
+        isVisible(FINANCIAL_MORTGAGE_OUTSTANDING_BALANCE_AMOUNT_XPATH, true);
+        sendKeysElement(FINANCIAL_MORTGAGE_OUTSTANDING_BALANCE_AMOUNT_XPATH, outstandingBalanceAmount, 30);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection typeMortgageFinancialInstitution(String financialInstitution) {
+        isVisible(FINANCIAL_MORTGAGE_FINANCIAL_INSTITUTION_XPATH, true);
+        sendKeysElement(FINANCIAL_MORTGAGE_FINANCIAL_INSTITUTION_XPATH, financialInstitution, 30);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection typeMortgageFinalRepaymentDate(String finalRepaymentDate) {
+        isVisible(FINANCIAL_MORTGAGE_FINAL_REPAYMENT_DATE_XPATH, true);
+        sendKeysElement(FINANCIAL_MORTGAGE_FINAL_REPAYMENT_DATE_XPATH, finalRepaymentDate, 30);
+        return this;
+    }
+
+    @Override
+    public IYourFinancialCommitmentsSection typeMortgageRepaymentAmount(String repaymentAmount) {
+        isVisible(FINANCIAL_MORTGAGE_REPAYMENT_AMOUNT_XPATH, true);
+        sendKeysElement(FINANCIAL_MORTGAGE_REPAYMENT_AMOUNT_XPATH, repaymentAmount, 30);
         return this;
     }
 }

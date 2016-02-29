@@ -1,6 +1,7 @@
 package com.r2development.leveris.bdd.borrower.apistepdef;
 
 import com.google.inject.Singleton;
+import com.r2development.leveris.bdd.borrower.model.LoginData;
 import com.r2development.leveris.qa.utils.Orasql;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -9,7 +10,7 @@ import cucumber.api.java.en.When;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.http.client.protocol.HttpClientContext;
+import org.apache.http.protocol.HttpContext;
 import org.hamcrest.core.Is;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -19,6 +20,7 @@ import org.junit.Assert;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import static com.r2development.leveris.utils.HttpUtils.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -27,6 +29,20 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ApiLoginPageStepDef extends ApiAbakusBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiLoginPageStepDef.class);
+
+//    private HttpClient httpClient;
+//    private HttpContext localContext;
+//    private IHttpResponse httpResponse;
+//    private IUser user;
+
+//    @Inject
+//    public ApiLoginPageStepDef(HttpClient httpClient, HttpContext localContext, IUser user, IHttpResponse httpResponse) {
+//        this.httpClient = httpClient;
+//        this.localContext = localContext;
+//        this.user = user;
+//        this.httpResponse = httpResponse;
+//        loginParameters = new LinkedHashMap<>();
+//    }
 
     @Given("^User types his email login (.*) in Login page$")
     public void user_types_his_login(String email) {
@@ -67,6 +83,57 @@ public class ApiLoginPageStepDef extends ApiAbakusBorrowerStepDef {
         );
     }
 
+    @When("^user logs in with these credentials$")
+    public void user_logs_in_with_these_credentials(List<String> credentials) throws IOException {
+
+        String loginPageResponse = requestHttpGet(
+                httpClient,
+                System.getProperty("borrower") + "/form.2?wicket:interface=:1:initialMenuWrapper:initialMenu:root:item:1:link::IBehaviorListener:0:",
+                new LinkedHashMap<String, String>() {
+                    {
+                        put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+                    }
+                },
+                localContext,
+                CONSUME_QUIETLY
+        );
+
+        httpResponse.setHttpResponse(loginPageResponse);
+
+        LoginData loginData = new LoginData(credentials);
+
+        user_types_his_login(loginData.get("email"));
+        user_types_his_pwd(loginData.get("pwd"));
+
+        if ( StringUtils.isEmpty(httpResponse.getHttpResponse())) {
+            loginParameters.put("stepToken", "1");
+        }
+        else {
+            String currentHttpResponse = httpResponse.getHttpResponse();
+            Document loginResponseDoc = Jsoup.parse(currentHttpResponse);
+            TextNode textNodeLoginResponseDoc = loginResponseDoc.select("component[id~=main]").select("component[encoding~=wicket]").first().textNodes().get(0);
+            Document loginResponseDoc2 = Jsoup.parse(textNodeLoginResponseDoc.text());
+//        Elements panelTasksHidden = loginResponseDoc2.select("div[wicketpath=main_c_form_form_root_c_w_btnTasksHidden]");
+            String stepToken = loginResponseDoc2.select("input[name=stepToken]").attr("value");
+            loginParameters.put("stepToken", stepToken);
+        }
+        loginParameters.put("root:c:w:pnlMain:c:w:btnLogin:submit", "1");
+
+        requestHttpPost(
+                httpClient,
+                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlMain:c:w:btnLogin:submit::IBehaviorListener:0:",
+                new LinkedHashMap<String, String>() {
+                    {
+                        put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+                        put("Content-Type", "application/x-www-form-urlencoded");
+                    }
+                },
+                loginParameters,
+                localContext,
+                CONSUME_QUIETLY
+        );
+    }
+
     @When("^user forgets his password$")
     public void user_forgets_his_password() {
     }
@@ -89,8 +156,20 @@ public class ApiLoginPageStepDef extends ApiAbakusBorrowerStepDef {
         activateAccount(user.getEmail());
 
         Assert.assertNotEquals("Should be different HttpClientContext object", localContext, initContext());
-        HttpClientContext newLocalContext = newHttpClientContext(System.getProperty("domain"), "/borrower");
+        HttpContext newLocalContext = newHttpClientContext(System.getProperty("domain"), "/stable-borrower");
         Assert.assertEquals("not same HttpClientContext object", newLocalContext, localContext);
+
+//        CookieStore cookieStore = new BasicCookieStore();
+//        HttpClientContext localContextBody = HttpClientContext.create();
+//        BasicClientCookie cookieScUnload = new BasicClientCookie("sc-unload", "obu");
+//        cookieScUnload.setDomain(System.getProperty("domain"));
+//        cookieScUnload.setPath("/stable-borrower");
+//        cookieStore.addCookie(cookieScUnload);
+//        localContextBody.setCookieStore(cookieStore);
+//        localContext = localContextBody;
+
+//        localContext = BorrowerDependenciesModule.getNewLocalContext();
+
         requestHttpGet(
                 httpClient,
                 System.getProperty("borrower") + "/home",
@@ -130,32 +209,14 @@ public class ApiLoginPageStepDef extends ApiAbakusBorrowerStepDef {
 
     // TODO ACMESQL or use multi git jenkins plugin then to be able to load
     private void activateAccount(String emailAsUserLoginId) throws Exception {
-
         //noinspection ConstantConditions
         File file = new File(ApiLoginPageStepDef.class.getClassLoader().getResource("tnsnames.ora").toURI());
         assertThat("File should exist", file.exists(), Is.is(true));
-
         System.setProperty("oracle.net.tns_admin", file.getParentFile().getAbsolutePath());
 
         if (StringUtils.isEmpty(System.getProperty("database")))
-            System.setProperty("database", "jdbc:oracle:thin:@ST0000D");
+            System.setProperty("database", "jdbc:oracle:thin:@DV2000.LEVERIS");
 
-//        Class.forName("oracle.jdbc.OracleDriver");
-////        Connection connection = DriverManager.getConnection(ABAKUS_ENVIRONMENT.get(ENVIRONMENT_RUN).get(APP_TYPE.DB), "anthony_mottot", "Heslo6897");
-////        Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@DBINT1", "abakus_mchuser", "heslo");
-//        Connection connection = DriverManager.getConnection(System.getProperty("database"), "anthony_mottot", "Heslo6897");
-//        Statement statement = connection.createStatement();
-//
-//        statement.execute("update mch_user set isemailaddressvalid = 'true', isphonenumbervalid = 'true', isregistrationcomplete = 'true' where userloginid = '" + emailAsUserLoginId + "'");
-//
-//        statement.close();
-//        connection.close();
-
-//        Orasql.executeSqlUpdateQuery("jdbc:oracle:thin:@TEST1", "abakus_mchuser", "heslo", "update mch_user set isemailaddressvalid = 'true', isphonenumbervalid = 'true', isregistrationcomplete = 'true' where userloginid = '" + emailAsUserLoginId + "'");
-        Orasql.executeSqlUpdateQuery(System.getProperty("database"), "anthony_mottot", "Heslo6897", "update mch_user set isemailaddressvalid = 'true', isphonenumbervalid = 'true', isregistrationcomplete = 'true' where userloginid = '" + emailAsUserLoginId + "'");
-
-//        WebDriver webDriver = ApiSupportWebDriverStepDef.getWebDriverInstance();
-//        webDriver.get("gmail.com");
-
+        Orasql.executeSqlUpdateQuery(System.getProperty("database"), "stable_pxmchuser", "heslo", "update mch_user set isemailaddressvalid = 'true', isphonenumbervalid = 'true', isregistrationcomplete = 'true' where userloginid = '" + user.getEmail() + "'");
     }
 }

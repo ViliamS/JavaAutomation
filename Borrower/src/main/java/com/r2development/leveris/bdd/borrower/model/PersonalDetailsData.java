@@ -1,5 +1,6 @@
 package com.r2development.leveris.bdd.borrower.model;
 
+import java.util.List;
 import java.util.Map;
 
 public class PersonalDetailsData extends DataModel {
@@ -8,9 +9,9 @@ public class PersonalDetailsData extends DataModel {
         super(personalDetailsData);
     }
 
-//    public Map<String, String> getData() {
-//        return super.getData();
-//    }
+    public PersonalDetailsData(List<String> personalDetailsData) {
+        super(personalDetailsData);
+    }
 
     public String getFirstName() {
         return data.get("firstName");

@@ -31,14 +31,18 @@
         <com-r2development-leveris-qa.underwriter.version>1.0-SNAPSHOT</com-r2development-leveris-qa.underwriter.version>
         <com-r2development-leveris-qa.apollo.version>1.0-SNAPSHOT</com-r2development-leveris-qa.apollo.version>
 
-        <environment>st1</environment>
-        <domain>loftkeys.com</domain>
-        <borrower>https://st1app.loftkeys.com/borrower</borrower>
-        <underwriter>https://st1app.loftkeys.com/underwriter</underwriter>
-        <partner>https://st1app.loftkeys.com/partner</partner>
-        <apollo.client>https://st1apl.loftkeys.com/client</apollo.client>
-        <apollo.payment>https://st1apl.loftkeys.com/payment</apollo.payment>
-        <apollo.auth>https://st1apl.loftkeys.com/auth</apollo.auth>
+        <environment>dev2</environment>
+        <domain>dv2app.opoqodev.com</domain>
+        <borrower>http://dv2app.opoqodev.com/stable-borrower</borrower>
+        <underwriter>http://dv2app.opoqodev.com/underwriter</underwriter>
+        <partner>http://dv2app.opoqodev.com/partner</partner>
+        <database>jdbc:oracle:thin:@DV20000.LEVERIS</database>
+        <automation.mode>dev</automation.mode>
+        <active.screenshot>false</active.screenshot>
+        <browser>chrome</browser>
+        <excel.filename>tdb.xls</excel.filename>
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <maven.build.timestamp.format>yyyyMMddHHmmssSSS</maven.build.timestamp.format>
 
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyyMMddHHmmssSSS</maven.build.timestamp.format>
@@ -139,6 +143,11 @@
                 <artifactId>selenium-java</artifactId>
                 <version>${org-seleniumhq-selenium.selenium-java.version}</version>
             </dependency>
+            <!--<dependency>-->
+                <!--<groupId>org.seleniumhq.selenium</groupId>-->
+                <!--<artifactId>selenium-server-standalone</artifactId>-->
+                <!--<version>2.43.1</version>-->
+            <!--</dependency>-->
 
             <!-- Cucumber -->
             <dependency>

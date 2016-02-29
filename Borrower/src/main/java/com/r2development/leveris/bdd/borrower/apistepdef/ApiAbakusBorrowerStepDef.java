@@ -4,12 +4,12 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.EmploymentIncomeData;
 import com.r2development.leveris.bdd.borrower.model.PersonalDetailsData;
-import com.r2development.leveris.di.HttpResponse;
-import com.r2development.leveris.di.User;
+import com.r2development.leveris.di.IHttpResponse;
+import com.r2development.leveris.di.IUser;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.protocol.HttpClientContext;
+import org.apache.http.protocol.HttpContext;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -20,7 +20,8 @@ public class ApiAbakusBorrowerStepDef /*implements IBorrower*/ {
     private static final Log log = LogFactory.getLog(ApiAbakusBorrowerStepDef.class);
 
     protected HttpClient httpClient;
-    protected HttpClientContext localContext;
+//    protected HttpClientContext localContext;
+    protected HttpContext localContext;
 
     protected Map<String, String> registerParameters;
     protected Map<String, String> automationRegistrationParameters;
@@ -38,12 +39,13 @@ public class ApiAbakusBorrowerStepDef /*implements IBorrower*/ {
     protected Map<String, String> coapplicantEmploymentIncomeParameters;
 
     protected Map<String, String> accountParameters;
+    protected Map<String, String> paydayParameters;
 
     @Inject
-    User user;
+    IUser user;
 
     @Inject
-    HttpResponse httpResponse;
+    IHttpResponse httpResponse;
 
     public ApiAbakusBorrowerStepDef() {
         httpClient = ApiSupportHttpClientStepDef.getInstanceHttpClient();
@@ -60,19 +62,20 @@ public class ApiAbakusBorrowerStepDef /*implements IBorrower*/ {
         coapplicantEmploymentIncomeParameters = new LinkedHashMap<>();
 
         accountParameters = new LinkedHashMap<>();
+        paydayParameters = new LinkedHashMap<>();
     }
 
     @Inject
-    public ApiAbakusBorrowerStepDef(User user, HttpResponse httpResponse) {
+    public ApiAbakusBorrowerStepDef(IUser user, IHttpResponse httpResponse) {
         this.user = user;
         this.httpResponse = httpResponse;
     }
 
-    public HttpClientContext newHttpClientContext() {
+    public HttpContext newHttpClientContext() {
         return ( localContext = ApiSupportHttpClientStepDef.getNewInstanceHttpClientContext() );
     }
 
-    public HttpClientContext newHttpClientContext(String domain, @SuppressWarnings("SameParameterValue") String context) {
+    public HttpContext newHttpClientContext(String domain, @SuppressWarnings("SameParameterValue") String context) {
         return ( localContext = ApiSupportHttpClientStepDef.getNewInstanceHttpClientContext(domain, context));
     }
 

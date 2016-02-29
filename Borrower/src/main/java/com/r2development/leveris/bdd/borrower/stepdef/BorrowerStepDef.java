@@ -1,7 +1,7 @@
 package com.r2development.leveris.bdd.borrower.stepdef;
 
 import com.google.inject.Inject;
-import com.r2development.leveris.di.User;
+import com.r2development.leveris.di.IUser;
 import com.r2development.leveris.selenium.borrower.pageobjects.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -17,7 +17,6 @@ public class BorrowerStepDef /*extends Abakus*/ /*implements IBorrower*/ {
     IAutomaticRegistrationPage automaticRegistrationPage;
     IVerifyEmailPage verifyEmailPage;
     IBuildQuotationPage buildQuotationPage;
-    IAddYourCoapplicantPage addYourCoapplicantPage;
     IBorrowerHomePage borrowerHomePage;
     INewPasswordPage newPasswordPage;
     IFormsMenu formsMenu;
@@ -26,11 +25,8 @@ public class BorrowerStepDef /*extends Abakus*/ /*implements IBorrower*/ {
     IEmploymentIncomesPage borrowerEmploymentIncomesPage;
     IEmploymentIncomesPage coapplicantEmploymentIncomesPage;
     IYourAccountsPage yourAccountsPage;
-    IYourDependentsPage yourDependentsPage;
-    IYourFinancialAssetsPage yourFinancialAssetsPage;
-    IYourFundingPage yourFundingPage;
+    IYourDependantsPage yourDependentsPage;
     IYourFinancialCommitmentsPage yourFinancialCommitmentsPage;
-    IYourPropertiesPage yourPropertiesPage;
     IDocumentUploadPage documentUploadPage;
     IFormsMenu currentPage;
 
@@ -43,7 +39,7 @@ public class BorrowerStepDef /*extends Abakus*/ /*implements IBorrower*/ {
     ITopBannerMenu topBannerMenu;
 
 //    @Inject
-    User user;
+    IUser user;
 //    @Inject
     WebDriver webDriver;
 
@@ -72,7 +68,7 @@ public class BorrowerStepDef /*extends Abakus*/ /*implements IBorrower*/ {
 //        borrowerEmploymentIncomesPage = new EmploymentIncomesPage(WebDriverService.getWebDriverInstance());
 //        coapplicantEmploymentIncomesPage = new EmploymentIncomesPage(WebDriverService.getWebDriverInstance());
 //        yourAccountsPage = new YourAccountsPage(WebDriverService.getWebDriverInstance());
-//        yourDependentsPage = new YourDependentsPage(WebDriverService.getWebDriverInstance());
+//        yourDependentsPage = new YourDependantsPage(WebDriverService.getWebDriverInstance());
 //        yourFinancialAssetsPage = new YourFinancialAssetsPage(WebDriverService.getWebDriverInstance());
 //        yourFundingPage = new YourFundingPage(WebDriverService.getWebDriverInstance());
 //        yourFinancialCommitmentsPage = new YourFinancialCommitmentsPage(WebDriverService.getWebDriverInstance());
@@ -87,11 +83,12 @@ public class BorrowerStepDef /*extends Abakus*/ /*implements IBorrower*/ {
 
     @Inject
 //    BorrowerStepDef(WebDriver webDriver, User user) {
-    BorrowerStepDef(WebDriver webDriver) {
+    BorrowerStepDef(WebDriver webDriver, IUser user) {
 //        super(webDriver);
 //        this.user = user;
 
         this.webDriver = webDriver;
+        this.user = user;
 
         quoteLandingPage = new QuoteLandingPage(webDriver);
         quoteQuickLoanPage = new QuoteQuickLoanPage(webDriver);
@@ -103,7 +100,6 @@ public class BorrowerStepDef /*extends Abakus*/ /*implements IBorrower*/ {
         loginPage = new LoginPage(webDriver);
         verifyEmailPage = new VerifyEmailPage(webDriver);
         buildQuotationPage = new BuildQuotationPage(webDriver);
-        addYourCoapplicantPage = new AddYourCoapplicantPage(webDriver);
         borrowerHomePage = new BorrowerHomePage(webDriver);
         newPasswordPage = new NewPasswordPage(webDriver);
         //IFormsPage formsPage;
@@ -113,9 +109,7 @@ public class BorrowerStepDef /*extends Abakus*/ /*implements IBorrower*/ {
         borrowerEmploymentIncomesPage = new EmploymentIncomesPage(webDriver);
         coapplicantEmploymentIncomesPage = new EmploymentIncomesPage(webDriver);
         yourAccountsPage = new YourAccountsPage(webDriver);
-        yourDependentsPage = new YourDependentsPage(webDriver);
-        yourFinancialAssetsPage = new YourFinancialAssetsPage(webDriver);
-        yourFundingPage = new YourFundingPage(webDriver);
+        yourDependentsPage = new YourDependantsPage(webDriver);
         yourFinancialCommitmentsPage = new YourFinancialCommitmentsPage(webDriver);
 //        documentUploadPage = new DocumentUploadPage(webDriver, user);
     }

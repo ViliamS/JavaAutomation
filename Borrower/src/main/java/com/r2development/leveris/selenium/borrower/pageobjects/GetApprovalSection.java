@@ -4,8 +4,6 @@ import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -123,54 +121,6 @@ public class GetApprovalSection extends Borrower implements IGetApprovalSection 
     }
 
     @Override
-    public IGetApprovalSection clickInviteCoapplicantStartTask() {
-//        clickElement(GET_APPROVAL_INVITE_COAPPLICANT_START_TASK_XPATH);
-        WebElement element = getWebElement(GET_APPROVAL_INVITE_COAPPLICANT_START_TASK_XPATH);
-        JavascriptExecutor executor = (JavascriptExecutor) webDriver;
-        executor.executeScript("arguments[0].click();", element);
-
-//        clickElementViaJavascript(GET_APPROVAL_INVITE_COAPPLICANT_START_TASK_XPATH);
-        return this;
-    }
-
-    @Override
-    public IGetApprovalSection clickInviteCoapplicantBox() {
-        isVisible(GET_APPROVAL_INVITE_COAPPLICANT_XPATH, true);
-        weGetApprovalCoApplicant.click();
-        return this;
-    }
-
-    @Override
-    public boolean isInviteCoapplicantLoaded() {
-        isVisible(INVITE_COAPPLICANT_XPATH);
-        isVisible(GO_SOLO_XPATH);
-        return true;
-    }
-
-    @Override
-    public IAddYourCoapplicantPage clickInviteCoapplicantButton() {
-        isVisible(INVITE_COAPPLICANT_XPATH);
-        try {
-            weInviteCoApplicant.click();
-        } catch (NoSuchElementException nsee) {
-            clickElement(INVITE_COAPPLICANT_XPATH);
-        }
-
-//        WebElement element = getWebElement(INVITE_COAPPLICANT_XPATH);
-//        JavascriptExecutor executor = (JavascriptExecutor) webDriver;
-//        executor.executeScript("arguments[0].click();", element);
-
-        return new AddYourCoapplicantPage(webDriver);
-    }
-
-    @Override
-    public IGetApprovalSection clickGoSolo() {
-        isVisible(GO_SOLO_XPATH, true);
-        clickElement(GO_SOLO_XPATH);
-        return this;
-    }
-
-    @Override
     public IPersonalDetailsPage clickInfoUpload() {
 //        isVisible(GET_APPROVAL_INFO_UPLOAD_XPATH, false, 15);
 //        weGetApprovalInfoUpload.click();
@@ -237,11 +187,13 @@ public class GetApprovalSection extends Borrower implements IGetApprovalSection 
 //        #  main_c_form_form_root_c_w_pnl-YourAppHasBeenSubmitted_c_w_lbl-YourAppHasBeenSubmittedTitle
 //        #    And user clicks "Submit a[@wicketpath='application" main_c_form_form_root_c_w_btnSubmitApplication_submit']
         isVisible(GET_APPROVAL_FINAL_SUBMIT_APPLICATION_XPATH, true);
-        getWebElement(GET_APPROVAL_FINAL_SUBMIT_APPLICATION_XPATH).click();
+//        getWebElement(GET_APPROVAL_FINAL_SUBMIT_APPLICATION_XPATH).click();
+        clickElement(GET_APPROVAL_FINAL_SUBMIT_APPLICATION_XPATH);
         isVisible(GET_APPROVAL_CONFIRMATION_XPATH, true);
-        isVisible("//div[@wicketpath='main_c_form_embeddedFormWrapper_embeddedForm_1_form_root_c_w_pnlQuote_c_w_lblQuoteDescription']", true);
-        isVisible("//div[@wicketpath='main_c_form_embeddedFormWrapper_embeddedForm_2_form_root_c_w_pnlCoapplicant_c_w_lblCoapplicantDescription']", true);
-        isVisible("//div[@wicketpath='main_c_form_embeddedFormWrapper_embeddedForm_3_form_root_c_w_pnlForms_c_w_lblFormsDescription']", true);
+        isVisible("//div[@wicketpath='main_c_form_form_root_c_w_pnl-YourAppHasBeenSubmitted_c_w_lbl-YourAppHasBeenSubmittedTitle_l' and contains(., 'Your application has been sent')]");
+//        isVisible("//div[@wicketpath='main_c_form_embeddedFormWrapper_embeddedForm_1_form_root_c_w_pnlQuote_c_w_lblQuoteDescription']", true);
+//        isVisible("//div[@wicketpath='main_c_form_embeddedFormWrapper_embeddedForm_2_form_root_c_w_pnlCoapplicant_c_w_lblCoapplicantDescription']", true);
+//        isVisible("//div[@wicketpath='main_c_form_embeddedFormWrapper_embeddedForm_3_form_root_c_w_pnlForms_c_w_lblFormsDescription']", true);
 
 //        Har har = ApiSupportWebDriverStepDef.getProxyInstance().getHar();
 //        try {

@@ -1,6 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
-import com.r2development.leveris.di.User;
+import com.r2development.leveris.di.IUser;
 
 //@ImplementedBy(DocumentUploadSection.class)
 public interface IDocumentUploadSection {
@@ -52,8 +52,8 @@ public interface IDocumentUploadSection {
     boolean getStatus(int i); // contains(@class, 'formdone-icon') ? true : false;
 
     IDocumentUploadSection uploadDocument(int i, String filename);
-    IDocumentUploadSection uploadDocument(User user, String userType, String filename, String documentType);
+    IDocumentUploadSection uploadDocument(IUser user, String userType, String filename, String documentType);
     IDocumentUploadSection uploadDocument(String userType, String filename, String documentType);
     IDocumentUploadSection uploadAllDocuments();
-    IDocumentUploadSection uploadAllDocuments(User user);
+    IDocumentUploadSection uploadAllDocuments(IUser user);
 }

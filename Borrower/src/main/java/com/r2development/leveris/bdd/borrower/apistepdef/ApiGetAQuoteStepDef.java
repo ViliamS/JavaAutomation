@@ -10,7 +10,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.http.client.protocol.HttpClientContext;
+import org.apache.http.protocol.HttpContext;
 import org.hamcrest.core.Is;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -39,7 +39,7 @@ public class ApiGetAQuoteStepDef extends ApiAbakusBorrowerStepDef {
     public void user_goes_to_borrower_home_page() throws IOException {
 
         assertNotEquals("Should be different HttpClientContext object", localContext, initContext());
-        HttpClientContext newLocalContext = newHttpClientContext();
+        HttpContext newLocalContext = newHttpClientContext();
         assertEquals("not same HttpClientContext object", newLocalContext, localContext);
 
         String response = requestHttpGet(
@@ -89,7 +89,7 @@ public class ApiGetAQuoteStepDef extends ApiAbakusBorrowerStepDef {
     }
 
     @Given("^user processes \"Get a Quote\" \\(format1\\)$")
-    public void user_processes_get_quote(List<QuoteData> quoteDataList) throws IOException {
+    public void user_processes_get_quote(List<QuoteData> quoteDataList, String... test) throws IOException {
         assertEquals("System is expecting only one QuoteData occurrence", quoteDataList.size(), 1);
         user_wants_to_get_a_quote_now();
         fill_in_quote_step1(quoteDataList.get(0));
@@ -98,7 +98,8 @@ public class ApiGetAQuoteStepDef extends ApiAbakusBorrowerStepDef {
     }
 
     @Given("^user processes \"Get a Quote\" \\(format2\\)$")
-    public void user_processes_get_quote(Map<String, String> quoteDataMap) throws IOException {
+//    public void user_processes_get_quote(Map<String, String> quoteDataMap) throws IOException {
+    public void user_processes_get_quote(List<String> quoteDataMap) throws IOException {
         user_wants_to_get_a_quote_now();
         quoteData = new QuoteData(quoteDataMap);
         fill_in_quote_step1(quoteData);
@@ -1953,6 +1954,8 @@ public class ApiGetAQuoteStepDef extends ApiAbakusBorrowerStepDef {
 
     @And("^user clicks \"Review and Submit\"$")
     public void user_clicks_review_and_submit() throws IOException {
+
+        // TODO to check application status
         requestHttpPost(
                 httpClient,
                 System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnl-YouAreReadyToSubmit:c:w:btn-ReviewAndSubmit:submit::IBehaviorListener:0:",
@@ -1972,10 +1975,14 @@ public class ApiGetAQuoteStepDef extends ApiAbakusBorrowerStepDef {
                 localContext,
                 CONSUME_QUIETLY
         );
+        // TODO to check application status
     }
 
     @And("^user clicks \"Submit your application\"$")
     public void user_clicks_submit_your_application() throws IOException {
+
+
+        // TODO to check
         requestHttpPost(
                 httpClient,
                 System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlContent:c:w:btnSubmitApplication:submit::IBehaviorListener:0:",
@@ -1995,6 +2002,8 @@ public class ApiGetAQuoteStepDef extends ApiAbakusBorrowerStepDef {
                 localContext,
                 CONSUME_QUIETLY
         );
+
+        // TODO to parse the response to validate the final page
     }
 
     @And("^user checks \"Distance Marketing\"$")
@@ -2034,6 +2043,8 @@ public class ApiGetAQuoteStepDef extends ApiAbakusBorrowerStepDef {
 
     @And("^finally, user clicks \"Submit Application\"$")
     public void user_clicks_submit_application_final() throws IOException {
+
+        // TODO to check
         requestHttpPost(
                 httpClient,
                 System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form::IFormChangeListener:2:-1",
@@ -2068,7 +2079,7 @@ public class ApiGetAQuoteStepDef extends ApiAbakusBorrowerStepDef {
 
         requestHttpPost(
                 httpClient,
-                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnSubmitApplication:submit::IBehaviorListener:0:",
+                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnSubmitApplication:submit::IBehaviorListener:0:-1",
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");

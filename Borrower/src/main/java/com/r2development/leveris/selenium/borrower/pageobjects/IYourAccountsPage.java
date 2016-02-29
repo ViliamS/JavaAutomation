@@ -5,39 +5,56 @@ import java.util.Map;
 public interface IYourAccountsPage {
 
     String getTitle();
+    String getDialogTitle();
     String getDescription();
+
+    IYourAccountsPage clickCurrentAccount();
+    IYourAccountsPage clickSavingsAccount();
+    IYourAccountsPage clickAccountScraping();
 
     IYourAccountsPage clickAddAccount();
     IYourAccountsPage clickAddThisAccount();
     IYourAccountsPage clickNext();
+    IYourDependantsPage clickDone();
     IYourAccountsPage clickCancel();
-    IYourAccountsPage clickAddAccountManually();
     IYourAccountsPage selectAccount(String account);
+    IYourAccountsPage selectAccount(int index);
+    IYourAccountsPage deleteAccount(String account);
+    IYourAccountsPage deleteAccount(int index);
+    IYourAccountsPage deleteAccountConfirm();
+    IYourAccountsPage cancelAccountConfirm();
+    IYourAccountsPage closeAccountConfirm();
+    IYourAccountsPage editAccount(int index);
+    Map<Integer, YourAccount> getAccountsOf(String accountType);
+    Map<Integer, YourAccount> getAllAccounts();
 
-    IYourAccountsPage selectSourceOfFunds(String sourceOfFund);
-    IYourAccountsPage checkAccountAppliesToBorrower(String borrower);
-    IYourAccountsPage checkAccountAppliesToCoapplicant(String coapplicant);
-
+    IYourAccountsPage typeCurrentStatementDate(String statementDate);
+    IYourAccountsPage typeCurrentAccountName(String accountName);
+    IYourAccountsPage typeCurrentSortCode1(String sortCode1);
+    IYourAccountsPage typeCurrentSortCode2(String sortCode2);
+    IYourAccountsPage typeCurrentSortCode3(String sortCode3);
+    IYourAccountsPage typeCurrentAccountNumber(String accountNumber);
+    @Deprecated
     IYourAccountsPage typeCurrentAccountProvider(String accountProvider);
     IYourAccountsPage typeCurrentIban(String iban);
     IYourAccountsPage typeCurrentAccountBalance(String accountBalance);
     IYourAccountsPage typeCurrentOverdraftLimit(String overdraftLimit);
+    IYourAccountsPage selectCurrentSavingSource(String savingSource);
+    IYourAccountsPage typeCurrentRegularMonthlySavings(String regularMonthlySavings);
 
+    IYourAccountsPage typeSavingStatementDate(String statementDate);
+    IYourAccountsPage typeSavingsAccountName(String accountName);
+    IYourAccountsPage typeSavingsSortCode1(String sortCode1);
+    IYourAccountsPage typeSavingsSortCode2(String sortCode2);
+    IYourAccountsPage typeSavingsSortCode3(String sortCode3);
+    IYourAccountsPage typeSavingsAccountNumber(String accountNumber);
+    @Deprecated
     IYourAccountsPage typeSavingAccountProvider(String accountProvider);
     IYourAccountsPage typeSavingIban(String iban);
     IYourAccountsPage typeSavingAccountBalance(String accountBalance);
+    IYourAccountsPage typeSavingOverdraftLimit(String savingOverdrafLimit);
     IYourAccountsPage selectSavingSourceSavings(String sourceSaving);
     IYourAccountsPage typeSavingRegularMonthlySavings(String savingRegularMonthlySavings);
 
-    IYourAccountsPage deleteAccount(int index);
-    Map<Integer, YourAccount> getAccountsOf(String accountType);
-    Map<Integer, YourAccount> getAllAccounts();
-    String getFundType(int index);
-    String getFundName(int index);
-    String computeFundSum(int index);
-    String getFundSubtotalAmount();
-    IYourAccountsPage clickFundPanel(int index);
-
-    IYourAccountsPage validateAccounts();
-
+    IYourAccountsPage closeScraping();
 }

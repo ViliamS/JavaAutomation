@@ -2,6 +2,7 @@ package com.r2development.leveris.bdd.borrower.model;
 
 import org.apache.commons.lang.StringUtils;
 
+import java.util.List;
 import java.util.Map;
 
 public class QuoteData extends DataModel {
@@ -11,6 +12,10 @@ public class QuoteData extends DataModel {
     }
 
     public QuoteData(Map<String, String> quoteDataMap) {
+        super(quoteDataMap);
+    }
+
+    public QuoteData(List<String> quoteDataMap) {
         super(quoteDataMap);
     }
 

@@ -1,7 +1,7 @@
 package com.r2development.leveris.bdd.borrower.stepdef;
 
 import com.google.inject.Inject;
-import com.r2development.leveris.di.User;
+import com.r2development.leveris.di.IUser;
 import com.r2development.leveris.selenium.borrower.pageobjects.DocumentUploadPage;
 import com.r2development.leveris.selenium.borrower.pageobjects.IBorrowerHomePage;
 import com.r2development.leveris.selenium.borrower.pageobjects.IDocumentUploadPage;
@@ -32,17 +32,19 @@ public class DocumentUploadStepDef /*extends BorrowerStepDef*/ implements CLV312
         CREDIT_CARD_PROVIDER
 
     }
-    User user;
+    IUser user;
     IDocumentUploadPage documentUploadPage;
     IBorrowerHomePage borrowerHomePage;
     IPersonalDetailsPage borrowerPersonalDetailsPage;
     private final WebDriver webDriver;
 
     @Inject
-    DocumentUploadStepDef(WebDriver webDriver) {
+    DocumentUploadStepDef(WebDriver webDriver, IUser user) {
 //        super(webDriver);
 //        documentUploadPage = new DocumentUploadPage(WebDriverService.getWebDriverInstance(), user);
         this.webDriver = webDriver;
+        this.user = user;
+        documentUploadPage = new DocumentUploadPage(webDriver, user);
     }
 
     @When("^user clicks on \"documents list\"$")
@@ -63,10 +65,11 @@ public class DocumentUploadStepDef /*extends BorrowerStepDef*/ implements CLV312
 
     @When("^Upload all documents$")
     public void upload_all_documents() throws InterruptedException {
-        workaroundCLV312(null);
+//        workaroundCLV312(null);
 //        documentUploadPage = new DocumentUploadPage(WebDriverService.getWebDriverInstance(), user);
-        documentUploadPage = new DocumentUploadPage(webDriver, user);
+//        documentUploadPage = new DocumentUploadPage(webDriver, user);
 //        documentUploadPage.uploadAllDocuments(user);
+        documentUploadPage.getTitle();
         documentUploadPage.uploadAllDocuments();
     }
 

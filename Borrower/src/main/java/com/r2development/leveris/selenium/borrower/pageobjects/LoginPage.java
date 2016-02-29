@@ -94,7 +94,8 @@ public class LoginPage extends Borrower implements ILoginPage {
     @Override
     public IBorrowerHomePage clickLogin() {
         isVisible(LOGIN_BUTTON_XPATH, true);
-        weLoginButton.click();
+        clickElement(LOGIN_BUTTON_XPATH);
+//        weLoginButton.click();
         return new BorrowerHomePage(webDriver);
     }
 

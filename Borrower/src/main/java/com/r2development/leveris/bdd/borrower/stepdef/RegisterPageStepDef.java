@@ -41,6 +41,7 @@ public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
     RegisterPageStepDef(WebDriver webDriver) {
 //        super(webDriver);
         this.webDriver = webDriver;
+        registerPage = new RegisterPage(webDriver);
     }
 
     @Given("user goes to Registration page$")
@@ -52,13 +53,14 @@ public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
     }
 
     @Given("^this registration data, user processes the registration \\(format1\\)$")
-    public void this_registration_data_user_processes_the_registration(List<RegistrationData> registrationDataList) {
+    public void this_registration_data_user_processes_the_registration(List<RegistrationData> registrationDataList, String... test) {
         assertEquals("System is expecting only one RegistrationData occurrence", registrationDataList.size(), 1);
         fill_in_registration(registrationDataList.get(0));
     }
 
     @Given("^this registration data, user processes the registration \\(format2\\)$")
-    public void this_registration_data_user_processes_the_registration(Map<String, String> registrationDataMap) {
+//    public void this_registration_data_user_processes_the_registration(Map<String, String> registrationDataMap) {
+    public void this_registration_data_user_processes_the_registration(List<String> registrationDataMap) {
         fill_in_registration(new RegistrationData(registrationDataMap));
     }
 

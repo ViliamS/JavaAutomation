@@ -1,5 +1,6 @@
 package com.r2development.leveris.bdd.borrower.model;
 
+import java.util.List;
 import java.util.Map;
 
 public class EmploymentIncomeData extends DataModel {
@@ -8,8 +9,10 @@ public class EmploymentIncomeData extends DataModel {
 
     public EmploymentIncomeData(Map<String, String> employmentIncomeData) {
         super(employmentIncomeData);
-//        data = new LinkedHashMap<>();
-//        data.putAll(employmentIncomeData);
+    }
+
+    public EmploymentIncomeData(List<String> employmentIncomeData) {
+        super(employmentIncomeData);
     }
 
 //    public String get(String key) {

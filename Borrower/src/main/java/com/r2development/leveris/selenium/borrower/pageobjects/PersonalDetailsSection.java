@@ -271,9 +271,11 @@ public class PersonalDetailsSection extends Borrower implements IPersonalDetails
 
     @Override
     public IPersonalDetailsSection selectResidencyCountry(String residencyCountry) {
+        moveTo(RESIDENCY_COUNTRY_LABEL_XPATH);
         isVisible(RESIDENCY_COUNTRY_XPATH, true);
-        weResidencyCountry.clear();
-        weResidencyCountry.sendKeys(residencyCountry);
+//        weResidencyCountry.clear();
+//        weResidencyCountry.sendKeys(residencyCountry);
+        selectFromDropDown(RESIDENCY_COUNTRY_XPATH, residencyCountry);
         return this;
     }
 

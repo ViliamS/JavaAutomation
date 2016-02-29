@@ -10,8 +10,24 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class BorrowerDependenciesModule extends AbstractModule {
 
     private IUser user;
-//    private User user;
     private WebDriver webDriver;
+
+//    protected HttpClient httpClient;
+//    protected HttpContext localContext;
+    protected static IHttpResponse httpResponse;
+
+//    public static HttpContext getNewLocalContext() {
+//        CookieStore cookieStore = new BasicCookieStore();
+//        HttpClientContext localContextBody = HttpClientContext.create();
+//        BasicClientCookie cookieScUnload = new BasicClientCookie("sc-unload", "obu");
+//        cookieScUnload.setDomain(System.getProperty("domain"));
+//        cookieScUnload.setPath("/stable-borrower");
+//        cookieStore.addCookie(cookieScUnload);
+//        localContextBody.setCookieStore(cookieStore);
+//        localContext = localContextBody;
+//
+//        return localContext;
+//    }
 
 //    private static HarProxyServer proxyServer;
 //    private static LegacyProxyServer legacyProxyServer;
@@ -77,7 +93,7 @@ public class BorrowerDependenciesModule extends AbstractModule {
         if ( StringUtils.isEmpty(System.getProperty("environment")))
             System.setProperty("environment", "dev2");
         if ( StringUtils.isEmpty(System.getProperty("domain")))
-            System.setProperty("domain", "dv2app.opoqodev.com/");
+            System.setProperty("domain", "dv2app.opoqodev.com");
         if ( StringUtils.isEmpty(System.getProperty("borrower")))
             System.setProperty("borrower", "http://dv2app.opoqodev.com/stable-borrower");
         if ( System.getProperty("browser") == null)
@@ -85,18 +101,40 @@ public class BorrowerDependenciesModule extends AbstractModule {
         if ( StringUtils.isEmpty(System.getProperty("timestamp")))
             System.setProperty("timestamp", DateTime.now().toString("yyyyMMddHHmmssSSS"));
 
-        switch (System.getProperty("browser")) {
-            case "chrome":
-                webDriver = new ChromeDriver();
-                bind(WebDriver.class).toInstance(webDriver);
-                break;
-            case "firefox":
-                webDriver = new FirefoxDriver();
-                bind(WebDriver.class).toInstance(webDriver);
-                break;
+        if ( StringUtils.isEmpty(System.getProperty("modeRun")) )
+            System.setProperty("modeRun", "gui");
+
+        if ( System.getProperty("modeRun").equals("gui") ) {
+            switch (System.getProperty("browser")) {
+                case "chrome":
+                    webDriver = new ChromeDriver();
+                    bind(WebDriver.class).toInstance(webDriver);
+                    break;
+                case "firefox":
+                    webDriver = new FirefoxDriver();
+                    bind(WebDriver.class).toInstance(webDriver);
+                    break;
+            }
+        }
+        else if ( System.getProperty("modeRun").equals("api") ) {
+//            httpClient = HttpClientBuilder.create().setRedirectStrategy(new LaxRedirectStrategy()).build();
+//            CookieStore cookieStore = new BasicCookieStore();
+//            HttpClientContext localContextBody = HttpClientContext.create();
+//            BasicClientCookie cookieScUnload = new BasicClientCookie("sc-unload", "obu");
+//            cookieScUnload.setDomain(System.getProperty("domain"));
+//            cookieScUnload.setPath("/stable-borrower");
+//            cookieStore.addCookie(cookieScUnload);
+//            localContextBody.setCookieStore(cookieStore);
+//            localContext = localContextBody;
+//            httpResponse = new HttpResponse(StringUtils.EMPTY);
+
+//            bind(HttpClient.class).toInstance(httpClient);
+//            bind(HttpContext.class).toInstance(localContext);
+//            bind(IHttpResponse.class).toInstance(httpResponse);
+            bind(IHttpResponse.class).to(HttpResponse.class);
         }
 
-//        user = new User();
+        user = new User();
         bind(IUser.class).toInstance(user);
     }
 

@@ -60,7 +60,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiAbakusBorrowerStepDef
                     CONSUME_QUIETLY
             );
 
-            requestHttpPost(
+            String noCommitmentsResponse = requestHttpPost(
                     httpClient,
                     System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNoCommitments:c:w:btnNextSection:submit::IBehaviorListener:0:",
                     new LinkedHashMap<String, String>() {
@@ -78,6 +78,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiAbakusBorrowerStepDef
                     localContext,
                     CONSUME_QUIETLY
             );
+            httpResponse.setHttpResponse(noCommitmentsResponse);
         }
     }
 

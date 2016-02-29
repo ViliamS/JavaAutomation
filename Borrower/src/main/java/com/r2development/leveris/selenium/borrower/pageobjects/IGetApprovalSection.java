@@ -12,7 +12,7 @@ public interface IGetApprovalSection {
 //    String GET_APPROVAL_INVITE_COAPPLICANT_START_TASK_XPATH = "//a[@wicketpath='main_c_form_embeddedFormWrapper_embeddedForm_2_form_root_c_w_pnlCoapplicant_c_w_btnAction_submit']";
     String GET_APPROVAL_INVITE_COAPPLICANT_START_TASK_XPATH = "//div[contains(@data-path,'pnlCoapplicant btnAction')]/a[contains(., 'Start Task')]";
     String GET_APPROVAL_INVITE_COAPPLICANT_XPATH = "//div[contains(@wicketpath, 'Coapplicant') and @data-path='pnlCoapplicant' and contains(., 'Invite a co-applicant')]";
-    String GET_APPROVAL_INFO_UPLOAD_XPATH = "//a[@wicketpath='main_c_form_embeddedFormWrapper_embeddedForm_3_form_root_c_w_pnlForms_c_w_btnAction_script']"; //div[contains(@wicketpath, 'Forms') and @data-path='pnlForms' and contains(., 'Some other info and uploads we need')]";
+    String GET_APPROVAL_INFO_UPLOAD_XPATH = "//a[@wicketpath='main_c_form_embeddedFormWrapper_embeddedForm_2_form_root_c_w_pnlForms_c_w_btnAction_script']"; //div[contains(@wicketpath, 'Forms') and @data-path='pnlForms' and contains(., 'Some other info and uploads we need')]";
 
     String WHAT_DOCS_CONTAINER_XPATH = "//div[@role='dialog']";
     String WHAT_DOCS_XPATH = "//h3[contains(., 'What documentation do I need?')]";
@@ -34,7 +34,8 @@ public interface IGetApprovalSection {
     String READY_TO_REVIEW_AND_SUBMIT_BUTTON_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnl-YouAreReadyToSubmit_c_w_btn-ReviewAndSubmit_submit']";
 
 
-    String GET_APPROVAL_SUBMIT_YOUR_APPLICATION_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlContent_c_w_btnSubmitApplication_submit']";
+//    String GET_APPROVAL_SUBMIT_YOUR_APPLICATION_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_btnSubmitApplication_submit']";
+    String GET_APPROVAL_SUBMIT_YOUR_APPLICATION_XPATH = "//a[contains(., 'Submit your application')]";
     String GET_APPROVAL_CHECK_DISTANCE_MARKETING_XPATH = "//label[@wicketpath='main_c_form_form_root_c_w_pnlBeforeSubmit_c_w_chkDistanceMarketing_label']/following-sibling::span/a";
     String GET_APPROVAL_CHECK_STATUTORY_XPATH = "//label[@wicketpath='main_c_form_form_root_c_w_pnlBeforeSubmit_c_w_chkStatutory_label']/following-sibling::span/a";
     String GET_APPROVAL_CHECK_DECLARATION_XPATH = "//label[@wicketpath='main_c_form_form_root_c_w_pnlBeforeSubmit_c_w_chkDeclarations_label']/following-sibling::span/a";
@@ -46,16 +47,10 @@ public interface IGetApprovalSection {
     void clickWhatDocs();
     void closePopup();
     IBuildQuotationPage clickGetAQuote();
-    IGetApprovalSection clickInviteCoapplicantStartTask();
-    IGetApprovalSection clickInviteCoapplicantBox();
     IPersonalDetailsPage clickInfoUpload();
     void closeWhatDocs();
 
-    boolean isInviteCoapplicantLoaded();
-    IAddYourCoapplicantPage clickInviteCoapplicantButton();
-    IGetApprovalSection clickGoSolo();
     IGetApprovalSection clickReviewAndSubmit();
-
     IGetApprovalSection clickSubmitYourApplication();
     IGetApprovalSection checkDistanceMarketing();
     IGetApprovalSection checkStatutory();

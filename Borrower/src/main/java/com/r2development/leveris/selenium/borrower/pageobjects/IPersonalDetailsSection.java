@@ -29,7 +29,10 @@ public interface IPersonalDetailsSection {
     String RESIDENCY_TOWN_CITY_XPATH = "//label[contains(., 'Town/city')]/following-sibling::input[contains(@wicketpath, 'txtTownCity')]";
     String RESIDENCY_COUNTY_STATE_XPATH = "//label[contains(., 'County/state')]/following-sibling::input[contains(@wicketpath, 'cmbCountyState')]";
     String RESIDENCY_POSTCODE_ZIP_XPATH = "//label[contains(., 'Postcode/ZIP(optional)')]/following-sibling::input[contains(@wicketpath, 'txtPostcode')]";
-    String RESIDENCY_COUNTRY_XPATH = "//label[contains(@wicketpath, 'cmbCountry')]/following-sibling::input[not(contains(@wicketpath,'PreviousResidency'))]";
+    String RESIDENCY_COUNTRY_LABEL_XPATH = "//label[contains(@wicketpath, 'cmbCountry')]";
+    String RESIDENCY_COUNTRY_XPATH = "//label[contains(@wicketpath, 'cmbCountry')]/following-sibling::input";
+//    String RESIDENCY_COUNTRY_XPATH = "//label[contains(@wicketpath, 'cmbCountry')]/following-sibling::input[not(contains(@wicketpath,'PreviousResidency'))]";
+//    String RESIDENCY_COUNTRY_XPATH = "//input[@wicketpath='main_c_form_form_root_c_w_cmbCountry_v']";
     // enum Rented on contract, Rented from family/friends, Property owner, Others
     String RESIDENCY_ACCOMMODATION_XPATH = "//label[contains(., 'This accommodation is')]/following-sibling::input";
     String RESIDENCY_RENT_XPATH = "//label[contains(., 'Rent')]/following-sibling::input";

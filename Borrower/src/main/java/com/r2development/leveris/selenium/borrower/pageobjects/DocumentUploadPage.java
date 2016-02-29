@@ -15,16 +15,16 @@ public class DocumentUploadPage extends HeaderAndBottomAndFormsMenuSection imple
     protected IFormsMenu formsMenu;
     protected IUser user;
 
-    @Inject
-    public DocumentUploadPage(WebDriver webDriver) {
-        super(webDriver);
-        headerSection = new HeaderSection(webDriver);
-        documentUploadSection = new DocumentUploadSection(webDriver);
-        formsMenu = new FormsMenu(webDriver);
-        bottomSection = new BottomSection(webDriver);
-    }
-
 //    @Inject
+//    public DocumentUploadPage(WebDriver webDriver) {
+//        super(webDriver);
+//        headerSection = new HeaderSection(webDriver);
+//        documentUploadSection = new DocumentUploadSection(webDriver);
+//        formsMenu = new FormsMenu(webDriver);
+//        bottomSection = new BottomSection(webDriver);
+//    }
+
+    @Inject
     public DocumentUploadPage(WebDriver webDriver, IUser user) {
         super(webDriver);
         this.user = user;
@@ -105,7 +105,7 @@ public class DocumentUploadPage extends HeaderAndBottomAndFormsMenuSection imple
     }
 
     @Override
-    public IDocumentUploadPage uploadDocument(User user, String userType, String filename, String documentType) {
+    public IDocumentUploadPage uploadDocument(IUser user, String userType, String filename, String documentType) {
         documentUploadSection.uploadDocument(user, userType, filename, documentType);
         return this;
     }

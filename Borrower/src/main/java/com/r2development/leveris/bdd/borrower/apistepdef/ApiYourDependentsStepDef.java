@@ -17,9 +17,6 @@ public class ApiYourDependentsStepDef extends ApiAbakusBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiYourDependentsStepDef.class);
 
-    public ApiYourDependentsStepDef() {
-    }
-
     @When("^user has(n't)? dependents$")
     public void user_has_dependencies(String hasDependents) throws IOException {
         if (hasDependents == null) {

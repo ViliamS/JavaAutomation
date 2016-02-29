@@ -24,6 +24,19 @@ public class ApiRegisterPageStepDef extends ApiAbakusBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiRegisterPageStepDef.class);
 
+//    private HttpClient httpClient;
+//    private HttpContext localContext;
+//    private IUser user;
+//    private Map<String, String> registerParameters;
+
+//    @Inject
+//    ApiRegisterPageStepDef( HttpClient httpClient, HttpContext localContext, IUser user) {
+//        this.httpClient = httpClient;
+//        this.localContext = localContext;
+//        this.user = user;
+//        registerParameters = new LinkedHashMap<>();
+//    }
+
     @Given("user goes to Registration page$")
     public void user_goes_to_registration_page() throws IOException {
 
@@ -73,13 +86,14 @@ public class ApiRegisterPageStepDef extends ApiAbakusBorrowerStepDef {
     }
 
     @Given("^this registration data, user processes the registration \\(format1\\)$")
-    public void this_registration_data_user_processes_the_registration(List<RegistrationData> registrationDataList) throws IOException {
+    public void this_registration_data_user_processes_the_registration(List<RegistrationData> registrationDataList, String... test) throws IOException {
         assertEquals("System is expecting only one RegistrationData occurrence", registrationDataList.size(), 1);
         fill_in_registration(registrationDataList.get(0));
     }
 
     @Given("^this registration data, user processes the registration \\(format2\\)$")
-    public void this_registration_data_user_processes_the_registration(Map<String, String> registrationDataMap) throws IOException {
+//    public void this_registration_data_user_processes_the_registration(Map<String, String> registrationDataMap) throws IOException {
+    public void this_registration_data_user_processes_the_registration(List<String> registrationDataMap) throws IOException {
         fill_in_registration(new RegistrationData(registrationDataMap));
     }
 
@@ -168,16 +182,15 @@ public class ApiRegisterPageStepDef extends ApiAbakusBorrowerStepDef {
         registerParameters.putAll(
                 new LinkedHashMap<String, String>() {
                     {
-                        put("stepToken", "1");
+                        put("stepToken", "4");
                         put("root:c:w:pnlMain:c:w:btnRegister:submit", "1");
                     }
                 }
         );
 
-        requestHttpPost(
+        String registrationResponse = requestHttpPost(
                 httpClient,
-//                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlMain:c:w:btnRegister:submit::IBehaviorListener:0:-1",
-                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlMain:c:w:btnRegister:submit::IBehaviorListener:0:-1",
+                "http://dv2app.opoqodev.com/stable-borrower/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlMain:c:w:btnRegister:submit::IBehaviorListener:0:",
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -186,7 +199,7 @@ public class ApiRegisterPageStepDef extends ApiAbakusBorrowerStepDef {
                 },
                 registerParameters,
                 localContext,
-                CONSUME_QUIETLY
+                false
         );
     }
 
