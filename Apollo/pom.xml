@@ -14,10 +14,14 @@
     <packaging>jar</packaging>
 
     <properties>
-        <environment>st1</environment>
-        <apollo.client>https://st1apl.loftkeys.com/client</apollo.client>
-        <apollo.payment>https://st1apl.loftkeys.com/payment</apollo.payment>
-        <apollo.auth>https://st1apl.loftkeys.com/auth</apollo.auth>
+        <environment>dev2</environment>
+        <domain.apollo>dv2apl.opoqodev.com</domain.apollo>
+        <apollo.context.client>/client</apollo.context.client>
+        <apollo.client>https://dv2apl.opoqodev.com/client</apollo.client>
+        <apollo.context.payment>/payment</apollo.context.payment>
+        <apollo.payment>https://dv2apl.opoqodev.com/payment</apollo.payment>
+        <apollo.sso>https://dv2apl.opoqodev.com/sso/</apollo.sso>
+        <!--<apollo.auth>https://st1apl.loftkeys.com/auth</apollo.auth>-->
         <automation.mode>dev</automation.mode>
         <active.screenshot>false</active.screenshot>
         <browser>chrome</browser>

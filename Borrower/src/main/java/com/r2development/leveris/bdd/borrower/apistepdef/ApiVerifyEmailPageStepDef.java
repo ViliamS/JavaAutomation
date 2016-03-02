@@ -8,7 +8,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 @Singleton
-public class ApiVerifyEmailPageStepDef extends ApiAbakusBorrowerStepDef {
+public class ApiVerifyEmailPageStepDef extends ApiOpoqoBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiVerifyEmailPageStepDef.class);
 

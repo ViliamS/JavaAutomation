@@ -21,7 +21,7 @@ import static com.r2development.leveris.utils.HttpUtils.requestHttpPost;
  * Created by anthonymottot on 03/02/2016.
  */
 @Singleton
-public class ApiLoanOfferStepDef extends ApiAbakusUnderwriterStepDef {
+public class ApiLoanOfferStepDef extends ApiOpoqoUnderwriterStepDef {
 
     private static final Log log = LogFactory.getLog(ApiLoanOfferStepDef.class.getName());
 

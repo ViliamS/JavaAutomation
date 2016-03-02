@@ -14,15 +14,23 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <environment>st1</environment>
-        <domain>loftkeys.com</domain>
-        <borrower>https://st1app.loftkeys.com/borrower</borrower>
-        <underwriter>https://st1app.loftkeys.com/underwriter</underwriter>
-        <partner>https://st1app.loftkeys.com/partner</partner>
-        <database>jdbc:oracle:thin:@ST0000D</database>
-        <apollo.client>https://st1apl.loftkeys.com/client</apollo.client>
-        <apollo.payment>https://st1apl.loftkeys.com/payment</apollo.payment>
-        <apollo.auth>https://st1apl.loftkeys.com/sso</apollo.auth>
+        <environment>dev2</environment>
+        <domain>dv2app.opoqodev.com</domain>
+        <borrower>http://dv2app.opoqodev.com/stable-borrower</borrower>
+        <!-- TODO check if we are using then delete after fixing -->
+        <underwriter>http://dv2app.opoqodev.com/underwriter</underwriter>
+        <!-- TODO check if we are using then delete after fixing -->
+        <partner>http://dv2app.opoqodev.com/partner</partner>
+        <domain.investor>dv2pub.opoqodev.com</domain.investor>
+        <investor.registration>http://dv2pub.opoqodev.com/register</investor.registration>
+        <investor>http://dv2pub.opoqodev.com/</investor>
+        <database>jdbc:oracle:thin:@DV2000.LEVERIS</database>
+        <automation.mode>dev</automation.mode>
+        <active.screenshot>false</active.screenshot>
+        <browser>chrome</browser>
+        <excel.filename>tdb.xls</excel.filename>
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <maven.build.timestamp.format>yyyyMMddHHmmssSSS</maven.build.timestamp.format>
     </properties>
 
     <repositories>

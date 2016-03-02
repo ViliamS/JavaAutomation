@@ -8,7 +8,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 @Singleton
-public class ApiWelcomePageStepDef extends ApiAbakusBorrowerStepDef {
+public class ApiWelcomePageStepDef extends ApiOpoqoBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiWelcomePageStepDef.class);
 

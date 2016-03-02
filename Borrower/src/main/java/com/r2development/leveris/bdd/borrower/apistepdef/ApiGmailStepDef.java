@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 @Singleton
-public class ApiGmailStepDef extends ApiAbakusBorrowerStepDef {
+public class ApiGmailStepDef extends ApiOpoqoBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiGmailStepDef.class);
 

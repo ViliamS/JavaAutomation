@@ -28,7 +28,7 @@ import static com.r2development.leveris.utils.HttpUtils.*;
 import static org.junit.Assert.*;
 
 @Singleton
-public class ApiGetAQuoteStepDef extends ApiAbakusBorrowerStepDef {
+public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiGetAQuoteStepDef.class.getName());
 

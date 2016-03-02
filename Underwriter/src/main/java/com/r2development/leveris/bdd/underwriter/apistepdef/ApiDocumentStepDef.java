@@ -30,7 +30,7 @@ import static com.r2development.leveris.utils.HttpUtils.requestHttpPost;
  * Created by anthonymottot on 03/02/2016.
  */
 @Singleton
-public class ApiDocumentStepDef extends ApiAbakusUnderwriterStepDef {
+public class ApiDocumentStepDef extends ApiOpoqoUnderwriterStepDef {
 
     @Given("user validates all documents")
     public void user_validates_all_documents() throws IOException {

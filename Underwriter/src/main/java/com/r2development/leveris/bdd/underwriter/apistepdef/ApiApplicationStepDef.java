@@ -28,9 +28,9 @@ import static org.junit.Assert.assertEquals;
  * Created by anthonymottot on 03/02/2016.
  */
 @Singleton
-public class ApiApplicationStepDef extends ApiAbakusUnderwriterStepDef {
+public class ApiApplicationStepDef extends ApiOpoqoUnderwriterStepDef {
 
-    private static final Log log = LogFactory.getLog(ApiAbakusUnderwriterStepDef.class.getName());
+    private static final Log log = LogFactory.getLog(ApiOpoqoUnderwriterStepDef.class.getName());
 
     @Inject
     User user;

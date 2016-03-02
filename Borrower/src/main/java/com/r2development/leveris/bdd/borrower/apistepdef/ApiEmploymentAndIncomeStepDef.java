@@ -30,7 +30,7 @@ import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertThat;
 
 @Singleton
-public class ApiEmploymentAndIncomeStepDef extends ApiAbakusBorrowerStepDef {
+public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiEmploymentAndIncomeStepDef.class);
 

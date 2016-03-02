@@ -1,4 +1,5 @@
-@LoginPage
+
+@login
 Feature: Verification LoginPage
 
   Background:
@@ -8,3 +9,20 @@ Feature: Verification LoginPage
     Given user creates an account
     When user logs in as his account is activated
     Then Home Borrower Page is loaded
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

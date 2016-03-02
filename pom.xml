@@ -18,6 +18,7 @@
         <module>Borrower</module>
         <module>Underwriter</module>
         <module>Apollo</module>
+        <module>Investor</module>
         <module>Testing</module>
     </modules>
 
@@ -30,11 +31,17 @@
         <com-r2development-leveris-qa.borrower.version>1.0-SNAPSHOT</com-r2development-leveris-qa.borrower.version>
         <com-r2development-leveris-qa.underwriter.version>1.0-SNAPSHOT</com-r2development-leveris-qa.underwriter.version>
         <com-r2development-leveris-qa.apollo.version>1.0-SNAPSHOT</com-r2development-leveris-qa.apollo.version>
+        <com-r2development-leveris-qa.investor.version>1.0-SNAPSHOT</com-r2development-leveris-qa.investor.version>
 
         <environment>dev2</environment>
         <domain>dv2app.opoqodev.com</domain>
         <borrower>http://dv2app.opoqodev.com/stable-borrower</borrower>
         <underwriter>http://dv2app.opoqodev.com/underwriter</underwriter>
+        <domain.apollo>dv2apl.opoqodev.com</domain.apollo>
+        <apollo.context.client>/client</apollo.context.client>
+        <apollo.client>https://dv2apl.opoqodev.com/client</apollo.client>
+        <apollo.context.payment>/payment</apollo.context.payment>
+        <apollo.payment>https://dv2apl.opoqodev.com/payment</apollo.payment>
         <partner>http://dv2app.opoqodev.com/partner</partner>
         <database>jdbc:oracle:thin:@DV20000.LEVERIS</database>
         <automation.mode>dev</automation.mode>
@@ -118,6 +125,11 @@
             <dependency>
                 <groupId>com.r2development.leveris.qa</groupId>
                 <artifactId>Apollo</artifactId>
+                <version>${com-r2development-leveris-qa.apollo.version.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.r2development.leveris.qa</groupId>
+                <artifactId>Investor</artifactId>
                 <version>${com-r2development-leveris-qa.apollo.version.version}</version>
             </dependency>
 

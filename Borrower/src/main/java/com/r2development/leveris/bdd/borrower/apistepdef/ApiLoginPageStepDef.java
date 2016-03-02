@@ -26,7 +26,7 @@ import static com.r2development.leveris.utils.HttpUtils.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @Singleton
-public class ApiLoginPageStepDef extends ApiAbakusBorrowerStepDef {
+public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiLoginPageStepDef.class);
 

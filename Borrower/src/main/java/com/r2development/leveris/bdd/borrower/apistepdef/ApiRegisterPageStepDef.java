@@ -20,7 +20,7 @@ import static com.r2development.leveris.utils.HttpUtils.*;
 import static org.junit.Assert.*;
 
 @Singleton
-public class ApiRegisterPageStepDef extends ApiAbakusBorrowerStepDef {
+public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiRegisterPageStepDef.class);
 
@@ -138,8 +138,8 @@ public class ApiRegisterPageStepDef extends ApiAbakusBorrowerStepDef {
     @Given("^user types his phone number (.*) in Register page$")
     public void user_types_his_phone_number(String phoneNumber) {
 //        DateTime now = DateTime.now();
-        user.setPhoneNumber(phoneNumber);
-        registerParameters.put("root:c:w:pnlMain:c:w:txtPhoneNumber:tb", phoneNumber);
+        user.setPhoneNumber("+420" + System.getProperty("timestamp"));
+        registerParameters.put("root:c:w:pnlMain:c:w:txtPhoneNumber:tb", "+420" + System.getProperty("timestamp"));
         log.info(user.getPhoneNumber());
     }
 
@@ -148,9 +148,9 @@ public class ApiRegisterPageStepDef extends ApiAbakusBorrowerStepDef {
 //        DateTime now = DateTime.now();
 //        String trickyPhoneNumber = now.toString("yyyyMMddHHmmss");
 //        user.setPhoneNumber(trickyPhoneNumber);
-        user.setPhoneNumber(System.getProperty("timestamp"));
+        user.setPhoneNumber("+420" + System.getProperty("timestamp"));
 //        registerParameters.put("root:c:w:pnlMain:c:w:txtPhoneNumber:tb", trickyPhoneNumber);
-        registerParameters.put("root:c:w:pnlMain:c:w:txtPhoneNumber:tb", System.getProperty("timestamp"));
+        registerParameters.put("root:c:w:pnlMain:c:w:txtPhoneNumber:tb", "+420" + System.getProperty("timestamp"));
         log.info(user.getPhoneNumber());
     }
 
@@ -235,9 +235,9 @@ public class ApiRegisterPageStepDef extends ApiAbakusBorrowerStepDef {
         }
         else {
             user_types_his_first_name("Tony");
-            user_types_his_email("anthony.mottot.test0001@abakus.com");
-            user_types_his_phone_number("123456789");
-            user_types_his_password("Password1122");
+            user_types_his_email("test.automation.api.0001@test.finfactory.com");
+            user_types_his_phone_number("+420123456789");
+            user_types_his_password("Password1122+");
             user_accepts_the_terms_of_business("accepts");
             user_accepts_the_data_protection_policy("accepts");
         }

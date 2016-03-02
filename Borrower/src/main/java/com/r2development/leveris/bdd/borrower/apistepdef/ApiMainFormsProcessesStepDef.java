@@ -15,7 +15,7 @@ import static com.r2development.leveris.utils.HttpUtils.CONSUME_QUIETLY;
 import static com.r2development.leveris.utils.HttpUtils.requestHttpGet;
 
 @Singleton
-public class ApiMainFormsProcessesStepDef extends ApiAbakusBorrowerStepDef {
+public class ApiMainFormsProcessesStepDef extends ApiOpoqoBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiMainFormsProcessesStepDef.class);
 

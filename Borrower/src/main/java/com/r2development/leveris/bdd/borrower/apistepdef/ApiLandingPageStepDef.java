@@ -21,7 +21,7 @@ import static com.r2development.leveris.utils.HttpUtils.requestHttpPost;
 /**
  * todo LandingPageStepDef Specific Implementation
  */
-public class ApiLandingPageStepDef extends ApiAbakusBorrowerStepDef {
+public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiLandingPageStepDef.class.getName());
 

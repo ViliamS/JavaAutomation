@@ -32,7 +32,7 @@ import static com.r2development.leveris.utils.HttpUtils.requestHttpPost;
 import static org.junit.Assert.assertThat;
 
 @Singleton
-public class ApiDocumentUploadStepDef extends ApiAbakusBorrowerStepDef {
+public class ApiDocumentUploadStepDef extends ApiOpoqoBorrowerStepDef {
 
     enum DOCUMENT {
         PROOF_IDENTITY,

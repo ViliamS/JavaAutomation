@@ -20,7 +20,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Singleton
-public class ApiCrmStepDef extends ApiAbakusBorrowerStepDef {
+public class ApiCrmStepDef extends ApiOpoqoBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiCrmStepDef.class);
 

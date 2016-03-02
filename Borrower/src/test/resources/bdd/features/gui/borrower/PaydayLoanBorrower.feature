@@ -19,7 +19,7 @@ Feature: Payday Loan
       | firstName         | AutomationSBUI                                    |
       | email             | test.automation.payday.ui.@test.finfactory.com    |
       | phoneNumber       | +420123456789                                     |
-      | password          | Password1122                                     |
+      | password          | Password1122+                                     |
       | termsBusiness     | accepts                                           |
       | protectionPolicy  | accepts                                           |
 
@@ -96,9 +96,6 @@ Feature: Payday Loan
     And borrower user clicks "Done"
 
 #    YOUR ACCOUNTS
-#    When user clicks "Account"
-#    Then user clicks "ADD ACCOUNT"
-    And user clicks "Current account"
     And user fills in "Current Account"
 #      | fundsSource     | Current Account         |
       | statementDate   | 01/01/2000              |
@@ -111,26 +108,26 @@ Feature: Payday Loan
       | overdraftLimit  | 2002                    |
       | sourceOfSaving  | Gift                    |
       | regularMonthlySaving | 200                |
-    And user clicks "ADD ACCOUNT"
-    And user clicks "Savings account"
-    And user fills in "Savings Account"
-      | statementDate   | 01/01/2000              |
-      | accountName     | test Current Account    |
-      | sortCode1       | 12                      |
-      | sortCode2       | 34                      |
-      | sortCode3       | 56                      |
-      | accountNumber   | 0987654321              |
-      | accountBalance  | 2001                    |
-#      | overdraftLimit  | 2002                    |
-      | sourceOfSaving  | Gift                    |
-      | regularMonthlySaving | 200                |
+#    And user clicks "ADD ACCOUNT"
+#    And user clicks "Savings account"
+#    And user fills in "Savings Account"
+#      | statementDate   | 01/01/2000              |
+#      | accountName     | test Current Account    |
+#      | sortCode1       | 12                      |
+#      | sortCode2       | 34                      |
+#      | sortCode3       | 56                      |
+#      | accountNumber   | 0987654321              |
+#      | accountBalance  | 2001                    |
+##      | overdraftLimit  | 2002                    |
+#      | sourceOfSaving  | Gift                    |
+#      | regularMonthlySaving | 200                |
 #    And user clicks "ADD ACCOUNT"
 #    And user clicks "Account scraping"
 #    And user closes "scraping" form
     And user clicks Accounts "Done"
 
 #    YOUR DEPENDENT
-#    And user hasn't dependants
+    And user hasn't dependants
     And user has dependants
     And user fills in "Dependant form"
     | date Of Birth | 01/01/2000 |

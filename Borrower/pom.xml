@@ -17,7 +17,9 @@
         <environment>dev2</environment>
         <domain>dv2app.opoqodev.com</domain>
         <borrower>http://dv2app.opoqodev.com/stable-borrower</borrower>
+        <!-- TODO check if we are using then delete after fixing -->
         <underwriter>http://dv2app.opoqodev.com/underwriter</underwriter>
+        <!-- TODO check if we are using then delete after fixing -->
         <partner>http://dv2app.opoqodev.com/partner</partner>
         <database>jdbc:oracle:thin:@DV2000.LEVERIS</database>
         <automation.mode>dev</automation.mode>

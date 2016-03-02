@@ -49,8 +49,8 @@ public class HttpUtils {
 
         BasicClientCookie cookieScUnload = new BasicClientCookie("sc-unload", "obu");
 //        cookieScUnload.setDomain("st1app.loftkeys.com");
-        cookieScUnload.setDomain(System.getProperty("domain"));
-        cookieScUnload.setPath("/stable-borrower");
+        cookieScUnload.setDomain(System.getProperty("domain.apollo"));
+        cookieScUnload.setPath("/client");
         cookieStore.addCookie(cookieScUnload);
         localContext.setCookieStore(cookieStore);
 

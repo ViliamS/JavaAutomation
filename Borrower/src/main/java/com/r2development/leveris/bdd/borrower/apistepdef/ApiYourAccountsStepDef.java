@@ -20,7 +20,7 @@ import java.util.List;
 import static com.r2development.leveris.utils.HttpUtils.*;
 
 @Singleton
-public class ApiYourAccountsStepDef extends ApiAbakusBorrowerStepDef {
+public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiYourAccountsStepDef.class);
 

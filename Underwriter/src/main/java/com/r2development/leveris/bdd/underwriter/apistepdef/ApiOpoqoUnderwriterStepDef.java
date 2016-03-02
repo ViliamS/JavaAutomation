@@ -11,9 +11,9 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.protocol.HttpClientContext;
 
 @Singleton
-public class ApiAbakusUnderwriterStepDef {
+public class ApiOpoqoUnderwriterStepDef {
 
-    private static final Log log = LogFactory.getLog(ApiAbakusUnderwriterStepDef.class.getName());
+    private static final Log log = LogFactory.getLog(ApiOpoqoUnderwriterStepDef.class.getName());
 
     protected HttpClient httpClient;
     protected HttpClientContext localContext;
@@ -36,14 +36,14 @@ public class ApiAbakusUnderwriterStepDef {
     @Inject
     HttpResponse httpResponse;
 
-    public ApiAbakusUnderwriterStepDef() {
+    public ApiOpoqoUnderwriterStepDef() {
         httpClient = ApiSupportHttpClientStepDef.getInstanceHttpClient();
         localContext = ApiSupportHttpClientStepDef.getInstanceHttpClientContext();
         jsoupContainer = ApiSupportJsoupStepDef.getInstanceJsoupContainer();
     }
 
     @Inject
-    public ApiAbakusUnderwriterStepDef(User user, HttpResponse httpResponse) {
+    public ApiOpoqoUnderwriterStepDef(User user, HttpResponse httpResponse) {
         this.user = user;
         this.httpResponse = httpResponse;
     }

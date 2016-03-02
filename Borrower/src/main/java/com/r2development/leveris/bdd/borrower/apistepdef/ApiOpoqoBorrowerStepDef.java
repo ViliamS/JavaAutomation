@@ -15,9 +15,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Singleton
-public class ApiAbakusBorrowerStepDef /*implements IBorrower*/ {
+public class ApiOpoqoBorrowerStepDef /*implements IBorrower*/ {
 
-    private static final Log log = LogFactory.getLog(ApiAbakusBorrowerStepDef.class);
+    private static final Log log = LogFactory.getLog(ApiOpoqoBorrowerStepDef.class);
 
     protected HttpClient httpClient;
 //    protected HttpClientContext localContext;
@@ -47,7 +47,7 @@ public class ApiAbakusBorrowerStepDef /*implements IBorrower*/ {
     @Inject
     IHttpResponse httpResponse;
 
-    public ApiAbakusBorrowerStepDef() {
+    public ApiOpoqoBorrowerStepDef() {
         httpClient = ApiSupportHttpClientStepDef.getInstanceHttpClient();
         localContext = ApiSupportHttpClientStepDef.getInstanceHttpClientContext();
 
@@ -66,7 +66,7 @@ public class ApiAbakusBorrowerStepDef /*implements IBorrower*/ {
     }
 
     @Inject
-    public ApiAbakusBorrowerStepDef(IUser user, IHttpResponse httpResponse) {
+    public ApiOpoqoBorrowerStepDef(IUser user, IHttpResponse httpResponse) {
         this.user = user;
         this.httpResponse = httpResponse;
     }

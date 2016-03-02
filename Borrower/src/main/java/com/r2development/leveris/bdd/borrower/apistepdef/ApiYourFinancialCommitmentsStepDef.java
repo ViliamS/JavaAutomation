@@ -13,7 +13,7 @@ import static com.r2development.leveris.utils.HttpUtils.CONSUME_QUIETLY;
 import static com.r2development.leveris.utils.HttpUtils.requestHttpPost;
 
 @Singleton
-public class ApiYourFinancialCommitmentsStepDef extends ApiAbakusBorrowerStepDef {
+public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiYourFinancialCommitmentsStepDef.class);
 

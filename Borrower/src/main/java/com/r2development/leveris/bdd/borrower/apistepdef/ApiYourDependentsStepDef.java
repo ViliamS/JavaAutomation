@@ -13,7 +13,7 @@ import java.util.LinkedHashMap;
 import static com.r2development.leveris.utils.HttpUtils.CONSUME_QUIETLY;
 
 @Singleton
-public class ApiYourDependentsStepDef extends ApiAbakusBorrowerStepDef {
+public class ApiYourDependentsStepDef extends ApiOpoqoBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiYourDependentsStepDef.class);
 

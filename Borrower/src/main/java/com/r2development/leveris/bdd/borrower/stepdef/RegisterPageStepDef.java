@@ -48,7 +48,7 @@ public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
     public void user_goes_to_registration_page() {
 
 //        welcomePage = new WelcomePage(WebDriverService.getWebDriverInstance());
-        welcomePage = new WelcomePage(webDriver);
+        welcomePage = new WelcomePage(webDriver, true);
         registerPage = welcomePage.clickRegister();
     }
 
@@ -88,7 +88,7 @@ public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
         String[] emailArray = email.split("@");
 //        DateTime now = DateTime.now();
 //        emailArray[0] = emailArray[0] + now.toString("yyyyMMddHHmmssSSS");
-        emailArray[0] = emailArray[0] + System.getProperty("timestamp");
+        emailArray[0] = emailArray[0] + System.getProperty("modeRun") + "." + System.getProperty("timestamp");
         registerPage.setEmailAddress(String.join("@", emailArray));
         user.setEmail(String.join("@", emailArray));
         log.info(user.getEmail());
@@ -97,8 +97,8 @@ public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
     @Given("^user types his phone number (.*) in Register page$")
     public void user_types_his_phone_number(String phoneNumber) {
 //        DateTime now = DateTime.now();
-        registerPage.setPhoneNumber(phoneNumber);
-        user.setPhoneNumber(phoneNumber);
+        registerPage.setPhoneNumber("+420" + System.getProperty("timestamp"));
+        user.setPhoneNumber("+420" + System.getProperty("timestamp"));
         log.info(user.getPhoneNumber());
     }
 
@@ -171,11 +171,11 @@ public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
             user_types_his_phone_number(borrowerRegistrationData.get("Phone Number"));
         }
         else {
-            user_types_his_first_name("Tony");
-            user_types_his_email("anthony.mottot.test0001@abakus.com");
+            user_types_his_first_name("AutomationTest");
+            user_types_his_email("test.automation.@test.finfactory.com");
             user_types_his_phone_number("123456789");
         }
-        user_types_his_password("Password1122");
+        user_types_his_password("Password1122+");
         user_accepts_the_terms_of_business("accepts");
         user_accepts_the_data_protection_policy("accepts");
         user_registers();
