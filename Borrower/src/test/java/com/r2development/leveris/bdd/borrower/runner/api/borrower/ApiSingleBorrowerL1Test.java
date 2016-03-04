@@ -1,12 +1,13 @@
 package com.r2development.leveris.bdd.borrower.runner.api.borrower;
 
 
+import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-//@CucumberOptions(
-@Cucumber.Options(
+@CucumberOptions(
+//@Cucumber.Options(
         glue = { "classpath:com.r2development.leveris.bdd.borrower.apistepdef" },
         monochrome = true,
         format = {

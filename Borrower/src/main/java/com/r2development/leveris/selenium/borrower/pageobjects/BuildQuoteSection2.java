@@ -1,10 +1,9 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
-import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -42,8 +41,8 @@ public class BuildQuoteSection2 extends Borrower implements IBuildQuoteSection2 
     @FindBy( xpath = BUILD_QUOTE_NOT_ELIGIBLE_XPATH )
     protected WebElement weQuoteNotEligible;
 
-    @Inject
-    public BuildQuoteSection2(WebDriver webDriver) {
+//    @Inject
+    public BuildQuoteSection2(SharedDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);
     }

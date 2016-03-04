@@ -1,7 +1,10 @@
 package com.r2development.leveris.bdd.borrower.apistepdef;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.QuoteData;
+import com.r2development.leveris.di.IHttpResponse;
+import com.r2development.leveris.di.IUser;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -34,6 +37,17 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
 
     protected boolean toSkip = false;
     protected QuoteData quoteData = new QuoteData();
+
+    @Inject
+    IHttpResponse httpResponse;
+    @Inject
+    IUser user;
+
+    @Inject
+    public ApiGetAQuoteStepDef(IHttpResponse httpResponse, IUser user) {
+        this.httpResponse = httpResponse;
+        this.user = user;
+    }
 
     @Given("^user goes to Borrower homepage$")
     public void user_goes_to_borrower_home_page() throws IOException {

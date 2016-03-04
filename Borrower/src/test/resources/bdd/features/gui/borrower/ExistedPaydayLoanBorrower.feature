@@ -6,9 +6,9 @@ Feature: Payday Loan
 
   Scenario: Payday Load
 
-    Given user logs in with these credentials
-      | email | test_automation.payday.ui.test000120160217192723839@abakus.com |
-      | pwd   | Password1122                                                   |
+    Given Borrower user logs in with these credentials
+      | email | test_automation.payday_ui@test.finfactory.com |
+      | pwd   | Password1122+                                                   |
 
 #    PERSONAL DETAILS
 #    When user clicks "Borrower Personal Details"

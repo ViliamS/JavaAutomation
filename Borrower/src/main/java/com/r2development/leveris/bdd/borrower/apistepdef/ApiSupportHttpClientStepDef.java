@@ -27,8 +27,8 @@ public class ApiSupportHttpClientStepDef {
         if ( StringUtils.isEmpty(System.getProperty("environment")))
             System.setProperty("environment", "dev2");
 
-        if ( StringUtils.isEmpty(System.getProperty("domain")))
-            System.setProperty("domain", "dv2app.opoqodev.com");
+        if ( StringUtils.isEmpty(System.getProperty("domain.borrower")))
+            System.setProperty("domain.borrower", "dv2app.opoqodev.com");
 
         if ( StringUtils.isEmpty(System.getProperty("borrower")))
             System.setProperty("borrower", "http://dv2app.opoqodev.com/stable-borrower");
@@ -39,10 +39,10 @@ public class ApiSupportHttpClientStepDef {
         httpClient = HttpUtils.createHttpClient();
 
         Assert.assertNotNull("Maven didn't load the System property Environment", System.getProperty("environment"));
-        Assert.assertNotNull("Maven didn't load the System property Domain", System.getProperty("domain"));
+        Assert.assertNotNull("Maven didn't load the System property Domain", System.getProperty("domain.borrower"));
         Assert.assertNotNull("Maven didn't load the System property Borrower", System.getProperty("borrower"));
 
-        localContext = HttpUtils.initContext(System.getProperty("domain"), "/stable-borrower");
+        localContext = HttpUtils.initContext(System.getProperty("domain.borrower"), "/stable-borrower");
 //        localContext = getNewInstanceHttpClientContext();
     }
 

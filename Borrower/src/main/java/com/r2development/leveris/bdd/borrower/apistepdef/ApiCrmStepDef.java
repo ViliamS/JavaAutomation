@@ -1,7 +1,10 @@
 package com.r2development.leveris.bdd.borrower.apistepdef;
 
 import com.google.common.base.Predicate;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.r2development.leveris.di.IHttpResponse;
+import com.r2development.leveris.di.IUser;
 import cucumber.api.java.en.Given;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -23,6 +26,17 @@ import java.util.regex.Pattern;
 public class ApiCrmStepDef extends ApiOpoqoBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiCrmStepDef.class);
+
+    @Inject
+    IHttpResponse httpResponse;
+    @Inject
+    IUser user;
+
+    @Inject
+    public ApiCrmStepDef(IHttpResponse httpResponse, IUser user) {
+        this.httpResponse = httpResponse;
+        this.user = user;
+    }
 
     @Given("^user goes to CRM$")
     public void user_goes_tp_CRM() {

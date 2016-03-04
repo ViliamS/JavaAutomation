@@ -1,11 +1,11 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
 import com.google.inject.Inject;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import com.r2development.leveris.di.IUser;
 import com.r2development.leveris.di.User;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.WebDriver;
 
 public class DocumentUploadPage extends HeaderAndBottomAndFormsMenuSection implements IFormsMenu, IDocumentUploadPage {
 
@@ -13,6 +13,8 @@ public class DocumentUploadPage extends HeaderAndBottomAndFormsMenuSection imple
 
     protected IDocumentUploadSection documentUploadSection;
     protected IFormsMenu formsMenu;
+
+    @Inject
     protected IUser user;
 
 //    @Inject
@@ -24,12 +26,12 @@ public class DocumentUploadPage extends HeaderAndBottomAndFormsMenuSection imple
 //        bottomSection = new BottomSection(webDriver);
 //    }
 
-    @Inject
-    public DocumentUploadPage(WebDriver webDriver, IUser user) {
+//    @Inject
+    public DocumentUploadPage(SharedDriver webDriver/*, IUser user*/) {
         super(webDriver);
-        this.user = user;
+//        this.user = user;
         headerSection = new HeaderSection(webDriver);
-        documentUploadSection = new DocumentUploadSection(webDriver, user);
+        documentUploadSection = new DocumentUploadSection(webDriver/*, user*/);
         formsMenu = new FormsMenu(webDriver);
         bottomSection = new BottomSection(webDriver);
     }

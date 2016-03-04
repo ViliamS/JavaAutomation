@@ -22,6 +22,8 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
     private static final Log log = LogFactory.getLog(YourAccountsStepDef.class);
 
     private WebDriver webDriver;
+
+    @Inject
     private IUser user;
 
     IYourAccountsPage yourAccountsPage;
@@ -29,7 +31,7 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
     IPersonalDetailsPage borrowerPersonalDetailsPage;
 
     @Inject
-    public YourAccountsStepDef(WebDriver webDriver, IUser user) {
+    public YourAccountsStepDef(SharedDriver webDriver/*, IUser user*/) {
         this.webDriver = webDriver;
         yourAccountsPage = new YourAccountsPage(webDriver);
     }

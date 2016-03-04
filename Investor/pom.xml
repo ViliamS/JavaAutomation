@@ -40,7 +40,6 @@
         <repository>
             <id>nexus.qa.loftkeys.com</id>
             <name>QA loftkeys</name>
-
             <url>https://nexus.loftkeys.com/content/repositories/qa</url>
         </repository>
     </repositories>
@@ -168,26 +167,26 @@
     <dependencies>
 
         <!-- Module Dependencies -->
-        <!--<dependency>-->
-        <!--<groupId>com.r2development.leveris.qa.utils</groupId>-->
-        <!--<artifactId>Environment</artifactId>-->
-        <!--<version>${com-r2development-leveris-qa-utils.environment.version}</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.r2development.leveris.qa.utils</groupId>
+            <artifactId>Environment</artifactId>
+            <version>${com-r2development-leveris-qa-utils.environment.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.r2development.leveris.qa.utils</groupId>
             <artifactId>AcmExcel</artifactId>
             <version>${com-r2development-leveris-qa-utils.acmexcel.version}</version>
         </dependency>
-        <!--<dependency>-->
-        <!--<groupId>com.r2development.leveris.qa.utils</groupId>-->
-        <!--<artifactId>OraSql</artifactId>-->
-        <!--<version>${com-r2development-leveris-qa-utils.orasql.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>com.r2development.leveris.qa.utils</groupId>-->
-        <!--<artifactId>DataValidator</artifactId>-->
-        <!--<version>${com-r2development-leveris-qa.data-validator.version}</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.r2development.leveris.qa.utils</groupId>
+            <artifactId>OraSql</artifactId>
+            <version>${com-r2development-leveris-qa-utils.orasql.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.r2development.leveris.qa.utils</groupId>
+            <artifactId>DataValidator</artifactId>
+            <version>${com-r2development-leveris-qa.data-validator.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.r2development.leveris.qa</groupId>
             <artifactId>Borrower</artifactId>
@@ -242,13 +241,6 @@
             <artifactId>guice</artifactId>
             <version>${com-google-inject.guice.version}</version>
         </dependency>
-
-        <!-- Oracle Ojdbc -->
-        <!--<dependency>-->
-        <!--<groupId>com.oracle</groupId>-->
-        <!--<artifactId>ojdbc7</artifactId>-->
-        <!--<version>${com-oracle.ojdbc7.version}</version>-->
-        <!--</dependency>-->
 
     </dependencies>
 

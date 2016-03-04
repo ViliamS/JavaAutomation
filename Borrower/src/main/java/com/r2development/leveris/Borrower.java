@@ -1,6 +1,6 @@
 package com.r2development.leveris;
 
-import com.google.inject.Inject;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.*;
@@ -16,10 +16,10 @@ public class Borrower /*implements IBorrower*/ {
     private static final Log log = LogFactory.getLog(Borrower.class.getName());
 
 //    @Inject
-    protected WebDriver /*final*/ webDriver;
+    protected SharedDriver /*final*/ webDriver;
 
-    @Inject
-    protected Borrower(WebDriver webDriver) {
+//    @Inject
+    protected Borrower(SharedDriver webDriver) {
         this.webDriver = webDriver;
     }
 

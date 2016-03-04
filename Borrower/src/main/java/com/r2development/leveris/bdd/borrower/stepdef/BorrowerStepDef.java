@@ -38,7 +38,7 @@ public class BorrowerStepDef /*extends Abakus*/ /*implements IBorrower*/ {
 
     ITopBannerMenu topBannerMenu;
 
-//    @Inject
+    @Inject
     IUser user;
 //    @Inject
     WebDriver webDriver;
@@ -83,12 +83,12 @@ public class BorrowerStepDef /*extends Abakus*/ /*implements IBorrower*/ {
 
     @Inject
 //    BorrowerStepDef(WebDriver webDriver, User user) {
-    BorrowerStepDef(WebDriver webDriver, IUser user) {
+    BorrowerStepDef(SharedDriver webDriver/*, IUser user*/) {
 //        super(webDriver);
 //        this.user = user;
 
         this.webDriver = webDriver;
-        this.user = user;
+//        this.user = user;
 
         quoteLandingPage = new QuoteLandingPage(webDriver);
         quoteQuickLoanPage = new QuoteQuickLoanPage(webDriver);

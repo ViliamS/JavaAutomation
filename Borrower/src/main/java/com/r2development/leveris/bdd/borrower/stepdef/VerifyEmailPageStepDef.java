@@ -10,13 +10,12 @@ import com.r2development.leveris.selenium.borrower.pageobjects.VerifyEmailPage;
 import cucumber.api.java.en.Then;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.WebDriver;
 
 @Singleton
 public class VerifyEmailPageStepDef /*extends BorrowerStepDef*/ {
 
     private static final Log log = LogFactory.getLog(VerifyEmailPageStepDef.class);
-    private WebDriver webdriver;
+    private SharedDriver webdriver;
 
     IVerifyEmailPage verifyEmailPage;
     IWelcomePage welcomePage;
@@ -26,7 +25,7 @@ public class VerifyEmailPageStepDef /*extends BorrowerStepDef*/ {
     IUser user;
 
     @Inject
-    VerifyEmailPageStepDef(WebDriver webDriver) {
+    VerifyEmailPageStepDef(SharedDriver webDriver) {
 //        super(webDriver);
         this.webdriver = webDriver;
 

@@ -13,7 +13,6 @@ import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hamcrest.core.Is;
-import org.openqa.selenium.WebDriver;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,7 +27,7 @@ public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
 
     private static final Log log = LogFactory.getLog(RegisterPageStepDef.class);
 
-    private WebDriver webDriver;
+    private SharedDriver webDriver;
     IWelcomePage welcomePage;
     IRegisterPage registerPage;
     IVerifyEmailPage verifyEmailPage;
@@ -38,7 +37,7 @@ public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
     IUser user;
 
     @Inject
-    RegisterPageStepDef(WebDriver webDriver) {
+    RegisterPageStepDef(SharedDriver webDriver) {
 //        super(webDriver);
         this.webDriver = webDriver;
         registerPage = new RegisterPage(webDriver);
@@ -97,8 +96,10 @@ public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
     @Given("^user types his phone number (.*) in Register page$")
     public void user_types_his_phone_number(String phoneNumber) {
 //        DateTime now = DateTime.now();
-        registerPage.setPhoneNumber("+420" + System.getProperty("timestamp"));
-        user.setPhoneNumber("+420" + System.getProperty("timestamp"));
+//        registerPage.setPhoneNumber("+420" + System.getProperty("timestamp"));
+        registerPage.setPhoneNumber("+420123456789");
+//        user.setPhoneNumber("+420" + System.getProperty("timestamp"));
+        user.setPhoneNumber("+420123456789");
         log.info(user.getPhoneNumber());
     }
 

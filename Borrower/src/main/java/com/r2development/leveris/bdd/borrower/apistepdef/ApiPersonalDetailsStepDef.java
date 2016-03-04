@@ -1,7 +1,10 @@
 package com.r2development.leveris.bdd.borrower.apistepdef;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.PersonalDetailsData;
+import com.r2development.leveris.di.IHttpResponse;
+import com.r2development.leveris.di.IUser;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang.StringUtils;
@@ -25,6 +28,17 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
     private static final Log log = LogFactory.getLog(ApiPersonalDetailsStepDef.class);
 
     PersonalDetailsData personalDetailsData;
+
+    @Inject
+    IHttpResponse httpResponse;
+    @Inject
+    IUser user;
+
+    @Inject
+    public ApiPersonalDetailsStepDef(IHttpResponse httpResponse, IUser user) {
+        this.httpResponse = httpResponse;
+        this.user = user;
+    }
 
     @When("^(borrower|coapplicant) fills in \"Personal Details\"$")
 //    public void user_fills_in_borrower_personal_details(String borrowerOrCoapplicant, Map<String, String> personalDetailsDataMap) throws IOException {

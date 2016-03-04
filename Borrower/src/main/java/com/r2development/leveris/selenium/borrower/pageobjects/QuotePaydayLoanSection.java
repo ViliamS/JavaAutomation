@@ -1,13 +1,12 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
-import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
-import org.openqa.selenium.WebDriver;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 
 public class QuotePaydayLoanSection extends Borrower implements IQuotePaydayLoanSection{
 
-    @Inject
-    public QuotePaydayLoanSection(WebDriver webDriver){
+//    @Inject
+    public QuotePaydayLoanSection(SharedDriver webDriver){
         super( webDriver );
     }
 
@@ -63,6 +62,6 @@ public class QuotePaydayLoanSection extends Borrower implements IQuotePaydayLoan
     public IQuoteConfigurationPage clickContinue() {
         isVisible(CONTINUE_TEAL_BUTTON_XPATH, true);
         clickElementViaJavascript(CONTINUE_TEAL_BUTTON_XPATH);
-        return new QuoteConfigurationPage( webDriver );
+        return new QuoteConfigurationPage(webDriver);
     }
 }

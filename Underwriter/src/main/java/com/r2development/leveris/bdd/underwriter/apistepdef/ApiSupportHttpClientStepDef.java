@@ -27,8 +27,8 @@ public class ApiSupportHttpClientStepDef {
         if ( StringUtils.isEmpty(System.getProperty("environment")))
             System.setProperty("environment", "dev2");
 
-        if ( StringUtils.isEmpty(System.getProperty("domain")))
-            System.setProperty("domain", "dv2app.opoqodev.com");
+        if ( StringUtils.isEmpty(System.getProperty("domain.underwriter")))
+            System.setProperty("domain.underwriter", "dv2app.opoqodev.com");
 
         if ( StringUtils.isEmpty(System.getProperty("underwriter")))
             System.setProperty("underwriter", "http://dv2app.opoqodev.com/stable-underwriter");
@@ -42,10 +42,10 @@ public class ApiSupportHttpClientStepDef {
         httpClient = HttpUtils.createHttpClient();
 
         Assert.assertNotNull("Maven didn't load the System property Environment", System.getProperty("environment"));
-        Assert.assertNotNull("Maven didn't load the System property Domain", System.getProperty("domain"));
+        Assert.assertNotNull("Maven didn't load the System property Domain", System.getProperty("domain.underwriter"));
         Assert.assertNotNull("Maven didn't load the System property UnderWriter", System.getProperty("underwriter"));
 
-        localContext = HttpUtils.initContext(System.getProperty("domain"), "/stable-underwriter");
+        localContext = HttpUtils.initContext(System.getProperty("domain.underwriter"), "/stable-underwriter");
 //        localContext = getNewInstanceHttpClientContext();
     }
 

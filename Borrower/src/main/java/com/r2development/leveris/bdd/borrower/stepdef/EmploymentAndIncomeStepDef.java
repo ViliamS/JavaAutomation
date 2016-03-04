@@ -22,6 +22,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
     private static final Log log = LogFactory.getLog(EmploymentAndIncomeStepDef.class);
 
     private final WebDriver webDriver;
+    @Inject
     IUser user;
     IBorrowerHomePage borrowerHomePage;
     IPersonalDetailsPage borrowerPersonalDetailsPage;
@@ -30,9 +31,9 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
     IYourAccountsPage yourAccountsPage;
 
     @Inject
-    EmploymentAndIncomeStepDef(WebDriver webDriver, IUser user) {
+    EmploymentAndIncomeStepDef(SharedDriver webDriver/*, IUser user*/) {
         this.webDriver = webDriver;
-        this.user = user;
+//        this.user = user;
 //        super(webDriver);
         borrowerEmploymentIncomesPage = new EmploymentIncomesPage(webDriver);
 //        coapplicantEmploymentIncomesPage = new EmploymentIncomesPage(WebDriverService.getWebDriverInstance());

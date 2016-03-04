@@ -131,18 +131,6 @@ public class Quote {
         user.setPhoneNumber(phoneNumber);
         user.setPwd(pwd);
 
-//        root:c:w:pnlMain:c:w:txtName:tb:Anthony
-//        root:c:w:pnlMain:c:w:txtEmailAddress:tb:anthony.mottot.test000120160209113000000@abakus.com
-//        root:c:w:pnlMain:c:w:txtPhoneNumber:tb:123456789
-//        root:c:w:pnlMain:c:w:txtPassword:tb:Password1122
-//        root:c:w:pnlMain:c:w:chkTermsOfBusiness:checkbox:on
-//        root:c:w:pnlMain:c:w:chkDataProtectionPolicy:checkbox:on
-//        stepToken:7
-//        root:c:w:pnlMain:c:w:btnRegister:submit:1
-
-//        http://dv2app.opoqodev.com/stable-borrower/form.1?wicket:interface=:1:main:c:form:form:root:c:w:pnlMain:c:w:btnRegister:submit::IBehaviorListener:0:-1&scrollPos=41&random=0.5611498283687979
-
-
         String registrationResponse = requestHttpPost(
                 httpClient,
                 "http://dv2app.opoqodev.com/stable-borrower/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlMain:c:w:btnRegister:submit::IBehaviorListener:0:",

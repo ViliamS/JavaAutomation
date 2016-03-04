@@ -1,10 +1,9 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
-import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.WebDriver;
 
 /**
  * todo Page Object Specific Implementation
@@ -15,8 +14,8 @@ public class QuoteQuickLoanPage extends Borrower implements IQuoteQuickLoanPage 
 
     private static final Log log = LogFactory.getLog( QuoteQuickLoanPage.class.getName() );
 
-    @Inject
-    public QuoteQuickLoanPage(WebDriver webDriver ) {
+//    @Inject
+    public QuoteQuickLoanPage(SharedDriver webDriver ) {
         super( webDriver );
         quickLoanSection = new QuoteQuickLoanSection(webDriver);
     }

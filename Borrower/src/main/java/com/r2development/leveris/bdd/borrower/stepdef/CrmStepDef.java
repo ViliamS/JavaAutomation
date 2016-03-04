@@ -3,7 +3,7 @@ package com.r2development.leveris.bdd.borrower.stepdef;
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.r2development.leveris.di.User;
+import com.r2development.leveris.di.IUser;
 import cucumber.api.java.en.Given;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -26,7 +26,8 @@ public class CrmStepDef /*extends BorrowerStepDef*/ {
 
     private static final Log log = LogFactory.getLog(CrmStepDef.class);
 
-    User user;
+    @Inject
+    IUser user;
     private final WebDriver webDriver;
 
     @Inject

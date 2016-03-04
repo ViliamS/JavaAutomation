@@ -1,6 +1,9 @@
 package com.r2development.leveris.bdd.borrower.apistepdef;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.r2development.leveris.di.IHttpResponse;
+import com.r2development.leveris.di.IUser;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;
@@ -17,7 +20,15 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
 
     private static final Log log = LogFactory.getLog(ApiYourFinancialCommitmentsStepDef.class);
 
-    public ApiYourFinancialCommitmentsStepDef() {
+    @Inject
+    IHttpResponse httpResponse;
+    @Inject
+    IUser user;
+
+    @Inject
+    public ApiYourFinancialCommitmentsStepDef(IHttpResponse httpResponse, IUser user) {
+        this.httpResponse = httpResponse;
+        this.user = user;
     }
 
     @When("^user selects (Personal Loan|Credit Card|Maintenance Payment|Other|Car Loan|Student Loan) as financial commitment type$")

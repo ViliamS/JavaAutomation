@@ -1,21 +1,23 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
 import com.google.inject.Inject;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import com.r2development.leveris.di.IUser;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.WebDriver;
 
 public class YourFinancialCommitmentsPage extends HeaderAndBottomAndFormsMenuSection implements IYourFinancialCommitmentsPage {
     
     private static final Log log = LogFactory.getLog(YourFinancialCommitmentsPage.class);
     
 //    IFormsMenu formsMenu;
+
+    @Inject
     private IUser user;
     protected IYourFinancialCommitmentsSection yourFinancialCommitmentsSection;
 
-    @Inject
-    public YourFinancialCommitmentsPage(WebDriver webDriver) {
+//    @Inject
+    public YourFinancialCommitmentsPage(SharedDriver webDriver) {
         super(webDriver);
         headerSection = new HeaderSection(webDriver);
         formsMenu = new FormsMenu(webDriver);
@@ -202,7 +204,8 @@ public class YourFinancialCommitmentsPage extends HeaderAndBottomAndFormsMenuSec
     @Override
     public IDocumentUploadPage clickDone() {
         yourFinancialCommitmentsSection.clickDone();
-        return new DocumentUploadPage(webDriver, user);
+//        return new DocumentUploadPage(webDriver, user);
+        return new DocumentUploadPage(webDriver);
     }
 
     @Override
@@ -214,7 +217,8 @@ public class YourFinancialCommitmentsPage extends HeaderAndBottomAndFormsMenuSec
     @Override
     public IDocumentUploadPage clickNext() {
         yourFinancialCommitmentsSection.clickNext();
-        return new DocumentUploadPage(webDriver, user);
+//        return new DocumentUploadPage(webDriver, user);
+        return new DocumentUploadPage(webDriver);
     }
 
     @Override

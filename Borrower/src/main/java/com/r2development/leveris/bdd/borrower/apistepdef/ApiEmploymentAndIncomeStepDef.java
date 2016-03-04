@@ -1,7 +1,9 @@
 package com.r2development.leveris.bdd.borrower.apistepdef;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.EmploymentIncomeData;
+import com.r2development.leveris.di.IHttpResponse;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -21,9 +23,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.r2development.leveris.utils.HttpUtils.CONSUME_QUIETLY;
-import static com.r2development.leveris.utils.HttpUtils.requestHttpGet;
-import static com.r2development.leveris.utils.HttpUtils.requestHttpPost;
+import static com.r2development.leveris.utils.HttpUtils.*;
 import static org.hamcrest.Matchers.anyOf;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.core.IsNot.not;
@@ -34,7 +34,12 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiEmploymentAndIncomeStepDef.class);
 
-    ApiEmploymentAndIncomeStepDef() {
+    @Inject
+    IHttpResponse httpResponse;
+
+    @Inject
+    public ApiEmploymentAndIncomeStepDef(IHttpResponse httpResponse) {
+        this.httpResponse = httpResponse;
     }
 
     @Given("(borrower) fills in \"Employment Income\"$")

@@ -1,12 +1,11 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
-import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 
 /**
  * todo LandingPageStepDef Specific Implementation
@@ -15,8 +14,8 @@ public class QuoteConfigurationSection extends Borrower implements IQuoteConfigu
 
     private static final Log log = LogFactory.getLog(QuoteConfigurationSection.class.getName());
 
-    @Inject
-    public QuoteConfigurationSection(WebDriver webDriver){
+//    @Inject
+    public QuoteConfigurationSection(SharedDriver webDriver){
         super(webDriver);
 /*        PageFactory.initElements(webDriver, this);
         isHeaderGreatAndQuickLoanPresent();

@@ -1,9 +1,7 @@
 package com.r2development.leveris.bdd.apollo.apistepdef;
 
 import com.google.inject.Singleton;
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -30,17 +28,17 @@ public class ApiLoginPageStepDef extends ApiOpoqoApolloStepDef {
 //        loginParameters = new LinkedHashMap<>();
 //    }
 
-    @Given("^User types his email login (.*) in Login page$")
+    @Given("^Apollo User types his email login (.*) in Login page$")
     public void user_types_his_login(String email) {
 //        loginParameters.put("root:c:w:pnlMain:c:w:txtEmailAddress:tb", email);
     }
 
-    @Given("^User types his pwd (.*) in Login page$")
+    @Given("^Apollo User types his pwd (.*) in Login page$")
     public void user_types_his_pwd(String pwd) {
 //        loginParameters.put("root:c:w:pnlMain:c:w:pwdPassword:tb", pwd);
     }
 
-    @When("^user logs in$")
+    @When("^Apollo user logs in$")
     public void user_logs_in() throws IOException {
 
 //        String currentHttpResponse = httpResponse.getHttpResponse();
@@ -70,7 +68,7 @@ public class ApiLoginPageStepDef extends ApiOpoqoApolloStepDef {
 
     }
 
-    @When("^user logs in with these credentials$")
+    @When("^Apollo user logs in with these credentials$")
     public void user_logs_in_with_these_credentials(List<String> credentials) throws IOException {
 
 //        String loginPageResponse = requestHttpGet(
@@ -122,24 +120,24 @@ public class ApiLoginPageStepDef extends ApiOpoqoApolloStepDef {
 
     }
 
-    @When("^user forgets his password$")
+    @When("^Apollo user forgets his password$")
     public void user_forgets_his_password() {
     }
 
-    @When("^user closes the login page")
+    @When("^Apollo user closes the login page")
     public void user_closes_the_login_page() {
     }
 
-    @When("^user wants to (show|hide) his password in Login page$")
+    @When("^Apollo user wants to (show|hide) his password in Login page$")
     public void user_wants_to_his_password(String showOrHide) {
     }
 
-    @Then("^Home Borrower Page is loaded$")
-    public void home_borrower_page_is_loaded() {
-    }
+//    @Then("^Home Borrower Page is loaded$")
+//    public void home_borrower_page_is_loaded() {
+//    }
 
-    @And("^user logs in as his account is activated$")
-    public void user_logs_in_as_his_account_is_activated() throws Exception {
+//    @And("^user logs in as his account is activated$")
+//    public void user_logs_in_as_his_account_is_activated() throws Exception {
 
 //        activateAccount(user.getEmail());
 //
@@ -194,6 +192,6 @@ public class ApiLoginPageStepDef extends ApiOpoqoApolloStepDef {
 //        user_logs_in();
 //        Thread.sleep(1000); // ??? without that we have white page
 
-    }
+//    }
 
 }

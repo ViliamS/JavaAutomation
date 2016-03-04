@@ -7,8 +7,8 @@ Feature: Verification LoginPage
 
   Scenario: Pass registration and Login page
     Given user creates an account
-    When user logs in as his account is activated
-    Then Home Borrower Page is loaded
+    When Borrower user logs in as his account is activated
+#    Then Home Borrower Page is loaded
 
 
 

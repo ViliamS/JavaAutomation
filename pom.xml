@@ -34,15 +34,19 @@
         <com-r2development-leveris-qa.investor.version>1.0-SNAPSHOT</com-r2development-leveris-qa.investor.version>
 
         <environment>dev2</environment>
-        <domain>dv2app.opoqodev.com</domain>
+        <domain.borrower>dv2app.opoqodev.com</domain.borrower>
         <borrower>http://dv2app.opoqodev.com/stable-borrower</borrower>
-        <underwriter>http://dv2app.opoqodev.com/underwriter</underwriter>
+        <domain.underwriter>dv2app.opoqodev.com</domain.underwriter>
+        <underwriter>http://dv2app.opoqodev.com/stable-underwriter</underwriter>
         <domain.apollo>dv2apl.opoqodev.com</domain.apollo>
         <apollo.context.client>/client</apollo.context.client>
         <apollo.client>https://dv2apl.opoqodev.com/client</apollo.client>
         <apollo.context.payment>/payment</apollo.context.payment>
         <apollo.payment>https://dv2apl.opoqodev.com/payment</apollo.payment>
         <partner>http://dv2app.opoqodev.com/partner</partner>
+        <domain.investor>dv2pub.opoqodev.com</domain.investor>
+        <investor.registration>http://dv2pub.opoqodev.com/register</investor.registration>
+        <investor>http://dv2pub.opoqodev.com/</investor>
         <database>jdbc:oracle:thin:@DV20000.LEVERIS</database>
         <automation.mode>dev</automation.mode>
         <active.screenshot>false</active.screenshot>
@@ -54,10 +58,10 @@
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyyMMddHHmmssSSS</maven.build.timestamp.format>
 
-        <org-seleniumhq-selenium.selenium-java.version>2.48.2</org-seleniumhq-selenium.selenium-java.version>
-        <info-cukes.cucumber-guice.version>1.1.1</info-cukes.cucumber-guice.version>
-        <info-cukes.cucumber-junit.version>1.1.1</info-cukes.cucumber-junit.version>
-        <info-cukes.cucumber-java.version>1.1.1</info-cukes.cucumber-java.version>
+        <org-seleniumhq-selenium.selenium-java.version>2.52.0</org-seleniumhq-selenium.selenium-java.version>
+        <info-cukes.cucumber-guice.version>1.2.4</info-cukes.cucumber-guice.version>
+        <info-cukes.cucumber-junit.version>1.2.4</info-cukes.cucumber-junit.version>
+        <info-cukes.cucumber-java.version>1.2.4</info-cukes.cucumber-java.version>
         <info-cukes.cucumber-java8.version>1.2.4</info-cukes.cucumber-java8.version>
         <com-google-inject.guice.version>4.0</com-google-inject.guice.version>
         <net-masterthought.cucumber-reporting.version>1.1.0</net-masterthought.cucumber-reporting.version>
@@ -130,7 +134,7 @@
             <dependency>
                 <groupId>com.r2development.leveris.qa</groupId>
                 <artifactId>Investor</artifactId>
-                <version>${com-r2development-leveris-qa.apollo.version.version}</version>
+                <version>${com-r2development-leveris-qa.investor.version}</version>
             </dependency>
 
             <!-- QA Utils -->
@@ -150,16 +154,16 @@
             <!--===========-->
 
             <!-- GUI Testing -->
-            <dependency>
-                <groupId>org.seleniumhq.selenium</groupId>
-                <artifactId>selenium-java</artifactId>
-                <version>${org-seleniumhq-selenium.selenium-java.version}</version>
-            </dependency>
             <!--<dependency>-->
                 <!--<groupId>org.seleniumhq.selenium</groupId>-->
-                <!--<artifactId>selenium-server-standalone</artifactId>-->
-                <!--<version>2.43.1</version>-->
+                <!--<artifactId>selenium-java</artifactId>-->
+                <!--<version>${org-seleniumhq-selenium.selenium-java.version}</version>-->
             <!--</dependency>-->
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-server-standalone</artifactId>
+                <version>2.52.0</version>
+            </dependency>
 
             <!-- Cucumber -->
             <dependency>

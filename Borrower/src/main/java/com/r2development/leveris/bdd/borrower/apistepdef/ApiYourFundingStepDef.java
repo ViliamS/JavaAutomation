@@ -1,6 +1,8 @@
 package com.r2development.leveris.bdd.borrower.apistepdef;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.r2development.leveris.di.IHttpResponse;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;
@@ -17,7 +19,12 @@ public class ApiYourFundingStepDef extends ApiOpoqoBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiYourFundingStepDef.class);
 
-    ApiYourFundingStepDef() {
+    @Inject
+    IHttpResponse httpResponse;
+
+    @Inject
+    public ApiYourFundingStepDef(IHttpResponse httpResponse) {
+        this.httpResponse = httpResponse;
     }
 
     @When("^user clicks \"ADD SOURCE OF FUNDS\"$")

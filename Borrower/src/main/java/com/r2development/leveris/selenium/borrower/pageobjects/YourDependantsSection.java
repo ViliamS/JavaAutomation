@@ -1,11 +1,10 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
-import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -60,8 +59,8 @@ public class YourDependantsSection extends Borrower implements IYourDependantsSe
     @FindBy ( xpath = YOUR_DEPENDANTS_NEXT_DEPENDANT_XPATH )
     protected WebElement weYourDependantsNextDependant;
 
-    @Inject
-    YourDependantsSection(WebDriver webDriver) {
+//    @Inject
+    YourDependantsSection(SharedDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);
     }

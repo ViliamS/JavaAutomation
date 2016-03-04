@@ -1,7 +1,10 @@
 package com.r2development.leveris.bdd.borrower.apistepdef;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.RegistrationData;
+import com.r2development.leveris.di.IUser;
+import com.r2development.leveris.di.User;
 import com.r2development.leveris.qa.utils.ACMExcel;
 import com.r2development.leveris.utils.ExcelUtils;
 import cucumber.api.java.en.Given;
@@ -29,6 +32,9 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
 //    private IUser user;
 //    private Map<String, String> registerParameters;
 
+    @Inject
+    IUser user;
+
 //    @Inject
 //    ApiRegisterPageStepDef( HttpClient httpClient, HttpContext localContext, IUser user) {
 //        this.httpClient = httpClient;
@@ -36,6 +42,18 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
 //        this.user = user;
 //        registerParameters = new LinkedHashMap<>();
 //    }
+
+    public ApiRegisterPageStepDef() {
+        super();
+    }
+
+    @Inject
+    public ApiRegisterPageStepDef(IUser user) {
+//        this.httpClient = httpClient;
+//        this.localContext = localContext;
+        this.user = user;
+//        registerParameters = new LinkedHashMap<>();
+    }
 
     @Given("user goes to Registration page$")
     public void user_goes_to_registration_page() throws IOException {
@@ -114,6 +132,8 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
     public void user_types_his_first_name(String firstName) {
 //        registerPage.setFirstname(firstName);
 //        String uniqueAutomationFirstname = new DateTime().now().toString("yyyyMMddHHmmssSSS");
+        if ( user == null)
+            user = new User(null, null, null, null);
         user.setFirstName(firstName/* + uniqueAutomationFirstname*/);
         registerParameters.put("root:c:w:pnlMain:c:w:txtName:tb", firstName /*+ new DateTime().now().toString("yyyyMMddHHmmssSSS")*/);
     }
@@ -235,7 +255,7 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
         }
         else {
             user_types_his_first_name("Tony");
-            user_types_his_email("test.automation.api.0001@test.finfactory.com");
+            user_types_his_email("test.automation.api@test.finfactory.com");
             user_types_his_phone_number("+420123456789");
             user_types_his_password("Password1122+");
             user_accepts_the_terms_of_business("accepts");

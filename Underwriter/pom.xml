@@ -15,8 +15,8 @@
 
     <properties>
         <environment>dev2</environment>
-        <domain>dv2app.opoqodev.com</domain>
-        <underwriter>http://dv2app.opoqodev.com/stable-borrower</underwriter>
+        <domain.underwriter>dv2app.opoqodev.com</domain.underwriter>
+        <underwriter>http://dv2app.opoqodev.com/stable-underwriter</underwriter>
         <automation.mode>dev</automation.mode>
         <active.screenshot>false</active.screenshot>
         <browser>chrome</browser>

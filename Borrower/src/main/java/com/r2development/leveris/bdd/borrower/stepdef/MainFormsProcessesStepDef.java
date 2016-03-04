@@ -2,7 +2,7 @@ package com.r2development.leveris.bdd.borrower.stepdef;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.r2development.leveris.di.User;
+import com.r2development.leveris.di.IUser;
 import com.r2development.leveris.selenium.borrower.pageobjects.*;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
@@ -15,7 +15,9 @@ public class MainFormsProcessesStepDef /*extends BorrowerStepDef*/ implements CL
 
     private static final Log log = LogFactory.getLog(MainFormsProcessesStepDef.class);
     private final WebDriver webDriver;
-    User user;
+
+    @Inject
+    IUser user;
     IBorrowerHomePage borrowerHomePage;
     IPersonalDetailsPage borrowerPersonalDetailsPage;
     IEmploymentIncomesPage borrowerEmploymentIncomesPage;
@@ -28,7 +30,7 @@ public class MainFormsProcessesStepDef /*extends BorrowerStepDef*/ implements CL
     IYourDependantsPage yourDependentsPage;
 
     @Inject
-    public MainFormsProcessesStepDef(WebDriver webDriver) {
+    public MainFormsProcessesStepDef(SharedDriver webDriver) {
 //        super(webDriver);
         this.webDriver = webDriver;
         borrowerHomePage = new BorrowerHomePage(webDriver);

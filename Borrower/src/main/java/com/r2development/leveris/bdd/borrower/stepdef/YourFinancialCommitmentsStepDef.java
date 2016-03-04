@@ -23,6 +23,7 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
     private static final Log log = LogFactory.getLog(YourFinancialCommitmentsStepDef.class);
 
     private WebDriver webDriver;
+    @Inject
     private IUser user;
 
     private IBorrowerHomePage borrowerHomePage;
@@ -30,7 +31,7 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
     private IYourFinancialCommitmentsPage yourFinancialCommitmentsPage;
 
     @Inject
-    public YourFinancialCommitmentsStepDef(WebDriver webDriver) {
+    public YourFinancialCommitmentsStepDef(SharedDriver webDriver) {
         yourFinancialCommitmentsPage = new YourFinancialCommitmentsPage(webDriver);
     }
 

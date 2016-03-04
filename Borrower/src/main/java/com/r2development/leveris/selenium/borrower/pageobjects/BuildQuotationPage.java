@@ -1,9 +1,8 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
-import com.google.inject.Inject;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.WebDriver;
 
 public class BuildQuotationPage extends HeaderAndBottomAndFormsMenuSection implements IBuildQuotationPage, IWelcomeGetQuoteSection/*, IHeaderSection, IBuildQuoteSection, IBuildQuoteSection2, IBuildQuoteSection3/*, IBottomSection*/ {
 
@@ -16,8 +15,8 @@ public class BuildQuotationPage extends HeaderAndBottomAndFormsMenuSection imple
     protected IBuildQuoteSection3 buildQuoteSection3;
     protected IBottomSection bottomSection;
 
-    @Inject
-    public BuildQuotationPage(WebDriver webDriver) {
+//    @Inject
+    public BuildQuotationPage(SharedDriver webDriver) {
         super(webDriver);
         headerSection = new HeaderSection(webDriver);
         welcomeGetQuoteSection = new WelcomeGetQuoteSection(webDriver);

@@ -165,26 +165,26 @@
     <dependencies>
 
         <!-- Module Dependencies -->
-        <!--<dependency>-->
-            <!--<groupId>com.r2development.leveris.qa.utils</groupId>-->
-            <!--<artifactId>Environment</artifactId>-->
-            <!--<version>${com-r2development-leveris-qa-utils.environment.version}</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.r2development.leveris.qa.utils</groupId>
+            <artifactId>Environment</artifactId>
+            <version>${com-r2development-leveris-qa-utils.environment.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.r2development.leveris.qa.utils</groupId>
             <artifactId>AcmExcel</artifactId>
             <version>${com-r2development-leveris-qa-utils.acmexcel.version}</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>com.r2development.leveris.qa.utils</groupId>-->
-            <!--<artifactId>OraSql</artifactId>-->
-            <!--<version>${com-r2development-leveris-qa-utils.orasql.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>com.r2development.leveris.qa.utils</groupId>-->
-            <!--<artifactId>DataValidator</artifactId>-->
-            <!--<version>${com-r2development-leveris-qa.data-validator.version}</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.r2development.leveris.qa.utils</groupId>
+            <artifactId>OraSql</artifactId>
+            <version>${com-r2development-leveris-qa-utils.orasql.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.r2development.leveris.qa.utils</groupId>
+            <artifactId>DataValidator</artifactId>
+            <version>${com-r2development-leveris-qa.data-validator.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.r2development.leveris.qa</groupId>
             <artifactId>Borrower</artifactId>
@@ -248,5 +248,59 @@
         <!--</dependency>-->
 
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>Login</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.18.1</version>
+                        <configuration>
+
+                            <systemPropertyVariables>
+                                <environment>${environment}</environment>
+                            </systemPropertyVariables>
+
+                            <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                            <testFailureIgnore>false</testFailureIgnore>
+
+                            <!--<forkCount>5</forkCount>-->
+                            <!--<reuseForks>false</reuseForks>-->
+                            <useFile>false</useFile>
+                            <includes>
+                                <include>**/LoginClientRunner.class</include>
+                                <include>**/LoginPaymentRunner.class</include>
+                            </includes>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>net.masterthought</groupId>
+                        <artifactId>maven-cucumber-reporting</artifactId>
+                        <version>0.1.0</version>
+                        <executions>
+                            <execution>
+                                <id>execution</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <projectName>cucumber-jvm-login</projectName>
+                                    <outputDirectory>${project.build.directory}/Login/CucumberReports/</outputDirectory>
+                                    <cucumberOutput>${project.build.directory}/Login/Cucumber-Json/</cucumberOutput>
+                                    <enableFlashCharts>true</enableFlashCharts>
+                                    <skippedFails>false</skippedFails>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>

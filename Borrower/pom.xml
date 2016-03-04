@@ -15,7 +15,7 @@
 
     <properties>
         <environment>dev2</environment>
-        <domain>dv2app.opoqodev.com</domain>
+        <domain.borrower>dv2app.opoqodev.com</domain.borrower>
         <borrower>http://dv2app.opoqodev.com/stable-borrower</borrower>
         <!-- TODO check if we are using then delete after fixing -->
         <underwriter>http://dv2app.opoqodev.com/underwriter</underwriter>

@@ -1,6 +1,5 @@
 package com.r2development.leveris.tdd.borrower.po;
 
-import com.r2development.leveris.selenium.borrower.pageobjects.WelcomePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -11,6 +10,6 @@ public class AccountPO {
 
     public static void main(String... args) {
         WebDriver webDriver = new ChromeDriver();
-        WelcomePage welcomePage = new WelcomePage(webDriver);
+//        WelcomePage welcomePage = new WelcomePage(webDriver);
     }
 }

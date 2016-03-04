@@ -1,7 +1,9 @@
 package com.r2development.leveris.bdd.borrower.apistepdef;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.AccountData;
+import com.r2development.leveris.di.IHttpResponse;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
@@ -25,6 +27,15 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
     private static final Log log = LogFactory.getLog(ApiYourAccountsStepDef.class);
 
     int countAccount = 0;
+
+
+    @Inject
+    IHttpResponse httpResponse;
+
+    @Inject
+    public ApiYourAccountsStepDef(IHttpResponse httpResponse) {
+        this.httpResponse = httpResponse;
+    }
 
     @Given("^user fills in \"(Current|Savings) Account\"$")
 //    public void user_fills_in_account(Map<String, String> accountDataMap) throws IOException {

@@ -8,15 +8,15 @@ Feature: Api Single Borrower
 
     Given this registration data, user processes the registration (format2)
       | firstName         | AutomationSBApi                             |
-      | email             | test_automation.stsbapi.test0001@abakus.com |
-      | phoneNumber       | 1234567890                                  |
-      | password          | Password1122                                |
+      | email             | test.automation.stsbapi@test.finfactory.com |
+      | phoneNumber       | +4201234567890                              |
+      | password          | Password1122+                               |
       | termsBusiness     | accepts                                     |
       | protectionPolicy  | accepts                                     |
 
 #    Then user goes to gmail
 #    And user goes to CRM
-    Then  user logs in as his account is activated
+    Then Borrower user logs in as his account is activated
 
     Then user processes "Get a Quote" (format2)
       | borrowerNumber           | a single borrower   |

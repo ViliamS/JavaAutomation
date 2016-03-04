@@ -11,7 +11,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class UnderwriterDependenciesModule extends AbstractModule {
 
 //    final User user;
-    private final IUser user;
+    private IUser user;
     private WebDriver webDriver;
 
 //    private static HarProxyServer proxyServer;
@@ -73,7 +73,7 @@ public class UnderwriterDependenciesModule extends AbstractModule {
 //    }
 
     @Inject
-    UnderwriterDependenciesModule(User user) {
+    UnderwriterDependenciesModule(IUser user) {
         this.user = user;
     }
 
@@ -82,28 +82,33 @@ public class UnderwriterDependenciesModule extends AbstractModule {
 
         if ( StringUtils.isEmpty(System.getProperty("environment")))
             System.setProperty("environment", "dev2");
-        if ( StringUtils.isEmpty(System.getProperty("domain")))
-            System.setProperty("domain", "http://dv2app.opoqodev.com/");
+        if ( StringUtils.isEmpty(System.getProperty("domain.underwriter")))
+            System.setProperty("domain.underwriter", "http://dv2app.opoqodev.com/");
         if ( StringUtils.isEmpty(System.getProperty("borrower")))
-            System.setProperty("borrower", "http://dv2app.opoqodev.com/stable-borrower");
+            System.setProperty("underwriter", "http://dv2app.opoqodev.com/stable-underwriter");
         if ( System.getProperty("browser") == null)
             System.setProperty("browser", "chrome");
         if ( StringUtils.isEmpty(System.getProperty("timestamp")))
             System.setProperty("timestamp", DateTime.now().toString("yyyyMMddHHmmssSSS"));
 
-        switch (System.getProperty("browser")) {
-            case "chrome":
-                webDriver = new ChromeDriver();
-                bind(WebDriver.class).toInstance(webDriver);
-                break;
-            case "firefox":
-                webDriver = new FirefoxDriver();
-                bind(WebDriver.class).toInstance(webDriver);
-                break;
+        if ( !StringUtils.isEmpty(System.getProperty("modeRun")) && System.getProperty("modeRun").equals("gui")) {
+            switch (System.getProperty("browser")) {
+                case "chrome":
+                    webDriver = new ChromeDriver();
+                    bind(WebDriver.class).toInstance(webDriver);
+                    break;
+                case "firefox":
+                    webDriver = new FirefoxDriver();
+                    bind(WebDriver.class).toInstance(webDriver);
+                    break;
+            }
         }
 
 //        binder.bind(User.class).toInstance(user);
+        if ( user == null)
+            user = new User();
         bind(IUser.class).toInstance(user);
+
 //        bind(IHttpResponse.class).to(HttpResponse.class).asEagerSingleton();
     }
 }

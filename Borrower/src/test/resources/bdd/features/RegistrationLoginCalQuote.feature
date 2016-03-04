@@ -10,11 +10,11 @@ Feature: Registration + Login + CalQuote
       | firstName         | Tonda                               |
       | email             | anthony.mottot.test0001@abakus.com  |
       | phoneNumber       | 1234567890                          |
-      | password          | Password1122                        |
+      | password          | Password1122+                       |
       | termsBusiness     | accepts                             |
       | protectionPolicy  | accepts                             |
 
-    Then  user logs in as his account is activated
+    Then Borrower user logs in as his account is activated
 
     Then user processes "Get a Quote" (format2)
       | borrowerNumber           | a single borrower   |

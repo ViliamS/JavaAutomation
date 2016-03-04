@@ -28,7 +28,7 @@ public class YourDependantsStepDef /*extends BorrowerStepDef*/ /*implements CLV3
     private IYourDependantsPage yourDependantsPage;
 
     @Inject
-    public YourDependantsStepDef(WebDriver webDriver, IUser user) {
+    public YourDependantsStepDef(SharedDriver webDriver/*, IUser user*/) {
         yourDependantsPage = new YourDependantsPage(webDriver);
     }
 

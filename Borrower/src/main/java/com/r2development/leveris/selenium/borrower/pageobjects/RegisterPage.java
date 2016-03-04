@@ -1,10 +1,9 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
-import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -53,8 +52,8 @@ public class RegisterPage extends Borrower implements IRegisterPage {
     @FindBy(xpath = ALREADY_REGISTER_XPATH)
     protected WebElement weAlreadyRegisterLink;
 
-    @Inject
-    public RegisterPage(WebDriver webDriver) {
+//    @Inject
+    public RegisterPage(SharedDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);
     }

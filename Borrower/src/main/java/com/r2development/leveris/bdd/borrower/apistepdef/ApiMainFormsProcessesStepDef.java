@@ -1,6 +1,8 @@
 package com.r2development.leveris.bdd.borrower.apistepdef;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.r2development.leveris.di.IHttpResponse;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;
@@ -21,12 +23,18 @@ public class ApiMainFormsProcessesStepDef extends ApiOpoqoBorrowerStepDef {
 
 //    private HttpClient httpClient;
 //    private HttpContext localContext;
+    private IHttpResponse httpResponse;
 
 //    @Inject
 //    public ApiMainFormsProcessesStepDef(HttpClient httpClient, HttpContext localContext) {
 //        this.httpClient = httpClient;
 //        this.localContext = localContext;
 //    }
+
+    @Inject
+    public ApiMainFormsProcessesStepDef(IHttpResponse httpResponse) {
+        this.httpResponse = httpResponse;
+    }
 
     // "proxy page"
     @And("^user processes \"Forms\"$")

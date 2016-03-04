@@ -1,7 +1,10 @@
 package com.r2development.leveris.bdd.borrower.apistepdef;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.LoginData;
+import com.r2development.leveris.di.IHttpResponse;
+import com.r2development.leveris.di.IUser;
 import com.r2development.leveris.qa.utils.Orasql;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -32,8 +35,12 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
 
 //    private HttpClient httpClient;
 //    private HttpContext localContext;
-//    private IHttpResponse httpResponse;
-//    private IUser user;
+
+    @Inject
+    private IHttpResponse httpResponse;
+
+    @Inject
+    private IUser user;
 
 //    @Inject
 //    public ApiLoginPageStepDef(HttpClient httpClient, HttpContext localContext, IUser user, IHttpResponse httpResponse) {
@@ -44,17 +51,31 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
 //        loginParameters = new LinkedHashMap<>();
 //    }
 
-    @Given("^User types his email login (.*) in Login page$")
+    public ApiLoginPageStepDef() {
+        super();
+    }
+
+    @Inject
+    public ApiLoginPageStepDef(IUser user, IHttpResponse httpResponse) {
+//        this.httpClient = httpClient;
+//        this.localContext = localContext;
+        this.user = user;
+        this.httpResponse = httpResponse;
+//        loginParameters = new LinkedHashMap<>();
+    }
+
+
+    @Given("^Borrower User types his email login (.*) in Login page$")
     public void user_types_his_login(String email) {
         loginParameters.put("root:c:w:pnlMain:c:w:txtEmailAddress:tb", email);
     }
 
-    @Given("^User types his pwd (.*) in Login page$")
+    @Given("^Borrower User types his pwd (.*) in Login page$")
     public void user_types_his_pwd(String pwd) {
         loginParameters.put("root:c:w:pnlMain:c:w:pwdPassword:tb", pwd);
     }
 
-    @When("^user logs in$")
+    @When("^Borrower user logs in$")
     public void user_logs_in() throws IOException {
 
         String currentHttpResponse = httpResponse.getHttpResponse();
@@ -83,7 +104,7 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
         );
     }
 
-    @When("^user logs in with these credentials$")
+    @When("^Borrower user logs in with these credentials$")
     public void user_logs_in_with_these_credentials(List<String> credentials) throws IOException {
 
         String loginPageResponse = requestHttpGet(
@@ -150,13 +171,13 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
     public void home_borrower_page_is_loaded() {
     }
 
-    @And("^user logs in as his account is activated$")
+    @And("^Borrower user logs in as his account is activated$")
     public void user_logs_in_as_his_account_is_activated() throws Exception {
 
         activateAccount(user.getEmail());
 
         Assert.assertNotEquals("Should be different HttpClientContext object", localContext, initContext());
-        HttpContext newLocalContext = newHttpClientContext(System.getProperty("domain"), "/stable-borrower");
+        HttpContext newLocalContext = newHttpClientContext(System.getProperty("domain.borrower"), "/stable-borrower");
         Assert.assertEquals("not same HttpClientContext object", newLocalContext, localContext);
 
 //        CookieStore cookieStore = new BasicCookieStore();

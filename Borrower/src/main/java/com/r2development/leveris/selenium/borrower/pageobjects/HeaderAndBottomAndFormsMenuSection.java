@@ -1,10 +1,9 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
-import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.WebDriver;
 
 public abstract class HeaderAndBottomAndFormsMenuSection extends Borrower implements IHeaderSection, IFormsMenu, IBottomSection {
 
@@ -14,8 +13,8 @@ public abstract class HeaderAndBottomAndFormsMenuSection extends Borrower implem
     protected IFormsMenu formsMenu;
     protected IBottomSection bottomSection;
 
-    @Inject
-    public HeaderAndBottomAndFormsMenuSection(WebDriver webDriver) {
+//    @Inject
+    public HeaderAndBottomAndFormsMenuSection(SharedDriver webDriver) {
         super(webDriver);
         headerSection = new HeaderSection(webDriver);
         formsMenu = new FormsMenu(webDriver);

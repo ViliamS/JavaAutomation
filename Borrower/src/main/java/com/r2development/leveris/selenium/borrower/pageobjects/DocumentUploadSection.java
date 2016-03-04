@@ -2,16 +2,15 @@ package com.r2development.leveris.selenium.borrower.pageobjects;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
-import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.Borrower;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import com.r2development.leveris.di.IUser;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hamcrest.core.Is;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
@@ -61,10 +60,10 @@ public class DocumentUploadSection extends Borrower implements IDocumentUploadSe
 //        PageFactory.initElements(webDriver, this);
 //    }
 
-    @Inject
-    public DocumentUploadSection(WebDriver webDriver, IUser user) {
+//    @Inject
+    public DocumentUploadSection(SharedDriver webDriver/*, IUser user*/) {
         super(webDriver);
-        this.user = user;
+//        this.user = user;
         PageFactory.initElements(webDriver, this);
     }
 

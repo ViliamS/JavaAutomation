@@ -1,16 +1,12 @@
 package com.r2development.leveris.di;
 
 import com.google.inject.AbstractModule;
-import cucumber.api.java.Before;
 import org.apache.commons.lang3.StringUtils;
-import org.joda.time.DateTime;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class BorrowerDependenciesModule extends AbstractModule {
 
-    private IUser user;
+    protected static IUser user;
     private WebDriver webDriver;
 
 //    protected HttpClient httpClient;
@@ -88,33 +84,32 @@ public class BorrowerDependenciesModule extends AbstractModule {
 //        }
 //    }
 
-    @Before
     @Override
     protected void configure() {
 
-        if ( StringUtils.isEmpty(System.getProperty("environment")))
-            System.setProperty("environment", "dev2");
-        if ( StringUtils.isEmpty(System.getProperty("domain")))
-            System.setProperty("domain", "dv2app.opoqodev.com");
-        if ( StringUtils.isEmpty(System.getProperty("borrower")))
-            System.setProperty("borrower", "http://dv2app.opoqodev.com/stable-borrower");
-        if ( System.getProperty("browser") == null)
-            System.setProperty("browser", "chrome");
-        if ( StringUtils.isEmpty(System.getProperty("timestamp")))
-            System.setProperty("timestamp", DateTime.now().toString("yyyyMMddHHmmssSSS"));
+//        if ( StringUtils.isEmpty(System.getProperty("environment")))
+//            System.setProperty("environment", "dev2");
+//        if ( StringUtils.isEmpty(System.getProperty("domain.borrower")))
+//            System.setProperty("domain.borrower", "dv2app.opoqodev.com");
+//        if ( StringUtils.isEmpty(System.getProperty("borrower")))
+//            System.setProperty("borrower", "http://dv2app.opoqodev.com/stable-borrower");
+//        if ( System.getProperty("browser") == null)
+//            System.setProperty("browser", "chrome");
+//        if ( StringUtils.isEmpty(System.getProperty("timestamp")))
+//            System.setProperty("timestamp", DateTime.now().toString("yyyyMMddHHmmssSSS"));
+//
+//        if ( StringUtils.isEmpty(System.getProperty("modeRun")) )
+//            System.setProperty("modeRun", "gui");
 
-        if ( StringUtils.isEmpty(System.getProperty("modeRun")) )
-            System.setProperty("modeRun", "gui");
-
-        if ( System.getProperty("modeRun").equals("gui") ) {
+        if ( !StringUtils.isEmpty(System.getProperty("modeRun")) && System.getProperty("modeRun").equals("gui")) {
             switch (System.getProperty("browser")) {
                 case "chrome":
-                    webDriver = new ChromeDriver();
-                    bind(WebDriver.class).toInstance(webDriver);
+//                    webDriver = new ChromeDriver();
+//                    bind(WebDriver.class).toInstance(webDriver);
                     break;
                 case "firefox":
-                    webDriver = new FirefoxDriver();
-                    bind(WebDriver.class).toInstance(webDriver);
+//                    webDriver = new FirefoxDriver();
+//                    bind(WebDriver.class).toInstance(webDriver);
                     break;
             }
         }
@@ -136,8 +131,10 @@ public class BorrowerDependenciesModule extends AbstractModule {
             bind(IHttpResponse.class).to(HttpResponse.class);
         }
 
-        user = new User();
+        if ( user == null)
+            user = new User();
         bind(IUser.class).toInstance(user);
+//        bind(IUser.class).to(User.class).asEagerSingleton();
     }
 
 }

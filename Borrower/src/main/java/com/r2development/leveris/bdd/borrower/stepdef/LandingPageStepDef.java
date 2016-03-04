@@ -1,6 +1,7 @@
 package com.r2development.leveris.bdd.borrower.stepdef;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.LandingPageData;
 import com.r2development.leveris.selenium.borrower.pageobjects.*;
 import cucumber.api.java.en.And;
@@ -9,13 +10,13 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
 /**
  * todo LandingPageStepDef Specific Implementation
  */
+@Singleton
 public class LandingPageStepDef /*extends BorrowerStepDef*/ {
 
     IQuoteLandingPage quoteLandingPage;
@@ -29,10 +30,10 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
 //        quoteLandingPage = new QuoteLandingPage(WebDriverService.getWebDriverInstance());
 //    }
 
-    private WebDriver webDriver;
+//    private WebDriver webDriver;
 
     @Inject
-    public LandingPageStepDef(WebDriver webDriver) {
+    public LandingPageStepDef(SharedDriver webDriver) {
 //        super(webDriver);
 //        this.webDriver = webDriver;
         quoteLandingPage = new QuoteLandingPage(webDriver);

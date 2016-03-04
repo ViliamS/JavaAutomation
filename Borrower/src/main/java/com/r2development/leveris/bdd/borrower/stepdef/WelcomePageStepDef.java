@@ -8,7 +8,6 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.WebDriver;
 
 @Singleton
 public class WelcomePageStepDef /*extends BorrowerStepDef*/ {
@@ -20,10 +19,10 @@ public class WelcomePageStepDef /*extends BorrowerStepDef*/ {
     ILoginPage loginPage;
     IBuildQuotationPage buildQuotationPage;
 
-    private final WebDriver webDriver;
+    private final SharedDriver webDriver;
 
     @Inject
-    WelcomePageStepDef(WebDriver webDriver) {
+    WelcomePageStepDef(SharedDriver webDriver) {
 //        super(webDriver);
         this.webDriver = webDriver;
     }

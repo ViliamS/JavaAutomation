@@ -22,14 +22,16 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
     private static final Log log = LogFactory.getLog(PersonalDetailsStepDef.class);
 
     private final WebDriver webDriver;
+
+    @Inject
     IUser user;
     IBorrowerHomePage borrowerHomePage;
     IPersonalDetailsPage borrowerPersonalDetailsPage;
 
     @Inject
-    PersonalDetailsStepDef(WebDriver webDriver, IUser user) {
+    PersonalDetailsStepDef(SharedDriver webDriver/*, IUser user*/) {
         this.webDriver = webDriver;
-        this.user = user;
+//        this.user = user;
         borrowerPersonalDetailsPage = new PersonalDetailsPage(webDriver);
     }
 

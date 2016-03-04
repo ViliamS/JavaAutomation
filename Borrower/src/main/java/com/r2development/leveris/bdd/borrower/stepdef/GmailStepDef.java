@@ -15,10 +15,12 @@ public class GmailStepDef /*extends BorrowerStepDef*/ {
 
     private static final Log log = LogFactory.getLog(GmailStepDef.class);
     private WebDriver webDriver;
+
+    @Inject
     IUser user;
 
     @Inject
-    GmailStepDef(WebDriver webDriver) {
+    GmailStepDef(SharedDriver webDriver) {
 //        super(webDriver);
         this.webDriver = webDriver;
     }

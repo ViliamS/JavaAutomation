@@ -25,7 +25,7 @@ Feature: Payday Loan
 
 #    Then user goes to gmail
 #    And user goes to CRM
-    Then  user logs in as his account is activated
+    Then Borrower user logs in as his account is activated
     And user processes "Forms"
 
 #    PERSONAL DETAILS

@@ -8,15 +8,15 @@ Feature: Double Borrowers
 
     Given this registration data, user processes the registration (format2)
       | firstName         | AutomationDBUI                             |
-      | email             | test_automation.stdbui.test0001@abakus.com |
-      | phoneNumber       | 1234567890                                 |
-      | password          | Password1122                               |
+      | email             | test.automation.stdbui@test.finfactory.com |
+      | phoneNumber       | +4201234567890                             |
+      | password          | Password1122+                              |
       | termsBusiness     | accepts                                    |
       | protectionPolicy  | accepts                                    |
 
 #    Then user goes to gmail
 #    And user goes to CRM
-    Then  user logs in as his account is activated
+    Then Borrower user logs in as his account is activated
 
     Then user processes "Get a Quote" (format2)
       | borrowerNumber           | two borrowers       |
@@ -33,7 +33,7 @@ Feature: Double Borrowers
 
     And borrower invites a co-applicant
       | firstName | Tonda-coapplicant                          |
-      | email     | test_automation.srcoui.test0001@abakus.com |
+      | email     | test.automation.srcoui@test.finfactory.com |
 
     And user processes "Forms"
 

@@ -1,11 +1,8 @@
 package com.r2development.leveris.bdd.borrower.apistepdef;
 
-import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.EmploymentIncomeData;
 import com.r2development.leveris.bdd.borrower.model.PersonalDetailsData;
-import com.r2development.leveris.di.IHttpResponse;
-import com.r2development.leveris.di.IUser;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.client.HttpClient;
@@ -41,13 +38,17 @@ public class ApiOpoqoBorrowerStepDef /*implements IBorrower*/ {
     protected Map<String, String> accountParameters;
     protected Map<String, String> paydayParameters;
 
-    @Inject
-    IUser user;
+//    @Inject
+//    IUser user;
+//    @Inject
+//    IHttpResponse httpResponse;
 
-    @Inject
-    IHttpResponse httpResponse;
+//    @Inject
+    public ApiOpoqoBorrowerStepDef(/*IUser user, IHttpResponse httpResponse*/) {
 
-    public ApiOpoqoBorrowerStepDef() {
+//        this.user = user;
+//        this.httpResponse = httpResponse;
+
         httpClient = ApiSupportHttpClientStepDef.getInstanceHttpClient();
         localContext = ApiSupportHttpClientStepDef.getInstanceHttpClientContext();
 
@@ -65,11 +66,11 @@ public class ApiOpoqoBorrowerStepDef /*implements IBorrower*/ {
         paydayParameters = new LinkedHashMap<>();
     }
 
-    @Inject
-    public ApiOpoqoBorrowerStepDef(IUser user, IHttpResponse httpResponse) {
-        this.user = user;
-        this.httpResponse = httpResponse;
-    }
+//    @Inject
+//    public ApiOpoqoBorrowerStepDef(IUser user, IHttpResponse httpResponse) {
+//        this.user = user;
+//        this.httpResponse = httpResponse;
+//    }
 
     public HttpContext newHttpClientContext() {
         return ( localContext = ApiSupportHttpClientStepDef.getNewInstanceHttpClientContext() );

@@ -1,10 +1,9 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
-import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -22,8 +21,8 @@ public class WelcomePage extends Borrower implements IWelcomePage {
     @FindBy(xpath = REGISTER_XPATH)
     protected  WebElement weRegister;
 
-    @Inject
-    public WelcomePage(WebDriver webDriver) {
+//    @Inject
+    public WelcomePage(SharedDriver webDriver) {
         super(webDriver);
 //        get(ABAKUS_ENVIRONMENT.get(ENVIRONMENT_RUN).get(APPLICATION_RUN));
 
@@ -41,7 +40,7 @@ public class WelcomePage extends Borrower implements IWelcomePage {
         return this;
     }
 
-    public WelcomePage(WebDriver webDriver, boolean toSetUrl) {
+    public WelcomePage(SharedDriver webDriver, boolean toSetUrl) {
         super(webDriver);
         if (toSetUrl)
 //            get(ABAKUS_ENVIRONMENT.get(ENVIRONMENT_RUN).get(APPLICATION_RUN));

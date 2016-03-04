@@ -32,6 +32,7 @@ public class DocumentUploadStepDef /*extends BorrowerStepDef*/ implements CLV312
         CREDIT_CARD_PROVIDER
 
     }
+    @Inject
     IUser user;
     IDocumentUploadPage documentUploadPage;
     IBorrowerHomePage borrowerHomePage;
@@ -39,12 +40,13 @@ public class DocumentUploadStepDef /*extends BorrowerStepDef*/ implements CLV312
     private final WebDriver webDriver;
 
     @Inject
-    DocumentUploadStepDef(WebDriver webDriver, IUser user) {
+    DocumentUploadStepDef(SharedDriver webDriver/*, IUser user*/) {
 //        super(webDriver);
 //        documentUploadPage = new DocumentUploadPage(WebDriverService.getWebDriverInstance(), user);
         this.webDriver = webDriver;
-        this.user = user;
-        documentUploadPage = new DocumentUploadPage(webDriver, user);
+//        this.user = user;
+//        documentUploadPage = new DocumentUploadPage(webDriver, user);
+        documentUploadPage = new DocumentUploadPage(webDriver);
     }
 
     @When("^user clicks on \"documents list\"$")

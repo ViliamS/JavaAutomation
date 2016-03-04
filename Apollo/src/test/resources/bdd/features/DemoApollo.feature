@@ -4,12 +4,12 @@ Feature: Demo Apollo - Display Client Data
     Given user is on Apollo homepage
 
   Scenario: Display client data via simple search
-#    When user searches tomas_p_test0030@abakus.com as a client on simple search
+#    When user searches tomas_p_test0030@test.finfactory.com as a client on simple search
     When user searches tomas as a client on simple search
     And user chooses 1st client
 #    Then user checks client's data
 
-#  tomas_p_test0030@abakus.com  +420 608 700 143
+#  tomas_p_test0030@test.finfactory.com  +420 608 700 143
 
 #  Scenario Outline: Display client data via simple search version 2
 #    When user searches <data> as a client on simple search

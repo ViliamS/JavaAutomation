@@ -1,11 +1,9 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
-import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
-import com.r2development.leveris.bdd.borrower.stepdef.WebDriverService;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.WebDriver;
 
 public class QuoteLandingSection extends Borrower implements IQuoteLandingSection {
 
@@ -15,8 +13,8 @@ public class QuoteLandingSection extends Borrower implements IQuoteLandingSectio
 //        super(WebDriverService.getWebDriverInstance());
 //    }
 
-    @Inject
-    public QuoteLandingSection(WebDriver webDriver) {
+//    @Inject
+    public QuoteLandingSection(SharedDriver webDriver) {
         super(webDriver);
     }
 

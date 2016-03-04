@@ -10,11 +10,11 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class ApolloDependenciesModule extends AbstractModule {
 
-    private final IUser user;
+    private IUser user;
     private WebDriver webDriver;
 
     @Inject
-    ApolloDependenciesModule(User user) {
+    ApolloDependenciesModule(IUser user) {
         this.user = user;
     }
 
@@ -90,18 +90,21 @@ public class ApolloDependenciesModule extends AbstractModule {
         if ( StringUtils.isEmpty(System.getProperty("timestamp")))
             System.setProperty("timestamp", DateTime.now().toString("yyyyMMddHHmmssSSS"));
 
-        switch (System.getProperty("browser")) {
-            case "chrome":
-                webDriver = new ChromeDriver();
-                bind(WebDriver.class).toInstance(webDriver);
-                break;
-            case "firefox":
-                webDriver = new FirefoxDriver();
-                bind(WebDriver.class).toInstance(webDriver);
-                break;
+        if ( !StringUtils.isEmpty(System.getProperty("modeRun")) && System.getProperty("modeRun").equals("gui")) {
+            switch (System.getProperty("browser")) {
+                case "chrome":
+                    webDriver = new ChromeDriver();
+                    bind(WebDriver.class).toInstance(webDriver);
+                    break;
+                case "firefox":
+                    webDriver = new FirefoxDriver();
+                    bind(WebDriver.class).toInstance(webDriver);
+                    break;
+            }
         }
-
 //        bind(User.class).toInstance(user);
+        if ( user == null)
+            user = new User();
         bind(IUser.class).toInstance(user);
     }
 }

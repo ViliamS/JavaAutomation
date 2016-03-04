@@ -1,12 +1,7 @@
 package com.r2development.leveris.di;
 
 import com.google.inject.AbstractModule;
-import com.google.inject.Inject;
-import org.apache.commons.lang3.StringUtils;
-import org.joda.time.DateTime;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class TestingDependenciesModule extends AbstractModule {
 
@@ -72,37 +67,47 @@ public class TestingDependenciesModule extends AbstractModule {
 //        }
 //    }
 
-    @Inject
-    TestingDependenciesModule(User user) {
-        this.user = user;
-    }
+//    @Inject
+//    TestingDependenciesModule(User user) {
+//        this.user = user;
+//    }
 
+//    @Before
     @Override
     public void configure() {
 
-        if ( StringUtils.isEmpty(System.getProperty("environment")))
-            System.setProperty("environment", "dev2");
-        if ( StringUtils.isEmpty(System.getProperty("domain")))
-            System.setProperty("domain", "http://dv2app.opoqodev.com/");
-        if ( StringUtils.isEmpty(System.getProperty("borrower")))
-            System.setProperty("borrower", "http://dv2app.opoqodev.com/stable-borrower");
-        if ( System.getProperty("browser") == null)
-            System.setProperty("browser", "chrome");
-        if ( StringUtils.isEmpty(System.getProperty("timestamp")))
-            System.setProperty("timestamp", DateTime.now().toString("yyyyMMddHHmmssSSS"));
+        System.out.println("I am in the configure Testing module !!!");
+//        if ( StringUtils.isEmpty(System.getProperty("environment")))
+//            System.setProperty("environment", "dev2");
+//        if ( StringUtils.isEmpty(System.getProperty("domain")))
+//            System.setProperty("domain", "http://dv2app.opoqodev.com/");
+//        if ( StringUtils.isEmpty(System.getProperty("borrower")))
+//            System.setProperty("borrower", "http://dv2app.opoqodev.com/stable-borrower");
+//        if ( System.getProperty("browser") == null)
+//            System.setProperty("browser", "chrome");
+//        if ( StringUtils.isEmpty(System.getProperty("timestamp")))
+//            System.setProperty("timestamp", DateTime.now().toString("yyyyMMddHHmmssSSS"));
+//
+//        if ( StringUtils.isEmpty(System.getProperty("modeRun")) && System.getProperty("modeRun").equals("gui") ) {
+//            switch (System.getProperty("browser")) {
+//                case "chrome":
+//                    webDriver = new ChromeDriver();
+//                    bind(WebDriver.class).toInstance(webDriver);
+//                    break;
+//                case "firefox":
+//                    webDriver = new FirefoxDriver();
+//                    bind(WebDriver.class).toInstance(webDriver);
+//                    break;
+//            }
+//        }
+//
+////        bind(User.class).toInstance(user);
+//        if ( user == null)
+//            user = new User();
+//        bind(IUser.class).toInstance(user);
 
-        switch (System.getProperty("browser")) {
-            case "chrome":
-                webDriver = new ChromeDriver();
-                bind(WebDriver.class).toInstance(webDriver);
-                break;
-            case "firefox":
-                webDriver = new FirefoxDriver();
-                bind(WebDriver.class).to(FirefoxDriver.class);
-                break;
-        }
+//        Guice.createInjector(new BorrowerDependenciesModule(), new UnderwriterDependenciesModule(user), new ApolloDependenciesModule(user));
+//        Guice.createInjector(new BorrowerDependenciesModule());
 
-//        bind(User.class).toInstance(user);
-        bind(IUser.class).toInstance(user);
     }
 }

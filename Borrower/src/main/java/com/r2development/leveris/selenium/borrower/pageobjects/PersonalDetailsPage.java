@@ -1,9 +1,8 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
-import com.google.inject.Inject;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.WebDriver;
 
 public class PersonalDetailsPage extends HeaderAndBottomAndFormsMenuSection implements IPersonalDetailsPage /*, IPersonalDetailsSection, IHeaderSection, IFormsMenu, IBottomSection*/ {
 
@@ -11,8 +10,8 @@ public class PersonalDetailsPage extends HeaderAndBottomAndFormsMenuSection impl
 
     protected IPersonalDetailsSection personalDetailsSection;
 
-    @Inject
-    public PersonalDetailsPage(WebDriver webDriver) {
+//    @Inject
+    public PersonalDetailsPage(SharedDriver webDriver) {
         super(webDriver);
         headerSection = new HeaderSection(webDriver);
         formsMenu = new FormsMenu(webDriver);

@@ -1,9 +1,9 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
 import com.r2development.leveris.Borrower;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -27,7 +27,7 @@ public class VerifyEmailPage extends Borrower implements IVerifyEmailPage {
     @FindBy( xpath = VERIFY_EMAIL_RESEND2_XPATH)
     protected WebElement weResend2;
 
-    public VerifyEmailPage(WebDriver webDriver) {
+    public VerifyEmailPage(SharedDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);
     }

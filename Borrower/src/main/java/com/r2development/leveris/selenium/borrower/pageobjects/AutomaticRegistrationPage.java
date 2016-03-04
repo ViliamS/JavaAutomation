@@ -1,10 +1,9 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
-import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.WebDriver;
 
 public class AutomaticRegistrationPage extends Borrower implements IHeaderSection, IAutomaticRegistrationPage {
 
@@ -13,8 +12,8 @@ public class AutomaticRegistrationPage extends Borrower implements IHeaderSectio
     protected  IHeaderSection headerSection;
     protected IAutomaticRegistrationSection automaticRegistrationSection;
 
-    @Inject
-    public AutomaticRegistrationPage(WebDriver webDriver) {
+//    @Inject
+    public AutomaticRegistrationPage(SharedDriver webDriver) {
         super(webDriver);
         headerSection = new HeaderSection(webDriver);
         automaticRegistrationSection = new AutomaticRegistrationSection(webDriver);

@@ -22,7 +22,7 @@ public class AutomaticRegistrationStepDef /*extends BorrowerStepDef*/ {
     private final WebDriver webDriver;
 
     @Inject
-    AutomaticRegistrationStepDef(WebDriver webDriver) {
+    AutomaticRegistrationStepDef(SharedDriver webDriver) {
 //        super(webDriver);
 //        automaticRegistrationPage = new AutomaticRegistrationPage(WebDriverService.getWebDriverInstance());
         this.webDriver = webDriver;

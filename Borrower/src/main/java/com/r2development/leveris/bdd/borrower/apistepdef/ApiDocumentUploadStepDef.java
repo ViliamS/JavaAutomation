@@ -1,6 +1,9 @@
 package com.r2development.leveris.bdd.borrower.apistepdef;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.r2development.leveris.di.IHttpResponse;
+import com.r2development.leveris.di.IUser;
 import cucumber.api.java.en.When;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -50,6 +53,18 @@ public class ApiDocumentUploadStepDef extends ApiOpoqoBorrowerStepDef {
     }
 
     private static final Log log = LogFactory.getLog(ApiDocumentUploadStepDef.class);
+
+    @Inject
+    IHttpResponse httpResponse;
+    @Inject
+    IUser user;
+
+    @Inject
+    public ApiDocumentUploadStepDef(IHttpResponse httpResponse, IUser user) {
+        this.httpResponse = httpResponse;
+        this.user = user;
+    }
+
 
     @When("^user clicks on \"documents list\"$")
     public void user_clicks_on_documents_list() {

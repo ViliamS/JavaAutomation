@@ -1,16 +1,15 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
-import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
-import org.openqa.selenium.WebDriver;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 
 /**
  * todo Page Object Specific Implementation
  */
 public class QuoteQuickLoanSection extends Borrower implements IQuoteQuickLoanSection {
 
-    @Inject
-    public QuoteQuickLoanSection(WebDriver webDriver){
+//    @Inject
+    public QuoteQuickLoanSection(SharedDriver webDriver){
         super( webDriver );
     }
 
@@ -69,7 +68,7 @@ public class QuoteQuickLoanSection extends Borrower implements IQuoteQuickLoanSe
     public IQuoteConfigurationPage clickContinue() {
         isVisible(CONTINUE_TEAL_BUTTON_XPATH, true);
         clickElementViaJavascript(CONTINUE_TEAL_BUTTON_XPATH);
-        return new QuoteConfigurationPage( webDriver );
+        return new QuoteConfigurationPage(webDriver);
     }
 
 }

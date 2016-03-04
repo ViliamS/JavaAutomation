@@ -18,7 +18,6 @@ import org.apache.commons.logging.LogFactory;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.Is;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 
 import java.io.IOException;
 import java.util.List;
@@ -34,14 +33,16 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
     private static final Log log = LogFactory.getLog(GetAQuoteStepDef.class);
 
     private boolean toSkip = false;
-    private final WebDriver webDriver;
+    private final SharedDriver webDriver;
+
+    @Inject
     IUser user;
     IBorrowerHomePage borrowerHomePage;
     IWelcomePage welcomePage;
     IBuildQuotationPage buildQuotationPage;
 
     @Inject
-    GetAQuoteStepDef(WebDriver webDriver) {
+    GetAQuoteStepDef(SharedDriver webDriver) {
 //        formsMenu = new FormsMenu(WebDriverService.getWebDriverInstance());
 //        super(webDriver);
         this.webDriver = webDriver;

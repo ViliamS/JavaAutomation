@@ -17,15 +17,15 @@ Feature: Payday Loan
     Then User clicks on Apply Online
     And this registration data, user processes the registration (format2)
       | firstName         | AutomationSBUI                                    |
-      | email             | test_automation.borrower.sbui.test0001@abakus.com |
-      | phoneNumber       | 1234567890                                        |
-      | password          | Password1122                                      |
+      | email             | test_automation.sbui@test.finfactory.com          |
+      | phoneNumber       | +4201234567890                                    |
+      | password          | Password1122+                                     |
       | termsBusiness     | accepts                                           |
       | protectionPolicy  | accepts                                           |
 
 #    Then user goes to gmail
 #    And user goes to CRM
-    Then  user logs in as his account is activated
+    Then Borrower user logs in as his account is activated
     And user processes "Forms"
 
 #    PERSONAL DETAILS

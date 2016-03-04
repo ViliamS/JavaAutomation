@@ -12,7 +12,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hamcrest.core.Is;
-import org.openqa.selenium.WebDriver;
 
 import java.io.File;
 import java.sql.Connection;
@@ -25,7 +24,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class LoginPageStepDef /*extends BorrowerStepDef*/ {
 
     private static final Log log = LogFactory.getLog(LoginPageStepDef.class);
-    private final WebDriver webDriver;
+    private final SharedDriver webDriver;
+
+    @Inject
     IUser user;
     ILoginPage loginPage;
     IBorrowerHomePage borrowerHomePage;
@@ -33,11 +34,11 @@ public class LoginPageStepDef /*extends BorrowerStepDef*/ {
     IBuildQuotationPage buildQuotationPage;
 
     @Inject
-    LoginPageStepDef(WebDriver webDriver, IUser user) {
+    LoginPageStepDef(SharedDriver webDriver/*, IUser user*/) {
 //        super(webDriver);
 //        loginPage = new LoginPage(WebDriverService.getWebDriverInstance());
         this.webDriver = webDriver;
-        this.user = user;
+//        this.user = user;
         welcomePage = new WelcomePage(webDriver);
     }
 
@@ -86,7 +87,7 @@ public class LoginPageStepDef /*extends BorrowerStepDef*/ {
         buildQuotationPage.isLoaded();
     }
 
-    @And("^user logs in as his account is activated$")
+    @And("^Borrower user logs in as his account is activated$")
     public void user_logs_in_as_his_account_is_activated() throws Exception {
 //        verifyEmailPage = new VerifyEmailPage(ApiSupportWebDriverStepDef.getWebDriverInstance());
 //        welcomePage = verifyEmailPage.redirectToWelcomePage();

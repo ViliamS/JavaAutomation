@@ -1,6 +1,6 @@
 
 @login @logout
-Feature: Apollo Api Login Payment
+Feature: Apollo Login Payment
 
   Scenario:
     Given user processes SSO Payment Auth Step
