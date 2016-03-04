@@ -158,8 +158,10 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
     @Given("^user types his phone number (.*) in Register page$")
     public void user_types_his_phone_number(String phoneNumber) {
 //        DateTime now = DateTime.now();
-        user.setPhoneNumber("+420" + System.getProperty("timestamp"));
-        registerParameters.put("root:c:w:pnlMain:c:w:txtPhoneNumber:tb", "+420" + System.getProperty("timestamp"));
+//        user.setPhoneNumber("+420" + System.getProperty("timestamp"));
+        user.setPhoneNumber(phoneNumber);
+//        registerParameters.put("root:c:w:pnlMain:c:w:txtPhoneNumber:tb", "+420" + System.getProperty("timestamp"));
+        registerParameters.put("root:c:w:pnlMain:c:w:txtPhoneNumber:tb", phoneNumber);
         log.info(user.getPhoneNumber());
     }
 

@@ -17,7 +17,7 @@ Feature: Payday Loan
     Then User clicks on Apply Online
     And this registration data, user processes the registration (format2)
       | firstName         | AutomationSBUI                                    |
-      | email             | test.automation.payday.ui.@test.finfactory.com    |
+      | email             | test.automation.payday@test.finfactory.com    |
       | phoneNumber       | +420123456789                                     |
       | password          | Password1122+                                     |
       | termsBusiness     | accepts                                           |

@@ -87,7 +87,7 @@ public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
         String[] emailArray = email.split("@");
 //        DateTime now = DateTime.now();
 //        emailArray[0] = emailArray[0] + now.toString("yyyyMMddHHmmssSSS");
-        emailArray[0] = emailArray[0] + System.getProperty("modeRun") + "." + System.getProperty("timestamp");
+        emailArray[0] = emailArray[0] + "_" + System.getProperty("modeRun") + "_" + System.getProperty("timestamp");
         registerPage.setEmailAddress(String.join("@", emailArray));
         user.setEmail(String.join("@", emailArray));
         log.info(user.getEmail());

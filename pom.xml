@@ -129,7 +129,7 @@
             <dependency>
                 <groupId>com.r2development.leveris.qa</groupId>
                 <artifactId>Apollo</artifactId>
-                <version>${com-r2development-leveris-qa.apollo.version.version}</version>
+                <version>${com-r2development-leveris-qa.apollo.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.r2development.leveris.qa</groupId>
