@@ -104,7 +104,7 @@ public class ApolloDependenciesModule extends AbstractModule {
         }
 //        bind(User.class).toInstance(user);
         if ( user == null)
-            user = new User();
+            user = new User(null, null, null, null);
         bind(IUser.class).toInstance(user);
     }
 }
