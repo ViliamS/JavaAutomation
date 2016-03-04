@@ -13,14 +13,14 @@ public class User implements IUser {
     private String phoneNumber;
 //    private MORTGAGE_TYPE mortgageType;
 
-    User() {
+    public User() {
         this.firstName = StringUtils.EMPTY;
         this.email = StringUtils.EMPTY;
         this.pwd = StringUtils.EMPTY;
         this.phoneNumber = StringUtils.EMPTY;
     }
 
-    User(IUser user) {
+    public User(IUser user) {
         this.firstName = user.getFirstName();
         this.email = user.getEmail();
         this.pwd = user.getPwd();
