@@ -93,7 +93,7 @@ public class ApiSsoStepDef extends ApiOpoqoApolloStepDef {
 
         String logoutResponse = requestHttpPost(
             httpClient,
-            "http://dv2apl.opoqodev.com/client/api/private/auth/logout",
+            "http://dv2apl.opoqodev.com/client/api/private/sso/logout",
             new LinkedHashMap<String, String>() {
                 {
                     put("accept", "*/*");
