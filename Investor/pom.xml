@@ -12,7 +12,8 @@
 
     <!--<groupId>com.r2development.leveris.qa</groupId>-->
     <artifactId>Investor</artifactId>
-    <version>jar</version>
+    <!--<version>jar</version>-->
+    <version>1.0-SNAPSHOT</version>
 
     <properties>
         <environment>dev2</environment>
