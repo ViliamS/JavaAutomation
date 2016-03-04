@@ -39,6 +39,11 @@
             <url>https://nexus.loftkeys.com</url>
         </repository>
         <repository>
+            <id>nexus.thirdparty.loftkeys.com</id>
+            <name>thirdparty loftkeys</name>
+            <url>https://nexus.loftkeys.com/content/repositories/thirdparty</url>
+        </repository>
+        <repository>
             <id>nexus.qa.loftkeys.com</id>
             <name>QA loftkeys</name>
             <url>https://nexus.loftkeys.com/content/repositories/qa</url>
