@@ -9,7 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.client.HttpClient;
-import org.apache.http.protocol.HttpContext;
+import org.apache.http.client.protocol.HttpClientContext;
 import org.joda.time.DateTime;
 import org.junit.Assert;
 
@@ -19,7 +19,8 @@ public class ApiSupportHttpClientStepDef {
     private static final Log log = LogFactory.getLog(ApiSupportHttpClientStepDef.class);
 
     private static HttpClient httpClient;
-    private static HttpContext localContext;
+//    private static HttpContext localContext;
+    private static HttpClientContext localContext;
 
     @Before
     public void setup() throws Exception {
@@ -82,16 +83,24 @@ public class ApiSupportHttpClientStepDef {
         return httpClient;
     }
 
-    public static HttpContext getInstanceHttpClientContext() {
+//    public static HttpContext getInstanceHttpClientContext() {
+//        return localContext;
+//    }
+    public static HttpClientContext getInstanceHttpClientContext() {
         return localContext;
     }
 
-    public static HttpContext getNewInstanceHttpClientContext() {
+//    public static HttpContext getNewInstanceHttpClientContext() {
+//        return ( localContext = HttpUtils.initContext() );
+//    }
+    public static HttpClientContext getNewInstanceHttpClientContext() {
         return ( localContext = HttpUtils.initContext() );
     }
 
-    public static HttpContext getNewInstanceHttpClientContext(String domain, String context) {
+//    public static HttpContext getNewInstanceHttpClientContext(String domain, String context) {
+//        return ( localContext = HttpUtils.initContext(domain, context) );
+//    }
+    public static HttpClientContext getNewInstanceHttpClientContext(String domain, String context) {
         return ( localContext = HttpUtils.initContext(domain, context) );
     }
-
 }

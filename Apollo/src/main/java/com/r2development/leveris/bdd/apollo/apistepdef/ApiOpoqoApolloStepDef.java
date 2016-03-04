@@ -7,6 +7,7 @@ import com.r2development.leveris.di.IUser;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.protocol.HttpContext;
 
 import java.util.LinkedHashMap;
@@ -18,8 +19,8 @@ public class ApiOpoqoApolloStepDef /*implements IBorrower*/ {
     private static final Log log = LogFactory.getLog(ApiOpoqoApolloStepDef.class);
 
     protected HttpClient httpClient;
-//    protected HttpClientContext localContext;
-    protected HttpContext localContext;
+    protected HttpClientContext localContext;
+//    protected HttpContext localContext;
 
 //    protected Map<String, String> registerParameters;
 //    protected Map<String, String> automationRegistrationParameters;
