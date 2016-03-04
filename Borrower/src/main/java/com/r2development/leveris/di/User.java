@@ -27,6 +27,14 @@ public class User implements IUser {
         this.phoneNumber = user.getPhoneNumber();
     }
 
+//    @Inject
+    public User(String firstName, String email, String pwd, String phoneNumber, String extraJenkins, String extraJenkins2) {
+        this.firstName = firstName;
+        this.email = email;
+        this.pwd = pwd;
+        this.phoneNumber = phoneNumber;
+    }
+
     @Inject
     public User(String firstName, String email, String pwd, String phoneNumber /*, MORTGAGE_TYPE mortgageType*/) {
         this.firstName = firstName;
