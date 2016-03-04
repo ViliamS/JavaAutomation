@@ -13,7 +13,7 @@ import org.junit.runner.RunWith;
     monochrome = true,
     format = { "pretty",
             "html:target/Login/NativeReports/LoginClient/",
-            "json:target/Login/Cucumber-Json/Cucumber-LoginClient.json"
+            "json:target/Login/CucumberJson/LoginClient.json"
     },
     strict = false,
     features = "classpath:bdd/features/ApolloLoginClient.feature"

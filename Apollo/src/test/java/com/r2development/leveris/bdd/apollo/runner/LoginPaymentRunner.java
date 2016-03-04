@@ -13,7 +13,7 @@ import org.junit.runner.RunWith;
     monochrome = true,
     format = { "pretty",
             "html:target/Login/NativeReports/LoginPayment/",
-            "json:target/Login/Cucumber-Json/Cucumber-LoginPayment.json"
+            "json:target/Login/CucumberJson/LoginPayment.json"
     },
     strict = false,
     features = "classpath:bdd/features/ApolloLoginPayment.feature"
