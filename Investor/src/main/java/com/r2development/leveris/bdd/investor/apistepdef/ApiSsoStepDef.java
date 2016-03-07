@@ -40,15 +40,15 @@ public class ApiSsoStepDef extends ApiOpoqoInvestorStepDef {
         httpPostValidateAuthProcessStep.setEntity(seValidateAuthProcessStep);
         HttpResponse responseValidateAuthProcessStep = httpClient.execute(httpPostValidateAuthProcessStep, localContext);
         HttpEntity httpEntityValidateAuthProcessStep = responseValidateAuthProcessStep.getEntity();
-        System.out.println("==== httpPostValidateAuthProcessStep ====");
+        log.info("==== httpPostValidateAuthProcessStep ====");
         String parse2jsonValidateAuthProcessStep = EntityUtils.toString(httpEntityValidateAuthProcessStep);
-        System.out.println(parse2jsonValidateAuthProcessStep);
+        log.info(parse2jsonValidateAuthProcessStep);
 
         JsonParser jsonParserValidateAuthProcessStep = new JsonParser();
         JsonObject jsonObjectValidateAuthProcessSte = (JsonObject) jsonParserValidateAuthProcessStep.parse(parse2jsonValidateAuthProcessStep);
 
         String idScenario = jsonObjectValidateAuthProcessSte.get("idScenario").getAsString();
-        System.out.println("idScenario: " + idScenario);
+        log.info("idScenario: " + idScenario);
 
         // Step 2 - SSO
         HttpPost httpPostGenerateServiceTicket = new HttpPost("https://dv2pub.opoqodev.com/proxy/router/api/public/ticket/generateServiceTicket");
@@ -59,17 +59,17 @@ public class ApiSsoStepDef extends ApiOpoqoInvestorStepDef {
         httpPostGenerateServiceTicket.setEntity(seGenerateServiceTicket);
         HttpResponse responseGenerateServiceTicket = httpClient.execute(httpPostGenerateServiceTicket, localContext);
         HttpEntity httpEntityGenerateServiceTicket = responseGenerateServiceTicket.getEntity();
-        System.out.println("==== httpEntityGenerateServiceTicket ====");
+        log.info("==== httpEntityGenerateServiceTicket ====");
         String parse2jsonGenerateServiceTicket = EntityUtils.toString(httpEntityGenerateServiceTicket);
-        System.out.println(parse2jsonGenerateServiceTicket);
+        log.info(parse2jsonGenerateServiceTicket);
 
         JsonParser jsonParserGenerateServiceTicket = new JsonParser();
         JsonObject jsonObjectGenerateServiceTicket = (JsonObject) jsonParserGenerateServiceTicket.parse(parse2jsonGenerateServiceTicket);
 
         String serviceTicketCode = jsonObjectGenerateServiceTicket.get("serviceTicketCode").getAsString();
-        System.out.println("serviceTicketCode: " + serviceTicketCode);
+        log.info("serviceTicketCode: " + serviceTicketCode);
         String applicationCode = jsonObjectGenerateServiceTicket.get("applicationCode").getAsString();
-        System.out.println("applicationCode <=> applicationid: " + applicationCode);
+        log.info("applicationCode <=> applicationid: " + applicationCode);
 
         String channeluuid = RandomStringUtils.random(8, true, true) + "-" + RandomStringUtils.random(4, true, true) + "-" + RandomStringUtils.random(4, true, false) + "-" + RandomStringUtils.random(4, true, false) + "-" + RandomStringUtils.random(12, true, true);
 //        System.out.println("channeluuid: " + xrsf_token);
@@ -88,15 +88,15 @@ public class ApiSsoStepDef extends ApiOpoqoInvestorStepDef {
 
         HttpResponse responseIssueToken = httpClient.execute(httpPostIssueToken, localContext);
         HttpEntity httpEntityIssueToken = responseIssueToken.getEntity();
-        System.out.println("==== httpEntityIssueToken ====");
+        log.info("==== httpEntityIssueToken ====");
         String parse2jsonIssueToken = EntityUtils.toString(httpEntityIssueToken);
-        System.out.println(parse2jsonIssueToken);
+        log.info(parse2jsonIssueToken);
 
         JsonParser jsonParserIssueToken = new JsonParser();
         JsonObject jsonObjectIssueToken = (JsonObject) jsonParserIssueToken.parse(parse2jsonIssueToken);
 
         token = jsonObjectIssueToken.get("token").getAsString();
-        System.out.println("TICKET: " + token);
+        log.info("TICKET: " + token);
 
     }
 
@@ -108,17 +108,17 @@ public class ApiSsoStepDef extends ApiOpoqoInvestorStepDef {
         httpGetApiModuleWithBearer.setHeader("authorization", "Bearer " + token);
         HttpResponse responseGetApiModuleWithBearer = httpClient.execute(httpGetApiModuleWithBearer, localContext);
         HttpEntity httpEntityGetApiModuleWithBearer = responseGetApiModuleWithBearer.getEntity();
-        System.out.println("==== httpEntityGetApiModuleWithBearer ====");
+        log.info("==== httpEntityGetApiModuleWithBearer ====");
         String parse2jsonGetApiModuleWithBearer = EntityUtils.toString(httpEntityGetApiModuleWithBearer);
-        System.out.println(parse2jsonGetApiModuleWithBearer);
+        log.info(parse2jsonGetApiModuleWithBearer);
 
         HttpGet httpGetInvestorManager = new HttpGet("https://dv2pub.opoqodev.com/api/module/investor_manager.js");
         httpGetInvestorManager.setHeader("Accept", "*/*");
         HttpResponse responseInvestorManager = httpClient.execute(httpGetInvestorManager, localContext);
         HttpEntity httpEntityInvestorManager = responseInvestorManager.getEntity();
-        System.out.println("==== httpEntityInvestorManager ====");
+        log.info("==== httpEntityInvestorManager ====");
         String parse2jsonInvestorManager = EntityUtils.toString(httpEntityInvestorManager);
-        System.out.println(parse2jsonInvestorManager);
+        log.info(parse2jsonInvestorManager);
 
         Assert.assertNotNull("we shouldn't have a null string", parse2jsonInvestorManager);
 
@@ -139,9 +139,11 @@ public class ApiSsoStepDef extends ApiOpoqoInvestorStepDef {
         httpPostLogOut.setHeader("Referer", "https://dv2pub.opoqodev.com/");
         HttpResponse responseLogOut = httpClient.execute(httpPostLogOut, localContext);
         HttpEntity httpEntityLogOut = responseLogOut.getEntity();
-        System.out.println("==== httpEntityLogOut ====");
+        log.info("==== httpEntityLogOut ====");
         String parse2jsonLogOut = EntityUtils.toString(httpEntityLogOut);
-        System.out.println(httpEntityLogOut);
+        log.info(httpEntityLogOut);
+
+        Assert.assertNotNull("we shouldn't habe a null string", parse2jsonLogOut);
     }
 
 }
