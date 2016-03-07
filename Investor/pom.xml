@@ -126,20 +126,19 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.18.1</version>
                 <configuration>
-                    <testFailureIgnore>true</testFailureIgnore>
                     <systemPropertyVariables>
                         <environment>${environment}</environment>
-                        <domain>loftkeys.com</domain>
                         <!--suppress MavenModelInspection -->
-                        <apollo.client>${apollo.client.url}</apollo.client>
+                        <domain.investor>${domain.prop}</domain.investor>
                         <!--suppress MavenModelInspection -->
-                        <apollo.payment>${apollo.payment.url}</apollo.payment>
+                        <investor>${borrower.url}</investor>
                         <!--suppress MavenModelInspection -->
-                        <apollo.auth>${apollo.auth.url}</apollo.auth>
+                        <database>${database.instance}</database>
                         <automation.mode>${automation.mode}</automation.mode>
                         <active.screenshot>${active.screenshot}</active.screenshot>
                         <browser>${browser}</browser>
                         <excel.filename>${excel.filename}</excel.filename>
+                        <timestamp>${timestamp}</timestamp>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

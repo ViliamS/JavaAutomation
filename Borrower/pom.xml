@@ -135,7 +135,7 @@
                     <systemPropertyVariables>
                         <environment>${environment}</environment>
                         <!--suppress MavenModelInspection -->
-                        <domain>${domain.prop}</domain>
+                        <domain.borrower>${domain.prop}</domain.borrower>
                         <!--suppress MavenModelInspection -->
                         <borrower>${borrower.url}</borrower>
                         <!--suppress MavenModelInspection -->
