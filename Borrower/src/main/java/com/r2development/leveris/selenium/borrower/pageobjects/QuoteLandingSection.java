@@ -21,12 +21,14 @@ public class QuoteLandingSection extends Borrower implements IQuoteLandingSectio
     @Override
     public IQuotePaydayLoanPage clickContinuePaydayLoanTealButton() {
         clickElementViaJavascript(PAYDAY_LOAN_CONTINUE_BUTTON_XPATH, true);
+        loadingCheck();
         return new QuotePaydayLoanPage(webDriver);
     }
 
     @Override
     public IQuoteQuickLoanPage clickContinueUnsecuredLoanRedButton(){
         clickElementViaJavascript(UNSECURED_LOAN_CONTINUE_BUTTON_XPATH, true);
+        loadingCheck();
         return new QuoteQuickLoanPage(webDriver);
     }
 

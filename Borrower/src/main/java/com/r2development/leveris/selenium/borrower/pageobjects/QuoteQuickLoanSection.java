@@ -33,6 +33,7 @@ public class QuoteQuickLoanSection extends Borrower implements IQuoteQuickLoanSe
 
     @Override
     public IQuoteQuickLoanSection setLoanPurpose(String loanPurposeType) {
+        loadingCheck();
         isVisible(LOAN_PURPOSE_XPATH, true);
         clickElement(LOAN_PURPOSE_XPATH);
         isVisible(DROP_DOWN_LIST + "/a[text()='" + loanPurposeType + "']");
@@ -68,6 +69,7 @@ public class QuoteQuickLoanSection extends Borrower implements IQuoteQuickLoanSe
     public IQuoteConfigurationPage clickContinue() {
         isVisible(CONTINUE_TEAL_BUTTON_XPATH, true);
         clickElementViaJavascript(CONTINUE_TEAL_BUTTON_XPATH);
+        loadingCheck();
         return new QuoteConfigurationPage(webDriver);
     }
 

@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class RegisterPage extends Borrower implements IRegisterPage {
 
-    private static final Log log = LogFactory.getLog(RegisterPage.class);
+    private static final Log log = LogFactory.getLog(RegisterPage.class.getName());
 
     @FindBy(xpath = CLOSE_REGISTER_XPATH)
     protected WebElement weCloseRegister;
@@ -72,6 +72,7 @@ public class RegisterPage extends Borrower implements IRegisterPage {
 
     @Override
     public IRegisterPage setFirstname(String firstName) {
+        loadingCheck();
         isVisible(FIRSTNAME_XPATH, true);
         weFirstname.clear();
         weFirstname.sendKeys(firstName);
@@ -105,6 +106,7 @@ public class RegisterPage extends Borrower implements IRegisterPage {
 
     @Override
     public IRegisterPage setPhoneNumber(String phoneNumber) {
+        loadingCheck();
         isVisible(PHONE_NUMBER_XPATH, true);
         wePhoneNumber.clear();
         wePhoneNumber.sendKeys(phoneNumber);
@@ -167,8 +169,10 @@ public class RegisterPage extends Borrower implements IRegisterPage {
 
     @Override
     public IVerifyEmailPage clickRegister() {
+        loadingCheck();
         isVisible(REGISTER_BUTTON_XPATH, true);
         clickElement(REGISTER_BUTTON_XPATH);
+        loadingCheck();
 //        weRegisterButton.click();
         isInvisible(ERROR_BOX_ROOT_XPATH, true);
         isInvisible(ERROR_FORMS_XPATH, true);
@@ -182,6 +186,7 @@ public class RegisterPage extends Borrower implements IRegisterPage {
 
     @Override
     public boolean isLoaded() {
+        loadingCheck();
         isVisible(CLOSE_REGISTER_XPATH, true);
         isVisible(REGISTER_TITLE_XPATH, true);
         isVisible(FIRSTNAME_XPATH, true);

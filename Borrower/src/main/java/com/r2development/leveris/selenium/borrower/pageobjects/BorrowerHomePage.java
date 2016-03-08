@@ -30,6 +30,7 @@ public class BorrowerHomePage extends HeaderAndBottomAndFormsMenuSection impleme
 //        headerSection.isLoaded();
 //        messageSection.isLoaded();
 //        subMenuSection.isLoaded();
+        loadingCheck();
         getApprovalSection.isLoaded();
         return true;
     }
@@ -41,15 +42,14 @@ public class BorrowerHomePage extends HeaderAndBottomAndFormsMenuSection impleme
 
     @Override
     public void clickGetQuoteOrGetStarted() throws Exception {
-        if ( isVisible(IGetStartedMortgageSection.GET_STARTED_BUTTON_XPATH, false, 5)  ) {
+        loadingCheck();
+        if ( isVisible(IGetStartedMortgageSection.GET_STARTED_BUTTON_XPATH, false, 1)  ) {
             log.info("We need to handle the page StartedMortgageSection");
             getStartedMortgageSection.clickGetStarted();
-        }
-        else {
+        } else {
             log.error("Houston, do we have a new page to check ?!");
 //            throw new Exception("Houston, do we have a new page to check ?!");
         }
-
         getApprovalSection.clickGetAQuote();
     }
 

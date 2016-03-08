@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class LoginPage extends Borrower implements ILoginPage {
 
-    private static final Log log = LogFactory.getLog(LoginPage.class);
+    private static final Log log = LogFactory.getLog(LoginPage.class.getName());
 
     @FindBy( xpath = CLOSE_LOGIN_XPATH)
     protected WebElement weCloseLogin;
@@ -46,11 +46,13 @@ public class LoginPage extends Borrower implements ILoginPage {
     public IWelcomePage closeLogin() {
         isVisible(CLOSE_LOGIN_XPATH, true);
         weCloseLogin.click();
+        loadingCheck();
         return new WelcomePage(webDriver);
     }
 
     @Override
     public ILoginPage setEmailAddress(String emailAddress) {
+        loadingCheck();
         isVisible(EMAIL_ADDRESS_XPATH, true);
         weEmailAddress.clear();
         weEmailAddress.sendKeys(emailAddress);
@@ -94,12 +96,14 @@ public class LoginPage extends Borrower implements ILoginPage {
     public IBorrowerHomePage clickLogin() {
         isVisible(LOGIN_BUTTON_XPATH, true);
         clickElement(LOGIN_BUTTON_XPATH);
+        loadingCheck();
 //        weLoginButton.click();
         return new BorrowerHomePage(webDriver);
     }
 
     @Override
     public boolean isLoaded() {
+        loadingCheck();
         isVisible(LOGIN_TITLE_XPATH, true);
         isVisible(EMAIL_ADDRESS_XPATH, true);
         isVisible(PASSWORD_XPATH, true);

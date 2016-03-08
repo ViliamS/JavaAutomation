@@ -152,12 +152,10 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
     @FindBy ( xpath = YOUR_ACCOUNTS_SCRAPING_CLOSE_XPATH )
     WebElement weAccountScrapingClose;
 
-
-
-
     @Override
     public String getTitle() {
-        isVisible(YOUR_ACCOUNTS_TITLE_XPATH, true, 10);
+        loadingCheck();
+        isVisible(YOUR_ACCOUNTS_TITLE_XPATH, 0);
         return weAccountsTitle.getText();
     }
 
@@ -168,54 +166,122 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
 
     @Override
     public String getDescription() {
-        isVisible(YOUR_ACCOUNTS_DESCRIPTION_XPATH, true);
+        loadingCheck();
+        isVisible(YOUR_ACCOUNTS_DESCRIPTION_XPATH, 0);
         return weAccountsDescription.getText();
     }
 
     @Override
-    public IYourAccountsSection clickCurrentAccount() {
-        try {
-            isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_XPATH, true);
-            clickElementViaJavascript(YOUR_ACCOUNTS_CURRENT_ACCOUNT_XPATH);
-        } catch ( Exception e ) {
-            isVisible(YOUR_ACCOUNTS_ACCOUNT_MAIN_DIALOG_XPATH);
-            isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_DIALOG_XPATH, true);
-            clickElementViaJavascript(YOUR_ACCOUNTS_CURRENT_ACCOUNT_DIALOG_XPATH);
+    public IYourAccountsSection selectAccountType(String accountType) {
+        loadingCheck();
+
+        //TODO : The overlay window should be detected instead of these
+        if(!isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_XPATH, 0) && !isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_DIALOG_XPATH, 0) ){
+
+            if(isVisible(YOUR_ACCOUNTS_ADD_ACCOUNT_XPATH, 0)){
+                clickElement(YOUR_ACCOUNTS_ADD_ACCOUNT_XPATH);
+                loadingCheck();
+            }
         }
+
+        switch(accountType){
+
+            case "Current account" :
+                try {
+                    isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_XPATH, 0);
+                    clickElementViaJavascript(YOUR_ACCOUNTS_CURRENT_ACCOUNT_XPATH);
+                } catch ( Exception e ) {
+                    isVisible(YOUR_ACCOUNTS_ACCOUNT_MAIN_DIALOG_XPATH, 0);
+                    isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_DIALOG_XPATH, 0);
+                    clickElementViaJavascript(YOUR_ACCOUNTS_CURRENT_ACCOUNT_DIALOG_XPATH);
+                }
+                break;
+
+            case "Savings account" :
+
+                try {
+                    isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_XPATH, true);
+                    clickElementViaJavascript(YOUR_ACCOUNTS_SAVING_ACCOUNT_XPATH);
+                } catch ( Exception e ) {
+                    isVisible(YOUR_ACCOUNTS_ACCOUNT_MAIN_DIALOG_XPATH);
+                    isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_DIALOG_XPATH);
+                    clickElementViaJavascript(YOUR_ACCOUNTS_SAVING_ACCOUNT_DIALOG_XPATH);
+                }
+
+                break;
+
+            case "Account scraping" :
+
+                try {
+                    isVisible(YOUR_ACCOUNTS_ACCOUNT_SCRAPING_XPATH, true);
+                    clickElementViaJavascript(YOUR_ACCOUNTS_ACCOUNT_SCRAPING_XPATH);
+                    isVisible(YOUR_ACCOUNTS_SCRAPING_CLOSE_XPATH, true);
+                } catch ( Exception e ) {
+                    isVisible(YOUR_ACCOUNTS_ACCOUNT_MAIN_DIALOG_XPATH);
+                    clickElementViaJavascript(YOUR_ACCOUNTS_ACCOUNT_SCRAPING_DIALOG_XPATH);
+                    isVisible(YOUR_ACCOUNTS_SCRAPING_CLOSE_XPATH, true);
+                }
+
+                break;
+
+        }
+        loadingCheck();
         return this;
+
     }
 
-    @Override
-    public IYourAccountsSection clickSavingsAccount() {
-        try {
-            isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_XPATH, true);
-            clickElementViaJavascript(YOUR_ACCOUNTS_SAVING_ACCOUNT_XPATH);
-        } catch ( Exception e ) {
-            isVisible(YOUR_ACCOUNTS_ACCOUNT_MAIN_DIALOG_XPATH);
-            isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_DIALOG_XPATH);
-            clickElementViaJavascript(YOUR_ACCOUNTS_SAVING_ACCOUNT_DIALOG_XPATH);
-        }
-        return this;
-    }
-
-    @Override
-    public IYourAccountsSection clickAccountScraping() {
-        try {
-            isVisible(YOUR_ACCOUNTS_ACCOUNT_SCRAPING_XPATH, true);
-            clickElementViaJavascript(YOUR_ACCOUNTS_ACCOUNT_SCRAPING_XPATH);
-            isVisible(YOUR_ACCOUNTS_SCRAPING_CLOSE_XPATH, true);
-        } catch ( Exception e ) {
-            isVisible(YOUR_ACCOUNTS_ACCOUNT_MAIN_DIALOG_XPATH);
-            clickElementViaJavascript(YOUR_ACCOUNTS_ACCOUNT_SCRAPING_DIALOG_XPATH);
-            isVisible(YOUR_ACCOUNTS_SCRAPING_CLOSE_XPATH, true);
-        }
-        return this;
-    }
+//    @Override
+//    public IYourAccountsSection clickCurrentAccount() {
+//        loadingCheck();
+//        try {
+//            isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_XPATH, 0);
+//            clickElementViaJavascript(YOUR_ACCOUNTS_CURRENT_ACCOUNT_XPATH);
+//        } catch ( Exception e ) {
+//            isVisible(YOUR_ACCOUNTS_ACCOUNT_MAIN_DIALOG_XPATH, 0);
+//            isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_DIALOG_XPATH, 0);
+//            clickElementViaJavascript(YOUR_ACCOUNTS_CURRENT_ACCOUNT_DIALOG_XPATH);
+//        }
+//        loadingCheck();
+//        return this;
+//    }
+//
+//    @Override
+//    public IYourAccountsSection clickSavingsAccount() {
+//        loadingCheck();
+//        try {
+//            isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_XPATH, true);
+//            clickElementViaJavascript(YOUR_ACCOUNTS_SAVING_ACCOUNT_XPATH);
+//        } catch ( Exception e ) {
+//            isVisible(YOUR_ACCOUNTS_ACCOUNT_MAIN_DIALOG_XPATH);
+//            isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_DIALOG_XPATH);
+//            clickElementViaJavascript(YOUR_ACCOUNTS_SAVING_ACCOUNT_DIALOG_XPATH);
+//        }
+//        loadingCheck();
+//        return this;
+//    }
+//
+//    @Override
+//    public IYourAccountsSection clickAccountScraping() {
+//        loadingCheck();
+//        try {
+//            isVisible(YOUR_ACCOUNTS_ACCOUNT_SCRAPING_XPATH, true);
+//            clickElementViaJavascript(YOUR_ACCOUNTS_ACCOUNT_SCRAPING_XPATH);
+//            isVisible(YOUR_ACCOUNTS_SCRAPING_CLOSE_XPATH, true);
+//        } catch ( Exception e ) {
+//            isVisible(YOUR_ACCOUNTS_ACCOUNT_MAIN_DIALOG_XPATH);
+//            clickElementViaJavascript(YOUR_ACCOUNTS_ACCOUNT_SCRAPING_DIALOG_XPATH);
+//            isVisible(YOUR_ACCOUNTS_SCRAPING_CLOSE_XPATH, true);
+//        }
+//        loadingCheck();
+//        return this;
+//    }
 
     @Override
     public IYourAccountsSection clickAddAccount() {
-        isVisible(YOUR_ACCOUNTS_ADD_ACCOUNT_XPATH, true, 15);
+        loadingCheck();
+        isVisible(YOUR_ACCOUNTS_ADD_ACCOUNT_XPATH, 0);
         clickElement(YOUR_ACCOUNTS_ADD_ACCOUNT_XPATH);
+        loadingCheck();
 
         try {
             isVisible(YOUR_ACCOUNTS_ACCOUNT_MAIN_DIALOG_XPATH, true, 60);
@@ -224,28 +290,32 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
             while ( !toGoOn ) {
                 try {
                     clickElement(YOUR_ACCOUNTS_ADD_ACCOUNT_XPATH);
-                    isVisible(YOUR_ACCOUNTS_ACCOUNT_MAIN_DIALOG_XPATH, false, 5);
+                    loadingCheck();
+                    isVisible(YOUR_ACCOUNTS_ACCOUNT_MAIN_DIALOG_XPATH, false, 0);
                     toGoOn = true;
                 } catch (TimeoutException te) {
                     log.debug("Issues of getting YourAccount page.");
                 }
             }
         }
-
         return this;
     }
 
     @Override
     public IYourAccountsSection clickAddThisAccount() {
-        isVisible(YOUR_ACCOUNTS_ADD_THIS_ACCOUNT_XPATH, true);
+        loadingCheck();
+        isVisible(YOUR_ACCOUNTS_ADD_THIS_ACCOUNT_XPATH, 0);
         weAccountsAddThisAccount.click();
+        loadingCheck();
         return this;
     }
 
     @Override
     public IYourAccountsSection clickNext() {
-        isVisible(YOUR_ACCOUNTS_NEXT_XPATH, true);
+        loadingCheck();
+        isVisible(YOUR_ACCOUNTS_NEXT_XPATH, 0);
         clickElement(YOUR_ACCOUNTS_NEXT_XPATH);
+        loadingCheck();
 //        weAccountsNext.click();
 //        if(isVisible(INDICATOR_SMALL_ON, false, 5))
 //            isInvisible(INDICATOR_SMALL_OFF, 5);
@@ -254,8 +324,10 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
 
     @Override
     public IYourDependantsPage clickDone() {
-        isVisible(YOUR_ACCOUNTS_DONE_XPATH, true);
+        loadingCheck();
+        isVisible(YOUR_ACCOUNTS_DONE_XPATH, 0);
         clickElement(YOUR_ACCOUNTS_DONE_XPATH);
+        loadingCheck();
 //        weAccountsNext.click();
 //        if(isVisible(INDICATOR_SMALL_ON, false, 5))
 //            isInvisible(INDICATOR_SMALL_OFF, 5);
@@ -287,8 +359,10 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
 
     @Override
     public IYourAccountsSection deleteAccount(int index) {
-        isVisible(YOUR_ACCOUNTS_ACCOUNT_DELETE_XPATH, true);
+        loadingCheck();
+        isVisible(YOUR_ACCOUNTS_ACCOUNT_DELETE_XPATH, 0);
         weAccountsAccountDelete.click();
+        loadingCheck();
         return this;
     }
 
@@ -330,108 +404,135 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
 
     @Override
     public IYourAccountsSection typeCurrentStatementDate(String statementDate) {
-        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_STATEMENT_DATE_INPUT_XPATH, true);
+        loadingCheck();
+        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_STATEMENT_DATE_INPUT_XPATH, 0);
 //        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_STATEMENT_DATE_INPUT_XPATH).clear();
 //        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_STATEMENT_DATE_INPUT_XPATH).sendKeys(statementDate);
         weAccountsCurrentStatementDateInput.clear();
         weAccountsCurrentStatementDateInput.sendKeys(statementDate);
+        loadingCheck();
         return this;
     }
 
     @Override
     public IYourAccountsSection typeCurrentAccountName(String accountName) {
-        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_NUMBER_INPUT_XPATH, true);
+        loadingCheck();
+        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_NUMBER_INPUT_XPATH, 0);
         weAccountsCurrentAccountName.clear();
         weAccountsCurrentAccountName.sendKeys(accountName);
+        loadingCheck();
         return this;
     }
 
     @Override
     public IYourAccountsSection typeCurrentSortCode1(String sortCode1) {
-        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_SORT_CODE_1_INPUT_XPATH, true);
+        loadingCheck();
+        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_SORT_CODE_1_INPUT_XPATH, 0);
         weAccountsCurrentSortCode1.clear();
         weAccountsCurrentSortCode1.sendKeys(sortCode1);
+        loadingCheck();
         return this;
     }
 
     @Override
     public IYourAccountsSection typeCurrentSortCode2(String sortCode2) {
-        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_SORT_CODE_2_INPUT_XPATH, true);
+        loadingCheck();
+        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_SORT_CODE_2_INPUT_XPATH, 0);
         weAccountsCurrentSortCode2.clear();
         weAccountsCurrentSortCode2.sendKeys(sortCode2);
+        loadingCheck();
         return this;
     }
 
     @Override
     public IYourAccountsSection typeCurrentSortCode3(String sortCode3) {
-        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_SORT_CODE_3_INPUT_XPATH, true);
+        loadingCheck();
+        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_SORT_CODE_3_INPUT_XPATH, 0);
         weAccountsCurrentSortCode3.clear();
         weAccountsCurrentSortCode3.sendKeys(sortCode3);
+        loadingCheck();
         return this;
     }
 
     @Override
     public IYourAccountsSection typeCurrentAccountNumber(String accountNumber) {
-        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_NUMBER_INPUT_XPATH, true);
+        loadingCheck();
+        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_NUMBER_INPUT_XPATH, 0);
         weAccountsCurrentAccountNumber.clear();
         weAccountsCurrentAccountNumber.sendKeys(accountNumber);
+        loadingCheck();
         return this;
     }
 
     @Deprecated @Override
     public IYourAccountsSection typeCurrentAccountProvider(String accountProvider) {
-        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_PROVIDER_INPUT_XPATH, true);
+        loadingCheck();
+        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_PROVIDER_INPUT_XPATH, 0);
         weAccountsCurrentProviderInput.clear();
         weAccountsCurrentProviderInput.sendKeys(accountProvider);
+        loadingCheck();
         return this;
     }
 
     @Override
     public IYourAccountsSection typeCurrentIban(String iban) {
-        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_IBAN_INPUT_XPATH, true);
+        loadingCheck();
+        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_IBAN_INPUT_XPATH, 0);
         weAccountsCurrentIbanInput.clear();
         weAccountsCurrentIbanInput.sendKeys(iban);
+        loadingCheck();
         return this;
     }
 
     @Override
     public IYourAccountsSection typeCurrentAccountBalance(String accountBalance) {
-        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_BALANCE_INPUT_XPATH, true);
+        loadingCheck();
+        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_BALANCE_INPUT_XPATH, 0);
         weAccountsCurrentAccountBalanceInput.clear();
         weAccountsCurrentAccountBalanceInput.sendKeys(accountBalance);
+        loadingCheck();
         return this;
     }
 
     @Override
     public IYourAccountsSection typeCurrentOverdraftLimit(String overdraftLimit) {
-        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_OVERDRAFT_INPUT_XPATH, true);
+        loadingCheck();
+        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_OVERDRAFT_INPUT_XPATH, 0);
         weAccountsCurrentAccountOverdraftInput.clear();
         weAccountsCurrentAccountOverdraftInput.sendKeys(overdraftLimit);
+        loadingCheck();
         return this;
     }
 
     @Override
     public IYourAccountsSection selectCurrentSavingSource(String savingSource) {
-        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_SAVING_SOURCE_INPUT_XPATH, true);
+        loadingCheck();
+        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_SAVING_SOURCE_INPUT_XPATH, 0);
         selectFromDropDown(YOUR_ACCOUNTS_CURRENT_ACCOUNT_SAVING_SOURCE_INPUT_XPATH, savingSource);
+        loadingCheck();
         return this;
     }
 
     @Override
     public IYourAccountsSection typeCurrentRegularMonthlySavings(String regularMonthlySavings) {
-        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_REGULAR_MONTHLY_SAVINGS_INPUT_XPATH, true);
+        loadingCheck();
+        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_REGULAR_MONTHLY_SAVINGS_INPUT_XPATH, 0);
         weAccountsCurrentRegularMonthlySavingsInput.clear();
         weAccountsCurrentRegularMonthlySavingsInput.sendKeys(regularMonthlySavings);
+        loadingCheck();
         return this;
     }
 
 
     @Override
     public IYourAccountsSection typeSavingStatementDate(String statementDate) {
+        loadingCheck();
 //        isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_STATEMENT_DATE_INPUT_XPATH, true);
 //        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_STATEMENT_DATE_INPUT_XPATH).clear();
 //        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_STATEMENT_DATE_INPUT_XPATH).sendKeys(statementDate);
+        isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_STATEMENT_DATE_INPUT_XPATH, 0);
         sendKeysElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_STATEMENT_DATE_INPUT_XPATH, statementDate, 30);
+        loadingCheck();
 //        weAccountsSavingStatementDateInput.clear();
 //        weAccountsSavingStatementDateInput.sendKeys(statementDate);
         return this;
@@ -442,7 +543,9 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
 //        isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_NAME_INPUT_XPATH, true);
 //        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_NAME_INPUT_XPATH).clear();
 //        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_NAME_INPUT_XPATH).sendKeys(accountName);
+        loadingCheck();
         sendKeysElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_NAME_INPUT_XPATH, accountName, 60);
+        loadingCheck();
         return this;
     }
 
@@ -452,6 +555,7 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
 //        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_SORT_CODE_1_INPUT_XPATH).clear();
 //        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_SORT_CODE_1_INPUT_XPATH).sendKeys(sortCode1);
         sendKeysElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_SORT_CODE_1_INPUT_XPATH, sortCode1, 60);
+        loadingCheck();
         return this;
     }
 
@@ -461,6 +565,7 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
 //        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_SORT_CODE_2_INPUT_XPATH).clear();
 //        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_SORT_CODE_2_INPUT_XPATH).sendKeys(sortCode2);
         sendKeysElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_SORT_CODE_2_INPUT_XPATH, sortCode2, 60);
+        loadingCheck();
         return this;
     }
 
@@ -470,6 +575,7 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
 //        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_SORT_CODE_3_INPUT_XPATH).clear();
 //        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_SORT_CODE_3_INPUT_XPATH).sendKeys(sortCode3);
         sendKeysElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_SORT_CODE_3_INPUT_XPATH, sortCode3, 60);
+        loadingCheck();
         return this;
     }
 
@@ -479,6 +585,7 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
 //        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_NUMBER_INPUT_XPATH).clear();
 //        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_NUMBER_INPUT_XPATH).sendKeys(accountNumber);
         sendKeysElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_NUMBER_INPUT_XPATH, accountNumber, 60);
+        loadingCheck();
         return this;
     }
 
@@ -488,6 +595,7 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
 //        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_PROVIDER_INPUT_XPATH).clear();
 //        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_PROVIDER_INPUT_XPATH).sendKeys(accountProvider);
         sendKeysElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_PROVIDER_INPUT_XPATH, accountProvider, 60);
+        loadingCheck();
 //        weAccountsSavingProviderInput.clear();
 //        weAccountsSavingProviderInput.sendKeys(accountProvider);
         return this;
@@ -499,6 +607,7 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
 //        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_IBAN_INPUT_XPATH).clear();
 //        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_IBAN_INPUT_XPATH).sendKeys(iban);
         sendKeysElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_IBAN_INPUT_XPATH, iban, 60);
+        loadingCheck();
 //        weAccountsSavingIbanInput.clear();
 //        weAccountsSavingIbanInput.sendKeys(iban);
         return this;
@@ -510,6 +619,7 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
 //        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_BALANCE_INPUT_XPATH).clear();
 //        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_BALANCE_INPUT_XPATH).sendKeys(accountBalance);
         sendKeysElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_BALANCE_INPUT_XPATH, accountBalance, 60);
+        loadingCheck();
 //        weAccountsSavingAccountBalanceInput.clear();
 //        weAccountsSavingAccountBalanceInput.sendKeys(accountBalance);
         return this;
@@ -522,6 +632,7 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
 //        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_OVERDRAFT_INPUT_XPATH).clear();
 //        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_OVERDRAFT_INPUT_XPATH).sendKeys(savingOverdraftLimit);
         sendKeysElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_OVERDRAFT_INPUT_XPATH, savingOverdraftLimit, 60);
+        loadingCheck();
 //        weAccountsSavingAccountOverdraftInput.clear();
 //        weAccountsSavingAccountOverdraftInput.sendKeys(savingOverdraftLimit);
         return this;
@@ -532,6 +643,7 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
 //        isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_REGULAR_MONTHLY_SAVINGS_LABEL_XPATH, true);
 //        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_SAVING_SOURCE_INPUT_XPATH).isDisplayed();
         selectFromDropDown(YOUR_ACCOUNTS_SAVING_ACCOUNT_REGULAR_MONTHLY_SAVINGS_INPUT_XPATH, sourceSaving);
+        loadingCheck();
         return this;
     }
 
@@ -541,6 +653,7 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
 //        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_REGULAR_MONTHLY_SAVINGS_INPUT_XPATH).clear();
 //        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_REGULAR_MONTHLY_SAVINGS_INPUT_XPATH).sendKeys(savingRegularMonthlySavings);
         sendKeysElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_REGULAR_MONTHLY_SAVINGS_INPUT_XPATH, savingRegularMonthlySavings, 60);
+        loadingCheck();
 //        weAccountsSavingRegularMonthlySavingsInput.clear();
 //        weAccountsSavingRegularMonthlySavingsInput.sendKeys(savingRegularMonthlySavings);
         return this;
@@ -549,8 +662,10 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
 
     @Override
     public IYourAccountsSection closeScraping() {
-        isVisible(YOUR_ACCOUNTS_SCRAPING_CLOSE_XPATH, true);
+        loadingCheck();
+        isVisible(YOUR_ACCOUNTS_SCRAPING_CLOSE_XPATH, 0);
         weAccountScrapingClose.click();
+        loadingCheck();
         return this;
     }
 

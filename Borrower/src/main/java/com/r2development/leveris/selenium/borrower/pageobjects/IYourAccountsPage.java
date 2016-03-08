@@ -8,9 +8,10 @@ public interface IYourAccountsPage {
     String getDialogTitle();
     String getDescription();
 
-    IYourAccountsPage clickCurrentAccount();
-    IYourAccountsPage clickSavingsAccount();
-    IYourAccountsPage clickAccountScraping();
+    IYourAccountsPage selectAccountType(String accountType);
+//    IYourAccountsPage clickCurrentAccount();
+//    IYourAccountsPage clickSavingsAccount();
+//    IYourAccountsPage clickAccountScraping();
 
     IYourAccountsPage clickAddAccount();
     IYourAccountsPage clickAddThisAccount();
@@ -42,7 +43,7 @@ public interface IYourAccountsPage {
     IYourAccountsPage selectCurrentSavingSource(String savingSource);
     IYourAccountsPage typeCurrentRegularMonthlySavings(String regularMonthlySavings);
 
-    IYourAccountsPage typeSavingStatementDate(String statementDate);
+    IYourAccountsPage typeSavingsStatementDate(String statementDate);
     IYourAccountsPage typeSavingsAccountName(String accountName);
     IYourAccountsPage typeSavingsSortCode1(String sortCode1);
     IYourAccountsPage typeSavingsSortCode2(String sortCode2);

@@ -17,7 +17,7 @@ Feature: Payday Loan
     Then User clicks on Apply Online
     And this registration data, user processes the registration (format2)
       | firstName         | AutomationSBUI                                    |
-      | email             | test.automation.payday@test.finfactory.com    |
+      | email             | test.automation.payday@test.finfactory.com        |
       | phoneNumber       | +420123456789                                     |
       | password          | Password1122+                                     |
       | termsBusiness     | accepts                                           |
@@ -47,7 +47,8 @@ Feature: Payday Loan
 
 #    EMPLOYMENT & INCOME
 #    When user clicks "Borrower Employment Income"
-    And borrower fills in "Employment Income"
+
+    And Borrower fills in Employment and Income type Paye
       | categoryIncome      | Paye        |
       | occupation          | Artist      |
       | employerName        | Hot Peppers Paye |
@@ -55,8 +56,16 @@ Feature: Payday Loan
       | startDate           | 05/11/2013  |
       | isCurrentEmployment | yes         |
       | netMonthlyIncome    | 124000      |
-    And borrower user clicks "ADD EMPLOYMENT"
-    And borrower fills in "Employment Income"
+    And Borrower user clicks "ADD EMPLOYMENT"
+    And Borrower fills in Employment and Income type Paye
+      | categoryIncome      | Paye        |
+      | occupation          | Artist      |
+      | employerName        | Hot Peppers Paye |
+      | employmentType      | Permanent   |
+      | startDate           | 05/11/2013  |
+      | isCurrentEmployment | yes         |
+      | netMonthlyIncome    | 124000      |
+    And Borrower fills in Employment and Income type Self Employed
       | categoryIncome      | Self Employed      |
       | occupation          | Artist             |
       | businessName        | testBusinessName   |
@@ -93,11 +102,11 @@ Feature: Payday Loan
 #      | additionalIncomeSource | testAdditionalIncomeSource |
 #      | netMonthlyIncome       | 2000                       |
 #      | timeEarningIncome      | 200                        |
-    And borrower user clicks "Done"
+    And Borrower user clicks "Done"
 
 #    YOUR ACCOUNTS
-    And user fills in "Current Account"
-#      | fundsSource     | Current Account         |
+    And Borrower fills in Current account
+      | accountType     | Current Account         |
       | statementDate   | 01/01/2000              |
       | accountName     | test Current Account    |
       | sortCode1       | 12                      |
@@ -108,23 +117,24 @@ Feature: Payday Loan
       | overdraftLimit  | 2002                    |
       | sourceOfSaving  | Gift                    |
       | regularMonthlySaving | 200                |
-#    And user clicks "ADD ACCOUNT"
-#    And user clicks "Savings account"
-#    And user fills in "Savings Account"
-#      | statementDate   | 01/01/2000              |
-#      | accountName     | test Current Account    |
-#      | sortCode1       | 12                      |
-#      | sortCode2       | 34                      |
-#      | sortCode3       | 56                      |
-#      | accountNumber   | 0987654321              |
-#      | accountBalance  | 2001                    |
-##      | overdraftLimit  | 2002                    |
-#      | sourceOfSaving  | Gift                    |
-#      | regularMonthlySaving | 200                |
-#    And user clicks "ADD ACCOUNT"
+    And Borrower clicks "ADD ACCOUNT"
+    And Borrower clicks Savings account
+    And Borrower fills in Savings account
+      | accountType     | Savings account         |
+      | statementDate   | 01/01/2000              |
+      | accountName     | test Current Account    |
+      | sortCode1       | 12                      |
+      | sortCode2       | 34                      |
+      | sortCode3       | 56                      |
+      | accountNumber   | 0987654321              |
+      | accountBalance  | 2001                    |
+      | overdraftLimit  | 2002                    |
+      | sourceOfSaving  | Gift                    |
+      | regularMonthlySaving | 200                |
+    And Borrower clicks "ADD ACCOUNT"
 #    And user clicks "Account scraping"
 #    And user closes "scraping" form
-    And user clicks Accounts "Done"
+    And Borrower clicks Accounts "Done"
 
 #    YOUR DEPENDENT
     And user hasn't dependants

@@ -27,6 +27,7 @@ public class QuotePaydayLoanSection extends Borrower implements IQuotePaydayLoan
 
     @Override
     public IQuotePaydayLoanSection setLoanPurpose(String loanPurposeType) {
+        loadingCheck();
         isVisible(LOAN_PURPOSE_XPATH, true);
         clickElement(LOAN_PURPOSE_XPATH);
         isVisible(DROP_DOWN_LIST + "/a[text()='" + loanPurposeType + "']");
@@ -62,6 +63,7 @@ public class QuotePaydayLoanSection extends Borrower implements IQuotePaydayLoan
     public IQuoteConfigurationPage clickContinue() {
         isVisible(CONTINUE_TEAL_BUTTON_XPATH, true);
         clickElementViaJavascript(CONTINUE_TEAL_BUTTON_XPATH);
+        loadingCheck();
         return new QuoteConfigurationPage(webDriver);
     }
 }
