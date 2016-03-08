@@ -209,7 +209,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                                 put("Content-Type", "application/x-www-form-urlencoded");
                             }
                         },
-                        null,
+                        new LinkedHashMap<String, String>() {},
                         localContext,
                         CONSUME_QUIETLY
                 );
@@ -250,7 +250,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                                 put("Content-Type", "application/x-www-form-urlencoded");
                             }
                         },
-                        null,
+                        new LinkedHashMap<String, String>() {},
                         localContext,
                         CONSUME_QUIETLY
                 );
@@ -1178,7 +1178,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                             put("Content-Type", "application/x-www-form-urlencoded");
                         }
                     },
-                    null,
+                    new LinkedHashMap<String, String>() {},
                     localContext,
                     CONSUME_QUIETLY
             );

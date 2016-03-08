@@ -266,7 +266,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
 //                            put("root:c:w:btnApplyNow:submit", "1");
 //                        }
 //                    },
-                null,
+                new LinkedHashMap<String, String>() {},
                 localContext,
                 CONSUME_QUIETLY
         );

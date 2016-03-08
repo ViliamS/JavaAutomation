@@ -14,6 +14,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.client.utils.HttpClientUtils;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.LaxRedirectStrategy;
@@ -140,7 +141,7 @@ public class HttpUtils {
             }
         }
 
-        if ( urlParameters != null ) {
+        if ( urlParameters != null && urlParameters.size() != 0) {
             List<NameValuePair> urlParametersPost = urlParameters.entrySet().stream().map(currentEntry -> new BasicNameValuePair(currentEntry.getKey(), currentEntry.getValue())).collect(Collectors.toList());
             httpPost.setEntity(new UrlEncodedFormEntity(urlParametersPost));
 
@@ -149,6 +150,41 @@ public class HttpUtils {
 //                urlParametersPost.add(new BasicNameValuePair(currentEntry.getKey(), currentEntry.getValue()));
 //            }
 //            httpPost.setEntity(new UrlEncodedFormEntity(urlParametersPost));
+        }
+
+        HttpResponse response = httpClient.execute(httpPost, localContext);
+
+//        assertTrue(response.getStatusLine().getStatusCode() == 200 || response.getStatusLine().getStatusCode() == 302);
+
+        HttpEntity httpEntity = response.getEntity();
+        if ( !consumeQuietly ) {
+            log.info("\n= Response of :" + url);
+            log.info(toReturn = EntityUtils.toString(httpEntity));
+        } else {
+            EntityUtils.consumeQuietly(httpEntity);
+            Instant end_timestamp = DateTime.now().toInstant();
+            log.info("done... in " + new Interval(begin_timestamp, end_timestamp).toDuration().toStandardSeconds());
+        }
+
+        HttpClientUtils.closeQuietly(response);
+        return toReturn;
+    }
+
+    public static String requestHttpPost(HttpClient httpClient, String url, Map<String, String> headers, String json, HttpContext localContext, boolean consumeQuietly) throws IOException {
+        String toReturn = StringUtils.EMPTY;
+        Instant begin_timestamp = DateTime.now().toInstant();
+        log.info("\n= Begin Request :" + url);
+        HttpPost httpPost = new HttpPost(url);
+
+        if ( headers != null ) {
+            for (Map.Entry<String, String> currentEntry : headers.entrySet() ) {
+                httpPost.setHeader(currentEntry.getKey(), currentEntry.getValue());
+            }
+        }
+
+        if ( json != null ) {
+            StringEntity jsonEntity =new StringEntity(json);
+            httpPost.setEntity(jsonEntity);
         }
 
         HttpResponse response = httpClient.execute(httpPost, localContext);

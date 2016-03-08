@@ -104,7 +104,7 @@ public class ApiDocumentUploadStepDef extends ApiOpoqoBorrowerStepDef {
                             put("Content-Type", "application/x-www-form-urlencoded");
                         }
                     },
-                    null,
+                    new LinkedHashMap<String, String>() {},
                     localContext,
                     CONSUME_QUIETLY
             );
