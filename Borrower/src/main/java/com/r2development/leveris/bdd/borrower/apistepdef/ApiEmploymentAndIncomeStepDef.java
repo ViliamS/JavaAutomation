@@ -141,10 +141,6 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
     @Given("^(borrower) user clicks the employment & income category : (Paye|Self Employed|Civil Servant|Unemployed/Homemaker|Other)$")
     public void borrower_coapplicant_user_clicks_an_employment_and_income_category(String borrowerOrCoapplicant, String category) throws IOException {
 
-        if ( !httpResponse.getHttpResponse().contains("ajax") ) {
-
-        }
-
         Document empListDoc = Jsoup.parse(httpResponse.getHttpResponse());
         TextNode textNodeEmpList = null;
         try {
@@ -1292,7 +1288,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
 
         String yourAccountPageResponse = requestHttpPost(
                 httpClient,
-                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlEmpList:c:w:btnImDone:submit::IBehaviorListener:0:",
+                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlEmpList:c:w:btnImDone:submit::IBehaviorListener:0:-1",
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");

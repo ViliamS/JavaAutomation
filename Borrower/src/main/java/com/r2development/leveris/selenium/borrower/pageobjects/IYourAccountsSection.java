@@ -99,7 +99,7 @@ public interface IYourAccountsSection {
     IYourAccountsSection clickAddAccount();
     IYourAccountsSection clickAddThisAccount();
     IYourAccountsSection clickNext();
-    IYourDependantsPage clickDone();
+    IYourDependentsPage clickDone();
     IYourAccountsSection clickCancel();
     IYourAccountsSection selectAccount(String account);
     IYourAccountsSection selectAccount(int index);

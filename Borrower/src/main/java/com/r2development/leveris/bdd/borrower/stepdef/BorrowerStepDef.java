@@ -25,7 +25,7 @@ public class BorrowerStepDef /*extends Abakus*/ /*implements IBorrower*/ {
     IEmploymentIncomesPage borrowerEmploymentIncomesPage;
     IEmploymentIncomesPage coapplicantEmploymentIncomesPage;
     IYourAccountsPage yourAccountsPage;
-    IYourDependantsPage yourDependentsPage;
+    IYourDependentsPage yourDependentsPage;
     IYourFinancialCommitmentsPage yourFinancialCommitmentsPage;
     IDocumentUploadPage documentUploadPage;
     IFormsMenu currentPage;
@@ -68,7 +68,7 @@ public class BorrowerStepDef /*extends Abakus*/ /*implements IBorrower*/ {
 //        borrowerEmploymentIncomesPage = new EmploymentIncomesPage(WebDriverService.getWebDriverInstance());
 //        coapplicantEmploymentIncomesPage = new EmploymentIncomesPage(WebDriverService.getWebDriverInstance());
 //        yourAccountsPage = new YourAccountsPage(WebDriverService.getWebDriverInstance());
-//        yourDependentsPage = new YourDependantsPage(WebDriverService.getWebDriverInstance());
+//        yourDependentsPage = new YourDependentsPage(WebDriverService.getWebDriverInstance());
 //        yourFinancialAssetsPage = new YourFinancialAssetsPage(WebDriverService.getWebDriverInstance());
 //        yourFundingPage = new YourFundingPage(WebDriverService.getWebDriverInstance());
 //        yourFinancialCommitmentsPage = new YourFinancialCommitmentsPage(WebDriverService.getWebDriverInstance());
@@ -109,7 +109,7 @@ public class BorrowerStepDef /*extends Abakus*/ /*implements IBorrower*/ {
         borrowerEmploymentIncomesPage = new EmploymentIncomesPage(webDriver);
         coapplicantEmploymentIncomesPage = new EmploymentIncomesPage(webDriver);
         yourAccountsPage = new YourAccountsPage(webDriver);
-        yourDependentsPage = new YourDependantsPage(webDriver);
+        yourDependentsPage = new YourDependentsPage(webDriver);
         yourFinancialCommitmentsPage = new YourFinancialCommitmentsPage(webDriver);
 //        documentUploadPage = new DocumentUploadPage(webDriver, user);
     }

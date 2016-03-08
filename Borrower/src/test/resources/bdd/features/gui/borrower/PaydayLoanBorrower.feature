@@ -12,7 +12,7 @@ Feature: Payday Loan
       | NetMonthlyIncome   | 21,000.00 |
       | MonthlyExpenses    | 1,000.00  |
       | NumberOfDependents | 1         |
-      | AmountToBorrow     | 1,000.00  |
+      | AmountToBorrow     | 500       |
     When Payday Loan User clicks on Continue button
     Then User clicks on Apply Online
     And this registration data, user processes the registration (format2)
@@ -109,7 +109,7 @@ Feature: Payday Loan
       | sourceOfSaving  | Gift                    |
       | regularMonthlySaving | 200                |
 #    And user clicks "ADD ACCOUNT"
-#    And user clicks "Savings account"
+##    And user clicks "Savings account"
 #    And user fills in "Savings Account"
 #      | statementDate   | 01/01/2000              |
 #      | accountName     | test Current Account    |
@@ -118,7 +118,7 @@ Feature: Payday Loan
 #      | sortCode3       | 56                      |
 #      | accountNumber   | 0987654321              |
 #      | accountBalance  | 2001                    |
-##      | overdraftLimit  | 2002                    |
+#      | overdraftLimit  | 2002                    |
 #      | sourceOfSaving  | Gift                    |
 #      | regularMonthlySaving | 200                |
 #    And user clicks "ADD ACCOUNT"
@@ -127,14 +127,14 @@ Feature: Payday Loan
     And user clicks Accounts "Done"
 
 #    YOUR DEPENDENT
-    And user hasn't dependants
-    And user has dependants
-    And user fills in "Dependant form"
-    | date Of Birth | 01/01/2000 |
-    And user clicks "ADD DEPENDANT"
-    And user fills in "Dependant form"
-      | date Of Birth | 01/01/2000 |
-    And user clicks Dependants "Done"
+    And user hasn't dependents
+#    And user has dependents
+#    And user fills in "Dependant form"
+#    | date Of Birth | 01/01/2000 |
+#    And user clicks "ADD DEPENDANT"
+#    And user fills in "Dependant form"
+#      | date Of Birth | 01/01/2000 |
+#    And user clicks Dependants "Done"
 
 #    Financial Commitments
 #    When user clicks "Financial Commitments"

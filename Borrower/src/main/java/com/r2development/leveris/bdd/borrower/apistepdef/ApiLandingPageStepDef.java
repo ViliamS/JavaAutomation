@@ -1,5 +1,6 @@
 package com.r2development.leveris.bdd.borrower.apistepdef;
 
+import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.LandingPageData;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -21,6 +22,7 @@ import static com.r2development.leveris.utils.HttpUtils.requestHttpPost;
 /**
  * todo LandingPageStepDef Specific Implementation
  */
+@Singleton
 public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiLandingPageStepDef.class.getName());
@@ -118,7 +120,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
         switch (loanType) {
             case "Payday Loan":
 //                quotePaydayLoanPage.setLoanPurpose(loanPurpose);
-                paydayParameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:cmbLoanPurpose:combobox", loanPurpose);
+                paydayParameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:cmbLoanPurpose:combobox", "PAYDAY");
                 break;
             case "Unsecured Loan":
 //                quoteQuickLoanPage.setLoanPurpose( loanPurpose );
@@ -182,6 +184,28 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
     public void user_clicks_on_continue_button(String switchCase) throws IOException {
         switch (switchCase) {
             case "Payday Loan":
+
+//                String hidePnlUnsecuredLoanQuotationResponse = requestHttpPost(
+//                    httpClient,
+//                    "http://dv2app.opoqodev.com/stable-borrower/form.2??wicket:interface=:0:main:c:form::IFormChangeListener:2:1",
+//                        new LinkedHashMap<String, String>() {
+//                            {
+//                                put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+//                                put("Content-Type", "application/x-www-form-urlencoded");
+//                            }
+//                        },
+//                        new LinkedHashMap<String, String>() {
+//                            {
+//                                put(
+//                                    "data",
+//                                    ""
+//                                );
+//                            }
+//                        },
+//                        localContext,
+//                        false
+//                );
+
 //                quoteConfigurationPage = quotePaydayLoanPage.clickContinue();
                 paydayParameters.put("stepToken", "2");
                 paydayParameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:btnContinue:submit", "1");

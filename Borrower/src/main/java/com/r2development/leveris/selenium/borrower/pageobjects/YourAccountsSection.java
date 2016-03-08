@@ -253,13 +253,13 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
     }
 
     @Override
-    public IYourDependantsPage clickDone() {
+    public IYourDependentsPage clickDone() {
         isVisible(YOUR_ACCOUNTS_DONE_XPATH, true);
         clickElement(YOUR_ACCOUNTS_DONE_XPATH);
 //        weAccountsNext.click();
 //        if(isVisible(INDICATOR_SMALL_ON, false, 5))
 //            isInvisible(INDICATOR_SMALL_OFF, 5);
-        return new YourDependantsPage(webDriver);
+        return new YourDependentsPage(webDriver);
     }
 
     @Override

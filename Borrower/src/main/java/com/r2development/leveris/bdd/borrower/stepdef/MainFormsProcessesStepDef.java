@@ -27,7 +27,7 @@ public class MainFormsProcessesStepDef /*extends BorrowerStepDef*/ implements CL
     IFormsMenu currentPage;
     IDocumentUploadPage documentUploadPage;
     IYourFinancialCommitmentsPage yourFinancialCommitmentsPage;
-    IYourDependantsPage yourDependentsPage;
+    IYourDependentsPage yourDependentsPage;
 
     @Inject
     public MainFormsProcessesStepDef(SharedDriver webDriver) {

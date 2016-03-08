@@ -15,7 +15,7 @@ public interface IYourAccountsPage {
     IYourAccountsPage clickAddAccount();
     IYourAccountsPage clickAddThisAccount();
     IYourAccountsPage clickNext();
-    IYourDependantsPage clickDone();
+    IYourDependentsPage clickDone();
     IYourAccountsPage clickCancel();
     IYourAccountsPage selectAccount(String account);
     IYourAccountsPage selectAccount(int index);

@@ -12,7 +12,7 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
     private static final Log log = LogFactory.getLog(YourAccountsPage.class);
 
     protected IYourAccountsSection yourAccountsSection;
-    protected IYourDependantsPage yourDependentsPage;
+    protected IYourDependentsPage yourDependentsPage;
 
 //    @Inject
     public YourAccountsPage(SharedDriver webDriver) {
@@ -75,7 +75,7 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
     }
 
     @Override
-    public IYourDependantsPage clickDone() {
+    public IYourDependentsPage clickDone() {
         yourDependentsPage = yourAccountsSection.clickDone();
 
         try {

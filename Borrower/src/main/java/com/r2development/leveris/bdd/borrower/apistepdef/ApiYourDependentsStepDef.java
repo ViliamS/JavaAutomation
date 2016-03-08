@@ -73,7 +73,7 @@ public class ApiYourDependentsStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @And("^this dependent is applied to (borrower|coapplicant|both)$")
+    @Deprecated @And("^this dependent is applied to (borrower|coapplicant|both)$")
     public void this_dependent_is_applied_to(String toWhom) {
         switch (toWhom) {
             case "borrower":

@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class DataModel extends LinkedHashMap {
     Map<String, String> data = new LinkedHashMap<>();
+    Map<String, DataModel> dataModel;
 
     /**
      * Constructs an empty insertion-ordered <tt>LinkedHashMap</tt> instance
@@ -15,6 +16,8 @@ public class DataModel extends LinkedHashMap {
         this.data.putAll(data);
     }
 
+//    public DataModel(Map<String, DataModel> dataModel) { this.dataModel = dataModel; }
+//
     public DataModel(List<String> dataList) {
         int i=0;
         do {

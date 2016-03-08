@@ -92,10 +92,11 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
 
         Document formToFillDoc = Jsoup.parse(httpResponse.getHttpResponse());
         TextNode textNodeFormToFill = null;
-//        if ( countAccount == 0 )
+        try {
             textNodeFormToFill = formToFillDoc.select("component[id~=dialog]").select("component[encoding~=wicket]").first().textNodes().get(0);
-//        else
-//            textNodeFormToFill = formToFillDoc.select("component[id~=form]").select("component[encoding~=wicket]").first().textNodes().get(0);
+        } catch ( NullPointerException npe ) {
+            textNodeFormToFill = formToFillDoc.select("component[id~=form]").select("component[encoding~=wicket]").first().textNodes().get(0);
+        }
         Document formToFillDoc2 = Jsoup.parse(textNodeFormToFill.text());
 
         String stepToken = formToFillDoc2.select("input[name=stepToken]").attr("value");
