@@ -101,7 +101,7 @@ public class ApiSsoStepDef extends ApiOpoqoApolloStepDef {
                     put("Referer", "http://dv2apl.opoqodev.com/" + application.toLowerCase());
                 }
             },
-            null,
+            new LinkedHashMap<String, String>() {},
             localContext,
             CONSUME_QUIETLY
         );

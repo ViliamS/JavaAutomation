@@ -167,7 +167,7 @@ public class ApiApplicationStepDef extends ApiOpoqoUnderwriterStepDef {
                         put("Accept", "text/xml");
                     }
                 },
-                null,
+                new LinkedHashMap<String, String>() {},
                 localContext,
                 false
         );

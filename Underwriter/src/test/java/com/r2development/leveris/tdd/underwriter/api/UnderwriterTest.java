@@ -211,7 +211,7 @@ public class UnderwriterTest {
                         put("Accept", "text/xml");
                     }
                 },
-                null,
+                new LinkedHashMap<String, String>() {},
                 localContext,
                 false
         );
