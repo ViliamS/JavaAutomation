@@ -7,6 +7,7 @@ import com.r2development.leveris.di.IHttpResponse;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.junit.Assert;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -42,9 +43,10 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
         this.httpResponse = httpResponse;
     }
 
-    @Given("(borrower) fills in \"Employment Income\"$")
+    @Given("(borrower) fills in \"(Paye|Self Employed|Civil Servant|Unemployed/Homemaker|Other) Employment Income\"$")
 //    public void user_fills_in_employment_income(String borrowerOrCoapplicant, Map<String, String> employmentIncomeDataMap) throws IOException {
-    public void user_fills_in_employment_income(String borrowerOrCoapplicant, List<String> employmentIncomeDataMap) throws IOException {
+    public void user_fills_in_employment_income(String borrowerOrCoapplicant, String employmentCategory, List<String> employmentIncomeDataMap) throws IOException {
+
 
 //        if ( borrowerOrCoapplicant.equals("coapplicant") ) {
 //            requestHttpPost(
@@ -64,6 +66,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
 //        }
 
         EmploymentIncomeData employmentIncomeData = new EmploymentIncomeData(employmentIncomeDataMap);
+        Assert.assertEquals("We should have the same employmentCategory in the stepdef and in the table", employmentCategory, employmentIncomeData.get("categoryIncome"));
 
         switch (employmentIncomeData.get("categoryIncome")) {
             case "Paye":
@@ -1288,7 +1291,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
 
         String yourAccountPageResponse = requestHttpPost(
                 httpClient,
-                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlEmpList:c:w:btnImDone:submit::IBehaviorListener:0:-1",
+                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlEmpList:c:w:btnImDone:submit::IBehaviorListener:0:",
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");
@@ -1297,7 +1300,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                 },
                 new LinkedHashMap<String, String>() {
                     {
-                        put("stepToken", "1");
+                        put("stepToken", "2"); // TODO Retrieve the steptoken !
                         put("root:c:w:pnlEmpList:c:w:btnImDone:submit", "1");
                     }
                 },

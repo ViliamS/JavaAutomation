@@ -47,7 +47,7 @@ Feature: Payday Loan
 
 #    EMPLOYMENT & INCOME
 #    When user clicks "Borrower Employment Income"
-    And borrower fills in "Employment Income"
+    And borrower fills in "Paye Employment Income"
       | categoryIncome      | Paye        |
       | occupation          | Artist      |
       | employerName        | Hot Peppers Paye |
@@ -55,19 +55,19 @@ Feature: Payday Loan
       | startDate           | 05/11/2013  |
       | isCurrentEmployment | yes         |
       | netMonthlyIncome    | 124000      |
-    And borrower user clicks "ADD EMPLOYMENT"
-    And borrower fills in "Employment Income"
-      | categoryIncome      | Self Employed      |
-      | occupation          | Artist             |
-      | businessName        | testBusinessName   |
-      | addressLine1        | 18 Woodquay        |
-      | townCity            | Galway             |
-      | country             | Ireland            |
-      | countyState         | Galway             |
-      | businessNature      | testNatureBusiness |
-      | startDate           | 05/11/2013         |
-      | isCurrentEmployment | yes                |
-      | netMonthlyIncome    | 124000             |
+#    And borrower user clicks "ADD EMPLOYMENT"
+#    And borrower fills in "Employment Income"
+#      | categoryIncome      | Self Employed      |
+#      | occupation          | Artist             |
+#      | businessName        | testBusinessName   |
+#      | addressLine1        | 18 Woodquay        |
+#      | townCity            | Galway             |
+#      | country             | Ireland            |
+#      | countyState         | Galway             |
+#      | businessNature      | testNatureBusiness |
+#      | startDate           | 05/11/2013         |
+#      | isCurrentEmployment | yes                |
+#      | netMonthlyIncome    | 124000             |
 #    And borrower user clicks "ADD EMPLOYMENT"
 #    And borrower fills in "Employment Income"
 #      | categoryIncome      | Civil Servant |
@@ -97,7 +97,7 @@ Feature: Payday Loan
 
 #    YOUR ACCOUNTS
     And user fills in "Current Account"
-#      | fundsSource     | Current Account         |
+      | fundsSource     | Current Account         |
       | statementDate   | 01/01/2000              |
       | accountName     | test Current Account    |
       | sortCode1       | 12                      |

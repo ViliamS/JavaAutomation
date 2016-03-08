@@ -41,7 +41,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
 //    public void user_fills_in_account(Map<String, String> accountDataMap) throws IOException {
     public void user_fills_in_account(String currentOrSaving, List<String> accountDataMap) throws IOException {
         AccountData accountData = new AccountData(accountDataMap);
-//        user_selects_source_funds(accountData.get("fundsSource"));
+        user_clicks_an_account_type(accountData.get("fundsSource"));
 //        yourAccountsPage.getTitle();
         if (!org.apache.commons.lang3.StringUtils.isEmpty(accountData.get("statementDate")))
             user_types_the_statement_date(currentOrSaving, accountData.get("statementDate"));
@@ -233,11 +233,6 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
         );
     }
 
-    @And("^user selects (Other) account$")
-    public void user_selects_account(String account){
-//        yourAccountsPage.selectAccount(account);
-    }
-
     @And("^user clicks \"ADD ACCOUNT MANUALLY\"$")
     public void user_clicks_add_account_manually() {
 //        yourAccountsPage.clickAddAccountManually();
@@ -247,7 +242,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
     public void user_clicks_an_account_type(String accountType) throws IOException {
 
         Document menuAccountDoc = Jsoup.parse(httpResponse.getHttpResponse());
-//        TextNode textNodeMenuAccountDoc = menuAccountDoc.select("id=main encodinh=wicket").first().textNodes().get(0);
+//        TextNode textNodeMenuAccountDoc = menuAccountDoc.select("id~=main encoding~=wicket").first().textNodes().get(0);
 //        try {
 //            textNodeYourAccount = yourAccountDoc.select("component[id~=form]").select("component[encoding~=wicket]").first().textNodes().get(0);
 //        } catch ( Exception e ) {
@@ -258,7 +253,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
 
         String formToFillResponse = StringUtils.EMPTY;
         switch (accountType) {
-            case "Current account":
+            case "Current Account":
 //                yourAccountsPage.clickCurrentAccount();
                 if ( countAccount == 0 ) {
                     formToFillResponse = requestHttpPost(
@@ -389,7 +384,6 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                 break;
         }
     }
-
 
     @Deprecated @And("^user types his (Current|Savings) account provider: (.*)$")
     public void user_types_his_account_provider(String currentOrSavings, String accountProvider) {

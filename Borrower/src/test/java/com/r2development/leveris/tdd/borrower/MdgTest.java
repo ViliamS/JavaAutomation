@@ -77,7 +77,7 @@ public class MdgTest {
         System.out.println("email body: " + new String(Base64.getDecoder().decode(bodyEmail.getBytes())));
         System.out.println("to: " + toEmailId);
 
-
+        // Extravct Url .....
 
         String querySmsResponse = requestHttpPost(
                 httpClient,

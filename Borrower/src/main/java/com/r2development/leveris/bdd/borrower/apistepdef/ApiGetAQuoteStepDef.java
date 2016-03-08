@@ -2020,8 +2020,10 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
         // TODO to parse the response to validate the final page
     }
 
+    // TODO potential bug on negatif scenario : submit without checking...
     @And("^user checks \"Distance Marketing\"$")
     public void user_checks_DistanceMarketing() throws IOException {
+        /*
         requestHttpPost(
                 httpClient,
                 // TODO to check even we failed here ... we are still able to complete Phase 1
@@ -2043,6 +2045,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                 localContext,
                 CONSUME_QUIETLY
         );
+        */
     }
 
     @And("^user checks \"Statutory\"$")
@@ -2080,7 +2083,9 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                                         "\"data\":" +
                                         "{" +
                                             "\"enable\":true" +
+                                            "\"visible\":true" +
                                         "}" +
+                                        "\"visibleEvent\": \"show\"" +
                                     "}" +
                                 "]" +
                             "}"
@@ -2093,7 +2098,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
 
         requestHttpPost(
                 httpClient,
-                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnSubmitApplication:submit::IBehaviorListener:0:-1",
+                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnSubmitApplication:submit::IBehaviorListener:0:",
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");
@@ -2102,11 +2107,12 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                 },
                 new LinkedHashMap<String, String>() {
                     {
+                        put("root:c:w:txaAddComment:textarea", "test");
                         put("root:c:w:txtLoanAmount:tb", null);
                         put("root:c:w:pnlBeforeSubmit:c:w:chkDistanceMarketing:checkbox", "on");
                         put("root:c:w:pnlBeforeSubmit:c:w:chkStatutory:checkbox", "on");
                         put("root:c:w:pnlBeforeSubmit:c:w:chkDeclarations:checkbox", "on");
-                        put("stepToken", "2");
+                        put("stepToken", "1");
                         put("root:c:w:btnSubmitApplication:submit", "1");
                     }
                 },
