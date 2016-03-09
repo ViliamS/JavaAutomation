@@ -10,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class VerifyEmailPage extends Borrower implements IVerifyEmailPage {
 
-    private static final Log log = LogFactory.getLog(VerifyEmailPage.class);
+    private static final Log log = LogFactory.getLog(VerifyEmailPage.class.getName());
 
     @FindBy( xpath = VERIFY_EMAIL_TITLE_XPATH)
     protected WebElement weTitle;
@@ -34,6 +34,7 @@ public class VerifyEmailPage extends Borrower implements IVerifyEmailPage {
 
     @Override
     public boolean isLoaded(String emailAddress) {
+        loadingCheck();
         isVisible(VERIFY_EMAIL_TITLE_XPATH, true);
         isVisible(VERIFY_EMAIL_DESCRIPTION_XPATH.replace("${replace}$", emailAddress), true);
         isVisible(VERIFY_EMAIL_NO_EMAIL_XPATH, true);
@@ -43,22 +44,27 @@ public class VerifyEmailPage extends Borrower implements IVerifyEmailPage {
 
     @Override
     public IVerifyEmailPage clickReSent() {
-        isVisible(VERIFY_EMAIL_RESEND_XPATH);
+        loadingCheck();
+        isVisible(VERIFY_EMAIL_RESEND_XPATH,1 );
         weResend.click();
+        loadingCheck();
         return new VerifyEmailPage(webDriver);
     }
 
     @Override
     public IVerifyEmailPage clickReSent2() {
-        isVisible(VERIFY_EMAIL_INPUT_XPATH);
-        isVisible(VERIFY_EMAIL_RESEND2_XPATH);
+        loadingCheck();
+        isVisible(VERIFY_EMAIL_INPUT_XPATH, 1);
+        isVisible(VERIFY_EMAIL_RESEND2_XPATH, 1);
         weResend2.click();
+        loadingCheck();
         return this;
     }
 
     @Override
     public IVerifyEmailPage setEmail(String email) {
-        isVisible(VERIFY_EMAIL_INPUT_XPATH);
+        loadingCheck();
+        isVisible(VERIFY_EMAIL_INPUT_XPATH, 1);
         weInputEmail.clear();
         weInputEmail.sendKeys(email);
         return this;

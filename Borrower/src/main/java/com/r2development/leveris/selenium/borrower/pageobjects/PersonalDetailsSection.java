@@ -12,7 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class PersonalDetailsSection extends Borrower implements IPersonalDetailsSection {
 
-    private static final Log log = LogFactory.getLog(PersonalDetailsSection.class);
+    private static final Log log = LogFactory.getLog(PersonalDetailsSection.class.getName());
 
     @FindBy( xpath = TITLE_XPATH )
     protected WebElement weTitle;
@@ -115,17 +115,21 @@ public class PersonalDetailsSection extends Borrower implements IPersonalDetails
 
     @Override
     public IPersonalDetailsSection setFirstname(String firstName) {
-        isVisible(FIRSTNAME_XPATH, true, 5);
+        loadingCheck();
+        isVisible(FIRSTNAME_XPATH, true, 0);
         weFirstName.clear();
         weFirstName.sendKeys(firstName);
+        loadingCheck();
         return this;
     }
 
     @Override
     public IPersonalDetailsSection setLastname(String lastName) {
-        isVisible(LASTNAME_XPATH, true, 5);
+        loadingCheck();
+        isVisible(LASTNAME_XPATH, true, 0);
         weLastName.clear();
         weLastName.sendKeys(lastName);
+        loadingCheck();
         return this;
     }
 
@@ -146,8 +150,9 @@ public class PersonalDetailsSection extends Borrower implements IPersonalDetails
 
     @Override
     public IPersonalDetailsSection checkGender(String gender) {
-        isVisible(GENDER_MALE_XPATH, true);
-        isVisible(GENDER_FEMALE_XPATH, true);
+        loadingCheck();
+        isVisible(GENDER_MALE_XPATH, true, 0);
+        isVisible(GENDER_FEMALE_XPATH, true, 0);
         switch (gender) {
             case "Male":
                 clickElement(GENDER_MALE_XPATH);
@@ -158,41 +163,50 @@ public class PersonalDetailsSection extends Borrower implements IPersonalDetails
             default:
                 log.error("Wrong type of gender !");
         }
+        loadingCheck();
         return this;
     }
 
     @Override
     public IPersonalDetailsSection setDateOfBirth(String dateOfBirth) {
-        isVisible(DATE_OF_BIRTH_XPATH, true);
+        loadingCheck();
+        isVisible(DATE_OF_BIRTH_XPATH, true, 0);
         try {
             weDateOfBirth.clear();
             weDateOfBirth.sendKeys(dateOfBirth);
         }
         catch ( StaleElementReferenceException sere ) {
-            sendKeysElement(DATE_OF_BIRTH_XPATH, dateOfBirth, 5);
+            sendKeysElement(DATE_OF_BIRTH_XPATH, dateOfBirth, 0);
         }
+        loadingCheck();
         return this;
     }
 
     @Override
     public IPersonalDetailsSection selectMaritalStatus(String maritalStatus) {
-        isVisible(MARITAL_STATUS_XPATH, true);
+        loadingCheck();
+        isVisible(MARITAL_STATUS_XPATH, true, 0);
         selectFromDropDown(MARITAL_STATUS_XPATH, maritalStatus);
+        loadingCheck();
         return this;
     }
 
     @Override
     public IPersonalDetailsSection selectNationality(String nationality) {
-        isVisible(NATIONALITY_XPATH, true);
+        loadingCheck();
+        isVisible(NATIONALITY_XPATH, true, 0);
         selectFromDropDown(NATIONALITY_XPATH, nationality);
+        loadingCheck();
         return this;
     }
 
     @Override
     public IPersonalDetailsSection setResidentYears(String residentYears) {
-        isVisible(RESIDENT_YEARS_XPATH, true);
+        loadingCheck();
+        isVisible(RESIDENT_YEARS_XPATH, true, 0);
         weResidentYears.clear();
         weResidentYears.sendKeys(residentYears);
+        loadingCheck();
         return this;
     }
 
@@ -203,93 +217,114 @@ public class PersonalDetailsSection extends Borrower implements IPersonalDetails
 
     @Override
     public IPersonalDetailsSection checkRequiredVisaYes() {
-        isVisible(REQUIRED_VISA_YES_XPATH, true);
+        loadingCheck();
+        isVisible(REQUIRED_VISA_YES_XPATH, true, 0);
         weRequiredVisaYes.click();
+        loadingCheck();
         return this;
     }
 
     @Override
     public IPersonalDetailsSection checkRequiredVisaNo() {
-        isVisible(REQUIRED_VISA_NO_XPATH, true);
+        loadingCheck();
+        isVisible(REQUIRED_VISA_NO_XPATH, true, 0);
         weRequiredVisaNo.click();
+        loadingCheck();
         return this;
     }
 
     @Override
     public IPersonalDetailsSection checkRequiredVisa(boolean requiredVisa) {
-        isVisible(REQUIRED_VISA_XPATH, true);
-        isVisible(REQUIRED_VISA_YES_XPATH, true);
-        isVisible(REQUIRED_VISA_NO_XPATH, true);
+        loadingCheck();
+        isVisible(REQUIRED_VISA_XPATH, true, 0);
+        isVisible(REQUIRED_VISA_YES_XPATH, true, 0);
+        isVisible(REQUIRED_VISA_NO_XPATH, true, 0);
         if (requiredVisa)
             weRequiredVisaYes.click();
         else //if (!requiredVisa)
             weRequiredVisaNo.click();
-
+        loadingCheck();
         return this;
     }
 
     @Override
     public IPersonalDetailsSection setResidencyAddressLine1(String residencyAddressLine1) {
-        isVisible(RESIDENCY_ADDRESS_LINE_1_XPATH, true);
+        loadingCheck();
+        isVisible(RESIDENCY_ADDRESS_LINE_1_XPATH, true, 0);
         weResidencyAddressLine1.clear();
         weResidencyAddressLine1.sendKeys(residencyAddressLine1);
         checkAlert();
+        loadingCheck();
         return this;
     }
 
     @Override
     public IPersonalDetailsSection setResidencyAddressLine2(String residencyAddressLine2) {
-        isVisible(RESIDENCY_ADDRESS_LINE_2_XPATH, true);
+        loadingCheck();
+        isVisible(RESIDENCY_ADDRESS_LINE_2_XPATH, true, 0);
         weResidencyAddressLine2.clear();
         weResidencyAddressLine2.sendKeys(residencyAddressLine2);
+        loadingCheck();
         return this;
     }
 
     @Override
     public IPersonalDetailsSection setResidencyTownCity(String residencyTownCity) {
-        isVisible(RESIDENCY_TOWN_CITY_XPATH, true);
+        loadingCheck();
+        isVisible(RESIDENCY_TOWN_CITY_XPATH, true, 0);
         weResidencyTownCity.clear();
         weResidencyTownCity.sendKeys(residencyTownCity);
+        loadingCheck();
         return this;
     }
 
     @Override
     public IPersonalDetailsSection selectResidencyCountyState(String residencyCountyState) {
-        isVisible(RESIDENCY_COUNTY_STATE_XPATH, true);
+        loadingCheck();
+        isVisible(RESIDENCY_COUNTY_STATE_XPATH, true, 0);
         selectFromDropDown(RESIDENCY_COUNTY_STATE_XPATH, residencyCountyState);
+        loadingCheck();
         return this;
     }
 
     @Override
     public IPersonalDetailsSection setResidencyPostcodeZip(String residencyPostcodeZip) {
-        isVisible(RESIDENCY_POSTCODE_ZIP_XPATH, true);
+        loadingCheck();
+        isVisible(RESIDENCY_POSTCODE_ZIP_XPATH, true, 0);
         weResidencyPostcodeZip.clear();
         weResidencyPostcodeZip.sendKeys(residencyPostcodeZip);
+        loadingCheck();
         return this;
     }
 
     @Override
     public IPersonalDetailsSection selectResidencyCountry(String residencyCountry) {
+        loadingCheck();
         moveTo(RESIDENCY_COUNTRY_LABEL_XPATH);
         isVisible(RESIDENCY_COUNTRY_XPATH, true);
 //        weResidencyCountry.clear();
 //        weResidencyCountry.sendKeys(residencyCountry);
         selectFromDropDown(RESIDENCY_COUNTRY_XPATH, residencyCountry);
+        loadingCheck();
         return this;
     }
 
     @Override
     public IPersonalDetailsSection selectResidencyAccommodation(String residencyAccommodation) {
-        isVisible(RESIDENCY_ACCOMMODATION_XPATH, true);
+        loadingCheck();
+        isVisible(RESIDENCY_ACCOMMODATION_XPATH, true, 0);
         selectFromDropDown(RESIDENCY_ACCOMMODATION_XPATH, residencyAccommodation);
+        loadingCheck();
         return this;
     }
 
     @Override
     public IPersonalDetailsSection setResidencyRent(String residencyRent) {
-        isVisible(RESIDENCY_RENT_XPATH, true);
+        loadingCheck();
+        isVisible(RESIDENCY_RENT_XPATH, true, 0);
         weResidencyRent.clear();
         weResidencyRent.sendKeys(residencyRent);
+        loadingCheck();
         return this;
     }
 
@@ -300,25 +335,31 @@ public class PersonalDetailsSection extends Borrower implements IPersonalDetails
 
     @Override
     public IPersonalDetailsSection checkLivedLast3YearsYes() {
-        isVisible(LIVED_LAST_3_YEARS_YES_XPATH, true);
+        loadingCheck();
+        isVisible(LIVED_LAST_3_YEARS_YES_XPATH, true, 0);
         weLivedLast3YearsYes.click();
+        loadingCheck();
         return this;
     }
 
     @Override
     public IPersonalDetailsSection checkLivedLast3YearsNo() {
-        isVisible(LIVED_LAST_3_YEARS_NO_XPATH, true);
+        loadingCheck();
+        isVisible(LIVED_LAST_3_YEARS_NO_XPATH, true, 0);
         weLivedLast3YearsNo.click();
+        loadingCheck();
         return this;
     }
 
     @Override
     public IPersonalDetailsSection checkLivedLast3Years(boolean livedLast3Years) {
-        isVisible(LIVED_LAST_3_YEARS_XPATH, true);
-        isVisible(LIVED_LAST_3_YEARS_YES_XPATH, true);
-        isVisible(LIVED_LAST_3_YEARS_NO_XPATH, true);
+        loadingCheck();
+        isVisible(LIVED_LAST_3_YEARS_XPATH, true, 0);
+        isVisible(LIVED_LAST_3_YEARS_YES_XPATH, true, 0);
+        isVisible(LIVED_LAST_3_YEARS_NO_XPATH, true, 0);
         if (livedLast3Years) {
             weLivedLast3YearsYes.click();
+            loadingCheck();
             clickElement(LIVED_LAST_3_YEARS_YES_XPATH);
         }
         else /*if (!livedLast3Years)*/ {
@@ -326,79 +367,94 @@ public class PersonalDetailsSection extends Borrower implements IPersonalDetails
         }
 //        else
 //            log.error("Wrong data for livedLast3years !");
-
+        loadingCheck();
         return this;
     }
 
     @Override
     public IPersonalDetailsSection setPreviousResidencyAddressLine1(String previousResidencyAddressLine1) {
-        isVisible(PREVIOUS_RESIDENCY_ADDRESS_LINE_1_XPATH, true);
+        loadingCheck();
+        isVisible(PREVIOUS_RESIDENCY_ADDRESS_LINE_1_XPATH, true, 0);
         wePreviousResidencyAddressLine1.clear();
         wePreviousResidencyAddressLine1.sendKeys(previousResidencyAddressLine1);
+        loadingCheck();
         checkAlert();
         return this;
     }
 
     @Override
     public IPersonalDetailsSection setPreviousResidencyAddressLine2(String previousResidencyAddressLine2) {
-        isVisible(PREVIOUS_RESIDENCY_ADDRESS_LINE_2_XPATH, true);
+        loadingCheck();
+        isVisible(PREVIOUS_RESIDENCY_ADDRESS_LINE_2_XPATH, true, 0);
         wePreviousResidencyAddressLine2.clear();
         wePreviousResidencyAddressLine2.sendKeys(previousResidencyAddressLine2);
+        loadingCheck();
         return this;
     }
 
     @Override
     public IPersonalDetailsSection setPreviousResidencyTownCity(String previousResidencyTownCity) {
-        isVisible(PREVIOUS_RESIDENCY_TOWN_CITY_XPATH, true);
+        loadingCheck();
+        isVisible(PREVIOUS_RESIDENCY_TOWN_CITY_XPATH, true, 0);
         wePreviousResidencyTownCity.clear();
         wePreviousResidencyTownCity.sendKeys(previousResidencyTownCity);
+        loadingCheck();
         return this;
     }
 
     @Override
     public IPersonalDetailsSection selectPreviousResidencyCountyState(String previousResidencyCountyState) {
-        isVisible(PREVIOUS_RESIDENCY_COUNTY_STATE_XPATH, true);
+        loadingCheck();
+        isVisible(PREVIOUS_RESIDENCY_COUNTY_STATE_XPATH, true, 0);
         selectFromDropDown(PREVIOUS_RESIDENCY_COUNTY_STATE_XPATH, previousResidencyCountyState);
+        loadingCheck();
         return this;
     }
 
     @Override
     public IPersonalDetailsSection setPreviousResidencyPostcodeZip(String previousResidencyPostcodeZip) {
-        isVisible(PREVIOUS_RESIDENCY_POSTCODE_ZIP_XPATH, true);
+        loadingCheck();
+        isVisible(PREVIOUS_RESIDENCY_POSTCODE_ZIP_XPATH, true, 0);
         wePreviousResidencyPostcodeZip.clear();
         wePreviousResidencyPostcodeZip.sendKeys(previousResidencyPostcodeZip);
+        loadingCheck();
         return this;
     }
 
     @Override
     public IPersonalDetailsSection selectPreviousResidencyCountry(String previousResidencyCountry) {
-        isVisible(PREVIOUS_RESIDENCY_COUNTRY_XPATH, true);
+        loadingCheck();
+        isVisible(PREVIOUS_RESIDENCY_COUNTRY_XPATH, true, 0);
         selectFromDropDown(PREVIOUS_RESIDENCY_COUNTRY_XPATH, previousResidencyCountry);
+        loadingCheck();
         return this;
     }
 
     @Override
     public IPersonalDetailsSection setPreviousResidencyCountry(String previousResidencyCountry) {
-        isVisible(PREVIOUS_RESIDENCY_COUNTRY_XPATH, true);
+        loadingCheck();
+        isVisible(PREVIOUS_RESIDENCY_COUNTRY_XPATH, true, 0);
         wePreviousResidencyCountry.clear();
         wePreviousResidencyCountry.sendKeys(previousResidencyCountry);
         wePreviousResidencyCountry.sendKeys(Keys.ENTER);
+        loadingCheck();
         return this;
     }
 
     @Override
     public IPersonalDetailsSection clickSave() {
-        isVisible(SAVE_BUTTON_XPATH, true);
+        loadingCheck();
+        isVisible(SAVE_BUTTON_XPATH, true, 0);
         weSaveButton.click();
-        if(isVisible(INDICATOR_SMALL_ON, false, 5))
-            isInvisible(INDICATOR_SMALL_OFF, 5);
+        loadingCheck();
         return this;
     }
 
     @Override
     public boolean isLoaded() {
+        loadingCheck();
 //        isVisible(TITLE_XPATH, true);
-        isVisible(SAVE_BUTTON_XPATH, true);
+        isVisible(SAVE_BUTTON_XPATH, true, 0);
         return true;
     }
 }

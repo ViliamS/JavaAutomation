@@ -23,7 +23,9 @@ public class GetStartedMortgageSection extends Borrower implements IGetStartedMo
 
     @Override
     public void clickGetStarted() {
-        isVisible(GET_STARTED_BUTTON_XPATH, true, 5);
+        loadingCheck();
+        isVisible(GET_STARTED_BUTTON_XPATH, true, 1);
         weGetStarted.click();
+        loadingCheck();
     }
 }

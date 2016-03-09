@@ -28,8 +28,8 @@ public class AutomaticRegistrationStepDef /*extends BorrowerStepDef*/ {
         this.webDriver = webDriver;
     }
 
-    @Given("^user goes to Automatic Registration page$")
-    public void user_goes_to_automatic_registration_page() {
+    @Given("^(Borrower) goes to Automatic Registration page$")
+    public void user_goes_to_automatic_registration_page(String user) {
         // TODO to implement
     }
 

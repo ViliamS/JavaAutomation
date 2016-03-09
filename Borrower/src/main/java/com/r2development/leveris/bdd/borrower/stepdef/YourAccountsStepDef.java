@@ -4,7 +4,9 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.AccountData;
 import com.r2development.leveris.di.IUser;
-import com.r2development.leveris.selenium.borrower.pageobjects.*;
+import com.r2development.leveris.selenium.borrower.pageobjects.IFormsMenu;
+import com.r2development.leveris.selenium.borrower.pageobjects.IYourAccountsPage;
+import com.r2development.leveris.selenium.borrower.pageobjects.YourAccountsPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
@@ -12,7 +14,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 
 import java.util.List;
 
@@ -27,8 +28,6 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
     private IUser user;
 
     IYourAccountsPage yourAccountsPage;
-    IBorrowerHomePage borrowerHomePage;
-    IPersonalDetailsPage borrowerPersonalDetailsPage;
 
     @Inject
     public YourAccountsStepDef(SharedDriver webDriver/*, IUser user*/) {
@@ -36,59 +35,48 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
         yourAccountsPage = new YourAccountsPage(webDriver);
     }
 
-    @Given("^user fills in \"(Current|Savings) Account\"$")
-    public void user_fills_in_account(String currentOrSaving, List<String> accountDataMap) {
+    @Given("^(Borrower) fills in (Current account|Savings account|Account scraping)$")
+    public void borrower_fills_in_account(String userType, String accountType, List<String> accountDataMap) {
         AccountData accountData = new AccountData(accountDataMap);
 
         yourAccountsPage.getTitle();
+
+        borrower_clicks_an_account_type(userType, accountType);
+
         if (!StringUtils.isEmpty(accountData.get("statementDate")))
-            user_types_the_statement_date(currentOrSaving, accountData.get("statementDate"));
-        user_types_his_account_name(currentOrSaving, accountData.get("accountName"));
-        user_types_his_sort_code_1(currentOrSaving, accountData.get("sortCode1"));
-        user_types_his_sort_code_2(currentOrSaving, accountData.get("sortCode2"));
-        user_types_his_sort_code_3(currentOrSaving, accountData.get("sortCode3"));
-        user_types_his_account_number(currentOrSaving, accountData.get("accountNumber"));
-//        user_types_his_account_provider(currentOrSaving, accountData.get("accountProvider"));
-//        user_types_his_iban(currentOrSaving, accountData.get("IBAN"));
-        user_types_his_account_balance(currentOrSaving, accountData.get("accountBalance"));
+            borrower_types_the_statement_date(userType, accountType, accountData.get("statementDate"));
+
+        borrower_types_his_account_name(userType, accountType, accountData.get("accountName"));
+        borrower_types_his_sort_code_1(userType, accountType, accountData.get("sortCode1"));
+        borrower_types_his_sort_code_2(userType, accountType, accountData.get("sortCode2"));
+        borrower_types_his_sort_code_3(userType, accountType, accountData.get("sortCode3"));
+        borrower_types_his_account_number(userType, accountType, accountData.get("accountNumber"));
+//        borrower_types_his_account_provider(accountType, accountData.get("accountProvider"));
+//        borrower_types_his_iban(accountType, accountData.get("IBAN"));
+        borrower_types_his_account_balance(userType, accountType, accountData.get("accountBalance"));
+
         if ( !StringUtils.isEmpty(accountData.get("overdraftLimit")))
-            user_types_his_overdraft_limit(currentOrSaving, accountData.get("overdraftLimit"));
-        user_selects_his_source_of_saving(currentOrSaving, accountData.get("sourceOfSaving"));
+            borrower_types_his_overdraft_limit(userType, accountType, accountData.get("overdraftLimit"));
+        borrower_selects_his_source_of_saving(userType, accountType, accountData.get("sourceOfSaving"));
+
         if ( !StringUtils.isEmpty(accountData.get("regularMonthlySaving")))
-            user_types_his_regular_monthly_saving(currentOrSaving, accountData.get("regularMonthlySaving"));
-        user_clicks_add_this_account();
+            borrower_types_his_regular_monthly_saving(userType, accountType, accountData.get("regularMonthlySaving"));
+
+        borrower_clicks_add_this_account(userType);
     }
 
-    @When("^user clicks \"ADD ACCOUNT\"$")
-    public void user_clicks_add_account() throws InterruptedException {
+    @When("^(Borrower) clicks \"ADD ACCOUNT\"$")
+    public void borrower_clicks_add_account(String userType) throws InterruptedException {
         yourAccountsPage.clickAddAccount();
     }
 
-    public void workaroundCLV312(String borrowerOrCoapplicant) {
-        borrowerHomePage.clickInfoUpload();
-        boolean toGoOn = false;
-        while ( !toGoOn ) {
-            try {
-                ((IFormsMenu)borrowerPersonalDetailsPage).clickAccount("double");
-//                yourAccountsPage.clickAddAccount();
-//                yourAccountsPage.clickAddAccountManually();
-                yourAccountsPage.getTitle();
-                toGoOn = true;
-            } catch (WebDriverException te) {
-                log.debug("Many issues to get the Account page.");
-            }/* catch (TimeoutException te) {
-                log.debug("Many issues to get the Account page.");
-            }*/
-        }
-    }
-
-    @When("^user clicks \"ADD THIS ACCOUNT\"$")
-    public void user_clicks_add_this_account() {
+    @When("^(Borrower) clicks \"ADD THIS ACCOUNT\"$")
+    public void borrower_clicks_add_this_account(String userType) {
         yourAccountsPage.clickAddThisAccount();
     }
 
-    @When("^user clicks Accounts \"NEXT\"$")
-    public void user_clicks_next() {
+    @When("^(Borrower) clicks Accounts \"NEXT\"$")
+    public void borrower_clicks_next(String userType) {
         yourAccountsPage.clickNext();
 
         if (!((IFormsMenu) yourAccountsPage).isAccountFormDone("single")) {
@@ -97,229 +85,226 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
         }
     }
 
-    @When("^user clicks Accounts \"Done\"$")
-    public void user_clicks_done() {
+    @When("^(Borrower) clicks Accounts \"Done\"$")
+    public void borrower_clicks_done(String userType) {
         yourAccountsPage.clickDone();
     }
 
-    @And("^user selects (Other) account$")
-    public void user_selects_account(String account){
-        yourAccountsPage.selectAccount(account);
+//    @And("^(Borrower) selects (Other) account$")
+//    public void borrower_selects_account(String account){
+//        yourAccountsPage.selectAccount(account);
+//    }
+
+    @And("^(Borrower) clicks \"ADD ACCOUNT MANUALLY\"$")
+    public void borrower_clicks_add_account_manually(String userType) {
     }
 
-    @And("^user clicks \"ADD ACCOUNT MANUALLY\"$")
-    public void user_clicks_add_account_manually() {
+    @And("^(Borrower) clicks (Current account|Savings account|Account scraping)$")
+    public void borrower_clicks_an_account_type(String userType, String accountType) {
+
+        yourAccountsPage.selectAccountType(accountType);
+
+
+//        switch (accountType) {
+//            case "Current account":
+//                break;
+//            case "Savings account":
+//                yourAccountsPage.clickSavingsAccount();
+//                break;
+//            case "Account scraping":
+//                yourAccountsPage.clickAccountScraping();
+//                break;
+//            default:
+//        }
     }
 
-    @And("^user clicks \"(Current account|Savings account|Account scraping)\"$")
-    public void user_clicks_an_account_type(String accountType) {
-        switch (accountType) {
-            case "Current account":
-                yourAccountsPage.clickCurrentAccount();
-                break;
-            case "Savings account":
-                yourAccountsPage.clickSavingsAccount();
-                break;
-            case "Account scraping":
-                yourAccountsPage.clickAccountScraping();
-                break;
-            default:
-        }
-    }
-
-    @When("^user types the (Current|Savings) statement date: (.*)")
-    public void user_types_the_statement_date(String currentOrSaving, String statementDate) {
+    @When("^(Borrower) types the (Current|Savings) statement date: (.*)")
+    public void borrower_types_the_statement_date(String userType, String currentOrSaving, String statementDate) {
         switch (currentOrSaving) {
             case "Current":
                 yourAccountsPage.typeCurrentStatementDate(statementDate);
                 break;
             case "Savings":
-                yourAccountsPage.typeSavingStatementDate(statementDate);
+                yourAccountsPage.typeSavingsStatementDate(statementDate);
                 break;
         }
     }
 
-    @And("^user types his (Current|Savings) account name: (.*)$")
-    public void user_types_his_account_name(String currentOrSavings, String accountName) {
+    @And("^(Borrower) types his (Current account|Savings account) name: (.*)$")
+    public void borrower_types_his_account_name(String userType, String currentOrSavings, String accountName) {
         switch (currentOrSavings) {
-            case "Current":
+            case "Current account":
                 yourAccountsPage.typeCurrentAccountName(accountName);
                 break;
-            case "Savings":
+            case "Savings account":
                 yourAccountsPage.typeSavingsAccountName(accountName);
                 break;
         }
 
     }
 
-    @And("^user types his (Current|Savings) sort code 1: (.*)$")
-    public void user_types_his_sort_code_1(String currentOrSavings, String sortCode1) {
+    @And("^(Borrower) types his (Current account|Savings account) sort code 1: (.*)$")
+    public void borrower_types_his_sort_code_1(String userType, String currentOrSavings, String sortCode1) {
         switch (currentOrSavings) {
-            case "Current":
+            case "Current account":
                 yourAccountsPage.typeCurrentSortCode1(sortCode1);
                 break;
-            case "Savings":
+            case "Savings account":
                 yourAccountsPage.typeSavingsSortCode1(sortCode1);
                 break;
         }
     }
 
-    @And("^user types his (Current|Savings) sort code 2: (.*)$")
-    public void user_types_his_sort_code_2(String currentOrSavings, String sortCode2) {
+    @And("^(Borrower) types his (Current account|Savings account) sort code 2: (.*)$")
+    public void borrower_types_his_sort_code_2(String userType, String currentOrSavings, String sortCode2) {
         switch (currentOrSavings) {
-            case "Current":
+            case "Current account":
                 yourAccountsPage.typeCurrentSortCode2(sortCode2);
                 break;
-            case "Savings":
+            case "Savings account":
                 yourAccountsPage.typeSavingsSortCode2(sortCode2);
                 break;
         }
     }
 
-    @And("^user types his (Current|Savings) sort code 3: (.*)$")
-    public void user_types_his_sort_code_3(String currentOrSavings, String sortCode3) {
+    @And("^(Borrower) types his (Current account|Savings account) sort code 3: (.*)$")
+    public void borrower_types_his_sort_code_3(String userType, String currentOrSavings, String sortCode3) {
         switch (currentOrSavings) {
-            case "Current":
+            case "Current account":
                 yourAccountsPage.typeCurrentSortCode3(sortCode3);
                 break;
-            case "Savings":
+            case "Savings account":
                 yourAccountsPage.typeSavingsSortCode3(sortCode3);
                 break;
         }
     }
 
-    @And("^user types his (Current|Savings) account number: (.*)$")
-    public void user_types_his_account_number(String currentOrSavings, String accountNumber) {
+    @And("^(Borrower) types his (Current account|Savings account) number: (.*)$")
+    public void borrower_types_his_account_number(String userType, String currentOrSavings, String accountNumber) {
         switch (currentOrSavings) {
-            case "Current":
+            case "Current account":
                 yourAccountsPage.typeCurrentAccountNumber(accountNumber);
                 break;
-            case "Savings":
+            case "Savings account":
                 yourAccountsPage.typeSavingsAccountNumber(accountNumber);
                 break;
         }
     }
 
-    @Deprecated @And("^user types his (Current|Savings) account provider: (.*)$")
-    public void user_types_his_account_provider(String currentOrSavings, String accountProvider) {
+    @Deprecated @And("^(Borrower) types his (Current account|Savings account) provider: (.*)$")
+    public void borrower_types_his_account_provider(String userType, String currentOrSavings, String accountProvider) {
         switch (currentOrSavings) {
-            case "Current":
+            case "Current account":
                 yourAccountsPage.typeCurrentAccountProvider(accountProvider);
                 break;
-            case "Savings":
+            case "Savings account":
                 yourAccountsPage.typeSavingAccountProvider(accountProvider);
                 break;
         }
     }
 
-    @And("^user types his (Current|Savings) IBAN: (.*)")
-    public void user_types_his_iban(String currentOrSavings, String iban) {
+    @And("^(Borrower) types his (Current account|Savings account) IBAN: (.*)")
+    public void borrower_types_his_iban(String userType, String currentOrSavings, String iban) {
         switch (currentOrSavings) {
-            case "Current":
+            case "Current account":
                 yourAccountsPage.typeCurrentIban(iban);
                 break;
-            case "Savings":
+            case "Savings account":
                 yourAccountsPage.typeSavingIban(iban);
                 break;
         }
     }
 
-    @And("^user types his (Current|Savings) account balance: (.*)$")
-    public void user_types_his_account_balance(String currentOrSavings, String accountBalance) {
+    @And("^(Borrower) types his (Current account|Savings account) balance: (.*)$")
+    public void borrower_types_his_account_balance(String userType, String currentOrSavings, String accountBalance) {
         switch (currentOrSavings) {
-            case "Current":
+            case "Current account":
                 yourAccountsPage.typeCurrentAccountBalance(accountBalance);
                 break;
-            case "Savings":
+            case "Savings account":
                 yourAccountsPage.typeSavingAccountBalance(accountBalance);
                 break;
         }
     }
 
-    @And("^user types his (Current|Savings) overdraft limit: (.*)$")
-    public void user_types_his_overdraft_limit(String currentOrSavings, String overdraftLimit) {
+    @And("^(Borrower) types his (Current|Savings) overdraft limit: (.*)$")
+    public void borrower_types_his_overdraft_limit(String userType, String currentOrSavings, String overdraftLimit) {
         switch (currentOrSavings) {
-            case "Current":
+            case "Current account":
                 yourAccountsPage.typeCurrentOverdraftLimit(overdraftLimit);
                 break;
-            case "Savings":
+            case "Savings account":
                 yourAccountsPage.typeSavingOverdraftLimit(overdraftLimit);
                 break;
         }
     }
 
-    @And("^user selects his (Current|Savings) source of savings: (Gift|Inheritance|Accident Claim|Redundancy|Income from Regular Savings|Other)")
-    public void user_selects_his_source_of_saving(String currentOrSavings, String sourceOfSavings) {
+    @And("^(Borrower) selects his (Current|Savings) source of savings: (Gift|Inheritance|Accident Claim|Redundancy|Income from Regular Savings|Other)")
+    public void borrower_selects_his_source_of_saving(String userType, String currentOrSavings, String sourceOfSavings) {
         switch (currentOrSavings) {
-            case "Current":
+            case "Current account":
                 yourAccountsPage.selectCurrentSavingSource(sourceOfSavings);
                 break;
-            case "Savings":
+            case "Savings account":
                 yourAccountsPage.selectSavingSourceSavings(sourceOfSavings);
                 break;
         }
     }
 
-    @And("^user types his (Current|Savings) regular monthly saving: (.*)$")
-    public void user_types_his_regular_monthly_saving(String currentOrSavings, String regularMonthlySaving) {
+    @And("^(Borrower) types his (Current|Savings) regular monthly saving: (.*)$")
+    public void borrower_types_his_regular_monthly_saving(String userType, String currentOrSavings, String regularMonthlySaving) {
         switch (currentOrSavings) {
-            case "Current":
+            case "Current account":
                 yourAccountsPage.typeCurrentRegularMonthlySavings(regularMonthlySaving);
                 break;
-            case "Savings":
+            case "Savings account":
                 yourAccountsPage.typeSavingRegularMonthlySavings(regularMonthlySaving);
                 break;
         }
     }
 
-
-    @When("^user closes \"scraping\" form$")
-    public void user_closes_scraping_form() {
+    @When("^(Borrower) closes \"scraping\" form$")
+    public void borrower_closes_scraping_form(String userType) {
         yourAccountsPage.closeScraping();
     }
 
-
-
-
-
-
-/*    @And("^user types his Current account provider: (.*)$")
-    public void user_types_current_account_provider(String accountProvider) {
+/*    @And("^(Borrower) types his Current account provider: (.*)$")
+    public void borrower_types_current_account_provider(String accountProvider) {
         yourAccountsPage.typeCurrentAccountProvider(accountProvider);
     }
 
-    @And("^user types his Current IBAN: (.*)")
-    public void user_types_current_iban(String iban) {
+    @And("^(Borrower) types his Current IBAN: (.*)")
+    public void borrower_types_current_iban(String iban) {
         yourAccountsPage.typeCurrentIban(iban);
     }
 
-    @And("^user types his Current account balance: (.*)$")
-    public void user_types_current_account_balance(String accountBalance) {
+    @And("^(Borrower) types his Current account balance: (.*)$")
+    public void borrower_types_current_account_balance(String accountBalance) {
         yourAccountsPage.typeCurrentAccountBalance(accountBalance);
     }
 
-    @And("^user types his Current overdraft limit: (.*)$")
-    public void user_types_current_overdraft_limit(String overdraftLimit) {
+    @And("^(Borrower) types his Current overdraft limit: (.*)$")
+    public void borrower_types_current_overdraft_limit(String overdraftLimit) {
         yourAccountsPage.typeCurrentOverdraftLimit(overdraftLimit);
     }
 
-    @And("^user types his Savings account provider: (.*)$")
-    public void user_types_his_savings_account_provider(String accountProvider) {
+    @And("^(Borrower) types his Savings account provider: (.*)$")
+    public void borrower_types_his_savings_account_provider(String accountProvider) {
         yourAccountsPage.typeSavingAccountProvider(accountProvider);
     }
 
-    @And("^user types his Savings IBAN: (.*)")
-    public void user_type_savings_iban(String iban) {
+    @And("^(Borrower) types his Savings IBAN: (.*)")
+    public void borrower_type_savings_iban(String iban) {
         yourAccountsPage.typeSavingIban(iban);
     }
 
-    @And("^user types his Savings account balance: (.*)$")
-    public void user_types_his_savings_account_balance(String accountBalance) {
+    @And("^(Borrower) types his Savings account balance: (.*)$")
+    public void borrower_types_his_savings_account_balance(String accountBalance) {
         yourAccountsPage.typeSavingAccountBalance(accountBalance);
     }
 
-    @And("^user verifies account data$")
-    public void user_verifies_account_data() {
+    @And("^(Borrower) verifies account data$")
+    public void borrower_verifies_account_data() {
 //        yourAccountsPage.validateAccounts();
     }*/
 }

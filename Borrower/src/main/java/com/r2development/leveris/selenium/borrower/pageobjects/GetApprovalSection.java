@@ -95,27 +95,35 @@ public class GetApprovalSection extends Borrower implements IGetApprovalSection 
 
     @Override
     public void clickWhatDocs() {
+        loadingCheck();
         isVisible(GET_APPROVAL_DOCS_LINK_XPATH, true);
         weGetApprovalDocs.click();
+        loadingCheck();
         isVisible(WHAT_DOCS_CONTAINER_XPATH, true);
     }
 
     @Override
     public void closeWhatDocs() {
+        loadingCheck();
         isVisible(WHAT_DOCS_CLOSE_XPATH, true);
         weDocsClose.click();
+        loadingCheck();
     }
 
     @Override
     public void closePopup() {
-        isVisible(POPUP_CLOSE_XPATH, true, 10);
+        loadingCheck();
+        isVisible(POPUP_CLOSE_XPATH, true, 1);
         clickElement(POPUP_CLOSE_XPATH);
+        loadingCheck();
     }
 
     @Override
     public IBuildQuotationPage clickGetAQuote() {
-        isVisible(GET_APPROVAL_GET_A_QUOTE_XPATH, true, 5);
+        loadingCheck();
+        isVisible(GET_APPROVAL_GET_A_QUOTE_XPATH, true, 1);
         weGetApprovalQuote.click();
+        loadingCheck();
         return new BuildQuotationPage( webDriver);
     }
 
@@ -123,7 +131,9 @@ public class GetApprovalSection extends Borrower implements IGetApprovalSection 
     public IPersonalDetailsPage clickInfoUpload() {
 //        isVisible(GET_APPROVAL_INFO_UPLOAD_XPATH, false, 15);
 //        weGetApprovalInfoUpload.click();
+        loadingCheck();
         clickElementViaJavascript(GET_APPROVAL_INFO_UPLOAD_XPATH);
+        loadingCheck();
         return new PersonalDetailsPage(webDriver);
     }
 
@@ -131,12 +141,15 @@ public class GetApprovalSection extends Borrower implements IGetApprovalSection 
     public IGetApprovalSection clickReviewAndSubmit() {
 //        isVisible(READY_TO_REVIEW_AND_SUBMIT_BUTTON_XPATH, true, 15);
 //        getWebElement(READY_TO_REVIEW_AND_SUBMIT_BUTTON_XPATH).click();
+        loadingCheck();
         clickElementViaJavascript(READY_TO_REVIEW_AND_SUBMIT_BUTTON_XPATH);
+        loadingCheck();
         return this;
     }
 
     @Override
     public boolean isLoaded() {
+        loadingCheck();
         isVisible(GET_APPROVAL_GET_A_QUOTE_XPATH, true);
         isVisible(GET_APPROVAL_INVITE_COAPPLICANT_XPATH, true);
         isVisible(GET_APPROVAL_INFO_UPLOAD_XPATH, true);
@@ -149,16 +162,20 @@ public class GetApprovalSection extends Borrower implements IGetApprovalSection 
 //        isVisible(GET_APPROVAL_SUBMIT_YOUR_APPLICATION_XPATH, true);
 //        getWebElement(GET_APPROVAL_SUBMIT_YOUR_APPLICATION_XPATH).click();
 //        weSubmitYourApplication.click();
+        loadingCheck();
         clickElementViaJavascript(GET_APPROVAL_SUBMIT_YOUR_APPLICATION_XPATH);
+        loadingCheck();
         return this;
     }
 
     @Override
     public IGetApprovalSection checkDistanceMarketing() {
 //        #    And user checks... label main_c_form_form_root_c_w_pnlBeforeSubmit_c_w_chkDistanceMarketing_label following-sibling::span/a
+        loadingCheck();
         isVisible(GET_APPROVAL_CHECK_DISTANCE_MARKETING_XPATH, true);
 //        getWebElement(GET_APPROVAL_CHECK_DISTANCE_MARKETING_XPATH).click();
         clickElement(GET_APPROVAL_CHECK_DISTANCE_MARKETING_XPATH);
+        loadingCheck();
 //        weCheckDistanceMarketing.click();
         return this;
     }
@@ -166,8 +183,10 @@ public class GetApprovalSection extends Borrower implements IGetApprovalSection 
     @Override
     public IGetApprovalSection checkStatutory() {
 //        #    And user checks... label main_c_form_form_root_c_w_pnlBeforeSubmit_c_w_chkStatutory_label
+        loadingCheck();
         isVisible(GET_APPROVAL_CHECK_STATUTORY_XPATH, true);
         getWebElement(GET_APPROVAL_CHECK_STATUTORY_XPATH).click();
+        loadingCheck();
 //        weCheckStatutory.click();
         return this;
     }
@@ -175,8 +194,10 @@ public class GetApprovalSection extends Borrower implements IGetApprovalSection 
     @Override
     public IGetApprovalSection checkDeclaration() {
 //        #    And user checks... label main_c_form_form_root_c_w_pnlBeforeSubmit_c_w_chkDeclarations_label
+        loadingCheck();
         isVisible(GET_APPROVAL_CHECK_DECLARATION_XPATH, true);
         getWebElement(GET_APPROVAL_CHECK_DECLARATION_XPATH).click();
+        loadingCheck();
 //        weCheckDeclaration.click();
         return this;
     }
@@ -185,9 +206,11 @@ public class GetApprovalSection extends Borrower implements IGetApprovalSection 
     public IGetApprovalSection clickFinalSubmitApplication() {
 //        #  main_c_form_form_root_c_w_pnl-YourAppHasBeenSubmitted_c_w_lbl-YourAppHasBeenSubmittedTitle
 //        #    And user clicks "Submit a[@wicketpath='application" main_c_form_form_root_c_w_btnSubmitApplication_submit']
+        loadingCheck();
         isVisible(GET_APPROVAL_FINAL_SUBMIT_APPLICATION_XPATH, true);
 //        getWebElement(GET_APPROVAL_FINAL_SUBMIT_APPLICATION_XPATH).click();
         clickElement(GET_APPROVAL_FINAL_SUBMIT_APPLICATION_XPATH);
+        loadingCheck();
         isVisible(GET_APPROVAL_CONFIRMATION_XPATH, true);
         isVisible("//div[@wicketpath='main_c_form_form_root_c_w_pnl-YourAppHasBeenSubmitted_c_w_lbl-YourAppHasBeenSubmittedTitle_l' and contains(., 'Your application has been sent')]");
 //        isVisible("//div[@wicketpath='main_c_form_embeddedFormWrapper_embeddedForm_1_form_root_c_w_pnlQuote_c_w_lblQuoteDescription']", true);

@@ -12,9 +12,8 @@ public interface IYourAccountsSection {
     String YOUR_ACCOUNTS_SAVING_ACCOUNT_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_lnkSavings_dialog']";
     String YOUR_ACCOUNTS_ACCOUNT_SCRAPING_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_lnkAuto_dialog']";
 
-    String YOUR_ACCOUNTS_ACCOUNT_MAIN_DIALOG_XPATH = "//div[@wicketpath='main_c_form_dialogWrapper_dialog']";
-//    main_c_form_dialogWrapper_dialog
-//    class=ui-dialog-titlebar
+    String YOUR_ACCOUNTS_ACCOUNT_MAIN_DIALOG_XPATH = "//div[contains(@style,'display: block')]/div[@wicketpath='main_c_form_dialogWrapper']/div[@wicketpath='main_c_form_dialogWrapper_dialog']";
+
     String YOUR_ACCOUNTS_CURRENT_ACCOUNT_DIALOG_XPATH = "//a[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_lnkCurrent_submit']";
     String YOUR_ACCOUNTS_SAVING_ACCOUNT_DIALOG_XPATH = "//a[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_lnkSavings_submit']";
     String YOUR_ACCOUNTS_ACCOUNT_SCRAPING_DIALOG_XPATH = "//a[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_lnkAuto_submit']";
@@ -92,6 +91,7 @@ public interface IYourAccountsSection {
     String getDialogTitle();
     String getDescription();
 
+    IYourAccountsSection selectAccountType(String accountType);
     IYourAccountsSection clickCurrentAccount();
     IYourAccountsSection clickSavingsAccount();
     IYourAccountsSection clickAccountScraping();

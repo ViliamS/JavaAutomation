@@ -87,16 +87,11 @@ public class LoginPageStepDef /*extends BorrowerStepDef*/ {
 
     @And("^Borrower user logs in as his account is activated$")
     public void user_logs_in_as_his_account_is_activated() throws Exception {
-//        verifyEmailPage = new VerifyEmailPage(ApiSupportWebDriverStepDef.getWebDriverInstance());
-//        welcomePage = verifyEmailPage.redirectToWelcomePage();
-//        loginPage = welcomePage.clickLogin();
         loginPage = welcomePage.clickSignIn();
-
         activateAccount(user.getEmail());
-
-        log.info("Email : " + user.getEmail());
+        log.info("--------------------------------- \n Email : " + user.getEmail() + "\n ---------------------------------");
         user_types_his_login(user.getEmail());
-        log.info("Pwd : " + user.getPwd());
+        log.info("--------------------------------- \n Pwd : " + user.getPwd() + "\n ---------------------------------");
         user_types_his_pwd(user.getPwd());
         user_logs_in();
     }

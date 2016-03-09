@@ -39,14 +39,20 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
     }
 
     @Override
-    public IYourAccountsPage clickCurrentAccount() {
-        yourAccountsSection.clickCurrentAccount();
+    public IYourAccountsPage selectAccountType(String accountType) {
+        yourAccountsSection.selectAccountType(accountType);
         return this;
     }
 
     @Override
     public IYourAccountsPage clickSavingsAccount() {
         yourAccountsSection.clickSavingsAccount();
+        return this;
+    }
+
+    @Override
+    public IYourAccountsPage clickCurrentAccount() {
+        yourAccountsSection.clickCurrentAccount();
         return this;
     }
 
@@ -225,7 +231,7 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
     }
 
     @Override
-    public IYourAccountsPage typeSavingStatementDate(String statementDate) {
+    public IYourAccountsPage typeSavingsStatementDate(String statementDate) {
         yourAccountsSection.typeSavingStatementDate(statementDate);
         return this;
     }

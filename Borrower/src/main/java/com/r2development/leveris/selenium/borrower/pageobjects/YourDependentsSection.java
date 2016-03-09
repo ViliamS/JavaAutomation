@@ -67,32 +67,37 @@ public class YourDependentsSection extends Borrower implements IYourDependentsSe
 
     @Override
     public String getTitle() {
-        isVisible(YOUR_DEPENDENTS_TITLE_XPATH, true, 10);
+        loadingCheck();
+        isVisible(YOUR_DEPENDENTS_TITLE_XPATH, true, 0);
         return weYourDependentTitle.getText();
     }
 
     @Override
     public String getDescription() {
-        isVisible(YOUR_DEPENDENTS_DESCRIPTION_INTRO_XPATH, true);
+        loadingCheck();
+        isVisible(YOUR_DEPENDENTS_DESCRIPTION_INTRO_XPATH, true, 0);
         return weYourDependentDescriptionIntro.getText();
     }
 
     @Override
     public String getDescription2() {
-        isVisible(YOUR_DEPENDENTS_DESCRIPTION_INTRO2_XPATH, true);
+        loadingCheck();
+        isVisible(YOUR_DEPENDENTS_DESCRIPTION_INTRO2_XPATH, true, 0);
         return weYourDependentDescriptionIntro2.getText();
     }
 
     @Override
     public IYourDependentsSection clickNone() {
-        isVisible(YOUR_DEPENDENTS_NONE_XPATH, true);
+        loadingCheck();
+        isVisible(YOUR_DEPENDENTS_NONE_XPATH, true, 0);
         weYourDependentNone.click();
         return this;
     }
 
     @Override
     public IYourDependentsSection clickNext() {
-        isVisible(YOUR_DEPENDENTS_NEXT_DEPENDENT_XPATH, true);
+        loadingCheck();
+        isVisible(YOUR_DEPENDENTS_NEXT_DEPENDENT_XPATH, true, 0);
         clickElement(YOUR_DEPENDENTS_NEXT_DEPENDENT_XPATH);
 //        weYourDependentsNextDependent.click();
 //        if(isVisible(INDICATOR_SMALL_ON, false, 5))
@@ -124,7 +129,9 @@ public class YourDependentsSection extends Borrower implements IYourDependentsSe
 //        isVisible(YOUR_DEPENDENTS_DATE_OF_BIRTH_INPUT_XPATH, true);
 //        weYourDependentsDateOfBirthInput.click();
 //        weYourDependentsDateOfBirthInput.sendKeys(dateOfBirth);
+        loadingCheck();
         sendKeysElement(YOUR_DEPENDENTS_DATE_OF_BIRTH_INPUT_XPATH, dateOfBirth, 60);
+        loadingCheck();
         if ( isVisible("//div[@id='ui-datepicker-div']") ) {
             isVisible("//div[@id='ui-datepicker-div']//button[@data-event='click' and contains(., 'Done')]");
             clickElement("//div[@id='ui-datepicker-div']//button[@data-event='click' and contains(., 'Done')]");
@@ -134,15 +141,19 @@ public class YourDependentsSection extends Borrower implements IYourDependentsSe
 
     @Override
     public IYourDependentsSection clickAddThisDependent() {
-        isVisible(YOUR_DEPENDENTS_ADD_THIS_DEPENDENT_XPATH, true);
+        loadingCheck();
+        isVisible(YOUR_DEPENDENTS_ADD_THIS_DEPENDENT_XPATH, true, 0);
         weYourDependentsAddThisDependent.click();
+        loadingCheck();
         return this;
     }
 
     @Override
     public IYourDependentsSection clickSaveAndClose() {
-        isVisible(YOUR_DEPENDENTS_SAVE_AND_CLOSE_XPATH, true, 15);
+        loadingCheck();
+        isVisible(YOUR_DEPENDENTS_SAVE_AND_CLOSE_XPATH, true, 0);
         weYourDependentsSaveAndClose.click();
+        loadingCheck();
         isNotVisible(YOUR_DEPENDENTS_PANEL_XPATH, true, 10);
         try {
             isVisible(YOUR_DEPENDENTS_TITLE_XPATH, true);
@@ -154,6 +165,7 @@ public class YourDependentsSection extends Borrower implements IYourDependentsSe
 
     @Override
     public IYourDependentsSection clickAddDependent() {
+        loadingCheck();
         try {
             isVisible(YOUR_DEPENDENTS_ADD_DEPENDENT_XPATH, true);
             getWebElement(YOUR_DEPENDENTS_ADD_DEPENDENT_XPATH).click();
@@ -162,6 +174,7 @@ public class YourDependentsSection extends Borrower implements IYourDependentsSe
             isVisible(YOUR_DEPENDENTS_ADD_DEPENDENT2_XPATH, true);
             clickElementViaJavascript(YOUR_DEPENDENTS_ADD_DEPENDENT2_XPATH, YOUR_DEPENDENTS_DATE_OF_BIRTH_INPUT_XPATH);
         }
+        loadingCheck();
 
 //        isNotVisible(YOUR_DEPENDENTS_PANEL_XPATH, true, 15);
         isVisible(YOUR_DEPENDENTS_PANEL_XPATH, 5);
@@ -172,15 +185,19 @@ public class YourDependentsSection extends Borrower implements IYourDependentsSe
 
     @Override
     public IYourDependentsSection clickCancel() {
-        isVisible(YOUR_DEPENDENTS_CANCEL_DEPENDENT_XPATH, true);
+        loadingCheck();
+        isVisible(YOUR_DEPENDENTS_CANCEL_DEPENDENT_XPATH, true, 0);
         weYourDependentsCancelDependent.click();
+        loadingCheck();
         return this;
     }
 
     @Override
     public IYourFinancialCommitmentsPage clickDone() {
-        isVisible(YOUR_DEPENDENTS_DONE_XPATH, true);
+        loadingCheck();
+        isVisible(YOUR_DEPENDENTS_DONE_XPATH, true, 0);
         clickElementViaJavascript(YOUR_DEPENDENTS_DONE_XPATH);
+        loadingCheck();
         return new YourFinancialCommitmentsPage(webDriver);
     }
 

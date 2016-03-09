@@ -10,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class MessageSection extends Borrower implements IMessageSection {
 
-    private static final Log log = LogFactory.getLog(MessageSection.class);
+    private static final Log log = LogFactory.getLog(MessageSection.class.getName());
 
     @FindBy( xpath = MESSAGE_SECTION_XPATH )
     protected WebElement weMessageSection;
@@ -26,13 +26,16 @@ public class MessageSection extends Borrower implements IMessageSection {
 
     @Override
     public void clickGetOneNow() {
-        isVisible(GET_ONE_NOW_XPATH, true, 10);
+        loadingCheck();
+        isVisible(GET_ONE_NOW_XPATH, true, 1);
         clickElement(GET_ONE_NOW_XPATH);
+        loadingCheck();
 //        weGetOneNow.click();
     }
 
     @Override
     public String getMessage() {
+        loadingCheck();
         isVisible(MESSAGE_CONTAINER_XPATH);
         return getText(MESSAGE_TEXT_XPATH); // potential bug !
     }

@@ -1,6 +1,7 @@
 package com.r2development.leveris;
 
 import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.*;
@@ -30,6 +31,45 @@ public class Borrower /*implements IBorrower*/ {
 
     protected final String INDICATOR_SMALL_OFF = "//div[@wicketpath='wicketpath' and @id='busyIndicator1a0' and @style='display: none']";
     protected final String INDICATOR_SMALL_ON = "//div[@wicketpath='wicketpath' and @id='busyIndicator1a0' and @style='display: block']";
+
+    protected final String
+            ANY_LOADING_OVERLAY = "//div[contains(@id,'busyIndicator') or contains(@class,'dblclick-fix-layer') or contains(@id,'initialMenuWrapper')][contains(@style,'display:block') or contains(@style,'display: block')]",
+            BUSY_INDICATOR_BLOCK = "//div[@id='busyIndicatorBig'][contains(@style,'display:block')][not(contains(@style,'display:none'))]",
+            BUSY_INDICATOR_BLOCK2 = "//div[@wicketpath='busyIndicator'][contains(@style,'display: block')][not(contains(@style,'display: none'))]",
+            BUSY_INDICATOR_BLOCK3 = "//div[@class='dblclick-fix-layer'][contains(@style,'display: block')][not(contains(@style,'display: none'))]",
+            BUSY_INDICATOR_NONE = "//div[@id='busyIndicatorBig'][contains(@style,'display:none')][not(contains(@style,'display:block'))]",
+            BUSY_INDICATOR_NONE2 = "//div[@wicketpath='busyIndicator'][contains(@style,'display: none')][not(contains(@style,'display: block'))]",
+            BUSY_INDICATOR_NONE3 = "//div[@class='dblclick-fix-layer'][contains(@style,'display: none')][not(contains(@style,'display: block'))]";
+
+    protected void loadingCheck(){
+
+        for(int i = 0; i < 3; i++){
+
+            if((i > 1) && (isLoadingBlock()))
+                notLoading(i);
+
+            if(isLoading())
+                notLoading(i);
+
+            if((i > 2) && (isLoadingBlock()))
+                notLoading(i);
+        }
+    }
+
+    private boolean isLoadingBlock(){
+        return (isVisible(BUSY_INDICATOR_BLOCK, 0)) || (isVisible(BUSY_INDICATOR_BLOCK2, 0)) || (isVisible(BUSY_INDICATOR_BLOCK3, 0));
+    }
+
+    private boolean isLoading(){
+        return isVisible(ANY_LOADING_OVERLAY, 0);
+    }
+
+    private void notLoading(int i){
+        isVisible(BUSY_INDICATOR_NONE, (i==0 ? i: i-1));
+        isVisible(BUSY_INDICATOR_NONE2, (i==0 ? i: i-1));
+        isVisible(BUSY_INDICATOR_NONE3, (i==0 ? i: i-1));
+    }
+
 
 //    protected final String CALENDAR_XPATH_DONE =  "//div[@id='ui-datepicker-div' and contains(@style, 'display: block')]//button[contains(., 'Done')]";
 
@@ -84,7 +124,7 @@ public class Borrower /*implements IBorrower*/ {
                     }
                     return true;
                 });
-        log.info("click on element with xpath: " + xpath);
+        log.info("\n sendKeysElement with xpath: " + xpath + "\n typing text = '" + text + "'");
     }
 
     protected List<WebElement> getWebElements(String xpath) {
@@ -176,12 +216,14 @@ public class Borrower /*implements IBorrower*/ {
     protected void clickElementViaJavascript(String xpath, boolean toGoOn) {
 
         try {
-            isVisible(xpath, true, 5);
+            loadingCheck();
+            isVisible(xpath, true, 0);
             JavascriptExecutor executor = (JavascriptExecutor) webDriver;
             executor.executeScript("arguments[0].click();", findBy(xpath));
 //            if ( xpath.equals(IEmploymentIncomeSection.EMPLOYMENT_INCOMES_ADD_EMPLOYMENT_XPATH))
 //                isVisible("//div[@wicketpath='main_c_form_dialogWrapper']", true, 5);
             log.info(("click via javascript injection with xpath: " + xpath));
+            loadingCheck();
         } catch ( NoSuchElementException | TimeoutException ignored) {
             log.info("Huston ! we have a problem !!!");
         }
@@ -193,10 +235,12 @@ public class Borrower /*implements IBorrower*/ {
         boolean toGoOn = false;
         while(!toGoOn) {
             try {
-                isVisible(xpath, true, 5);
+                loadingCheck();
+                isVisible(xpath, true, 0);
                 JavascriptExecutor executor = (JavascriptExecutor) webDriver;
                 executor.executeScript("arguments[0].click();", findBy(xpath));
                 log.info(("click via javascript injection with xpath: " + xpath));
+                loadingCheck();
                 toGoOn = true;
             } catch ( NoSuchElementException | TimeoutException ignored) {
                 log.info("Huston ! we have a problem !!!");
@@ -210,11 +254,13 @@ public class Borrower /*implements IBorrower*/ {
         boolean toGoOn = false;
         while(!toGoOn) {
             try {
-                isVisible(xpath, true, 10);
+                loadingCheck();
+                isVisible(xpath, true, 0);
                 JavascriptExecutor executor = (JavascriptExecutor) webDriver;
                 executor.executeScript("arguments[0].click();", findBy(xpath));
                 log.info(("click via javascript injection with xpath: " + xpath));
-                isVisible(expectedXpath, true, 2);
+                loadingCheck();
+                isVisible(expectedXpath, true, 0);
                 toGoOn = true;
             } catch ( NoSuchElementException | TimeoutException ignored) {
                 log.info("Huston ! we have a problem !!!");
@@ -275,7 +321,7 @@ public class Borrower /*implements IBorrower*/ {
     }
 
     private void waitForVisibility(String xpath, int timeout_in_seconds) {
-        log.info("waitForVisibility based on this xpath: " + xpath);
+        log.info("\n waitForVisibility \n ||| Xpath: '" + xpath + "' |||");
         WebDriverWait wait = new WebDriverWait(webDriver, timeout_in_seconds);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
     }
@@ -490,7 +536,7 @@ public class Borrower /*implements IBorrower*/ {
     }
 
     protected void selectFromDropDown(String xpath, String valueToSelect) {
-        log.info("Selecting this value: " + valueToSelect + ", on this xpath: " + xpath);
+        log.info("Selecting a value: " + valueToSelect + ", on element with xpath: " + xpath);
         moveTo(By.xpath(xpath));
         By currentBy = By.xpath(xpath + "/following-sibling::button");
         waitForVisibility(currentBy);
@@ -509,7 +555,7 @@ public class Borrower /*implements IBorrower*/ {
     }
 
     protected void selectFromDropDownIncludingBold(String xpath, String valueToSelect) {
-        log.info("Selecting this value: " + valueToSelect + ", on this xpath: " + xpath);
+        log.info("Selecting a value: " + valueToSelect + ", on element with xpath: " + xpath);
         By currentBy = By.xpath(xpath + "/following-sibling::button");
         waitForVisibility(currentBy);
         moveTo(currentBy);
@@ -526,33 +572,65 @@ public class Borrower /*implements IBorrower*/ {
     }
 
     protected void type(String xpath, String valueToType) {
-        log.info("Typing this value: " + valueToType + ", on this xpath: " + xpath);
+        log.info("Typing a value: " + valueToType + ", to element with xpath: " + xpath);
         By currentBy = By.xpath(xpath);
         waitForVisibility(currentBy);
         moveTo(currentBy);
 //        webDriver.findElement(currentBy).clear();
         webDriver.findElement(currentBy).sendKeys(valueToType);
 //        webDriver.findElement(currentBy).sendKeys(Keys.ENTER);
-        log.info("type on xpath: " + xpath + " with value: " + valueToType);
+        log.info("type on element with xpath: " + xpath + " \n and type a value: '" + valueToType + "'");
     }
 
     protected void type(String xpath, String valueToType, boolean sendKeyEnter) {
-        log.info("Typing this value: " + valueToType + ", on this xpath: " + xpath);
+        if(sendKeyEnter)
+        // type(xpath, valueToType, "ENTER");
+        type(xpath, valueToType, Keys.ENTER);
+        else
+        type(xpath, valueToType);
+    }
+
+    protected void typeEndWithTab(String xpath, String valueToType, boolean sendKeyTab) {
+        if(sendKeyTab)
+            type(xpath, valueToType, "TAB");
+        else
+            type(xpath, valueToType);
+    }
+
+    protected void type(String xpath, String valueToType, String sendKeyType) {
+        log.info("Typing a value: " + valueToType + ", to element with xpath: " + xpath + "' \n and hitting a key = '" + sendKeyType + "'");
+
+        if ( !StringUtils.isEmpty(sendKeyType) )
+            type(xpath, valueToType, Keys.valueOf(sendKeyType));
+        else
+            type(xpath, valueToType);
+    }
+
+    protected void type(String xpath, String valueToType, Keys sendKeyType){
+        log.info("Typing a value: " + valueToType + ", to element with xpath: " + xpath + "' \n and hitting a key = '" + sendKeyType.toString() + "'");
         By currentBy = By.xpath(xpath);
         waitForVisibility(currentBy);
         moveTo(currentBy);
-//        webDriver.findElement(currentBy).clear();
         webDriver.findElement(currentBy).sendKeys(valueToType);
-        if ( sendKeyEnter )
+        /*        if ( sendKeyType.equalsIgnoreCase("ENTER") ) {
+            log.info("sendKeys Enter");
             webDriver.findElement(currentBy).sendKeys(Keys.ENTER);
-        log.info("type on xpath: " + xpath + " with value: " + valueToType);
+        }
+
+        if ( sendKeyType.equalsIgnoreCase("TAB") ){
+            log.info("sendKeys TAB");
+            webDriver.findElement(currentBy).sendKeys(Keys.TAB);
+        }*/
+        if ( !StringUtils.isEmpty(sendKeyType) ) {
+            log.info("sendKeys " + sendKeyType + "");
+            webDriver.findElement(currentBy).sendKeys(sendKeyType);
+        }
     }
 
     protected void scroll(int vertical, @SuppressWarnings("SameParameterValue") int horizontal) {
         JavascriptExecutor jse = (JavascriptExecutor) webDriver;
         jse.executeScript("scroll(" + vertical + "," + horizontal + ")");
     }
-
 
     /**
      * Method is simulating hovering of an cursor over an element

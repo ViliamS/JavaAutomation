@@ -10,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class WelcomePage extends Borrower implements IWelcomePage {
 
-    private static final Log log = LogFactory.getLog(WelcomePage.class);
+    private static final Log log = LogFactory.getLog(WelcomePage.class.getName());
 
     @FindBy(xpath = QUOTE_XPATH)
     protected  WebElement weQuote;
@@ -49,6 +49,7 @@ public class WelcomePage extends Borrower implements IWelcomePage {
 
     @Override
     public boolean isLoaded() {
+        loadingCheck();
         isVisible(QUOTE_XPATH, true);
         isVisible(LOGIN_XPATH, true);
         isVisible(REGISTER_XPATH, true);
@@ -74,6 +75,7 @@ public class WelcomePage extends Borrower implements IWelcomePage {
         isVisible(LOGIN_XPATH, true);
 //        weLogin.click();
         clickElement(LOGIN_XPATH);
+        loadingCheck();
         return new LoginPage(webDriver);
     }
 
@@ -81,6 +83,7 @@ public class WelcomePage extends Borrower implements IWelcomePage {
     public ILoginPage clickSignIn() {
         isVisible(SIGN_IN_XPATH, true);
         clickElement(SIGN_IN_XPATH);
+        loadingCheck();
         return new LoginPage(webDriver);
     }
 
@@ -88,6 +91,7 @@ public class WelcomePage extends Borrower implements IWelcomePage {
     public IRegisterPage clickRegister() {
         isVisible(REGISTER_XPATH, true);
         clickElement(REGISTER_XPATH);
+        loadingCheck();
 //        weRegister.click();
         return new RegisterPage(webDriver);
     }

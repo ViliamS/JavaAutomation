@@ -11,10 +11,11 @@ import cucumber.api.java.en.When;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 @Singleton
 public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements CLV312Workaround*/ {
@@ -39,45 +40,62 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
 //        coapplicantEmploymentIncomesPage = new EmploymentIncomesPage(WebDriverService.getWebDriverInstance());
     }
 
-    @Given("(borrower) fills in \"Employment Income\"$")
+    @Given("(Borrower) fills in Employment and Income type (Paye|Self Employed|Civil Servant|Unemployed/Homemaker|Other)$")
 //    public void user_fills_in_employment_income(String borrowerOrCoapplicant, Map<String, String> employmentIncomeDataMap) throws InterruptedException {
-    public void user_fills_in_employment_income(String borrowerOrCoapplicant, List<String> employmentIncomeDataMap) throws InterruptedException {
+    public void user_fills_in_employment_income(String borrowerOrCoapplicant, String employmentCategory, List<String> employmentIncomeDataMap) throws InterruptedException {
 //        workaroundCLV312(borrowerOrCoapplicant);
         EmploymentIncomeData employmentIncomeData = new EmploymentIncomeData(employmentIncomeDataMap);
 
+        assertEquals(
+                "We should have the same employment and income category in step def calling and in the table",
+                employmentCategory,
+                employmentIncomeData.get("categoryIncome")
+        );
+
         switch (employmentIncomeData.get("categoryIncome")) {
+
             case "Paye":
+
                 borrower_coapplicant_user_clicks_an_employment_and_income_category(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"));
                 borrower_coapplicant_user_selects_category_occupation(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("occupation"));
                 borrower_coapplicant_user_types_category_employer_name(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("employerName"));
                 borrower_coapplicant_user_selects_category_employer_type(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("employmentType"));
                 borrower_coapplicant_user_types_category_start_date(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("startDate"));
                 borrower_coapplicant_user_checks_unchecks_category_currently(borrowerOrCoapplicant, (employmentIncomeData.isCurrentEmployment() ? "checks" : "unchecks"), employmentIncomeData.get("categoryIncome"));
+
                 if ( !employmentIncomeData.isCurrentEmployment() )
                     borrower_coapplicant_user_types_category_end_date(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("endDate"));
                 borrower_coapplicant_user_types_category_net_monthly_income(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("netMonthlyIncome"));
-
                 break;
+
             case "Self Employed":
                 borrower_coapplicant_user_clicks_an_employment_and_income_category(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"));
                 borrower_coapplicant_user_selects_category_occupation(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("occupation"));
                 borrower_coapplicant_user_types_category_business_name(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("businessName"));
                 borrower_coapplicant_user_types_category_address_line1(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("addressLine1"));
+
                 if ( !StringUtils.isEmpty(employmentIncomeData.get("addressLine2")))
                     borrower_coapplicant_user_types_category_address_line2(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("addressLine2"));
+
                 borrower_coapplicant_user_types_category_town_city(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("townCity"));
-                if ( !StringUtils.isEmpty(employmentIncomeData.get("country")) && employmentIncomeData.get("country").equals("Ireland") )
-                    borrower_coapplicant_user_types_category_county_state(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("countyState"));
-                if ( !StringUtils.isEmpty(employmentIncomeData.get("country")) )
+
+                if ( !StringUtils.isEmpty(employmentIncomeData.get("country")) ) {
                     borrower_coapplicant_user_selects_category_country(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("country"));
+
+                    if ( !StringUtils.isEmpty(employmentIncomeData.get("country")) && employmentIncomeData.get("country").equals("Ireland") )
+                        borrower_coapplicant_user_types_category_county_state(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("countyState"));
+                }
+
                 borrower_coapplicant_user_types_category_nature_business(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("businessNature"));
                 borrower_coapplicant_user_types_category_start_date(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("startDate"));
                 borrower_coapplicant_user_checks_unchecks_category_currently(borrowerOrCoapplicant, (employmentIncomeData.isCurrentEmployment() ? "checks" : "unchecks"), employmentIncomeData.get("categoryIncome"));
+
                 if ( !employmentIncomeData.isCurrentEmployment() )
                     borrower_coapplicant_user_types_category_end_date(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("endDate"));
-                borrower_coapplicant_user_types_category_net_monthly_income(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("netMonthlyIncome"));
 
+                borrower_coapplicant_user_types_category_net_monthly_income(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("netMonthlyIncome"));
                 break;
+
             case "Civil Servant":
                 borrower_coapplicant_user_clicks_an_employment_and_income_category(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"));
                 borrower_coapplicant_user_selects_category_occupation(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("occupation"));
@@ -85,70 +103,51 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
                 borrower_coapplicant_user_selects_category_employer_type(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("employmentType"));
                 borrower_coapplicant_user_types_category_start_date(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("startDate"));
                 borrower_coapplicant_user_checks_unchecks_category_currently(borrowerOrCoapplicant, (employmentIncomeData.isCurrentEmployment() ? "checks" : "unchecks"), employmentIncomeData.get("categoryIncome"));
+
                 if ( !employmentIncomeData.isCurrentEmployment() )
                     borrower_coapplicant_user_types_category_end_date(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("endDate"));
                 borrower_coapplicant_user_types_category_net_monthly_income(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("netMonthlyIncome"));
-
                 break;
+
             case "Unemployed/Homemaker":
                 borrower_coapplicant_user_clicks_an_employment_and_income_category(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"));
                 borrower_coapplicant_user_types_category_start_date(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("startDate"));
                 borrower_coapplicant_user_checks_unchecks_category_currently(borrowerOrCoapplicant, (employmentIncomeData.isCurrentEmployment() ? "checks" : "unchecks"), employmentIncomeData.get("categoryIncome"));
+
                 if ( !employmentIncomeData.isCurrentEmployment() )
                     borrower_coapplicant_user_types_category_end_date(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("endDate"));
-
                 break;
+
             case "Other":
                 borrower_coapplicant_user_clicks_an_employment_and_income_category(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"));
                 borrower_coapplicant_user_types_category_source_additional_income(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("additionalIncomeSource"));
                 borrower_coapplicant_user_types_category_net_monthly_income(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("netMonthlyIncome"));
                 borrower_coapplicant_user_types_category_time_earning_income(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("timeEarningIncome"));
                 break;
+
             default:
                 log.error("Huston, we have a problem on selecting Employment&Income category");
         }
-
         borrower_coapplicant_user_clicks_add_this_employment(borrowerOrCoapplicant);
     }
 
-//    @Override
-    public void workaroundCLV312(String borrowerOrCoapplicant) {
-
-        if ( borrowerOrCoapplicant.equals("borrower")) {
-            borrowerHomePage.clickInfoUpload();
-            boolean toGoOn = false;
-            while (!toGoOn) {
-                try {
-                    if (borrowerOrCoapplicant.equals("borrower")) {
-                        borrowerPersonalDetailsPage.clickBorrowerEmploymentIncome(user.getFirstName());
-//                        borrowerEmploymentIncomesPage.isTitle(user.getFirstName());
-                        borrowerEmploymentIncomesPage.isTitle("Automation");
-                    }
-                    toGoOn = true;
-                } catch (TimeoutException te) {
-                    log.debug("Issues of getting Financial Assets page.");
-                }
-            }
-        }
-    }
-
-    @Given("^(borrower) user sees his name in the Employment & Income title$")
+    @Given("^(Borrower) user sees his name in the Employment & Income title$")
     public void borrower_coapplicant_user_sees_his_name_in_the_title(String borrowerOrCoapplicant) {
 
 //        workaroundCLV312(borrowerOrCoapplicant);
 
         switch (borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrowerEmploymentIncomesPage.isTitle(user.getFirstName());
                 break;
         }
     }
 
     @Deprecated
-    @Given("^(borrower) user selects the employment & income category : (Paye|Self Employed|Civil Servant|Unemployed|Homemaker)$")
+    @Given("^(Borrower) user selects the employment & income category : (Paye|Self Employed|Civil Servant|Unemployed|Homemaker)$")
     public void borrower_coapplicant_user_selects_an_employment_and_income_category(String borrowerOrCoapplicant, String category) {
         switch (borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrowerEmploymentIncomesPage.selectCategory(category);
                 break;
 //            case "coapplicant":
@@ -157,10 +156,10 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-    @Given("^(borrower) user clicks the employment & income category : (Paye|SelfEmployed|CivilServant|Unemployed/Homemaker|Other)$")
+    @Given("^(Borrower) user clicks the employment & income category : (Paye|Self Employed|Civil Servant|Unemployed/Homemaker|Other)$")
     public void borrower_coapplicant_user_clicks_an_employment_and_income_category(String borrowerOrCoapplicant, String category) {
         switch (borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrowerEmploymentIncomesPage.clickCategory(category);
                 break;
 //            case "coapplicant":
@@ -169,10 +168,10 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-    @Given("^(borrower) user selects the (Paye|Self Employed|Civil Servant) occupation : (.*)$")
+    @Given("^(Borrower) user selects the (Paye|Self Employed|Civil Servant) occupation : (.*)$")
     public void borrower_coapplicant_user_selects_category_occupation(String borrowerOrCoapplicant, String category, String occupation) {
         switch (borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrower_coapplicant_user_selects_category_occupation(borrowerEmploymentIncomesPage, category, occupation);
                 break;
 //            case "coapplicant":
@@ -223,10 +222,10 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-    @Given("^(borrower) user selects the (Paye|Civil Servant) employment type : (Contract|Permanent|Temporary)$")
+    @Given("^(Borrower) user selects the (Paye|Civil Servant) employment type : (Contract|Permanent|Temporary)$")
     public void borrower_coapplicant_user_selects_category_employer_type(String borrowerOrCoapplicant, String category, String employmentType) {
         switch (borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrower_coapplicant_user_selects_category_employer_type(borrowerEmploymentIncomesPage, category, employmentType);
                 break;
 //            case "coapplicant":
@@ -248,10 +247,10 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-    @Given("^(borrower) user types the (Paye|Self Employed|Civil Servant|Unemployed/Homemaker) start date : (.*)$")
+    @Given("^(Borrower) user types the (Paye|Self Employed|Civil Servant|Unemployed/Homemaker) start date : (.*)$")
     public void borrower_coapplicant_user_types_category_start_date(String borrowerOrCoapplicant, String category, String startDate) {
         switch (borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrower_coapplicant_user_types_category_start_date(borrowerEmploymentIncomesPage, category, startDate);
 //                break;
 //            case "coapplicant":
@@ -281,10 +280,10 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-    @Given("^(borrower) user types the (Paye|Self Employed|Civil Servant|Unemployed/Homemaker) end date : (.*)$")
+    @Given("^(Borrower) user types the (Paye|Self Employed|Civil Servant|Unemployed/Homemaker) end date : (.*)$")
     public void borrower_coapplicant_user_types_category_end_date(String borrowerOrCoapplicant, String category, String endDate) {
         switch (borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrower_coapplicant_user_types_category_end_date(borrowerEmploymentIncomesPage, category, endDate);
                 break;
 //            case "coapplicant":
@@ -314,10 +313,10 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-    @Given("^(borrower) user (checks|unchecks) the (Paye|Self Employed|Civil Servant|Unemployed/Homemaker) currently$")
+    @Given("^(Borrower) user (checks|unchecks) the (Paye|Self Employed|Civil Servant|Unemployed/Homemaker) currently$")
     public void borrower_coapplicant_user_checks_unchecks_category_currently(String borrowerOrCoapplicant, String action, String category) {
         switch (borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrower_coapplicant_user_checks_unchecks_category_currently(borrowerEmploymentIncomesPage, action, category);
                 break;
 //            case "coapplicant":
@@ -372,10 +371,10 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-//    @Given("^(borrower) user types the (Paye|Civil Servant) gross salary : (.*)$")
+//    @Given("^(Borrower) user types the (Paye|Civil Servant) gross salary : (.*)$")
 //    public void borrower_coapplicant_user_types_category_salary(String borrowerOrCoapplicant, String category, String grossSalary) {
 //        switch (borrowerOrCoapplicant) {
-//            case "borrower":
+//            case "Borrower":
 //                borrower_coapplicant_user_types_category_salary(borrowerEmploymentIncomesPage, category, grossSalary);
 //                break;
 ////            case "coapplicant":
@@ -395,10 +394,10 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
 //        }
 //    }
 
-//    @Given("^(borrower) user types the (Paye|Civil Servant) regular overtime : (.*)$")
+//    @Given("^(Borrower) user types the (Paye|Civil Servant) regular overtime : (.*)$")
 //    public void borrower_coapplicant_user_types_category_regular_overtime(String borrowerOrCoapplicant, String category, String regularOvertime) {
 //        switch (borrowerOrCoapplicant) {
-//            case "borrower":
+//            case "Borrower":
 //                borrower_coapplicant_user_types_category_regular_overtime(borrowerEmploymentIncomesPage, category, regularOvertime);
 //                break;
 ////            case "coapplicant":
@@ -418,10 +417,10 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
 //        }
 //    }
 
-//    @Given("^(borrower) user types the (Paye|Civil Servant) regular guaranteed bonus : (.*)$")
+//    @Given("^(Borrower) user types the (Paye|Civil Servant) regular guaranteed bonus : (.*)$")
 //    public void borrower_coapplicant_user_types_category_regular_guaranteed_bonus(String borrowerOrCoapplicant, String category, String regularGuaranteedBonus) {
 //        switch (borrowerOrCoapplicant) {
-//            case "borrower":
+//            case "Borrower":
 //                borrower_coapplicant_user_types_category_regular_guaranteed_bonus(borrowerEmploymentIncomesPage, category, regularGuaranteedBonus);
 //                break;
 ////            case "coapplicant":
@@ -441,10 +440,10 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
 //        }
 //    }
 
-//    @Given("^(borrower) user types the (Paye|Civil Servant) guaranteed commission : (.*)$")
+//    @Given("^(Borrower) user types the (Paye|Civil Servant) guaranteed commission : (.*)$")
 //    public void borrower_coapplicant_user_types_category_guaranteed_commission(String borrowerOrCoapplicant, String category, String guaranteedCommission) {
 //        switch (borrowerOrCoapplicant) {
-//            case "borrower":
+//            case "Borrower":
 //                borrower_coapplicant_user_types_category_guaranteed_commission(borrowerEmploymentIncomesPage, category, guaranteedCommission);
 //                break;
 ////            case "coapplicant":
@@ -464,10 +463,10 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
 //        }
 //    }
 
-    @Given("^(borrower) user types the (Self Employed) business name : (.*)$")
+    @Given("^(Borrower) user types the (Self Employed) business name : (.*)$")
     public void borrower_coapplicant_user_types_category_business_name(String borrowerOrCoapplicant, String category, String businessName) {
         switch (borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrower_coapplicant_user_types_category_business_name(borrowerEmploymentIncomesPage, category, businessName);
                 break;
 //            case "coapplicant":
@@ -484,10 +483,10 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-    @Given("^(borrower) user types the (Self Employed) address line 1 : (.*)$")
+    @Given("^(Borrower) user types the (Self Employed) address line 1 : (.*)$")
     public void borrower_coapplicant_user_types_category_address_line1(String borrowerOrCoapplicant, String category, String addressLine1) {
         switch (borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrower_coapplicant_user_types_category_address_line1(borrowerEmploymentIncomesPage, category, addressLine1);
                 break;
 //            case "coapplicant":
@@ -504,10 +503,10 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-    @Given("^(borrower) user types the (Self Employed) address line 2 : (.*)$")
+    @Given("^(Borrower) user types the (Self Employed) address line 2 : (.*)$")
     public void borrower_coapplicant_user_types_category_address_line2(String borrowerOrCoapplicant, String category, String addressLine2) {
         switch (borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrower_coapplicant_user_types_category_address_line2(borrowerEmploymentIncomesPage, category, addressLine2);
                 break;
 //            case "coapplicant":
@@ -524,10 +523,10 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-    @Given("^(borrower) user types the (Self Employed) town/city : (.*)$")
+    @Given("^(Borrower) user types the (Self Employed) town/city : (.*)$")
     public void borrower_coapplicant_user_types_category_town_city(String borrowerOrCoapplicant, String category, String townCity) {
         switch (borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrower_coapplicant_user_types_category_town_city(borrowerEmploymentIncomesPage, category, townCity);
                 break;
 //            case "coapplicant":
@@ -544,10 +543,10 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-    @Given("^(borrower) user types the (Self Employed) county/state : (.*)$")
+    @Given("^(Borrower) user types the (Self Employed) county/state : (.*)$")
     public void borrower_coapplicant_user_types_category_county_state(String borrowerOrCoapplicant, String category, String countyState) {
         switch (borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrower_coapplicant_user_types_category_county_state(borrowerEmploymentIncomesPage, category, countyState);
                 break;
 //            case "coapplicant":
@@ -564,10 +563,10 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-    @Given("^(borrower) user selects the (Self Employed) country : (.*)$")
+    @Given("^(Borrower) user selects the (Self Employed) country : (.*)$")
     public void borrower_coapplicant_user_selects_category_country(String borrowerOrCoapplicant, String category, String country) {
         switch (borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrower_coapplicant_user_selects_category_country(borrowerEmploymentIncomesPage, category, country);
                 break;
 //            case "coapplicant":
@@ -584,10 +583,10 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-    @Given("^(borrower) user types the (Self Employed) nature of business : (.*)$")
+    @Given("^(Borrower) user types the (Self Employed) nature of business : (.*)$")
     public void borrower_coapplicant_user_types_category_nature_business(String borrowerOrCoapplicant, String category, String natureBusiness) {
         switch (borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrower_coapplicant_user_types_category_nature_business(borrowerEmploymentIncomesPage, category, natureBusiness);
                 break;
 //            case "coapplicant":
@@ -604,10 +603,10 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-//    @Given("^(borrower) user types the (Self Employed) net profit last year : (.*)$")
+//    @Given("^(Borrower) user types the (Self Employed) net profit last year : (.*)$")
 //    public void borrower_coapplicant_user_types_category_net_profit_last_year(String borrowerOrCoapplicant, String category, String netProfitLastYear) {
 //        switch (borrowerOrCoapplicant) {
-//            case "borrower":
+//            case "Borrower":
 //                borrower_coapplicant_user_types_category_net_profit_last_year(borrowerEmploymentIncomesPage, category, netProfitLastYear);
 //                break;
 ////            case "coapplicant":
@@ -624,10 +623,10 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
 //        }
 //    }
 
-//    @Given("^(borrower) user types the (Self Employed) net profit previous year : (.*)$")
+//    @Given("^(Borrower) user types the (Self Employed) net profit previous year : (.*)$")
 //    public void borrower_coapplicant_user_types_category_net_profit_previous_year(String borrowerOrCoapplicant, String category, String netProfitPreviousYear) {
 //        switch (borrowerOrCoapplicant) {
-//            case "borrower":
+//            case "Borrower":
 //                borrower_coapplicant_user_types_category_net_profit_previous_year(borrowerEmploymentIncomesPage, category, netProfitPreviousYear);
 //                break;
 ////            case "coapplicant":
@@ -644,10 +643,10 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
 //        }
 //    }
 
-//    @Given("^(borrower) user types the (Self Employed) accountant name / practice : (.*)$")
+//    @Given("^(Borrower) user types the (Self Employed) accountant name / practice : (.*)$")
 //    public void borrower_coapplicant_user_types_category_accountant_name_practice(String borrowerOrCoapplicant, String category, String accountantNamePractice) {
 //        switch (borrowerOrCoapplicant) {
-//            case "borrower":
+//            case "Borrower":
 //                borrower_coapplicant_user_types_category_accountant_name_practice(borrowerEmploymentIncomesPage, category, accountantNamePractice);
 //                break;
 ////            case "coapplicant":
@@ -664,10 +663,10 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
 //        }
 //    }
 
-    @Given("^(borrower) user types the (Other) source of additional income : (.*)$")
+    @Given("^(Borrower) user types the (Other) source of additional income : (.*)$")
     public void borrower_coapplicant_user_types_category_source_additional_income(String borrowerOrCoapplicant, String category, String additionalIncomeSource) {
         switch (borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrower_coapplicant_user_types_category_source_additional_income(borrowerEmploymentIncomesPage, category, additionalIncomeSource);
                 break;
 //            case "coapplicant":
@@ -684,10 +683,10 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-//    @Given("^(borrower|coapplicant) user types the (Other) gross income : (.*)$")
+//    @Given("^(Borrower|coapplicant) user types the (Other) gross income : (.*)$")
 //    public void borrower_coapplicant_user_types_category_gross_income(String borrowerOrCoapplicant, String category, String grossIncome) {
 //        switch (borrowerOrCoapplicant) {
-//            case "borrower":
+//            case "Borrower":
 //                borrower_coapplicant_user_types_category_gross_income(borrowerEmploymentIncomesPage, category, grossIncome);
 //                break;
 ////            case "coapplicant":
@@ -704,10 +703,10 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
 //        }
 //    }
 
-    @Given("^(borrower) user types the (Other) time earning this income : (.*)$")
+    @Given("^(Borrower) user types the (Other) time earning this income : (.*)$")
     public void borrower_coapplicant_user_types_category_time_earning_income(String borrowerOrCoapplicant, String category, String timeEarningIncome) {
         switch (borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrower_coapplicant_user_types_category_time_earning_income(borrowerEmploymentIncomesPage, category, timeEarningIncome);
                 break;
 //            case "coapplicant":
@@ -724,10 +723,10 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-    @When("^(borrower) user clicks \"Add This Employment\"$")
+    @When("^(Borrower) user clicks \"Add This Employment\"$")
     public void borrower_coapplicant_user_clicks_add_this_employment(String borrowerOrCoapplicant) {
         switch(borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
 //                borrowerEmploymentIncomesPage.clickEmploymentIncomeAddThisEmployment();
                 borrowerEmploymentIncomesPage.clickSaveAndClose();
                 break;
@@ -738,11 +737,11 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
 
     }
 
-    @When("^(borrower|coapplicant) user clicks \"ADD EMPLOYMENT\"$")
+    @When("^(Borrower|coapplicant) user clicks \"ADD EMPLOYMENT\"$")
     public void borrower_coapplicant_user_clicks_add_employment(String borrowerOrCoapplicant) {
 //        workaroundCLV312(borrowerOrCoapplicant);
         switch(borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
 //                borrowerEmploymentIncomesPage.clickEmploymentIncomeAddEmployment();
                 borrowerEmploymentIncomesPage.clickAdd();
                 break;
@@ -753,13 +752,11 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
 
     }
 
-    @Then("^(borrower) user clicks \"Done\"$")
+    @Then("^(Borrower) user clicks \"Done\"$")
     public void borrower_coapplicant_user_clicks_done(String borrowerOrCoapplicant) {
         switch (borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
 //                yourAccountsPage = borrowerEmploymentIncomesPage.clickEmploymentIncomeDone();
-
-
                 yourAccountsPage = borrowerEmploymentIncomesPage.clickDone();
                 yourAccountsPage.getTitle();
                 break;
