@@ -17,7 +17,7 @@ public class ApiYourFinancialAssetsStepDef extends ApiOpoqoBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiYourFinancialAssetsStepDef.class);
 
-    @When("^user has(n't)? financial assets$")
+    @When("^Borrower has(n't)? financial assets$")
     public void user_has_financial_assets(String hasFinancialAsset) throws IOException {
         if (hasFinancialAsset == null) {
             // TODO to implement
@@ -73,7 +73,7 @@ public class ApiYourFinancialAssetsStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @And("^user selects (Investment Product Funds / Bonds|Shares|Share Options|Land/Site|Life Policy|Other) as Financial Asset Type$")
+    @And("^Borrower selects (Investment Product Funds / Bonds|Shares|Share Options|Land/Site|Life Policy|Other) as Financial Asset Type$")
     public void user_selects_as_financial_asset_type(String assetType) {
 //        yourFinancialAssetsPage.selectAssetType(assetType);
     }
@@ -81,7 +81,7 @@ public class ApiYourFinancialAssetsStepDef extends ApiOpoqoBorrowerStepDef {
     @And("^this financial assets is applied to (borrower|coapplicant|both)$")
     public void this_financial_assets_is_applied_to(String toWhom) {
         switch (toWhom) {
-            case "borrower":
+            case "Borrower":
 //                yourFinancialAssetsPage.checkFinancialAssetAppliedToBorrower(user.getFirstName());
                 break;
             case "coapplicant":
@@ -95,52 +95,52 @@ public class ApiYourFinancialAssetsStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @And("^user types Funds/Bonds investment value: (.*)$")
+    @And("^Borrower types Funds/Bonds investment value: (.*)$")
     public void user_types_funds_bonds_investment_value(String investmentValue) {
 //        yourFinancialAssetsPage.typeFundsBondsInvestment(investmentValue);
     }
 
-    @And("^user types Funds/Bonds institution: (.*)$")
+    @And("^Borrower types Funds/Bonds institution: (.*)$")
     public void user_types_funds_bonds_institution(String institution) {
 //        yourFinancialAssetsPage.typeFundsBondsInstitution(institution);
     }
 
-    @And("^user types Funds/Bonds maturity date: (.*)$")
+    @And("^Borrower types Funds/Bonds maturity date: (.*)$")
     public void user_types_funds_bonds_maturity_date(String maturityDate) {
 //        yourFinancialAssetsPage.typeFundsBondsMaturityDate(maturityDate);
     }
 
-    @And("^user clicks \"ADD THIS ASSET\"$")
+    @And("^Borrower clicks \"ADD THIS ASSET\"$")
     public void user_clicks_add_this_asset() {
 //        yourFinancialAssetsPage.clickAddThisAsset();
     }
 
-    @And("^user clicks \"ADD ASSET\"$")
+    @And("^Borrower clicks \"ADD ASSET\"$")
     public void user_clicks_add_asset() {
 //        yourFinancialAssetsPage.clickAddAsset();
     }
 
-    @And("^user types Shares company: (.*)$")
+    @And("^Borrower types Shares company: (.*)$")
     public void user_types_shares_company(String company) {
 //        yourFinancialAssetsPage.typeSharesCompany(company);
     }
 
-    @And("^user types Shares value: (.*)$")
+    @And("^Borrower types Shares value: (.*)$")
     public void user_types_shares_value(String value) {
 //        yourFinancialAssetsPage.typeSharesValue(value);
     }
 
-    @And("^user types Share Option Company: (.*)$")
+    @And("^Borrower types Share Option Company: (.*)$")
     public void user_types_share_option_company(String company) {
 //        yourFinancialAssetsPage.typeShareOptionCompany(company);
     }
 
-    @And("^user types Share Option exercise date: (.*)$")
+    @And("^Borrower types Share Option exercise date: (.*)$")
     public void user_types_share_option_exercise_date(String exerciseDate) {
 //        yourFinancialAssetsPage.typeShareOptionExerciseDate(exerciseDate);
     }
 
-    @And("^user types Share Option value: (.*)$")
+    @And("^Borrower types Share Option value: (.*)$")
     public void user_types_share_option_value(String value) {
 //        yourFinancialAssetsPage.typeShareOptionValue(value);
     }
@@ -180,22 +180,22 @@ public class ApiYourFinancialAssetsStepDef extends ApiOpoqoBorrowerStepDef {
 //        yourFinancialAssetsPage.typeLifePolicyValue(value);
     }
 
-    @And("^user types Other financial asset nature: (.*)$")
+    @And("^Borrower types Other financial asset nature: (.*)$")
     public void user_types_other_financial_asset_nature(String nature) {
 //        yourFinancialAssetsPage.typeOtherNature(nature);
     }
 
-    @And("^user types Other financial asset value: (.*)$")
+    @And("^Borrower types Other financial asset value: (.*)$")
     public void user_types_other_financial_asset_value(String value) {
 //        yourFinancialAssetsPage.typeOtherValue(value);
     }
 
-    @And("^user clicks Financial assets \"Next\"$")
+    @And("^Borrower clicks Financial assets \"Next\"$")
     public void user_clicks_financial_assets_next() {
 //        yourFinancialAssetsPage.clickNext();
     }
 
-    @And("^user verifies financial assets data$")
+    @And("^Borrower verifies financial assets data$")
     public void user_verifies_financial_assets_data() {
 //        yourFinancialAssetsPage.validateFinancialAssets();
     }

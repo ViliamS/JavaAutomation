@@ -55,7 +55,6 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         switch (employmentIncomeData.get("categoryIncome")) {
 
             case "Paye":
-
                 borrower_coapplicant_user_clicks_an_employment_and_income_category(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"));
                 borrower_coapplicant_user_selects_category_occupation(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("occupation"));
                 borrower_coapplicant_user_types_category_employer_name(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("employerName"));
@@ -131,11 +130,8 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         borrower_coapplicant_user_clicks_add_this_employment(borrowerOrCoapplicant);
     }
 
-    @Given("^(Borrower) user sees his name in the Employment & Income title$")
+    @Given("^(Borrower) sees his name in the Employment & Income title$")
     public void borrower_coapplicant_user_sees_his_name_in_the_title(String borrowerOrCoapplicant) {
-
-//        workaroundCLV312(borrowerOrCoapplicant);
-
         switch (borrowerOrCoapplicant) {
             case "Borrower":
                 borrowerEmploymentIncomesPage.isTitle(user.getFirstName());
@@ -144,7 +140,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
     }
 
     @Deprecated
-    @Given("^(Borrower) user selects the employment & income category : (Paye|Self Employed|Civil Servant|Unemployed|Homemaker)$")
+    @Given("^(Borrower) selects the employment & income category : (Paye|Self Employed|Civil Servant|Unemployed|Homemaker)$")
     public void borrower_coapplicant_user_selects_an_employment_and_income_category(String borrowerOrCoapplicant, String category) {
         switch (borrowerOrCoapplicant) {
             case "Borrower":
@@ -156,7 +152,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-    @Given("^(Borrower) user clicks the employment & income category : (Paye|Self Employed|Civil Servant|Unemployed/Homemaker|Other)$")
+    @Given("^(Borrower) clicks the employment & income category : (Paye|Self Employed|Civil Servant|Unemployed/Homemaker|Other)$")
     public void borrower_coapplicant_user_clicks_an_employment_and_income_category(String borrowerOrCoapplicant, String category) {
         switch (borrowerOrCoapplicant) {
             case "Borrower":
@@ -168,7 +164,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-    @Given("^(Borrower) user selects the (Paye|Self Employed|Civil Servant) occupation : (.*)$")
+    @Given("^(Borrower) selects the (Paye|Self Employed|Civil Servant) occupation : (.*)$")
     public void borrower_coapplicant_user_selects_category_occupation(String borrowerOrCoapplicant, String category, String occupation) {
         switch (borrowerOrCoapplicant) {
             case "Borrower":
@@ -197,10 +193,10 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-    @Given("^(borrower) user types the (Paye|Civil Servant) employer's name : (.*)$")
+    @Given("^(Borrower) types the (Paye|Civil Servant) employer's name : (.*)$")
     public void borrower_coapplicant_user_types_category_employer_name(String borrowerOrCoapplicant, String category, String employerName) {
         switch (borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrower_coapplicant_user_types_category_employer_name(borrowerEmploymentIncomesPage, category, employerName);
                 break;
 //            case "coapplicant":
@@ -222,7 +218,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-    @Given("^(Borrower) user selects the (Paye|Civil Servant) employment type : (Contract|Permanent|Temporary)$")
+    @Given("^(Borrower) selects the (Paye|Civil Servant) employment type : (Contract|Permanent|Temporary)$")
     public void borrower_coapplicant_user_selects_category_employer_type(String borrowerOrCoapplicant, String category, String employmentType) {
         switch (borrowerOrCoapplicant) {
             case "Borrower":
@@ -247,7 +243,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-    @Given("^(Borrower) user types the (Paye|Self Employed|Civil Servant|Unemployed/Homemaker) start date : (.*)$")
+    @Given("^(Borrower) types the (Paye|Self Employed|Civil Servant|Unemployed/Homemaker) start date : (.*)$")
     public void borrower_coapplicant_user_types_category_start_date(String borrowerOrCoapplicant, String category, String startDate) {
         switch (borrowerOrCoapplicant) {
             case "Borrower":
@@ -280,7 +276,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-    @Given("^(Borrower) user types the (Paye|Self Employed|Civil Servant|Unemployed/Homemaker) end date : (.*)$")
+    @Given("^(Borrower) types the (Paye|Self Employed|Civil Servant|Unemployed/Homemaker) end date : (.*)$")
     public void borrower_coapplicant_user_types_category_end_date(String borrowerOrCoapplicant, String category, String endDate) {
         switch (borrowerOrCoapplicant) {
             case "Borrower":
@@ -313,7 +309,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-    @Given("^(Borrower) user (checks|unchecks) the (Paye|Self Employed|Civil Servant|Unemployed/Homemaker) currently$")
+    @Given("^(Borrower) (checks|unchecks) the (Paye|Self Employed|Civil Servant|Unemployed/Homemaker) currently$")
     public void borrower_coapplicant_user_checks_unchecks_category_currently(String borrowerOrCoapplicant, String action, String category) {
         switch (borrowerOrCoapplicant) {
             case "Borrower":
@@ -342,10 +338,10 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-    @Given("^(borrower) user types the (Paye|Self Employed|Civil Servant|Unemployed/Homemaker|Other) net monthly income : (.*)$")
+    @Given("^(Borrower) types the (Paye|Self Employed|Civil Servant|Unemployed/Homemaker|Other) net monthly income : (.*)$")
     public void borrower_coapplicant_user_types_category_net_monthly_income(String borrowerOrCoapplicant, String category, String netMonthlyIncome) {
         switch (borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrower_coapplicant_user_types_net_monthly_income(borrowerEmploymentIncomesPage, category, netMonthlyIncome);
                 break;
 //            case "coapplicant":
@@ -371,7 +367,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-//    @Given("^(Borrower) user types the (Paye|Civil Servant) gross salary : (.*)$")
+//    @Given("^(Borrower) types the (Paye|Civil Servant) gross salary : (.*)$")
 //    public void borrower_coapplicant_user_types_category_salary(String borrowerOrCoapplicant, String category, String grossSalary) {
 //        switch (borrowerOrCoapplicant) {
 //            case "Borrower":
@@ -394,7 +390,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
 //        }
 //    }
 
-//    @Given("^(Borrower) user types the (Paye|Civil Servant) regular overtime : (.*)$")
+//    @Given("^(Borrower) types the (Paye|Civil Servant) regular overtime : (.*)$")
 //    public void borrower_coapplicant_user_types_category_regular_overtime(String borrowerOrCoapplicant, String category, String regularOvertime) {
 //        switch (borrowerOrCoapplicant) {
 //            case "Borrower":
@@ -417,7 +413,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
 //        }
 //    }
 
-//    @Given("^(Borrower) user types the (Paye|Civil Servant) regular guaranteed bonus : (.*)$")
+//    @Given("^(Borrower) types the (Paye|Civil Servant) regular guaranteed bonus : (.*)$")
 //    public void borrower_coapplicant_user_types_category_regular_guaranteed_bonus(String borrowerOrCoapplicant, String category, String regularGuaranteedBonus) {
 //        switch (borrowerOrCoapplicant) {
 //            case "Borrower":
@@ -440,7 +436,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
 //        }
 //    }
 
-//    @Given("^(Borrower) user types the (Paye|Civil Servant) guaranteed commission : (.*)$")
+//    @Given("^(Borrower) types the (Paye|Civil Servant) guaranteed commission : (.*)$")
 //    public void borrower_coapplicant_user_types_category_guaranteed_commission(String borrowerOrCoapplicant, String category, String guaranteedCommission) {
 //        switch (borrowerOrCoapplicant) {
 //            case "Borrower":
@@ -463,7 +459,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
 //        }
 //    }
 
-    @Given("^(Borrower) user types the (Self Employed) business name : (.*)$")
+    @Given("^(Borrower) types the (Self Employed) business name : (.*)$")
     public void borrower_coapplicant_user_types_category_business_name(String borrowerOrCoapplicant, String category, String businessName) {
         switch (borrowerOrCoapplicant) {
             case "Borrower":
@@ -483,7 +479,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-    @Given("^(Borrower) user types the (Self Employed) address line 1 : (.*)$")
+    @Given("^(Borrower) types the (Self Employed) address line 1 : (.*)$")
     public void borrower_coapplicant_user_types_category_address_line1(String borrowerOrCoapplicant, String category, String addressLine1) {
         switch (borrowerOrCoapplicant) {
             case "Borrower":
@@ -503,7 +499,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-    @Given("^(Borrower) user types the (Self Employed) address line 2 : (.*)$")
+    @Given("^(Borrower) types the (Self Employed) address line 2 : (.*)$")
     public void borrower_coapplicant_user_types_category_address_line2(String borrowerOrCoapplicant, String category, String addressLine2) {
         switch (borrowerOrCoapplicant) {
             case "Borrower":
@@ -523,7 +519,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-    @Given("^(Borrower) user types the (Self Employed) town/city : (.*)$")
+    @Given("^(Borrower) types the (Self Employed) town/city : (.*)$")
     public void borrower_coapplicant_user_types_category_town_city(String borrowerOrCoapplicant, String category, String townCity) {
         switch (borrowerOrCoapplicant) {
             case "Borrower":
@@ -543,7 +539,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-    @Given("^(Borrower) user types the (Self Employed) county/state : (.*)$")
+    @Given("^(Borrower) types the (Self Employed) county/state : (.*)$")
     public void borrower_coapplicant_user_types_category_county_state(String borrowerOrCoapplicant, String category, String countyState) {
         switch (borrowerOrCoapplicant) {
             case "Borrower":
@@ -563,7 +559,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-    @Given("^(Borrower) user selects the (Self Employed) country : (.*)$")
+    @Given("^(Borrower) selects the (Self Employed) country : (.*)$")
     public void borrower_coapplicant_user_selects_category_country(String borrowerOrCoapplicant, String category, String country) {
         switch (borrowerOrCoapplicant) {
             case "Borrower":
@@ -583,7 +579,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-    @Given("^(Borrower) user types the (Self Employed) nature of business : (.*)$")
+    @Given("^(Borrower) types the (Self Employed) nature of business : (.*)$")
     public void borrower_coapplicant_user_types_category_nature_business(String borrowerOrCoapplicant, String category, String natureBusiness) {
         switch (borrowerOrCoapplicant) {
             case "Borrower":
@@ -603,7 +599,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-//    @Given("^(Borrower) user types the (Self Employed) net profit last year : (.*)$")
+//    @Given("^(Borrower) types the (Self Employed) net profit last year : (.*)$")
 //    public void borrower_coapplicant_user_types_category_net_profit_last_year(String borrowerOrCoapplicant, String category, String netProfitLastYear) {
 //        switch (borrowerOrCoapplicant) {
 //            case "Borrower":
@@ -623,7 +619,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
 //        }
 //    }
 
-//    @Given("^(Borrower) user types the (Self Employed) net profit previous year : (.*)$")
+//    @Given("^(Borrower) types the (Self Employed) net profit previous year : (.*)$")
 //    public void borrower_coapplicant_user_types_category_net_profit_previous_year(String borrowerOrCoapplicant, String category, String netProfitPreviousYear) {
 //        switch (borrowerOrCoapplicant) {
 //            case "Borrower":
@@ -643,7 +639,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
 //        }
 //    }
 
-//    @Given("^(Borrower) user types the (Self Employed) accountant name / practice : (.*)$")
+//    @Given("^(Borrower) types the (Self Employed) accountant name / practice : (.*)$")
 //    public void borrower_coapplicant_user_types_category_accountant_name_practice(String borrowerOrCoapplicant, String category, String accountantNamePractice) {
 //        switch (borrowerOrCoapplicant) {
 //            case "Borrower":
@@ -663,7 +659,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
 //        }
 //    }
 
-    @Given("^(Borrower) user types the (Other) source of additional income : (.*)$")
+    @Given("^(Borrower) types the (Other) source of additional income : (.*)$")
     public void borrower_coapplicant_user_types_category_source_additional_income(String borrowerOrCoapplicant, String category, String additionalIncomeSource) {
         switch (borrowerOrCoapplicant) {
             case "Borrower":
@@ -683,7 +679,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-//    @Given("^(Borrower|coapplicant) user types the (Other) gross income : (.*)$")
+//    @Given("^(Borrower) types the (Other) gross income : (.*)$")
 //    public void borrower_coapplicant_user_types_category_gross_income(String borrowerOrCoapplicant, String category, String grossIncome) {
 //        switch (borrowerOrCoapplicant) {
 //            case "Borrower":
@@ -703,7 +699,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
 //        }
 //    }
 
-    @Given("^(Borrower) user types the (Other) time earning this income : (.*)$")
+    @Given("^(Borrower) types the (Other) time earning this income : (.*)$")
     public void borrower_coapplicant_user_types_category_time_earning_income(String borrowerOrCoapplicant, String category, String timeEarningIncome) {
         switch (borrowerOrCoapplicant) {
             case "Borrower":
@@ -723,7 +719,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         }
     }
 
-    @When("^(Borrower) user clicks \"Add This Employment\"$")
+    @When("^(Borrower) clicks \"Add This Employment\"$")
     public void borrower_coapplicant_user_clicks_add_this_employment(String borrowerOrCoapplicant) {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
@@ -737,7 +733,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
 
     }
 
-    @When("^(Borrower|coapplicant) user clicks \"ADD EMPLOYMENT\"$")
+    @When("^(Borrower) clicks \"ADD EMPLOYMENT\"$")
     public void borrower_coapplicant_user_clicks_add_employment(String borrowerOrCoapplicant) {
 //        workaroundCLV312(borrowerOrCoapplicant);
         switch(borrowerOrCoapplicant) {
@@ -752,7 +748,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
 
     }
 
-    @Then("^(Borrower) user clicks \"Done\"$")
+    @Then("^(Borrower) clicks \"Done\"$")
     public void borrower_coapplicant_user_clicks_done(String borrowerOrCoapplicant) {
         switch (borrowerOrCoapplicant) {
             case "Borrower":

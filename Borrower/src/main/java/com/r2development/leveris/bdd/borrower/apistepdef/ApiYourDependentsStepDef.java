@@ -17,7 +17,7 @@ public class ApiYourDependentsStepDef extends ApiOpoqoBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiYourDependentsStepDef.class);
 
-    @When("^user has(n't)? dependents$")
+    @When("^Borrower has(n't)? dependents$")
     public void user_has_dependencies(String hasDependents) throws IOException {
         if (hasDependents == null) {
             // TODO to implement
@@ -63,7 +63,7 @@ public class ApiYourDependentsStepDef extends ApiOpoqoBorrowerStepDef {
                     },
                     new LinkedHashMap<String, String>() {
                         {
-                            put("stepToken", "1");
+                            put("stepToken", "2");
                             put("root:c:w:pnlNoEmplyments:c:w:btnNextSection:submit", "1");
                         }
                     },
@@ -76,7 +76,7 @@ public class ApiYourDependentsStepDef extends ApiOpoqoBorrowerStepDef {
     @Deprecated @And("^this dependent is applied to (borrower|coapplicant|both)$")
     public void this_dependent_is_applied_to(String toWhom) {
         switch (toWhom) {
-            case "borrower":
+            case "Borrower":
 //                yourDependentsPage.checkAccountAppliesToBorrower(user.getFirstName());
                 break;
             case "coapplicant":
@@ -90,22 +90,22 @@ public class ApiYourDependentsStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @And("^user types the Dependent date of birth: (.*)$")
+    @And("^Borrower types the Dependent date of birth: (.*)$")
     public void user_types_Dependent_date_of_birth(String dateOfBirth) {
 //        yourDependentsPage.typeDateOfBirth(dateOfBirth);
     }
 
-    @And("^user clicks \"ADD THIS DEPENDENT\"$")
+    @And("^Borrower clicks \"ADD THIS DEPENDENT\"$")
     public void user_clicks_add_this_dependent() {
 //        yourDependentsPage.clickAddThisDependent();
     }
 
-    @And("^user clicks \"ADD DEPENDENT\"$")
+    @And("^Borrower clicks \"ADD DEPENDENT\"$")
     public void user_clicks_add_dependent() {
 //        yourDependentsPage.clickAddDependent();
     }
 
-    @And("^user clicks Dependents \"NEXT\"$")
+    @And("^Borrower clicks Dependents \"NEXT\"$")
     public void user_clicks_dependents_next() {
 //        yourDependentsPage.clickNext();
     }

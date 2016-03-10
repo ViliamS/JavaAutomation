@@ -27,7 +27,7 @@ public class ApiGmailStepDef extends ApiOpoqoBorrowerStepDef {
         this.user = user;
     }
 
-    @Given("^user goes to gmail$")
+    @Given("^Borrower goes to gmail$")
     public void user_goes_to_gmail() {
         WebDriver webDriver = ApiSupportWebDriverStepDef.getWebDriverInstance();
         webDriver.get("http://www.gmail.com");

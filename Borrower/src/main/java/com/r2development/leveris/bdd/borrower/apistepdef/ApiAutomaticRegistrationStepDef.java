@@ -21,17 +21,17 @@ public class ApiAutomaticRegistrationStepDef extends ApiOpoqoBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiAutomaticRegistrationStepDef.class.getName());
 
-    @Given("^user goes to Automatic Registration page$")
+    @Given("^Borrower goes to Automatic Registration page$")
     public void user_goes_to_automatic_registration_page() {
         // TODO to implement
     }
 
-    @Given("^User types his applicant : (.*)$")
+    @Given("^Borrower types his applicant : (.*)$")
     public void user_types_his_applicant(String applicantId) {
         automationRegistrationParameters.put("root:c:w:pnlMain:c:w:txtId:tb", "anthony.mottot.test0001" + DateTime.now().toString("yyyyMMddHHmmssSSS") + "@abakus.com");
     }
 
-    @Given("^User (unchecks|checks) \"Quote Complete\"$")
+    @Given("^Borrower (unchecks|checks) \"Quote Complete\"$")
     public void user_unchecks_or_checks_for_quote_complete(String checks_or_unchecks) {
         switch (checks_or_unchecks) {
             case "unchecks":
@@ -46,7 +46,7 @@ public class ApiAutomaticRegistrationStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Given("^User (unchecks|checks) \"Invite Coapplicant\"$")
+    @Given("^Borrower (unchecks|checks) \"Invite Coapplicant\"$")
     public void user_unchecks_or_checks_for_invite_coapplicant(String checks_or_unchecks) {
         switch (checks_or_unchecks) {
             case "unchecks":
@@ -61,14 +61,14 @@ public class ApiAutomaticRegistrationStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Given("^User types coapplicant's email: (.*)$")
+    @Given("^Borrower types coapplicant's email: (.*)$")
     public void user_types_coapplicant_email(String coapplicantId) {
 //        DateTime now = DateTime.now();
 //        automationRegistrationParameters.put("root:c:w:pnlMain:c:w:pnlQuote:c:w:txtCoapp:tb", "anthony.mottot.coapplicant.test0001" + now.toString("yyyyMMddHHmmssSSS") + "@abakus.com");
         automationRegistrationParameters.put("root:c:w:pnlMain:c:w:pnlQuote:c:w:txtCoapp:tb", "anthony.mottot.coapplicant.test0001" + System.getProperty("timestamp") + "@abakus.com");
     }
 
-    @When("^User clicks \"Create new user\"$")
+    @When("^Borrower clicks \"Create new user\"$")
     public void user_clicks_create_new_user() throws IOException {
 
         automationRegistrationParameters.putAll(

@@ -25,7 +25,7 @@ public class GmailStepDef /*extends BorrowerStepDef*/ {
         this.webDriver = webDriver;
     }
 
-    @Given("^user goes to gmail$")
+    @Given("^Borrower goes to gmail$")
     public void user_goes_to_gmail() {
 //        WebDriver webDriver = WebDriverService.getWebDriverInstance();
 //        WebDriver webDriver = webDriver;

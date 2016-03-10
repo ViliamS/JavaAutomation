@@ -128,7 +128,7 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
         user_registers();
     }
 
-    @Given("^user types his first name (.*) in Register page$")
+    @Given("^Borrower types his first name (.*) in Register page$")
     public void user_types_his_first_name(String firstName) {
 //        registerPage.setFirstname(firstName);
 //        String uniqueAutomationFirstname = new DateTime().now().toString("yyyyMMddHHmmssSSS");
@@ -138,7 +138,7 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
         registerParameters.put("root:c:w:pnlMain:c:w:txtName:tb", firstName /*+ new DateTime().now().toString("yyyyMMddHHmmssSSS")*/);
     }
 
-    @Given("^user types his email (.*) in Register page$")
+    @Given("^Borrower types his email (.*) in Register page$")
     public void user_types_his_email(String email) {
         String[] emailArray = email.split("@");
 //        DateTime now = DateTime.now();
@@ -155,13 +155,14 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
         log.info(user.getEmail());
     }
 
-    @Given("^user types his phone number (.*) in Register page$")
+    @Given("^Borrower types his phone number (.*) in Register page$")
     public void user_types_his_phone_number(String phoneNumber) {
 //        DateTime now = DateTime.now();
 //        user.setPhoneNumber("+420" + System.getProperty("timestamp"));
-        user.setPhoneNumber(phoneNumber);
+        String phoneNumberEpoch = String.valueOf(System.currentTimeMillis()/1000);
+        user.setPhoneNumber("+420" + phoneNumberEpoch);
 //        registerParameters.put("root:c:w:pnlMain:c:w:txtPhoneNumber:tb", "+420" + System.getProperty("timestamp"));
-        registerParameters.put("root:c:w:pnlMain:c:w:txtPhoneNumber:tb", phoneNumber);
+        registerParameters.put("root:c:w:pnlMain:c:w:txtPhoneNumber:tb", "+420" + phoneNumberEpoch);
         log.info(user.getPhoneNumber());
     }
 
@@ -170,35 +171,38 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
 //        DateTime now = DateTime.now();
 //        String trickyPhoneNumber = now.toString("yyyyMMddHHmmss");
 //        user.setPhoneNumber(trickyPhoneNumber);
-        user.setPhoneNumber("+420" + System.getProperty("timestamp"));
+        String phoneNumberEpoch = String.valueOf(System.currentTimeMillis()/1000);
+//        user.setPhoneNumber("+420" + System.getProperty("timestamp"));
+        user.setPhoneNumber("+420" + phoneNumberEpoch);
 //        registerParameters.put("root:c:w:pnlMain:c:w:txtPhoneNumber:tb", trickyPhoneNumber);
-        registerParameters.put("root:c:w:pnlMain:c:w:txtPhoneNumber:tb", "+420" + System.getProperty("timestamp"));
+//        registerParameters.put("root:c:w:pnlMain:c:w:txtPhoneNumber:tb", "+420" + System.getProperty("timestamp"));
+        registerParameters.put("root:c:w:pnlMain:c:w:txtPhoneNumber:tb", "+420" + phoneNumberEpoch);
         log.info(user.getPhoneNumber());
     }
 
-    @Given("^user types his password (.*) in Register page$")
+    @Given("^Borrower types his password (.*) in Register page$")
     public void user_types_his_password(String pwd) {
         user.setPwd(pwd);
         registerParameters.put("root:c:w:pnlMain:c:w:txtPassword:tb", pwd);
     }
 
-    @Given("^user wants to (show|hide) his password in Registration page$")
+    @Given("^Borrower wants to (show|hide) his password in Registration page$")
     public void user_wants_to_his_password(String showOrHide) {
     }
 
-    @Given("^user (accepts|unaccepts) the terms of business$")
+    @Given("^Borrower (accepts|unaccepts) the terms of business$")
     public void user_accepts_the_terms_of_business(String acceptOrNot) {
         if ( acceptOrNot.equals("accepts") )
             registerParameters.put("root:c:w:pnlMain:c:w:chkTermsOfBusiness:checkbox", "on");
     }
 
-    @Given("^user (accepts|unaccepts) the data protection policy$")
+    @Given("^Borrower (accepts|unaccepts) the data protection policy$")
     public void user_accepts_the_data_protection_policy(String acceptOrNot) {
         if ( acceptOrNot.equals("accepts") )
             registerParameters.put("root:c:w:pnlMain:c:w:chkDataProtectionPolicy:checkbox", "on");
     }
 
-    @When("^user registers$")
+    @When("^Borrower registers$")
     public void user_registers() throws IOException {
 
         registerParameters.putAll(
@@ -225,7 +229,7 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
         );
     }
 
-    @When("^user creates an account$")
+    @When("^Borrower creates an account$")
     public void user_creates_an_account() throws IOException {
 
         if ( System.getProperty("excel.filename") != null ) {
@@ -266,12 +270,12 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
         user_registers();
     }
 
-    @When("^user is already signed$")
+    @When("^Borrower is already signed$")
     public void user_already_signed() {
 //        loginPage = registerPage.clickAlreadyRegister();
     }
 
-    @When("^user closes the Register page$")
+    @When("^Borrower closes the Register page$")
     public void user_closes_the_register_page() {
 //        welcomePage = registerPage.closeRegister();
     }
@@ -281,18 +285,18 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
 //        verifyEmailPage.isLoaded(registerPage.getEmailAddress());
     }
 
-    @When("^user wants us resent email$")
+    @When("^Borrower wants us resent email$")
     public void user_wants_us_resent_email() {
 //        verifyEmailPage.clickReSent();
     }
 
-    @Then("^user types his email (.*) in the Verify Email Page$")
+    @Then("^Borrower types his email (.*) in the Verify Email Page$")
     public void user_types_his_email_in_the_verify_email_page(String email) {
 //        verifyEmailPage.setEmail(registerPage.getEmailAddress());
 //        verifyEmailPage.setEmail(user.getEmail());
     }
 
-    @Then("^user resends$")
+    @Then("^Borrower resends$")
     public void user_resends() {
 //        verifyEmailPage.clickReSent2();
     }

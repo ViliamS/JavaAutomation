@@ -48,7 +48,7 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
         this.webDriver = webDriver;
     }
 
-    @Given("^user processes \"Get a Quote\" \\(format1\\)$")
+    @Given("^Borrower processes \"Get a Quote\" \\(format1\\)$")
     public void user_processes_get_quote(List<QuoteData> quoteDataList, String... test) {
         assertEquals("System is expecting only one QuoteData occurrence", quoteDataList.size(), 1);
         user_wants_to_get_a_quote_now();
@@ -57,7 +57,7 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
         user_processes_3step3_to_get_a_quote();
     }
 
-    @Given("^user processes \"Get a Quote\" \\(format2\\)$")
+    @Given("^Borrower processes \"Get a Quote\" \\(format2\\)$")
 //    public void user_processes_get_quote(Map<String, String> quoteDataMap) {
     public void user_processes_get_quote(List<String> quoteDataMap) {
         user_wants_to_get_a_quote_now();
@@ -66,7 +66,7 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
         user_processes_3step3_to_get_a_quote();
     }
 
-//    @Given("^user processes \"Get a Quote\" \\(format2 with failure\\)$")
+//    @Given("^Borrower processes \"Get a Quote\" \\(format2 with failure\\)$")
 //    public void user_processes_get_quote_with_error_click(Map<String, String> quoteDataMap) {
 //        user_wants_to_get_a_quote_now();
 //        fill_in_quote_step1_failure(new QuoteData(quoteDataMap));
@@ -114,14 +114,14 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
 //        user_clicks_get_my_quote_failure();
 //    }
 
-    @When("^user clicks on Get a quote or Get Started$")
+    @When("^Borrower clicks on Get a quote or Get Started$")
     public void user_clicks_to_get_a_quote_or_get_started() throws Exception {
 //        borrowerHomePage = new BorrowerHomePage(WebDriverService.getWebDriverInstance());
         borrowerHomePage = new BorrowerHomePage(webDriver);
         borrowerHomePage.clickGetQuoteOrGetStarted();
     }
 
-    @When("^user creates a quote")
+    @When("^Borrower creates a quote")
     public void user_create_a_quote() {
 //        welcomePage = new WelcomePage(WebDriverService.getWebDriverInstance());
         welcomePage = new WelcomePage(webDriver);
@@ -129,13 +129,13 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
 //        buildQuotationPage.clickGetQuoteNow();
     }
 
-    @When("^user clicks on \"Get a quote now\"$")
+    @When("^Borrower clicks on \"Get a quote now\"$")
     public void user_clicks_on_get_a_quote_now() {
 //        buildQuotationPage = welcomePage.clickQuote();
 //        buildQuotationPage.clickGetQuoteNow();
     }
 
-    @And("^user wants to get a quote now$")
+    @And("^Borrower wants to get a quote now$")
     public void user_wants_to_get_a_quote_now() {
 
         try {
@@ -158,7 +158,7 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
         buildQuotationPage.clickGetQuoteNow();
     }
 
-    @Then("^user processes \"Get a Quote\"$")
+    @Then("^Borrower processes \"Get a Quote\"$")
     public void user_processes_get_quote() {
         user_wants_to_get_a_quote_now();
         user_processes_1step3_to_get_a_quote();
@@ -166,7 +166,7 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
         user_processes_3step3_to_get_a_quote();
     }
 
-    @And("^user processes 1st step of 3 to get a quote$")
+    @And("^Borrower processes 1st step of 3 to get a quote$")
     public void user_processes_1step3_to_get_a_quote() {
 
         // TODO extract data from excel
@@ -217,96 +217,96 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
         user_clicks_get_my_quote();
     }
 
-    @And("^user processes 2nd step of 3 to get a quote$")
+    @And("^Borrower processes 2nd step of 3 to get a quote$")
     public void user_processes_2step3_to_get_a_quote() {
         user_clicks_configure_loan();
     }
 
-    @And("^user processes 3rd step of 3 to get a quote$")
+    @And("^Borrower processes 3rd step of 3 to get a quote$")
     public void user_processes_3step3_to_get_a_quote() {
         user_clicks_apply_now();
     }
 
-    @And("^user selects (a single borrower|two borrowers) as number of borrowers")
+    @And("^Borrower selects (a single borrower|two borrowers) as number of borrowers")
     public void user_selects_number_of_borrowers(String nbBorrowers) {
         buildQuotationPage.selectNumberOfBorrower(nbBorrowers);
     }
 
-    @And("^user clicks (a single borrower|two borrowers) as number of borrowers$")
-//    @And("^user clicks \"(Single|Joint) Borrower\" as number of borrowers$")
+    @And("^Borrower clicks (a single borrower|two borrowers) as number of borrowers$")
+//    @And("^Borrower clicks \"(Single|Joint) Borrower\" as number of borrowers$")
     public void user_clicks_number_of_borrowers(String nbBorrowers) {
         buildQuotationPage.clickNumberOfBorrower(nbBorrowers);
     }
 
-    @And("^user selects (first-time buyer\\(s\\)|mover\\(s\\)) as mortgage type$")
+    @And("^Borrower selects (first-time buyer\\(s\\)|mover\\(s\\)) as mortgage type$")
     public void user_selects_mortgage_type(String mortgageType) {
         buildQuotationPage.selectMortgageType(mortgageType);
     }
 
-    @And("^user clicks (first-time buyer\\(s\\)|mover\\(s\\)) as mortgage type$")
-//    @And("^user clicks (first time buyer|mover) as mortgage type$")
+    @And("^Borrower clicks (first-time buyer\\(s\\)|mover\\(s\\)) as mortgage type$")
+//    @And("^Borrower clicks (first time buyer|mover) as mortgage type$")
     public void user_clicks_mortgage_type(String mortgageType) {
         buildQuotationPage.clickMortgageType(mortgageType);
     }
 
-    @And("^user types (.*) as age$")
+    @And("^Borrower types (.*) as age$")
     public void user_types_his_age(String age) {
         buildQuotationPage.typeAge(age);
     }
 
-    @And("^user types (.*) as partner\'s age")
+    @And("^Borrower types (.*) as partner\'s age")
     public void user_types_partner_age(String age) {
         buildQuotationPage.typePartnerAge(age);
     }
 
-    @And("^user selects (single|separated|married/civil partner\\(s\\)|divorced/dissolved civil partnership|widowed) as marital status$")
+    @And("^Borrower selects (single|separated|married/civil partner\\(s\\)|divorced/dissolved civil partnership|widowed) as marital status$")
     public void user_selects_his_marital_status(String maritalStatus) {
         buildQuotationPage.selectMaritalStatus(maritalStatus);
     }
 
-    @And("^user types (.*) as total of dependents$")
+    @And("^Borrower types (.*) as total of dependents$")
     public void user_types_his_total_of_dependents(String totalDependents) {
         if ( StringUtils.isEmpty(totalDependents) )
             totalDependents = "0";
         buildQuotationPage.typeTotalDependents(totalDependents);
     }
 
-    @And("^user selects (an employee|a civil servant|self employed|not in paid work just now) as income type$")
+    @And("^Borrower selects (an employee|a civil servant|self employed|not in paid work just now) as income type$")
     public void user_selects_his_income_type(String incomeType) {
         buildQuotationPage.selectIncomeType(incomeType);
     }
 
-    @And("^user types (.*) as income amount$")
+    @And("^Borrower types (.*) as income amount$")
     public void user_types_his_income_amount(String incomeAmount) {
         buildQuotationPage.typeIncomeAmount(incomeAmount);
     }
 
-    @And("^user selects (\\s*|an employee|a civil servant|self employed|not in paid work just now) as partner\'s income type$")
+    @And("^Borrower selects (\\s*|an employee|a civil servant|self employed|not in paid work just now) as partner\'s income type$")
     public void user_selects_partner_income_type(String incomeType){
         buildQuotationPage.selectPartnerIncomeType(incomeType);
     }
 
-    @And("^user types (.*) as partner\'s income amount$")
+    @And("^Borrower types (.*) as partner\'s income amount$")
     public void user_types_partner_income_amount(String incomeAmount) {
         buildQuotationPage.typePartnerIncomeAmount(incomeAmount);
     }
 
-    @And("^user types (.*) as monthly credit commitments$")
+    @And("^Borrower types (.*) as monthly credit commitments$")
     public void user_types_monthly_credit_commitments(String monthlyCreditCommitments) {
         buildQuotationPage.typeMonthlyCreditCommitments(monthlyCreditCommitments);
     }
 
-    @And("^user clicks \"GET MY QUOTE\"$")
+    @And("^Borrower clicks \"GET MY QUOTE\"$")
     public void user_clicks_get_my_quote() {
         buildQuotationPage.clickGetQuote();
     }
 
-//    @And("^user clicks \"GET MY QUOTE\" with failure$")
+//    @And("^Borrower clicks \"GET MY QUOTE\" with failure$")
 //    public void user_clicks_get_my_quote_failure() {
 //        buildQuotationPage.clickGetQuoteFailure();
 //    }
 
-    @And("^user is(\\s*|n't) eligible to borrow at this time$")
+    @And("^Borrower is(\\s*|n't) eligible to borrow at this time$")
     public void user_is_eligible_to_borrow_at_this_time(String isEligible) {
         if ( StringUtils.isEmpty(isEligible) ) {
             assertThat("we are expected that user is eligible.", buildQuotationPage.isEligible(), Is.is(true) );
@@ -318,27 +318,27 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
         }
     }
 
-    @And("^user clicks \"CONFIGURE LOAN\"$")
+    @And("^Borrower clicks \"CONFIGURE LOAN\"$")
     public void user_clicks_configure_loan() {
         buildQuotationPage.clickConfigureLoan();
     }
 
-    @And("^user clicks \"APPLY NOW\"$")
+    @And("^Borrower clicks \"APPLY NOW\"$")
     public void user_clicks_apply_now() {
         buildQuotationPage.clickApplyNow();
     }
 
-    @And("^user clicks \"E-MAIL QUOTE\"$")
+    @And("^Borrower clicks \"E-MAIL QUOTE\"$")
     public void user_clicks_email_quote() {
         buildQuotationPage.clickEmailQuote();
     }
 
-    @And("^user clicks \"EDIT YOUR DETAILS\"$")
+    @And("^Borrower clicks \"EDIT YOUR DETAILS\"$")
     public void user_clicks_edit_details() {
         buildQuotationPage.clickEditDetails();
     }
 
-    @Then("^user could buy a home up to the value of (.*) euros$")
+    @Then("^Borrower could buy a home up to the value of (.*) euros$")
     public void user_could_build_a_home_up_to_value(String maxLoanAmount) {
         if ( !toSkip ) {
             int roundedMaxLoanAmount = Math.round(Float.parseFloat(buildQuotationPage.getAffordabilityAmount().replaceAll(",", "").replace("€", "").trim()));
@@ -349,7 +349,7 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
         }
     }
 
-    @Then("^user should pay monthly (.*) euros$")
+    @Then("^Borrower should pay monthly (.*) euros$")
     public void user_should_pay_monthly(String monthlyPayment) {
         if ( !toSkip ) {
             int roundedMonthlyPayment = Math.round(Float.parseFloat(buildQuotationPage.getAffordabilityMonthly().replaceAll(",", "").replace("€", "")));
@@ -360,7 +360,7 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
         }
     }
 
-    @Then("^user should get a minimum deposit value of (.*) euros$")
+    @Then("^Borrower should get a minimum deposit value of (.*) euros$")
     public void user_should_get_minimum_deposit_of(String minimumDeposit) {
         if ( !toSkip ) {
             int roundedMinimumDeposit = Math.round(Float.parseFloat(buildQuotationPage.getAffordabilityFunds().replaceAll("\\(", "").replaceAll("\\)", "").replace("€", "").replace(",", "").concat(".00")));
@@ -371,33 +371,33 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
         }
     }
 
-    @And("^user clicks \"Review and Submit\"$")
+    @And("^Borrower clicks \"Review and Submit\"$")
     public void user_clicks_review_and_submit() {
         borrowerHomePage = new BorrowerHomePage(webDriver);
         borrowerHomePage.clickReviewAndSubmit();
     }
 
-    @And("^user clicks \"Submit your application\"$")
+    @And("^Borrower clicks \"Submit your application\"$")
     public void user_clicks_submit_your_application() {
         borrowerHomePage.clickSubmitYourApplication();
     }
 
-    @And("^user checks \"Distance Marketing\"$")
+    @And("^Borrower checks \"Distance Marketing\"$")
     public void user_checks_DistanceMarketing() {
         borrowerHomePage.checkDistanceMarketing();
     }
 
-    @And("^user checks \"Statutory\"$")
+    @And("^Borrower checks \"Statutory\"$")
     public void user_checks_Statutory() {
         borrowerHomePage.checkStatutory();
     }
 
-    @And("^user checks \"Declaration\"$")
+    @And("^Borrower checks \"Declaration\"$")
     public void user_checks_Declaration() {
         borrowerHomePage.checkDeclaration();
     }
 
-    @And("^finally, user clicks \"Submit Application\"$")
+    @And("^finally, Borrower clicks \"Submit Application\"$")
     public void user_clicks_submit_application_final() {
         borrowerHomePage.clickFinalSubmitApplication();
     }

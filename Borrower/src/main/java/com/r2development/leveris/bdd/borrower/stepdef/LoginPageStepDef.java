@@ -40,32 +40,32 @@ public class LoginPageStepDef /*extends BorrowerStepDef*/ {
         welcomePage = new WelcomePage(webDriver);
     }
 
-    @Given("^User types his email login (.*) in Login page$")
+    @Given("^Borrower types his email login (.*) in Login page$")
     public void user_types_his_login(String email) {
         loginPage.setEmailAddress(email);
     }
 
-    @Given("^User types his pwd (.*) in Login page$")
+    @Given("^Borrower types his pwd (.*) in Login page$")
     public void user_types_his_pwd(String pwd) {
         loginPage.setPassword(pwd);
     }
 
-    @When("^user logs in$")
+    @When("^Borrower logs in$")
     public void user_logs_in() {
         loginPage.clickLogin();
     }
 
-    @When("^user forgets his password$")
+    @When("^Borrower forgets his password$")
     public void user_forgets_his_password() {
         loginPage.clickForgotPassword();
     }
 
-    @When("^user closes the login page")
+    @When("^Borrower closes the login page")
     public void user_closes_the_login_page() {
         loginPage.closeLogin();
     }
 
-    @When("^user wants to (show|hide) his password in Login page$")
+    @When("^Borrower wants to (show|hide) his password in Login page$")
     public void user_wants_to_his_password(String showOrHide) {
         loginPage = (showOrHide.equals("show") ? loginPage.clickShowPassword() : loginPage.clickHidePassword());
     }

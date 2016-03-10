@@ -27,7 +27,7 @@ public class WelcomePageStepDef /*extends BorrowerStepDef*/ {
         this.webDriver = webDriver;
     }
 
-    @Given("^user is on Abakus Borrower homepage$")
+    @Given("^Borrower is on Abakus Borrower homepage$")
     public void user_is_on_Abakus_Borrower_homepage() {
 //        welcomePage = new WelcomePage(WebDriverService.getWebDriverInstance());
         welcomePage = new WelcomePage(webDriver);
@@ -47,7 +47,7 @@ public class WelcomePageStepDef /*extends BorrowerStepDef*/ {
         buildQuotationPage = welcomePage.clickQuote();
     }
 
-    @When("^user clicks on (Register|Login|Quote) link on Welcome Page$")
+    @When("^Borrower clicks on (Register|Login|Quote) link on Welcome Page$")
     public void user_clicks_on_link(String link) {
         switch (link) {
             case "Register":

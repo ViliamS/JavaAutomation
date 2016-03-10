@@ -63,7 +63,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
 
     }
 
-    @Given("^User clicks on continue to get (Payday Loan|Unsecured Loan)$")
+    @Given("^Borrower clicks on continue to get (Payday Loan|Unsecured Loan)$")
     public void user_click_on_continue_button(String loanType) throws IOException {
         switch (loanType) {
             case "Payday Loan":
@@ -93,7 +93,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @And("^User fills in (Payday Loan|Unsecured Loan) form$")
+    @And("^Borrower fills in (Payday Loan|Unsecured Loan) form$")
 //    public void user_fills_form (String loanType, Map<String, String> rawData){
     public void user_fills_in_form ( String loanType, List<String> rawData) {
         log.info(rawData);
@@ -230,12 +230,12 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Given("^User types into Monthly installment field a (.*)$")
+    @Given("^Borrower types into Monthly installment field a (.*)$")
     public void user_types_value_into_monthly_repayment_field(String monthlyRepayment) {
 //        quoteConfigurationPage.setMonthlyInstallmentInput( monthlyRepayment );
     }
 
-    @Given("^User types into Loan amount field a (.*)$")
+    @Given("^Borrower types into Loan amount field a (.*)$")
     public void user_types_value_into_loan_amount_field( String amountToBorrow ) {
 //        quoteConfigurationPage.setLoanAmountInput( amountToBorrow );
     }
@@ -254,7 +254,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
 //        Assert.assertTrue("Monthly repayment doesn't match expected value", actualMonthlyRepayment.equalsIgnoreCase( expectedMonthlyRepaymentField ) );
     }
 
-    @When("^User walk-through (Payday Loan|Unsecured Loan) Quotation process$")
+    @When("^Borrower walk-through (Payday Loan|Unsecured Loan) Quotation process$")
     public void userWalkThroughTheQuotationProcessFillingAllMandatoryData(String loanType, List<String> rawQuotationData) throws IOException {
 
         this.loanData = new LandingPageData( rawQuotationData );
@@ -313,7 +313,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
         Assert.assertTrue("from $ per month doesn't match expected value", actualPaydayLoanAmount.equalsIgnoreCase( expectedPaydayLoanAmount ) );
     }
 
-    @Then("^User clicks on Apply Online$")
+    @Then("^Borrower clicks on Apply Online$")
     public void user_clicks_on_apply_online() throws IOException {
         Map<String, String> applyParameters = new LinkedHashMap<>();
         applyParameters.put("root:c:w:pnlMain:c:w:pnlMortgageCalc:data", "{\"loanValue\":1000,\"repaymentValue\":1016.6666666666725,\"changedParam\":\"\"}");
@@ -335,7 +335,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
         );
     }
 
-    @Then("^User is forwarded to the Registration Page$")
+    @Then("^Borrower is forwarded to the Registration Page$")
     public void gets_to_registration_page(){
 //        registerPage.isLoaded();
     }

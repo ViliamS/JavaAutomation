@@ -27,17 +27,17 @@ public class ApiYourFundingStepDef extends ApiOpoqoBorrowerStepDef {
         this.httpResponse = httpResponse;
     }
 
-    @When("^user clicks \"ADD SOURCE OF FUNDS\"$")
+    @When("^Borrower clicks \"ADD SOURCE OF FUNDS\"$")
     public void user_clicks_add_source_of_funds() {
 //        yourFundingPage.clickAddFundsSource();
     }
 
-    @When("^user clicks \"ADD THIS SOURCE OF FUNDS\"$")
+    @When("^Borrower clicks \"ADD THIS SOURCE OF FUNDS\"$")
     public void user_clicks_add_this_source_of_funds() {
 //        yourFundingPage.clickAddThisFundsSource();
     }
 
-    @When("^user clicks Funding \"NEXT\"$")
+    @When("^Borrower clicks Funding \"NEXT\"$")
     public void user_clicks_funding_next() throws IOException {
 
         String currentResponse = requestHttpPost(
@@ -64,7 +64,7 @@ public class ApiYourFundingStepDef extends ApiOpoqoBorrowerStepDef {
         httpResponse.setHttpResponse(currentResponse);
     }
 
-    @And("^user selects (Gift|Inheritance|Other) as source of funds$")
+    @And("^Borrower selects (Gift|Inheritance|Other) as source of funds$")
     public void user_selects_source_funds(String sourceFunds) {
 //        yourFundingPage.selectFundsSource(sourceFunds);
     }
@@ -72,7 +72,7 @@ public class ApiYourFundingStepDef extends ApiOpoqoBorrowerStepDef {
     @And("^this funding is applied to (borrower|coapplicant|both)$")
     public void this_funding_is_applied_to(String toWhom) {
         switch (toWhom) {
-            case "borrower":
+            case "Borrower":
 //                yourFundingPage.checkFundingAppliesToBorrower(user.getFirstName());
                 break;
             case "coapplicant":
@@ -86,37 +86,37 @@ public class ApiYourFundingStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @And("^user types Gift description: (.*)$")
+    @And("^Borrower types Gift description: (.*)$")
     public void user_types_gift_description(String description) {
 //        yourFundingPage.typeGiftDescription(description);
     }
 
-    @And("^user types Gift amount: (.*)$")
+    @And("^Borrower types Gift amount: (.*)$")
     public void user_types_gift_amount(String amount) {
 //        yourFundingPage.typeGiftAmount(amount);
     }
 
-    @And("^user types Inheritance description: (.*)$")
+    @And("^Borrower types Inheritance description: (.*)$")
     public void user_types_inheritance_description(String description) {
 //        yourFundingPage.typeInheritanceDescription(description);
     }
 
-    @And("^user types Inheritance amount: (.*)$")
+    @And("^Borrower types Inheritance amount: (.*)$")
     public void user_types_inheritance_amount(String amount) {
 //        yourFundingPage.typeInheritanceAmount(amount);
     }
 
-    @And("^user types Other Funding description: (.*)$")
+    @And("^Borrower types Other Funding description: (.*)$")
     public void user_types_other_description(String description) {
 //        yourFundingPage.typeOtherDescription(description);
     }
 
-    @And("^user types Other Funding amount: (.*)$")
+    @And("^Borrower types Other Funding amount: (.*)$")
     public void user_types_other_amount(String amount) {
 //        yourFundingPage.typeOtherAmount(amount);
     }
 
-    @And("^user verifies funding data$")
+    @And("^Borrower verifies funding data$")
     public void user_verifies_funding_data() {
     }
 }

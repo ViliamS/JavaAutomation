@@ -35,7 +35,7 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
         borrowerPersonalDetailsPage = new PersonalDetailsPage(webDriver);
     }
 
-    @When("^(borrower|coapplicant) fills in \"Personal Details\"$")
+    @When("^(Borrower) fills in \"Personal Details\"$")
 //    public void user_fills_in_borrower_personal_details(String borrowerOrCoapplicant, Map<String, String> personalDetailsDataMap) {
     public void user_fills_in_borrower_personal_details(String borrowerOrCoapplicant, List<String> personalDetailsDataMap) {
 //        workaroundCLV312(borrowerOrCoapplicant);
@@ -77,83 +77,11 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
         }
     }
 
-//    @When("^user fills in \"Borrower's personal details\"$")
-//    public void user_fills_in_borrower_personal_details() {
-//        borrowerPersonalDetailsPage
-//                .setFirstname(user.getFirstName())
-//                .setLastname("Mottot")
-//                .checkGender("Male")
-//                .setDateOfBirth("20/10/1978")
-//                .selectMaritalStatus("single")
-//                .selectNationality("French")
-//                .setResidentYears("3")
-////                .checkRequiredVisa(false)
-//                .setResidencyAddressLine1("Prague, Czech Republic")
-//                .setResidencyAddressLine2("Hlavní město Praha")
-//                .setResidencyTownCity("Prague")
-//                .setResidencyPostcodeZip("14000")
-////                .selectResidencyCountyState()
-//                .selectResidencyCountry("Czech Republic")
-//                .selectResidencyAccommodation("Rented on contract")
-//                .setResidencyRent("200")
-//                .checkLivedLast3Years(false)
-//                .setPreviousResidencyAddressLine1("Dijon, France")
-//                .setPreviousResidencyAddressLine2("Burgundy")
-//                .setPreviousResidencyTownCity("Dijon")
-//                .setPreviousResidencyPostcodeZip("21000")
-////                .selectPreviousResidencyCountry("France")
-//                .setPreviousResidencyCountry("France")
-//                .clickSave();
-//    }
-
-//    @When("^user fills in \"Coapplicant's personal details\"$")
-//    public void user_fills_in_coapplicant_personal_details() {
-//    }
-
-//    private void fillInPersonalDetails(String whichBorrower) {
-//
-//        IPersonalDetailsPage currentPersonalDetailsPage = null;
-//        switch (whichBorrower) {
-//            case "Borrower" :
-//
-//                currentPersonalDetailsPage = borrowerPersonalDetailsPage;
-//                break;
-//            case "Coapplicant" :
-//                currentPersonalDetailsPage = coapplicantPersonalDetailsPage;
-//                break;
-//        }
-//
-//        currentPersonalDetailsPage
-//                .setFirstname(user.getFirstNameCoApplicant())
-//                .setLastname("Mottot")
-//                .checkGender("Male")
-//                .setDateOfBirth("20/10/1978")
-//                .selectMaritalStatus("single")
-//                .selectNationality("French")
-//                .setResidentYears("3")
-//                .setResidencyAddressLine1("Prague, Czech Republic")
-//                .setResidencyAddressLine2("Hlavní město Praha")
-//                .setResidencyTownCity("Prague")
-//                .setResidencyPostcodeZip("14000")
-////                .selectResidencyCountyState()
-//                .selectResidencyCountry("Czech Republic")
-//                .selectResidencyAccommodation("Rented on contract")
-//                .setResidencyRent("200")
-//                .checkLivedLast3Years(false)
-//                .setPreviousResidencyAddressLine1("Dijon, France")
-//                .setPreviousResidencyAddressLine2("Burgundy")
-//                .setPreviousResidencyTownCity("Dijon")
-//                .setPreviousResidencyPostcodeZip("21000")
-////                .selectPreviousResidencyCountry("France")
-//                .setPreviousResidencyCountry("France")
-//                .clickSave();
-//    }
-
-    @Given("^(borrower) user sees his name in the Personal Details title$")
+    @Given("^(Borrower) sees his name in the Personal Details title$")
     public void borrower_coapplicant_user_sees_his_name_in_the_title(String borrowerOrCoapplicant) {
 //        workaroundCLV312(borrowerOrCoapplicant);
         switch (borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
 //                assertThat("user\'s firstname should be in the title !", borrowerPersonalDetailsPage.isTitle(user.getFirstName()), is(true));
                 borrowerPersonalDetailsPage.isTitle(user.getFirstName());
                 break;
@@ -162,11 +90,11 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
         }
     }
 
-    @Given("^(borrower|coapplicant) user types his firstname : (.*)$")
+    @Given("^(Borrower) types his firstname : (.*)$")
     public void borrower_coapplicant_user_types_his_firstname(String borrowerOrCoapplicant, String firstName) {
 //        DateTime now = DateTime.now();
         switch(borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 if (firstName.isEmpty()) {
 //                    borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setFirstname(user.getFirstName() + now.toString("yyyyDDmmHH"));
                     borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setFirstname(user.getFirstName() + System.getProperty("timestamp"));
@@ -184,10 +112,10 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
         }
     }
 
-    @Given("^(borrower|coapplicant) user types his lastname : (.*)$")
+    @Given("^(Borrower) types his lastname : (.*)$")
     public void borrower_coapplicant_user_types_his_lastname(String borrowerOrCoapplicant, String lastname) {
         switch(borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setLastname(lastname);
                 break;
 //            case "coapplicant":
@@ -202,10 +130,10 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
 //    IPersonalDetailsPage checkGenderMale();
 //    IPersonalDetailsPage checkGenderFemale();
 
-    @Given("^(borrower|coapplicant) user checks his gender : (Male|Female)$")
+    @Given("^(Borrower) checks his gender : (Male|Female)$")
     public void borrower_coapplicant_user_checks_his_gender(String borrowerOrCoapplicant, String gender) {
         switch(borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.checkGender(gender);
                 break;
 //            case "coapplicant":
@@ -216,10 +144,10 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
         }
     }
 
-    @Given("^(borrower|coapplicant) user types his date of birth : (\\d\\d/\\d\\d/\\d\\d\\d\\d)$")
+    @Given("^(Borrower) types his date of birth : (\\d\\d/\\d\\d/\\d\\d\\d\\d)$")
     public void borrower_coapplicant_user_types_his_date_of_birth(String borrowerOrCoapplicant, String dateOfBirth) {
         switch(borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setDateOfBirth(dateOfBirth);
                 break;
 //            case "coapplicant":
@@ -230,10 +158,10 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
         }
     }
 
-    @Given("^(borrower|coapplicant) user selects his marital status : (single|separated|married/civil partner\\(s\\)|divorced/dissolved civil partnership|widowed)$")
+    @Given("^(Borrower) selects his marital status : (single|separated|married/civil partner\\(s\\)|divorced/dissolved civil partnership|widowed)$")
     public void borrower_coapplicant_user_selects_his_marital_status(String borrowerOrCoapplicant, String maritalStatus) {
         switch(borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.selectMaritalStatus(maritalStatus);
                 break;
 //            case "coapplicant":
@@ -244,10 +172,10 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
         }
     }
 
-    @Given("^(borrower|coapplicant) user selects his nationality : (.*)$")
+    @Given("^(Borrower) selects his nationality : (.*)$")
     public void borrower_coapplicant_user_selects_his_nationality(String borrowerOrCoapplicant, String nationality) {
         switch(borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.selectNationality(nationality);
                 break;
 //            case "coapplicant":
@@ -258,10 +186,10 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
         }
     }
 
-    @Given("^(borrower|coapplicant) user types the number of resident years : ([\\d]+)$")
+    @Given("^(Borrower) types the number of resident years : ([\\d]+)$")
     public void borrower_coapplicant_user_types_the_number_resident_years(String borrowerOrCoapplicant, String residentYear) {
         switch(borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setResidentYears(residentYear);
                 break;
 //            case "coapplicant":
@@ -276,11 +204,11 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
 //    IPersonalDetailsPage checkRequiredVisaYes();
 //    IPersonalDetailsPage checkRequiredVisaNo();
 
-    @Given("^(borrower|coapplicant) user checks if he (is not|is) requiring a visa$")
+    @Given("^(Borrower) checks if he (is not|is) requiring a visa$")
     public void borrower_coapplicant_user_check_if_requiring_visa(String borrowerOrCoapplicant, String sRequiringVisa) {
         boolean bRequiredVisa = sRequiringVisa.equals("is");
         switch(borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.checkRequiredVisa(bRequiredVisa);
                 break;
 //            case "coapplicant":
@@ -291,10 +219,10 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
         }
     }
 
-    @Given("^(borrower|coapplicant) user types his residency address in line 1 : (.*)$")
+    @Given("^(Borrower) types his residency address in line 1 : (.*)$")
     public void borrower_coapplicant_user_types_his_residency_address_line_1(String borrowerOrCoapplicant, String residencyAddressLine1) {
         switch(borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setResidencyAddressLine1(residencyAddressLine1);
                 break;
 //            case "coapplicant":
@@ -305,10 +233,10 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
         }
     }
 
-    @Given("^(borrower|coapplicant) user types his residency address in line 2 : (.*)$")
+    @Given("^(Borrower) types his residency address in line 2 : (.*)$")
     public void borrower_coapplicant_user_types_his_residency_address_line_2(String borrowerOrCoapplicant, String residencyAddressLine2) {
         switch(borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setResidencyAddressLine2(residencyAddressLine2);
                 break;
 //            case "coapplicant":
@@ -319,10 +247,10 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
         }
     }
 
-    @Given("^(borrower|coapplicant) user types his residency town/city : (.*)$")
+    @Given("^(Borrower) types his residency town/city : (.*)$")
     public void borrower_coapplicant_user_types_his_residency_towncity(String borrowerOrCoapplicant, String residencyTownCity) {
         switch(borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setResidencyTownCity(residencyTownCity);
                 break;
 //            case "coapplicant":
@@ -333,10 +261,10 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
         }
     }
 
-    @Given("^(borrower|coapplicant) user selects his residency county/state : (.*)$")
+    @Given("^(Borrower) selects his residency county/state : (.*)$")
     public void borrower_coapplicant_user_selects_his_residency_countystate(String borrowerOrCoapplicant, String residencyCountyState) {
         switch(borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.selectResidencyCountyState(residencyCountyState);
                 break;
 //            case "coapplicant":
@@ -347,10 +275,10 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
         }
     }
 
-    @Given("^(borrower|coapplicant) user types his postcode/zip : (.*)$")
+    @Given("^(Borrower) types his postcode/zip : (.*)$")
     public void borrower_coapplicant_user_types_his_postcode_zip(String borrowerOrCoapplicant, String residencyPostcodeZip) {
         switch(borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setResidencyPostcodeZip(residencyPostcodeZip);
                 break;
 //            case "coapplicant":
@@ -361,10 +289,10 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
         }
     }
 
-    @Given("^(borrower|coapplicant) user selects his residency country : (.*)")
+    @Given("^(Borrower) selects his residency country : (.*)")
     public void borrower_coapplicant_user_selects_his_residency_country(String borrowerOrCoapplicant, String residencyCountry) {
         switch(borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.selectResidencyCountry(residencyCountry);
                 break;
 //            case "coapplicant":
@@ -375,10 +303,10 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
         }
     }
 
-    @Given("^(borrower|coapplicant) user selects his residency accommodation : (Rented on contract|Rented from family/friends|Property owner|Others)$")
+    @Given("^(Borrower) selects his residency accommodation : (Rented on contract|Rented from family/friends|Property owner|Others)$")
     public void borrower_coapplicant_user_selects_his_residency_accommodation(String borrowerOrCoapplicant, String residencyAccommodation) {
         switch(borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.selectResidencyAccommodation(residencyAccommodation);
                 break;
 //            case "coapplicant":
@@ -389,10 +317,10 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
         }
     }
 
-    @Given("^(borrower|coapplicant) user types his residency rent : (.*)$")
+    @Given("^(Borrower) types his residency rent : (.*)$")
     public void borrower_coapplicant_user_types_his_residency_rent(String borrowerOrCoapplicant, String residencyRent) {
         switch(borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrowerPersonalDetailsPage.setResidencyRent(residencyRent);
                 break;
 //            case "coapplicant":
@@ -407,11 +335,11 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
 //    IPersonalDetailsPage checkLivedLast3YearsYes();
 //    IPersonalDetailsPage checkLivedLast3YearsNo();
 
-    @Given("^(borrower|coapplicant) user checks if he (is not|is) living since 3 years$")
+    @Given("^(Borrower) checks if he (is not|is) living since 3 years$")
     public void borrower_coapplicant_user_checks_if_he_is_living_since_3_years(String borrowerOrCoapplicant, String sLivedLast3Years) {
         boolean bLivedLast3Years = sLivedLast3Years.equals("is");
         switch(borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.checkLivedLast3Years(bLivedLast3Years);
                 break;
 //            case "coapplicant":
@@ -422,10 +350,10 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
         }
     }
 
-    @Given("^(borrower|coapplicant) user types his previous residency address in line 1 : (.*)$")
+    @Given("^(Borrower) types his previous residency address in line 1 : (.*)$")
     public void borrower_coapplicant_user_types_his_previous_residency_address_line1(String borrowerOrCoapplicant, String previousResidencyAddressLine1) {
         switch(borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setPreviousResidencyAddressLine1(previousResidencyAddressLine1);
                 break;
 //            case "coapplicant":
@@ -436,10 +364,10 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
         }
     }
 
-    @Given("^(borrower|coapplicant) user types his previous residency address in line 2 : (.*)$")
+    @Given("^(Borrower) types his previous residency address in line 2 : (.*)$")
     public void borrower_coapplicant_user_types_his_previous_residency_address_line2(String borrowerOrCoapplicant, String previousResidencyAddressLine2) {
         switch(borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setPreviousResidencyAddressLine2(previousResidencyAddressLine2);
                 break;
 //            case "coapplicant":
@@ -450,10 +378,10 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
         }
     }
 
-    @Given("^(borrower|coapplicant) user types his previous residency town/city : (.*)$")
+    @Given("^(Borrower) types his previous residency town/city : (.*)$")
     public void borrower_coapplicant_user_types_his_previous_residency_towncity(String borrowerOrCoapplicant, String previousResidencyTownCity) {
         switch(borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setPreviousResidencyTownCity(previousResidencyTownCity);
                 break;
 //            case "coapplicant":
@@ -464,10 +392,10 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
         }
     }
 
-    @Given("^(borrower|coapplicant) user selects his previous residency county/state : (.*)$")
+    @Given("^(Borrower) selects his previous residency county/state : (.*)$")
     public void borrower_coapplicant_user_selects_his_previous_residency_countystate(String borrowerOrCoapplicant, String residencyCountyState) {
         switch(borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.selectResidencyCountyState(residencyCountyState);
                 break;
 //            case "coapplicant":
@@ -478,10 +406,10 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
         }
     }
 
-    @Given("^(borrower|coapplicant) user types his previous residency postcode/zip : (.*)$")
+    @Given("^(Borrower) types his previous residency postcode/zip : (.*)$")
     public void borrower_coapplicant_user_types_his_previous_residency_postcodezip(String borrowerOrCoapplicant, String previousResidencyPostcodeZip) {
         switch(borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setPreviousResidencyPostcodeZip(previousResidencyPostcodeZip);
                 break;
 //            case "coapplicant":
@@ -492,10 +420,10 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
         }
     }
 
-    @Given("^(borrower|coapplicant) user selects his previous residency country : (.*)$")
+    @Given("^(Borrower) selects his previous residency country : (.*)$")
     public void borrower_coapplicant_user_selects_his_previous_residency_country(String borrowerOrCoapplicant, String previousResidencyCountry) {
         switch(borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrowerPersonalDetailsPage.selectPreviousResidencyCountry(previousResidencyCountry);
                 break;
 //            case "coapplicant":
@@ -506,10 +434,10 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
         }
     }
 
-    @Given("^(borrower|coapplicant) user types his previous residency country : (.*)$")
+    @Given("^(Borrower) types his previous residency country : (.*)$")
     public void borrower_coapplicant_user_types_his_previous_residency_country(String borrowerOrCoapplicant, String previousResidencyCountry) {
         switch(borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrowerPersonalDetailsPage.setPreviousResidencyCountry(previousResidencyCountry);
                 break;
 //            case "coapplicant":
@@ -520,10 +448,10 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
         }
     }
 
-    @Given("^(borrower|coapplicant) user saves his personal details data$")
+    @Given("^(Borrower) saves his personal details data$")
     public void borrower_coapplicant_user_saves(String borrowerOrCoapplicant) {
         switch(borrowerOrCoapplicant) {
-            case "borrower":
+            case "Borrower":
                 borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.clickSave();
 //                formsPage = new FormsPage(ApiSupportWebDriverStepDef.getWebDriverInstance());
 //                formsPage.isLoaded();

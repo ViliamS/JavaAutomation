@@ -1,4 +1,4 @@
-@RegisterPage
+@Registration
 Feature: Verification RegistrationPage
   
   Background: 

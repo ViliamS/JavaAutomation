@@ -32,7 +32,7 @@ public class YourDependentsStepDef {
         yourDependentsPage = new YourDependentsPage(webDriver);
     }
 
-    @Given("^user fills in \"Dependent form\"$")
+    @Given("^Borrower fills in \"Dependent form\"$")
     public void user_fills_in_account(Map<String, String> accountDataMap) {
         DependentData dependentData = new DependentData(accountDataMap);
 
@@ -41,7 +41,7 @@ public class YourDependentsStepDef {
         user_clicks_save_and_close();
     }
 
-    @When("^user has(n't)? dependents$")
+    @When("^Borrower has(n't)? dependents$")
     public void user_has_dependents(String hasDependents) throws InterruptedException {
 //        workaroundCLV312(null);
 
@@ -57,31 +57,31 @@ public class YourDependentsStepDef {
         }
     }
 
-    @And("^user types the Dependent date of birth: (.*)$")
+    @And("^Borrower types the Dependent date of birth: (.*)$")
     public void user_types_dependent_date_of_birth(String dateOfBirth) {
         yourDependentsPage.typeDateOfBirth(dateOfBirth);
     }
 
-    @And("^user clicks \"ADD THIS DEPENDENT\"$")
+    @And("^Borrower clicks \"ADD THIS DEPENDENT\"$")
     public void user_clicks_add_this_dependant() {
         yourDependentsPage.clickAddThisDependent();
     }
 
-    @And("^user clicks \"Save and Close\"$")
+    @And("^Borrower clicks \"Save and Close\"$")
     public void user_clicks_save_and_close() {
         yourDependentsPage.clickSaveAndClose();
     }
 
-    @And("^user clicks \"ADD DEPENDENT\"$")
+    @And("^Borrower clicks \"ADD DEPENDENT\"$")
     public void user_clicks_add_dependent() {
         yourDependentsPage.clickAddDependent();
     }
 
-    @And("^user clicks Dependents \"NEXT\"$")
+    @And("^Borrower clicks Dependents \"NEXT\"$")
     public void user_clicks_dependents_next() {
         yourDependentsPage.clickNext();
     }
 
-    @And("^user clicks Dependents \"Done\"$")
+    @And("^Borrower clicks Dependents \"Done\"$")
     public void user_clicks_dependents_done() { yourDependentsPage.clickDone(); }
 }

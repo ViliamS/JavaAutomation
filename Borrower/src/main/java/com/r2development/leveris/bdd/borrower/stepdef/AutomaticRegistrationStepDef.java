@@ -33,12 +33,12 @@ public class AutomaticRegistrationStepDef /*extends BorrowerStepDef*/ {
         // TODO to implement
     }
 
-    @Given("^User types his applicant : (.*)$")
+    @Given("^Borrower types his applicant : (.*)$")
     public void user_types_his_applicant(String applicantId) {
         automaticRegistrationPage.typeCoapplicantId(applicantId);
     }
 
-    @Given("^User (unchecks|checks) \"Quote Complete\"$")
+    @Given("^Borrower (unchecks|checks) \"Quote Complete\"$")
     public void user_unchecks_or_checks_for_quote_complete(String checks_or_unchecks) {
         switch (checks_or_unchecks) {
             case "unchecks":
@@ -53,7 +53,7 @@ public class AutomaticRegistrationStepDef /*extends BorrowerStepDef*/ {
         }
     }
 
-    @Given("^User (unchecks|checks) \"Invite Coapplicant\"$")
+    @Given("^Borrower (unchecks|checks) \"Invite Coapplicant\"$")
     public void user_unchecks_or_checks_for_invite_coapplicant(String checks_or_unchecks) {
         switch (checks_or_unchecks) {
             case "unchecks":
@@ -68,12 +68,12 @@ public class AutomaticRegistrationStepDef /*extends BorrowerStepDef*/ {
         }
     }
 
-    @Given("^User types coapplicant's email: (.*)$")
+    @Given("^Borrower types coapplicant's email: (.*)$")
     public void user_types_coapplicant_email(String coapplicantId) {
         automaticRegistrationPage.typeCoapplicantId(coapplicantId);
     }
 
-    @When("^User clicks \"Create new user\"$")
+    @When("^Borrower clicks \"Create new user\"$")
     public void user_clicks_create_new_user() {
         automaticRegistrationPage.clickCreateNewUser();
     }

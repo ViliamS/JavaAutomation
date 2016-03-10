@@ -37,7 +37,7 @@ public class ApiMainFormsProcessesStepDef extends ApiOpoqoBorrowerStepDef {
     }
 
     // "proxy page"
-    @And("^user processes \"Forms\"$")
+    @And("^Borrower processes \"Forms\"$")
     public void user_processes_Forms() throws IOException {
 
 //        requestHttpGet(
@@ -71,11 +71,11 @@ public class ApiMainFormsProcessesStepDef extends ApiOpoqoBorrowerStepDef {
         httpResponse.setHttpResponse(formResponse);
     }
 
-    @When("^user clicks \"Dashboard\"$")
+    @When("^Borrower clicks \"Dashboard\"$")
     public void user_clicks_Dashboard() {
     }
 
-    @When("^user clicks \"Borrower Personal Details\"$")
+    @When("^Borrower clicks \"Borrower Personal Details\"$")
     public void user_clicks_Borrower_Personal_Details() {
 //        if ( StringUtils.isNotEmpty(user.getFirstNameCoApplicant()) ) {
 //        }
@@ -83,7 +83,7 @@ public class ApiMainFormsProcessesStepDef extends ApiOpoqoBorrowerStepDef {
 //        }
     }
 
-    @When("^user clicks \"Borrower Employment Income\"$")
+    @When("^Borrower clicks \"Borrower Employment Income\"$")
     public void clickBorrowerEmploymentIncome() throws InterruptedException {
 //        if ( StringUtils.isNotEmpty(user.getFirstNameCoApplicant()) ) {
 //        }
@@ -91,43 +91,43 @@ public class ApiMainFormsProcessesStepDef extends ApiOpoqoBorrowerStepDef {
 //        }
     }
 
-    @When("^user clicks \"Coapplicant Personal Details\"$")
+    @When("^Borrower clicks \"Coapplicant Personal Details\"$")
     public void clickCoapplicantPersonalDetails() {
     }
 
-    @When("^user clicks \"Coapplicant Employment Income\"$")
+    @When("^Borrower clicks \"Coapplicant Employment Income\"$")
     public void clickCoapplicantEmploymentIncome() {
     }
 
-    @When("^user clicks \"Account\"$")
+    @When("^Borrower clicks \"Account\"$")
     public void clickAccount() {
     }
 
-    @When("^user clicks \"Dependents\"$")
+    @When("^Borrower clicks \"Dependents\"$")
     public void clickDependents() {
     }
 
-    @When("^user clicks \"Financial Assets\"$")
+    @When("^Borrower clicks \"Financial Assets\"$")
     public void clickFinancialAssets() {
     }
 
-    @When("^user clicks \"Properties\"$")
+    @When("^Borrower clicks \"Properties\"$")
     public void clickProperties() {
     }
 
-    @When("^user clicks \"Financial Commitments\"$")
+    @When("^Borrower clicks \"Financial Commitments\"$")
     public void clickFinancialCommitments() {
     }
 
-    @When("^user clicks \"Funding\"$")
+    @When("^Borrower clicks \"Funding\"$")
     public void clickFunding() {
     }
 
-    @When("^user clicks \"Document Upload\"$")
+    @When("^Borrower clicks \"Document Upload\"$")
     public void clickDocumentUpload() {
     }
 
-    @When("^user clicks \"Home\"$")
+    @When("^Borrower clicks \"Home\"$")
     public void clickHome() {
     }
 

@@ -50,7 +50,7 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
         quoteLandingPage.goToBorrowerQuoteLandingPage();
     }
 
-    @Given("^User clicks on continue to get (Payday Loan|Unsecured Loan)$")
+    @Given("^Borrower clicks on continue to get (Payday Loan|Unsecured Loan)$")
     public void user_click_on_continue_button(String loanType) {
         switch (loanType) {
             case "Payday Loan":
@@ -62,18 +62,18 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
         }
     }
 
-/*    @Given("^User clicks on red continue button$")
+/*    @Given("^Borrower clicks on red continue button$")
     public void user_click_on_red_continue_button() {
         quoteQuickLoanPage = quoteLandingPage.clickContinueUnsecuredLoanRedButton();
     }
 
-    @Given("^User clicks on teal continue button$")
+    @Given("^Borrower clicks on teal continue button$")
     public void user_click_on_teal_continue_button() {
         quotePaydayLoanPage = quoteLandingPage.clickContinuePaydayLoanTealButton();
     }*/
 
 
-    @And("^User fills in (Payday Loan|Unsecured Loan) form$")
+    @And("^Borrower fills in (Payday Loan|Unsecured Loan) form$")
 //    public void user_fills_form (String loanType, Map<String, String> rawData){
     public void user_fills_in_form ( String loanType, List<String> rawData) {
 
@@ -123,7 +123,7 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
         }
     }
 
-/*    @Given("^User types into Net monthly income field a (.*)$")
+/*    @Given("^Borrower types into Net monthly income field a (.*)$")
     public void user_types_value_into_net_monthly_income_field(String netMonthlyIncome) {
         quoteQuickLoanPage.setNetMonthlyIncome( netMonthlyIncome );
     }*/
@@ -140,7 +140,7 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
         }
     }
 
-/*    @Given("^User types into Monthly expenses field a (.*)$")
+/*    @Given("^Borrower types into Monthly expenses field a (.*)$")
     public void user_types_value_into_monthly_expenses_field(String monthlyExpenses) {
         quoteQuickLoanPage.setMonthlyExpenses( monthlyExpenses );
     }*/
@@ -157,7 +157,7 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
         }
     }
 
-    /*@Given("^User types into Number of dependents field a (.*)$")
+    /*@Given("^Borrower types into Number of dependents field a (.*)$")
     public void user_types_value_into_number_of_dependents_field(String numberOfDependents) {
         quoteQuickLoanPage.setNumberOfDependents( numberOfDependents );
     }*/
@@ -174,7 +174,7 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
         }
     }
 
-/*    @Given("^User types into Amount to borrow field a (.*)$")
+/*    @Given("^Borrower types into Amount to borrow field a (.*)$")
     public void user_types_value_into_amount_to_borrow_field(String amountToBorrow) {
         quoteQuickLoanPage.setAmountToBorrow( amountToBorrow );
     }*/
@@ -191,17 +191,17 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
         }
     }
 
-/*    @Then("^User clicks on Continue button$")
+/*    @Then("^Borrower clicks on Continue button$")
     public void user_click_on_continue_button() {
         quoteConfigurationPage = quoteQuickLoanPage.clickContinue();
     }*/
 
-    @Given("^User types into Monthly instalment field a (.*)$")
+    @Given("^Borrower types into Monthly instalment field a (.*)$")
     public void user_types_value_into_monthly_repayment_field(String monthlyRepayment) {
         quoteConfigurationPage.setMonthlyInstallmentInput( monthlyRepayment );
     }
 
-    @Given("^User types into Loan amount field a (.*)$")
+    @Given("^Borrower types into Loan amount field a (.*)$")
     public void user_types_value_into_loan_amount_field( String amountToBorrow ) {
         quoteConfigurationPage.setLoanAmountInput( amountToBorrow );
     }
@@ -220,7 +220,7 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
 //        Assert.assertTrue("Monthly repayment doesn't match expected value", actualMonthlyRepayment.equalsIgnoreCase( expectedMonthlyRepaymentField ) );
     }
 
-    @When("^User walk-through (Payday Loan|Unsecured Loan) Quotation process$")
+    @When("^Borrower walk-through (Payday Loan|Unsecured Loan) Quotation process$")
     public void userWalkThroughTheQuotationProcessFillingAllMandatoryData(String loanType, List<String> rawQuotationData) {
 
         this.loanData = new LandingPageData( rawQuotationData );
@@ -271,12 +271,12 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
         Assert.assertTrue("from $ per month doesn't match expected value", actualPaydayLoanAmount.equalsIgnoreCase( expectedPaydayLoanAmount ) );
     }
 
-    @Then("^User clicks on Apply Online$")
+    @Then("^Borrower clicks on Apply Online$")
     public void user_clicks_on_apply_online() {
         registerPage = quoteConfigurationPage.clickApplyOnline();
     }
 
-    @Then("^User is forwarded to the Registration Page$")
+    @Then("^Borrower is forwarded to the Registration Page$")
     public void gets_to_registration_page(){
         registerPage.isLoaded();
     }

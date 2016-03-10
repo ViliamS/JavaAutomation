@@ -10,21 +10,21 @@
 
   Scenario: WalkThrough Payday Loan Section
 #      Given Open Leveris Quote Landing page
-      When User clicks on continue to get Payday Loan
-      Then User fills in Payday Loan form
+      When Borrower clicks on continue to get Payday Loan
+      Then Borrower fills in Payday Loan form
       | LoanPurpose        | PAYDAY    |
       | NetMonthlyIncome   | 21,000.00 |
       | MonthlyExpenses    | 1,000.00  |
       | NumberOfDependents | 1         |
       | AmountToBorrow     | 1,000.00  |
     Then Payday Loan User clicks on Continue button
-    When User clicks on Apply Online
-    Then User is forwarded to the Registration Page
+    When Borrower clicks on Apply Online
+    Then Borrower is forwarded to the Registration Page
 
   Scenario: WalkThrough Unsecured Loan Section
 #      Given Open Leveris Quote Landing page
-      When User clicks on continue to get Unsecured Loan
-      Then User fills in Unsecured Loan form
+      When Borrower clicks on continue to get Unsecured Loan
+      Then Borrower fills in Unsecured Loan form
         | LoanPurpose        | PERSONAL  |
         | NetMonthlyIncome   | 44,000.00 |
         | MonthlyExpenses    | 5,000.00  |
@@ -40,7 +40,7 @@
 
   Scenario: WalkThrough Whole Unsecured Loan Process at once
 #      Given Open Leveris Quote Landing page
-      When User walk-through Unsecured Loan Quotation process
+      When Borrower walk-through Unsecured Loan Quotation process
         | LoanPurpose        | HOMEIMPROVEMENT |
         | NetMonthlyIncome   | 4,000.00        |
         | MonthlyExpenses    | 500.00          |
@@ -48,11 +48,11 @@
         | AmountToBorrow     | 1,000.00        |
         | LoanAmount         | 1,000.00        |
         | MonthlyRepayment   | 296             |
-      Then User is forwarded to the Registration Page
+      Then Borrower is forwarded to the Registration Page
 
   Scenario: WalkThrough Whole PayDay Process at onc
 #      Given Open Leveris Quote Landing page
-      When User walk-through Payday Loan Quotation process
+      When Borrower walk-through Payday Loan Quotation process
         | LoanPurpose        | PAYDAY    |
         | NetMonthlyIncome   | 2,500.00  |
         | MonthlyExpenses    | 1,500.00  |
@@ -60,4 +60,4 @@
         | AmountToBorrow     | 525       |
         | LoanAmount         | 10,000.00 |
         | MonthlyRepayment   | 296       |
-      Then User is forwarded to the Registration Page
+      Then Borrower is forwarded to the Registration Page

@@ -66,11 +66,11 @@ public class ApiDocumentUploadStepDef extends ApiOpoqoBorrowerStepDef {
     }
 
 
-    @When("^user clicks on \"documents list\"$")
+    @When("^Borrower clicks on \"documents list\"$")
     public void user_clicks_on_documents_list() {
     }
 
-    @When("^user clicks on \"DOWNLOAD CERT\"$")
+    @When("^Borrower clicks on \"DOWNLOAD CERT\"$")
     public void user_clicks_on_download_cert() {
     }
 
@@ -78,7 +78,7 @@ public class ApiDocumentUploadStepDef extends ApiOpoqoBorrowerStepDef {
     public void user_uploads_document(String userType, String filename, String documentType) {
     }
 
-    @When("^Upload all documents$")
+    @When("^Borrower uploads all documents$")
     public void upload_all_documents() throws IOException {
         Pattern p = Pattern.compile("main_c_form_form_root_c_w_pnlNew_c_w_rptDocs_c_rows_(\\d{1,2})_item_pnlDocs_c_w_lblUploadName_l\" data-height=\"\\d{1,3}\"><span>([0-9A-Za-z -]*)</span>");
         Matcher m = p.matcher(httpResponse.getHttpResponse());

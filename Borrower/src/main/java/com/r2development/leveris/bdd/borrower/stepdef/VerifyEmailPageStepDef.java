@@ -31,7 +31,7 @@ public class VerifyEmailPageStepDef /*extends BorrowerStepDef*/ {
 
     }
 
-    @Then("^user goes to Login page$")
+    @Then("^Borrower goes to Login page$")
     public void user_goes_to_Login_page() {
 //        verifyEmailPage = new VerifyEmailPage(WebDriverService.getWebDriverInstance());
         verifyEmailPage = new VerifyEmailPage(webdriver);

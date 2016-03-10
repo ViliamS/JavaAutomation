@@ -14,7 +14,7 @@ public class ApiVerifyEmailPageStepDef extends ApiOpoqoBorrowerStepDef {
 
     @Inject IUser user;
 
-    @Then("^user goes to Login page$")
+    @Then("^Borrower goes to Login page$")
     public void user_goes_to_Login_page() {
 //        verifyEmailPage = new VerifyEmailPage(SupportWebDriverStepDef.getWebDriverInstance());
 //        verifyEmailPage.isLoaded(user.getEmail());

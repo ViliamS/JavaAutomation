@@ -38,7 +38,7 @@ public class ApiCrmStepDef extends ApiOpoqoBorrowerStepDef {
         this.user = user;
     }
 
-    @Given("^user goes to CRM$")
+    @Given("^Borrower goes to CRM$")
     public void user_goes_tp_CRM() {
 
         WebDriver firefoxWebDriver = new FirefoxDriver();

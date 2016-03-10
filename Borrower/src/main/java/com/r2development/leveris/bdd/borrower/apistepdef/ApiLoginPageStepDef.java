@@ -155,15 +155,15 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
         );
     }
 
-    @When("^user forgets his password$")
+    @When("^Borrower forgets his password$")
     public void user_forgets_his_password() {
     }
 
-    @When("^user closes the login page")
+    @When("^Borrower closes the login page")
     public void user_closes_the_login_page() {
     }
 
-    @When("^user wants to (show|hide) his password in Login page$")
+    @When("^Borrower wants to (show|hide) his password in Login page$")
     public void user_wants_to_his_password(String showOrHide) {
     }
 
@@ -171,10 +171,10 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
     public void home_borrower_page_is_loaded() {
     }
 
-    @And("^Borrower user logs in as his account is activated$")
+    @And("^Borrower logs in as his account is activated$")
     public void user_logs_in_as_his_account_is_activated() throws Exception {
 
-        activateAccount(user.getEmail());
+        activateAccount("db", user.getEmail());
 
         Assert.assertNotEquals("Should be different HttpClientContext object", localContext, initContext());
         HttpContext newLocalContext = newHttpClientContext(System.getProperty("domain.borrower"), "/stable-borrower");
@@ -229,15 +229,30 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
     }
 
     // TODO ACMESQL or use multi git jenkins plugin then to be able to load
-    private void activateAccount(String emailAsUserLoginId) throws Exception {
-        //noinspection ConstantConditions
-        File file = new File(ApiLoginPageStepDef.class.getClassLoader().getResource("tnsnames.ora").toURI());
-        assertThat("File should exist", file.exists(), Is.is(true));
-        System.setProperty("oracle.net.tns_admin", file.getParentFile().getAbsolutePath());
+    private void activateAccount(String activationMode, String emailAsUserLoginId) throws Exception {
 
-        if (StringUtils.isEmpty(System.getProperty("database")))
-            System.setProperty("database", "jdbc:oracle:thin:@DV2000.LEVERIS");
+        switch (activationMode) {
+            case "db":
+                //noinspection ConstantConditions
+                File file = new File(ApiLoginPageStepDef.class.getClassLoader().getResource("tnsnames.ora").toURI());
+                assertThat("File should exist", file.exists(), Is.is(true));
+                System.setProperty("oracle.net.tns_admin", file.getParentFile().getAbsolutePath());
 
-        Orasql.executeSqlUpdateQuery(System.getProperty("database"), "stable_pxmchuser", "heslo", "update mch_user set isemailaddressvalid = 'true', isphonenumbervalid = 'true', isregistrationcomplete = 'true' where userloginid = '" + user.getEmail() + "'");
+                if (StringUtils.isEmpty(System.getProperty("database")))
+                    System.setProperty("database", "jdbc:oracle:thin:@DV2000.LEVERIS");
+
+                Orasql.executeSqlUpdateQuery(System.getProperty("database"), "stable_pxmchuser", "heslo", "update mch_user set isemailaddressvalid = 'true', isphonenumbervalid = 'true', isregistrationcomplete = 'true' where userloginid = '" + user.getEmail() + "'");
+
+                break;
+            case "mdg":
+
+
+                break;
+
+            default:
+                log.error("Huston ! we have a problem. We don't know which activationMode we should use.");
+        }
+
     }
+
 }

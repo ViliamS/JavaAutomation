@@ -37,31 +37,31 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
         this.httpResponse = httpResponse;
     }
 
-    @Given("^user fills in \"(Current|Savings) Account\"$")
+    @Given("^Borrower fills in (Current account|Savings account)$")
 //    public void user_fills_in_account(Map<String, String> accountDataMap) throws IOException {
     public void user_fills_in_account(String currentOrSaving, List<String> accountDataMap) throws IOException {
         AccountData accountData = new AccountData(accountDataMap);
-        user_clicks_an_account_type(accountData.get("fundsSource"));
+        user_clicks_an_account_type(accountData.get("accountType"));
 //        yourAccountsPage.getTitle();
-        if (!org.apache.commons.lang3.StringUtils.isEmpty(accountData.get("statementDate")))
+        if (!StringUtils.isEmpty(accountData.get("statementDate")))
             user_types_the_statement_date(currentOrSaving, accountData.get("statementDate"));
+        user_types_his_account_provider(currentOrSaving, accountData.get("accountProvider"));
         user_types_his_account_name(currentOrSaving, accountData.get("accountName"));
         user_types_his_sort_code_1(currentOrSaving, accountData.get("sortCode1"));
         user_types_his_sort_code_2(currentOrSaving, accountData.get("sortCode2"));
         user_types_his_sort_code_3(currentOrSaving, accountData.get("sortCode3"));
-//        user_types_his_account_provider(currentOrSaving, accountData.get("accountProvider"));
 //        user_types_his_iban(currentOrSaving, accountData.get("IBAN"));
         user_types_his_account_number(currentOrSaving, accountData.get("accountNumber"));
         user_types_his_account_balance(currentOrSaving, accountData.get("accountBalance"));
         if ( !org.apache.commons.lang3.StringUtils.isEmpty(accountData.get("overdraftLimit")))
             user_types_his_overdraft_limit(currentOrSaving, accountData.get("overdraftLimit"));
         user_selects_his_source_of_saving(currentOrSaving, accountData.get("sourceOfSaving"));
-        if ( !org.apache.commons.lang3.StringUtils.isEmpty(accountData.get("regularMonthlySaving")))
+        if ( !StringUtils.isEmpty(accountData.get("regularMonthlySaving")))
             user_types_his_regular_monthly_saving(currentOrSaving, accountData.get("regularMonthlySaving"));
         user_clicks_add_this_account();
     }
 
-    @When("^user clicks \"ADD ACCOUNT\"$")
+    @When("^Borrower clicks \"ADD ACCOUNT\"$")
     public void user_clicks_add_account() throws IOException {
 
         Document yourAccountDoc = Jsoup.parse(httpResponse.getHttpResponse());
@@ -87,7 +87,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
         httpResponse.setHttpResponse(menuAccountResponse);
     }
 
-    @When("^user clicks \"ADD THIS ACCOUNT\"$")
+    @When("^Borrower clicks \"ADD THIS ACCOUNT\"$")
     public void user_clicks_add_this_account() throws IOException {
 
         Document formToFillDoc = Jsoup.parse(httpResponse.getHttpResponse());
@@ -144,7 +144,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                     },
                     new LinkedHashMap<String, String>() {
                         {
-                            put("stepToken", "1");
+                            put("stepToken", "1"); // TODO retrieve the stepToken
                             put("root:c:w:btnHiddenSubmit:submit", "1");
                         }
                     },
@@ -189,7 +189,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @When("^user clicks Accounts \"NEXT\"$")
+    @When("^Borrower clicks Accounts \"NEXT\"$")
     public void user_clicks_next() throws IOException {
 //        yourAccountsPage.clickNext();
         requestHttpGet(
@@ -205,7 +205,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
         );
     }
 
-    @When("^user clicks Accounts \"Done\"$")
+    @When("^Borrower clicks Accounts \"Done\"$")
     public void user_clicks_done() throws IOException {
 
         Document yourAccountDoc = Jsoup.parse(httpResponse.getHttpResponse()); // ???? BUG CLV response from abakus
@@ -233,12 +233,12 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
         );
     }
 
-    @And("^user clicks \"ADD ACCOUNT MANUALLY\"$")
+    @And("^Borrower clicks \"ADD ACCOUNT MANUALLY\"$")
     public void user_clicks_add_account_manually() {
 //        yourAccountsPage.clickAddAccountManually();
     }
 
-    @And("^user clicks \"(Current account|Savings account|Account scraping)\"$")
+    @And("^Borrower clicks (Current account|Savings account|Account scraping)$")
     public void user_clicks_an_account_type(String accountType) throws IOException {
 
         Document menuAccountDoc = Jsoup.parse(httpResponse.getHttpResponse());
@@ -253,7 +253,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
 
         String formToFillResponse = StringUtils.EMPTY;
         switch (accountType) {
-            case "Current Account":
+            case "Current account":
 //                yourAccountsPage.clickCurrentAccount();
                 if ( countAccount == 0 ) {
                     formToFillResponse = requestHttpPost(
@@ -371,133 +371,133 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
 
     }
 
-    @When("^user types the (Current|Savings) statement date: (.*)")
+    @When("^Borrower types the (Current account|Savings account) statement date: (.*)")
     public void user_types_the_statement_date(String currentOrSaving, String statementDate) {
         switch (currentOrSaving) {
-            case "Current":
+            case "Current account":
 //                yourAccountsPage.typeCurrentStatementDate(statementDate);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlStatementDate:c:w:txtStatementDate:tb", statementDate);
                 break;
-            case "Savings":
+            case "Savings account":
 //                yourAccountsPage.typeSavingStatementDate(statementDate);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlStatementDate:c:w:txtStatementDate:tb", statementDate);
                 break;
         }
     }
 
-    @Deprecated @And("^user types his (Current|Savings) account provider: (.*)$")
+    @Deprecated @And("^Borrower types his (Current account|Savings account) account provider: (.*)$")
     public void user_types_his_account_provider(String currentOrSavings, String accountProvider) {
         switch (currentOrSavings) {
-            case "Current":
+            case "Current account":
 //                yourAccountsPage.typeCurrentAccountProvider(accountProvider);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccountProvider:c:w:txtAccountProvider:tb", accountProvider);
                 break;
-            case "Savings":
+            case "Savings account":
 //                yourAccountsPage.typeSavingAccountProvider(accountProvider);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccountProvider:c:w:txtAccountProvider:tb", accountProvider);
                 break;
         }
     }
 
-    @Deprecated @And("^user types his (Current|Savings) IBAN: (.*)")
+    @Deprecated @And("^Borrower types his (Current account|Savings account) IBAN: (.*)")
     public void user_types_his_iban(String currentOrSavings, String iban) {
         switch (currentOrSavings) {
-            case "Current":
+            case "Current account":
 //                yourAccountsPage.typeCurrentIban(iban);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlLastFourDigits:c:w:txtIban:tb", iban);
                 break;
-            case "Savings":
+            case "Savings account":
 //                yourAccountsPage.typeSavingIban(iban);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlLastFourDigits:c:w:txtIban:tb", iban);
                 break;
         }
     }
 
-    @And("^user types his (Current|Savings) account name: (.*)")
+    @And("^Borrower types his (Current account|Savings account) account name: (.*)")
     public void user_types_his_account_name(String currentOrSavings, String accountName) {
         switch (currentOrSavings) {
-            case "Current":
+            case "Current account":
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccNumb:c:w:txtAccName:tb", accountName);
                 break;
-            case "Savings":
+            case "Savings account":
                 accountParameters.put("", accountName);
                 break;
         }
     }
 
-    @And("^user types his (Current|Savings) sort code: ([0-9]{2})")
+    @And("^Borrower types his (Current account|Savings account) sort code: ([0-9]{2})")
     public void user_types_his_sort_code_1(String currentOrSavings, String sortCode1) {
         switch (currentOrSavings) {
-            case "Current":
+            case "Current account":
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccNumb:c:w:txtSortCode1:tb", sortCode1);
                 break;
-            case "Savings":
+            case "Savings account":
                 accountParameters.put("", sortCode1);
         }
     }
 
-    @And("^user types his (Current|Savings) sort code 2: ([0-9]{2})")
+    @And("^Borrower types his (Current account|Savings account) sort code 2: ([0-9]{2})")
     public void user_types_his_sort_code_2(String currentOrSavings, String sortCode2) {
         switch (currentOrSavings) {
-            case "Current":
+            case "Current account":
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccNumb:c:w:txtSortCode2:tb", sortCode2);
                 break;
-            case "Savings":
+            case "Savings account":
                 accountParameters.put("", sortCode2);
         }
     }
 
-    @And("^user types his (Current|Savings) sort code 3: ([0-9]{2})")
+    @And("^Borrower types his (Current account|Savings account) sort code 3: ([0-9]{2})")
     public void user_types_his_sort_code_3(String currentOrSavings, String sortCode3) {
         switch (currentOrSavings) {
-            case "Current":
+            case "Current account":
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccNumb:c:w:txtSortCode3:tb", sortCode3);
                 break;
-            case "Savings":
+            case "Savings account":
                 accountParameters.put("", sortCode3);
         }
     }
 
-    @And("^user types his (Current|Savings) account number: (.*)")
+    @And("^Borrower types his (Current account|Savings account) account number: (.*)")
     public void user_types_his_account_number(String currentOrSavings, String accountNumber) {
         switch (currentOrSavings) {
-            case "Current":
+            case "Current account":
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccNumb:c:w:txtAccnumber:tb", accountNumber);
                 break;
-            case "Savings":
+            case "Savings account":
                 accountParameters.put("", accountNumber);
         }
     }
 
-    @And("^user types his (Current|Savings) account balance: (.*)$")
+    @And("^Borrower types his (Current account|Savings account) account balance: (.*)$")
     public void user_types_his_account_balance(String currentOrSavings, String accountBalance) {
         switch (currentOrSavings) {
-            case "Current":
+            case "Current account":
 //                yourAccountsPage.typeCurrentAccountBalance(accountBalance);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccountBalance:c:w:crbAccountBalance:tb", accountBalance);
                 break;
-            case "Savings":
+            case "Savings account":
 //                yourAccountsPage.typeSavingAccountBalance(accountBalance);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccountBalance:c:w:crbAccountBalance:tb", accountBalance);
                 break;
         }
     }
 
-    @And("^user types his (Current|Savings) overdraft limit: (.*)$")
+    @And("^Borrower types his (Current account|Savings account) overdraft limit: (.*)$")
     public void user_types_his_overdraft_limit(String currentOrSavings, String overdraftLimit) {
         switch (currentOrSavings) {
-            case "Current":
+            case "Current account":
 //                yourAccountsPage.typeCurrentOverdraftLimit(overdraftLimit);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlOverDraft:c:w:crbOverdraft:tb", overdraftLimit);
                 break;
-            case "Savings":
+            case "Savings account":
 //                yourAccountsPage.typeSavingOverdraftLimit(overdraftLimit);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlOverDraft:c:w:crbOverdraft:tb", overdraftLimit);
                 break;
         }
     }
 
-    @And("^user selects his (Current|Savings) source of savings: (Gift|Inheritance|Accident Claim|Redundancy|Income from Regular Savings|Other)")
+    @And("^Borrower selects his (Current account|Savings account) source of savings: (Gift|Inheritance|Accident Claim|Redundancy|Income from Regular Savings|Other)")
     public void user_selects_his_source_of_saving(String currentOrSavings, String sourceOfSavings) {
 
 /*        <option selected="selected" value="">Choose One</option>
@@ -531,25 +531,25 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
         }
 
         switch (currentOrSavings) {
-            case "Current":
+            case "Current account":
 //                yourAccountsPage.selectCurrentSavingSource(sourceOfSavings);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlSourceOfSavings:c:w:cmbSourceOfSavings:combobox", abbreviationSavingSource);
                 break;
-            case "Savings":
+            case "Savings account":
 //                yourAccountsPage.selectSavingSourceSavings(sourceOfSavings);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlSourceOfSavings:c:w:cmbSourceOfSavings:combobox", abbreviationSavingSource);
                 break;
         }
     }
 
-    @And("^user types his (Current|Savings) regular monthly saving: (.*)$")
+    @And("^Borrower types his (Current account|Savings account) regular monthly saving: (.*)$")
     public void user_types_his_regular_monthly_saving(String currentOrSavings, String regularMonthlySaving) {
         switch (currentOrSavings) {
-            case "Current":
+            case "Current account":
 //                yourAccountsPage.typeCurrentRegularMonthlySavings(regularMonthlySaving);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlRegularMonthlySavings:c:w:crbRegularMonthlySavings:tb", regularMonthlySaving);
                 break;
-            case "Savings":
+            case "Savings account":
 //                yourAccountsPage.typeSavingRegularMonthlySavings(regularMonthlySaving);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlRegularMonthlySavings:c:w:crbRegularMonthlySavings:tb", regularMonthlySaving);
                 break;
@@ -557,7 +557,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
     }
 
 
-    @When("^user closes \"scraping\" form$")
+    @When("^Borrower closes \"scraping\" form$")
     public void user_closes_scraping_form() throws IOException {
         Document yourAccountDoc = Jsoup.parse(httpResponse.getHttpResponse());
         TextNode textNodeYourAccount = null;
@@ -601,25 +601,25 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
 
 
 
-/*    @And("^user types his Current account provider: (.*)$")
+/*    @And("^Borrower types his Current account provider: (.*)$")
     public void user_types_current_account_provider(String accountProvider) {
 //        yourAccountsPage.typeCurrentAccountProvider(accountProvider);
         accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccountProvider:c:w:txtAccountProvider:tb", accountProvider);
     }
 
-    @And("^user types his Current IBAN: (.*)")
+    @And("^Borrower types his Current IBAN: (.*)")
     public void user_types_current_iban(String iban) {
 //        yourAccountsPage.typeCurrentIban(iban);
         accountParameters.put("root:c:w:pnlAddSource:c:w:pnlLastFourDigits:c:w:txtIban:tb", iban);
     }
 
-    @And("^user types his Current account balance: (.*)$")
+    @And("^Borrower types his Current account balance: (.*)$")
     public void user_types_current_account_balance(String accountBalance) {
 //        yourAccountsPage.typeCurrentAccountBalance(accountBalance);
         accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccountBalance:c:w:crbAccountBalance:tb", accountBalance);
     }
 
-    @And("^user types his Current savings source : (.*)$")
+    @And("^Borrower types his Current savings source : (.*)$")
     public void user_types_current_savings_source(String savingSource) {
 //        yourAccountsPage.typeCurrentSavingSource(savingSource);
         String abbreviationSavingSource = StringUtils.EMPTY;
@@ -632,41 +632,41 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
         accountParameters.put("root:c:w:pnlAddSource:c:w:pnlSourceOfSavings:c:w:cmbSourceOfSavings:combobox", abbreviationSavingSource);
     }
 
-    @And("^user types his Current overdraft limit: (.*)$")
+    @And("^Borrower types his Current overdraft limit: (.*)$")
     public void user_types_his_current_overdraft_limit(String overdraftLimit) {
 //        yourAccountsPage.typeCurrentOverdraftLimit(overdraftLimit);
         accountParameters.put("root:c:w:pnlAddSource:c:w:pnlOverDraft:c:w:crbOverdraft:tb", "");
     }
 
-    @And("^user types his Savings account provider: (.*)$")
+    @And("^Borrower types his Savings account provider: (.*)$")
     public void user_types_his_savings_account_provider(String accountProvider) {
 //        yourAccountsPage.typeSavingAccountProvider(accountProvider);
 //        accountParameters.put("root:c:w:pnlAddSource:c:w:pnlLastFourDigits:c:w:txtIban:tb", "IE92BOFI90001710027952");
     }
 
-    @And("^user types his Savings IBAN: (.*)")
+    @And("^Borrower types his Savings IBAN: (.*)")
     public void user_type_savings_iban(String iban) {
 //        yourAccountsPage.typeSavingIban(iban);
     }
 
-    @And("^user types his Savings account balance: (.*)$")
+    @And("^Borrower types his Savings account balance: (.*)$")
     public void user_types_his_savings_account_balance(String accountBalance) {
 //        yourAccountsPage.typeSavingAccountBalance(accountBalance);
 //        accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccountBalance:c:w:crbAccountBalance:tb", "20000");
     }
 
-    @And("^user selects (Gift|Inheritance|Accident Claim|Redundancy|Income from Regular Savings|Other) as Source of savings")
+    @And("^Borrower selects (Gift|Inheritance|Accident Claim|Redundancy|Income from Regular Savings|Other) as Source of savings")
     public void user_selects_his_source_of_savings(String sourceSavings) {
 //        yourAccountsPage.selectSavingSourceSavings(sourceSavings);
     }
 
-    @And("^user types his Savings regular monthly: (.*)$")
+    @And("^Borrower types his Savings regular monthly: (.*)$")
     public void user_types_his_Savings_regular_monthly(String regularMonthly) {
 //        yourAccountsPage.typeSavingRegularMonthlySavings(regularMonthly);
 
     }
 
-    @And("^user verifies account data$")
+    @And("^Borrower verifies account data$")
     public void user_verifies_account_data() {
 //        yourAccountsPage.validateAccounts();
     }*/
