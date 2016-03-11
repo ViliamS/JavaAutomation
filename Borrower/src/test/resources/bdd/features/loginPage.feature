@@ -2,8 +2,8 @@
 @login
 Feature: Verification LoginPage
 
-  Background:
-    Given user goes to Registration page
+#  Background:
+#    Given user goes to Registration page
 
   Scenario: Pass registration and Login page
     Given Borrower processes the automatic registration
