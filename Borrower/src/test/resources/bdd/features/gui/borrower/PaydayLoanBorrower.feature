@@ -1,4 +1,5 @@
 
+@HP_Payday
 Feature: Payday Loan
 
   Background:
