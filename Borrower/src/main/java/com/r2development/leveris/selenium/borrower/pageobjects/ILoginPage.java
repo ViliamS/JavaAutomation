@@ -6,14 +6,16 @@ import java.util.Map;
 public interface ILoginPage {
     String CLOSE_LOGIN_XPATH = "//a[contains(., 'X')]";
     String LOGIN_TITLE_XPATH = "//div[contains(@wicketpath, 'Title') and contains(@class, 'sc-label') and contains(., 'Login')]";
-    String EMAIL_ADDRESS_XPATH = "//label[contains(.,'Email address')]/following-sibling::input[contains(@wicketpath, 'EmailAddress')]";
-    String PASSWORD_XPATH = "//label[contains(.,'Password')]/following-sibling::input[contains(@wicketpath, 'Password')]";
+    String EMAIL_ADDRESS_XPATH = "//input[@name='USERNAME']";
+    String PASSWORD_XPATH = "//input[@name='PWD']";
     String SHOW_PASSWORD_XPATH = "//label[contains(.,'Password')]/following-sibling::span[contains(@wicketpath, 'Password_showhide')]";
     String HIDE_PASSWORD_XPATH = "";
     String FORGOT_PASSWORD_XPATH = "//a[contains(., 'Forgot your password?')]";
-    String LOGIN_BUTTON_XPATH = "//a[contains(@wicketpath, 'Login_submit')]";
+    String LOGIN_BUTTON_XPATH = "//button[@type='submit']/span[text()='Log in']";
+    String EXCEPTION_DIALOG = "//div[contains(@class,'alert-danger')]/span";
 
-    String ERROR_BOX_ROOT_XPATH = "//div[contains(@id, 'feedbackBox') and contains(@class, 'feedback-form')]"; // .//li
+
+    String ERROR_BOX_ROOT_XPATH = "//div[contains(@id, 'feedbackBox') and contains(@class, 'feedback-form')]";
     String ERROR_FORMS_XPATH = "//label[contains(@class, 'message-inline-error') and @role='alert']";
     String ERROR_EMAIL_ADDRESS_XPATH = "";
     String ERROR_PASSWORD_XPATH = "";

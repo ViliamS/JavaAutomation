@@ -2,6 +2,7 @@ package com.r2development.leveris.selenium.borrower.pageobjects;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.Borrower;
 import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
@@ -292,7 +293,7 @@ public class DocumentUploadSection extends Borrower implements IDocumentUploadSe
             }
 //            if ( uploadName.contains(user.getFirstName()) )
 //            toReturn.put("Borrower", uploadName.replace(user.getFirstName() + " - ", ""), i+1);
-            toReturn.put("Borrower", uploadName.replace(user.getFirstName() + " - ", ""), i+1);
+            toReturn.put("Borrower", uploadName, i+1);
         }
 
         return toReturn;

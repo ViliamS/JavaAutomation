@@ -25,6 +25,7 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
     IQuoteConfigurationPage quoteConfigurationPage;
     IRegisterPage registerPage;
     LandingPageData loanData;
+    IAutomaticRegistrationPage automaticRegistrationPage;
 
 //    public LandingPageStepDef() {
 //        quoteLandingPage = new QuoteLandingPage(WebDriverService.getWebDriverInstance());
@@ -37,6 +38,7 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
 //        super(webDriver);
 //        this.webDriver = webDriver;
         quoteLandingPage = new QuoteLandingPage(webDriver);
+        automaticRegistrationPage = new AutomaticRegistrationPage(webDriver);
     }
 
 //    @Given("^I am running Chrome WebDriver$")
@@ -50,7 +52,17 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
         quoteLandingPage.goToBorrowerQuoteLandingPage();
     }
 
-    @Given("^User clicks on continue to get (Payday Loan|Unsecured Loan)$")
+    @Given("^Open Leveris Automatic Registration Page$")
+    public void open_leveris_automatic_registration_page(){
+        automaticRegistrationPage.goToAutomaticRegistrationPage();
+    }
+
+    @When("^Use Automatic registration page to create a new Borrower and login$")
+    public void use_automatic_registration_page_to_create_new_user(){
+        automaticRegistrationPage.clickCreateNewUser();
+    }
+
+    @Given("^Borrower clicks on continue to get (Payday Loan|Unsecured Loan)$")
     public void user_click_on_continue_button(String loanType) {
         switch (loanType) {
             case "Payday Loan":
@@ -62,22 +74,24 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
         }
     }
 
-/*    @Given("^User clicks on red continue button$")
+/*    @Given("^Borrower clicks on red continue button$")
     public void user_click_on_red_continue_button() {
         quoteQuickLoanPage = quoteLandingPage.clickContinueUnsecuredLoanRedButton();
     }
 
-    @Given("^User clicks on teal continue button$")
+    @Given("^Borrower clicks on teal continue button$")
     public void user_click_on_teal_continue_button() {
         quotePaydayLoanPage = quoteLandingPage.clickContinuePaydayLoanTealButton();
     }*/
 
 
-    @And("^User fills in (Payday Loan|Unsecured Loan) form$")
+    @And("^Borrower fills in (Payday Loan|Unsecured Loan) form$")
 //    public void user_fills_form (String loanType, Map<String, String> rawData){
     public void user_fills_in_form ( String loanType, List<String> rawData) {
 
         this.loanData = new LandingPageData( rawData );
+
+        Assert.assertTrue(loanType + " doesn't equals to " + loanData.getLoanType(), loanType.equalsIgnoreCase(loanData.getLoanType()));
 
         if ( !StringUtils.isEmpty(loanData.getLoanPurpose()) )
             user_selects_loan_purpose( loanType, loanData.getLoanPurpose() );
@@ -88,12 +102,12 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
 
     }
 
-    @Given("^(Payday Loan) User selects Loan purpose (PAYDAY)$")
+    @Given("^(Payday Loan) Borrower selects Loan purpose (PAYDAY)$")
     public void user_selects_pay_loan_purpose(String loanType, String loanPurpose) {
         loan_purpose( loanType ,loanPurpose );
     }
 
-    @Given("^(Unsecured Loan) User selects Loan purpose (PERSONAL|CAR|HOLIDAY|STUDENT|HOMEIMPROVEMENT)$")
+    @Given("^(Unsecured Loan) Borrower selects Loan purpose (PERSONAL|CAR|HOLIDAY|STUDENT|HOMEIMPROVEMENT)$")
     public void user_selects_loan_purpose(String loanType, String loanPurpose) {
         loan_purpose( loanType, loanPurpose );
     }
@@ -111,7 +125,7 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
     }
 
 
-    @Given("^(Payday Loan|Unsecured Loan) User types into Net monthly income field a (.*)$")
+    @Given("^(Payday Loan|Unsecured Loan) Borrower types into Net monthly income field a (.*)$")
     public void user_types_value_into_net_monthly_income_field(String switchCase, String netMonthlyIncome) {
         switch (switchCase) {
             case "Payday Loan":
@@ -123,12 +137,12 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
         }
     }
 
-/*    @Given("^User types into Net monthly income field a (.*)$")
+/*    @Given("^Borrower types into Net monthly income field a (.*)$")
     public void user_types_value_into_net_monthly_income_field(String netMonthlyIncome) {
         quoteQuickLoanPage.setNetMonthlyIncome( netMonthlyIncome );
     }*/
 
-    @Given("^(Payday Loan|Usecured Loan) User types into Monthly expenses field a (.*)$")
+    @Given("^(Payday Loan|Usecured Loan) Borrower types into Monthly expenses field a (.*)$")
     public void user_types_value_into_monthly_expenses_field(String switchCase, String monthlyExpenses) {
         switch (switchCase) {
             case "Payday Loan":
@@ -140,12 +154,12 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
         }
     }
 
-/*    @Given("^User types into Monthly expenses field a (.*)$")
+/*    @Given("^Borrower types into Monthly expenses field a (.*)$")
     public void user_types_value_into_monthly_expenses_field(String monthlyExpenses) {
         quoteQuickLoanPage.setMonthlyExpenses( monthlyExpenses );
     }*/
 
-    @Given("^(Payday Loan|Usecured Loan) User types into Number of dependents field a (.*)$")
+    @Given("^(Payday Loan|Usecured Loan) Borrower types into Number of dependents field a (.*)$")
     public void user_types_value_into_number_of_dependents_field(String switchCase, String numberOfDependents) {
         switch (switchCase) {
             case "Payday Loan":
@@ -157,12 +171,12 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
         }
     }
 
-    /*@Given("^User types into Number of dependents field a (.*)$")
+    /*@Given("^Borrower types into Number of dependents field a (.*)$")
     public void user_types_value_into_number_of_dependents_field(String numberOfDependents) {
         quoteQuickLoanPage.setNumberOfDependents( numberOfDependents );
     }*/
 
-    @Given("^(Payday Loan|Usecured Loan) User types into Amount to borrow field a (.*)$")
+    @Given("^(Payday Loan|Usecured Loan) Borrower types into Amount to borrow field a (.*)$")
     public void user_types_value_into_amount_to_borrow_field(String switchCase, String amountToBorrow) {
         switch (switchCase) {
             case "Payday Loan":
@@ -174,12 +188,12 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
         }
     }
 
-/*    @Given("^User types into Amount to borrow field a (.*)$")
+/*    @Given("^Borrower types into Amount to borrow field a (.*)$")
     public void user_types_value_into_amount_to_borrow_field(String amountToBorrow) {
         quoteQuickLoanPage.setAmountToBorrow( amountToBorrow );
     }*/
 
-    @Then("^(Payday Loan|Unsecured Loan) User clicks on Continue button$")
+    @Then("^(Payday Loan|Unsecured Loan) Borrower clicks on Continue button$")
     public void user_clicks_on_continue_button(String switchCase) {
         switch (switchCase) {
             case "Payday Loan":
@@ -191,17 +205,17 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
         }
     }
 
-/*    @Then("^User clicks on Continue button$")
+/*    @Then("^Borrower clicks on Continue button$")
     public void user_click_on_continue_button() {
         quoteConfigurationPage = quoteQuickLoanPage.clickContinue();
     }*/
 
-    @Given("^User types into Monthly instalment field a (.*)$")
+    @Given("^Borrower types into Monthly instalment field a (.*)$")
     public void user_types_value_into_monthly_repayment_field(String monthlyRepayment) {
         quoteConfigurationPage.setMonthlyInstallmentInput( monthlyRepayment );
     }
 
-    @Given("^User types into Loan amount field a (.*)$")
+    @Given("^Borrower types into Loan amount field a (.*)$")
     public void user_types_value_into_loan_amount_field( String amountToBorrow ) {
         quoteConfigurationPage.setLoanAmountInput( amountToBorrow );
     }
@@ -220,7 +234,7 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
 //        Assert.assertTrue("Monthly repayment doesn't match expected value", actualMonthlyRepayment.equalsIgnoreCase( expectedMonthlyRepaymentField ) );
     }
 
-    @When("^User walk-through (Payday Loan|Unsecured Loan) Quotation process$")
+    @When("^Borrower walk-through (Payday Loan|Unsecured Loan) Quotation process$")
     public void userWalkThroughTheQuotationProcessFillingAllMandatoryData(String loanType, List<String> rawQuotationData) {
 
         this.loanData = new LandingPageData( rawQuotationData );
@@ -271,12 +285,12 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
         Assert.assertTrue("from $ per month doesn't match expected value", actualPaydayLoanAmount.equalsIgnoreCase( expectedPaydayLoanAmount ) );
     }
 
-    @Then("^User clicks on Apply Online$")
+    @Then("^Borrower clicks on Apply Online$")
     public void user_clicks_on_apply_online() {
         registerPage = quoteConfigurationPage.clickApplyOnline();
     }
 
-    @Then("^User is forwarded to the Registration Page$")
+    @Then("^Borrower is forwarded to the Registration Page$")
     public void gets_to_registration_page(){
         registerPage.isLoaded();
     }

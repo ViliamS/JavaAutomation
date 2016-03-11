@@ -49,23 +49,23 @@ public class DocumentUploadStepDef /*extends BorrowerStepDef*/ implements CLV312
         documentUploadPage = new DocumentUploadPage(webDriver);
     }
 
-    @When("^user clicks on \"documents list\"$")
+    @When("^Borrower clicks on \"documents list\"$")
     public void user_clicks_on_documents_list() {
         documentUploadPage.clickDocumentsList();
     }
 
-    @When("^user clicks on \"DOWNLOAD CERT\"$")
+    @When("^Borrower clicks on \"DOWNLOAD CERT\"$")
     public void user_clicks_on_download_cert() {
         documentUploadPage.clickDownloadCert();
     }
 
-    @When("^(Borrower|Coapplicant|Borrower and Coapplicant) user upload(?:s) the file (.*) as (.*) document$")
+    @When("^(Borrower) user upload(?:s) the file (.*) as (.*) document$")
     public void user_uploads_document(String userType, String filename, String documentType) {
         documentUploadPage.uploadDocument(user, userType, filename, documentType); // TODO to review : not nice, but temporary solution to go forward .
 //        documentUploadPage.uploadDocument(userType, filename, documentType);
     }
 
-    @When("^Upload all documents$")
+    @When("^Borrower uploads all documents$")
     public void upload_all_documents() throws InterruptedException {
 //        workaroundCLV312(null);
 //        documentUploadPage = new DocumentUploadPage(WebDriverService.getWebDriverInstance(), user);

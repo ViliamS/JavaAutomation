@@ -89,9 +89,13 @@ public class LoginPageStepDef /*extends BorrowerStepDef*/ {
     public void user_logs_in_as_his_account_is_activated() throws Exception {
         loginPage = welcomePage.clickSignIn();
         activateAccount(user.getEmail());
-        log.info("--------------------------------- \n Email : " + user.getEmail() + "\n ---------------------------------");
+        log.info("\n --------------------------------------------------------------------------------------------------- \n" +
+                " | \n ---> Email : " + user.getEmail() + " <--- \n" +
+                " | \n --------------------------------------------------------------------------------------------------- \n");
         user_types_his_login(user.getEmail());
-        log.info("--------------------------------- \n Pwd : " + user.getPwd() + "\n ---------------------------------");
+        log.info("\n --------------------------------- \n" +
+                " | \n ---> Pwd : " + user.getPwd() + " <--- \n" +
+                " | \n --------------------------------- \n");
         user_types_his_pwd(user.getPwd());
         user_logs_in();
     }
@@ -106,6 +110,11 @@ public class LoginPageStepDef /*extends BorrowerStepDef*/ {
         if (StringUtils.isEmpty(System.getProperty("database")))
             System.setProperty("database", "jdbc:oracle:thin:@DV2000.LEVERIS");
 
+//        Orasql.displayResult(System.getProperty("database"), "stable_pxmchuser", "heslo", "select * from mch_user where userloginid = '" + user.getEmail() + "'");
+
         Orasql.executeSqlUpdateQuery(System.getProperty("database"), "stable_pxmchuser", "heslo", "update mch_user set isemailaddressvalid = 'true', isphonenumbervalid = 'true', isregistrationcomplete = 'true' where userloginid = '" + user.getEmail() + "'");
+
+//        Orasql.displayResult(System.getProperty("database"), "stable_pxmchuser", "heslo", "select * from mch_user where userloginid = '" + user.getEmail() + "'");
+
     }
 }

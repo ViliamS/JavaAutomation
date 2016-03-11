@@ -19,6 +19,8 @@ public class LandingPageData extends DataModel {
         return getData();
     }
 
+    public String getLoanType(){ return data.get("LoanType"); }
+
     public String getUpToAmount(){ return data.get("UpToAmount"); }
 
     public String  getFromAmountPerMonth() { return data.get("FromAmountPerMonth"); }

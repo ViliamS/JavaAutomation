@@ -9,9 +9,9 @@ public interface IYourAccountsPage {
     String getDescription();
 
     IYourAccountsPage selectAccountType(String accountType);
-//    IYourAccountsPage clickCurrentAccount();
-//    IYourAccountsPage clickSavingsAccount();
-//    IYourAccountsPage clickAccountScraping();
+    IYourAccountsPage clickCurrentAccount();
+    IYourAccountsPage clickSavingsAccount();
+    IYourAccountsPage clickAccountScraping();
 
     IYourAccountsPage clickAddAccount();
     IYourAccountsPage clickAddThisAccount();
@@ -28,14 +28,14 @@ public interface IYourAccountsPage {
     IYourAccountsPage editAccount(int index);
     Map<Integer, YourAccount> getAccountsOf(String accountType);
     Map<Integer, YourAccount> getAllAccounts();
-
+    @Deprecated
+    IYourAccountsPage typeAccountProvider(String accountProvider);
     IYourAccountsPage typeCurrentStatementDate(String statementDate);
     IYourAccountsPage typeCurrentAccountName(String accountName);
     IYourAccountsPage typeCurrentSortCode1(String sortCode1);
     IYourAccountsPage typeCurrentSortCode2(String sortCode2);
     IYourAccountsPage typeCurrentSortCode3(String sortCode3);
     IYourAccountsPage typeCurrentAccountNumber(String accountNumber);
-    @Deprecated
     IYourAccountsPage typeCurrentAccountProvider(String accountProvider);
     IYourAccountsPage typeCurrentIban(String iban);
     IYourAccountsPage typeCurrentAccountBalance(String accountBalance);
@@ -49,7 +49,6 @@ public interface IYourAccountsPage {
     IYourAccountsPage typeSavingsSortCode2(String sortCode2);
     IYourAccountsPage typeSavingsSortCode3(String sortCode3);
     IYourAccountsPage typeSavingsAccountNumber(String accountNumber);
-    @Deprecated
     IYourAccountsPage typeSavingAccountProvider(String accountProvider);
     IYourAccountsPage typeSavingIban(String iban);
     IYourAccountsPage typeSavingAccountBalance(String accountBalance);

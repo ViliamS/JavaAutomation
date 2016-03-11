@@ -44,17 +44,23 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
         return this;
     }
 
-//    @Override
-//    public IYourAccountsPage clickSavingsAccount() {
-//        yourAccountsSection.clickSavingsAccount();
-//        return this;
-//    }
-//
-//    @Override
-//    public IYourAccountsPage clickAccountScraping() {
-//        yourAccountsSection.clickAccountScraping();
-//        return this;
-//    }
+    @Override
+    public IYourAccountsPage clickCurrentAccount() {
+        yourAccountsSection.clickCurrentAccount();
+        return this;
+    }
+
+    @Override
+    public IYourAccountsPage clickSavingsAccount() {
+        yourAccountsSection.clickSavingsAccount();
+        return this;
+    }
+
+    @Override
+    public IYourAccountsPage clickAccountScraping() {
+        yourAccountsSection.clickAccountScraping();
+        return this;
+    }
 
     @Override
     public IYourAccountsPage clickAddAccount() {
@@ -151,6 +157,12 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
     @Override
     public Map<Integer, YourAccount> getAllAccounts() {
         return yourAccountsSection.getAllAccounts();
+    }
+
+    @Override
+    public IYourAccountsPage typeAccountProvider(String accountProvider){
+        yourAccountsSection.typeAccountProvider(accountProvider);
+        return this;
     }
 
     @Override

@@ -66,8 +66,15 @@ public class AutomaticRegistrationPage extends Borrower implements IHeaderSectio
 
     @Override
     // TODO to check which page we move to
-    public void clickCreateNewUser() {
-        automaticRegistrationSection.clickCreateNewUser();
+    public IAutomaticRegistrationPage clickCreateNewUser() {
+        automaticRegistrationSection.clickCreateNewUserAndLogin();
+        return this;
+    }
+
+    @Override
+    public IAutomaticRegistrationPage goToAutomaticRegistrationPage(){
+        get(System.getProperty("autoregistration"));
+        return this;
     }
 
     @Override

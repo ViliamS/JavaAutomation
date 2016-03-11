@@ -89,8 +89,14 @@ public class AutomaticRegistrationSection extends Borrower implements IAutomatic
     }
 
     @Override
-    public void clickCreateNewUser() {
+    public IAutomaticRegistrationSection clickCreateNewUserAndLogin() {
+        loadingCheck();
         isVisible(LINK_CREATE_NEW_USER_XPATH, 5);
         clickElement(LINK_CREATE_NEW_USER_XPATH);
+        loadingCheck();
+        isVisible(OPOQUO_LOGIN_BUTTON_XPATH, 5);
+        clickElement(OPOQUO_LOGIN_BUTTON_XPATH);
+        loadingCheck();
+        return this;
     }
 }

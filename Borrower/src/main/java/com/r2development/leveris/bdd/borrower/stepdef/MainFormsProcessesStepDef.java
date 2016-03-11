@@ -37,13 +37,13 @@ public class MainFormsProcessesStepDef /*extends BorrowerStepDef*/ implements CL
     }
 
     // "proxy page"
-    @And("^user processes \"Forms\"$")
+    @And("^Borrower processes \"Forms\"$")
     public void user_processes_Forms() {
         borrowerHomePage.clickInfoUpload();
         currentPage = (IFormsMenu) borrowerPersonalDetailsPage;
     }
 
-//    @When("^user clicks \"Dashboard\"$")
+//    @When("^Borrower clicks \"Dashboard\"$")
 //    public void user_clicks_Dashboard() {
 //        formsPage.clickDashboard();
 //    }
@@ -53,59 +53,59 @@ public class MainFormsProcessesStepDef /*extends BorrowerStepDef*/ implements CL
         borrowerHomePage.clickInfoUpload();
     }
 
-    @When("^user clicks \"Borrower Personal Details\"$")
+    @When("^Borrower clicks \"Borrower Personal Details\"$")
     public void user_clicks_Borrower_Personal_Details() {
         workaroundCLV312("borrower");
         currentPage.clickSingleBorrowerPersonalDetails();
         currentPage = (IFormsMenu) borrowerPersonalDetailsPage;
     }
 
-    @When("^user clicks \"Borrower Employment Income\"$")
+    @When("^Borrower clicks \"Borrower Employment Income\"$")
     public void clickBorrowerEmploymentIncome() throws InterruptedException {
         // TODO to redesign as Borrower_Personal_Details
         currentPage.clickBorrowerEmploymentIncome();
         currentPage = (IFormsMenu) borrowerEmploymentIncomesPage;
     }
 
-    @When("^user clicks \"Coapplicant Personal Details\"$")
+    @When("^Borrower clicks \"Coapplicant Personal Details\"$")
     public void clickCoapplicantPersonalDetails() {
     }
 
-    @When("^user clicks \"Coapplicant Employment Income\"$")
+    @When("^Borrower clicks \"Coapplicant Employment Income\"$")
     public void clickCoapplicantEmploymentIncome() {
     }
 
-    @When("^user clicks \"Account\"$")
+    @When("^Borrower clicks \"Account\"$")
     public void clickAccount() {
         currentPage.clickAccount();
         currentPage = (IFormsMenu) yourAccountsPage;
     }
 
-    @When("^user clicks \"Dependents\"$")
+    @When("^Borrower clicks \"Dependents\"$")
     public void clickDependents() {
         currentPage.clickDependents();
         currentPage = (IFormsMenu) yourDependentsPage;
     }
 
-    @When("^user clicks \"Financial Assets\"$")
+    @When("^Borrower clicks \"Financial Assets\"$")
     public void clickFinancialAssets() {
         currentPage.clickFinancialAssets();
         currentPage = (IFormsMenu) yourDependentsPage;
     }
 
-    @When("^user clicks \"Financial Commitments\"$")
+    @When("^Borrower clicks \"Financial Commitments\"$")
     public void clickFinancialCommitments() {
         currentPage.clickFinancialCommitments();
         currentPage = (IFormsMenu) yourFinancialCommitmentsPage;
     }
 
-    @When("^user clicks \"Document Upload\"$")
+    @When("^Borrower clicks \"Document Upload\"$")
     public void clickDocumentUpload() {
         currentPage.clickDocumentUpload();
         currentPage = (IFormsMenu) documentUploadPage;
     }
 
-    @When("^user clicks \"Home\"$")
+    @When("^Borrower clicks \"Home\"$")
     public void clickHome() {
         currentPage.clickHome();
         currentPage = (IFormsMenu) borrowerHomePage;

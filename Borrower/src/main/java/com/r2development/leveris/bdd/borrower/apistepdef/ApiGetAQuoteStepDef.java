@@ -49,7 +49,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
         this.user = user;
     }
 
-    @Given("^user goes to Borrower homepage$")
+    @Given("^Borrower goes to Borrower homepage$")
     public void user_goes_to_borrower_home_page() throws IOException {
 
         assertNotEquals("Should be different HttpClientContext object", localContext, initContext());
@@ -70,7 +70,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
         httpResponse.setHttpResponse(response);
     }
 
-    @Given("^user clicks the Quote link$")
+    @Given("^Borrower clicks the Quote link$")
     public void user_clicks_quote_link() throws IOException {
 
         String response = requestHttpPost(
@@ -95,14 +95,14 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
 
     }
 
-    @Given("^user creates a quote$")
+    @Given("^Borrower creates a quote$")
     public void user_creates_a_quote() throws IOException {
         user_goes_to_borrower_home_page();
 //        user_clicks_quote_link();
 //        user_clicks_the_get_quote_now_button();
     }
 
-    @Given("^user processes \"Get a Quote\" \\(format1\\)$")
+    @Given("^Borrower processes \"Get a Quote\" \\(format1\\)$")
     public void user_processes_get_quote(List<QuoteData> quoteDataList, String... test) throws IOException {
         assertEquals("System is expecting only one QuoteData occurrence", quoteDataList.size(), 1);
         user_wants_to_get_a_quote_now();
@@ -111,7 +111,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
         user_processes_3step3_to_get_a_quote();
     }
 
-    @Given("^user processes \"Get a Quote\" \\(format2\\)$")
+    @Given("^Borrower processes \"Get a Quote\" \\(format2\\)$")
 //    public void user_processes_get_quote(Map<String, String> quoteDataMap) throws IOException {
     public void user_processes_get_quote(List<String> quoteDataMap) throws IOException {
         user_wants_to_get_a_quote_now();
@@ -121,7 +121,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
         user_processes_3step3_to_get_a_quote();
     }
 
-    @And("^user wants to get a quote now$")
+    @And("^Borrower wants to get a quote now$")
     public void user_wants_to_get_a_quote_now() throws IOException {
 
         String getStartedResponse = requestHttpGet(
@@ -214,12 +214,12 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
         user_clicks_get_my_quote();
     }
 
-    @And("^user processes 2nd step of 3 to get a quote$")
+    @And("^Borrower processes 2nd step of 3 to get a quote$")
     public void user_processes_2step3_to_get_a_quote() throws IOException {
         user_clicks_configure_loan();
     }
 
-    @And("^user clicks \"CONFIGURE LOAN\"$")
+    @And("^Borrower clicks \"CONFIGURE LOAN\"$")
     public void user_clicks_configure_loan() throws IOException {
         requestHttpPost(
                 httpClient,
@@ -242,12 +242,12 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
         );
     }
 
-    @And("^user processes 3rd step of 3 to get a quote$")
+    @And("^Borrower processes 3rd step of 3 to get a quote$")
     public void user_processes_3step3_to_get_a_quote() throws IOException {
         user_clicks_apply_now();
     }
 
-    @And("^user clicks \"APPLY NOW\"$")
+    @And("^Borrower clicks \"APPLY NOW\"$")
     public void user_clicks_apply_now() throws IOException {
         requestHttpPost(
                 httpClient,
@@ -272,7 +272,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
         );
     }
 
-    @Given("^user clicks the Get Quote Now button$")
+    @Given("^Borrower clicks the Get Quote Now button$")
     public void user_clicks_the_get_quote_now_button() throws IOException {
 
 //        String currentResponse = requestHttpPost(
@@ -297,7 +297,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
 //        httpResponse.setHttpResponse(currentResponse);
     }
 
-    @And("^user selects (a single borrower|two borrowers) as number of borrowers")
+    @And("^Borrower selects (a single borrower|two borrowers) as number of borrowers")
     public void user_selects_number_of_borrowers(String nbBorrowers) throws IOException {
 
         String numberOfBorrowers = ( nbBorrowers.equals("a single borrower") ? "1" : "2" );
@@ -393,7 +393,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
 
     }
 
-    @And("^user selects (first-time buyer\\(s\\)|mover\\(s\\)) as mortgage type$")
+    @And("^Borrower selects (first-time buyer\\(s\\)|mover\\(s\\)) as mortgage type$")
     public void user_selects_mortgage_type(String mortgageType) throws IOException {
 
         String mortgageTypeValue = ( mortgageType.equals("first-time buyer(s)") ? "FTB" : "MOV" );
@@ -548,7 +548,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
 
     }
 
-    @And("^user types (.*) as age$")
+    @And("^Borrower types (.*) as age$")
     public void user_types_his_age(String age) throws IOException {
 
         quoteData.setBorrowerAge(age);
@@ -665,7 +665,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @And("^user types (.*) as partner\'s age")
+    @And("^Borrower types (.*) as partner\'s age")
     public void user_types_partner_age(String age) throws IOException {
 
         if ( quoteData.getBorrowerNumber().equals("2")) {
@@ -782,7 +782,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @And("^user selects (single|separated|married/civil partner\\(s\\)|divorced/dissolved civil partnership|widowed) as marital status$")
+    @And("^Borrower selects (single|separated|married/civil partner\\(s\\)|divorced/dissolved civil partnership|widowed) as marital status$")
     public void user_selects_his_marital_status(String maritalStatus) throws IOException {
 
         String maritalStatusValue = "";
@@ -861,7 +861,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
         );
     }
 
-    @And("^user types (.*) as total of dependents$")
+    @And("^Borrower types (.*) as total of dependents$")
     public void user_types_his_total_of_dependents(String totalDependents) throws IOException {
 
         if ( StringUtils.isEmpty(totalDependents) )
@@ -1019,7 +1019,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
         );
     }
 
-    @And("^user selects (an employee|self employed|a civil servant) as income type$")
+    @And("^Borrower selects (an employee|self employed|a civil servant) as income type$")
     public void user_selects_his_income_type(String incomeType) throws IOException {
 
         String incomeTypeValue = "";
@@ -1244,7 +1244,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
         );
     }
 
-    @And("^user types (.*) as income amount$")
+    @And("^Borrower types (.*) as income amount$")
     public void user_types_his_income_amount(String incomeAmount) throws IOException {
 
         quoteData.setBorrowerIncomeAmount(incomeAmount);
@@ -1417,7 +1417,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
         );
     }
 
-    @And("^user selects (an employee|a civil servant|self employed) as partner\'s income type$")
+    @And("^Borrower selects (an employee|a civil servant|self employed) as partner\'s income type$")
     public void user_selects_partner_income_type(String incomeType) throws IOException {
 
         if ( quoteData.getBorrowerNumber().equals("2") ) {
@@ -1581,7 +1581,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @And("^user types (.*) as partner\'s income amount$")
+    @And("^Borrower types (.*) as partner\'s income amount$")
     public void user_types_partner_income_amount(String incomeAmount) throws IOException {
 
 //        if ( quoteData.getBorrowerNumber().equals("2") && quoteData.getPartnerIncomeType().equals("not in paid work just now")) {
@@ -1684,7 +1684,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @And("^user types (.*) as monthly credit commitments$")
+    @And("^Borrower types (.*) as monthly credit commitments$")
     public void user_types_monthly_credit_commitments(String monthlyCreditCommitments) throws IOException {
 
         quoteData.setMonthlyCreditCommitments(monthlyCreditCommitments);
@@ -1736,7 +1736,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
         );
     }
 
-    @When("^user clicks \"GET MY QUOTE\"$")
+    @When("^Borrower clicks \"GET MY QUOTE\"$")
     public void user_clicks_get_my_quote() throws IOException {
 
         quoteParameters.put("stepToken", "1");
@@ -1759,7 +1759,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
         httpResponse.setHttpResponse(currentResponse);
     }
 
-    @And("^user is(\\s*|n't) eligible to borrow at this time$")
+    @And("^Borrower is(\\s*|n't) eligible to borrow at this time$")
     public void user_is_eligible_to_borrow_at_this_time(String isEligible) throws IOException {
 
         Document isEligibleDoc = Jsoup.parse(httpResponse.getHttpResponse());
@@ -1770,12 +1770,12 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
         toSkip = (!StringUtils.isEmpty(isEligibleText) && isEligibleText.equals("Sorry, you're not eligible to borrow at this time"));
     }
 
-    @Then("^user could buy a home up to the value of (.*) euros, should pay monthly (.*) euros and should get a minimum deposit value of (.*) euros, for scenario (.*)$")
+    @Then("^Borrower could buy a home up to the value of (.*) euros, should pay monthly (.*) euros and should get a minimum deposit value of (.*) euros, for scenario (.*)$")
     public void user_gets(String maxLoanAmount, String monthlyPayment, String minimumDeposit, String testcase) throws IOException {
         user_gets(maxLoanAmount, monthlyPayment, minimumDeposit, "", "", testcase);
     }
 
-    @Then("^user could buy a home up to the value of (.*) euros, should pay monthly (.*) euros and should get a minimum deposit value of (.*) euros, need to pay Government stamp duty of (.*) and a maximum price of (.*), for scenario (.*)$")
+    @Then("^Borrower could buy a home up to the value of (.*) euros, should pay monthly (.*) euros and should get a minimum deposit value of (.*) euros, need to pay Government stamp duty of (.*) and a maximum price of (.*), for scenario (.*)$")
     public void user_gets(String maxLoanAmount, String monthlyPayment, String minimumDeposit, String stampDuty, String maxHousePrice, String testcase) throws IOException {
 
         if ( toSkip )
@@ -1834,7 +1834,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
     }
 
 
-    @Then("^user could buy a home up to the value of (.*) euros$")
+    @Then("^Borrower could buy a home up to the value of (.*) euros$")
     public void user_could_build_a_home_up_to_value(String maxLoanAmount) {
         if ( !toSkip ) {
             assertThat("Expected max loan amount is incorrect",
@@ -1844,7 +1844,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Then("^user should pay monthly (.*) euros$")
+    @Then("^Borrower should pay monthly (.*) euros$")
     public void user_should_pay_monthly(String monthlyPayment) {
         if ( !toSkip ) {
             assertThat("Expected monthly payment is incorrect",
@@ -1854,7 +1854,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Then("^user should get a minimum deposit value of (.*) euros$")
+    @Then("^Borrower should get a minimum deposit value of (.*) euros$")
     public void user_should_get_minimum_deposit_of(String minimumDeposit) {
         if ( !toSkip ) {
             assertThat("Expected minimum  deposit is incorrect",
@@ -1966,7 +1966,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
         );
     }
 
-    @And("^user clicks \"Review and Submit\"$")
+    @And("^Borrower clicks \"Review and Submit\"$")
     public void user_clicks_review_and_submit() throws IOException {
 
         // TODO to check application status
@@ -1992,7 +1992,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
         // TODO to check application status
     }
 
-    @And("^user clicks \"Submit your application\"$")
+    @And("^Borrower clicks \"Submit your application\"$")
     public void user_clicks_submit_your_application() throws IOException {
 
 
@@ -2020,7 +2020,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
         // TODO to parse the response to validate the final page
     }
 
-    @And("^user checks \"Distance Marketing\"$")
+    @And("^Borrower checks \"Distance Marketing\"$")
     public void user_checks_DistanceMarketing() throws IOException {
         requestHttpPost(
                 httpClient,
@@ -2045,12 +2045,12 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
         );
     }
 
-    @And("^user checks \"Statutory\"$")
+    @And("^Borrower checks \"Statutory\"$")
     public void user_checks_Statutory() {
 //        borrowerHomePage.checkStatutory();
     }
 
-    @And("^user checks \"Declaration\"$")
+    @And("^Borrower checks \"Declaration\"$")
     public void user_checks_Declaration() {
 //        borrowerHomePage.checkDeclaration();
     }

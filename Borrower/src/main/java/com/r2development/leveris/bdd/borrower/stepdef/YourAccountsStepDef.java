@@ -43,6 +43,8 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
 
         borrower_clicks_an_account_type(userType, accountType);
 
+        borrower_types_his_account_provider(userType, accountType, accountData.get("accountProvider"));
+
         if (!StringUtils.isEmpty(accountData.get("statementDate")))
             borrower_types_the_statement_date(userType, accountType, accountData.get("statementDate"));
 
@@ -101,21 +103,7 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
 
     @And("^(Borrower) clicks (Current account|Savings account|Account scraping)$")
     public void borrower_clicks_an_account_type(String userType, String accountType) {
-
         yourAccountsPage.selectAccountType(accountType);
-
-
-//        switch (accountType) {
-//            case "Current account":
-//                break;
-//            case "Savings account":
-//                yourAccountsPage.clickSavingsAccount();
-//                break;
-//            case "Account scraping":
-//                yourAccountsPage.clickAccountScraping();
-//                break;
-//            default:
-//        }
     }
 
     @When("^(Borrower) types the (Current|Savings) statement date: (.*)")
@@ -191,7 +179,7 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
         }
     }
 
-    @Deprecated @And("^(Borrower) types his (Current account|Savings account) provider: (.*)$")
+    @And("^(Borrower) types his (Current account|Savings account) provider: (.*)$")
     public void borrower_types_his_account_provider(String userType, String currentOrSavings, String accountProvider) {
         switch (currentOrSavings) {
             case "Current account":

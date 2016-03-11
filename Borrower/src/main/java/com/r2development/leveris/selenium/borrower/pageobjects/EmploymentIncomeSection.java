@@ -9,6 +9,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class EmploymentIncomeSection extends Borrower implements IEmploymentIncomeSection {
 
     private static final Log log = LogFactory.getLog(EmploymentIncomeSection.class.getName());
@@ -188,12 +191,9 @@ public class EmploymentIncomeSection extends Borrower implements IEmploymentInco
 
     @Override
     public IEmploymentIncomeSection clickCategory(String category) {
-
         loadingCheck();
-
         //TODO : The overlay window should be detected instead of these
         if(!isVisible(EMPLOYMENT_INCOMES_DIALOG_ADD_PAYE_XPATH, 0) && !isVisible(EMPLOYMENT_INCOMES_ADD_PAYE_XPATH, 0) ){
-
             if(isVisible(ADD_XPATH, 0)){
                 clickElement(ADD_XPATH);
                 loadingCheck();
@@ -517,6 +517,30 @@ public class EmploymentIncomeSection extends Borrower implements IEmploymentInco
         return this;
     }
 
+    private Map<String, String> formExceptionDetails(){
+        Map<String, String> formExceptionDetails = new LinkedHashMap<>();
+        formExceptionDetails.put(
+                "FormName",
+                "\n Employment and income saving problem as save button is still present \n" +
+                        " Extracting exception text from the form \n"
+        );
+        formExceptionDetails.put(
+                "GetExceptionResult1",
+                "\n --------------------------------------------------------------\n" +
+                        " | Not being able to save the form @!wtf!@                         | \n" +
+                        " | it is due to : '"
+        );
+        formExceptionDetails.put(
+                "GetExceptionResult2",
+                "' is displayed on page | \n" +
+                        " -------------------------------------------------------------- \n"
+        );
+        formExceptionDetails.put(
+                "FormAction",
+                "Failed clickSaveAndClose"
+        );
+        return formExceptionDetails;
+    }
 
     @Override
     public IEmploymentIncomeSection clickSaveAndClose() {
@@ -525,8 +549,7 @@ public class EmploymentIncomeSection extends Borrower implements IEmploymentInco
         isNotVisible(EMPLOYMENT_INCOMES_FEEDBACK_DIALOG_XPATH + ERROR, false, 0);
         clickElementViaJavascript(SAVE_AND_CLOSE_XPATH);
         loadingCheck();
-        isNotVisible(EMPLOYMENT_INCOMES_DIALOG_XPATH, true, 0);
-        isVisible(ADD_XPATH, true, 0);
+        formSubmitPostSync(SAVE_AND_CLOSE_XPATH, formExceptionDetails());
         return this;
     }
 
@@ -542,16 +565,9 @@ public class EmploymentIncomeSection extends Borrower implements IEmploymentInco
     @Override
     public IEmploymentIncomeSection clickAdd() {
         loadingCheck();
-        isVisible(ADD_XPATH, true, 0);
-//        clickElementViaJavascript(ADD_XPATH);
-        try {
-            isVisible(EMPLOYMENT_INCOMES_DIALOG_XPATH, true, 1);
-        } catch(TimeoutException te) {
-            isVisible(ADD_XPATH, true, 1);
+        if(isVisible(ADD_XPATH, 0) && !isVisible(EMPLOYMENT_INCOMES_DIALOG_XPATH, 0))
             clickElementViaJavascript(ADD_XPATH, EMPLOYMENT_INCOMES_DIALOG_XPATH);
-            loadingCheck();
-        }
-//        isVisible(EMPLOYMENT_INCOMES_DIALOG_XPATH, true, 10);
+        loadingCheck();
         return this;
     }
 
