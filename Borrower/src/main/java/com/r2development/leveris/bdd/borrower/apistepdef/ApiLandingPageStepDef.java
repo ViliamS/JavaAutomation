@@ -1,7 +1,9 @@
 package com.r2development.leveris.bdd.borrower.apistepdef;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.LandingPageData;
+import com.r2development.leveris.di.IHttpResponse;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -15,7 +17,10 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import static com.r2development.leveris.utils.HttpUtils.CONSUME_QUIETLY;
 import static com.r2development.leveris.utils.HttpUtils.requestHttpGet;
 import static com.r2development.leveris.utils.HttpUtils.requestHttpPost;
 
@@ -26,6 +31,9 @@ import static com.r2development.leveris.utils.HttpUtils.requestHttpPost;
 public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiLandingPageStepDef.class.getName());
+
+    @Inject
+    IHttpResponse httpResponse;
 
 //    IQuoteLandingPage quoteLandingPage;
 //    IQuotePaydayLoanPage quotePaydayLoanPage;
@@ -93,9 +101,44 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
+    @And("^Borrower clicks \"Quote\" task$")
+    public void borrower_clicks_quote_task() throws IOException {
+
+        Pattern pHomeDashboard = Pattern.compile("\\{\"workItemId\"\\:\"(.*)\"\\}");
+        Matcher mHomeDashboard = pHomeDashboard.matcher(httpResponse.getHttpResponse());
+
+        String workItemId = null;
+        while (mHomeDashboard.find()) {
+            workItemId = mHomeDashboard.group(1);
+        }
+        String finalWorkItemId = workItemId;
+
+        requestHttpPost(
+            httpClient,
+            "http://dv2app.opoqodev.com/stable-borrower/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnTasksHidden:submit::IBehaviorListener:0:",
+            new LinkedHashMap<String, String>() {
+                {
+                    put("Accept", "text/xml");
+                    put("Content-Type", "application/x-www-form-urlencoded");
+                }
+            },
+            new LinkedHashMap<String, String>() {
+                {
+                    put("stepToken", "1");
+                    put("root:c:w:txtWorkItemViewTaskId:tb", finalWorkItemId);
+                    put("root:c:w:btnTasksHidden:submit", "1");
+                }
+            },
+            localContext,
+            CONSUME_QUIETLY
+        );
+//        wicket:interface=:1:main:c:form:form:root:c:w:btnTasksHidden:submit::IBehaviorListener:0:
+//        root:c:w:btnTasksHidden:submit
+    }
+
     @And("^Borrower fills in (Payday Loan|Unsecured Loan) form$")
 //    public void user_fills_form (String loanType, Map<String, String> rawData){
-    public void user_fills_in_form ( String loanType, List<String> rawData) {
+    public void user_fills_in_form ( String loanType, Map<String, String> rawData) {
         log.info(rawData);
         this.loanData = new LandingPageData( rawData );
 
@@ -104,6 +147,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
         user_types_value_into_monthly_expenses_field( loanType, loanData.getMonthlyExpenses() );
         user_types_value_into_number_of_dependents_field( loanType, loanData.getNumberOfDependents() );
         user_types_value_into_amount_to_borrow_field( loanType, loanData.getLoanAmount() );
+//        user_clicks_on_continue_button(loanType);
     }
 
     @Given("^(Payday Loan) User selects Loan purpose (PAYDAY)$")
@@ -223,6 +267,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
                         localContext,
                         false
                 );
+                httpResponse.setHttpResponse(form1Response);
                 break;
             case "Unsecured Loan":
 //                quoteConfigurationPage = quoteQuickLoanPage.clickContinue();
@@ -322,7 +367,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
 
         String applyResponse = requestHttpPost(
                 httpClient,
-                "http://dv2app.opoqodev.com/stable-borrower/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnApplyOnline:submit::IBehaviorListener:0:-1",
+                "http://dv2app.opoqodev.com/stable-borrower/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnApplyOnline:submit::IBehaviorListener:0:",
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -333,6 +378,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
                 localContext,
                 false
         );
+        httpResponse.setHttpResponse(applyResponse);
     }
 
     @Then("^Borrower is forwarded to the Registration Page$")

@@ -7,8 +7,6 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
@@ -54,8 +52,8 @@ public class ApiMainFormsProcessesStepDef extends ApiOpoqoBorrowerStepDef {
 
         log.info("Going to Forms page");
 
-        Document loginResponse = Jsoup.parse(httpResponse.getHttpResponse());
-        Document loginResponse2 = Jsoup.parse(loginResponse.select("component[id~=main]").select("component[encoding~=wicket]").first().textNodes().get(0).text());
+//        Document loginResponse = Jsoup.parse(httpResponse.getHttpResponse());
+//        Document loginResponse2 = Jsoup.parse(loginResponse.select("component[id~=main]").select("component[encoding~=wicket]").first().textNodes().get(0).text());
 
         String formResponse = requestHttpGet(
                 httpClient,

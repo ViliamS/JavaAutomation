@@ -1,5 +1,7 @@
 package com.r2development.leveris.bdd.borrower.apistepdef;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.LoginData;
@@ -13,7 +15,15 @@ import cucumber.api.java.en.When;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.protocol.HttpContext;
+import org.apache.http.util.EntityUtils;
 import org.hamcrest.core.Is;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -174,7 +184,10 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
     @And("^Borrower logs in as his account is activated$")
     public void user_logs_in_as_his_account_is_activated() throws Exception {
 
-        activateAccount("db", user.getEmail());
+//        activateAccount("db", user.getEmail());
+
+        user.setEmail("test.automation.api123456789@finfactory.com");
+        user.setPwd("Password1122+");
 
         Assert.assertNotEquals("Should be different HttpClientContext object", localContext, initContext());
         HttpContext newLocalContext = newHttpClientContext(System.getProperty("domain.borrower"), "/stable-borrower");
@@ -217,15 +230,146 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
 
         httpResponse.setHttpResponse(loginPageResponse);
 
-        Thread.sleep(1000); // ??? without that we have white page
-        log.info("Email : " + user.getEmail());
-        user_types_his_login(user.getEmail());
-        Thread.sleep(1000); // ??? without that we have white page
-        log.info("Pwd : " + user.getPwd());
-        user_types_his_pwd(user.getPwd());
-        Thread.sleep(1000); // ??? without that we have white page
-        user_logs_in();
-        Thread.sleep(1000); // ??? without that we have white page
+        requestHttpGet(
+            httpClient,
+            "http://dv2pub.opoqodev.com/",
+            new LinkedHashMap<String, String>() {
+                {
+                    put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+                    put("Referer", "http://dv2app.opoqodev.com/stable-borrower/form.1?sc=1");
+                    put("Upgrade-Insecure-Requests", "1");
+                }
+            },
+            localContext,
+            CONSUME_QUIETLY
+        );
+
+        requestHttpGet(
+                httpClient,
+                "http://dv2pub.opoqodev.com/",
+                new LinkedHashMap<String, String>() {
+                    {
+                        put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+                        put("Referer", "http://dv2app.opoqodev.com/stable-borrower/form.1?sc=1");
+                        put("Upgrade-Insecure-Requests", "1");
+                        put("Cookie", "testcookie");
+                    }
+                },
+                localContext,
+                CONSUME_QUIETLY
+        );
+
+
+        WebSocketClient wsc = new WebSocketClient();
+//        wsc. = this;
+        wsc.Connect("wss://dv2pub.opoqodev.com/pull/wicket-wicket-0" );
+//        wsc.Connect("wss://dv2pub.opoqodev.com/service");
+        Thread.sleep(1000);
+//        wsc.userSession
+//        wsc.Disconnect();
+
+        // Step 1 - SSO
+        HttpPost httpPostValidateAuthProcessStep = new HttpPost("https://dv2pub.opoqodev.com/proxy/router/api/public/auth/validateAuthProcessStep");
+        httpPostValidateAuthProcessStep.setHeader("Content-Type", "application/json; charset=UTF-8");
+        httpPostValidateAuthProcessStep.setHeader("Referer", "https://dv2pub.opoqodev.com/");
+        httpPostValidateAuthProcessStep.setHeader("Cookie", "testcookie");
+//        StringEntity seValidateAuthProcessStep = new StringEntity("{\"scenarioCode\":\"USR_PWD\",\"authProcessStepValues\":[{\"authDetailType\":\"USERNAME\",\"value\":\"anthony.mottot@finfactory.com\"},{\"authDetailType\":\"PWD\",\"value\":\"autPassword1122+\"}]}");
+        StringEntity seValidateAuthProcessStep = new StringEntity("{\"scenarioCode\":\"USR_PWD\",\"authProcessStepValues\":[{\"authDetailType\":\"USERNAME\",\"value\":\"" + user.getEmail() + "\"},{\"authDetailType\":\"PWD\",\"value\":\"" + user.getPwd() + "\"}]}");
+        seValidateAuthProcessStep.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+        httpPostValidateAuthProcessStep.setEntity(seValidateAuthProcessStep);
+        HttpResponse responseValidateAuthProcessStep = httpClient.execute(httpPostValidateAuthProcessStep, localContext);
+        HttpEntity httpEntityValidateAuthProcessStep = responseValidateAuthProcessStep.getEntity();
+        log.info("==== httpPostValidateAuthProcessStep ====");
+        String parse2jsonValidateAuthProcessStep = EntityUtils.toString(httpEntityValidateAuthProcessStep);
+        log.info(parse2jsonValidateAuthProcessStep);
+
+        JsonParser jsonParserValidateAuthProcessStep = new JsonParser();
+        JsonObject jsonObjectValidateAuthProcessSte = (JsonObject) jsonParserValidateAuthProcessStep.parse(parse2jsonValidateAuthProcessStep);
+
+        String idScenario = jsonObjectValidateAuthProcessSte.get("idScenario").getAsString();
+        log.info("idScenario: " + idScenario);
+
+        // Step 2 - SSO
+        HttpPost httpPostGenerateServiceTicket = new HttpPost("https://dv2pub.opoqodev.com/proxy/router/api/public/ticket/generateServiceTicket");
+        httpPostGenerateServiceTicket.setHeader("Content-Type", "application/json; charset=UTF-8");
+        httpPostGenerateServiceTicket.setHeader("Referer", "https://dv2pub.opoqodev.com/");
+        httpPostGenerateServiceTicket.setHeader("Cookie", "testcookie");
+        StringEntity seGenerateServiceTicket = new StringEntity("{\"idAuthProcess\":\"" + idScenario + "\"}");
+        seGenerateServiceTicket.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+        httpPostGenerateServiceTicket.setEntity(seGenerateServiceTicket);
+        HttpResponse responseGenerateServiceTicket = httpClient.execute(httpPostGenerateServiceTicket, localContext);
+        HttpEntity httpEntityGenerateServiceTicket = responseGenerateServiceTicket.getEntity();
+        log.info("==== httpEntityGenerateServiceTicket ====");
+        String parse2jsonGenerateServiceTicket = EntityUtils.toString(httpEntityGenerateServiceTicket);
+        log.info(parse2jsonGenerateServiceTicket);
+
+        JsonParser jsonParserGenerateServiceTicket = new JsonParser();
+        JsonObject jsonObjectGenerateServiceTicket = (JsonObject) jsonParserGenerateServiceTicket.parse(parse2jsonGenerateServiceTicket);
+
+        String serviceTicketCode = jsonObjectGenerateServiceTicket.get("serviceTicketCode").getAsString();
+        log.info("serviceTicketCode: " + serviceTicketCode);
+        String applicationCode = jsonObjectGenerateServiceTicket.get("applicationCode").getAsString();
+        log.info("applicationCode <=> applicationid: " + applicationCode);
+
+//        String channeluuid = RandomStringUtils.random(8, true, true) + "-" + RandomStringUtils.random(4, true, true) + "-" + RandomStringUtils.random(4, true, false) + "-" + RandomStringUtils.random(4, true, false) + "-" + RandomStringUtils.random(12, true, true);
+//        System.out.println("channeluuid: " + xrsf_token);
+
+
+        HttpPost httpPostIssueToken = new HttpPost("https://dv2pub.opoqodev.com/api/issueToken");
+        httpPostIssueToken.setHeader("accept", "application/json");
+        httpPostIssueToken.setHeader("applicationid", applicationCode);
+//        httpPostIssueToken.setHeader("channeluuid", "8114a4af-1b81-4698-8298-183edc1023c8");
+//        httpPostIssueToken.setHeader("channeluuid", "8114a4af-1b81-4698-8298-183edc1023c8");
+        httpPostIssueToken.setHeader("channeluuid", "wicket-wicket-0");
+        httpPostIssueToken.setHeader("Referer", "https://dv2pub.opoqodev.com");
+        httpPostIssueToken.setHeader("Cookie", "testcookie");
+
+        StringEntity sePostIssueToken = new StringEntity(serviceTicketCode);
+        sePostIssueToken.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "text/plain"));
+        httpPostIssueToken.setEntity(sePostIssueToken);
+
+        HttpResponse responseIssueToken = httpClient.execute(httpPostIssueToken, localContext);
+        HttpEntity httpEntityIssueToken = responseIssueToken.getEntity();
+        log.info("==== httpEntityIssueToken ====");
+        String parse2jsonIssueToken = EntityUtils.toString(httpEntityIssueToken);
+        log.info(parse2jsonIssueToken);
+
+        JsonParser jsonParserIssueToken = new JsonParser();
+        JsonObject jsonObjectIssueToken = (JsonObject) jsonParserIssueToken.parse(parse2jsonIssueToken);
+
+        String token = jsonObjectIssueToken.get("token").getAsString();
+        log.info("TICKET: " + token);
+
+
+        HttpGet httpGetApiModuleWithBearer = new HttpGet("https://dv2pub.opoqodev.com/api/modules");
+        httpGetApiModuleWithBearer.setHeader("Accept", "*/*");
+        httpGetApiModuleWithBearer.setHeader("authorization", "Bearer " + token);
+        httpGetApiModuleWithBearer.setHeader("Cookie", "testcookie");
+        HttpResponse responseGetApiModuleWithBearer = httpClient.execute(httpGetApiModuleWithBearer, localContext);
+        HttpEntity httpEntityGetApiModuleWithBearer = responseGetApiModuleWithBearer.getEntity();
+        log.info("==== httpEntityGetApiModuleWithBearer ====");
+        String parse2jsonGetApiModuleWithBearer = EntityUtils.toString(httpEntityGetApiModuleWithBearer);
+        log.info(parse2jsonGetApiModuleWithBearer);
+
+
+        HttpGet httpGetApiAuthentication = new HttpGet("http://dv2app.opoqodev.com/stable-borrower/home?useCase=authenticate&ticket="+ serviceTicketCode);
+        HttpResponse responseGetApiAuthentication = httpClient.execute(httpGetApiAuthentication, localContext);
+        HttpEntity httpEntityGetApiAuthentication = responseGetApiAuthentication.getEntity();
+        log.info("==== httpEntityGetApiAuthentication ====");
+        String parse2jsonGetApiAuthenticationr = EntityUtils.toString(httpEntityGetApiAuthentication);
+        log.info(parse2jsonGetApiAuthenticationr);
+
+        httpResponse.setHttpResponse(parse2jsonGetApiAuthenticationr);
+
+//        Thread.sleep(1000); // ??? without that we have white page
+//        log.info("Email : " + user.getEmail());
+//        user_types_his_login(user.getEmail());
+//        Thread.sleep(1000); // ??? without that we have white page
+//        log.info("Pwd : " + user.getPwd());
+//        user_types_his_pwd(user.getPwd());
+//        Thread.sleep(1000); // ??? without that we have white page
+//        user_logs_in();
+//        Thread.sleep(1000); // ??? without that we have white page
     }
 
     // TODO ACMESQL or use multi git jenkins plugin then to be able to load

@@ -2,6 +2,7 @@ package com.r2development.leveris.tdd.investor.sso;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.r2development.leveris.bdd.investor.apistepdef.WebSocketClient;
 import com.r2development.leveris.utils.HttpUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;

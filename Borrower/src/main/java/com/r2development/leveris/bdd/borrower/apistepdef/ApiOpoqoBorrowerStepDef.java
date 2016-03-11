@@ -64,6 +64,8 @@ public class ApiOpoqoBorrowerStepDef /*implements IBorrower*/ {
 
         accountParameters = new LinkedHashMap<>();
         paydayParameters = new LinkedHashMap<>();
+
+        automationRegistrationParameters = new LinkedHashMap<>();
     }
 
 //    @Inject

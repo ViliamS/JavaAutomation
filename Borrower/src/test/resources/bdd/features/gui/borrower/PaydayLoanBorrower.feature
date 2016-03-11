@@ -2,30 +2,41 @@
 Feature: Payday Loan
 
   Background:
-    Given Open Leveris Quote Landing page
+#    Given Open Leveris Quote Landing page
 
   Scenario: Payday Load
 
-    Given Borrower clicks on continue to get Payday Loan
+    Given Borrower processes the automatic registration
+      | applicantId | test.automation.test@test.finfactory.com |
+    When Borrower logs in via Automatic Registration
+#    When Payday Loan User clicks on Continue button
+#    Then Borrower clicks on Apply Online
+#    And this registration data, user processes the registration (format2)
+#      | firstName         | AutomationSB                               |
+#      | email             | test.automation.payday@test.finfactory.com |
+#      | phoneNumber       | +420123456789                              |
+#      | password          | Password1122+                              |
+#      | termsBusiness     | accepts                                    |
+#      | protectionPolicy  | accepts                                    |
+
+#    Then user goes to gmail
+#    And user goes to CRM
+
+#    Then Borrower logs in as his account is activated
+#    When Borrower clicks "Create new user"
+
+    Then Borrower clicks "Quote" task
+
+    And Borrower clicks on continue to get Payday Loan
     And Borrower fills in Payday Loan form
-#      | LoanPurpose        | PAYDAY    |
+      | LoanPurpose        | PAYDAY    |
       | NetMonthlyIncome   | 21,000.00 |
       | MonthlyExpenses    | 1,000.00  |
       | NumberOfDependents | 1         |
       | AmountToBorrow     | 500       |
     When Payday Loan User clicks on Continue button
     Then Borrower clicks on Apply Online
-    And this registration data, user processes the registration (format2)
-      | firstName         | AutomationSB                               |
-      | email             | test.automation.payday@test.finfactory.com |
-      | phoneNumber       | +420123456789                              |
-      | password          | Password1122+                              |
-      | termsBusiness     | accepts                                    |
-      | protectionPolicy  | accepts                                    |
 
-#    Then user goes to gmail
-#    And user goes to CRM
-    Then Borrower logs in as his account is activated
     And Borrower processes "Forms"
 
 #    PERSONAL DETAILS

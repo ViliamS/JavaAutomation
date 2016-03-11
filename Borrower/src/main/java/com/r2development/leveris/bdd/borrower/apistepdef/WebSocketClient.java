@@ -1,4 +1,4 @@
-package com.r2development.leveris.tdd.investor.sso;
+package com.r2development.leveris.bdd.borrower.apistepdef;
 
 import javax.websocket.*;
 import java.io.IOException;
@@ -8,9 +8,9 @@ import java.net.URISyntaxException;
 @ClientEndpoint
 public class WebSocketClient {
 
-    protected   WebSocketContainer container;
+    protected WebSocketContainer container;
     protected Session userSession = null;
-    protected Session onOpenSession = null;
+//    protected Session onOpenSession = null;
 
     public WebSocketClient() {
         container = ContainerProvider.getWebSocketContainer();
@@ -33,8 +33,8 @@ public class WebSocketClient {
 
     @OnOpen
     public void onOpen(Session session) {
-        System.out.println("Connected");
-        onOpenSession = session;
+//        log.info("WebSocket Connected");
+//        onOpenSession = session;
     }
 
     @OnClose
