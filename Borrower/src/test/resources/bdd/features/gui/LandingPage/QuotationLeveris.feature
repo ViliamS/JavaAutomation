@@ -10,7 +10,7 @@ Business Need: To provide fill of whole page Section by one Sentence and using
         | LoanPurpose        | PERSONAL   |
         | NetMonthlyIncome   | 66,000.00  |
         | MonthlyExpenses    | 10,000.00  |
-        | NumberOfDependents | 4          |
+        | NumberOfDependants | 4          |
         | AmountToBorrow     | 500,000.00 |
         | MonthlyRepayment   |            |
 

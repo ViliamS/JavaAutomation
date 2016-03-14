@@ -27,7 +27,7 @@ public class MainFormsProcessesStepDef /*extends BorrowerStepDef*/ implements CL
     IFormsMenu currentPage;
     IDocumentUploadPage documentUploadPage;
     IYourFinancialCommitmentsPage yourFinancialCommitmentsPage;
-    IYourDependantsPage yourDependentsPage;
+    IYourDependantsPage yourDependantsPage;
 
     @Inject
     public MainFormsProcessesStepDef(SharedDriver webDriver) {
@@ -81,16 +81,16 @@ public class MainFormsProcessesStepDef /*extends BorrowerStepDef*/ implements CL
         currentPage = (IFormsMenu) yourAccountsPage;
     }
 
-    @When("^Borrower clicks \"Dependents\"$")
+    @When("^Borrower clicks \"Dependants\"$")
     public void clickDependents() {
-        currentPage.clickDependents();
-        currentPage = (IFormsMenu) yourDependentsPage;
+        currentPage.clickDependants();
+        currentPage = (IFormsMenu) yourDependantsPage;
     }
 
     @When("^Borrower clicks \"Financial Assets\"$")
     public void clickFinancialAssets() {
         currentPage.clickFinancialAssets();
-        currentPage = (IFormsMenu) yourDependentsPage;
+        currentPage = (IFormsMenu) yourDependantsPage;
     }
 
     @When("^Borrower clicks \"Financial Commitments\"$")

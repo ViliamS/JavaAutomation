@@ -59,7 +59,7 @@ public class DocumentUploadStepDef /*extends BorrowerStepDef*/ implements CLV312
         documentUploadPage.clickDownloadCert();
     }
 
-    @When("^(Borrower) user upload(?:s) the file (.*) as (.*) document$")
+    @When("^(Borrower) upload(?:s) the file (.*) as (.*) document$")
     public void user_uploads_document(String userType, String filename, String documentType) {
         documentUploadPage.uploadDocument(user, userType, filename, documentType); // TODO to review : not nice, but temporary solution to go forward .
 //        documentUploadPage.uploadDocument(userType, filename, documentType);

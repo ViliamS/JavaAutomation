@@ -28,11 +28,11 @@ public interface IFormsMenu {
     String ACCOUNT_DONE_XPATH = "//div[@wicketpath='left_c_form_form_root_c_w_pnlBorrower1_c_w_rptBorrower1CommonForms_c_rows_1_item_pnlBorrower1CommonForms' and contains(@class, 'formdone-icon')]";
     String ACCOUNT_COMMON_XPATH = "//div[@wicketpath='left_c_form_form_root_c_w_pnlCommon_c_w_rptCommonForms_c_rows_1_item_pnlCommonForms']";
     String ACCOUNT_COMMON_DONE_XPATH = "//div[@wicketpath='left_c_form_form_root_c_w_pnlCommon_c_w_rptCommonForms_c_rows_1_item_pnlCommonForms' and contains(@class, 'formdone-icon')]";
-//    String DEPENDENTS_XPATH = "//div[contains(@data-path, 'pnlCommonForms') and not(contains(@wicketpath, 'lblCommonForms')) and contains(., 'Dependents')]"; //data-path pnlBorrower1 rptBorrower1CommonForms 1 pnlBorrower1CommonForms
-    String DEPENDENTS_XPATH = "//div[@wicketpath='left_c_form_form_root_c_w_pnlBorrower1_c_w_rptBorrower1CommonForms_c_rows_2_item_pnlBorrower1CommonForms']";
-    String DEPENDENTS_DONE_XPATH = "//div[@wicketpath='left_c_form_form_root_c_w_pnlBorrower1_c_w_rptBorrower1CommonForms_c_rows_2_item_pnlBorrower1CommonForms' and contains(@class, 'formdone-icon')]";
-    String DEPENDENTS_COMMON_XPATH = "//div[@wicketpath='left_c_form_form_root_c_w_pnlCommon_c_w_rptCommonForms_c_rows_2_item_pnlCommonForms']";
-    String DEPENDENTS_COMMON_DONE_XPATH = "//div[@wicketpath='left_c_form_form_root_c_w_pnlCommon_c_w_rptCommonForms_c_rows_2_item_pnlCommonForms' and contains(@class, 'formdone-icon')]";
+//    String DEPENDANTS_XPATH = "//div[contains(@data-path, 'pnlCommonForms') and not(contains(@wicketpath, 'lblCommonForms')) and contains(., 'Dependents')]"; //data-path pnlBorrower1 rptBorrower1CommonForms 1 pnlBorrower1CommonForms
+    String DEPENDANTS_XPATH = "//div[@wicketpath='left_c_form_form_root_c_w_pnlBorrower1_c_w_rptBorrower1CommonForms_c_rows_2_item_pnlBorrower1CommonForms']";
+    String DEPENDANTS_DONE_XPATH = "//div[@wicketpath='left_c_form_form_root_c_w_pnlBorrower1_c_w_rptBorrower1CommonForms_c_rows_2_item_pnlBorrower1CommonForms' and contains(@class, 'formdone-icon')]";
+    String DEPENDANTS_COMMON_XPATH = "//div[@wicketpath='left_c_form_form_root_c_w_pnlCommon_c_w_rptCommonForms_c_rows_2_item_pnlCommonForms']";
+    String DEPENDANTS_COMMON_DONE_XPATH = "//div[@wicketpath='left_c_form_form_root_c_w_pnlCommon_c_w_rptCommonForms_c_rows_2_item_pnlCommonForms' and contains(@class, 'formdone-icon')]";
 //    String FINANCIAL_ASSETS_XPATH = "//div[contains(@data-path, 'pnlCommonForms') and not(contains(@wicketpath, 'lblCommonForms')) and contains(., 'Financial assets')]"; //data-path pnlBorrower1 rptBorrower1CommonForms 2 pnlBorrower1CommonForms
     String FINANCIAL_ASSETS_XPATH = "//div[@wicketpath='left_c_form_form_root_c_w_pnlBorrower1_c_w_rptBorrower1CommonForms_c_rows_3_item_pnlBorrower1CommonForms']";
     String FINANCIAL_ASSETS_DONE_XPATH = "//div[@wicketpath='left_c_form_form_root_c_w_pnlBorrower1_c_w_rptBorrower1CommonForms_c_rows_3_item_pnlBorrower1CommonForms' and contains(@class, 'formdone-icon')]";
@@ -74,9 +74,9 @@ public interface IFormsMenu {
     IFormsMenu clickAccount();
     IFormsMenu clickAccount(String singleOrDouble);
     boolean isAccountFormDone(String singleOrDouble);
-    IFormsMenu clickDependents();
-    IFormsMenu clickDependents(String singleOrDouble);
-    boolean isDependentFormDone(String singleOrDouble);
+    IFormsMenu clickDependants();
+    IFormsMenu clickDependants(String singleOrDouble);
+    boolean isDependantFormDone(String singleOrDouble);
     IFormsMenu clickFinancialAssets();
     IFormsMenu clickFinancialAssets(String singleOrDouble);
     boolean isFinancialAssetsFormDone(String singleOrDouble);

@@ -85,8 +85,8 @@ public class BuildQuotationPage extends HeaderAndBottomAndFormsMenuSection imple
     }
 
     @Override
-    public IBuildQuotationPage typeTotalDependents(String totalDependents) {
-        buildQuoteSection.typeTotalDependents(totalDependents);
+    public IBuildQuotationPage typeTotalDependants(String totalDependants) {
+        buildQuoteSection.typeTotalDependants(totalDependants);
         return this;
     }
 
@@ -95,6 +95,7 @@ public class BuildQuotationPage extends HeaderAndBottomAndFormsMenuSection imple
         buildQuoteSection.selectIncomeType(incomeType);
         return this;
     }
+
 
     @Override
     public IBuildQuotationPage selectPartnerIncomeType(String incomeType) {

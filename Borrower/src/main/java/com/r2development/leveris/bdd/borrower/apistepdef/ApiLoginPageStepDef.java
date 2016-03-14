@@ -104,7 +104,7 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
         );
     }
 
-    @When("^Borrower user logs in with these credentials$")
+    @When("^Borrower logs in with these credentials$")
     public void user_logs_in_with_these_credentials(List<String> credentials) throws IOException {
 
         String loginPageResponse = requestHttpGet(

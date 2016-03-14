@@ -107,8 +107,8 @@ public abstract class HeaderAndBottomAndFormsMenuSection extends Borrower implem
     }
 
     @Override
-    public IFormsMenu clickDependents() {
-        return formsMenu.clickDependents();
+    public IFormsMenu clickDependants() {
+        return formsMenu.clickDependants();
     }
 
     @Override
@@ -168,8 +168,8 @@ public abstract class HeaderAndBottomAndFormsMenuSection extends Borrower implem
     }
 
     @Override
-    public IFormsMenu clickDependents(String singleOrDouble) {
-        return formsMenu.clickDependents(singleOrDouble);
+    public IFormsMenu clickDependants(String singleOrDouble) {
+        return formsMenu.clickDependants(singleOrDouble);
     }
 
     @Override
@@ -213,8 +213,8 @@ public abstract class HeaderAndBottomAndFormsMenuSection extends Borrower implem
     }
 
     @Override
-    public boolean isDependentFormDone(String singleOrDouble) {
-        return formsMenu.isDependentFormDone(singleOrDouble);
+    public boolean isDependantFormDone(String singleOrDouble) {
+        return formsMenu.isDependantFormDone(singleOrDouble);
     }
 
     @Override

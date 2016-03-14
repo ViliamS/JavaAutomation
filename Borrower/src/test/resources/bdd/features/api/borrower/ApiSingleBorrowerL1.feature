@@ -2,11 +2,11 @@
 Feature: Api Single Borrower
 
   Background:
-    Given user goes to Registration page
+    Given Borrower goes to Registration page
 
   Scenario: Simplest Single Borrower
 
-    Given this registration data, user processes the registration (format2)
+    Given this registration data, Borrower processes the registration (format2)
       | firstName         | AutomationSBApi                             |
       | email             | test.automation.stsbapi@test.finfactory.com |
       | phoneNumber       | +4201234567890                              |
@@ -18,19 +18,19 @@ Feature: Api Single Borrower
 #    And user goes to CRM
     Then Borrower user logs in as his account is activated
 
-    Then user processes "Get a Quote" (format2)
+    Then Borrower processes "Get a Quote" (format2)
       | borrowerNumber           | a single borrower   |
       | mortgageType             | first-time buyer(s) |
       | borrowerAge              | 28                  |
       | borrowerMaritalStatus    | single              |
-      | borrowerTotalDependents  | 0                   |
+      | borrowerTotalDependants  | 0                   |
       | borrowerIncomeType       | an employee         |
       | borrowerIncomeAmount     | 125000              |
       | monthlyCreditCommitments | 1000                |
 
     And borrower goes solo
 
-    And user processes "Forms"
+    And Borrower processes "Forms"
 
 #    PERSONAL DETAILS
 #    When user clicks "Borrower Personal Details"
@@ -72,7 +72,7 @@ Feature: Api Single Borrower
 
 #    YOUR DEPENDENT
 #    When user clicks "Dependents"
-    Then user hasn't dependents
+    Then user hasn't dependants
 
 #    YOUR FINANCIAL ASSETS
 #    When user clicks "Financial Assets"

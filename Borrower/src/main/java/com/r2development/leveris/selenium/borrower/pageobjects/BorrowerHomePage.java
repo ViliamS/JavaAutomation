@@ -54,6 +54,15 @@ public class BorrowerHomePage extends HeaderAndBottomAndFormsMenuSection impleme
     }
 
     @Override
+    public void clickStartTaskButton(){
+        loadingCheck();
+        isVisible(GET_A_QUOTE_START_TASK_BUTTON_XPATH, true);
+        clickElement(GET_A_QUOTE_START_TASK_BUTTON_XPATH);
+        loadingCheck();
+        isNotVisible(GET_A_QUOTE_START_TASK_BUTTON_XPATH, true, 20);
+    }
+
+    @Override
     public void clickGetOneNow() {
         messageSection.clickGetOneNow();
     }

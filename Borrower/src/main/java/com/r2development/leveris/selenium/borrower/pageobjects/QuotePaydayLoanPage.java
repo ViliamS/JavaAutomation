@@ -57,7 +57,7 @@ public class QuotePaydayLoanPage extends Borrower implements IQuotePaydayLoanPag
     }
 
     @Override
-    public IQuotePaydayLoanPage setNumberOfDependents(String numberOfDependents){
+    public IQuotePaydayLoanPage setNumberOfDependants(String numberOfDependents){
         quotePaydayLoanSection.setNumberOfDependents( numberOfDependents );
         return this;
     }

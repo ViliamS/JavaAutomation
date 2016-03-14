@@ -15,7 +15,7 @@
       | LoanPurpose        | PAYDAY    |
       | NetMonthlyIncome   | 21,000.00 |
       | MonthlyExpenses    | 1,000.00  |
-      | NumberOfDependents | 1         |
+      | NumberOfDependants | 1         |
       | AmountToBorrow     | 1,000.00  |
     Then Payday Loan User clicks on Continue button
     When User clicks on Apply Online
@@ -28,7 +28,7 @@
         | LoanPurpose        | PERSONAL  |
         | NetMonthlyIncome   | 44,000.00 |
         | MonthlyExpenses    | 5,000.00  |
-        | NumberOfDependents | 3         |
+        | NumberOfDependants | 3         |
         | AmountToBorrow     | 1,000.00  |
       Then Unsecured Loan User clicks on Continue button
       When User clicks on Apply Online
@@ -44,7 +44,7 @@
         | LoanPurpose        | HOMEIMPROVEMENT |
         | NetMonthlyIncome   | 4,000.00        |
         | MonthlyExpenses    | 500.00          |
-        | NumberOfDependents | 1               |
+        | NumberOfDependants | 1               |
         | AmountToBorrow     | 1,000.00        |
         | LoanAmount         | 1,000.00        |
         | MonthlyRepayment   | 296             |
@@ -56,7 +56,7 @@
         | LoanPurpose        | PAYDAY    |
         | NetMonthlyIncome   | 2,500.00  |
         | MonthlyExpenses    | 1,500.00  |
-        | NumberOfDependents | 10        |
+        | NumberOfDependants | 10        |
         | AmountToBorrow     | 525       |
         | LoanAmount         | 10,000.00 |
         | MonthlyRepayment   | 296       |

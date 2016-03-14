@@ -15,7 +15,7 @@ public interface IAutomaticRegistrationPage {
     void typeCoapplicantId(String coapplicantId);
 
     // TODO ... to check in which page we move to.
-    IAutomaticRegistrationPage clickCreateNewUser();
+    IAutomaticRegistrationPage clickCreateNewUser(String userName);
     IAutomaticRegistrationPage goToAutomaticRegistrationPage();
 
 }

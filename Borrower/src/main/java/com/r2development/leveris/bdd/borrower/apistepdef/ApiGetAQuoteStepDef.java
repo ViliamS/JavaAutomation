@@ -202,7 +202,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
         if ( quoteData.getPartnerAge() != null )
             user_types_partner_age(quoteData.getPartnerAge());
         user_selects_his_marital_status(quoteData.getBorrowerMaritalStatus());
-        user_types_his_total_of_dependents(quoteData.getBorrowerTotalDependents());
+        user_types_his_total_of_dependents(quoteData.getBorrowerTotalDependants());
         user_selects_his_income_type(quoteData.getBorrowerIncomeType());
         user_types_his_income_amount(quoteData.getBorrowerIncomeAmount());
         if ( quoteData.getPartnerIncomeType() != null ) {
@@ -867,7 +867,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
         if ( StringUtils.isEmpty(totalDependents) )
             totalDependents = "0";
 
-        quoteData.setBorrowerTotalDependents(totalDependents);
+        quoteData.setBorrowerTotalDependants(totalDependents);
 //        quoteParameters.put("root:c:w:pnlBuildYourQuotation:c:w:pnlMaritalStatus:c:w:txtTotalDependents:tb",totalDependents);
         quoteParameters.put("root:c:w:pnlBuildYourQuotation:c:w:pnlTotalDependents:c:w:txtTotalDependents:tb", totalDependents);
 

@@ -43,7 +43,7 @@ public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
         registerPage = new RegisterPage(webDriver);
     }
 
-    @Given("user goes to Registration page$")
+    @Given("Borrower goes to Registration page$")
     public void user_goes_to_registration_page() {
 
 //        welcomePage = new WelcomePage(WebDriverService.getWebDriverInstance());
@@ -51,14 +51,14 @@ public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
         registerPage = welcomePage.clickRegister();
     }
 
-    @Given("^this registration data, user processes the registration \\(format1\\)$")
+    @Given("^this registration data, Borrower processes the registration \\(format1\\)$")
     public void this_registration_data_user_processes_the_registration(List<RegistrationData> registrationDataList, String... test) {
         assertEquals("System is expecting only one RegistrationData occurrence", registrationDataList.size(), 1);
         fill_in_registration(registrationDataList.get(0));
     }
 
-    @Given("^this registration data, user processes the registration \\(format2\\)$")
-//    public void this_registration_data_user_processes_the_registration(Map<String, String> registrationDataMap) {
+    @Given("^this registration data, Borrower processes the registration \\(format2\\)$")
+//    public void this_registration_data_Borrower_processes_the_registration(Map<String, String> registrationDataMap) {
     public void this_registration_data_user_processes_the_registration(List<String> registrationDataMap) {
         fill_in_registration(new RegistrationData(registrationDataMap));
     }
@@ -76,24 +76,27 @@ public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
         user_registers();
     }
 
-    @Given("^user types his first name (.*) in Register page$")
+    @Given("^Borrower types his first name (.*) in Register page$")
     public void user_types_his_first_name(String firstName) {
         registerPage.setFirstname(firstName);
         user.setFirstName(firstName);
     }
 
-    @Given("^user types his email (.*) in Register page$")
+    @Given("^Borrower types his email (.*) in Register page$")
     public void user_types_his_email(String email) {
         String[] emailArray = email.split("@");
 //        DateTime now = DateTime.now();
 //        emailArray[0] = emailArray[0] + now.toString("yyyyMMddHHmmssSSS");
         emailArray[0] = emailArray[0] + "_" + System.getProperty("modeRun") + "_" + System.getProperty("timestamp");
+
+
+
         registerPage.setEmailAddress(String.join("@", emailArray));
         user.setEmail(String.join("@", emailArray));
         log.info(user.getEmail());
     }
 
-    @Given("^user types his phone number (.*) in Register page$")
+    @Given("^Borrower types his phone number (.*) in Register page$")
     public void user_types_his_phone_number(String phoneNumber) {
 //        DateTime now = DateTime.now();
 //        registerPage.setPhoneNumber("+420" + System.getProperty("timestamp"));
@@ -114,34 +117,34 @@ public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
         log.info(user.getPhoneNumber());
     }
 
-    @Given("^user types his password (.*) in Register page$")
+    @Given("^Borrower types his password (.*) in Register page$")
     public void user_types_his_password(String pwd) {
         registerPage.setPassword(pwd);
         user.setPwd(pwd);
     }
 
-    @Given("^user wants to (show|hide) his password in Registration page$")
+    @Given("^Borrower wants to (show|hide) his password in Registration page$")
     public void user_wants_to_his_password(String showOrHide) {
         registerPage = ( showOrHide.equals("show") ? registerPage.showPassword() : registerPage.hidePassword() );
     }
 
-    @Given("^user (accepts|unaccepts) the terms of business$")
+    @Given("^Borrower (accepts|unaccepts) the terms of business$")
     public void user_accepts_the_terms_of_business(String acceptOrNot) {
         registerPage = ( acceptOrNot.equals("accepts") ? registerPage.checkAcceptTerms() : registerPage.uncheckAcceptTerms() );
     }
 
-    @Given("^user (accepts|unaccepts) the data protection policy$")
+    @Given("^Borrower (accepts|unaccepts) the data protection policy$")
     public void user_accepts_the_data_protection_policy(String acceptOrNot) {
         registerPage = ( acceptOrNot.equals("accepts") ? registerPage.checkDataPolicy() : registerPage.uncheckDataPolicy() );
     }
 
-    @When("^user registers$")
+    @When("^Borrower registers$")
     public void user_registers() {
         verifyEmailPage = registerPage.clickRegister();
         verifyEmailPage.isLoaded(user.getEmail());
     }
 
-    @When("^user creates an account$")
+    @When("^Borrower creates an account$")
     public void user_creates_an_account() {
 
 //        if ( IBorrower.EXCEL_FILENAME != null ) {
@@ -182,12 +185,12 @@ public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
         user_registers();
     }
 
-    @When("^user is already signed$")
+    @When("^Borrower is already signed$")
     public void user_already_signed() {
         loginPage = registerPage.clickAlreadyRegister();
     }
 
-    @When("^user closes the Register page$")
+    @When("^Borrower closes the Register page$")
     public void user_closes_the_register_page() {
         welcomePage = registerPage.closeRegister();
     }
@@ -197,18 +200,18 @@ public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
         verifyEmailPage.isLoaded(registerPage.getEmailAddress());
     }
 
-    @When("^user wants us resent email$")
+    @When("^Borrower wants us resent email$")
     public void user_wants_us_resent_email() {
         verifyEmailPage.clickReSent();
     }
 
-    @Then("^user types his email (.*) in the Verify Email Page$")
+    @Then("^Borrower types his email (.*) in the Verify Email Page$")
     public void user_types_his_email_in_the_verify_email_page(String email) {
         verifyEmailPage.setEmail(registerPage.getEmailAddress());
 //        verifyEmailPage.setEmail(user.getEmail());
     }
 
-    @Then("^user resends$")
+    @Then("^Borrower clicks re-sent$")
     public void user_resends() {
         verifyEmailPage.clickReSent2();
     }

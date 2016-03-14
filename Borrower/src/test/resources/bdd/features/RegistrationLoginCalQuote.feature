@@ -16,12 +16,12 @@ Feature: Registration + Login + CalQuote
 
     Then Borrower user logs in as his account is activated
 
-    Then user processes "Get a Quote" (format2)
+    Then Borrower processes "Get a Quote" (format2)
       | borrowerNumber           | a single borrower   |
       | mortgageType             | first-time buyer(s) |
       | borrowerAge              | 28                  |
       | borrowerMaritalStatus    | single              |
-      | borrowerTotalDependents  | 0                   |
+      | borrowerTotalDependants  | 0                   |
       | borrowerIncomeType       | an employee         |
       | borrowerIncomeAmount     | 125000              |
       | monthlyCreditCommitments | 1000                |

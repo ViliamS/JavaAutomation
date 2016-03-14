@@ -38,6 +38,31 @@ public class Borrower /*implements IBorrower*/ {
 
     protected final String EXCEPTION_THERE_ARE_ERROR_ITEMS_XPATH = "//div[@wicketpath='main_c_form_dialogWrapper_dialog_feedbackBox1']/div[@class='errorbox']/ul/li/div";
 
+    /**
+     * Java Time Since the Epoch
+     */
+    protected long fromEpoch(){
+        return (System.currentTimeMillis() / 1000);
+    }
+
+    protected String userNameTimeStamping(String userName, boolean isGui){
+        if(isGui){
+            return userNameTimeStamping(userName, ".gui.aut.test.");
+        } else {
+            return userNameTimeStamping(userName, ".api.aut.test.");
+        }
+    }
+
+    protected String userNameTimeStamping(String userName, String testType){
+        String[] userNameArray = userName.split("@");
+        userName = userNameArray[0] + testType + System.getProperty("timestamp") + "@" + userNameArray[1];
+        return userName;
+    }
+
+    private String userNameTimeStamping(String userName){
+        return userNameTimeStamping(userName, ".aut.test.");
+    }
+
     private String getExceptionText(){
         isVisible(EXCEPTION_THERE_ARE_ERROR_ITEMS_XPATH, 5);
         return getText(EXCEPTION_THERE_ARE_ERROR_ITEMS_XPATH);
@@ -325,10 +350,10 @@ public class Borrower /*implements IBorrower*/ {
 //        return ( webElement.getAttribute(attributeName) != null ? true : false );
 //    }
 
-//    protected String getAttributeText(WebElement webElement, String attributeName) {
-//        log.info("Extracting attribute value of " + attributeName + " from the webElement " + webElement.toString());
-//        return ( webElement.getAttribute(attributeName) != null ? webElement.getAttribute(attributeName) : null);
-//    }
+    protected String getAttributeText(WebElement webElement, String attributeName) {
+        log.info("Extracting attribute value of " + attributeName + " from the webElement " + webElement.toString());
+        return ( webElement.getAttribute(attributeName) != null ? webElement.getAttribute(attributeName) : null);
+    }
 
     private void waitForVisibility(By locator) {
         log.info("\n waitForVisibility ---> locator: " + locator.toString() + "\n");
@@ -579,6 +604,13 @@ public class Borrower /*implements IBorrower*/ {
 //    }
 
     protected void get(String url) {
+        log.info("\n **************************************************************************************************** \n" +
+                 " *                                                                                                    * \n" +
+                 " *                                                                                                    * \n" +
+                 " Opening a Web Page URL: " + url + "\n" +
+                 " *                                                                                                    * \n" +
+                 " *                                                                                                    * " +
+                 "\n *************************************************************************************************** \n");
         webDriver.get(url);
     }
 

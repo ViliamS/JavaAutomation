@@ -6,13 +6,13 @@ Feature: Payday Loan
 
   Scenario: Payday Load
 
-    Given Borrower user logs in with these credentials
+    Given Borrower logs in with these credentials
       | email | test_automation.payday_ui@test.finfactory.com |
       | pwd   | Password1122+                                                   |
 
 #    PERSONAL DETAILS
 #    When user clicks "Borrower Personal Details"
-    And borrower fills in "Personal Details"
+    And Borrower fills in "Personal Details"
       | firstName           | AutomationSBUI |
       | lastName            | Tester         |
       | gender              | Male           |
@@ -25,7 +25,7 @@ Feature: Payday Loan
       | county/state        | Galway         |
 #      | accommodation       | Property owner |
 #      | isLivingSince3years | yes            |
-    And borrower user saves his personal details data
+    And Borrower saves his personal details data
 
 #    EMPLOYMENT & INCOME
 #    When user clicks "Borrower Employment Income"
@@ -75,14 +75,14 @@ Feature: Payday Loan
 #      | additionalIncomeSource | testAdditionalIncomeSource |
 #      | netMonthlyIncome       | 2000                       |
 #      | timeEarningIncome      | 200                        |
-    And borrower user clicks "Done"
+    And Borrower clicks "Done"
 
 #    YOUR ACCOUNTS
 #    When user clicks "Account"
 #    Then user clicks "ADD ACCOUNT"
     And user clicks "Current account"
-    And user fills in "Current Account"
-#      | fundsSource     | Current Account         |
+    And Borrower fills in Current account
+      | fundsSource     | Current Account         |
       | statementDate   | 01/01/2000              |
       | accountName     | test Current Account    |
       | sortCode1       | 12                      |
@@ -104,11 +104,11 @@ Feature: Payday Loan
 #    And user clicks "ADD ACCOUNT"
 #    And user clicks "Account scraping"
 #    And user closes "scraping" form
-    And user clicks Accounts "Done"
+    And Borrower clicks Accounts "Done"
 
 #    YOUR DEPENDENT
 #    When user clicks "Dependents"
-    Then user hasn't dependents
+    Then Borrower hasn't dependants
 
 #    YOUR FINANCIAL ASSETS
 #    When user clicks "Financial Assets"

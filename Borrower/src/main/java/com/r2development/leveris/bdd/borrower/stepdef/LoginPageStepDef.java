@@ -3,6 +3,7 @@ package com.r2development.leveris.bdd.borrower.stepdef;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.di.IUser;
+import com.r2development.leveris.di.User;
 import com.r2development.leveris.qa.utils.Orasql;
 import com.r2development.leveris.selenium.borrower.pageobjects.*;
 import cucumber.api.java.en.And;
@@ -15,6 +16,8 @@ import org.apache.commons.logging.LogFactory;
 import org.hamcrest.core.Is;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -40,32 +43,32 @@ public class LoginPageStepDef /*extends BorrowerStepDef*/ {
         welcomePage = new WelcomePage(webDriver);
     }
 
-    @Given("^User types his email login (.*) in Login page$")
+    @Given("^Borrower types his email login (.*) in Login page$")
     public void user_types_his_login(String email) {
         loginPage.setEmailAddress(email);
     }
 
-    @Given("^User types his pwd (.*) in Login page$")
+    @Given("^Borrower types his pwd (.*) in Login page$")
     public void user_types_his_pwd(String pwd) {
         loginPage.setPassword(pwd);
     }
 
-    @When("^user logs in$")
+    @When("^Borrower logs in$")
     public void user_logs_in() {
         loginPage.clickLogin();
     }
 
-    @When("^user forgets his password$")
+    @When("^Borrower forgets his password$")
     public void user_forgets_his_password() {
         loginPage.clickForgotPassword();
     }
 
-    @When("^user closes the login page")
+    @When("^Borrower closes the login page")
     public void user_closes_the_login_page() {
         loginPage.closeLogin();
     }
 
-    @When("^user wants to (show|hide) his password in Login page$")
+    @When("^Borrower wants to (show|hide) his password in Login page$")
     public void user_wants_to_his_password(String showOrHide) {
         loginPage = (showOrHide.equals("show") ? loginPage.clickShowPassword() : loginPage.clickHidePassword());
     }
@@ -85,7 +88,7 @@ public class LoginPageStepDef /*extends BorrowerStepDef*/ {
         buildQuotationPage.isLoaded();
     }
 
-    @And("^Borrower user logs in as his account is activated$")
+    @And("^Borrower logs in as his account is activated$")
     public void user_logs_in_as_his_account_is_activated() throws Exception {
         loginPage = welcomePage.clickSignIn();
         activateAccount(user.getEmail());
@@ -99,6 +102,13 @@ public class LoginPageStepDef /*extends BorrowerStepDef*/ {
         user_types_his_pwd(user.getPwd());
         user_logs_in();
     }
+
+    @When("^Borrower logs in with these credentials$")
+    public void user_logs_in_with_these_credentials(List<String> credentials) throws Exception {
+        user = new User("null", credentials.get(0), credentials.get(1), "null");
+        user_logs_in_as_his_account_is_activated();
+    }
+
 
     // TODO ACMESQL or multi git jenkins plugins
     private void activateAccount(String emailAsUserLoginId) throws Exception {

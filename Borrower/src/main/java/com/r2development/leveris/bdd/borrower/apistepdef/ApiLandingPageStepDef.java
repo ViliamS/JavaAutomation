@@ -100,7 +100,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
         user_selects_loan_purpose( loanType, loanData.getLoanPurpose() );
         user_types_value_into_net_monthly_income_field( loanType, loanData.getNetMonthlyIncome() );
         user_types_value_into_monthly_expenses_field( loanType, loanData.getMonthlyExpenses() );
-        user_types_value_into_number_of_dependents_field( loanType, loanData.getNumberOfDependents() );
+        user_types_value_into_number_of_dependents_field( loanType, loanData.getNumberOfDependants() );
         user_types_value_into_amount_to_borrow_field( loanType, loanData.getLoanAmount() );
     }
 
@@ -156,11 +156,11 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
     public void user_types_value_into_number_of_dependents_field(String switchCase, String numberOfDependents) {
         switch (switchCase) {
             case "Payday Loan":
-//                quotePaydayLoanPage.setNumberOfDependents( numberOfDependents );
+//                quotePaydayLoanPage.setNumberOfDependants( numberOfDependents );
                 paydayParameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:txtNumberOfDependents:tb", numberOfDependents);
                 break;
             case "Unsecured Loan":
-//                quoteQuickLoanPage.setNumberOfDependents( numberOfDependents );
+//                quoteQuickLoanPage.setNumberOfDependants( numberOfDependents );
                 break;
         }
     }
@@ -239,7 +239,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
         user_selects_loan_purpose(loanType, loanData.getLoanPurpose() );
         user_types_value_into_net_monthly_income_field( loanType, loanData.getNetMonthlyIncome() );
         user_types_value_into_monthly_expenses_field( loanType, loanData.getMonthlyExpenses() );
-        user_types_value_into_number_of_dependents_field( loanType, loanData.getNumberOfDependents() );
+        user_types_value_into_number_of_dependents_field( loanType, loanData.getNumberOfDependants() );
         user_types_value_into_amount_to_borrow_field( loanType, loanData.getLoanAmount() );
 
         user_clicks_on_continue_button( loanType );

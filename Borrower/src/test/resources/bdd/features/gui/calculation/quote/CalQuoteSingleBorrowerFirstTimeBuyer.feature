@@ -1,26 +1,26 @@
 Feature: Cal Quote - Two Borrowers - First Time Buyer
 
   Background:
-    Given user creates a quote
+    Given Borrower creates a quote
 
   Scenario Outline: Cal Quote
-    And user selects <BorrowerNumber> as number of borrowers
-    And user selects <MortgageType> as mortgage type
-    And user types <BorrowerAge> as age
-    And user types <PartnerAge> as partner's age
-    And user selects <BorrowerMaritalStatus> as marital status
-    And user types <BorrowerTotalDependents> as total of dependents
-    And user selects <BorrowerIncomeType> as income type
-    And user types <BorrowerIncomeAmount> as income amount
-    And user selects <PartnerIncomeType> as partner's income type
-    And user types <PartnerIncomeAmount> as partner's income amount
-    And user types <MonthlyCreditCommitments> as monthly credit commitments
-    When user clicks "GET MY QUOTE"
-    And user is<isEligible> eligible to borrow at this time
-    Then user could buy a home up to the value of <MaxLoanAmount> euros, should pay monthly <MonthlyPayment> euros and should get a minimum deposit value of <MinimumDeposit> euros, need to pay Government stamp duty of <StampDuty> and a maximum price of <MaxHousePrice>, for scenario <ScenarioID>
+    And Borrower selects <BorrowerNumber> as number of borrowers
+    And Borrower selects <MortgageType> as mortgage type
+    And Borrower types <BorrowerAge> as age
+    And Borrower types <PartnerAge> as partner's age
+    And Borrower selects <BorrowerMaritalStatus> as marital status
+    And Borrower types <BorrowerTotalDependents> as total of dependents
+    And Borrower selects <BorrowerIncomeType> as income type
+    And Borrower types <BorrowerIncomeAmount> as income amount
+    And Borrower selects <PartnerIncomeType> as partner's income type
+    And Borrower types <PartnerIncomeAmount> as partner's income amount
+    And Borrower types <MonthlyCreditCommitments> as monthly credit commitments
+    When Borrower clicks "GET MY QUOTE"
+    And Borrower is<isEligible> eligible to borrow at this time
+    Then Borrower could buy a home up to the value of <MaxLoanAmount> euros, should pay monthly <MonthlyPayment> euros and should get a minimum deposit value of <MinimumDeposit> euros, need to pay Government stamp duty of <StampDuty> and a maximum price of <MaxHousePrice>, for scenario <ScenarioID>
 
     Examples:
-      | ScenarioID | BorrowerNumber | MortgageType | BorrowerAge | PartnerAge | BorrowerMaritalStatus | BorrowerTotalDependents | BorrowerIncomeType | BorrowerIncomeAmount | PartnerIncomeType | PartnerIncomeAmount | MonthlyCreditCommitments | isEligible | MaxLoanAmount | MonthlyPayment | MinimumDeposit | StampDuty | MaxHousePrice |
+      | ScenarioID | BorrowerNumber | MortgageType | BorrowerAge | PartnerAge | BorrowerMaritalStatus | BorrowerTotalDependants | BorrowerIncomeType | BorrowerIncomeAmount | PartnerIncomeType | PartnerIncomeAmount | MonthlyCreditCommitments | isEligible | MaxLoanAmount | MonthlyPayment | MinimumDeposit | StampDuty | MaxHousePrice |
 #      |UAT - TC 7|two borrowers|first-time buyer(s)|20|20|separated|2|not in paid work just now|0|an employee|45000|100|n't|||||                                                                                                                                                                                                            |
 #      |UAT - TC 8|two borrowers|first-time buyer(s)|20|20|separated|2|not in paid work just now|0|an employee|45000|1000|n't|||||                                                                                                                                                                                                           |
 #      |UAT - TC 23|two borrowers|first-time buyer(s)|30|30|divorced/dissolved civil partnership|2|not in paid work just now|0|an employee|45000|100|n't|||||                                                                                                                                                                                |

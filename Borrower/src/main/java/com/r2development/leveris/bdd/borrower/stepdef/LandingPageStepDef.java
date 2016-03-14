@@ -58,8 +58,9 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
     }
 
     @When("^Use Automatic registration page to create a new Borrower and login$")
-    public void use_automatic_registration_page_to_create_new_user(){
-        automaticRegistrationPage.clickCreateNewUser();
+    public void use_automatic_registration_page_to_create_new_user(List<String> userData){
+        // Todo : uncomment when moving back to Map         automaticRegistrationPage.clickCreateNewUser(userData.get(ApplicantId));
+        automaticRegistrationPage.clickCreateNewUser(userData.get(1));
     }
 
     @Given("^Borrower clicks on continue to get (Payday Loan|Unsecured Loan)$")
@@ -97,7 +98,7 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
             user_selects_loan_purpose( loanType, loanData.getLoanPurpose() );
         user_types_value_into_net_monthly_income_field( loanType, loanData.getNetMonthlyIncome() );
         user_types_value_into_monthly_expenses_field( loanType, loanData.getMonthlyExpenses() );
-        user_types_value_into_number_of_dependents_field( loanType, loanData.getNumberOfDependents() );
+        user_types_value_into_number_of_dependants_field( loanType, loanData.getNumberOfDependants() );
         user_types_value_into_amount_to_borrow_field( loanType, loanData.getLoanAmount() );
 
     }
@@ -159,21 +160,21 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
         quoteQuickLoanPage.setMonthlyExpenses( monthlyExpenses );
     }*/
 
-    @Given("^(Payday Loan|Usecured Loan) Borrower types into Number of dependents field a (.*)$")
-    public void user_types_value_into_number_of_dependents_field(String switchCase, String numberOfDependents) {
+    @Given("^(Payday Loan|Usecured Loan) Borrower types into Number of dependants field a (.*)$")
+    public void user_types_value_into_number_of_dependants_field(String switchCase, String numberOfDependants) {
         switch (switchCase) {
             case "Payday Loan":
-                quotePaydayLoanPage.setNumberOfDependents( numberOfDependents );
+                quotePaydayLoanPage.setNumberOfDependants( numberOfDependants );
                 break;
             case "Unsecured Loan":
-                quoteQuickLoanPage.setNumberOfDependents( numberOfDependents );
+                quoteQuickLoanPage.setNumberOfDependants( numberOfDependants );
                 break;
         }
     }
 
     /*@Given("^Borrower types into Number of dependents field a (.*)$")
-    public void user_types_value_into_number_of_dependents_field(String numberOfDependents) {
-        quoteQuickLoanPage.setNumberOfDependents( numberOfDependents );
+    public void user_types_value_into_number_of_dependants_field(String numberOfDependents) {
+        quoteQuickLoanPage.setNumberOfDependants( numberOfDependents );
     }*/
 
     @Given("^(Payday Loan|Usecured Loan) Borrower types into Amount to borrow field a (.*)$")
@@ -243,7 +244,7 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
         user_selects_loan_purpose(loanType, loanData.getLoanPurpose() );
         user_types_value_into_net_monthly_income_field( loanType, loanData.getNetMonthlyIncome() );
         user_types_value_into_monthly_expenses_field( loanType, loanData.getMonthlyExpenses() );
-        user_types_value_into_number_of_dependents_field( loanType, loanData.getNumberOfDependents() );
+        user_types_value_into_number_of_dependants_field( loanType, loanData.getNumberOfDependants() );
         user_types_value_into_amount_to_borrow_field( loanType, loanData.getLoanAmount() );
 
         user_clicks_on_continue_button( loanType );
@@ -290,7 +291,7 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
         registerPage = quoteConfigurationPage.clickApplyOnline();
     }
 
-    @Then("^Borrower is forwarded to the Registration Page$")
+    @Then("^Borrower is on the Registration Page$")
     public void gets_to_registration_page(){
         registerPage.isLoaded();
     }

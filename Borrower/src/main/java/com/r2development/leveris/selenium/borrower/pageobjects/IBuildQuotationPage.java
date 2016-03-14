@@ -13,7 +13,7 @@ public interface IBuildQuotationPage {
     IBuildQuotationPage typeAge(String age);
     IBuildQuotationPage typePartnerAge(String age);
     IBuildQuotationPage selectMaritalStatus(String maritalStatus);
-    IBuildQuotationPage typeTotalDependents(String totalDependents);
+    IBuildQuotationPage typeTotalDependants(String totalDependants);
     IBuildQuotationPage selectIncomeType(String incomeType);
     IBuildQuotationPage selectPartnerIncomeType(String incomeType);
     IBuildQuotationPage typeIncomeAmount(String incomeAmount);

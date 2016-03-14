@@ -59,17 +59,18 @@ public class QuoteData extends DataModel {
         data.replace("borrowerMaritalStatus", borrowerMaritalStatus);
     }
 
-    public String getBorrowerTotalDependents() {
+    public String getBorrowerTotalDependants() {
         return data.get("borrowerTotalDependents");
     }
 
-    public void setBorrowerTotalDependents(String borrowerTotalDependents) {
-        data.replace("borrowerTotalDependents", borrowerTotalDependents);
+    public void setBorrowerTotalDependants(String borrowerTotalDependants) {
+        data.replace("borrowerTotalDependants", borrowerTotalDependants);
     }
 
     public String getBorrowerIncomeType() {
         return data.get("borrowerIncomeType");
     }
+
 
     public void setBorrowerIncomeType(String borrowerIncomeType) {
         data.replace("borrowerIncomeType", borrowerIncomeType);

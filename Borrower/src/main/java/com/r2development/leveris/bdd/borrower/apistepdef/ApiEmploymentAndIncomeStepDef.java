@@ -1248,7 +1248,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @When("^(borrower) user clicks \"ADD EMPLOYMENT\"$")
+    @When("^(Borrower) clicks \"ADD EMPLOYMENT\"$")
     public void borrower_coapplicant_user_clicks_add_employment(String borrowerOrCoapplicant) throws IOException {
 
         Document precedentResponseDoc = Jsoup.parse(httpResponse.getHttpResponse());
@@ -1287,7 +1287,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
 
     }
 
-    @Then("^(borrower) user clicks \"Done\"$")
+    @Then("^(Borrower) clicks \"Done\"$")
     public void borrower_coapplicant_user_clicks_done(String borrowerOrCoapplicant) throws IOException {
 
         String yourAccountPageResponse = requestHttpPost(

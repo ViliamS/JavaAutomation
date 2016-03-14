@@ -1,7 +1,11 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
 import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import com.r2development.leveris.di.IUser;
+import com.r2development.leveris.di.User;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebElement;
@@ -11,6 +15,15 @@ import org.openqa.selenium.support.PageFactory;
 public class AutomaticRegistrationSection extends Borrower implements IAutomaticRegistrationSection {
 
     private static final Log log = LogFactory.getLog(AutomaticRegistrationSection.class);
+
+    @Inject
+    IUser user;
+
+    @FindBy( xpath = OPOQUO_APPLICANT_READ_ONLY_INPUT_XPATH )
+    protected WebElement readOnlyApplicantInput;
+
+    @FindBy( xpath = OPOQUO_PASSWORD_READ_ONLY_INPUT_XPATH )
+    protected WebElement readOnlyPasswordInput;
 
     @FindBy( xpath = TITLE_XPATH )
     protected WebElement weTitle;
@@ -89,12 +102,31 @@ public class AutomaticRegistrationSection extends Borrower implements IAutomatic
     }
 
     @Override
-    public IAutomaticRegistrationSection clickCreateNewUserAndLogin() {
+    public IAutomaticRegistrationSection clickCreateNewUserAndLogin(String userName) {
         loadingCheck();
-        isVisible(LINK_CREATE_NEW_USER_XPATH, 5);
+
+        isVisible(OPOQUO_APPLICANTS_ID_INPUT_XPATH, true);
+        isVisible(LINK_CREATE_NEW_USER_XPATH, true);
+
+        if(!StringUtils.isEmpty(userName))
+            type(OPOQUO_APPLICANTS_ID_INPUT_XPATH, userNameTimeStamping(userName, true)); //typing with timestamp
+
         clickElement(LINK_CREATE_NEW_USER_XPATH);
         loadingCheck();
-        isVisible(OPOQUO_LOGIN_BUTTON_XPATH, 5);
+
+        isVisible(OPOQUO_APPLICANT_READ_ONLY_INPUT_XPATH, true);
+        isVisible(OPOQUO_PASSWORD_READ_ONLY_INPUT_XPATH, true);
+        isVisible(OPOQUO_LOGIN_BUTTON_XPATH, true);
+
+        String applicant = getAttributeText(readOnlyApplicantInput, "value");
+        if(!StringUtils.isEmpty(applicant)) {
+          //todo Anthony cucumber guice module not executed
+            user = new User();
+            user.setEmail(applicant);
+        }
+        String password = getAttributeText(readOnlyPasswordInput, "value");
+        if(!StringUtils.isEmpty(password))
+            user.setPwd(password);
         clickElement(OPOQUO_LOGIN_BUTTON_XPATH);
         loadingCheck();
         return this;

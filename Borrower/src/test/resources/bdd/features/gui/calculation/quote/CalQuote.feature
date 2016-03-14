@@ -2,32 +2,32 @@
 Feature: Cal Quote Verification
 
   Background:
-    Given user creates a quote
+    Given Borrower creates a quote
 
   Scenario Outline: Cal Quote
-    And user selects <BorrowerNumber> as number of borrowers
-#    And user clicks "<BorrowerNumber> Borrower" as number or borrowers
-    And user selects <MortgageType> as mortgage type
-#    And user clicks "<MortgageType>" as mortgage type
-    And user types <BorrowerAge> as age
-    And user types <PartnerAge> as partner's age
-    And user selects <BorrowerMaritalStatus> as marital status
-    And user types <BorrowerTotalDependents> as total of dependents
-    And user selects <BorrowerIncomeType> as income type
-    And user types <BorrowerIncomeAmount> as income amount
-    And user selects <PartnerIncomeType> as partner's income type
-    And user types <PartnerIncomeAmount> as partner's income amount
-    And user types <MonthlyCreditCommitments> as monthly credit commitments
-    When user clicks "GET MY QUOTE"
-    And user is<isEligible> eligible to borrow at this time
-#    Then user could buy a home up to the value of <MaxLoanAmount> euros, should pay monthly <MonthlyPayment> euros and should get a minimum deposit value of <MinimumDeposit> euros
-    Then user could buy a home up to the value of <MaxLoanAmount> euros, should pay monthly <MonthlyPayment> euros and should get a minimum deposit value of <MinimumDeposit> euros, need to pay Government stamp duty of <StampDuty> and a maximum price of <MaxHousePrice>, for scenario <ScenarioID>
-#    And user could buy a home up to the value of <MaxLoanAmount> euros
-#    And user should pay monthly <MonthlyPayment> euros
-#    And user should get a minimum deposit value of <MinimumDeposit> euros
+    And Borrower selects <BorrowerNumber> as number of borrowers
+#    And Borrower clicks "<BorrowerNumber> Borrower" as number or borrowers
+    And Borrower selects <MortgageType> as mortgage type
+#    And Borrower clicks "<MortgageType>" as mortgage type
+    And Borrower types <BorrowerAge> as age
+    And Borrower types <PartnerAge> as partner's age
+    And Borrower selects <BorrowerMaritalStatus> as marital status
+    And Borrower types <BorrowerTotalDependants> as total of dependents
+    And Borrower selects <BorrowerIncomeType> as income type
+    And Borrower types <BorrowerIncomeAmount> as income amount
+    And Borrower selects <PartnerIncomeType> as partner's income type
+    And Borrower types <PartnerIncomeAmount> as partner's income amount
+    And Borrower types <MonthlyCreditCommitments> as monthly credit commitments
+    When Borrower clicks "GET MY QUOTE"
+    And Borrower is<isEligible> eligible to borrow at this time
+#    Then Borrower could buy a home up to the value of <MaxLoanAmount> euros, should pay monthly <MonthlyPayment> euros and should get a minimum deposit value of <MinimumDeposit> euros
+    Then Borrower could buy a home up to the value of <MaxLoanAmount> euros, should pay monthly <MonthlyPayment> euros and should get a minimum deposit value of <MinimumDeposit> euros, need to pay Government stamp duty of <StampDuty> and a maximum price of <MaxHousePrice>, for scenario <ScenarioID>
+#    And Borrower could buy a home up to the value of <MaxLoanAmount> euros
+#    And Borrower should pay monthly <MonthlyPayment> euros
+#    And Borrower should get a minimum deposit value of <MinimumDeposit> euros
 
     Examples:
-      | ScenarioID | BorrowerNumber    | MortgageType        | BorrowerAge | PartnerAge | BorrowerMaritalStatus                | BorrowerTotalDependents | BorrowerIncomeType        | BorrowerIncomeAmount | PartnerIncomeType         | PartnerIncomeAmount | MonthlyCreditCommitments | isEligible | MaxLoanAmount                                     | MonthlyPayment | MinimumDeposit | StampDuty | MaxHousePrice |
+      | ScenarioID | BorrowerNumber    | MortgageType        | BorrowerAge | PartnerAge | BorrowerMaritalStatus                | BorrowerTotalDependants | BorrowerIncomeType        | BorrowerIncomeAmount | PartnerIncomeType         | PartnerIncomeAmount | MonthlyCreditCommitments | isEligible | MaxLoanAmount                                     | MonthlyPayment | MinimumDeposit | StampDuty | MaxHousePrice |
       |UAT - TC 1|two borrowers|first-time buyer(s)|20|20|separated|1|an employee|150000|an employee|150000|0||1050000.00|4969.11|350000.00||                                                                                                                                                                                               |
       |UAT - TC 2|two borrowers|first-time buyer(s)|20|20|separated|2|an employee|100000|a civil servant|100000|100||700000.00|3312.74|147500.00||                                                                                                                                                                                          |
       |UAT - TC 3|two borrowers|first-time buyer(s)|20|20|separated|0|an employee|85000|self employed|75000|200||560000.00|2650.19|112500.00||                                                                                                                                                                                              |

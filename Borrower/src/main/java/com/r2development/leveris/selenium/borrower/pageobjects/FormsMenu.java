@@ -45,8 +45,8 @@ public class FormsMenu extends Borrower implements IFormsMenu {
     @FindBy ( xpath = ACCOUNT_XPATH )
     protected WebElement weAccount;
 
-    @FindBy ( xpath = DEPENDENTS_XPATH )
-    protected WebElement weDependents;
+    @FindBy ( xpath = DEPENDANTS_XPATH)
+    protected WebElement weDependants;
 
     @FindBy ( xpath = FINANCIAL_ASSETS_XPATH )
     protected WebElement weFinancialAssets;
@@ -215,29 +215,29 @@ public class FormsMenu extends Borrower implements IFormsMenu {
     }
 
     @Override
-    public IFormsMenu clickDependents() {
-//        isVisible(DEPENDENTS_XPATH, true, 10);
+    public IFormsMenu clickDependants() {
+//        isVisible(DEPENDANTS_XPATH, true, 10);
 //        weDependents.click();
-        clickElement(DEPENDENTS_XPATH);
+        clickElement(DEPENDANTS_XPATH);
         return this;
     }
 
     @Override
-    public IFormsMenu clickDependents(String singleOrDouble) {
+    public IFormsMenu clickDependants(String singleOrDouble) {
         if ( singleOrDouble.equals("single"))
-            clickElement(DEPENDENTS_XPATH);
+            clickElement(DEPENDANTS_XPATH);
         else
-            clickElement(DEPENDENTS_COMMON_XPATH);
+            clickElement(DEPENDANTS_COMMON_XPATH);
         return this;
     }
 
     @Override
-    public boolean isDependentFormDone(String singleOrDouble) {
+    public boolean isDependantFormDone(String singleOrDouble) {
         if ( singleOrDouble.equals("single")) {
-            return isVisible(DEPENDENTS_DONE_XPATH, false, 10);
+            return isVisible(DEPENDANTS_DONE_XPATH, false, 10);
         }
         else {
-            return isVisible(DEPENDENTS_COMMON_DONE_XPATH, false, 10);
+            return isVisible(DEPENDANTS_COMMON_DONE_XPATH, false, 10);
         }
     }
 

@@ -1,4 +1,4 @@
-
+@HPPaydayLoan
 Feature: Payday Loan
 
   Background:
@@ -32,9 +32,15 @@ Feature: Payday Loan
 ##    And user goes to CRM
 #    Then Borrower user logs in as his account is activated
 
-    When Use Automatic registration page to create a new Borrower and login
+    Given Borrower processes the automatic registration
+      | ApplicantId | test.automation.test@finfactory.com |
 
-    Then Borrower wants to get a quote now
+    Then Borrower clicks "Quote" task
+
+#    When Use Automatic registration page to create a new Borrower and login
+#      | ApplicantId | test.automation.test@finfactory.com |
+#
+#    Then Borrower wants to get a quote now
 
     And Borrower clicks on continue to get Payday Loan
 
@@ -42,7 +48,7 @@ Feature: Payday Loan
       | LoanType           | Payday Loan |
       | NetMonthlyIncome   | 21,000.00   |
       | MonthlyExpenses    | 1,000.00    |
-      | NumberOfDependents | 1           |
+      | NumberOfDependants | 1           |
       | AmountToBorrow     | 1,000.00    |
 
     When Payday Loan Borrower clicks on Continue button
@@ -54,7 +60,7 @@ Feature: Payday Loan
 #    PERSONAL DETAILS
 #    When Borrower clicks "Borrower Personal Details"
     And Borrower fills in "Personal Details"
-      | firstName           | AutomationSBUI    |
+      | firstName           | AutomationGUI    |
       | lastName            | Tester            |
       | gender              | Male              |
       | dateOfBirth         | 01/01/1977        |
