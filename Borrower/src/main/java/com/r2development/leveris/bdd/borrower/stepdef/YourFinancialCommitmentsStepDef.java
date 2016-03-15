@@ -39,8 +39,8 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
     public void user_fills_in_financial(String userType, List<String> financialListData) {
         FinancialData financialData = new FinancialData(financialListData);
 
-        // TODO do we really need userType ? + typo
-        user_clicks_financial_loan_type(usertType, financialData.get("financialType"));
+        // TODO do we really need userType
+        user_clicks_financial_loan_type(userType, financialData.get("financialType"));
         switch (financialData.get("financialType")) {
             case "Personal":
                 yourFinancialCommitmentsPage.typePersonalOutstandingBalanceAmount(financialData.get("outstandingBalanceAmount"));
