@@ -101,8 +101,8 @@ public class ApiMainFormsProcessesStepDef extends ApiOpoqoBorrowerStepDef {
     public void clickAccount() {
     }
 
-    @When("^Borrower clicks \"Dependents\"$")
-    public void clickDependents() {
+    @When("^Borrower clicks \"Dependants\"$")
+    public void clickDependants() {
     }
 
     @When("^Borrower clicks \"Financial Assets\"$")

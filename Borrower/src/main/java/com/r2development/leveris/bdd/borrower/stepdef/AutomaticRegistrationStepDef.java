@@ -3,6 +3,7 @@ package com.r2development.leveris.bdd.borrower.stepdef;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.AutomaticRegistrationData;
+import com.r2development.leveris.selenium.borrower.pageobjects.AutomaticRegistrationPage;
 import com.r2development.leveris.selenium.borrower.pageobjects.IAutomaticRegistrationPage;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
@@ -11,6 +12,7 @@ import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
+import java.util.List;
 import java.util.Map;
 
 @Singleton
@@ -24,13 +26,15 @@ public class AutomaticRegistrationStepDef /*extends BorrowerStepDef*/ {
     @Inject
     AutomaticRegistrationStepDef(SharedDriver webDriver) {
 //        super(webDriver);
-//        automaticRegistrationPage = new AutomaticRegistrationPage(WebDriverService.getWebDriverInstance());
+        automaticRegistrationPage = new AutomaticRegistrationPage(webDriver);
         this.webDriver = webDriver;
     }
 
-    @Given("^(Borrower) goes to Automatic Registration page$")
-    public void user_goes_to_automatic_registration_page(String user) {
-        // TODO to implement
+    @Given("^Borrower processes the automatic registration$")
+    public void user_goes_to_automatic_registration_page(List<String> userNameList) {
+        //todo when change back to map just uncomment
+        //automaticRegistrationPage.clickCreateNewUser(userNameMap.get(ApplicantId));
+        automaticRegistrationPage.clickCreateNewUser(userNameList.get(1));
     }
 
     @Given("^Borrower types his applicant : (.*)$")
@@ -73,16 +77,19 @@ public class AutomaticRegistrationStepDef /*extends BorrowerStepDef*/ {
         automaticRegistrationPage.typeCoapplicantId(coapplicantId);
     }
 
+    @Deprecated
     @When("^Borrower clicks \"Create new user\"$")
-    public void user_clicks_create_new_user() {
-        automaticRegistrationPage.clickCreateNewUser();
+    public void user_clicks_create_new_user(List<String> userData) {
+        //automaticRegistrationPage.clickCreateNewUser();
     }
 
+    @Deprecated
     @Given("^this automatic registration data, user processes the automatic registration$")
     public void this_registration_data_user_processes_the_registration(Map<String, String> automationRegistrationDataMap) {
         fill_in_automatic_registration(new AutomaticRegistrationData(automationRegistrationDataMap));
     }
 
+    @Deprecated
     private void fill_in_automatic_registration(AutomaticRegistrationData automaticRegistrationData) {
         user_types_coapplicant_email(automaticRegistrationData.get("applicantId"));
         if ( automaticRegistrationData.get("quoteComplete") != null && automaticRegistrationData.get("quoteComplete").equals("yes"))
@@ -92,6 +99,6 @@ public class AutomaticRegistrationStepDef /*extends BorrowerStepDef*/ {
             Assert.assertNotNull("coapplicant id is mandatory to invite a coapplicant", automaticRegistrationData.get("coapplicantId" ));
             user_types_coapplicant_email(automaticRegistrationData.get("coapplicantId"));
         }
-        user_clicks_create_new_user();
+        //user_clicks_create_new_user();
     }
 }

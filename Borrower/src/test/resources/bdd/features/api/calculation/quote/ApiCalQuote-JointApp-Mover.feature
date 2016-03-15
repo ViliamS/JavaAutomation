@@ -9,7 +9,7 @@ Feature: Cal Quote - Two Borrowers - Mover
     And user types <BorrowerAge> as age
     And user types <PartnerAge> as partner's age
     And user selects <BorrowerMaritalStatus> as marital status
-    And user types <BorrowerTotalDependents> as total of dependents
+    And user types <BorrowerTotalDependants> as total of dependants
     And user selects <BorrowerIncomeType> as income type
     And user types <BorrowerIncomeAmount> as income amount
     And user selects <PartnerIncomeType> as partner's income type
@@ -20,7 +20,7 @@ Feature: Cal Quote - Two Borrowers - Mover
     Then user could buy a home up to the value of <MaxLoanAmount> euros, should pay monthly <MonthlyPayment> euros and should get a minimum deposit value of <MinimumDeposit> euros, for scenario <ScenarioID>
 
     Examples:
-      |ScenarioID| BorrowerNumber    | MortgageType        | BorrowerAge | PartnerAge | BorrowerMaritalStatus                | BorrowerTotalDependents | BorrowerIncomeType        | BorrowerIncomeAmount | PartnerIncomeType         | PartnerIncomeAmount | MonthlyCreditCommitments | isEligible | MaxLoanAmount                                     | MonthlyPayment | MinimumDeposit |
+      |ScenarioID| BorrowerNumber    | MortgageType        | BorrowerAge | PartnerAge | BorrowerMaritalStatus                | BorrowerTotalDependants | BorrowerIncomeType        | BorrowerIncomeAmount | PartnerIncomeType         | PartnerIncomeAmount | MonthlyCreditCommitments | isEligible | MaxLoanAmount                                     | MonthlyPayment | MinimumDeposit |
       |UAT - TC 41|two borrowers|mover(s)|20|20|separated|1|an employee|150000|an employee|150000|0||1050000|5320.11|368000|
       |UAT - TC 42|two borrowers|mover(s)|20|20|separated|2|an employee|100000|a civil servant|100000|100||700000|3547|183750|
       |UAT - TC 43|two borrowers|mover(s)|20|20|separated|0|an employee|85000|self employed|75000|200||56000|2837|147000|

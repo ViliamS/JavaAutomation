@@ -48,8 +48,8 @@ public class QuotePaydayLoanSection extends Borrower implements IQuotePaydayLoan
     }
 
     @Override
-    public IQuotePaydayLoanSection setNumberOfDependents(String numberOfDependents) {
-        type(NUMBER_OF_DEPENDENTS_INPUT, numberOfDependents);
+    public IQuotePaydayLoanSection setNumberOfDependants(String numberOfDependants) {
+        type(NUMBER_OF_DEPENDANTS_INPUT, numberOfDependants);
         return this;
     }
 

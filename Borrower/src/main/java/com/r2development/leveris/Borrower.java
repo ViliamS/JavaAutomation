@@ -4,6 +4,7 @@ import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,6 +12,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
+import java.util.Map;
 
 public class Borrower /*implements IBorrower*/ {
 
@@ -31,6 +33,61 @@ public class Borrower /*implements IBorrower*/ {
 
     protected final String INDICATOR_SMALL_OFF = "//div[@wicketpath='wicketpath' and @id='busyIndicator1a0' and @style='display: none']";
     protected final String INDICATOR_SMALL_ON = "//div[@wicketpath='wicketpath' and @id='busyIndicator1a0' and @style='display: block']";
+
+    protected final Integer[] scrollDown = {50, 0};
+
+    protected final String EXCEPTION_THERE_ARE_ERROR_ITEMS_XPATH = "//div[@wicketpath='main_c_form_dialogWrapper_dialog_feedbackBox1']/div[@class='errorbox']/ul/li/div";
+
+    /**
+     * Java Time Since the Epoch
+     */
+    protected long fromEpoch(){
+        return (System.currentTimeMillis() / 1000);
+    }
+
+    protected String userNameTimeStamping(String userName, boolean isGui){
+        if(isGui){
+            return userNameTimeStamping(userName, ".gui.aut.test.");
+        } else {
+            return userNameTimeStamping(userName, ".api.aut.test.");
+        }
+    }
+
+    protected String userNameTimeStamping(String userName, String testType){
+        String[] userNameArray = userName.split("@");
+        userName = userNameArray[0] + testType + System.getProperty("timestamp") + "@" + userNameArray[1];
+        return userName;
+    }
+
+    private String userNameTimeStamping(String userName){
+        return userNameTimeStamping(userName, ".aut.test.");
+    }
+
+    private String getExceptionText(){
+        isVisible(EXCEPTION_THERE_ARE_ERROR_ITEMS_XPATH, 5);
+        return getText(EXCEPTION_THERE_ARE_ERROR_ITEMS_XPATH);
+    }
+
+    protected void formSubmitPostSync(String xpathWaitToDisappear, String xpathOfExceptionDialog, Map<String, String> exceptionTexts) {
+        log.info("formSPSEE ----> ");
+        try {
+            isNotVisible(xpathWaitToDisappear, true, 5);
+            log.info("formSPSEE ---> \n" +
+                    "Passed isNotVisible('" + xpathWaitToDisappear  + "')");
+        } catch (Exception x) {
+            log.info("formSPSEE ---> \n" +
+                    "Failed isNotVisible('" + xpathWaitToDisappear  + "')");
+            log.info(exceptionTexts.get("FormName"));
+            if (isVisible(xpathWaitToDisappear, 1) && isVisible(xpathOfExceptionDialog, 1)) {
+                log.info(exceptionTexts.get("GetExceptionResult1") + getExceptionText() + exceptionTexts.get("GetExceptionResult2"));
+                Assert.assertTrue(exceptionTexts.get("FormAction"), false);
+            }
+        }
+    }
+
+    protected void formSubmitPostSync(String xpathWaitToDisappear, Map<String, String> exceptionTextDisplayedIfFieldStillPresent) {
+        formSubmitPostSync(xpathWaitToDisappear, EXCEPTION_THERE_ARE_ERROR_ITEMS_XPATH, exceptionTextDisplayedIfFieldStillPresent);
+    }
 
     protected final String
             ANY_LOADING_OVERLAY = "//div[contains(@id,'busyIndicator') or contains(@class,'dblclick-fix-layer') or contains(@id,'initialMenuWrapper')][contains(@style,'display:block') or contains(@style,'display: block')]",
@@ -57,17 +114,18 @@ public class Borrower /*implements IBorrower*/ {
     }
 
     private boolean isLoadingBlock(){
-        return (isVisible(BUSY_INDICATOR_BLOCK, 0)) || (isVisible(BUSY_INDICATOR_BLOCK2, 0)) || (isVisible(BUSY_INDICATOR_BLOCK3, 0));
+        // TODO tocheck
+        return (isVisibleLoadingCheck(BUSY_INDICATOR_BLOCK, 0)) || (isVisibleLoadingCheck(BUSY_INDICATOR_BLOCK2, 0)) || (isVisibleLoadingCheck(BUSY_INDICATOR_BLOCK3, 0));
     }
 
     private boolean isLoading(){
-        return isVisible(ANY_LOADING_OVERLAY, 0);
+        return isVisibleLoadingCheck(ANY_LOADING_OVERLAY, 0);
     }
 
     private void notLoading(int i){
-        isVisible(BUSY_INDICATOR_NONE, (i==0 ? i: i-1));
-        isVisible(BUSY_INDICATOR_NONE2, (i==0 ? i: i-1));
-        isVisible(BUSY_INDICATOR_NONE3, (i==0 ? i: i-1));
+        isVisibleLoadingCheck(BUSY_INDICATOR_NONE, (i==0 ? i: i-1));
+        isVisibleLoadingCheck(BUSY_INDICATOR_NONE2, (i==0 ? i: i-1));
+        isVisibleLoadingCheck(BUSY_INDICATOR_NONE3, (i==0 ? i: i-1));
     }
 
 
@@ -94,19 +152,19 @@ public class Borrower /*implements IBorrower*/ {
     }
 
     protected WebElement getWebElement(String xpath) {
-        log.info("wait for visibility of the xpath: " + xpath);
+        log.info("\n getWebElement ---> xpath: " + xpath + "\n");
         waitForVisibility(xpath);
         return findBy(xpath);
     }
 
     protected WebElement getWebElement(String xpath, @SuppressWarnings("SameParameterValue") int timeout) {
-        log.info("wait for visibility of the xpath: " + xpath);
+        log.info("\n getWebElement ---> xpath: " + xpath + " with time-out: " + timeout + "\n");
         waitForVisibility(xpath, timeout);
         return findBy(xpath);
     }
 
     protected boolean getWebElementWithText(String xpath, @SuppressWarnings("SameParameterValue") String text, int timeout) {
-        log.info("wait for visibility of the xpath: " + xpath + " having this text: " + text);
+        log.info("\n getWebElementWithText ---> xpath: " + xpath + " containing text: " + text + " with time-out: " + timeout + "\n");
         waitForVisibilityWithText(xpath, text, timeout);
         return true;
     }
@@ -120,11 +178,11 @@ public class Borrower /*implements IBorrower*/ {
                         driver.findElement(By.xpath(xpath)).clear();
                         driver.findElement(By.xpath(xpath)).sendKeys(text);
                     } catch (WebDriverException wde) {
-                        log.debug("Element with xpath: " + xpath + " can't be found now.");
+                        log.debug("\n sendKeysElement ---> xpath: " + xpath + " can't be found now \n");
                     }
                     return true;
                 });
-        log.info("\n sendKeysElement with xpath: " + xpath + "\n typing text = '" + text + "'");
+        log.info("\n sendKeysElement ---> xpath: " + xpath + " typing: '" + text + "'\n");
     }
 
     protected List<WebElement> getWebElements(String xpath) {
@@ -140,7 +198,7 @@ public class Borrower /*implements IBorrower*/ {
                     try {
                         driver.findElement(By.xpath(xpath)).click();
                     } catch (WebDriverException wde) {
-                        log.debug("Element with xpath: " + xpath + " can't be found now.");
+                        log.debug("\n clickElement ---> xpath: " + xpath + " can't be found now \n");
                     }
                     return true;
                 });
@@ -159,11 +217,11 @@ public class Borrower /*implements IBorrower*/ {
             try {
                 driver.findElement(By.xpath(xpath)).click();
             } catch (WebDriverException wde) {
-                log.debug("Element with xpath: " + xpath + " can't be found now.");
+                log.debug("\n clickElement ---> xpath: " + xpath + " can't be found now \n");
             }
             return true;
         });
-        log.info("click on element with xpath: " + xpath);
+        log.info("\n clickElement ---> xpath: " + xpath + "\n");
     }
 
     protected void clickElement(String xpath, @SuppressWarnings("SameParameterValue") String expectedClickableXpath) {
@@ -173,13 +231,14 @@ public class Borrower /*implements IBorrower*/ {
                 .until((WebDriver driver) -> {
                     try {
                         driver.findElement(By.xpath(xpath)).click();
+                        loadingCheck();
                     } catch (WebDriverException wde) {
-                        log.debug("Element with xpath: " + xpath + " can't be found now.");
+                        log.debug("\n clickElement ---> xpath: " + xpath + " couldn't been found \n");
                     }
                     return true;
                 });
         new WebDriverWait(webDriver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(expectedClickableXpath)));
-        log.info("click on element with xpath: " + xpath + "and expect clickable xpath: " + expectedClickableXpath);
+        log.info("\n clickElement ---> xpath: " + xpath + "and expect clickable xpath: " + expectedClickableXpath + "\n");
     }
 
     private void clickElement(By by) {
@@ -190,23 +249,24 @@ public class Borrower /*implements IBorrower*/ {
                     try {
                         driver.findElement(by).click();
                     } catch (WebDriverException wde) {
-                        log.debug("Element with By: " + by.toString() + " can't be found now.");
+                        log.debug("\n clickElement ---> By: " + by.toString() + " couldn't been found \n");
                     }
                     return true;
                 });
-        log.info("click on element with by: " + by.toString());
+        log.info("\n clickElement ---> by: " + by.toString() + "\n");
     }
 
-    protected void clickElement(By by, @SuppressWarnings("SameParameterValue") String expected) {
+    protected void clickElement(By by, @SuppressWarnings("SameParameterValue") String expectedXpath) {
+        log.info(("\n clickElement ---> xpath: " + by.toString() + " \n and ---> expected: " + expectedXpath));
         new WebDriverWait(webDriver, DEFAULT_TIMEOUT)
                 .ignoring(StaleElementReferenceException.class)
 //                .ignoring(WebDriverException.class)
                 .until((WebDriver driver) -> {
                     try {
                         driver.findElement(by).click();
-                        isVisible(expected, true);
+                        isVisible(expectedXpath, true);
                     } catch (WebDriverException wde) {
-                        log.debug("Element with By: " + by.toString() + " can't be found now.");
+                        log.debug("\n clickElement ---> By: " + by.toString() + " couldn't been found or expectedXpath: " + expectedXpath + " couldn't been found \n");
                     }
                     return true;
                 });
@@ -222,7 +282,7 @@ public class Borrower /*implements IBorrower*/ {
             executor.executeScript("arguments[0].click();", findBy(xpath));
 //            if ( xpath.equals(IEmploymentIncomeSection.EMPLOYMENT_INCOMES_ADD_EMPLOYMENT_XPATH))
 //                isVisible("//div[@wicketpath='main_c_form_dialogWrapper']", true, 5);
-            log.info(("click via javascript injection with xpath: " + xpath));
+            log.info(("\n clickElementViaJavascript ---> xpath: " + xpath + "\n"));
             loadingCheck();
         } catch ( NoSuchElementException | TimeoutException ignored) {
             log.info("Huston ! we have a problem !!!");
@@ -239,7 +299,7 @@ public class Borrower /*implements IBorrower*/ {
                 isVisible(xpath, true, 0);
                 JavascriptExecutor executor = (JavascriptExecutor) webDriver;
                 executor.executeScript("arguments[0].click();", findBy(xpath));
-                log.info(("click via javascript injection with xpath: " + xpath));
+                log.info(("\n clickElementViaJavascript ---> xpath: " + xpath + "\n"));
                 loadingCheck();
                 toGoOn = true;
             } catch ( NoSuchElementException | TimeoutException ignored) {
@@ -258,7 +318,7 @@ public class Borrower /*implements IBorrower*/ {
                 isVisible(xpath, true, 0);
                 JavascriptExecutor executor = (JavascriptExecutor) webDriver;
                 executor.executeScript("arguments[0].click();", findBy(xpath));
-                log.info(("click via javascript injection with xpath: " + xpath));
+                log.info(("\n clickElementViaJavascript ---> xpath: " + xpath + " \n and ---> expectedXpath: " + expectedXpath) + "\n");
                 loadingCheck();
                 isVisible(expectedXpath, true, 0);
                 toGoOn = true;
@@ -276,7 +336,7 @@ public class Borrower /*implements IBorrower*/ {
                     driver.findElement(By.xpath(xpath)).getText();
                     return true;
                 });
-        log.info("Extract text on this xpath: " + xpath);
+        log.info("\n getText ---> xpath: " + xpath + "\n");
         return getWebElement(xpath).getText();
     }
 
@@ -297,67 +357,72 @@ public class Borrower /*implements IBorrower*/ {
 //        return ( webElement.getAttribute(attributeName) != null ? true : false );
 //    }
 
-//    protected String getAttributeText(WebElement webElement, String attributeName) {
-//        log.info("Extracting attribute value of " + attributeName + " from the webElement " + webElement.toString());
-//        return ( webElement.getAttribute(attributeName) != null ? webElement.getAttribute(attributeName) : null);
-//    }
+    protected String getAttributeText(WebElement webElement, String attributeName) {
+        log.info("Extracting attribute value of " + attributeName + " from the webElement " + webElement.toString());
+        return ( webElement.getAttribute(attributeName) != null ? webElement.getAttribute(attributeName) : null);
+    }
 
     private void waitForVisibility(By locator) {
-        log.info("waitForVisibility based on this locator: " + locator.toString());
+        log.info("\n waitForVisibility ---> locator: " + locator.toString() + "\n");
         WebDriverWait wait = new WebDriverWait(webDriver, DEFAULT_TIMEOUT);
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
     private void waitForVisibility(By locator, int timeout_in_seconds) {
-        log.info("waitForVisibility based on this locator: " + locator.toString());
+        log.info("\n waitForVisibility ---> locator: " + locator.toString() + " with time-out: '" + timeout_in_seconds + "'\n");
         WebDriverWait wait = new WebDriverWait(webDriver, timeout_in_seconds);
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
     private void waitForVisibility(String xpath) {
-        log.info("waitForVisibility based on this xpath: " + xpath);
+        log.info("\n waitForVisibility ---> xpath: '" + xpath + "' <--- \n");
         WebDriverWait wait = new WebDriverWait(webDriver, DEFAULT_TIMEOUT);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
     }
 
+    private void waitForVisibilityLoadingCheck(String xpath, int timeout_in_seconds) {
+        WebDriverWait wait = new WebDriverWait(webDriver, timeout_in_seconds);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+    }
+
     private void waitForVisibility(String xpath, int timeout_in_seconds) {
-        log.info("\n waitForVisibility \n ||| Xpath: '" + xpath + "' |||");
+        log.info("\n waitForVisibility ---> xpath: '" + xpath + "' <--- " + " with time-out: '" + timeout_in_seconds + "'\n");
         WebDriverWait wait = new WebDriverWait(webDriver, timeout_in_seconds);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
     }
 
     private void waitForVisibilityWithText(String xpath, String text, int timeout_in_seconds) {
-        log.info("waitForVisibility based on this xpath: " + xpath + " and on this text: " + text);
+        log.info("\n waitForVisibilityWithText ---> xpath: '" + xpath + "' <--- and on this text: " + text + " with time-out: '" + timeout_in_seconds + "'\n");
         WebDriverWait wait = new WebDriverWait(webDriver, timeout_in_seconds);
         wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(xpath), text));
     }
 
     private void waitForInvisibility(By locator) {
-        log.info("waitForVisibility based on this locator: " + locator.toString());
+        log.info("\n waitForInvisibility ---> locator: " + locator.toString() + "\n");
         WebDriverWait wait = new WebDriverWait(webDriver, DEFAULT_TIMEOUT);
         wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
 
     private void waitForInvisibility(By locator, int timeout_in_seconds) {
-        log.info("waitForVisibility based on this locator: " + locator.toString());
+        log.info("\n waitForInvisibility ---> locator: " + locator.toString() + " with time-out: '" + timeout_in_seconds + "'\n");
         WebDriverWait wait = new WebDriverWait(webDriver, timeout_in_seconds);
         wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
 
     private void waitForInvisibility(String xpath) {
-        log.info("waitForVisibility based on this xpath: " + xpath);
+        log.info("\n waitForInvisibility ---> xpath: " + xpath + " <--- \n");
         WebDriverWait wait = new WebDriverWait(webDriver, DEFAULT_TIMEOUT);
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(xpath)));
     }
 
     private void waitForInvisibility(String xpath, int timeout_in_seconds) {
-        log.info("waitForVisibility based on this xpath: " + xpath);
+        log.info("\n waitForInvisibility ---> xpath: " + xpath + " with time-out: '" + timeout_in_seconds + "'\n");
         WebDriverWait wait = new WebDriverWait(webDriver, timeout_in_seconds);
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(xpath)));
     }
 
     private void waitForVisibilities(String xpath, int timeout_in_seconds) {
-        log.info("waitForVisibility based on this xpath: " + xpath);
+        log.info("\n waitForInvisibility ---> xpath: " + xpath + " with time-out: '" + timeout_in_seconds + "'\n");
         WebDriverWait wait = new WebDriverWait(webDriver, timeout_in_seconds);
         wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(xpath)));
     }
@@ -450,6 +515,21 @@ public class Borrower /*implements IBorrower*/ {
         return true;
     }
 
+    // TODO to check
+    private boolean isVisibleLoadingCheck(String xpath, int timeout_in_seconds) {
+//        boolean toReturn = true;
+        try {
+            waitForVisibilityLoadingCheck(xpath, timeout_in_seconds);
+        } catch (TimeoutException te) {
+//            toReturn = false;
+            return false;
+        }
+//        } finally {
+//        }
+//        return toReturn;
+        return true;
+    }
+
     protected boolean isVisible(String xpath, int timeout_in_seconds) {
 //        boolean toReturn = true;
         try {
@@ -532,17 +612,88 @@ public class Borrower /*implements IBorrower*/ {
 //    }
 
     protected void get(String url) {
+        log.info("\n **************************************************************************************************** \n" +
+                 " *                                                                                                    * \n" +
+                 " *                                                                                                    * \n" +
+                 " Opening a Web Page URL: " + url + "\n" +
+                 " *                                                                                                    * \n" +
+                 " *                                                                                                    * " +
+                 "\n *************************************************************************************************** \n");
         webDriver.get(url);
     }
 
+    // TODO to check
+    private void horizontalVerticalScroll(Integer[] horizontalAndVertical){
+        if(horizontalAndVertical.length == 2)
+            scroll(horizontalAndVertical[0], horizontalAndVertical[1]);
+        else if (horizontalAndVertical.length == 1)
+            scroll(horizontalAndVertical[0], 0);
+    }
+
+    private String moveToDropDownButton(String xpath, Integer[] horizontalAndVertical){
+        loadingCheck();
+        moveTo(By.xpath(xpath));
+        horizontalVerticalScroll(horizontalAndVertical);
+        String currentBy = xpath + "/following-sibling::button";
+        waitForVisibility(currentBy);
+        moveTo(currentBy);
+        return currentBy;
+    }
+
+    private void clickOnDropDownToShowList(String xpath){
+        loadingCheck();
+        clickElement(xpath);
+        loadingCheck();
+    }
+
+    private void clickOnDropDownToShowList(String xpath, boolean recall){
+        if(recall){
+            for(int i = 0; i < 5; i++) {
+                if (!isVisible(xpath))
+                    clickOnDropDownToShowList(xpath);
+                isVisible(xpath, 2);
+            }
+        } else
+            clickOnDropDownToShowList(xpath);
+    }
+
+    private void selectFromDisplayedDropDownList(String valueToSelect){
+        final String DROP_DOWN_LIST = "//ul[contains(@style, 'display: block')]/li/a";
+        String dropDownLocator = DROP_DOWN_LIST + "[.='" + valueToSelect + "']";
+        waitForVisibility( dropDownLocator, DEFAULT_TIMEOUT );
+
+        if(!isVisible(dropDownLocator))
+            clickOnDropDownToShowList(dropDownLocator, true);
+
+        moveTo( dropDownLocator );
+        clickElement( dropDownLocator );
+        loadingCheck();
+
+    }
+
+    protected void selectFromDropDown(String xpath, String valueToSelect, Integer[] horizontalVerticalScroll){
+        log.info("\n selectFromDropDown: " + valueToSelect + " on ---> xpath: " + xpath + "\n");
+        //By currentBy = moveToDropDownButton(xpath);
+        //clickOnDropDownToShowList(currentBy)
+         /**
+          * that two rows above are redundant if compared to row below....
+          * but row below is harder to read so keeping two rows above commented as hint
+          */
+        clickOnDropDownToShowList( moveToDropDownButton( xpath, horizontalVerticalScroll ) );
+        horizontalVerticalScroll( horizontalVerticalScroll );
+        selectFromDisplayedDropDownList( valueToSelect );
+        loadingCheck();
+    }
+
     protected void selectFromDropDown(String xpath, String valueToSelect) {
-        log.info("Selecting a value: " + valueToSelect + ", on element with xpath: " + xpath);
+        log.info("\n selectFromDropDown: " + valueToSelect + " on ---> xpath: " + xpath + "\n");
+        loadingCheck();
         moveTo(By.xpath(xpath));
         By currentBy = By.xpath(xpath + "/following-sibling::button");
         waitForVisibility(currentBy);
         moveTo(currentBy);
         clickElement(currentBy);
-
+        loadingCheck();
         final String DROP_DOWN_LIST = "//ul[contains(@style, 'display: block')]/li/a";
 //        final String DROP_DOWN_LIST = "//ul[@role='listbox'][not(contains(@style,'display: none'))]/li[@class='ui-menu-item']/a";
         // or //ul[contains(@style, 'display: block')]/li/a
@@ -552,15 +703,17 @@ public class Borrower /*implements IBorrower*/ {
         waitForVisibility(dropDownLocator, DEFAULT_TIMEOUT);
         moveTo(dropDownLocator);
         clickElement(dropDownLocator);
+        loadingCheck();
     }
 
     protected void selectFromDropDownIncludingBold(String xpath, String valueToSelect) {
-        log.info("Selecting a value: " + valueToSelect + ", on element with xpath: " + xpath);
+        log.info("\n selectFromDropDownIncludingBold: " + valueToSelect + " on ---> xpath: " + xpath + "\n");
         By currentBy = By.xpath(xpath + "/following-sibling::button");
+        loadingCheck();
         waitForVisibility(currentBy);
         moveTo(currentBy);
         clickElement(currentBy);
-
+        loadingCheck();
         final String DROP_DOWN_LIST = "//ul[contains(@style, 'display: block')]/li/a/b";
 //        final String DROP_DOWN_LIST = "//ul[@role='listbox'][not(contains(@style,'display: none'))]/li[@class='ui-menu-item']/a";
         // or //ul[contains(@style, 'display: block')]/li/a
@@ -569,10 +722,11 @@ public class Borrower /*implements IBorrower*/ {
 //        waitForVisibility(dropDownLocator, DEFAULT_TIMEOUT);
         moveTo(dropDownLocator);
         clickElement(dropDownLocator);
+        loadingCheck();
     }
 
     protected void type(String xpath, String valueToType) {
-        log.info("Typing a value: " + valueToType + ", to element with xpath: " + xpath);
+        log.info("\n type: " + valueToType + " to ---> xpath: " + xpath + "\n");
         By currentBy = By.xpath(xpath);
         waitForVisibility(currentBy);
         moveTo(currentBy);
@@ -598,7 +752,7 @@ public class Borrower /*implements IBorrower*/ {
     }
 
     protected void type(String xpath, String valueToType, String sendKeyType) {
-        log.info("Typing a value: " + valueToType + ", to element with xpath: " + xpath + "' \n and hitting a key = '" + sendKeyType + "'");
+        log.info("\n type: " + valueToType + " to ---> xpath: " + xpath + "' \n and hitting a key = '" + sendKeyType + "'\n");
 
         if ( !StringUtils.isEmpty(sendKeyType) )
             type(xpath, valueToType, Keys.valueOf(sendKeyType));
@@ -607,7 +761,7 @@ public class Borrower /*implements IBorrower*/ {
     }
 
     protected void type(String xpath, String valueToType, Keys sendKeyType){
-        log.info("Typing a value: " + valueToType + ", to element with xpath: " + xpath + "' \n and hitting a key = '" + sendKeyType.toString() + "'");
+        log.info("\n type: " + valueToType + " to ---> xpath: " + xpath + "' \n and hitting a key = '" + sendKeyType.toString() + "'\n");
         By currentBy = By.xpath(xpath);
         waitForVisibility(currentBy);
         moveTo(currentBy);
@@ -623,8 +777,17 @@ public class Borrower /*implements IBorrower*/ {
         }*/
         if ( !StringUtils.isEmpty(sendKeyType) ) {
             log.info("sendKeys " + sendKeyType + "");
-            webDriver.findElement(currentBy).sendKeys(sendKeyType);
+            sendKeysKeyType(currentBy, sendKeyType);
         }
+    }
+
+    private void sendKeysKeyType(String xpath, Keys sendKeyType){
+        sendKeysKeyType(By.xpath(xpath), sendKeyType);
+    }
+
+    private void sendKeysKeyType(By currentBy, Keys sendKeyType){
+        log.info("\n -------------------------------------- \n | sendKeysKeyType | \n byLocator ---> " + currentBy.toString() + " <--- | \n -------------------------------------- \n");
+        webDriver.findElement(currentBy).sendKeys(sendKeyType);
     }
 
     protected void scroll(int vertical, @SuppressWarnings("SameParameterValue") int horizontal) {
@@ -660,13 +823,15 @@ public class Borrower /*implements IBorrower*/ {
 //    }
 
     protected void checkAlert() {
+        loadingCheck();
         try {
-            WebDriverWait wait = new WebDriverWait(webDriver, 2);
+            WebDriverWait wait = new WebDriverWait(webDriver, 0);
             wait.until(ExpectedConditions.alertIsPresent());
             Alert alert = webDriver.switchTo().alert();
             alert.accept();
         } catch (Exception e) {
             //exception handling
         }
+        loadingCheck();
     }
 }

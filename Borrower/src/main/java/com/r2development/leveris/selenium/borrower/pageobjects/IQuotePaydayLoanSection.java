@@ -20,7 +20,7 @@ public interface IQuotePaydayLoanSection {
             UNSECURED_LOAN_WICKET =         "[contains(@wicketpath,'UnsecuredLoanQuotation')]",
             NET_MONTHLY_INCOME_WICKET =     "[contains(@wicketpath,'NetMonthlyIncome')]",
             MONTHLY_EXPENSES_WICKET =       "[contains(@wicketpath,'MonthlyExpenses')]",
-            NUMBER_OF_DEPENDENTS_WICKET =   "[contains(@wicketpath,'NumberOfDependents')]",
+            NUMBER_OF_DEPENDANTS_WICKET =   "[contains(@wicketpath,'NumberOfDependents')]",
             AMOUNT_TO_BORROW_WICKET =       "[contains(@wicketpath,'AmountToBorrow')]",
             BTN_CONTINUE_WICKET =           "[contains(@wicketpath,'Continue')]",
             SUBMIT_WICKET =                 "[contains(@wicketpath,'submit')]",
@@ -42,8 +42,8 @@ public interface IQuotePaydayLoanSection {
             LOAN_PURPOSE_XPATH =            UNSECURED_LOAN_SPACE    + LOAN_PURPOSE_WICKET           + INPUT        + LOAN_PURPOSE_WICKET + NOT_DISABLED,
             NET_MONTHLY_INCOME_INPUT =      UNSECURED_LOAN_SPACE    + NET_MONTHLY_INCOME_WICKET     + DIRECT_INPUT + NOT_DISABLED,
             MONTHLY_EXPENSES_INPUT =        UNSECURED_LOAN_SPACE    + MONTHLY_EXPENSES_WICKET       + DIRECT_INPUT + NOT_DISABLED,
-            //    NUMBER_OF_DEPENDENTS_INPUT =    UNSECURED_LOAN_SPACE    + NUMBER_OF_DEPENDENTS_WICKET   + DIRECT_INPUT + NOT_DISABLED,
-            NUMBER_OF_DEPENDENTS_INPUT =    "//input[@wicketpath='main_c_form_form_root_c_w_pnlUnsecuredLoanQuotation_c_w_txtNumberOfDependents_tb']",
+            //    NUMBER_OF_DEPENDANTS_INPUT =    UNSECURED_LOAN_SPACE    + NUMBER_OF_DEPENDANTS_WICKET   + DIRECT_INPUT + NOT_DISABLED,
+            NUMBER_OF_DEPENDANTS_INPUT =    "//input[@wicketpath='main_c_form_form_root_c_w_pnlUnsecuredLoanQuotation_c_w_txtNumberOfDependents_tb']",
             AMOUNT_TO_BORROW_INPUT =        UNSECURED_LOAN_SPACE    + AMOUNT_TO_BORROW_WICKET       + DIRECT_INPUT + NOT_DISABLED,
             CONTINUE_TEAL_BUTTON_XPATH =    UNSECURED_LOAN_SPACE    + BTN_CONTINUE_WICKET + DIRECT_A + BTN_CONTINUE_WICKET + SUBMIT_WICKET + DIRECT_SPAN + TEXT_CONTINUE;
             //    CONTINUE_TEAL_BUTTON_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlUnsecuredLoanQuotation_c_w_btnContinue_submit']";
@@ -54,7 +54,7 @@ public interface IQuotePaydayLoanSection {
     IQuotePaydayLoanSection setLoanPurpose(String loanPurposeType);
     IQuotePaydayLoanSection setNetMonthlyIncome(String netMonthlyIncome);
     IQuotePaydayLoanSection setMonthlyExpenses(String monthlyExpenses);
-    IQuotePaydayLoanSection setNumberOfDependents(String numberOfDependents);
+    IQuotePaydayLoanSection setNumberOfDependants(String numberOfDependants);
     IQuotePaydayLoanSection setAmountToBorrow(String amountToBorrow);
     IQuoteConfigurationPage clickContinue();
 

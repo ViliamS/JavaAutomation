@@ -25,8 +25,8 @@ public interface IBuildQuoteSection {
     String BUILD_QUOTE_MARITAL_STATUS_DIVORCED_XPATH = "//div[@wicketpath='main_c_form_form_root_c_w_pnlBuildYourQuotation_c_w_pnlMaritalStatus_c_w_rgrMaritalStatus_rg_rb_radMaritalStatusDivorced']//a";
     String BUILD_QUOTE_MARITAL_STATUS_WIDOWED_XPATH = "//div[@wicketpath='main_c_form_form_root_c_w_pnlBuildYourQuotation_c_w_pnlMaritalStatus_c_w_rgrMaritalStatus_rg_rb_radMaritalStatusWidowed']//a";
 
-//    String BUILD_QUOTE_TOTAL_DEPENDENTS_XPATH = "//input[contains(@wicketpath, 'TotalDependents')]";
-    String BUILD_QUOTE_TOTAL_DEPENDENTS_XPATH = "//input[@wicketpath='main_c_form_form_root_c_w_pnlBuildYourQuotation_c_w_pnlTotalDependents_c_w_txtTotalDependents_tb']";
+//    String BUILD_QUOTE_TOTAL_DEPENDANTS_XPATH = "//input[contains(@wicketpath, 'TotalDependents')]";
+    String BUILD_QUOTE_TOTAL_DEPENDANTS_XPATH = "//input[@wicketpath='main_c_form_form_root_c_w_pnlBuildYourQuotation_c_w_pnlTotalDependents_c_w_txtTotalDependents_tb']";
 
     String BUILD_QUOTE_INCOME_TYPE_XPATH = "//input[contains(@wicketpath, 'Income1') and contains(@wicketpath, 'IncomeType') and not(contains(@wicketpath, 'IncomeType1origValue'))]";
     String BUILD_QUOTE_INCOME_TYPE_PANEL_XPATH = "//div[@wicketpath='main_c_form_form_root_c_w_pnlBuildYourQuotation_c_w_pnlEmploymentAndIncome1_c_w_pnlIncome1_c_w_rgrIncomeTypeB1_rg']";
@@ -53,7 +53,7 @@ public interface IBuildQuoteSection {
     IBuildQuoteSection typeAge(String age);
     IBuildQuoteSection typePartnerAge(String age);
     IBuildQuoteSection selectMaritalStatus(String maritalStatus);
-    IBuildQuoteSection typeTotalDependents(String totalDependents);
+    IBuildQuoteSection typeTotalDependants(String totalDependants);
     IBuildQuoteSection selectIncomeType(String incomeType);
     IBuildQuoteSection selectPartnerIncomeType(String incomeType);
     IBuildQuoteSection typeIncomeAmount(String incomeAmount);

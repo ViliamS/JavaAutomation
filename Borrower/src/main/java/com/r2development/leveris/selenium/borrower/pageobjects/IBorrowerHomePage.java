@@ -5,6 +5,8 @@ public interface IBorrowerHomePage {
     void closePopup();
     void clickGetQuoteOrGetStarted() throws Exception;
 
+    String GET_A_QUOTE_START_TASK_BUTTON_XPATH = "//a[@wicketpath='main_c_form_embeddedFormWrapper_embeddedForm_1_form_root_c_w_pnlQuote_c_w_btnAction_script']";
+
     IBorrowerHomePage clickLogo();
     INotificationMessagePage clickNotificationMessages();
     IBorrowerHomePage clickYourAccount();
@@ -31,6 +33,8 @@ public interface IBorrowerHomePage {
     void clickHelpCenter();
     void clickWhatElse();
     void clickLegalTerm();
+
+    void clickStartTaskButton();
 
     IBorrowerHomePage clickReviewAndSubmit();
     IBorrowerHomePage clickSubmitYourApplication();

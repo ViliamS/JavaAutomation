@@ -106,6 +106,8 @@ public class RegisterPage extends Borrower implements IRegisterPage {
 
     @Override
     public IRegisterPage setPhoneNumber(String phoneNumber) {
+        // TODO why ?
+        loadingCheck();
         isVisible(PHONE_NUMBER_XPATH, true);
         wePhoneNumber.clear();
         wePhoneNumber.sendKeys(phoneNumber);

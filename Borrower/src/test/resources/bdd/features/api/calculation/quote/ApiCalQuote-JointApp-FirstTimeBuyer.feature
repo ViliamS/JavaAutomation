@@ -9,7 +9,7 @@ Feature: Cal Quote - Two Borrowers - First Time Buyer
     And user types <BorrowerAge> as age
     And user types <PartnerAge> as partner's age
     And user selects <BorrowerMaritalStatus> as marital status
-    And user types <BorrowerTotalDependents> as total of dependents
+    And user types <BorrowerTotalDependants> as total of dependants
     And user selects <BorrowerIncomeType> as income type
     And user types <BorrowerIncomeAmount> as income amount
     And user selects <PartnerIncomeType> as partner's income type
@@ -20,7 +20,7 @@ Feature: Cal Quote - Two Borrowers - First Time Buyer
     Then user could buy a home up to the value of <MaxLoanAmount> euros, should pay monthly <MonthlyPayment> euros and should get a minimum deposit value of <MinimumDeposit> euros, need to pay Government stamp duty of <StampDuty> and a maximum price of <MaxHousePrice>, for scenario <ScenarioID>
 
     Examples:
-      | ScenarioID | BorrowerNumber | MortgageType | BorrowerAge | PartnerAge | BorrowerMaritalStatus | BorrowerTotalDependents | BorrowerIncomeType | BorrowerIncomeAmount | PartnerIncomeType | PartnerIncomeAmount | MonthlyCreditCommitments | isEligible | MaxLoanAmount | MonthlyPayment | MinimumDeposit | StampDuty | MaxHousePrice |
+      | ScenarioID | BorrowerNumber | MortgageType | BorrowerAge | PartnerAge | BorrowerMaritalStatus | BorrowerTotalDependants | BorrowerIncomeType | BorrowerIncomeAmount | PartnerIncomeType | PartnerIncomeAmount | MonthlyCreditCommitments | isEligible | MaxLoanAmount | MonthlyPayment | MinimumDeposit | StampDuty | MaxHousePrice |
 #      |UAT - TC 7|two borrowers|first-time buyer(s)|20|20|separated|2|not in paid work just now|0|an employee|45000|100|n't|||||                                                                                                                                                                                                            |
 #      |UAT - TC 8|two borrowers|first-time buyer(s)|20|20|separated|2|not in paid work just now|0|an employee|45000|1000|n't|||||                                                                                                                                                                                                           |
 #      |UAT - TC 23|two borrowers|first-time buyer(s)|30|30|divorced/dissolved civil partnership|2|not in paid work just now|0|an employee|45000|100|n't|||||                                                                                                                                                                                |

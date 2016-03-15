@@ -91,18 +91,18 @@ public class CalQuoteCombination {
         maritalStatus.add("Divorced"); // DIV
         maritalStatus.add("Window"); // WID
 
-        Collection<String> dependents = new LinkedHashSet<>();
-        dependents.add("0");
-        dependents.add("1");
-        dependents.add("2");
-        dependents.add("3");
-        dependents.add("4");
-        dependents.add("5");
-        dependents.add("6");
-        dependents.add("7");
-        dependents.add("8");
-        dependents.add("9");
-        dependents.add("10");
+        Collection<String> dependants = new LinkedHashSet<>();
+        dependants.add("0");
+        dependants.add("1");
+        dependants.add("2");
+        dependants.add("3");
+        dependants.add("4");
+        dependants.add("5");
+        dependants.add("6");
+        dependants.add("7");
+        dependants.add("8");
+        dependants.add("9");
+        dependants.add("10");
 
         Collection<String> employmentType1 = new LinkedHashSet<>();
         employmentType1.add("Employee"); // PAY
@@ -147,13 +147,13 @@ public class CalQuoteCombination {
                 for ( String currentBorrowerAge : borrowerAge ) {
                     for ( String currentCoapplicantAge : coapplicantAge) {
                         for ( String currentMaritalStatus : maritalStatus ) {
-                            for ( String currentDependent : dependents ) {
+                            for ( String currentDependant : dependants ) {
                                 for ( String currentEmploymentType1 : employmentType1 ) {
                                     for ( String currentSalary1 : salary1 ) {
                                         for ( String currentEmploymentType2 : employmentType2 ) {
                                             for ( String currentSalary2 : salary2 ) {
                                                 for ( String currentMonthlyCommitment : monthlyCommitment ) {
-                                                    System.out.println("| " + currentNbBorrower + " | " + currentQuoteType + " | " + currentBorrowerAge + " | " + currentCoapplicantAge + " | " + currentMaritalStatus + " | " + currentDependent + " | " + currentEmploymentType1 + " | " + currentSalary1 + " | " + currentEmploymentType2 + " | " + currentSalary2 + " | " + currentMonthlyCommitment + " | | | | | | |");
+                                                    System.out.println("| " + currentNbBorrower + " | " + currentQuoteType + " | " + currentBorrowerAge + " | " + currentCoapplicantAge + " | " + currentMaritalStatus + " | " + currentDependant + " | " + currentEmploymentType1 + " | " + currentSalary1 + " | " + currentEmploymentType2 + " | " + currentSalary2 + " | " + currentMonthlyCommitment + " | | | | | | |");
                                                 }
                                             }
                                         }

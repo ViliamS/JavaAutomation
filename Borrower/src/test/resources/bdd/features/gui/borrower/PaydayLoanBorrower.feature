@@ -1,9 +1,9 @@
 
-@HP_Payday
+@HP_Payday @:-] @:-P @:-]]
 Feature: Payday Loan
 
   Background:
-#    Given Open Leveris Quote Landing page
+    Given Open Leveris Automatic Registration Page
 
   Scenario: Payday Load
 
@@ -30,20 +30,20 @@ Feature: Payday Loan
 
     And Borrower clicks on continue to get Payday Loan
     And Borrower fills in Payday Loan form
-      | LoanPurpose        | PAYDAY    |
+      | LoanType        | Payday Loan |          # TODO to check
       | NetMonthlyIncome   | 21,000.00 |
       | MonthlyExpenses    | 1,000.00  |
-      | NumberOfDependents | 1         |
+      | NumberOfDependants | 1         |
       | AmountToBorrow     | 500       |
-    When Payday Loan User clicks on Continue button
+    When Payday Loan Borrower clicks on Continue button
     Then Borrower clicks on Apply Online
 
     And Borrower processes "Forms"
 
 #    PERSONAL DETAILS
-#    When user clicks "Borrower Personal Details"
+#    When Borrower clicks "Borrower Personal Details"
     And Borrower fills in "Personal Details"
-      | firstName           | AutomationSBUI |
+      | firstName           | AutomationBGUI |
       | lastName            | Tester         |
       | gender              | Male           |
       | dateOfBirth         | 01/01/1977     |
@@ -58,7 +58,7 @@ Feature: Payday Loan
     And Borrower saves his personal details data
 
 #    EMPLOYMENT & INCOME
-#    When user clicks "Borrower Employment Income"
+#    When Borrower clicks "Borrower Employment Income"
 
     And Borrower fills in Employment and Income type Paye
       | categoryIncome      | Paye        |
@@ -68,7 +68,7 @@ Feature: Payday Loan
       | startDate           | 05/11/2013  |
       | isCurrentEmployment | yes         |
       | netMonthlyIncome    | 124000      |
-#    And Borrower user clicks "ADD EMPLOYMENT"
+#    And Borrower clicks "ADD EMPLOYMENT"
 #    And Borrower fills in Employment and Income type Paye
 #      | categoryIncome      | Paye        |
 #      | occupation          | Artist      |
@@ -89,8 +89,8 @@ Feature: Payday Loan
 #      | startDate           | 05/11/2013         |
 #      | isCurrentEmployment | yes                |
 #      | netMonthlyIncome    | 124000             |
-#    And borrower user clicks "ADD EMPLOYMENT"
-#    And borrower fills in "Employment Income"
+#    And Borrower clicks "ADD EMPLOYMENT"
+#    And Borrower fills in "Employment Income"
 #      | categoryIncome      | Civil Servant |
 #      | occupation          | Artist        |
 #      | employerName        | Hot Peppers Civil Servant  |
@@ -98,18 +98,18 @@ Feature: Payday Loan
 #      | startDate           | 05/11/2013    |
 #      | isCurrentEmployment | yes           |
 #      | netMonthlyIncome    | 124000        |
-#    And borrower user clicks "ADD EMPLOYMENT"
-#    And borrower fills in "Employment Income"
+#    And Borrower clicks "ADD EMPLOYMENT"
+#    And Borrower fills in "Employment Income"
 #      | categoryIncome      | Unemployed/Homemaker |
 #      | startDate           | 05/11/2013           |
 #      | isCurrentEmployment | yes                  |
-#    And borrower user clicks "ADD EMPLOYMENT"
-#    And borrower fills in "Employment Income"
+#    And Borrower clicks "ADD EMPLOYMENT"
+#    And Borrower fills in "Employment Income"
 #      | categoryIncome      | Unemployed/Homemaker |
 #      | startDate           | 13/11/2013           |
 #      | endDate             | 13/12/2014           |
-#    And borrower user clicks "ADD EMPLOYMENT"
-#    And borrower fills in "Employment Income"
+#    And Borrower clicks "ADD EMPLOYMENT"
+#    And Borrower fills in "Employment Income"
 #      | categoryIncome         | Other                      |
 #      | additionalIncomeSource | testAdditionalIncomeSource |
 #      | netMonthlyIncome       | 2000                       |
@@ -131,53 +131,53 @@ Feature: Payday Loan
       | sourceOfSaving  | Gift                    |
       | regularMonthlySaving | 200                |
 #    And Borrower clicks "ADD ACCOUNT"
-#    And Borrower clicks Savings account
-#    And Borrower fills in Savings account
-#      | accountType     | Savings account         |
-#      | statementDate   | 01/01/2000              |
-#      | accountName     | test Current Account    |
-#      | sortCode1       | 12                      |
-#      | sortCode2       | 34                      |
-#      | sortCode3       | 56                      |
-#      | accountNumber   | 0987654321              |
-#      | accountBalance  | 2001                    |
-#      | overdraftLimit  | 2002                    |
-#      | sourceOfSaving  | Gift                    |
-#      | regularMonthlySaving | 200                |
-#    And Borrower clicks "ADD ACCOUNT"
-#    And user clicks "Account scraping"
-#    And user closes "scraping" form
+
+#     BUG OPO-280 - As one of the impacts its not possible to add second current account as form is a lot different from the first one.... why?? hope would be answered in OPO-280
+#    And Borrower fills in Current account # BUG OPO-280
+#      | accountType           | Current Account         | # BUG OPO-280      // TODO Account or account
+#      | accountProvider       | deWilliamS              | # BUG OPO-280
+#      | statementDate         | 01/01/2000              | # BUG OPO-280
+#      | accountName           | test Current Account    | # BUG OPO-280
+#      | sortCode1             | 12                      | # BUG OPO-280
+#      | sortCode2             | 34                      | # BUG OPO-280
+#      | sortCode3             | 56                      | # BUG OPO-280
+#      | accountNumber         | 1234567890              | # BUG OPO-280
+#      | accountBalance        | 2001                    | # BUG OPO-280
+#      | overdraftLimit        | 2002                    | # BUG OPO-280
+#      | sourceOfSaving        | Gift                    | # BUG OPO-280
+#      | regularMonthlySaving  | 200                     | # BUG OPO-280
+
     And Borrower clicks Accounts "Done"
 
-#    YOUR DEPENDENT
-    And Borrower hasn't dependents
-#    And user has dependents
-#    And user fills in "Dependant form"
+#    YOUR DEPENDANT
+    And Borrower hasn't dependants
+#    And Borrower has dependants
+#    And Borrower fills in "Dependant form"
 #    | date Of Birth | 01/01/2000 |
-#    And user clicks "ADD DEPENDANT"
-#    And user fills in "Dependant form"
+#    And Borrower clicks "ADD DEPENDANT"
+#    And Borrower fills in "Dependant form"
 #      | date Of Birth | 01/01/2000 |
-#    And user clicks Dependants "Done"
+#    And Borrower clicks Dependants "Done"
 
 #    Financial Commitments
-#    When user clicks "Financial Commitments"
+#    When Borrower clicks "Financial Commitments"
     And  Borrower hasn't financial commitments
 
 #    FUNDING
-#    When user clicks "Funding"
+#    When Borrower clicks "Funding"
 # should be changed to I'm done :)
-#    Then user clicks Funding "NEXT"
+#    Then Borrower clicks Funding "NEXT"
 
 #    DOCUMENT UPLOAD
-#    And user uploads required document
-#    And user clicks "Document Upload"
-#    And Borrower user uploads the file file.txt as Proof of identity document
-#    And Borrower user uploads the file file.txt as Proof of address document
-#    And Borrower user uploads the file file.txt as P60 document
-#    And Borrower user uploads the file file.txt as Current payslip document
-#    And Borrower user uploads the file file.txt as Previous payslip document
-#    And Borrower user uploads the file file.txt as Salary certificate document
-#    And Borrower user uploads the file file.txt as Current account - IE92BOFI90001710027952 document
+#    And Borrower uploads required document
+#    And Borrower clicks "Document Upload"
+#    And Borrower uploads the file file.txt as Proof of identity document
+#    And Borrower uploads the file file.txt as Proof of address document
+#    And Borrower uploads the file file.txt as P60 document
+#    And Borrower uploads the file file.txt as Current payslip document
+#    And Borrower uploads the file file.txt as Previous payslip document
+#    And Borrower uploads the file file.txt as Salary certificate document
+#    And Borrower uploads the file file.txt as Current account - IE92BOFI90001710027952 document
     And Borrower uploads all documents
 
 #    FINAL STAGE 1

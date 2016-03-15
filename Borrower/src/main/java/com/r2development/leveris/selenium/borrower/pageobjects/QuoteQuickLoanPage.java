@@ -55,8 +55,8 @@ public class QuoteQuickLoanPage extends Borrower implements IQuoteQuickLoanPage 
     }
 
     @Override
-    public IQuoteQuickLoanPage setNumberOfDependents(String numberOfDependents){
-        quickLoanSection.setNumberOfDependents( numberOfDependents );
+    public IQuoteQuickLoanPage setNumberOfDependants(String numberOfDependants){
+        quickLoanSection.setNumberOfDependants( numberOfDependants );
         return this;
     }
 

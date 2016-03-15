@@ -6,13 +6,14 @@ Feature: Payday Loan
 
   Scenario: Payday Load
 
-    Given Borrower user logs in with these credentials
+    Given Borrower logs in with these credentials
       | email | test_automation.payday_ui@test.finfactory.com |
-      | pwd   | Password1122+                                                   |
+      ## TODO ... sync
+      | pwd   | Password1122+                                 |
 
 #    PERSONAL DETAILS
 #    When user clicks "Borrower Personal Details"
-    And borrower fills in "Personal Details"
+    And Borrower fills in "Personal Details"
       | firstName           | AutomationSBUI |
       | lastName            | Tester         |
       | gender              | Male           |
@@ -25,11 +26,11 @@ Feature: Payday Loan
       | county/state        | Galway         |
 #      | accommodation       | Property owner |
 #      | isLivingSince3years | yes            |
-    And borrower user saves his personal details data
+    And Borrower saves his personal details data
 
 #    EMPLOYMENT & INCOME
-#    When user clicks "Borrower Employment Income"
-    And borrower fills in "Employment Income"
+#    When Borrower clicks "Borrower Employment Income"
+    And Borrower fills in "Employment Income"
       | categoryIncome      | Paye        |
       | occupation          | Artist      |
       | employerName        | Hot Peppers Paye |
@@ -75,14 +76,14 @@ Feature: Payday Loan
 #      | additionalIncomeSource | testAdditionalIncomeSource |
 #      | netMonthlyIncome       | 2000                       |
 #      | timeEarningIncome      | 200                        |
-    And borrower user clicks "Done"
+    And Borrower user clicks "Done"
 
 #    YOUR ACCOUNTS
 #    When user clicks "Account"
 #    Then user clicks "ADD ACCOUNT"
-    And user clicks "Current account"
-    And user fills in "Current Account"
-#      | fundsSource     | Current Account         |
+    And Borrower clicks "Current account"
+    And Borrower fills in "Current account"
+      | fundsSource     | Current qccount         |
       | statementDate   | 01/01/2000              |
       | accountName     | test Current Account    |
       | sortCode1       | 12                      |
@@ -104,11 +105,11 @@ Feature: Payday Loan
 #    And user clicks "ADD ACCOUNT"
 #    And user clicks "Account scraping"
 #    And user closes "scraping" form
-    And user clicks Accounts "Done"
+    And Borrower clicks Accounts "Done"
 
-#    YOUR DEPENDENT
-#    When user clicks "Dependents"
-    Then user hasn't dependents
+#    YOUR DEPENDANT
+#    When Borrower clicks "Dependants"
+    Then Borrower hasn't dependants
 
 #    YOUR FINANCIAL ASSETS
 #    When user clicks "Financial Assets"
@@ -121,7 +122,7 @@ Feature: Payday Loan
 
 #    Financial Commitments
 #    When user clicks "Financial Commitments"
-    Then user hasn't financial commitments
+    Then Borrower hasn't financial commitments
 
 #    FUNDING
 #    When user clicks "Funding"
@@ -138,13 +139,13 @@ Feature: Payday Loan
 #    And Borrower user uploads the file file.txt as Previous payslip document
 #    And Borrower user uploads the file file.txt as Salary certificate document
 #    And Borrower user uploads the file file.txt as Current account - IE92BOFI90001710027952 document
-    And Upload all documents
+    And Borrower uploads all documents
 
 #    FINAL STAGE 1
 #    And borrower finalizes the Borrower Phase
-#    And user clicks "Review and Submit"
-#    And user checks "Distance Marketing"
-#    And user checks "Statutory"
-#    And user checks "Declaration"
+    And user clicks "Review and Submit"
+    And user checks "Distance Marketing"
+    And user checks "Statutory"
+    And user checks "Declaration"
 #    And user clicks "Submit your application"
-#    And finally, user clicks "Submit Application"
+    And finally, user clicks "Submit Application"

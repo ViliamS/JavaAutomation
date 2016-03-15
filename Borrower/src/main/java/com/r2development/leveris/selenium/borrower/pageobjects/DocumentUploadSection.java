@@ -280,6 +280,7 @@ public class DocumentUploadSection extends Borrower implements IDocumentUploadSe
         return toReturn;
     }
 
+    // TODO to redesign : internal automation framework bug
     private Table<String, String, Integer> getDocumentTable() {
         Table<String, String, Integer> toReturn = HashBasedTable.create();
         for( int i=0; i < weReportsList.size(); i++) {
@@ -294,7 +295,7 @@ public class DocumentUploadSection extends Borrower implements IDocumentUploadSe
             }
 //            if ( uploadName.contains(user.getFirstName()) )
 //            toReturn.put("Borrower", uploadName.replace(user.getFirstName() + " - ", ""), i+1);
-            toReturn.put("Borrower", uploadName.replace(user.getFirstName() + " - ", ""), i+1);
+            toReturn.put("Borrower", uploadName, i+1);
         }
 
         return toReturn;

@@ -113,9 +113,9 @@ public class BuildQuoteSection extends Borrower implements IBuildQuoteSection {
     }
 
     @Override
-    public IBuildQuoteSection typeTotalDependents(String totalDependents) {
-        if ( !totalDependents.equals("") )
-            type(BUILD_QUOTE_TOTAL_DEPENDENTS_XPATH, totalDependents);
+    public IBuildQuoteSection typeTotalDependants(String totalDependants) {
+        if ( !totalDependants.equals("") )
+            type(BUILD_QUOTE_TOTAL_DEPENDANTS_XPATH, totalDependants);
         return this;
     }
 

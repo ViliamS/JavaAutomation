@@ -1,6 +1,7 @@
 package com.r2development.leveris.di;
 
 import com.google.inject.AbstractModule;
+import cucumber.api.java.Before;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 
@@ -84,6 +85,7 @@ public class BorrowerDependenciesModule extends AbstractModule {
 //        }
 //    }
 
+    @Before
     @Override
     protected void configure() {
 

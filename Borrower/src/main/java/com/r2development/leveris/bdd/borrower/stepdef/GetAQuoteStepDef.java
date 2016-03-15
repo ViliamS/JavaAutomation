@@ -46,6 +46,12 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
 //        formsMenu = new FormsMenu(WebDriverService.getWebDriverInstance());
 //        super(webDriver);
         this.webDriver = webDriver;
+        borrowerHomePage = new BorrowerHomePage(webDriver);
+    }
+
+    @Given("^Borrower clicks \"Quote\" task$")
+    public void borrower_clicks_start_task() {
+        borrowerHomePage.clickStartTaskButton();
     }
 
     @Given("^Borrower processes \"Get a Quote\" \\(format1\\)$")
@@ -83,7 +89,7 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
         if ( quoteData.getPartnerAge() != null )
             user_types_partner_age(quoteData.getPartnerAge());
         user_selects_his_marital_status(quoteData.getBorrowerMaritalStatus());
-        user_types_his_total_of_dependents(quoteData.getBorrowerTotalDependents());
+        user_types_his_total_of_dependants(quoteData.getBorrowerTotalDependants());
         user_selects_his_income_type(quoteData.getBorrowerIncomeType());
         user_types_his_income_amount(quoteData.getBorrowerIncomeAmount());
         if ( quoteData.getPartnerIncomeType() != null ) {
@@ -102,7 +108,7 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
 //        if ( quoteData.getPartnerAge() != null )
 //            user_types_partner_age(quoteData.getPartnerAge());
 //        user_selects_his_marital_status(quoteData.getBorrowerMaritalStatus());
-//        user_types_his_total_of_dependents(quoteData.getBorrowerTotalDependents());
+//        user_types_his_total_of_dependants(quoteData.getBorrowerTotalDependants());
 //        user_selects_his_income_type(quoteData.getBorrowerIncomeType());
 //        user_types_his_income_amount(quoteData.getBorrowerIncomeAmount());
 //        if ( quoteData.getPartnerIncomeType() != null ) {
@@ -192,7 +198,7 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
             user_types_his_age(quotationData.get("First Borrower Age"));
             user_types_partner_age(quotationData.get("Second Borrower Age"));
             user_selects_his_marital_status(quotationData.get("Borrowers Marital Status"));
-            user_types_his_total_of_dependents(quotationData.get("Number of Dependants"));
+            user_types_his_total_of_dependants(quotationData.get("Number of Dependants"));
             user_selects_his_income_type(quotationData.get("Income Type First Borrower"));
             user_types_his_income_amount(quotationData.get("Income Amount First Borrower"));
             user_selects_partner_income_type(quotationData.get("Income Type Second Borrower"));
@@ -206,7 +212,7 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
             user_types_his_age("22");
             user_types_partner_age("20");
             user_selects_his_marital_status("single");
-            user_types_his_total_of_dependents("1");
+            user_types_his_total_of_dependants("1");
             user_selects_his_income_type("an employee");
             user_types_his_income_amount("300000");
             user_selects_partner_income_type("an employee");
@@ -264,11 +270,11 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
         buildQuotationPage.selectMaritalStatus(maritalStatus);
     }
 
-    @And("^Borrower types (.*) as total of dependents$")
-    public void user_types_his_total_of_dependents(String totalDependents) {
-        if ( StringUtils.isEmpty(totalDependents) )
-            totalDependents = "0";
-        buildQuotationPage.typeTotalDependents(totalDependents);
+    @And("^Borrower types (.*) as total of dependants$")
+    public void user_types_his_total_of_dependants(String totalDependants) {
+        if ( StringUtils.isEmpty(totalDependants) )
+            totalDependants = "0";
+        buildQuotationPage.typeTotalDependants(totalDependants);
     }
 
     @And("^Borrower selects (an employee|a civil servant|self employed|not in paid work just now) as income type$")

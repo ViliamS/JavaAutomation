@@ -3,8 +3,8 @@ package com.r2development.leveris.bdd.borrower.apistepdef;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.AutomaticRegistrationData;
-import com.r2development.leveris.di.HttpResponse;
 import com.r2development.leveris.di.IHttpResponse;
+import com.r2development.leveris.di.IUser;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;
@@ -18,13 +18,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.r2development.leveris.utils.HttpUtils.CONSUME_QUIETLY;
-import static com.r2development.leveris.utils.HttpUtils.requestHttpGet;
 import static com.r2development.leveris.utils.HttpUtils.requestHttpPost;
 
 @Singleton
 public class ApiAutomaticRegistrationStepDef extends ApiOpoqoBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiAutomaticRegistrationStepDef.class.getName());
+
+    @Inject
+    IUser user;
 
     @Inject
     IHttpResponse httpResponse;
@@ -79,24 +81,8 @@ public class ApiAutomaticRegistrationStepDef extends ApiOpoqoBorrowerStepDef {
     @When("^Borrower clicks \"Create new user\"$")
     public void user_clicks_create_new_user() throws IOException {
 
-        String automaticRegistrationResponse = requestHttpGet(
-            httpClient,
-            "http://dv2app.opoqodev.com/stable-borrower/home?useCase=automaticregistration",
-            new LinkedHashMap<String, String>() {
-                {
-                    put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
-                }
-            },
-            localContext,
-            false
-        );
-
-        if ( httpResponse == null )
-            httpResponse = new HttpResponse(null);
-        httpResponse.setHttpResponse(automaticRegistrationResponse);
-
         Pattern pLinkWithSession = Pattern.compile(";(jsessionid=.*?wicket:interface=.*)&amp;");
-        Matcher mLinkWithSession = pLinkWithSession.matcher(automaticRegistrationResponse);
+        Matcher mLinkWithSession = pLinkWithSession.matcher(httpResponse.getHttpResponse());
 
         String linkWithSession = null;
         while (mLinkWithSession.find()) {
@@ -179,6 +165,8 @@ public class ApiAutomaticRegistrationStepDef extends ApiOpoqoBorrowerStepDef {
     private void fill_in_automatic_registration(AutomaticRegistrationData automaticRegistrationData) throws IOException {
 //        user_types_coapplicant_email(automaticRegistrationData.get("applicantId"));
         user_types_his_applicant(automaticRegistrationData.get("applicantId"));
+        user.setPwd("Password1122+");
+
 //        if ( automaticRegistrationData.get("quoteComplete") != null && automaticRegistrationData.get("quoteComplete").equals("yes"))
 //            user_unchecks_or_checks_for_quote_complete("checks");
 //        if ( automaticRegistrationData.get("inviteCoapplicant") != null && automaticRegistrationData.get("inviteCoapplicant").equals("yes")) {

@@ -12,7 +12,7 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
     private static final Log log = LogFactory.getLog(YourAccountsPage.class);
 
     protected IYourAccountsSection yourAccountsSection;
-    protected IYourDependentsPage yourDependentsPage;
+    protected IYourDependantsPage yourDependantsPage;
 
 //    @Inject
     public YourAccountsPage(SharedDriver webDriver) {
@@ -45,14 +45,14 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
     }
 
     @Override
-    public IYourAccountsPage clickSavingsAccount() {
-        yourAccountsSection.clickSavingsAccount();
+    public IYourAccountsPage clickCurrentAccount() {
+        yourAccountsSection.clickCurrentAccount();
         return this;
     }
 
     @Override
-    public IYourAccountsPage clickCurrentAccount() {
-        yourAccountsSection.clickCurrentAccount();
+    public IYourAccountsPage clickSavingsAccount() {
+        yourAccountsSection.clickSavingsAccount();
         return this;
     }
 
@@ -81,24 +81,24 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
     }
 
     @Override
-    public IYourDependentsPage clickDone() {
-        yourDependentsPage = yourAccountsSection.clickDone();
+    public IYourDependantsPage clickDone() {
+        yourDependantsPage = yourAccountsSection.clickDone();
 
         try {
-            yourDependentsPage.getTitle();
+            yourDependantsPage.getTitle();
         } catch ( TimeoutException te ) {
             boolean toGoOn = false;
             while ( !toGoOn ) {
                 try {
-                    yourDependentsPage = yourAccountsSection.clickDone();
-                    yourDependentsPage.getTitle();
+                    yourDependantsPage = yourAccountsSection.clickDone();
+                    yourDependantsPage.getTitle();
                     toGoOn = true;
                 } catch ( TimeoutException te2) {
                     log.debug("Problem of clicking on Your Account Done or getting the Dependant title.");
                 }
             }
         }
-        return yourDependentsPage;
+        return yourDependantsPage;
     }
 
     @Override
@@ -157,6 +157,12 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
     @Override
     public Map<Integer, YourAccount> getAllAccounts() {
         return yourAccountsSection.getAllAccounts();
+    }
+
+    @Override
+    public IYourAccountsPage typeAccountProvider(String accountProvider){
+        yourAccountsSection.typeAccountProvider(accountProvider);
+        return this;
     }
 
     @Override
@@ -267,7 +273,7 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
     }
 
     @Override
-    public IYourAccountsPage typeSavingAccountProvider(String accountProvider) {
+    public IYourAccountsPage typeSavingsAccountProvider(String accountProvider) {
         yourAccountsSection.typeSavingAccountProvider(accountProvider);
         return this;
     }

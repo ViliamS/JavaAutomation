@@ -55,8 +55,8 @@ public interface IPersonalDetailsPage {
     IFormsMenu clickBorrowerEmploymentIncome(String borrowerOrCoapplicant);
     IFormsMenu clickAccount();
 //    IFormsMenu clickAccount(String singleOrDouble);
-    IFormsMenu clickDependents();
-//    IFormsMenu clickDependents(String singleOrDouble);
+    IFormsMenu clickDependants();
+//    IFormsMenu clickDependants(String singleOrDouble);
     IFormsMenu clickFinancialAssets();
 //    IFormsMenu clickFinancialAssets(String singleOrDouble);
     IFormsMenu clickProperties();

@@ -43,7 +43,7 @@ public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
         registerPage = new RegisterPage(webDriver);
     }
 
-    @Given("user goes to Registration page$")
+    @Given("Borrower goes to Registration page$")
     public void user_goes_to_registration_page() {
 
 //        welcomePage = new WelcomePage(WebDriverService.getWebDriverInstance());
@@ -51,14 +51,14 @@ public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
         registerPage = welcomePage.clickRegister();
     }
 
-    @Given("^this registration data, user processes the registration \\(format1\\)$")
+    @Given("^this registration data, Borrower processes the registration \\(format1\\)$")
     public void this_registration_data_user_processes_the_registration(List<RegistrationData> registrationDataList, String... test) {
         assertEquals("System is expecting only one RegistrationData occurrence", registrationDataList.size(), 1);
         fill_in_registration(registrationDataList.get(0));
     }
 
-    @Given("^this registration data, user processes the registration \\(format2\\)$")
-//    public void this_registration_data_user_processes_the_registration(Map<String, String> registrationDataMap) {
+    @Given("^this registration data, Borrower processes the registration \\(format2\\)$")
+//    public void this_registration_data_Borrower_processes_the_registration(Map<String, String> registrationDataMap) {
     public void this_registration_data_user_processes_the_registration(List<String> registrationDataMap) {
         fill_in_registration(new RegistrationData(registrationDataMap));
     }
@@ -208,7 +208,7 @@ public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
 //        verifyEmailPage.setEmail(user.getEmail());
     }
 
-    @Then("^Borrower resends$")
+    @Then("^Borrower clicks re-sent$")
     public void user_resends() {
         verifyEmailPage.clickReSent2();
     }

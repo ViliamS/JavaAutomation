@@ -235,22 +235,22 @@ Feature: Verification Quote Creation Process
 #    And Borrower verifies account data
     And Borrower clicks Accounts "NEXT"
 
-#    YOUR DEPENDENT
+#    YOUR DEPENDANT
 
-    When Borrower clicks "Dependents"
-    Then Borrower has dependents
-    And this dependent is applied to both
-    And Borrower types the Dependent date of birth: 20/10/1975
-    And Borrower clicks "ADD THIS DEPENDENT"
-    And Borrower clicks "ADD DEPENDENT"
-    And this dependent is applied to borrower
-    And Borrower types the Dependent date of birth: 20/10/1975
-    And Borrower clicks "ADD THIS DEPENDENT"
-    And Borrower clicks "ADD DEPENDENT"
-    And this dependent is applied to coapplicant
-    And Borrower types the Dependent date of birth: 20/10/1975
-    And Borrower clicks "ADD THIS DEPENDENT"
-    And Borrower clicks Dependents "NEXT"
+    When Borrower clicks "Dependants"
+    Then Borrower has dependants
+    And this dependant is applied to both
+    And Borrower types the dependant date of birth: 20/10/1975
+    And Borrower clicks "ADD THIS DEPENDANT"
+    And Borrower clicks "ADD DEPENDANT"
+    And this dependant is applied to borrower
+    And Borrower types the dependant date of birth: 20/10/1975
+    And Borrower clicks "ADD THIS DEPENDANT"
+    And Borrower clicks "ADD DEPENDANT"
+    And this dependant is applied to coapplicant
+    And Borrower types the Dependant date of birth: 20/10/1975
+    And Borrower clicks "ADD THIS DEPENDANT"
+    And Borrower clicks Dependants "NEXT"
 
 #    YOUR FINANCIAL ASSETS
 

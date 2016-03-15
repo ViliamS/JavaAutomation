@@ -3,6 +3,7 @@ package com.r2development.leveris.bdd.borrower.apistepdef;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.LandingPageData;
+import com.r2development.leveris.di.HttpResponse;
 import com.r2development.leveris.di.IHttpResponse;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -52,6 +53,25 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
 //        this.localContext = provideNewLocalContext();
 //
 //    }
+
+    @Given("^Open Leveris Automatic Registration Page")
+    public void open_leveris_automatic_registration_page() throws IOException {
+        String automaticRegistrationResponse = requestHttpGet(
+                httpClient,
+                "http://dv2app.opoqodev.com/stable-borrower/home?useCase=automaticregistration",
+                new LinkedHashMap<String, String>() {
+                    {
+                        put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+                    }
+                },
+                localContext,
+                false
+        );
+
+        if ( httpResponse == null )
+            httpResponse = new HttpResponse(null);
+        httpResponse.setHttpResponse(automaticRegistrationResponse);
+    }
 
     @Given("^Open Leveris Quote Landing page$")
     public void open_leveris_quote_landing_page() throws IOException {
@@ -145,17 +165,17 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
         user_selects_loan_purpose( loanType, loanData.getLoanPurpose() );
         user_types_value_into_net_monthly_income_field( loanType, loanData.getNetMonthlyIncome() );
         user_types_value_into_monthly_expenses_field( loanType, loanData.getMonthlyExpenses() );
-        user_types_value_into_number_of_dependents_field( loanType, loanData.getNumberOfDependents() );
+        user_types_value_into_number_of_dependants_field( loanType, loanData.getNumberOfDependants() );
         user_types_value_into_amount_to_borrow_field( loanType, loanData.getLoanAmount() );
 //        user_clicks_on_continue_button(loanType);
     }
 
-    @Given("^(Payday Loan) User selects Loan purpose (PAYDAY)$")
+    @Given("^(Payday Loan) Borrower selects Loan purpose (PAYDAY)$")
     public void user_selects_pay_loan_purpose(String loanType, String loanPurpose) {
         loan_purpose( loanType ,loanPurpose );
     }
 
-    @Given("^(Unsecured Loan) User selects Loan purpose (PERSONAL|CAR|HOLIDAY|STUDENT|HOMEIMPROVEMENT)$")
+    @Given("^(Unsecured Loan) Borrower selects Loan purpose (PERSONAL|CAR|HOLIDAY|STUDENT|HOMEIMPROVEMENT)$")
     public void user_selects_loan_purpose(String loanType, String loanPurpose) {
         loan_purpose( loanType, loanPurpose );
     }
@@ -172,7 +192,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Given("^(Payday Loan|Unsecured Loan) User types into Net monthly income field a (.*)$")
+    @Given("^(Payday Loan|Unsecured Loan) Borrower types into Net monthly income field a (.*)$")
     public void user_types_value_into_net_monthly_income_field(String switchCase, String netMonthlyIncome) {
         switch (switchCase) {
             case "Payday Loan":
@@ -185,7 +205,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Given("^(Payday Loan|Usecured Loan) User types into Monthly expenses field a (.*)$")
+    @Given("^(Payday Loan|Usecured Loan) Borrower types into Monthly expenses field a (.*)$")
     public void user_types_value_into_monthly_expenses_field(String switchCase, String monthlyExpenses) {
         switch (switchCase) {
             case "Payday Loan":
@@ -198,20 +218,20 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Given("^(Payday Loan|Usecured Loan) User types into Number of dependents field a (.*)$")
-    public void user_types_value_into_number_of_dependents_field(String switchCase, String numberOfDependents) {
+    @Given("^(Payday Loan|Usecured Loan) Borrower types into Number of dependants field a (.*)$")
+    public void user_types_value_into_number_of_dependants_field(String switchCase, String numberOfDependants) {
         switch (switchCase) {
             case "Payday Loan":
-//                quotePaydayLoanPage.setNumberOfDependents( numberOfDependents );
-                paydayParameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:txtNumberOfDependents:tb", numberOfDependents);
+//                quotePaydayLoanPage.setNumberOfDependants( numberOfDependants );
+                paydayParameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:txtNumberOfDependents:tb", numberOfDependants);
                 break;
             case "Unsecured Loan":
-//                quoteQuickLoanPage.setNumberOfDependents( numberOfDependents );
+//                quoteQuickLoanPage.setNumberOfDependants( numberOfDependants );
                 break;
         }
     }
 
-    @Given("^(Payday Loan|Usecured Loan) User types into Amount to borrow field a (.*)$")
+    @Given("^(Payday Loan|Usecured Loan) Borrower types into Amount to borrow field a (.*)$")
     public void user_types_value_into_amount_to_borrow_field(String switchCase, String amountToBorrow) {
         switch (switchCase) {
             case "Payday Loan":
@@ -224,7 +244,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Then("^(Payday Loan|Unsecured Loan) User clicks on Continue button$")
+    @Then("^(Payday Loan|Unsecured Loan) Borrower clicks on Continue button$")
     public void user_clicks_on_continue_button(String switchCase) throws IOException {
         switch (switchCase) {
             case "Payday Loan":
@@ -308,7 +328,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
         user_selects_loan_purpose(loanType, loanData.getLoanPurpose() );
         user_types_value_into_net_monthly_income_field( loanType, loanData.getNetMonthlyIncome() );
         user_types_value_into_monthly_expenses_field( loanType, loanData.getMonthlyExpenses() );
-        user_types_value_into_number_of_dependents_field( loanType, loanData.getNumberOfDependents() );
+        user_types_value_into_number_of_dependants_field( loanType, loanData.getNumberOfDependants() );
         user_types_value_into_amount_to_borrow_field( loanType, loanData.getLoanAmount() );
 
         user_clicks_on_continue_button( loanType );

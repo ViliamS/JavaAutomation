@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -92,12 +93,47 @@ public class LoginPage extends Borrower implements ILoginPage {
         return null;
     }
 
+    private Map<String, String> formExceptionDetails(){
+        Map<String, String> formExceptionDetails = new LinkedHashMap<>();
+        formExceptionDetails.put(
+                "FormName",
+                "\n Login button is still present! \n" +
+                        " Extracting exception text from dialog \n"
+        );
+        formExceptionDetails.put(
+                "GetExceptionResult1",
+                "\n -------------------------------\n" +
+                        " | Not being able to login @!!@ | \n" +
+                        " | due to : "
+        );
+        formExceptionDetails.put(
+                "GetExceptionResult2",
+                " | \n ------------------------------- \n"
+        );
+        formExceptionDetails.put(
+                "FormAction",
+                "Failed clickLogin"
+        );
+        return formExceptionDetails;
+    }
+
     @Override
     public IBorrowerHomePage clickLogin() {
         isVisible(LOGIN_BUTTON_XPATH, true);
         clickElement(LOGIN_BUTTON_XPATH);
         loadingCheck();
-//        weLoginButton.click();
+        // TODO tocheck
+        formSubmitPostSync(LOGIN_BUTTON_XPATH, EXCEPTION_DIALOG, formExceptionDetails());
+
+//        try{
+//        isNotVisible(LOGIN_BUTTON_XPATH, true, 5);
+//        } catch(Exception x){
+//            log.info("\n Login button is still present! \n Extracting exception text from dialog \n");
+//            if(isVisible(EXCEPTION_DIALOG)){
+//                log.info("\n -------------------------------\n | Not being able to login @!!@ | \n | due to : " + getExceptionText() + " | \n ------------------------------- \n");
+//                Assert.assertTrue("Failed to Login", false);
+//            }
+//        }
         return new BorrowerHomePage(webDriver);
     }
 

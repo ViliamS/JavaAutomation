@@ -55,9 +55,10 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
 //        borrower_coapplicant_user_checks_if_he_is_living_since_3_years(borrowerOrCoapplicant, (personalDetailsData.isLivingSince3years() ? "is" : "is not" ));
     }
 
+    // TODO Delete
     @Override
     public void workaroundCLV312(String borrowerOrCoapplicant) {
-        if ( borrowerOrCoapplicant.equals("borrower") )
+        if ( borrowerOrCoapplicant.equals("Borrower") )
             borrowerHomePage.clickInfoUpload();
 
         boolean toGoOn = false;

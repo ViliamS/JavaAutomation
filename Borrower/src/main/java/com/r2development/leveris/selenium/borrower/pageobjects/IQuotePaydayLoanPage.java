@@ -8,7 +8,7 @@ public interface IQuotePaydayLoanPage {
     IQuotePaydayLoanPage setLoanPurpose(String loanPurposeType);
     IQuotePaydayLoanPage setNetMonthlyIncome(String netMonthlyIncome);
     IQuotePaydayLoanPage setMonthlyExpenses(String monthlyExpenses);
-    IQuotePaydayLoanPage setNumberOfDependents(String numberOfDependents);
+    IQuotePaydayLoanPage setNumberOfDependants(String numberOfDependants);
     IQuotePaydayLoanPage setAmountToBorrow(String amountToBorrow);
     IQuoteConfigurationPage clickContinue();
 

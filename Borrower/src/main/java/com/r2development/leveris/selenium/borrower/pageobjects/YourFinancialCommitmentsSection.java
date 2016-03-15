@@ -32,18 +32,21 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
 
     @Override
     public String getDialogTitle() {
-        isVisible(FINANCIAL_CONTAINER_XPATH);
+        loadingCheck();
+        isVisible(FINANCIAL_CONTAINER_XPATH, 0);
         return getWebElement(FINANCIAL_DIALOG_TITLE_XPATH).getText();
     }
 
     @Override
     public String getDialogDescription() {
-        isVisible(FINANCIAL_DIALOG_DESCRIPTION_XPATH);
+        loadingCheck();
+        isVisible(FINANCIAL_DIALOG_DESCRIPTION_XPATH, 0);
         return getWebElement(FINANCIAL_DIALOG_DESCRIPTION_XPATH).getText();
     }
 
     @Override
     public String getDialogDescription2() {
+        loadingCheck();
         isVisible(FINANCIAL_DIALOG_DESCRIPTION2_XPATH);
         return getWebElement(FINANCIAL_DIALOG_DESCRIPTION2_XPATH).getText();
     }

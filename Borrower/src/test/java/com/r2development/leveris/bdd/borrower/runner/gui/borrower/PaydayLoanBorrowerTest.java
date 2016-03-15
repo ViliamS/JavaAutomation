@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 //@Cucumber.Options(
-        glue = { "classpath:com.r2development.leveris.bdd.borrower.stepdef" },
+        glue = { "classpath:com.r2development.leveris.bdd.borrower.stepdef; com.r2development.leveris.di.BorrowerDependenciesModule.java" },
         monochrome = true,
         format = {
                 "pretty",
