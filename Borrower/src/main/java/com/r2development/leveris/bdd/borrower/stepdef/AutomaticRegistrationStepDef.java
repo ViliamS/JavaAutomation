@@ -9,7 +9,6 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
 import java.util.List;
@@ -77,28 +76,25 @@ public class AutomaticRegistrationStepDef /*extends BorrowerStepDef*/ {
         automaticRegistrationPage.typeCoapplicantId(coapplicantId);
     }
 
-    @Deprecated
     @When("^Borrower clicks \"Create new user\"$")
     public void user_clicks_create_new_user(List<String> userData) {
         //automaticRegistrationPage.clickCreateNewUser();
     }
 
-    @Deprecated
     @Given("^this automatic registration data, user processes the automatic registration$")
     public void this_registration_data_user_processes_the_registration(Map<String, String> automationRegistrationDataMap) {
         fill_in_automatic_registration(new AutomaticRegistrationData(automationRegistrationDataMap));
     }
 
-    @Deprecated
     private void fill_in_automatic_registration(AutomaticRegistrationData automaticRegistrationData) {
-        user_types_coapplicant_email(automaticRegistrationData.get("applicantId"));
-        if ( automaticRegistrationData.get("quoteComplete") != null && automaticRegistrationData.get("quoteComplete").equals("yes"))
-            user_unchecks_or_checks_for_quote_complete("checks");
-        if ( automaticRegistrationData.get("inviteCoapplicant") != null && automaticRegistrationData.get("inviteCoapplicant").equals("yes")) {
-            user_unchecks_or_checks_for_invite_coapplicant("checks");
-            Assert.assertNotNull("coapplicant id is mandatory to invite a coapplicant", automaticRegistrationData.get("coapplicantId" ));
-            user_types_coapplicant_email(automaticRegistrationData.get("coapplicantId"));
-        }
+//        user_types_coapplicant_email(automaticRegistrationData.get("applicantId"));
+//        if ( automaticRegistrationData.get("quoteComplete") != null && automaticRegistrationData.get("quoteComplete").equals("yes"))
+//            user_unchecks_or_checks_for_quote_complete("checks");
+//        if ( automaticRegistrationData.get("inviteCoapplicant") != null && automaticRegistrationData.get("inviteCoapplicant").equals("yes")) {
+//            user_unchecks_or_checks_for_invite_coapplicant("checks");
+//            Assert.assertNotNull("coapplicant id is mandatory to invite a coapplicant", automaticRegistrationData.get("coapplicantId" ));
+//            user_types_coapplicant_email(automaticRegistrationData.get("coapplicantId"));
+//        }
         //user_clicks_create_new_user();
     }
 }

@@ -659,6 +659,11 @@ public class Orasql {
         return (O) input;
     }
 
+    public static void displayResult(String DB, String userName, String passWord, String sqlSelectQuery) throws Exception {
+        Orasql orasql = new Orasql(DB, userName, passWord);
+        orasql.displayResults(sqlSelectQuery);
+    }
+
     public static void executeSqlUpdateQuery( String DB, String userName, String passWord, String sqlUpdateQuery) throws Exception {
         Orasql orasql = new Orasql(DB, userName, passWord);
         orasql.sqlUpdate(sqlUpdateQuery);

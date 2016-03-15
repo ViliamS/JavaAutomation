@@ -868,7 +868,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
             totalDependants = "0";
 
         quoteData.setBorrowerTotalDependants(totalDependants);
-//        quoteParameters.put("root:c:w:pnlBuildYourQuotation:c:w:pnlMaritalStatus:c:w:txtTotalDependents:tb",totalDependents);
+//        quoteParameters.put("root:c:w:pnlBuildYourQuotation:c:w:pnlMaritalStatus:c:w:txtTotalDependents:tb",totalDependants);
         quoteParameters.put("root:c:w:pnlBuildYourQuotation:c:w:pnlTotalDependents:c:w:txtTotalDependents:tb", totalDependants);
 
         requestHttpPost(

@@ -78,7 +78,14 @@ public class YourDependantsPage extends HeaderAndBottomAndFormsMenuSection imple
 
     @Override
     public IYourDependantsPage clickAddDependant() {
-        yourDependantsSection.clickAddDependant();
+        try {
+            yourDependantsSection.clickAddDependant();
+        } catch (Exception e){
+
+            log.info("\n ---------------------------------------------------------------------- \n" +
+                     " | Exception raised due to failed clicking to get to add dependant page | \n" +
+                     " ----------------------------------------------------------------------- \n");
+        }
         return this;
     }
 

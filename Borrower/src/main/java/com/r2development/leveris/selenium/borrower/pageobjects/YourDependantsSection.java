@@ -68,38 +68,40 @@ public class YourDependantsSection extends Borrower implements IYourDependantsSe
     @Override
     public String getTitle() {
         loadingCheck();
-        isVisible(YOUR_DEPENDANTS_TITLE_XPATH, true, 0);
+        isVisible(YOUR_DEPENDANTS_TITLE_XPATH, 0);
         return weYourDependantTitle.getText();
     }
 
     @Override
     public String getDescription() {
         loadingCheck();
-        isVisible(YOUR_DEPENDANTS_DESCRIPTION_INTRO_XPATH, true, 0);
+        isVisible(YOUR_DEPENDANTS_DESCRIPTION_INTRO_XPATH, 0);
         return weYourDependantDescriptionIntro.getText();
     }
 
     @Override
     public String getDescription2() {
         loadingCheck();
-        isVisible(YOUR_DEPENDANTS_DESCRIPTION_INTRO2_XPATH, true, 0);
+        isVisible(YOUR_DEPENDANTS_DESCRIPTION_INTRO2_XPATH, 0);
         return weYourDependantDescriptionIntro2.getText();
     }
 
     @Override
     public IYourDependantsSection clickNone() {
         loadingCheck();
-        isVisible(YOUR_DEPENDANTS_NONE_XPATH, true, 0);
-        weYourDependantNone.click();
+        isVisible(YOUR_DEPENDANTS_NONE_XPATH, 0);
+        clickElement(YOUR_DEPENDANTS_NONE_XPATH);
+        loadingCheck();
         return this;
     }
 
     @Override
     public IYourDependantsSection clickNext() {
         loadingCheck();
-        isVisible(YOUR_DEPENDANTS_NEXT_DEPENDANT_XPATH, true, 0);
+        isVisible(YOUR_DEPENDANTS_NEXT_DEPENDANT_XPATH, 0);
         clickElement(YOUR_DEPENDANTS_NEXT_DEPENDANT_XPATH);
-//        weYourDependantsNextDependant.click();
+        loadingCheck();
+//        weYourDependantsNextDependent.click();
 //        if(isVisible(INDICATOR_SMALL_ON, false, 5))
 //            isInvisible(INDICATOR_SMALL_OFF, 5);
         return this;
@@ -130,9 +132,9 @@ public class YourDependantsSection extends Borrower implements IYourDependantsSe
 //        weYourDependantsDateOfBirthInput.click();
 //        weYourDependantsDateOfBirthInput.sendKeys(dateOfBirth);
         loadingCheck();
-        sendKeysElement(YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH, dateOfBirth, 60);
+        type(YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH, dateOfBirth);
         loadingCheck();
-        if ( isVisible("//div[@id='ui-datepicker-div']") ) {
+        if (isVisible("//div[@id='ui-datepicker-div']", 0)) {
             isVisible("//div[@id='ui-datepicker-div']//button[@data-event='click' and contains(., 'Done')]");
             clickElement("//div[@id='ui-datepicker-div']//button[@data-event='click' and contains(., 'Done')]");
         }
@@ -142,52 +144,109 @@ public class YourDependantsSection extends Borrower implements IYourDependantsSe
     @Override
     public IYourDependantsSection clickAddThisDependant() {
         loadingCheck();
-        isVisible(YOUR_DEPENDANTS_ADD_THIS_DEPENDANT_XPATH, true, 0);
-        weYourDependantsAddThisDependant.click();
-        loadingCheck();
+        if(isVisible(YOUR_DEPENDANTS_ADD_THIS_DEPENDANT_XPATH, 0)) {
+            clickElement(YOUR_DEPENDANTS_ADD_THIS_DEPENDANT_XPATH);
+            return this;
+        } else if((isVisible(YOUR_DEPENDANTS_ADD_DEPENDANTS_XPATH, 0) || isVisible(YOUR_DEPENDANTS_ADD_DEPENDANT2_XPATH, 0)) && !isNotVisible(YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH, 0)) {
+            clickAddDependant();
+            return this;
+        } else if(isVisible(YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH, 0))
+            return this;
+
+        // TODO update message
+        Assert.assertTrue("We've got lost!!! go home looser ", false);
         return this;
+    }
+
+    private Map<String, String> formExceptionDetails(){
+        Map<String, String> formExceptionDetails = new LinkedHashMap<>();
+        formExceptionDetails.put(
+                "FormName",
+                "\n Adding of dependant failed because save button is still present! " +
+                        "\n Extracting exception text from the form \n"
+        );
+        formExceptionDetails.put(
+                "GetExceptionResult1",
+                "\n -------------------------------" +
+                        "\n | Not being able to save the form @!wtf!@ | " +
+                        "\n | it is due to : '"
+        );
+        formExceptionDetails.put(
+                "GetExceptionResult2",
+                "' is displayed on page | " +
+                        "\n ------------------------------- \n"
+        );
+        formExceptionDetails.put(
+                "FormAction",
+                "Failed clickSaveAndClose"
+        );
+        return formExceptionDetails;
     }
 
     @Override
     public IYourDependantsSection clickSaveAndClose() {
         loadingCheck();
-        isVisible(YOUR_DEPENDANTS_SAVE_AND_CLOSE_XPATH, true, 0);
-        weYourDependantsSaveAndClose.click();
+        isVisible(YOUR_DEPENDANTS_SAVE_AND_CLOSE_XPATH, 0);
+        clickElement(YOUR_DEPENDANTS_SAVE_AND_CLOSE_XPATH);
         loadingCheck();
-        isNotVisible(YOUR_DEPENDANTS_PANEL_XPATH, true, 10);
-        try {
-            isVisible(YOUR_DEPENDANTS_TITLE_XPATH, true);
-        } catch( TimeoutException te ) {
-            isVisible(YOUR_DEPENDANTS_TITLE2_XPATH, true);
-        }
+
+//        isNotVisible(YOUR_DEPENDANTS_PANEL_XPATH, true, 10);
+//        try {
+//            isVisible(YOUR_DEPENDANTS_TITLE_XPATH, true);
+//        } catch (TimeoutException te) {
+//            isVisible(YOUR_DEPENDANTS_TITLE2_XPATH, true);
+//        }
+        formSubmitPostSync(YOUR_DEPENDANTS_SAVE_AND_CLOSE_XPATH, formExceptionDetails());
         return this;
     }
 
     @Override
     public IYourDependantsSection clickAddDependant() {
         loadingCheck();
-        try {
-            isVisible(YOUR_DEPENDANTS_ADD_DEPENDANT_XPATH, true);
-            getWebElement(YOUR_DEPENDANTS_ADD_DEPENDANT_XPATH).click();
-            //        weYourDependantsAddDependant.click();
-        } catch (Exception e) {
-            isVisible(YOUR_DEPENDANTS_ADD_DEPENDANT2_XPATH, true);
-            clickElementViaJavascript(YOUR_DEPENDANTS_ADD_DEPENDANT2_XPATH, YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH);
-        }
-        loadingCheck();
 
-//        isNotVisible(YOUR_DEPENDANTS_PANEL_XPATH, true, 15);
-        isVisible(YOUR_DEPENDANTS_PANEL_XPATH, 5);
-        isVisible(YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH, 5);
-        isVisible(YOUR_DEPENDANTS_ADD_DEPENDANT_XPATH, 5);
+        if (!isVisible(YOUR_DEPENDANTS_ADD_DEPENDANTS_XPATH, 0) && !isVisible(YOUR_DEPENDANTS_SAVE_AND_CLOSE_XPATH, 0) && !isVisible(YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH, 0) && !isVisible(FINANCIAL_COMMITMENTS_NAVIGATION_CHECK_XPATH, 0)) {
+            if (isVisible(YOUR_DEPENDANTS_ADD_DEPENDANT2_XPATH, 0) && !isVisible(FINANCIAL_COMMITMENTS_NAVIGATION_CHECK_XPATH, 0)) {
+                clickElement(YOUR_DEPENDANTS_ADD_DEPENDANT2_XPATH, YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH);
+            } else {
+                if(isVisible(FINANCIAL_COMMITMENTS_NAVIGATION_CHECK_XPATH)) {
+                    log.info("\n ---------------------------------------------------------------------- \n" +
+                            " | Navigation problem we are already on Your financial commitments page | \n" +
+                            " ----------------------------------------------------------------------- \n");
+                    return this;
+                }
+                else {
+                    log.info("\n ------------------------------------------------------------------------ \n" +
+                            " | Navigation problem we are lost .... We should be Dependants main screen   | \n" +
+                            " | Or on your financial commitments page but none of those is being detected | \n" +
+                            " ------------------------------------------------------------------------- \n");
+                return this;
+                }
+            }
+        } else if(isVisible(YOUR_DEPENDANTS_ADD_DEPENDANTS_XPATH, 10)) {
+            clickElement(YOUR_DEPENDANTS_ADD_DEPENDANTS_XPATH, YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH);
+        }
+
+//        try {
+//            isVisible(YOUR_DEPENDANTS_ADD_DEPENDANT_XPATH, true);
+//            clickElement(YOUR_DEPENDANTS_ADD_DEPENDANT_XPATH);
+//            // getWebElement(YOUR_DEPENDANTS_ADD_DEPENDANT_XPATH).click();
+//            //        weYourDependantsAddDependant.click();
+//        } catch (Exception e) {
+//            isVisible(YOUR_DEPENDANTS_ADD_DEPENDANT2_XPATH, true);
+//            clickElementViaJavascript(YOUR_DEPENDANTS_ADD_DEPENDANT2_XPATH, YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH);
+//        }
+        loadingCheck();
+        isVisible(YOUR_DEPENDANTS_PANEL_XPATH, true, 0);
+        isVisible(YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH, true, 0);
+        isVisible(YOUR_DEPENDANTS_ADD_DEPENDANT_XPATH, true, 0);
         return this;
     }
 
     @Override
     public IYourDependantsSection clickCancel() {
         loadingCheck();
-        isVisible(YOUR_DEPENDANTS_CANCEL_DEPENDANT_XPATH, true, 0);
-        weYourDependantsCancelDependant.click();
+        isVisible(YOUR_DEPENDANTS_CANCEL_DEPENDANT_XPATH, 0);
+        clickElement(YOUR_DEPENDANTS_CANCEL_DEPENDANT_XPATH);
         loadingCheck();
         return this;
     }
@@ -195,7 +254,7 @@ public class YourDependantsSection extends Borrower implements IYourDependantsSe
     @Override
     public IYourFinancialCommitmentsPage clickDone() {
         loadingCheck();
-        isVisible(YOUR_DEPENDANTS_DONE_XPATH, true, 0);
+        isVisible(YOUR_DEPENDANTS_DONE_XPATH, 0);
         clickElementViaJavascript(YOUR_DEPENDANTS_DONE_XPATH);
         loadingCheck();
         return new YourFinancialCommitmentsPage(webDriver);
@@ -215,5 +274,4 @@ public class YourDependantsSection extends Borrower implements IYourDependantsSe
     public IYourDependantsSection deleteDependant(int index) {
         return this;
     }
-
 }

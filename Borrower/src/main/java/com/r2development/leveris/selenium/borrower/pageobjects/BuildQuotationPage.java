@@ -96,6 +96,7 @@ public class BuildQuotationPage extends HeaderAndBottomAndFormsMenuSection imple
         return this;
     }
 
+
     @Override
     public IBuildQuotationPage selectPartnerIncomeType(String incomeType) {
         buildQuoteSection.selectPartnerIncomeType(incomeType);

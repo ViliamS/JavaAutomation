@@ -3,6 +3,7 @@ package com.r2development.leveris.selenium.borrower.pageobjects;
 import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Assert;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -176,14 +177,12 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
     @Override
     public IYourAccountsSection selectAccountType(String accountType) {
         loadingCheck();
-        // TODO all at once
         if(!isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_XPATH, 0) && !isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_DIALOG_XPATH, 0) ){
             if(isVisible(YOUR_ACCOUNTS_ADD_ACCOUNT_XPATH, 0) && !isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_NUMBER_INPUT_XPATH, 0)){
                 clickElement(YOUR_ACCOUNTS_ADD_ACCOUNT_XPATH);
                 loadingCheck();
             }
         }
-
         switch(accountType){
             case "Current account" :
                 clickCurrentAccount();

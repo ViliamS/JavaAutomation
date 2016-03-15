@@ -71,6 +71,7 @@ public class QuoteData extends DataModel {
         return data.get("borrowerIncomeType");
     }
 
+
     public void setBorrowerIncomeType(String borrowerIncomeType) {
         data.replace("borrowerIncomeType", borrowerIncomeType);
     }

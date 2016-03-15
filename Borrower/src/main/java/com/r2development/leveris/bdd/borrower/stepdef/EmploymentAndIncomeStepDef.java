@@ -55,6 +55,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         switch (employmentIncomeData.get("categoryIncome")) {
 
             case "Paye":
+
                 borrower_coapplicant_user_clicks_an_employment_and_income_category(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"));
                 borrower_coapplicant_user_selects_category_occupation(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("occupation"));
                 borrower_coapplicant_user_types_category_employer_name(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("employerName"));
@@ -154,6 +155,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
 
     @Given("^(Borrower) clicks the employment & income category : (Paye|Self Employed|Civil Servant|Unemployed/Homemaker|Other)$")
     public void borrower_coapplicant_user_clicks_an_employment_and_income_category(String borrowerOrCoapplicant, String category) {
+
         switch (borrowerOrCoapplicant) {
             case "Borrower":
                 borrowerEmploymentIncomesPage.clickCategory(category);

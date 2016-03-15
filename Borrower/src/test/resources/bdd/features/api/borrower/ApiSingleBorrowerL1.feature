@@ -14,8 +14,8 @@ Feature: Api Single Borrower
       | termsBusiness     | accepts                                     |
       | protectionPolicy  | accepts                                     |
 
-#    Then user goes to gmail
-#    And user goes to CRM
+#    Then Borrower goes to gmail
+#    And Borrower goes to CRM
     Then Borrower logs in as his account is activated
 
     Then Borrower processes "Get a Quote" (format2)
@@ -28,12 +28,12 @@ Feature: Api Single Borrower
       | borrowerIncomeAmount     | 125000              |
       | monthlyCreditCommitments | 1000                |
 
-    And borrower goes solo
+    And Borrower goes solo
 
     And Borrower processes "Forms"
 
 #    PERSONAL DETAILS
-#    When user clicks "Borrower Personal Details"
+#    When Borrower clicks "Borrower Personal Details"
     And Borrower fills in "Personal Details"
       | firstName           | AutomationSBApi |
       | lastName            | Tester          |
@@ -48,7 +48,7 @@ Feature: Api Single Borrower
     And Borrower saves his personal details data
 
 #    EMPLOYMENT & INCOME
-#    When user clicks "Borrower Employment Income"
+#    When Borrower clicks "Borrower Employment Income"
     And Borrower fills in "Employment Income"
       | categoryIncome      | Paye        |
       | occupation          | ARTIST      |
@@ -60,15 +60,15 @@ Feature: Api Single Borrower
     And Borrower clicks "Done"
 
 #    YOUR ACCOUNTS
-#    When user clicks "Account"
+#    When Borrower clicks "Account"
     Then Borrower clicks "ADD ACCOUNT"
-#    And user clicks "ADD ACCOUNT MANUALLY"
+#    And Borrower clicks "ADD ACCOUNT MANUALLY"
     And Borrower fills in "Account"
       | fundsSource     | Current Account         |
       | accountProvider | Central Bank of Ireland |
       | IBAN            | IE92BOFI90001710027952  |
       | accountBalance  | 20000                   |
-    And user clicks Accounts "NEXT"
+    And Borrower clicks Accounts "NEXT"
 
 #    YOUR DEPENDANT
 #    When Borrower clicks "Dependants"

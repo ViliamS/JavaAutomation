@@ -143,7 +143,9 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
 
     @And("^Borrower wants to get a quote now$")
     public void user_wants_to_get_a_quote_now() {
-
+        
+        
+        
         try {
             borrowerHomePage.closePopup();
         } catch ( TimeoutException te) {

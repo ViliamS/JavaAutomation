@@ -17,7 +17,7 @@ import org.openqa.selenium.WebDriver;
 import java.util.Map;
 
 @Singleton
-public class YourDependantsStepDef {
+public class YourDependantsStepDef /*extends BorrowerStepDef*/ /*implements CLV312Workaround*/ {
 
     private static final Log log = LogFactory.getLog(YourDependantsStepDef.class);
 
@@ -32,56 +32,59 @@ public class YourDependantsStepDef {
         yourDependantsPage = new YourDependantsPage(webDriver);
     }
 
-    @Given("^Borrower fills in \"Dependant form\"$")
-    public void user_fills_in_account(Map<String, String> accountDataMap) {
+    @Given("^(Borrower) fills in \"Dependant form\"$")
+    public void user_fills_in_account(String userType, List<String> accountDataMap) throws InterruptedException {
         DependantData dependantData = new DependantData(accountDataMap);
 
-        if (!StringUtils.isEmpty(dependantData.get("date Of Birth")))
-            user_types_dependant_date_of_birth(dependantData.get("date Of Birth"));
-        user_clicks_save_and_close();
+        if (!StringUtils.isEmpty(dependantData.get("date Of Birth"))){
+            user_clicks_add_dependant(userType);
+            user_types_dependant_date_of_birth(userType, dependantData.get("date Of Birth"));
+        }
+        user_clicks_save_and_close(userType);
     }
 
-    @When("^Borrower has(n't)? dependants$")
-    public void user_has_dependants(String hasDependants) throws InterruptedException {
-//        workaroundCLV312(null);
-
-        if (hasDependants == null) {
-//            yourDependantsPage.clickSingleYes();
-            yourDependantsPage.clickAddDependant();
-        }
+    @When("^(Borrower) has(n't)? dependants$")
+    public void user_has_dependants(String userType, String hasDependants) throws InterruptedException {
+        if (hasDependants == null)
+            user_clicks_add_dependant(userType);
         else {
-            yourDependantsPage.clickNone();
-//            yourDependantsPage.clickSingleNo();
-            yourDependantsPage.clickNext();
-
+            borrower_clicks_i_have_none_dependant(userType);
+            user_clicks_dependants_next(userType);
         }
     }
 
-    @And("^Borrower types the Dependant date of birth: (.*)$")
-    public void user_types_dependant_date_of_birth(String dateOfBirth) {
+    @And("^(Borrower) types the Dependant date of birth: (.*)$")
+    public void user_types_dependant_date_of_birth(String userType, String dateOfBirth) {
         yourDependantsPage.typeDateOfBirth(dateOfBirth);
     }
 
-    @And("^Borrower clicks \"ADD THIS DEPENDANT\"$")
-    public void user_clicks_add_this_dependant() {
+    @And("^(Borrower) clicks \"ADD THIS DEPENDANT\"$")
+    public void user_clicks_add_this_dependant(String userType) {
         yourDependantsPage.clickAddThisDependant();
     }
 
-    @And("^Borrower clicks \"Save and Close\"$")
-    public void user_clicks_save_and_close() {
+    @And("^(Borrower) clicks \"Save and Close\"$")
+    public void user_clicks_save_and_close(String userType) {
         yourDependantsPage.clickSaveAndClose();
     }
 
-    @And("^Borrower clicks \"ADD DEPENDANT\"$")
-    public void user_clicks_add_dependant() {
+    @And("^(Borrower) clicks \"ADD DEPENDANT\"$")
+    public void user_clicks_add_dependant(String userType) {
         yourDependantsPage.clickAddDependant();
     }
 
-    @And("^Borrower clicks Dependants \"NEXT\"$")
-    public void user_clicks_dependants_next() {
+    @And("^(Borrower) clicks Dependants \"NEXT\"$")
+    public void user_clicks_dependants_next(String userType) {
         yourDependantsPage.clickNext();
     }
 
-    @And("^Borrower clicks Dependants \"Done\"$")
-    public void user_clicks_dependants_done() { yourDependantsPage.clickDone(); }
+    @And("^(Borrower) clicks \"I HAVE NONE\" Dependant$")
+    public void borrower_clicks_i_have_none_dependant(String userType){
+        yourDependantsPage.clickNone();
+    }
+
+    @And("^(Borrower) clicks Dependants \"Done\"$")
+    public void user_clicks_dependants_done(String userType) {
+        yourDependantsPage.clickDone();
+    }
 }

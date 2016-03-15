@@ -63,7 +63,7 @@ Feature: Single Borrower
 
 #    EMPLOYMENT & INCOME
 #    When Borrower clicks "Borrower Employment Income"
-    And Borrower fills in "Employment Income"
+    And borrower fills in "Employment Income"
       | categoryIncome      | Paye        |
       | occupation          | Artist      |
       | employerName        | Hot Peppers |
@@ -90,12 +90,12 @@ Feature: Single Borrower
 
 #    YOUR FINANCIAL ASSETS
 #    When Borrower clicks "Financial Assets"
-    Then Borrower hasn't financial assets
+#    Then borrower hasn't financial assets
 
 #    Properties
 #    When Borrower clicks "Properties"
-    Then Borrower hasn't properties
-    And Borrower hasn't a property in the past
+#    Then Borrower hasn't properties
+#    And Borrower hasn't a property in the past
 
 #    Financial Commitments
 #    When Borrower clicks "Financial Commitments"
@@ -104,7 +104,7 @@ Feature: Single Borrower
 #    FUNDING
 #    When Borrower clicks "Funding"
 # should be changed to I'm done :)
-    Then Borrower clicks Funding "NEXT"
+#    Then Borrower clicks Funding "NEXT"
 
 #    DOCUMENT UPLOAD
 #    And Borrower uploads required document

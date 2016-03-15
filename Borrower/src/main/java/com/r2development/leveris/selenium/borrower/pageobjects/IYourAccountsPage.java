@@ -28,6 +28,7 @@ public interface IYourAccountsPage {
     IYourAccountsPage editAccount(int index);
     Map<Integer, YourAccount> getAccountsOf(String accountType);
     Map<Integer, YourAccount> getAllAccounts();
+
     IYourAccountsPage typeAccountProvider(String accountProvider);
     IYourAccountsPage typeCurrentStatementDate(String statementDate);
     IYourAccountsPage typeCurrentAccountName(String accountName);
@@ -48,7 +49,7 @@ public interface IYourAccountsPage {
     IYourAccountsPage typeSavingsSortCode2(String sortCode2);
     IYourAccountsPage typeSavingsSortCode3(String sortCode3);
     IYourAccountsPage typeSavingsAccountNumber(String accountNumber);
-    IYourAccountsPage typeSavingsAccountProvider(String accountProvider);
+    IYourAccountsPage typeSavingAccountProvider(String accountProvider);
     IYourAccountsPage typeSavingIban(String iban);
     IYourAccountsPage typeSavingAccountBalance(String accountBalance);
     IYourAccountsPage typeSavingOverdraftLimit(String savingOverdrafLimit);

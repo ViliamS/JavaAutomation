@@ -3,13 +3,17 @@ package com.r2development.leveris.selenium.borrower.pageobjects;
 import java.util.Map;
 
 public interface IYourAccountsSection {
+
     String YOUR_ACCOUNTS_TITLE_XPATH = "//h2[contains(., 'Your accounts')]";
     String YOUR_ACCOUNTS_DIALOG_XPATH = "//div[contains(@aria-labelledby, 'ui-dialog-title-dialogWrapper')]/h3[text()='Your accounts']";
     String YOUR_ACCOUNTS_DESCRIPTION_XPATH = "//div[contains(@id, 'lblDeposit')]//span";
 
+    String ACCOUNT_PROVIDER_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccountProvider_c_w_txtAccountProvider_tb']";
+
     String YOUR_ACCOUNTS_CURRENT_ACCOUNT_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_lnkCurrent_dialog']";
     String YOUR_ACCOUNTS_SAVING_ACCOUNT_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_lnkSavings_dialog']";
     String YOUR_ACCOUNTS_ACCOUNT_SCRAPING_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_lnkAuto_dialog']";
+
     String YOUR_ACCOUNTS_ACCOUNT_MAIN_DIALOG_XPATH = "//div[contains(@style,'display: block')]/div[@wicketpath='main_c_form_dialogWrapper']/div[@wicketpath='main_c_form_dialogWrapper_dialog']";
 
     String YOUR_ACCOUNTS_CURRENT_ACCOUNT_DIALOG_XPATH = "//a[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_lnkCurrent_submit']";
@@ -57,10 +61,8 @@ public interface IYourAccountsSection {
     String YOUR_ACCOUNTS_CURRENT_ACCOUNT_SAVING_SOURCE_LABEL_XPATH = "//label[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlSourceOfSavings_c_w_cmbSourceOfSavings_label']";
     String YOUR_ACCOUNTS_CURRENT_ACCOUNT_SAVING_SOURCE_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlSourceOfSavings_c_w_cmbSourceOfSavings_v']";
     String YOUR_ACCOUNTS_CURRENT_ACCOUNT_SAVING_SOURCE_SELECT_XPATH = "//select[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlSourceOfSavings_c_w_cmbSourceOfSavings_combobox']";
-
-
-    String YOUR_ACCOUNTS_CURRENT_ACCOUNT_REGULAR_MONTHLY_SAVINGS_LABEL_XPATH = "label[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlRegularMonthlySavings_c_w_crbRegularMonthlySavings_label']";
-    String YOUR_ACCOUNTS_CURRENT_ACCOUNT_REGULAR_MONTHLY_SAVINGS_INPUT_XPATH = "input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlRegularMonthlySavings_c_w_crbRegularMonthlySavings_tb']";
+    String YOUR_ACCOUNTS_CURRENT_ACCOUNT_REGULAR_MONTHLY_SAVINGS_LABEL_XPATH = "//label[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlRegularMonthlySavings_c_w_crbRegularMonthlySavings_label']";
+    String YOUR_ACCOUNTS_CURRENT_ACCOUNT_REGULAR_MONTHLY_SAVINGS_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlRegularMonthlySavings_c_w_crbRegularMonthlySavings_tb']";
 
     // Savings Account
     String YOUR_ACCOUNTS_SAVING_ACCOUNT_STATEMENT_DATE_LABEL_XPATH = "//label[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlStatementDate_c_w_txtStatementDate_label']";
@@ -84,7 +86,9 @@ public interface IYourAccountsSection {
     String YOUR_ACCOUNTS_SAVING_ACCOUNT_OVERDRAFT_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlOverDraft_c_w_crbOverdraft_tb']";
     String YOUR_ACCOUNTS_SAVING_ACCOUNT_SAVING_SOURCE_LABEL_XPATH = "//label[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlSourceOfSavings_c_w_cmbSourceOfSavings_label']";
     String YOUR_ACCOUNTS_SAVING_ACCOUNT_SAVING_SOURCE_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlSourceOfSavings_c_w_cmbSourceOfSavings_v']";
+
     String YOUR_ACCOUNTS_SAVING_ACCOUNT_SAVING_SOURCE_SELECT_XPATH = "//select[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlSourceOfSavings_c_w_cmbSourceOfSavings_combobox']";
+
     String YOUR_ACCOUNTS_SAVING_ACCOUNT_REGULAR_MONTHLY_SAVINGS_LABEL_XPATH = "//label[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlSourceOfSavings_c_w_cmbSourceOfSavings_label']";
     String YOUR_ACCOUNTS_SAVING_ACCOUNT_REGULAR_MONTHLY_SAVINGS_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlRegularMonthlySavings_c_w_crbRegularMonthlySavings_tb']";
 

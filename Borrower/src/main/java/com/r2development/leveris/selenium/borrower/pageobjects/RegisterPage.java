@@ -106,7 +106,6 @@ public class RegisterPage extends Borrower implements IRegisterPage {
 
     @Override
     public IRegisterPage setPhoneNumber(String phoneNumber) {
-        // TODO why ?
         loadingCheck();
         isVisible(PHONE_NUMBER_XPATH, true);
         wePhoneNumber.clear();
@@ -170,8 +169,10 @@ public class RegisterPage extends Borrower implements IRegisterPage {
 
     @Override
     public IVerifyEmailPage clickRegister() {
+        loadingCheck();
         isVisible(REGISTER_BUTTON_XPATH, true);
         clickElement(REGISTER_BUTTON_XPATH);
+        loadingCheck();
 //        weRegisterButton.click();
         isInvisible(ERROR_BOX_ROOT_XPATH, true);
         isInvisible(ERROR_FORMS_XPATH, true);

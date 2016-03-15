@@ -36,11 +36,10 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
     }
 
     @Given("^(Borrower) fills in \"Financial forn\"$")
-    public void user_fills_in_financial(String userType, List<String> financialListData) {
+    public void user_fills_in_financial(String usertType, List<String> financialListData) {
         FinancialData financialData = new FinancialData(financialListData);
 
-        // TODO do we really need userType
-        user_clicks_financial_loan_type(userType, financialData.get("financialType"));
+        user_clicks_financial_loan_type(financialData.get("financialType"));
         switch (financialData.get("financialType")) {
             case "Personal":
                 yourFinancialCommitmentsPage.typePersonalOutstandingBalanceAmount(financialData.get("outstandingBalanceAmount"));
@@ -113,7 +112,6 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
     }
 
     @When("^(Borrower) has(n't)? financial commitments$")
-    // TODO why userType ?
     public void user_has_financial_commitments(String usertType, String hasCommitments) throws InterruptedException {
 
         if (hasCommitments == null) {

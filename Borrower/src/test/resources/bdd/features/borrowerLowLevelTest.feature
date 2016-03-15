@@ -142,7 +142,7 @@ Feature: Verification Quote Creation Process
     And Borrower clicks "Add This Employment"
     And Borrower clicks "Done"
 
-    When Coapplicant clicks "Coapplicant Employment Income"
+    When Borrower clicks "Coapplicant Employment Income"
     Then Coapplicant sees his name in the Employment & Income title
     And Coapplicant clicks the employment & income category : Paye
     # problem of xpath or select method
@@ -506,17 +506,16 @@ Feature: Verification Quote Creation Process
 #    And Borrower uploads the file file.txt as Proof of identity document
 #    And Borrower uploads the file file.txt as Proof of address document
 #    And Borrower uploads the file file.txt as Marriage certificate document
-#    And Coapplicant uploads the file file.txt as Proof of identity document
 #    And Coapplicant uploads the file file.txt as Proof of address document
 #    And Coapplicant uploads the file file.txt as Marriage certificate document
-#    And Borrower uploads the file file.txt as P60 document
-#    And Borrower uploads the file file.txt as Certified account (Last year) document
-#    And Borrower uploads the file file.txt as Certified account (Previous before last year) document
-#    And Borrower uploads the file file.txt as Confirmation of tax affairs document
-#    And Borrower uploads the file file.txt as Current payslip document
-#    And Borrower uploads the file file.txt as Previous payslip document
-#    And Borrower uploads the file file.txt as Salary certificate document
-#    And Borrower uploads the file file.txt as P60 document
+#    And Borrowerr uploads the file file.txt as P60 document
+#    And Borrowerr uploads the file file.txt as Certified account (Last year) document
+#    And Borrowerr uploads the file file.txt as Certified account (Previous before last year) document
+#    And Borrowerr uploads the file file.txt as Confirmation of tax affairs document
+#    And Borrowerr uploads the file file.txt as Current payslip document
+#    And Borrowerr uploads the file file.txt as Previous payslip document
+#    And Borrowerr uploads the file file.txt as Salary certificate document
+#    And Borrowerr uploads the file file.txt as P60 document
 #    And Coapplicant uploads the file file.txt as Certified account (Last year) document
 #    And Coapplicant uploads the file file.txt as Certified account (Previous before last year) document
 #    And Coapplicant uploads the file file.txt as Confirmation of tax affairs document
@@ -524,12 +523,12 @@ Feature: Verification Quote Creation Process
 #    And Coapplicant uploads the file file.txt as Current payslip document
 #    And Coapplicant uploads the file file.txt as Previous payslip document
 #    And Coapplicant uploads the file file.txt as Salary certificate document
-#    And Borrower and Coapplicant uploads the file file.txt as Current account - 1234 document
-#    And Borrower and Coapplicant uploads the file file.txt as Credit card - provider document
+#    And Borrower and Coapplicant Borrower upload the file file.txt as Current account - 1234 document
+#    And Borrower and Coapplicant Borrower upload the file file.txt as Credit card - provider document
     And Borrower uploads all documents
 
 #    FINAL STAGE 1
-#    And borrower finalizes the Borrower Phase
+#    And Borrower finalizes the Borrower Phase
     And Borrower clicks "Review and Submit"
     And Borrower clicks "Submit your application"
     And Borrower checks "Distance Marketing"

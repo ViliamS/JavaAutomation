@@ -117,9 +117,8 @@ Feature: Payday Loan
     And Borrower clicks "Done"
 
 #    YOUR ACCOUNTS
-    And Borrower fills in Current account
+    And Borrower fills in "Current Account"
       | accountType     | Current account         |
-      | accountProvider | bli bla bleu            |
       | statementDate   | 01/01/2000              |
       | accountName     | test Current Account    |
       | sortCode1       | 12                      |
@@ -131,10 +130,28 @@ Feature: Payday Loan
       | sourceOfSaving  | Gift                    |
       | regularMonthlySaving | 200                |
 #    And Borrower clicks "ADD ACCOUNT"
+#    And Borrower clicks "Savings account"
+#    And Borrower fills in "Savings Account"
+#      | statementDate   | 01/01/2000              |
+#      | accountName     | test Current Account    |
+#      | sortCode1       | 12                      |
+#      | sortCode2       | 34                      |
+#      | sortCode3       | 56                      |
+#      | accountNumber   | 0987654321              |
+#      | accountBalance  | 2001                    |
+##      | overdraftLimit  | 2002                    |
+#      | sourceOfSaving  | Gift                    |
+#      | regularMonthlySaving | 200                |
+#    And Borrower clicks "ADD ACCOUNT"
+#    And Borrower clicks "Account scraping"
+#    And Borrower closes "scraping" form
+    And Borrower clicks Accounts "Done"
+
+#    And Borrower clicks "ADD ACCOUNT"
 
 #     BUG OPO-280 - As one of the impacts its not possible to add second current account as form is a lot different from the first one.... why?? hope would be answered in OPO-280
 #    And Borrower fills in Current account # BUG OPO-280
-#      | accountType           | Current Account         | # BUG OPO-280      // TODO Account or account
+#      | accountType           | Current Account         | # BUG OPO-280
 #      | accountProvider       | deWilliamS              | # BUG OPO-280
 #      | statementDate         | 01/01/2000              | # BUG OPO-280
 #      | accountName           | test Current Account    | # BUG OPO-280
@@ -149,19 +166,26 @@ Feature: Payday Loan
 
     And Borrower clicks Accounts "Done"
 
-#    YOUR DEPENDANT
+#    YOUR DEPENDANTS
     And Borrower hasn't dependants
-#    And Borrower has dependants
-#    And Borrower fills in "Dependant form"
-#    | date Of Birth | 01/01/2000 |
-#    And Borrower clicks "ADD DEPENDANT"
+#  - negative way not adding any
+#    And Borrower has dependants - positive way is now included in whole form filling step definition and it is being automatically handled if present
+#
 #    And Borrower fills in "Dependant form"
 #      | date Of Birth | 01/01/2000 |
+#
+#    And Borrower fills in "Dependant form"
+#      | date Of Birth | 01/01/2000 |
+
+#    And Borrower clicks "ADD DEPENDANT" - not mandatory to use but is available and it would work
+#    And Borrower fills in "Dependant form"
+#      | date Of Birth | 01/01/2000 |
+
 #    And Borrower clicks Dependants "Done"
 
 #    Financial Commitments
 #    When Borrower clicks "Financial Commitments"
-    And  Borrower hasn't financial commitments
+    And Borrower hasn't financial commitments
 
 #    FUNDING
 #    When Borrower clicks "Funding"
@@ -186,5 +210,5 @@ Feature: Payday Loan
     And Borrower checks "Distance Marketing"
     And Borrower checks "Statutory"
     And Borrower checks "Declaration"
-#    And user clicks "Submit your application"
+#    And Borrower clicks "Submit your application"
     And finally, Borrower clicks "Submit Application"

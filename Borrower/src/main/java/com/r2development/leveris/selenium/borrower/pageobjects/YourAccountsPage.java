@@ -233,6 +233,7 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
 
     @Override
     public IYourAccountsPage typeCurrentRegularMonthlySavings(String regularMonthlySavings) {
+        yourAccountsSection.typeCurrentRegularMonthlySavings(regularMonthlySavings);
         return this;
     }
 

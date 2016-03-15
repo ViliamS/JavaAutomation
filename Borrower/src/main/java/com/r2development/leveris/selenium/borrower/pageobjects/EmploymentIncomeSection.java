@@ -4,6 +4,7 @@ import com.r2development.leveris.Borrower;
 import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -198,7 +199,6 @@ public class EmploymentIncomeSection extends Borrower implements IEmploymentInco
                 loadingCheck();
             }
         }
-
         switch (category) {
 
             case "Paye":
@@ -549,7 +549,6 @@ public class EmploymentIncomeSection extends Borrower implements IEmploymentInco
         isNotVisible(EMPLOYMENT_INCOMES_FEEDBACK_DIALOG_XPATH + ERROR, false, 0);
         clickElementViaJavascript(SAVE_AND_CLOSE_XPATH);
         loadingCheck();
-        // TODO to check
         formSubmitPostSync(SAVE_AND_CLOSE_XPATH, formExceptionDetails());
         return this;
     }

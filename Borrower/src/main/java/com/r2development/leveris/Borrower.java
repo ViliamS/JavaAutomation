@@ -1,10 +1,8 @@
 package com.r2development.leveris;
 
 import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -12,7 +10,6 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
-import java.util.Map;
 
 public class Borrower /*implements IBorrower*/ {
 
@@ -45,22 +42,22 @@ public class Borrower /*implements IBorrower*/ {
         return (System.currentTimeMillis() / 1000);
     }
 
-    protected String userNameTimeStamping(String userName, boolean isGui){
+    protected String userNameTimeStamping(String userName, boolean isGui) {
         if(isGui){
-            return userNameTimeStamping(userName, ".gui.aut.test.");
+            return userNameTimeStamping(userName, "gui");
         } else {
-            return userNameTimeStamping(userName, ".api.aut.test.");
+            return userNameTimeStamping(userName, "api");
         }
     }
 
     protected String userNameTimeStamping(String userName, String testType){
         String[] userNameArray = userName.split("@");
-        userName = userNameArray[0] + testType + System.getProperty("timestamp") + "@" + userNameArray[1];
+        userName = userNameArray[0] + "." + testType + System.getProperty("timestamp") + "@" + userNameArray[1];
         return userName;
     }
 
     private String userNameTimeStamping(String userName){
-        return userNameTimeStamping(userName, ".aut.test.");
+        return userNameTimeStamping(userName, "gui");
     }
 
     private String getExceptionText(){
@@ -77,11 +74,14 @@ public class Borrower /*implements IBorrower*/ {
         } catch (Exception x) {
             log.info("formSPSEE ---> \n" +
                     "Failed isNotVisible('" + xpathWaitToDisappear  + "')");
-            log.info(exceptionTexts.get("FormName"));
+            // TODO REWORK !
+            /*
+            log.info("FialureexceptionTexts.get("FormName"));
             if (isVisible(xpathWaitToDisappear, 1) && isVisible(xpathOfExceptionDialog, 1)) {
                 log.info(exceptionTexts.get("GetExceptionResult1") + getExceptionText() + exceptionTexts.get("GetExceptionResult2"));
                 Assert.assertTrue(exceptionTexts.get("FormAction"), false);
             }
+            */
         }
     }
 
@@ -99,22 +99,17 @@ public class Borrower /*implements IBorrower*/ {
             BUSY_INDICATOR_NONE3 = "//div[@class='dblclick-fix-layer'][contains(@style,'display: none')][not(contains(@style,'display: block'))]";
 
     protected void loadingCheck(){
-
         for(int i = 0; i < 3; i++){
-
             if((i > 1) && (isLoadingBlock()))
                 notLoading(i);
-
             if(isLoading())
                 notLoading(i);
-
             if((i > 2) && (isLoadingBlock()))
                 notLoading(i);
         }
     }
 
     private boolean isLoadingBlock(){
-        // TODO tocheck
         return (isVisibleLoadingCheck(BUSY_INDICATOR_BLOCK, 0)) || (isVisibleLoadingCheck(BUSY_INDICATOR_BLOCK2, 0)) || (isVisibleLoadingCheck(BUSY_INDICATOR_BLOCK3, 0));
     }
 
@@ -128,13 +123,11 @@ public class Borrower /*implements IBorrower*/ {
         isVisibleLoadingCheck(BUSY_INDICATOR_NONE3, (i==0 ? i: i-1));
     }
 
-
 //    protected final String CALENDAR_XPATH_DONE =  "//div[@id='ui-datepicker-div' and contains(@style, 'display: block')]//button[contains(., 'Done')]";
 
 //    private List<WebElement> findAllBy(String xpath) {
 //        return webDriver.findElements(By.xpath(xpath));
 //    }
-
     private List<WebElement> findAllBy(By locator) {
         return webDriver.findElements(locator);
     }
@@ -515,7 +508,6 @@ public class Borrower /*implements IBorrower*/ {
         return true;
     }
 
-    // TODO to check
     private boolean isVisibleLoadingCheck(String xpath, int timeout_in_seconds) {
 //        boolean toReturn = true;
         try {
@@ -622,7 +614,6 @@ public class Borrower /*implements IBorrower*/ {
         webDriver.get(url);
     }
 
-    // TODO to check
     private void horizontalVerticalScroll(Integer[] horizontalAndVertical){
         if(horizontalAndVertical.length == 2)
             scroll(horizontalAndVertical[0], horizontalAndVertical[1]);
@@ -722,7 +713,6 @@ public class Borrower /*implements IBorrower*/ {
 //        waitForVisibility(dropDownLocator, DEFAULT_TIMEOUT);
         moveTo(dropDownLocator);
         clickElement(dropDownLocator);
-        loadingCheck();
     }
 
     protected void type(String xpath, String valueToType) {

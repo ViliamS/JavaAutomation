@@ -88,6 +88,9 @@ public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
 //        DateTime now = DateTime.now();
 //        emailArray[0] = emailArray[0] + now.toString("yyyyMMddHHmmssSSS");
         emailArray[0] = emailArray[0] + "_" + System.getProperty("modeRun") + "_" + System.getProperty("timestamp");
+
+
+
         registerPage.setEmailAddress(String.join("@", emailArray));
         user.setEmail(String.join("@", emailArray));
         log.info(user.getEmail());
@@ -120,7 +123,7 @@ public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
         user.setPwd(pwd);
     }
 
-    @Given("^Borrower wants to (show|hide) his password in Registration page$")
+    @Given("^Borrower (show|hide)s his password in Registration page$")
     public void user_wants_to_his_password(String showOrHide) {
         registerPage = ( showOrHide.equals("show") ? registerPage.showPassword() : registerPage.hidePassword() );
     }

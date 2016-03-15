@@ -296,7 +296,7 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
 //        verifyEmailPage.setEmail(user.getEmail());
     }
 
-    @Then("^Borrower resends$")
+    @Then("^Borrower clicks re-send$")
     public void user_resends() {
 //        verifyEmailPage.clickReSent2();
     }

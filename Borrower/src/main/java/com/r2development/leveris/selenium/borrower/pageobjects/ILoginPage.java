@@ -14,6 +14,8 @@ public interface ILoginPage {
     String LOGIN_BUTTON_XPATH = "//button[@type='submit']/span[text()='Log in']";
     String EXCEPTION_DIALOG = "//div[contains(@class,'alert-danger')]/span";
 
+    String ERROR_EMAIL_XPATH = "//input[@eicketpath='main_c_form_form_root_c_w_pnlMain_c_w_txtName_tb']/following-sibling:label";
+
     String ERROR_BOX_ROOT_XPATH = "//div[contains(@id, 'feedbackBox') and contains(@class, 'feedback-form')]";
     String ERROR_FORMS_XPATH = "//label[contains(@class, 'message-inline-error') and @role='alert']";
     String ERROR_EMAIL_ADDRESS_XPATH = "";
