@@ -66,8 +66,8 @@ Feature: Payday Loan
       | accountBalance  | 20000                   |
     And Borrower clicks Accounts "NEXT"
 
-#    YOUR DEPENDENT
-#    When Borrower clicks "Dependents"
+#    YOUR DEPENDANT
+#    When Borrower clicks "Dependants"
     Then Borrower hasn't dependants
 
 #    YOUR FINANCIAL ASSETS

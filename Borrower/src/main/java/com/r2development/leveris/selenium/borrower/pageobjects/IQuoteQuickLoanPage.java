@@ -11,7 +11,7 @@ public interface IQuoteQuickLoanPage {
     IQuoteQuickLoanPage setLoanPurpose(String loanPurposeType);
     IQuoteQuickLoanPage setNetMonthlyIncome(String netMonthlyIncome);
     IQuoteQuickLoanPage setMonthlyExpenses(String monthlyExpenses);
-    IQuoteQuickLoanPage setNumberOfDependants(String numberOfDependents);
+    IQuoteQuickLoanPage setNumberOfDependants(String numberOfDependants);
     IQuoteQuickLoanPage setAmountToBorrow(String amountToBorrow);
     IQuoteConfigurationPage clickContinue();
 

@@ -9,7 +9,7 @@ Feature: Cal Quote - Two Borrowers - Mover
     And Borrower types <BorrowerAge> as age
     And Borrower types <PartnerAge> as partner's age
     And Borrower selects <BorrowerMaritalStatus> as marital status
-    And Borrower types <BorrowerTotalDependants> as total of dependents
+    And Borrower types <BorrowerTotalDependants> as total of dependants
     And Borrower selects <BorrowerIncomeType> as income type
     And Borrower types <BorrowerIncomeAmount> as income amount
     And Borrower selects <PartnerIncomeType> as partner's income type

@@ -26,7 +26,7 @@ Feature: Single Borrower
 #      | borrowerAge              | 20                  |
 #      | partnerAge               | 20                  |
 #      | borrowerMaritalStatus    | separated           |
-#      | borrowerTotalDependents  | 1                   |
+#      | borrowerTotalDependants  | 1                   |
 #      | borrowerIncomeType       | an employee         |
 #      | borrowerIncomeAmount     | 150000              |
 #      | partnerIncomeType        | an employee         |
@@ -84,8 +84,8 @@ Feature: Single Borrower
       | accountBalance  | 20000                   |
     And Borrower clicks Accounts "NEXT"
 
-#    YOUR DEPENDENT
-#    When Borrower clicks "Dependents"
+#    YOUR DEPENDANT
+#    When Borrower clicks "Dependants"
     Then Borrower hasn't dependants
 
 #    YOUR FINANCIAL ASSETS
@@ -109,14 +109,14 @@ Feature: Single Borrower
 #    DOCUMENT UPLOAD
 #    And Borrower uploads required document
 #    And Borrower clicks "Document Upload"
-#    And Borrower Borrower uploads the file file.txt as Proof of identity document
-#    And Borrower Borrower uploads the file file.txt as Proof of address document
-#    And Borrower Borrower uploads the file file.txt as P60 document
-#    And Borrower Borrower uploads the file file.txt as Current payslip document
-#    And Borrower Borrower uploads the file file.txt as Previous payslip document
-#    And Borrower Borrower uploads the file file.txt as Salary certificate document
-#    And Borrower Borrower uploads the file file.txt as Current account - IE92BOFI90001710027952 document
-    And Upload all documents
+#    And Borrower uploads the file file.txt as Proof of identity document
+#    And Borrower uploads the file file.txt as Proof of address document
+#    And Borrower uploads the file file.txt as P60 document
+#    And Borrower uploads the file file.txt as Current payslip document
+#    And Borrower uploads the file file.txt as Previous payslip document
+#    And Borrower uploads the file file.txt as Salary certificate document
+#    And Borrower uploads the file file.txt as Current account - IE92BOFI90001710027952 document
+    And Borrower uploads all documents
 
 #    FINAL STAGE 1
 #    And borrower finalizes the Borrower Phase

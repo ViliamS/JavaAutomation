@@ -12,7 +12,7 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
     private static final Log log = LogFactory.getLog(YourAccountsPage.class);
 
     protected IYourAccountsSection yourAccountsSection;
-    protected IYourDependantsPage yourDependentsPage;
+    protected IYourDependantsPage yourDependantsPage;
 
 //    @Inject
     public YourAccountsPage(SharedDriver webDriver) {
@@ -82,23 +82,23 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
 
     @Override
     public IYourDependantsPage clickDone() {
-        yourDependentsPage = yourAccountsSection.clickDone();
+        yourDependantsPage = yourAccountsSection.clickDone();
 
         try {
-            yourDependentsPage.getTitle();
+            yourDependantsPage.getTitle();
         } catch ( TimeoutException te ) {
             boolean toGoOn = false;
             while ( !toGoOn ) {
                 try {
-                    yourDependentsPage = yourAccountsSection.clickDone();
-                    yourDependentsPage.getTitle();
+                    yourDependantsPage = yourAccountsSection.clickDone();
+                    yourDependantsPage.getTitle();
                     toGoOn = true;
                 } catch ( TimeoutException te2) {
                     log.debug("Problem of clicking on Your Account Done or getting the Dependant title.");
                 }
             }
         }
-        return yourDependentsPage;
+        return yourDependantsPage;
     }
 
     @Override
@@ -233,6 +233,7 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
 
     @Override
     public IYourAccountsPage typeCurrentRegularMonthlySavings(String regularMonthlySavings) {
+        yourAccountsSection.typeCurrentRegularMonthlySavings(regularMonthlySavings);
         return this;
     }
 

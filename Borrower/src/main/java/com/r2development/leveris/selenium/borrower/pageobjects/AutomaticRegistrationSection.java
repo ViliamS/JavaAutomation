@@ -19,10 +19,10 @@ public class AutomaticRegistrationSection extends Borrower implements IAutomatic
     @Inject
     IUser user;
 
-    @FindBy( xpath = OPOQUO_APPLICANT_READ_ONLY_INPUT_XPATH )
+    @FindBy( xpath = OPOQO_APPLICANT_READ_ONLY_INPUT_XPATH )
     protected WebElement readOnlyApplicantInput;
 
-    @FindBy( xpath = OPOQUO_PASSWORD_READ_ONLY_INPUT_XPATH )
+    @FindBy( xpath = OPOQO_PASSWORD_READ_ONLY_INPUT_XPATH )
     protected WebElement readOnlyPasswordInput;
 
     @FindBy( xpath = TITLE_XPATH )
@@ -105,18 +105,18 @@ public class AutomaticRegistrationSection extends Borrower implements IAutomatic
     public IAutomaticRegistrationSection clickCreateNewUserAndLogin(String userName) {
         loadingCheck();
 
-        isVisible(OPOQUO_APPLICANTS_ID_INPUT_XPATH, true);
+        isVisible(OPOQO_APPLICANTS_ID_INPUT_XPATH, true);
         isVisible(LINK_CREATE_NEW_USER_XPATH, true);
 
         if(!StringUtils.isEmpty(userName))
-            type(OPOQUO_APPLICANTS_ID_INPUT_XPATH, userNameTimeStamping(userName, true)); //typing with timestamp
+            type(OPOQO_APPLICANTS_ID_INPUT_XPATH, userNameTimeStamping(userName, true)); //typing with timestamp
 
         clickElement(LINK_CREATE_NEW_USER_XPATH);
         loadingCheck();
 
-        isVisible(OPOQUO_APPLICANT_READ_ONLY_INPUT_XPATH, true);
-        isVisible(OPOQUO_PASSWORD_READ_ONLY_INPUT_XPATH, true);
-        isVisible(OPOQUO_LOGIN_BUTTON_XPATH, true);
+        isVisible(OPOQO_APPLICANT_READ_ONLY_INPUT_XPATH, true);
+        isVisible(OPOQO_PASSWORD_READ_ONLY_INPUT_XPATH, true);
+        isVisible(OPOQO_LOGIN_BUTTON_XPATH, true);
 
         String applicant = getAttributeText(readOnlyApplicantInput, "value");
         if(!StringUtils.isEmpty(applicant)) {
@@ -127,7 +127,7 @@ public class AutomaticRegistrationSection extends Borrower implements IAutomatic
         String password = getAttributeText(readOnlyPasswordInput, "value");
         if(!StringUtils.isEmpty(password))
             user.setPwd(password);
-        clickElement(OPOQUO_LOGIN_BUTTON_XPATH);
+        clickElement(OPOQO_LOGIN_BUTTON_XPATH);
         loadingCheck();
         return this;
     }

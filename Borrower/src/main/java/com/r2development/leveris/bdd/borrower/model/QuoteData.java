@@ -60,7 +60,7 @@ public class QuoteData extends DataModel {
     }
 
     public String getBorrowerTotalDependants() {
-        return data.get("borrowerTotalDependents");
+        return data.get("borrowerTotalDependants");
     }
 
     public void setBorrowerTotalDependants(String borrowerTotalDependants) {

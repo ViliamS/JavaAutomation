@@ -17,7 +17,7 @@ Feature: Lever.is Draft Happy path walk-through
 
     And Payday Loan Borrower types into Net monthly income field a 66,000.00
     And Payday Loan Borrower types into Monthly expenses field a 10,000.00
-    And Payday Loan Borrower types into Number of dependents field a 4
+    And Payday Loan Borrower types into Number of dependants field a 4
     And Payday Loan Borrower types into Amount to borrow field a 500,000.00
 
     When Payday Loan Borrower clicks on Continue button

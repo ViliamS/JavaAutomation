@@ -23,189 +23,189 @@ Feature: Verification Quote Creation Process
 #    PERSONAL DETAILS
 
     When Borrower clicks "Borrower Personal Details"
-    Then borrower Borrower sees his name in the Personal Details title
-    And borrower Borrower types his firstname : Tony
-    And borrower Borrower types his lastname : Mottot
-    And borrower Borrower checks his gender : Male
-    And borrower Borrower types his date of birth : 20/10/1978
-    And borrower Borrower selects his marital status : married/civil partner(s)
-    And borrower Borrower selects his nationality : French
-    And borrower Borrower types the number of resident years : 3
-#    And borrower Borrower checks if he is requiring a visa
-    And borrower Borrower types his residency address in line 1 : Prague, Czech Republic
-    And borrower Borrower types his residency address in line 2 : Hlavní město Praha
-    And borrower Borrower types his residency town/city : Prague
-#    And borrower Borrower selects his residency County/State : ???
-    And borrower Borrower types his postcode/zip : 14000
-    And borrower Borrower selects his residency country : Czech Republic
-    And borrower Borrower selects his residency accommodation : Rented on contract
-    And borrower Borrower types his residency rent : 200
-    And borrower Borrower checks if he is not living since 3 years
-    And borrower Borrower types his previous residency address in line 1 : Dijon, France
-    And borrower Borrower types his previous residency address in line 2 : Burgundy
-    And borrower Borrower types his previous residency town/city : Dijon
-#    And borrower Borrower selects his previous residency county/state :
-    And borrower Borrower types his previous residency postcode/zip : 21000
-    And borrower Borrower types his previous residency country : France
-    And borrower Borrower saves his personal details data
+    Then Borrower sees his name in the Personal Details title
+    And Borrower types his firstname : Tony
+    And Borrower types his lastname : Mottot
+    And Borrower checks his gender : Male
+    And Borrower types his date of birth : 20/10/1978
+    And Borrower selects his marital status : married/civil partner(s)
+    And Borrower selects his nationality : French
+    And Borrower types the number of resident years : 3
+#    And Borrower checks if he is requiring a visa
+    And Borrower types his residency address in line 1 : Prague, Czech Republic
+    And Borrower types his residency address in line 2 : Hlavní město Praha
+    And Borrower types his residency town/city : Prague
+#    And Borrower selects his residency County/State : ???
+    And Borrower types his postcode/zip : 14000
+    And Borrower selects his residency country : Czech Republic
+    And Borrower selects his residency accommodation : Rented on contract
+    And Borrower types his residency rent : 200
+    And Borrower checks if he is not living since 3 years
+    And Borrower types his previous residency address in line 1 : Dijon, France
+    And Borrower types his previous residency address in line 2 : Burgundy
+    And Borrower types his previous residency town/city : Dijon
+#    And Borrower selects his previous residency county/state :
+    And Borrower types his previous residency postcode/zip : 21000
+    And Borrower types his previous residency country : France
+    And Borrower saves his personal details data
     When Borrower clicks "Coapplicant Personal Details"
-    Then coapplicant Borrower sees his name in the Personal Details title
-    And coapplicant Borrower types his firstname : Anthony Mottot co-applicant
-    And coapplicant Borrower types his lastname : Mottot
-    And coapplicant Borrower checks his gender : Male
-    And coapplicant Borrower types his date of birth : 20/10/1978
-    And coapplicant Borrower selects his marital status : married/civil partner(s)
-    And coapplicant Borrower selects his nationality : French
-    And coapplicant Borrower types the number of resident years : 3
-#    And coapplicant Borrower checks if he is requiring a visa
-    And coapplicant Borrower types his residency address in line 1 : Prague, Czech Republic
-    And coapplicant Borrower types his residency address in line 2 : Hlavní město Praha
-    And coapplicant Borrower types his residency town/city : Prague
-#    And coapplicant Borrower selects his residency County/State : ???
-    And coapplicant Borrower types his postcode/zip : 14000
-    And coapplicant Borrower selects his residency country : Czech Republic
-    And coapplicant Borrower selects his residency accommodation : Rented on contract
-    And coapplicant Borrower types his residency rent : 200
-    And coapplicant Borrower checks if he is not living since 3 years
-    And coapplicant Borrower types his previous residency address in line 1 : Dijon, France
-    And coapplicant Borrower types his previous residency address in line 2 : Burgundy
-    And coapplicant Borrower types his previous residency town/city : Dijon
-#    And coapplicant Borrower selects his previous residency county/state :
-    And coapplicant Borrower types his previous residency postcode/zip : 21000
-    And coapplicant Borrower types his previous residency country : France
-    And coapplicant Borrower saves his personal details data
+    Then Coapplicant sees his name in the Personal Details title
+    And Coapplicant types his firstname : Anthony Mottot co-applicant
+    And Coapplicant types his lastname : Mottot
+    And Coapplicant checks his gender : Male
+    And Coapplicant types his date of birth : 20/10/1978
+    And Coapplicant selects his marital status : married/civil partner(s)
+    And Coapplicant selects his nationality : French
+    And Coapplicant types the number of resident years : 3
+#    And Coapplicant checks if he is requiring a visa
+    And Coapplicant types his residency address in line 1 : Prague, Czech Republic
+    And Coapplicant types his residency address in line 2 : Hlavní město Praha
+    And Coapplicant types his residency town/city : Prague
+#    And Coapplicant selects his residency County/State : ???
+    And Coapplicant types his postcode/zip : 14000
+    And Coapplicant selects his residency country : Czech Republic
+    And Coapplicant selects his residency accommodation : Rented on contract
+    And Coapplicant types his residency rent : 200
+    And Coapplicant checks if he is not living since 3 years
+    And Coapplicant types his previous residency address in line 1 : Dijon, France
+    And Coapplicant types his previous residency address in line 2 : Burgundy
+    And Coapplicant types his previous residency town/city : Dijon
+#    And Coapplicant selects his previous residency county/state :
+    And Coapplicant types his previous residency postcode/zip : 21000
+    And Coapplicant types his previous residency country : France
+    And Coapplicant saves his personal details data
 
 #    EMPLOYMENT & INCOME
 
     When Borrower clicks "Borrower Employment Income"
-    Then borrower Borrower sees his name in the Employment & Income title
-    And borrower Borrower clicks the employment & income category : Paye
+    Then Borrower sees his name in the Employment & Income title
+    And Borrower clicks the employment & income category : Paye
     # problem of xpath or select method
-    And borrower Borrower selects the Paye occupation : Accountant
-    And borrower Borrower types the Paye employer's name : Test
-    And borrower Borrower selects the Paye employment type : Contract
-    And borrower Borrower types the Paye start date : 01/01/2013
-    And borrower Borrower types the Paye end date : 01/01/2014
+    And Borrower selects the Paye occupation : Accountant
+    And Borrower types the Paye employer's name : Test
+    And Borrower selects the Paye employment type : Contract
+    And Borrower types the Paye start date : 01/01/2013
+    And Borrower types the Paye end date : 01/01/2014
     # to check if displayed or not !! disappear when end date is filled ?
-#    And borrower Borrower checks the Paye currently
-    And borrower Borrower types the Paye gross salary : 200
-    And borrower Borrower types the Paye regular overtime : 200
-    And borrower Borrower types the Paye regular guaranteed bonus : 100
-    And borrower Borrower types the Paye guaranteed commission : 100
-    And borrower Borrower clicks "Add This Employment"
+#    And Borrower checks the Paye currently
+    And Borrower types the Paye gross salary : 200
+    And Borrower types the Paye regular overtime : 200
+    And Borrower types the Paye regular guaranteed bonus : 100
+    And Borrower types the Paye guaranteed commission : 100
+    And Borrower clicks "Add This Employment"
 
-    When borrower Borrower clicks "ADD EMPLOYMENT"
-    Then borrower Borrower clicks the employment & income category : SelfEmployed
-    And borrower Borrower selects the Self Employed occupation : Accountant
-    And borrower Borrower types the Self Employed business name : Business name Self Employed
-    And borrower Borrower types the Self Employed address line 1 : Prague
-    And borrower Borrower types the Self Employed address line 2 : address line 2
-    And borrower Borrower types the Self Employed town/city : Prague
-    And borrower Borrower types the Self Employed county/state : Dublin
-    And borrower Borrower selects the Self Employed country : Czech Republic
-    And borrower Borrower types the Self Employed nature of business : it's my nature
-    And borrower Borrower types the Self Employed start date : 01/01/2013
-    And borrower Borrower types the Self Employed end date : 01/01/2014
-    And borrower Borrower checks the Self Employed currently
-    And borrower Borrower types the Self Employed net profit last year : 200
-    And borrower Borrower types the Self Employed net profit previous year : 200
-    And borrower Borrower types the Self Employed accountant name / practice : accountant name test
-    And borrower Borrower clicks "Add This Employment"
+    When Borrower clicks "ADD EMPLOYMENT"
+    Then Borrower clicks the employment & income category : SelfEmployed
+    And Borrower selects the Self Employed occupation : Accountant
+    And Borrower types the Self Employed business name : Business name Self Employed
+    And Borrower types the Self Employed address line 1 : Prague
+    And Borrower types the Self Employed address line 2 : address line 2
+    And Borrower types the Self Employed town/city : Prague
+    And Borrower types the Self Employed county/state : Dublin
+    And Borrower selects the Self Employed country : Czech Republic
+    And Borrower types the Self Employed nature of business : it's my nature
+    And Borrower types the Self Employed start date : 01/01/2013
+    And Borrower types the Self Employed end date : 01/01/2014
+    And Borrower checks the Self Employed currently
+    And Borrower types the Self Employed net profit last year : 200
+    And Borrower types the Self Employed net profit previous year : 200
+    And Borrower types the Self Employed accountant name / practice : accountant name test
+    And Borrower clicks "Add This Employment"
 
-    When borrower Borrower clicks "ADD EMPLOYMENT"
-#    Then borrower Borrower sees his name in the Employment & Income title
-    And borrower Borrower clicks the employment & income category : CivilServant
-    And borrower Borrower selects the Civil Servant occupation : Accountant
-    And borrower Borrower types the Civil Servant employer's name : Test
-    And borrower Borrower selects the Civil Servant employment type : Permanent
-    And borrower Borrower types the Civil Servant start date : 01/01/2013
-    And borrower Borrower types the Civil Servant end date : 01/01/2014
-    And borrower Borrower checks the Civil Servant currently
-    And borrower Borrower types the Civil Servant gross salary : 200
-    And borrower Borrower types the Civil Servant regular overtime : 200
-    And borrower Borrower types the Civil Servant regular guaranteed bonus : 100
-    And borrower Borrower types the Civil Servant guaranteed commission : 100
-    And borrower Borrower clicks "Add This Employment"
+    When Borrower clicks "ADD EMPLOYMENT"
+#    Then Borrower sees his name in the Employment & Income title
+    And Borrower clicks the employment & income category : CivilServant
+    And Borrower selects the Civil Servant occupation : Accountant
+    And Borrower types the Civil Servant employer's name : Test
+    And Borrower selects the Civil Servant employment type : Permanent
+    And Borrower types the Civil Servant start date : 01/01/2013
+    And Borrower types the Civil Servant end date : 01/01/2014
+    And Borrower checks the Civil Servant currently
+    And Borrower types the Civil Servant gross salary : 200
+    And Borrower types the Civil Servant regular overtime : 200
+    And Borrower types the Civil Servant regular guaranteed bonus : 100
+    And Borrower types the Civil Servant guaranteed commission : 100
+    And Borrower clicks "Add This Employment"
 
-    When borrower Borrower clicks "ADD EMPLOYMENT"
-    Then borrower Borrower clicks the employment & income category : Unemployed/Homemaker
-    And borrower Borrower types the Unemployed/Homemaker start date : 01/01/2015
-    And borrower Borrower types the Unemployed/Homemaker end date : 01/10/2015
-    And borrower Borrower checks the Unemployed/Homemaker currently
-    And borrower Borrower clicks "Add This Employment"
+    When Borrower clicks "ADD EMPLOYMENT"
+    Then Borrower clicks the employment & income category : Unemployed/Homemaker
+    And Borrower types the Unemployed/Homemaker start date : 01/01/2015
+    And Borrower types the Unemployed/Homemaker end date : 01/10/2015
+    And Borrower checks the Unemployed/Homemaker currently
+    And Borrower clicks "Add This Employment"
 
-    When borrower Borrower clicks "ADD EMPLOYMENT"
-    Then borrower Borrower clicks the employment & income category : Other
-    And borrower Borrower types the Other source of additional income : Testing
-    And borrower Borrower types the Other gross income : 200
-    And borrower Borrower types the Other time earning this income : 200
-    And borrower Borrower clicks "Add This Employment"
-    And borrower Borrower clicks "Done"
+    When Borrower clicks "ADD EMPLOYMENT"
+    Then Borrower clicks the employment & income category : Other
+    And Borrower types the Other source of additional income : Testing
+    And Borrower types the Other gross income : 200
+    And Borrower types the Other time earning this income : 200
+    And Borrower clicks "Add This Employment"
+    And Borrower clicks "Done"
 
     When Borrower clicks "Coapplicant Employment Income"
-    Then coapplicant Borrower sees his name in the Employment & Income title
-    And coapplicant Borrower clicks the employment & income category : Paye
+    Then Coapplicant sees his name in the Employment & Income title
+    And Coapplicant clicks the employment & income category : Paye
     # problem of xpath or select method
-    And coapplicant Borrower selects the Paye occupation : Accountant
-    And coapplicant Borrower types the Paye employer's name : Test
-    And coapplicant Borrower selects the Paye employment type : Contract
-    And coapplicant Borrower types the Paye start date : 01/01/2013
-    And coapplicant Borrower types the Paye end date : 01/01/2014
+    And Coapplicant selects the Paye occupation : Accountant
+    And Coapplicant types the Paye employer's name : Test
+    And Coapplicant selects the Paye employment type : Contract
+    And Coapplicant types the Paye start date : 01/01/2013
+    And Coapplicant types the Paye end date : 01/01/2014
     # to check if displayed or not !! disappear when end date is field ?
-#    And coapplicant Borrower checks the Paye currently
-    And coapplicant Borrower types the Paye gross salary : 200
-    And coapplicant Borrower types the Paye regular overtime : 200
-    And coapplicant Borrower types the Paye regular guaranteed bonus : 100
-    And coapplicant Borrower types the Paye guaranteed commission : 100
-    And coapplicant Borrower clicks "Add This Employment"
+#    And Coapplicant checks the Paye currently
+    And Coapplicant types the Paye gross salary : 200
+    And Coapplicant types the Paye regular overtime : 200
+    And Coapplicant types the Paye regular guaranteed bonus : 100
+    And Coapplicant types the Paye guaranteed commission : 100
+    And Coapplicant clicks "Add This Employment"
 
-    When coapplicant Borrower clicks "ADD EMPLOYMENT"
-    Then coapplicant Borrower clicks the employment & income category : SelfEmployed
-    And coapplicant Borrower selects the Self Employed occupation : Accountant
-    And coapplicant Borrower types the Self Employed business name : Business name Self Employed
-    And coapplicant Borrower types the Self Employed address line 1 : Prague
-    And coapplicant Borrower types the Self Employed address line 2 : address line 2
-    And coapplicant Borrower types the Self Employed town/city : Prague
-    And coapplicant Borrower types the Self Employed county/state : Dublin
-    And coapplicant Borrower selects the Self Employed country : Czech Republic
-    And coapplicant Borrower types the Self Employed nature of business : it's my nature
-    And coapplicant Borrower types the Self Employed start date : 01/01/2013
-    And coapplicant Borrower types the Self Employed end date : 01/01/2014
-    And coapplicant Borrower checks the Self Employed currently
-    And coapplicant Borrower types the Self Employed net profit last year : 200
-    And coapplicant Borrower types the Self Employed net profit previous year : 200
-    And coapplicant Borrower types the Self Employed accountant name / practice : accountant name test
-    And coapplicant Borrower clicks "Add This Employment"
+    When Coapplicant clicks "ADD EMPLOYMENT"
+    Then Coapplicant clicks the employment & income category : SelfEmployed
+    And Coapplicant selects the Self Employed occupation : Accountant
+    And Coapplicant types the Self Employed business name : Business name Self Employed
+    And Coapplicant types the Self Employed address line 1 : Prague
+    And Coapplicant types the Self Employed address line 2 : address line 2
+    And Coapplicant types the Self Employed town/city : Prague
+    And Coapplicant types the Self Employed county/state : Dublin
+    And Coapplicant selects the Self Employed country : Czech Republic
+    And Coapplicant types the Self Employed nature of business : it's my nature
+    And Coapplicant types the Self Employed start date : 01/01/2013
+    And Coapplicant types the Self Employed end date : 01/01/2014
+    And Coapplicant checks the Self Employed currently
+    And Coapplicant types the Self Employed net profit last year : 200
+    And Coapplicant types the Self Employed net profit previous year : 200
+    And Coapplicant types the Self Employed accountant name / practice : accountant name test
+    And Coapplicant clicks "Add This Employment"
 
-    When coapplicant Borrower clicks "ADD EMPLOYMENT"
-#    Then coapplicant Borrower sees his name in the Employment & Income title
-    And coapplicant Borrower clicks the employment & income category : Paye
-    And coapplicant Borrower selects the Civil Servant occupation : Accountant
-    And coapplicant Borrower types the Civil Servant employer's name : Test
-    And coapplicant Borrower selects the Civil Servant employment type : Permanent
-    And coapplicant Borrower types the Civil Servant start date : 01/01/2013
-    And coapplicant Borrower types the Civil Servant end date : 01/01/2014
-    And coapplicant Borrower checks the Civil Servant currently
-    And coapplicant Borrower types the Civil Servant gross salary : 200
-    And coapplicant Borrower types the Civil Servant regular overtime : 200
-    And coapplicant Borrower types the Civil Servant regular guaranteed bonus : 100
-    And coapplicant Borrower types the Civil Servant guaranteed commission : 100
-    And coapplicant Borrower clicks "Add This Employment"
+    When Coapplicant clicks "ADD EMPLOYMENT"
+#    Then Coapplicant sees his name in the Employment & Income title
+    And Coapplicant clicks the employment & income category : Paye
+    And Coapplicant selects the Civil Servant occupation : Accountant
+    And Coapplicant types the Civil Servant employer's name : Test
+    And Coapplicant selects the Civil Servant employment type : Permanent
+    And Coapplicant types the Civil Servant start date : 01/01/2013
+    And Coapplicant types the Civil Servant end date : 01/01/2014
+    And Coapplicant checks the Civil Servant currently
+    And Coapplicant types the Civil Servant gross salary : 200
+    And Coapplicant types the Civil Servant regular overtime : 200
+    And Coapplicant types the Civil Servant regular guaranteed bonus : 100
+    And Coapplicant types the Civil Servant guaranteed commission : 100
+    And Coapplicant clicks "Add This Employment"
 
-    When coapplicant Borrower clicks "ADD EMPLOYMENT"
-    Then coapplicant Borrower clicks the employment & income category : Unemployed/Homemaker
-    And coapplicant Borrower types the Unemployed/Homemaker start date : 01/01/2015
-    And coapplicant Borrower types the Unemployed/Homemaker end date : 01/10/2015
-    And coapplicant Borrower checks the Unemployed/Homemaker currently
-    And coapplicant Borrower clicks "Add This Employment"
+    When Coapplicant clicks "ADD EMPLOYMENT"
+    Then Coapplicant clicks the employment & income category : Unemployed/Homemaker
+    And Coapplicant types the Unemployed/Homemaker start date : 01/01/2015
+    And Coapplicant types the Unemployed/Homemaker end date : 01/10/2015
+    And Coapplicant checks the Unemployed/Homemaker currently
+    And Coapplicant clicks "Add This Employment"
 
-    When coapplicant Borrower clicks "ADD EMPLOYMENT"
-    Then coapplicant Borrower clicks the employment & income category : Other
-    And coapplicant Borrower types the Other source of additional income : Testing
-    And coapplicant Borrower types the Other gross income : 200
-    And coapplicant Borrower types the Other time earning this income : 200
-    And coapplicant Borrower clicks "Add This Employment"
-    And coapplicant Borrower clicks "Done"
+    When Coapplicant clicks "ADD EMPLOYMENT"
+    Then Coapplicant clicks the employment & income category : Other
+    And Coapplicant types the Other source of additional income : Testing
+    And Coapplicant types the Other gross income : 200
+    And Coapplicant types the Other time earning this income : 200
+    And Coapplicant clicks "Add This Employment"
+    And Coapplicant clicks "Done"
 
 #    YOUR ACCOUNTS
 
@@ -503,33 +503,32 @@ Feature: Verification Quote Creation Process
 
     And Borrower clicks "Document Upload"
 
-#    And Borrower Borrower uploads the file file.txt as Proof of identity document
-#    And Borrower Borrower uploads the file file.txt as Proof of address document
-#    And Borrower Borrower uploads the file file.txt as Marriage certificate document
-#    And Coapplicant Borrower uploads the file file.txt as Proof of identity document
-#    And Coapplicant Borrower uploads the file file.txt as Proof of address document
-#    And Coapplicant Borrower uploads the file file.txt as Marriage certificate document
-#    And Borrower Borrower uploads the file file.txt as P60 document
-#    And Borrower Borrower uploads the file file.txt as Certified account (Last year) document
-#    And Borrower Borrower uploads the file file.txt as Certified account (Previous before last year) document
-#    And Borrower Borrower uploads the file file.txt as Confirmation of tax affairs document
-#    And Borrower Borrower uploads the file file.txt as Current payslip document
-#    And Borrower Borrower uploads the file file.txt as Previous payslip document
-#    And Borrower Borrower uploads the file file.txt as Salary certificate document
-#    And Borrower Borrower uploads the file file.txt as P60 document
-#    And Coapplicant Borrower uploads the file file.txt as Certified account (Last year) document
-#    And Coapplicant Borrower uploads the file file.txt as Certified account (Previous before last year) document
-#    And Coapplicant Borrower uploads the file file.txt as Confirmation of tax affairs document
-#    And Coapplicant Borrower uploads the file file.txt as P60 document
-#    And Coapplicant Borrower uploads the file file.txt as Current payslip document
-#    And Coapplicant Borrower uploads the file file.txt as Previous payslip document
-#    And Coapplicant Borrower uploads the file file.txt as Salary certificate document
-#    And Borrower and Coapplicant Borrower uploads the file file.txt as Current account - 1234 document
-#    And Borrower and Coapplicant Borrower uploads the file file.txt as Credit card - provider document
-    And Upload all documents
+#    And Borrower uploads the file file.txt as Proof of identity document
+#    And Borrower uploads the file file.txt as Proof of address document
+#    And Borrower uploads the file file.txt as Marriage certificate document
+#    And Coapplicant uploads the file file.txt as Proof of address document
+#    And Coapplicant uploads the file file.txt as Marriage certificate document
+#    And Borrowerr uploads the file file.txt as P60 document
+#    And Borrowerr uploads the file file.txt as Certified account (Last year) document
+#    And Borrowerr uploads the file file.txt as Certified account (Previous before last year) document
+#    And Borrowerr uploads the file file.txt as Confirmation of tax affairs document
+#    And Borrowerr uploads the file file.txt as Current payslip document
+#    And Borrowerr uploads the file file.txt as Previous payslip document
+#    And Borrowerr uploads the file file.txt as Salary certificate document
+#    And Borrowerr uploads the file file.txt as P60 document
+#    And Coapplicant uploads the file file.txt as Certified account (Last year) document
+#    And Coapplicant uploads the file file.txt as Certified account (Previous before last year) document
+#    And Coapplicant uploads the file file.txt as Confirmation of tax affairs document
+#    And Coapplicant uploads the file file.txt as P60 document
+#    And Coapplicant uploads the file file.txt as Current payslip document
+#    And Coapplicant uploads the file file.txt as Previous payslip document
+#    And Coapplicant uploads the file file.txt as Salary certificate document
+#    And Borrower and Coapplicant Borrower upload the file file.txt as Current account - 1234 document
+#    And Borrower and Coapplicant Borrower upload the file file.txt as Credit card - provider document
+    And Borrower uploads all documents
 
 #    FINAL STAGE 1
-#    And borrower finalizes the Borrower Phase
+#    And Borrower finalizes the Borrower Phase
     And Borrower clicks "Review and Submit"
     And Borrower clicks "Submit your application"
     And Borrower checks "Distance Marketing"

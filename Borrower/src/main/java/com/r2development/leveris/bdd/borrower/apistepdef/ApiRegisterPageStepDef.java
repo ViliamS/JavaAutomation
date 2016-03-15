@@ -182,7 +182,7 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
         registerParameters.put("root:c:w:pnlMain:c:w:txtPassword:tb", pwd);
     }
 
-    @Given("^user wants to (show|hide) his password in Registration page$")
+    @Given("^user (show|hide)s his password in Registration page$")
     public void user_wants_to_his_password(String showOrHide) {
     }
 

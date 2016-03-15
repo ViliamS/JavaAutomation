@@ -14,9 +14,9 @@ Feature: Api Single Borrower
       | termsBusiness     | accepts                                     |
       | protectionPolicy  | accepts                                     |
 
-#    Then user goes to gmail
-#    And user goes to CRM
-    Then Borrower user logs in as his account is activated
+#    Then Borrower goes to gmail
+#    And Borrower goes to CRM
+    Then Borrower logs in as his account is activated
 
     Then Borrower processes "Get a Quote" (format2)
       | borrowerNumber           | a single borrower   |
@@ -33,7 +33,7 @@ Feature: Api Single Borrower
     And Borrower processes "Forms"
 
 #    PERSONAL DETAILS
-#    When user clicks "Borrower Personal Details"
+#    When Borrower clicks "Borrower Personal Details"
     And borrower fills in "Personal Details"
       | firstName           | AutomationSBApi |
       | lastName            | Tester          |
@@ -45,10 +45,10 @@ Feature: Api Single Borrower
       | accommodation       | Property owner  |
       | isLivingSince3years | yes             |
       | maritalStatus       | single          |
-    And borrower user saves his personal details data
+    And Borrower saves his personal details data
 
 #    EMPLOYMENT & INCOME
-#    When user clicks "Borrower Employment Income"
+#    When Borrower clicks "Borrower Employment Income"
     And borrower fills in "Employment Income"
       | categoryIncome      | Paye        |
       | occupation          | ARTIST      |
@@ -57,57 +57,57 @@ Feature: Api Single Borrower
       | startDate           | 05/11/2013  |
       | isCurrentEmployment | yes         |
       | grossSalary         | 124000      |
-    And borrower user clicks "Done"
+    And Borrower clicks "Done"
 
 #    YOUR ACCOUNTS
-#    When user clicks "Account"
-    Then user clicks "ADD ACCOUNT"
-#    And user clicks "ADD ACCOUNT MANUALLY"
-    And user fills in "Account"
+#    When Borrower clicks "Account"
+    Then Borrower clicks "ADD ACCOUNT"
+#    And Borrower clicks "ADD ACCOUNT MANUALLY"
+    And Borrower fills in "Account"
       | fundsSource     | Current Account         |
       | accountProvider | Central Bank of Ireland |
       | IBAN            | IE92BOFI90001710027952  |
       | accountBalance  | 20000                   |
-    And user clicks Accounts "NEXT"
+    And Borrower clicks Accounts "NEXT"
 
-#    YOUR DEPENDENT
-#    When user clicks "Dependents"
-    Then user hasn't dependants
+#    YOUR DEPENDANT
+#    When Borrower clicks "Dependants"
+    Then Borrower hasn't dependants
 
 #    YOUR FINANCIAL ASSETS
-#    When user clicks "Financial Assets"
-    Then user hasn't financial assets
+#    When Borrower clicks "Financial Assets"
+    Then Borrower hasn't financial assets
 
 #    Properties
-#    When user clicks "Properties"
-    Then user hasn't properties
-    And user hasn't a property in the past
+#    When Borrower clicks "Properties"
+    Then Borrower hasn't properties
+    And Borrower hasn't a property in the past
 
 #    Financial Commitments
-#    When user clicks "Financial Commitments"
-    Then user hasn't financial commitments
+#    When Borrower clicks "Financial Commitments"
+    Then Borrower hasn't financial commitments
 
 #    FUNDING
-#    When user clicks "Funding"
-    Then user clicks Funding "NEXT"
+#    When Borrower clicks "Funding"
+    Then Borrower clicks Funding "NEXT"
 
 #    DOCUMENT UPLOAD
-#    And user uploads required document
-#    And user clicks "Document Upload"
-#    And Borrower user uploads the file file.txt as Proof of identity document
-#    And Borrower user uploads the file file.txt as Proof of address document
-#    And Borrower user uploads the file file.txt as P60 document
-#    And Borrower user uploads the file file.txt as Current payslip document
-#    And Borrower user uploads the file file.txt as Previous payslip document
-#    And Borrower user uploads the file file.txt as Salary certificate document
-#    And Borrower user uploads the file file.txt as Current account - IE92BOFI90001710027952 document
-    And Upload all documents
+#    And Borrower uploads required document
+#    And Borrower clicks "Document Upload"
+#    And Borrower uploads the file file.txt as Proof of identity document
+#    And Borrower uploads the file file.txt as Proof of address document
+#    And Borrower uploads the file file.txt as P60 document
+#    And Borrower uploads the file file.txt as Current payslip document
+#    And Borrower uploads the file file.txt as Previous payslip document
+#    And Borrower uploads the file file.txt as Salary certificate document
+#    And Borrower uploads the file file.txt as Current account - IE92BOFI90001710027952 document
+    And Borrower uploads all documents
 
 #    FINAL STAGE 1
 #    And borrower finalizes the Borrower Phase
-    And user clicks "Review and Submit"
-    And user clicks "Submit your application"
-    And user checks "Distance Marketing"
-    And user checks "Statutory"
-    And user checks "Declaration"
-    And finally, user clicks "Submit Application"
+    And Borrower clicks "Review and Submit"
+    And Borrower clicks "Submit your application"
+    And Borrower checks "Distance Marketing"
+    And Borrower checks "Statutory"
+    And Borrower checks "Declaration"
+    And finally, Borrower clicks "Submit Application"

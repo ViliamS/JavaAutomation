@@ -9,7 +9,7 @@ Feature: Cal Quote - Single Borrower Mover
     And user types <BorrowerAge> as age
     And user types <PartnerAge> as partner's age
     And user selects <BorrowerMaritalStatus> as marital status
-    And user types <BorrowerTotalDependents> as total of dependents
+    And user types <BorrowerTotalDependants> as total of dependants
     And user selects <BorrowerIncomeType> as income type
     And user types <BorrowerIncomeAmount> as income amount
     And user selects <PartnerIncomeType> as partner's income type
@@ -22,7 +22,7 @@ Feature: Cal Quote - Single Borrower Mover
     And user should get a minimum deposit value of <MinimumDeposit> euros
 
     Examples:
-      | BorrowerNumber    | MortgageType        | BorrowerAge | PartnerAge | BorrowerMaritalStatus                | BorrowerTotalDependents | BorrowerIncomeType        | BorrowerIncomeAmount | PartnerIncomeType         | PartnerIncomeAmount | MonthlyCreditCommitments | isEligible | MaxLoanAmount                                     | MonthlyPayment | MinimumDeposit |
+      | BorrowerNumber    | MortgageType        | BorrowerAge | PartnerAge | BorrowerMaritalStatus                | BorrowerTotalDependants | BorrowerIncomeType        | BorrowerIncomeAmount | PartnerIncomeType         | PartnerIncomeAmount | MonthlyCreditCommitments | isEligible | MaxLoanAmount                                     | MonthlyPayment | MinimumDeposit |
       | a single borrower | mover(s)            | 20          |            | separated                            | 1                       | an employee               | 100000               |                           |                     | 0                        |            | 350000                                            | 1773           | 91875          |
       | a single borrower | mover(s)            | 35          |            | separated                            | 2                       | a civil servant           | 65000                |                           |                     | 100                      |            | 204232                                            | 1035           | 53611          |
       | a single borrower | mover(s)            | 45          |            | separated                            | 0                       | self employed             | 89000                |                           |                     | 200                      |            | 311500                                            | 1731           | 81769          |

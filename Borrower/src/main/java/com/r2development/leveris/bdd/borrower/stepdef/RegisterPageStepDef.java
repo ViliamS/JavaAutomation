@@ -123,7 +123,7 @@ public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
         user.setPwd(pwd);
     }
 
-    @Given("^Borrower wants to (show|hide) his password in Registration page$")
+    @Given("^Borrower (show|hide)s his password in Registration page$")
     public void user_wants_to_his_password(String showOrHide) {
         registerPage = ( showOrHide.equals("show") ? registerPage.showPassword() : registerPage.hidePassword() );
     }

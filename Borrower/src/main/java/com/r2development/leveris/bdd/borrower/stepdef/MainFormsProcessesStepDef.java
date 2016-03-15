@@ -82,7 +82,7 @@ public class MainFormsProcessesStepDef /*extends BorrowerStepDef*/ implements CL
     }
 
     @When("^Borrower clicks \"Dependants\"$")
-    public void clickDependents() {
+    public void clickDependants() {
         currentPage.clickDependants();
         currentPage = (IFormsMenu) yourDependantsPage;
     }

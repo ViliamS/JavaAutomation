@@ -172,9 +172,9 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
         }
     }
 
-    /*@Given("^Borrower types into Number of dependents field a (.*)$")
-    public void user_types_value_into_number_of_dependants_field(String numberOfDependents) {
-        quoteQuickLoanPage.setNumberOfDependants( numberOfDependents );
+    /*@Given("^Borrower types into Number of dependants field a (.*)$")
+    public void user_types_value_into_number_of_dependants_field(String numberOfDependants) {
+        quoteQuickLoanPage.setNumberOfDependants( numberOfDependants );
     }*/
 
     @Given("^(Payday Loan|Usecured Loan) Borrower types into Amount to borrow field a (.*)$")

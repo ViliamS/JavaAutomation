@@ -100,7 +100,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
         user_selects_loan_purpose( loanType, loanData.getLoanPurpose() );
         user_types_value_into_net_monthly_income_field( loanType, loanData.getNetMonthlyIncome() );
         user_types_value_into_monthly_expenses_field( loanType, loanData.getMonthlyExpenses() );
-        user_types_value_into_number_of_dependents_field( loanType, loanData.getNumberOfDependants() );
+        user_types_value_into_number_of_dependants_field( loanType, loanData.getNumberOfDependants() );
         user_types_value_into_amount_to_borrow_field( loanType, loanData.getLoanAmount() );
     }
 
@@ -152,15 +152,15 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Given("^(Payday Loan|Usecured Loan) User types into Number of dependents field a (.*)$")
-    public void user_types_value_into_number_of_dependents_field(String switchCase, String numberOfDependents) {
+    @Given("^(Payday Loan|Usecured Loan) User types into Number of dependants field a (.*)$")
+    public void user_types_value_into_number_of_dependants_field(String switchCase, String numberOfDependants) {
         switch (switchCase) {
             case "Payday Loan":
-//                quotePaydayLoanPage.setNumberOfDependants( numberOfDependents );
-                paydayParameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:txtNumberOfDependents:tb", numberOfDependents);
+//                quotePaydayLoanPage.setNumberOfDependants( numberOfDependants );
+                paydayParameters.put("root:c:w:pnlUnsecuredLoanQuotation:c:w:txtNumberOfDependents:tb", numberOfDependants);
                 break;
             case "Unsecured Loan":
-//                quoteQuickLoanPage.setNumberOfDependants( numberOfDependents );
+//                quoteQuickLoanPage.setNumberOfDependants( numberOfDependants );
                 break;
         }
     }
@@ -239,7 +239,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
         user_selects_loan_purpose(loanType, loanData.getLoanPurpose() );
         user_types_value_into_net_monthly_income_field( loanType, loanData.getNetMonthlyIncome() );
         user_types_value_into_monthly_expenses_field( loanType, loanData.getMonthlyExpenses() );
-        user_types_value_into_number_of_dependents_field( loanType, loanData.getNumberOfDependants() );
+        user_types_value_into_number_of_dependants_field( loanType, loanData.getNumberOfDependants() );
         user_types_value_into_amount_to_borrow_field( loanType, loanData.getLoanAmount() );
 
         user_clicks_on_continue_button( loanType );

@@ -13,14 +13,14 @@ Feature: Payday Loan
 ##      | LoanPurpose        | PAYDAY    |
 #      | NetMonthlyIncome   | 21,000.00 |
 #      | MonthlyExpenses    | 1,000.00  |
-#      | NumberOfDependents | 1         |
+#      | NumberOfDependants | 1         |
 #      | AmountToBorrow     | 1,000.00  |
 #
 #    When Payday Loan User clicks on Continue button
 #
 #    Then User clicks on Apply Online
 #
-#    And this registration data, user processes the registration (format2)
+#    And this registration data, Borrower processes the registration (format2)
 #      | firstName         | AutomationSBUI                                    |
 #      | email             | test.automation.payday@test.finfactory.com        |
 #      | phoneNumber       | +420123456789                                     |
@@ -28,9 +28,9 @@ Feature: Payday Loan
 #      | termsBusiness     | accepts                                           |
 #      | protectionPolicy  | accepts                                           |
 #
-##    Then user goes to gmail
-##    And user goes to CRM
-#    Then Borrower user logs in as his account is activated
+##    Then Borrower goes to gmail
+##    And Borrower goes to CRM
+#    Then Borrower Borrower logs in as his account is activated
 
     Given Borrower processes the automatic registration
       | ApplicantId | test.automation.test@finfactory.com |
@@ -190,7 +190,7 @@ Feature: Payday Loan
 #    YOUR DEPENDANTS
     And Borrower hasn't dependants
 #  - negative way not adding any
-#    And user has dependants - positive way is now included in whole form filling step definition and it is being automatically handled if present
+#    And Borrower has dependants - positive way is now included in whole form filling step definition and it is being automatically handled if present
 #
 #    And Borrower fills in "Dependant form"
 #      | date Of Birth | 01/01/2000 |
@@ -198,31 +198,31 @@ Feature: Payday Loan
 #    And Borrower fills in "Dependant form"
 #      | date Of Birth | 01/01/2000 |
 
-#    And user clicks "ADD DEPENDANT" - not mandatory to use but is available and it would work
-#    And user fills in "Dependant form"
+#    And Borrower clicks "ADD DEPENDANT" - not mandatory to use but is available and it would work
+#    And Borrower fills in "Dependant form"
 #      | date Of Birth | 01/01/2000 |
 
 #    And Borrower clicks Dependants "Done"
 
 #    Financial Commitments
-#    When user clicks "Financial Commitments"
+#    When Borrower clicks "Financial Commitments"
     And Borrower hasn't financial commitments
 
 #    FUNDING
-#    When user clicks "Funding"
+#    When Borrower clicks "Funding"
 # should be changed to I'm done :)
-#    Then user clicks Funding "NEXT"
+#    Then Borrower clicks Funding "NEXT"
 
 #    DOCUMENT UPLOAD
-#    And user uploads required document
-#    And user clicks "Document Upload"
-#    And Borrower user uploads the file file.txt as Proof of identity document
-#    And Borrower user uploads the file file.txt as Proof of address document
-#    And Borrower user uploads the file file.txt as P60 document
-#    And Borrower user uploads the file file.txt as Current payslip document
-#    And Borrower user uploads the file file.txt as Previous payslip document
-#    And Borrower user uploads the file file.txt as Salary certificate document
-#    And Borrower user uploads the file file.txt as Current account - IE92BOFI90001710027952 document
+#    And Borrower uploads required document
+#    And Borrower clicks "Document Upload"
+#    And Borrower uploads the file file.txt as Proof of identity document
+#    And Borrower uploads the file file.txt as Proof of address document
+#    And Borrower uploads the file file.txt as P60 document
+#    And Borrower uploads the file file.txt as Current payslip document
+#    And Borrower uploads the file file.txt as Previous payslip document
+#    And Borrower uploads the file file.txt as Salary certificate document
+#    And Borrower uploads the file file.txt as Current account - IE92BOFI90001710027952 document
     And Borrower uploads all documents
 
 #    FINAL STAGE 1
@@ -231,5 +231,5 @@ Feature: Payday Loan
     And Borrower checks "Distance Marketing"
     And Borrower checks "Statutory"
     And Borrower checks "Declaration"
-#    And user clicks "Submit your application"
+#    And Borrower clicks "Submit your application"
     And finally, Borrower clicks "Submit Application"

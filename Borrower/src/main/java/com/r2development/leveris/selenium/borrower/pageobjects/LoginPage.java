@@ -4,7 +4,6 @@ import com.r2development.leveris.Borrower;
 import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -94,8 +93,18 @@ public class LoginPage extends Borrower implements ILoginPage {
         return null;
     }
 
+    private Map<String, String> formExceptionDetails = new LinkedHashMap<String, String>() {
+        {
+            put("forName", "Login");
+            put("login", ERROR_EMAIL_XPATH);
+        }
+    };
+
+/*
     private Map<String, String> formExceptionDetails(){
         Map<String, String> formExceptionDetails = new LinkedHashMap<>();
+        // TODO LIST of ERROR XPATH
+
         formExceptionDetails.put(
                 "FormName",
                 "\n Login button is still present! \n" +
@@ -117,13 +126,15 @@ public class LoginPage extends Borrower implements ILoginPage {
         );
         return formExceptionDetails;
     }
+*/
+
 
     @Override
     public IBorrowerHomePage clickLogin() {
         isVisible(LOGIN_BUTTON_XPATH, true);
         clickElement(LOGIN_BUTTON_XPATH);
         loadingCheck();
-        formSubmitPostSync(LOGIN_BUTTON_XPATH, EXCEPTION_DIALOG, formExceptionDetails());
+        formSubmitPostSync(LOGIN_BUTTON_XPATH, EXCEPTION_DIALOG, formExceptionDetails);
 
 //        try{
 //        isNotVisible(LOGIN_BUTTON_XPATH, true, 5);

@@ -28,7 +28,7 @@ public interface IYourAccountsPage {
     IYourAccountsPage editAccount(int index);
     Map<Integer, YourAccount> getAccountsOf(String accountType);
     Map<Integer, YourAccount> getAllAccounts();
-    @Deprecated
+
     IYourAccountsPage typeAccountProvider(String accountProvider);
     IYourAccountsPage typeCurrentStatementDate(String statementDate);
     IYourAccountsPage typeCurrentAccountName(String accountName);

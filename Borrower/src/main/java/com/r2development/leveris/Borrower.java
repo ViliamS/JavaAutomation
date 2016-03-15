@@ -4,7 +4,6 @@ import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -45,22 +44,22 @@ public class Borrower /*implements IBorrower*/ {
         return (System.currentTimeMillis() / 1000);
     }
 
-    protected String userNameTimeStamping(String userName, boolean isGui){
+    protected String userNameTimeStamping(String userName, boolean isGui) {
         if(isGui){
-            return userNameTimeStamping(userName, ".gui.aut.test.");
+            return userNameTimeStamping(userName, "gui");
         } else {
-            return userNameTimeStamping(userName, ".api.aut.test.");
+            return userNameTimeStamping(userName, "api");
         }
     }
 
     protected String userNameTimeStamping(String userName, String testType){
         String[] userNameArray = userName.split("@");
-        userName = userNameArray[0] + testType + System.getProperty("timestamp") + "@" + userNameArray[1];
+        userName = userNameArray[0] + "." + testType + System.getProperty("timestamp") + "@" + userNameArray[1];
         return userName;
     }
 
     private String userNameTimeStamping(String userName){
-        return userNameTimeStamping(userName, ".aut.test.");
+        return userNameTimeStamping(userName, "gui");
     }
 
     private String getExceptionText(){
@@ -77,11 +76,14 @@ public class Borrower /*implements IBorrower*/ {
         } catch (Exception x) {
             log.info("formSPSEE ---> \n" +
                     "Failed isNotVisible('" + xpathWaitToDisappear  + "')");
-            log.info(exceptionTexts.get("FormName"));
+            // TODO REWORK !
+            /*
+            log.info("FialureexceptionTexts.get("FormName"));
             if (isVisible(xpathWaitToDisappear, 1) && isVisible(xpathOfExceptionDialog, 1)) {
                 log.info(exceptionTexts.get("GetExceptionResult1") + getExceptionText() + exceptionTexts.get("GetExceptionResult2"));
                 Assert.assertTrue(exceptionTexts.get("FormAction"), false);
             }
+            */
         }
     }
 
