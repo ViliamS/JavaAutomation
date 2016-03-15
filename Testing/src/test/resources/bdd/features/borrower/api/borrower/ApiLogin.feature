@@ -2,8 +2,8 @@
 @login
 Feature: Borrower Wicket Login
 
-#  Background:
-#    Given user goes to Registration page
+  Background:
+    Given Open Leveris Automatic Registration Page
 
   Scenario: Pass registration and Login page
     Given Borrower processes the automatic registration
