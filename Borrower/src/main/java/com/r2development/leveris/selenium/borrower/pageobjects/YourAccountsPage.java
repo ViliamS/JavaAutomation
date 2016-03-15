@@ -274,7 +274,7 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
     }
 
     @Override
-    public IYourAccountsPage typeSavingsAccountProvider(String accountProvider) {
+    public IYourAccountsPage typeSavingAccountProvider(String accountProvider) {
         yourAccountsSection.typeSavingAccountProvider(accountProvider);
         return this;
     }

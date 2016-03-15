@@ -4,10 +4,14 @@ import com.r2development.leveris.Borrower;
 import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import static org.junit.Assert.assertTrue;
 
 public class YourDependantsSection extends Borrower implements IYourDependantsSection {
 
@@ -154,7 +158,7 @@ public class YourDependantsSection extends Borrower implements IYourDependantsSe
             return this;
 
         // TODO update message
-        Assert.assertTrue("We've got lost!!! go home looser ", false);
+        assertTrue("We've got lost!!! go home looser ", false);
         return this;
     }
 

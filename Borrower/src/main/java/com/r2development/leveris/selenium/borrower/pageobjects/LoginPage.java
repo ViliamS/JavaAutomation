@@ -98,7 +98,7 @@ public class LoginPage extends Borrower implements ILoginPage {
         isVisible(LOGIN_BUTTON_XPATH, true);
         clickElement(LOGIN_BUTTON_XPATH);
         loadingCheck();
-        formSubmitPostSync(LOGIN_BUTTON_XPATH, EXCEPTION_DIALOG, formExceptionDetails);
+        formSubmitPostSync(LOGIN_BUTTON_XPATH, EXCEPTION_DIALOG, new LinkedHashMap<String, String>() {} );
 
 //        try{
 //        isNotVisible(LOGIN_BUTTON_XPATH, true, 5);

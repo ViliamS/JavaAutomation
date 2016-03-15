@@ -1,6 +1,7 @@
 package com.r2development.leveris;
 
 import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.*;
@@ -10,6 +11,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
+import java.util.Map;
 
 public class Borrower /*implements IBorrower*/ {
 
@@ -384,6 +386,13 @@ public class Borrower /*implements IBorrower*/ {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
     }
 
+    private void waitForVisibility(String xpath, int timeout_in_seconds, boolean getInfoLog) {
+        if (getInfoLog)
+            log.info("\n waitForVisibility ---> xpath: '" + xpath + "' <--- " + " with time-out: '" + timeout_in_seconds + "'\n");
+        WebDriverWait wait = new WebDriverWait(webDriver, timeout_in_seconds);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+    }
+
     private void waitForVisibilityWithText(String xpath, String text, int timeout_in_seconds) {
         log.info("\n waitForVisibilityWithText ---> xpath: '" + xpath + "' <--- and on this text: " + text + " with time-out: '" + timeout_in_seconds + "'\n");
         WebDriverWait wait = new WebDriverWait(webDriver, timeout_in_seconds);
@@ -508,10 +517,11 @@ public class Borrower /*implements IBorrower*/ {
         return true;
     }
 
+    // TODO check change
     private boolean isVisibleLoadingCheck(String xpath, int timeout_in_seconds) {
 //        boolean toReturn = true;
         try {
-            waitForVisibilityLoadingCheck(xpath, timeout_in_seconds);
+            waitForVisibility(xpath, timeout_in_seconds, false);
         } catch (TimeoutException te) {
 //            toReturn = false;
             return false;
@@ -614,6 +624,7 @@ public class Borrower /*implements IBorrower*/ {
         webDriver.get(url);
     }
 
+    // TODO check splint down
     private void horizontalVerticalScroll(Integer[] horizontalAndVertical){
         if(horizontalAndVertical.length == 2)
             scroll(horizontalAndVertical[0], horizontalAndVertical[1]);
@@ -775,6 +786,7 @@ public class Borrower /*implements IBorrower*/ {
         sendKeysKeyType(By.xpath(xpath), sendKeyType);
     }
 
+    // TODO check change
     private void sendKeysKeyType(By currentBy, Keys sendKeyType){
         log.info("\n -------------------------------------- \n | sendKeysKeyType | \n byLocator ---> " + currentBy.toString() + " <--- | \n -------------------------------------- \n");
         webDriver.findElement(currentBy).sendKeys(sendKeyType);

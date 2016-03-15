@@ -8,7 +8,7 @@ Feature: Payday Loan
   Scenario: Payday Load
 
     Given Borrower processes the automatic registration
-      | applicantId | test.automation.test@test.finfactory.com |
+      | applicantId | test.automation@test.finfactory.com |
     When Borrower logs in via Automatic Registration
 #    When Payday Loan User clicks on Continue button
 #    Then Borrower clicks on Apply Online
@@ -30,7 +30,7 @@ Feature: Payday Loan
 
     And Borrower clicks on continue to get Payday Loan
     And Borrower fills in Payday Loan form
-      | LoanType        | Payday Loan |          # TODO to check
+      | LoanType        | Payday Loan |
       | NetMonthlyIncome   | 21,000.00 |
       | MonthlyExpenses    | 1,000.00  |
       | NumberOfDependants | 1         |
@@ -42,7 +42,7 @@ Feature: Payday Loan
 
 #    PERSONAL DETAILS
 #    When Borrower clicks "Borrower Personal Details"
-    And Borrower fills in "Personal Details"
+    And Borrower fills in Personal Details
       | firstName           | AutomationBGUI |
       | lastName            | Tester         |
       | gender              | Male           |
@@ -117,8 +117,9 @@ Feature: Payday Loan
     And Borrower clicks "Done"
 
 #    YOUR ACCOUNTS
-    And Borrower fills in "Current Account"
+    And Borrower fills in Current account
       | accountType     | Current account         |
+      | accountProvider | test account provider   |
       | statementDate   | 01/01/2000              |
       | accountName     | test Current Account    |
       | sortCode1       | 12                      |
@@ -164,7 +165,7 @@ Feature: Payday Loan
 #      | sourceOfSaving        | Gift                    | # BUG OPO-280
 #      | regularMonthlySaving  | 200                     | # BUG OPO-280
 
-    And Borrower clicks Accounts "Done"
+#    And Borrower clicks Accounts "Done"
 
 #    YOUR DEPENDANTS
     And Borrower hasn't dependants
@@ -210,5 +211,6 @@ Feature: Payday Loan
     And Borrower checks "Distance Marketing"
     And Borrower checks "Statutory"
     And Borrower checks "Declaration"
+    And Borrower checks "Fraud Credit check"
 #    And Borrower clicks "Submit your application"
     And finally, Borrower clicks "Submit Application"

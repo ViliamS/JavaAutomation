@@ -14,7 +14,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
 
-import java.util.Map;
+import java.util.List;
 
 @Singleton
 public class YourDependantsStepDef /*extends BorrowerStepDef*/ /*implements CLV312Workaround*/ {

@@ -40,9 +40,9 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
         this.user = user;
     }
 
-    @When("^(Borrower) fills in \"Personal Details\"$")
+    @When("^(Borrower) fills in (Personal Details)$")
 //    public void user_fills_in_borrower_personal_details(String borrowerOrCoapplicant, Map<String, String> personalDetailsDataMap) throws IOException {
-    public void user_fills_in_borrower_personal_details(String borrowerOrCoapplicant, List<String> personalDetailsDataMap) throws IOException {
+    public void user_fills_in_borrower_personal_details(String borrowerOrCoapplicant, String formType, List<String> personalDetailsDataMap) throws IOException {
 
 //        if ( borrowerOrCoapplicant.equals("coapplicant") ) {
 //            requestHttpPost(

@@ -37,27 +37,26 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
         this.httpResponse = httpResponse;
     }
 
-    @Given("^Borrower fills in (Current account|Savings account)$")
-//    public void user_fills_in_account(Map<String, String> accountDataMap) throws IOException {
-    public void user_fills_in_account(String currentOrSaving, List<String> accountDataMap) throws IOException {
+    @Given("^(Borrower) fills in (Current account|Savings account|Account scraping)$")
+    public void user_fills_in_account(String userType, String accountType, List<String> accountDataMap) throws IOException {
         AccountData accountData = new AccountData(accountDataMap);
         user_clicks_an_account_type(accountData.get("accountType"));
 //        yourAccountsPage.getTitle();
         if (!StringUtils.isEmpty(accountData.get("statementDate")))
-            user_types_the_statement_date(currentOrSaving, accountData.get("statementDate"));
-        user_types_his_account_provider(currentOrSaving, accountData.get("accountProvider"));
-        user_types_his_account_name(currentOrSaving, accountData.get("accountName"));
-        user_types_his_sort_code_1(currentOrSaving, accountData.get("sortCode1"));
-        user_types_his_sort_code_2(currentOrSaving, accountData.get("sortCode2"));
-        user_types_his_sort_code_3(currentOrSaving, accountData.get("sortCode3"));
+            user_types_the_statement_date(accountType, accountData.get("statementDate"));
+        user_types_his_account_provider(accountType, accountData.get("accountProvider"));
+        user_types_his_account_name(accountType, accountData.get("accountName"));
+        user_types_his_sort_code_1(accountType, accountData.get("sortCode1"));
+        user_types_his_sort_code_2(accountType, accountData.get("sortCode2"));
+        user_types_his_sort_code_3(accountType, accountData.get("sortCode3"));
 //        user_types_his_iban(currentOrSaving, accountData.get("IBAN"));
-        user_types_his_account_number(currentOrSaving, accountData.get("accountNumber"));
-        user_types_his_account_balance(currentOrSaving, accountData.get("accountBalance"));
-        if ( !org.apache.commons.lang3.StringUtils.isEmpty(accountData.get("overdraftLimit")))
-            user_types_his_overdraft_limit(currentOrSaving, accountData.get("overdraftLimit"));
-        user_selects_his_source_of_saving(currentOrSaving, accountData.get("sourceOfSaving"));
+        user_types_his_account_number(accountType, accountData.get("accountNumber"));
+        user_types_his_account_balance(accountType, accountData.get("accountBalance"));
+        if ( !StringUtils.isEmpty(accountData.get("overdraftLimit")))
+            user_types_his_overdraft_limit(accountType, accountData.get("overdraftLimit"));
+        user_selects_his_source_of_saving(accountType, accountData.get("sourceOfSaving"));
         if ( !StringUtils.isEmpty(accountData.get("regularMonthlySaving")))
-            user_types_his_regular_monthly_saving(currentOrSaving, accountData.get("regularMonthlySaving"));
+            user_types_his_regular_monthly_saving(accountType, accountData.get("regularMonthlySaving"));
         user_clicks_add_this_account();
     }
 
@@ -215,7 +214,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
 //        yourAccountsPage.clickDone();
         requestHttpPost(
                 httpClient,
-                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlEmpList:c:w:btnImDone:submit::IBehaviorListener:0:-1",
+                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlEmpList:c:w:btnImDone:submit::IBehaviorListener:0:",
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");
@@ -224,7 +223,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                 },
                 new LinkedHashMap<String, String>() {
                     {
-                        put("stepToken", "2");
+                        put("stepToken", "2"); // TODO extract stepToken
                         put("root:c:w:pnlEmpList:c:w:btnImDone:submit", "1");
                     }
                 },
@@ -385,7 +384,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Deprecated @And("^Borrower types his (Current account|Savings account) account provider: (.*)$")
+    @And("^Borrower types his (Current account|Savings account) account provider: (.*)$")
     public void user_types_his_account_provider(String currentOrSavings, String accountProvider) {
         switch (currentOrSavings) {
             case "Current account":
@@ -399,7 +398,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Deprecated @And("^Borrower types his (Current account|Savings account) IBAN: (.*)")
+    @And("^Borrower types his (Current account|Savings account) IBAN: (.*)")
     public void user_types_his_iban(String currentOrSavings, String iban) {
         switch (currentOrSavings) {
             case "Current account":

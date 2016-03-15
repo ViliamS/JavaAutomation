@@ -36,10 +36,10 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
     }
 
     @Given("^(Borrower) fills in \"Financial forn\"$")
-    public void user_fills_in_financial(String usertType, List<String> financialListData) {
+    public void user_fills_in_financial(String userType, List<String> financialListData) {
         FinancialData financialData = new FinancialData(financialListData);
 
-        user_clicks_financial_loan_type(financialData.get("financialType"));
+        user_clicks_financial_loan_type(userType, financialData.get("financialType"));
         switch (financialData.get("financialType")) {
             case "Personal":
                 yourFinancialCommitmentsPage.typePersonalOutstandingBalanceAmount(financialData.get("outstandingBalanceAmount"));

@@ -15,6 +15,7 @@ import org.apache.commons.logging.LogFactory;
 import org.hamcrest.core.Is;
 
 import java.io.File;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -102,7 +103,9 @@ public class LoginPageStepDef /*extends BorrowerStepDef*/ {
 
     @When("^Borrower logs in with these credentials$")
     public void user_logs_in_with_these_credentials(List<String> credentials) throws Exception {
-        user = new User("null", credentials.get(0), credentials.get(1), "null");
+//        user = new User("null", credentials.get(0), credentials.get(1), "null");
+        user.setEmail(credentials.get(0));
+        user.setPwd(credentials.get(1));
         user_logs_in_as_his_account_is_activated();
     }
 

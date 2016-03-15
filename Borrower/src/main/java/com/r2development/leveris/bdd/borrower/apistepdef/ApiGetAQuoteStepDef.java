@@ -2058,6 +2058,10 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
 //        borrowerHomePage.checkDeclaration();
     }
 
+    @And("^Borrower checks \"Fraud Credit check\"$")
+    public void user_checks_fraud_credit_check() {
+    }
+
     @And("^finally, Borrower clicks \"Submit Application\"$")
     public void user_clicks_submit_application_final() throws IOException {
 
@@ -2079,7 +2083,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                                 "\"widgets\":" +
                                 "[" +
                                     "{" +
-                                        "\"widget\": \"btnSubmitApplication\"," +
+                                        "\"widget\": \"pnlSubmitButton btnSubmitApplication\"," +
                                         "\"data\":" +
                                         "{" +
                                             "\"enable\":true" +
@@ -2098,7 +2102,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
 
         requestHttpPost(
                 httpClient,
-                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnSubmitApplication:submit::IBehaviorListener:0:",
+                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlSubmitButton:c:w:btnSubmitApplication:submit::IBehaviorListener:0:-1",
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");
@@ -2107,11 +2111,12 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                 },
                 new LinkedHashMap<String, String>() {
                     {
-                        put("root:c:w:txaAddComment:textarea", "test");
+                        put("root:c:w:pnlComment:c:w:txaAddComment:textarea", "test");
                         put("root:c:w:txtLoanAmount:tb", null);
                         put("root:c:w:pnlBeforeSubmit:c:w:chkDistanceMarketing:checkbox", "on");
                         put("root:c:w:pnlBeforeSubmit:c:w:chkStatutory:checkbox", "on");
                         put("root:c:w:pnlBeforeSubmit:c:w:chkDeclarations:checkbox", "on");
+                        put("root:c:w:pnlBeforeSubmit:c:w:chkCraAml:checkbox", "on");
                         put("stepToken", "1");
                         put("root:c:w:btnSubmitApplication:submit", "1");
                     }
