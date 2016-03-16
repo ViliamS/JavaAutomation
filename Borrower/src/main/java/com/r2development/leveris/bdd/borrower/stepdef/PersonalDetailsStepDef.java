@@ -12,13 +12,12 @@ import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
 @Singleton
-public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV312Workaround {
+public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ /*implements CLV312Workaround*/ {
 
     private static final Log log = LogFactory.getLog(PersonalDetailsStepDef.class);
 
