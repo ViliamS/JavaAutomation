@@ -119,7 +119,6 @@ public class BorrowerHomePage extends HeaderAndBottomAndFormsMenuSection impleme
 
     @Override
     public void closeWhatDocs() {
-
     }
 
     @Override
@@ -149,6 +148,12 @@ public class BorrowerHomePage extends HeaderAndBottomAndFormsMenuSection impleme
     @Override
     public IBorrowerHomePage checkDeclaration() {
         getApprovalSection.checkDeclaration();
+        return this;
+    }
+
+    @Override
+    public IBorrowerHomePage checkCreditFraud() {
+        getApprovalSection.checkCreditFraud();
         return this;
     }
 

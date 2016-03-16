@@ -11,26 +11,27 @@ Feature: Payday Loan
       | password   | Password1122+                            |
 
 #    PERSONAL DETAILS
-#    When user clicks "Borrower Personal Details"
-    And borrower fills in "Personal Details"
-      | firstName           | AutomationSBUI |
-      | lastName            | Tester         |
-      | gender              | Male           |
-      | dateOfBirth         | 01/01/1977     |
-      | nationality         | French         |
-      | maritalStatus       | single         |
-      | address line 1      | 18 Woodquay    |
-      | town/city           | Galway         |
-      | country             | Ireland        |
-      | county/state        | Galway         |
+#    When Borrower clicks "Borrower Personal Details"
+    And Borrower fills in Personal Details
+      | formType            | Personal Details  |
+      | firstName           | AutomationSBUI    |
+      | lastName            | Tester            |
+      | gender              | Male              |
+      | dateOfBirth         | 01/01/1977        |
+      | nationality         | French            |
+      | maritalStatus       | single            |
+      | address line 1      | 18 Woodquay       |
+      | town/city           | Galway            |
+      | country             | Ireland           |
+      | county/state        | Galway            |
 #      | accommodation       | Property owner |
 #      | isLivingSince3years | yes            |
     And Borrower saves his personal details data
 
 #    EMPLOYMENT & INCOME
 #    When Borrower clicks "Borrower Employment Income"
-    And Borrower fills in "Employment Income"
-      | categoryIncome      | Paye        |
+    And Borrower fills in Employment and Income type Paye
+      | formType      | Paye        |
       | occupation          | Artist      |
       | employerName        | Hot Peppers Paye |
       | employmentType      | Permanent   |
@@ -80,9 +81,10 @@ Feature: Payday Loan
 #    YOUR ACCOUNTS
 #    When Borrower clicks "Account"
 #    Then Borrower clicks "ADD ACCOUNT"
-    And Borrower clicks "Current account"
+#    And Borrower clicks "Current account"
+
     And Borrower fills in Current account
-      | fundsSource     | Current Account         |
+      | formType     | Current account         |
       | statementDate   | 01/01/2000              |
       | accountName     | test Current Account    |
       | sortCode1       | 12                      |
@@ -91,7 +93,7 @@ Feature: Payday Loan
       | accountNumber   | 1234567890              |
       | accountBalance  | 2001                    |
       | overdraftLimit  | 2002                    |
-      | sourceOfSaving  | Gift                    |
+      | sourceOfSaving       | Gift               |
       | regularMonthlySaving | 200                |
 #    And Borrower clicks "ADD ACCOUNT"
 #    And Borrower clicks "Savings account"
@@ -141,10 +143,11 @@ Feature: Payday Loan
     And Borrower uploads all documents
 
 #    FINAL STAGE 1
-#    And Borrower finalizes the Borrower Phase
-#    And Borrower clicks "Review and Submit"
-#    And Borrower checks "Distance Marketing"
-#    And Borrower checks "Statutory"
-#    And Borrower checks "Declaration"
+#    And borrower finalizes the Borrower Phase
+    And Borrower clicks "Review and Submit"
+    And Borrower checks "Distance Marketing"
+    And Borrower checks "Statutory"
+    And Borrower checks "Declaration"
+    And Borrower checks "Fraud Credit check"
 #    And Borrower clicks "Submit your application"
-#    And finally, Borrower clicks "Submit Application"
+    And finally, Borrower clicks "Submit Application"

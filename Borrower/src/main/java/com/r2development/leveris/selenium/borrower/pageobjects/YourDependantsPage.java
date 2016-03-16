@@ -85,6 +85,7 @@ public class YourDependantsPage extends HeaderAndBottomAndFormsMenuSection imple
             log.info("\n ---------------------------------------------------------------------- \n" +
                      " | Exception raised due to failed clicking to get to add dependant page | \n" +
                      " ----------------------------------------------------------------------- \n");
+            //todo shouldn't this have to fail
         }
         return this;
     }

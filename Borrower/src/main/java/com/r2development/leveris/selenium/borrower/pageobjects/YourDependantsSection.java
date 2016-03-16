@@ -4,6 +4,7 @@ import com.r2development.leveris.Borrower;
 import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -11,17 +12,15 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static org.junit.Assert.assertTrue;
-
 public class YourDependantsSection extends Borrower implements IYourDependantsSection {
 
     private static final Log log = LogFactory.getLog(YourDependantsSection.class);
 
-    @FindBy( xpath = YOUR_DEPENDANTS_TITLE_XPATH )
+    @FindBy(xpath = YOUR_DEPENDANTS_TITLE_XPATH)
     protected WebElement weYourDependantTitle;
-    @FindBy ( xpath = YOUR_DEPENDANTS_DESCRIPTION_INTRO_XPATH )
+    @FindBy(xpath = YOUR_DEPENDANTS_DESCRIPTION_INTRO_XPATH)
     protected WebElement weYourDependantDescriptionIntro;
-    @FindBy ( xpath = YOUR_DEPENDANTS_DESCRIPTION_INTRO2_XPATH )
+    @FindBy(xpath = YOUR_DEPENDANTS_DESCRIPTION_INTRO2_XPATH)
     protected WebElement weYourDependantDescriptionIntro2;
 
 //    @FindBy ( xpath = YOUR_DEPENDANT_SINGLE_NO_XPATH )
@@ -33,7 +32,7 @@ public class YourDependantsSection extends Borrower implements IYourDependantsSe
 //    @FindBy ( xpath = YOUR_DEPENDANT_COUPLE_YES_XPATH )
 //    protected WebElement weYourDependantCoupleYes;
 
-    @FindBy ( xpath = YOUR_DEPENDANTS_NONE_XPATH )
+    @FindBy(xpath = YOUR_DEPENDANTS_NONE_XPATH)
     protected WebElement weYourDependantNone;
 
     //div[contains(@id, 'DependentList')]
@@ -47,23 +46,23 @@ public class YourDependantsSection extends Borrower implements IYourDependantsSe
 //    @FindBy ( xpath = YOUR_DEPENDANTS_APPLIES_TO_COAPPLICANT_XPATH )
 //    protected WebElement weYourDependantsAppliesToCoapplicant;
 
-    @FindBy ( xpath = YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH )
+    @FindBy(xpath = YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH)
     protected WebElement weYourDependantsDateOfBirthInput;
 
-    @FindBy ( xpath = YOUR_DEPENDANTS_ADD_THIS_DEPENDANT_XPATH )
+    @FindBy(xpath = YOUR_DEPENDANTS_ADD_THIS_DEPENDANT_XPATH)
     protected WebElement weYourDependantsAddThisDependant;
-    @FindBy ( xpath = YOUR_DEPENDANTS_SAVE_AND_CLOSE_XPATH )
-    protected WebElement weYourDependantsSaveAndClose;
-    @FindBy ( xpath = YOUR_DEPENDANTS_ADD_DEPENDANT_XPATH )
+    @FindBy(xpath = YOUR_DEPENDANTS_SAVE_AND_CLOSE_XPATH)
+    protected WebElement weYourDependantssaveAndClose;
+    @FindBy(xpath = YOUR_DEPENDANTS_ADD_DEPENDANT_XPATH)
     protected WebElement weYourDependantsAddDependant;
-    @FindBy ( xpath = YOUR_DEPENDANTS_EDIT_THIS_DEPENDANT_XPATH )
+    @FindBy(xpath = YOUR_DEPENDANTS_EDIT_THIS_DEPENDANT_XPATH)
     protected WebElement weYourDependantsEditThisDependant;
-    @FindBy ( xpath = YOUR_DEPENDANTS_CANCEL_DEPENDANT_XPATH )
+    @FindBy(xpath = YOUR_DEPENDANTS_CANCEL_DEPENDANT_XPATH)
     protected WebElement weYourDependantsCancelDependant;
-    @FindBy ( xpath = YOUR_DEPENDANTS_NEXT_DEPENDANT_XPATH )
+    @FindBy(xpath = YOUR_DEPENDANTS_NEXT_DEPENDANT_XPATH)
     protected WebElement weYourDependantsNextDependant;
 
-//    @Inject
+    //    @Inject
     YourDependantsSection(SharedDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);
@@ -157,8 +156,7 @@ public class YourDependantsSection extends Borrower implements IYourDependantsSe
         } else if(isVisible(YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH, 0))
             return this;
 
-        // TODO update message
-        assertTrue("We've got lost!!! go home looser ", false);
+        Assert.assertTrue("We've got lost!!! go home looser ", false);
         return this;
     }
 

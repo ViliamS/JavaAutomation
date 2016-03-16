@@ -293,7 +293,6 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
         isVisible(YOUR_ACCOUNTS_ADD_THIS_ACCOUNT_XPATH, 0);
         clickElement(YOUR_ACCOUNTS_ADD_THIS_ACCOUNT_XPATH);
         loadingCheck();
-
         formSubmitPostSync(YOUR_ACCOUNTS_ADD_THIS_ACCOUNT_XPATH, formExceptionDetails());
 
 //        try{
@@ -407,10 +406,7 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
     public IYourAccountsSection typeCurrentStatementDate(String statementDate) {
         loadingCheck();
         isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_STATEMENT_DATE_INPUT_XPATH, 0);
-//        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_STATEMENT_DATE_INPUT_XPATH).clear();
-//        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_STATEMENT_DATE_INPUT_XPATH).sendKeys(statementDate);
-        weAccountsCurrentStatementDateInput.clear();
-        weAccountsCurrentStatementDateInput.sendKeys(statementDate);
+        type(YOUR_ACCOUNTS_CURRENT_ACCOUNT_STATEMENT_DATE_INPUT_XPATH, statementDate);
         loadingCheck();
         return this;
     }
@@ -499,8 +495,7 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
     public IYourAccountsSection typeCurrentOverdraftLimit(String overdraftLimit) {
         loadingCheck();
         isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_OVERDRAFT_INPUT_XPATH, 0);
-        weAccountsCurrentAccountOverdraftInput.clear();
-        weAccountsCurrentAccountOverdraftInput.sendKeys(overdraftLimit);
+        type(YOUR_ACCOUNTS_CURRENT_ACCOUNT_OVERDRAFT_INPUT_XPATH, overdraftLimit);
         loadingCheck();
         return this;
     }
@@ -509,7 +504,7 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
     public IYourAccountsSection selectCurrentSavingSource(String savingSource) {
         loadingCheck();
         isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_SAVING_SOURCE_SELECT_XPATH, 0);
-        selectFromDropDown(YOUR_ACCOUNTS_CURRENT_ACCOUNT_SAVING_SOURCE_SELECT_XPATH, savingSource, scrollDown);
+        selectFromDropDown(YOUR_ACCOUNTS_CURRENT_ACCOUNT_SAVING_SOURCE_SELECT_XPATH, savingSource, scrollHorizontal, scrollVertical);
         loadingCheck();
         return this;
     }
@@ -518,8 +513,7 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
     public IYourAccountsSection typeCurrentRegularMonthlySavings(String regularMonthlySavings) {
         loadingCheck();
         isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_REGULAR_MONTHLY_SAVINGS_INPUT_XPATH, 0);
-        weAccountsCurrentRegularMonthlySavingsInput.clear();
-        weAccountsCurrentRegularMonthlySavingsInput.sendKeys(regularMonthlySavings);
+        type(YOUR_ACCOUNTS_CURRENT_ACCOUNT_REGULAR_MONTHLY_SAVINGS_INPUT_XPATH, regularMonthlySavings);
         loadingCheck();
         return this;
     }
@@ -528,22 +522,14 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
     @Override
     public IYourAccountsSection typeSavingStatementDate(String statementDate) {
         loadingCheck();
-//        isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_STATEMENT_DATE_INPUT_XPATH, true);
-//        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_STATEMENT_DATE_INPUT_XPATH).clear();
-//        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_STATEMENT_DATE_INPUT_XPATH).sendKeys(statementDate);
         isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_STATEMENT_DATE_INPUT_XPATH, 0);
         type(YOUR_ACCOUNTS_SAVING_ACCOUNT_STATEMENT_DATE_INPUT_XPATH, statementDate);
         loadingCheck();
-//        weAccountsSavingStatementDateInput.clear();
-//        weAccountsSavingStatementDateInput.sendKeys(statementDate);
         return this;
     }
 
     @Override
     public IYourAccountsSection typeSavingsAccountName(String accountName) {
-//        isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_NAME_INPUT_XPATH, true);
-//        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_NAME_INPUT_XPATH).clear();
-//        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_NAME_INPUT_XPATH).sendKeys(accountName);
         loadingCheck();
         isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_NAME_INPUT_XPATH, 0);
         type(YOUR_ACCOUNTS_SAVING_ACCOUNT_NAME_INPUT_XPATH, accountName);
@@ -553,9 +539,6 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
 
     @Override
     public IYourAccountsSection typeSavingsSortCode1(String sortCode1) {
-//        isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_SORT_CODE_1_INPUT_XPATH, true);
-//        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_SORT_CODE_1_INPUT_XPATH).clear();
-//        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_SORT_CODE_1_INPUT_XPATH).sendKeys(sortCode1);
         sendKeysElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_SORT_CODE_1_INPUT_XPATH, sortCode1, 60);
         loadingCheck();
         return this;
@@ -563,9 +546,6 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
 
     @Override
     public IYourAccountsSection typeSavingsSortCode2(String sortCode2) {
-//        isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_SORT_CODE_2_INPUT_XPATH, true);
-//        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_SORT_CODE_2_INPUT_XPATH).clear();
-//        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_SORT_CODE_2_INPUT_XPATH).sendKeys(sortCode2);
         sendKeysElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_SORT_CODE_2_INPUT_XPATH, sortCode2, 60);
         loadingCheck();
         return this;
@@ -573,9 +553,6 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
 
     @Override
     public IYourAccountsSection typeSavingsSortCode3(String sortCode3) {
-//        isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_SORT_CODE_3_INPUT_XPATH, true);
-//        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_SORT_CODE_3_INPUT_XPATH).clear();
-//        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_SORT_CODE_3_INPUT_XPATH).sendKeys(sortCode3);
         sendKeysElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_SORT_CODE_3_INPUT_XPATH, sortCode3, 60);
         loadingCheck();
         return this;
@@ -583,9 +560,6 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
 
     @Override
     public IYourAccountsSection typeSavingsAccountNumber(String accountNumber) {
-//        isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_NUMBER_INPUT_XPATH, true);
-//        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_NUMBER_INPUT_XPATH).clear();
-//        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_NUMBER_INPUT_XPATH).sendKeys(accountNumber);
         sendKeysElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_NUMBER_INPUT_XPATH, accountNumber, 60);
         loadingCheck();
         return this;
@@ -593,75 +567,47 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
 
     @Deprecated @Override
     public IYourAccountsSection typeSavingAccountProvider(String accountProvider) {
-//        isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_PROVIDER_INPUT_XPATH, true);
-//        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_PROVIDER_INPUT_XPATH).clear();
-//        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_PROVIDER_INPUT_XPATH).sendKeys(accountProvider);
         sendKeysElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_PROVIDER_INPUT_XPATH, accountProvider, 60);
         loadingCheck();
-//        weAccountsSavingProviderInput.clear();
-//        weAccountsSavingProviderInput.sendKeys(accountProvider);
         return this;
     }
 
     @Override
     public IYourAccountsSection typeSavingIban(String iban) {
-//        isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_IBAN_INPUT_XPATH, true);
-//        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_IBAN_INPUT_XPATH).clear();
-//        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_IBAN_INPUT_XPATH).sendKeys(iban);
         sendKeysElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_IBAN_INPUT_XPATH, iban, 60);
         loadingCheck();
-//        weAccountsSavingIbanInput.clear();
-//        weAccountsSavingIbanInput.sendKeys(iban);
         return this;
     }
 
     @Override
     public IYourAccountsSection typeSavingAccountBalance(String accountBalance) {
-//        isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_BALANCE_INPUT_XPATH, true);
-//        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_BALANCE_INPUT_XPATH).clear();
-//        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_BALANCE_INPUT_XPATH).sendKeys(accountBalance);
         sendKeysElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_BALANCE_INPUT_XPATH, accountBalance, 60);
         loadingCheck();
-//        weAccountsSavingAccountBalanceInput.clear();
-//        weAccountsSavingAccountBalanceInput.sendKeys(accountBalance);
         return this;
     }
 
     @Override
     public IYourAccountsSection typeSavingOverdraftLimit(String savingOverdraftLimit) {
-        // TODO to check it ... synchronization
-//        isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_OVERDRAFT_INPUT_XPATH,true);
-//        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_OVERDRAFT_INPUT_XPATH).clear();
-//        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_OVERDRAFT_INPUT_XPATH).sendKeys(savingOverdraftLimit);
         sendKeysElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_OVERDRAFT_INPUT_XPATH, savingOverdraftLimit, 60);
         loadingCheck();
-//        weAccountsSavingAccountOverdraftInput.clear();
-//        weAccountsSavingAccountOverdraftInput.sendKeys(savingOverdraftLimit);
         return this;
     }
 
     @Override
     public IYourAccountsSection selectSavingSourceSavings(String sourceSaving) {
-//        isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_REGULAR_MONTHLY_SAVINGS_LABEL_XPATH, true);
-//        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_SAVING_SOURCE_INPUT_XPATH).isDisplayed();
         loadingCheck();
         isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_SAVING_SOURCE_SELECT_XPATH, 0);
-        selectFromDropDown(YOUR_ACCOUNTS_SAVING_ACCOUNT_SAVING_SOURCE_SELECT_XPATH, sourceSaving, scrollDown);
+        selectFromDropDown(YOUR_ACCOUNTS_SAVING_ACCOUNT_SAVING_SOURCE_SELECT_XPATH, sourceSaving, scrollHorizontal, scrollVertical);
         loadingCheck();
         return this;
     }
 
     @Override
     public IYourAccountsSection typeSavingRegularMonthlySavings(String savingRegularMonthlySavings) {
-//        isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_REGULAR_MONTHLY_SAVINGS_INPUT_XPATH, true);
-//        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_REGULAR_MONTHLY_SAVINGS_INPUT_XPATH).clear();
-//        getWebElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_REGULAR_MONTHLY_SAVINGS_INPUT_XPATH).sendKeys(savingRegularMonthlySavings);
         loadingCheck();
         isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_REGULAR_MONTHLY_SAVINGS_INPUT_XPATH, 0);
         type(YOUR_ACCOUNTS_SAVING_ACCOUNT_REGULAR_MONTHLY_SAVINGS_INPUT_XPATH, savingRegularMonthlySavings);
         loadingCheck();
-//        weAccountsSavingRegularMonthlySavingsInput.clear();
-//        weAccountsSavingRegularMonthlySavingsInput.sendKeys(savingRegularMonthlySavings);
         return this;
     }
 

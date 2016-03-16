@@ -13,6 +13,7 @@ import cucumber.api.java.en.When;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
 import java.util.List;
@@ -39,30 +40,53 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
     public void borrower_fills_in_account(String userType, String accountType, List<String> accountDataMap) {
         AccountData accountData = new AccountData(accountDataMap);
 
-        yourAccountsPage.getTitle();
+        Assert.assertEquals(
+                "'Filling of formType : '" + accountType + "' have Failed StepDef list data check \n " +
+                        "accountType = '" + accountType + "' should equals to the accountData.getAccountType() : '" + accountData.getAccountType() + "'",
+                accountType,
+                accountData.getAccountType());
 
+        yourAccountsPage.getTitle();
         borrower_clicks_an_account_type(userType, accountType);
 
-        borrower_types_his_account_provider(userType, accountType, accountData.get("accountProvider"));
+//      borrower_types_his_account_provider(userType, accountType, accountData.get("accountProvider"));
+        borrower_types_his_account_provider(userType, accountType, accountData.getAccountProvider());
 
-        if (!StringUtils.isEmpty(accountData.get("statementDate")))
-            borrower_types_the_statement_date(userType, accountType, accountData.get("statementDate"));
+//      if (!StringUtils.isEmpty(accountData.get("statementDate")))
+//          borrower_types_the_statement_date(userType, accountType, accountData.get("statementDate"));
+        if (!StringUtils.isEmpty(accountData.getStatementDate()))
+            borrower_types_the_statement_date(userType, accountType, accountData.getStatementDate());
 
-        borrower_types_his_account_name(userType, accountType, accountData.get("accountName"));
-        borrower_types_his_sort_code_1(userType, accountType, accountData.get("sortCode1"));
-        borrower_types_his_sort_code_2(userType, accountType, accountData.get("sortCode2"));
-        borrower_types_his_sort_code_3(userType, accountType, accountData.get("sortCode3"));
-        borrower_types_his_account_number(userType, accountType, accountData.get("accountNumber"));
-//        borrower_types_his_account_provider(accountType, accountData.get("accountProvider"));
-//        borrower_types_his_iban(accountType, accountData.get("IBAN"));
-        borrower_types_his_account_balance(userType, accountType, accountData.get("accountBalance"));
+//      borrower_types_his_account_name(userType, accountType, accountData.get("accountName"));
+        borrower_types_his_account_name(userType, accountType, accountData.getAccountName());
 
-        if ( !StringUtils.isEmpty(accountData.get("overdraftLimit")))
-            borrower_types_his_overdraft_limit(userType, accountType, accountData.get("overdraftLimit"));
-        borrower_selects_his_source_of_saving(userType, accountType, accountData.get("sourceOfSaving"));
+//      borrower_types_his_sort_code_1(userType, accountType, accountData.get("sortCode1"));
+        borrower_types_his_sort_code_1(userType, accountType, accountData.getSortCode1());
 
-        if ( !StringUtils.isEmpty(accountData.get("regularMonthlySaving")))
-            borrower_types_his_regular_monthly_saving(userType, accountType, accountData.get("regularMonthlySaving"));
+//      borrower_types_his_sort_code_2(userType, accountType, accountData.get("sortCode2"));
+        borrower_types_his_sort_code_2(userType, accountType, accountData.getSortCode2());
+
+//      borrower_types_his_sort_code_3(userType, accountType, accountData.get("sortCode3"));
+        borrower_types_his_sort_code_3(userType, accountType, accountData.getSortCode3());
+
+//      borrower_types_his_account_number(userType, accountType, accountData.get("accountNumber"));
+        borrower_types_his_account_number(userType, accountType, accountData.getAccountNumber());
+
+//      borrower_types_his_account_balance(userType, accountType, accountData.get("accountBalance"));
+        borrower_types_his_account_balance(userType, accountType, accountData.getAccountBalance());
+
+//      if ( !StringUtils.isEmpty(accountData.get("overdraftLimit")))
+//          borrower_types_his_overdraft_limit(userType, accountType, accountData.get("overdraftLimit"));
+        if ( !StringUtils.isEmpty(accountData.getOverdraftLimit()))
+            borrower_types_his_overdraft_limit(userType, accountType, accountData.getOverdraftLimit());
+
+//      borrower_selects_his_source_of_saving(userType, accountType, accountData.get("sourceOfSaving"));
+        borrower_selects_his_source_of_saving(userType, accountType, accountData.getSourceOfSaving());
+
+//      if ( !StringUtils.isEmpty(accountData.get("regularMonthlySaving")))
+//          borrower_types_his_regular_monthly_saving(userType, accountType, accountData.get("regularMonthlySaving"));
+        if ( !StringUtils.isEmpty(accountData.getRegularMonthlySaving()))
+            borrower_types_his_regular_monthly_saving(userType, accountType, accountData.getRegularMonthlySaving());
 
         borrower_clicks_add_this_account(userType);
     }
@@ -256,8 +280,9 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
         yourAccountsPage.closeScraping();
     }
 
-/*    @And("^user types his Current account provider: (.*)$")
-    public void user_types_current_account_provider(String accountProvider) {
+
+/*    @And("^(Borrower) types his Current account provider: (.*)$")
+    public void borrower_types_current_account_provider(String accountProvider) {
         yourAccountsPage.typeCurrentAccountProvider(accountProvider);
     }
 

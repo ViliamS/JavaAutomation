@@ -11,6 +11,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Assert;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 
@@ -35,11 +36,19 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
         borrowerPersonalDetailsPage = new PersonalDetailsPage(webDriver);
     }
 
-    @When("^(Borrower) fills in \"Personal Details\"$")
-//    public void user_fills_in_borrower_personal_details(String borrowerOrCoapplicant, Map<String, String> personalDetailsDataMap) {
-    public void user_fills_in_borrower_personal_details(String borrowerOrCoapplicant, List<String> personalDetailsDataMap) {
+    @When("^(Borrower) fills in (Personal Details)$")
+//    public void user_fills_in_borrower_personal_details(String borrowerOrCoapplicant, String formType,  Map<String, String> personalDetailsDataMap) {
+    public void user_fills_in_borrower_personal_details(String borrowerOrCoapplicant, String formType, List<String> personalDetailsDataMap) {
 //        workaroundCLV312(borrowerOrCoapplicant);
         PersonalDetailsData personalDetailsData = new PersonalDetailsData(personalDetailsDataMap);
+
+        Assert.assertEquals(
+                "'Borrower fills in Personal Details' have Failed on the check of Feature file table declaration. \n " +
+                    "formType = '" + formType + "' equals to the personalDetailsData.getFormType() : '" + personalDetailsData.getFormType() + "'",
+                formType,
+                personalDetailsData.getFormType()
+        );
+
         borrower_coapplicant_user_sees_his_name_in_the_title(borrowerOrCoapplicant);
         borrower_coapplicant_user_types_his_firstname(borrowerOrCoapplicant, personalDetailsData.getFirstName());
         borrower_coapplicant_user_types_his_lastname(borrowerOrCoapplicant, personalDetailsData.getLastName());
@@ -53,29 +62,6 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ implements CLV31
         borrower_coapplicant_user_selects_his_residency_countystate(borrowerOrCoapplicant, personalDetailsData.getCountyState());
 //        borrower_coapplicant_user_selects_his_residency_accommodation(borrowerOrCoapplicant, personalDetailsData.getAccommodation());
 //        borrower_coapplicant_user_checks_if_he_is_living_since_3_years(borrowerOrCoapplicant, (personalDetailsData.isLivingSince3years() ? "is" : "is not" ));
-    }
-
-    // TODO Delete
-    @Override
-    public void workaroundCLV312(String borrowerOrCoapplicant) {
-        if ( borrowerOrCoapplicant.equals("Borrower") )
-            borrowerHomePage.clickInfoUpload();
-
-        boolean toGoOn = false;
-        while ( !toGoOn ) {
-            try {
-//                else if ( borrowerOrCoapplicant.equals("borrower")) {
-//                    if ( StringUtils.isEmpty(user.getFirstNameCoApplicant()))
-//                        ((IFormsMenu)borrowerPersonalDetailsPage).clickBorrowerPersonalDetails(user.getFirstName());
-//                    else
-//                        ((IFormsMenu)borrowerPersonalDetailsPage).clickSingleBorrowerPersonalDetails();
-//                    borrowerPersonalDetailsPage.isTitle(user.getFirstName());
-//                }
-                toGoOn = true;
-            } catch (TimeoutException te) {
-                log.debug("Issues of getting Financial Assets page.");
-            }
-        }
     }
 
     @Given("^(Borrower) sees his name in the Personal Details title$")

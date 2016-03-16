@@ -405,6 +405,11 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
         borrowerHomePage.checkDeclaration();
     }
 
+    @And("^Borrower checks \"Fraud Credit check\"$")
+    public void user_checks_fraud_credit_check() {
+        borrowerHomePage.checkCreditFraud();
+    }
+
     @And("^finally, Borrower clicks \"Submit Application\"$")
     public void user_clicks_submit_application_final() {
         borrowerHomePage.clickFinalSubmitApplication();

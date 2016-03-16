@@ -68,7 +68,7 @@ public class GetApprovalSection extends Borrower implements IGetApprovalSection 
     protected WebElement weCheckDeclaration;
 
     //a[@wicketpath='application" main_c_form_form_root_c_w_btnSubmitApplication_submit']
-    @FindBy( xpath = GET_APPROVAL_FINAL_SUBMIT_APPLICATION_XPATH )
+    @FindBy( xpath = GET_APPROVAL_FINAL_SUBMIT_APPLICATION_ENABLED_XPATH)
     protected WebElement weFinalSubmitApplication;
 
     //h2[@wicketpath='main_c_form_form_root_c_w_pnl-YourAppHasBeenSubmitted_c_w_lbl-YourAppHasBeenSubmittedTitle']
@@ -113,7 +113,7 @@ public class GetApprovalSection extends Borrower implements IGetApprovalSection 
     @Override
     public void closePopup() {
         loadingCheck();
-        isVisible(POPUP_CLOSE_XPATH, true, 1);
+        isVisible(POPUP_CLOSE_XPATH, 0);
         clickElement(POPUP_CLOSE_XPATH);
         loadingCheck();
     }
@@ -121,14 +121,15 @@ public class GetApprovalSection extends Borrower implements IGetApprovalSection 
     @Override
     public IBuildQuotationPage clickGetAQuote() {
         loadingCheck();
-        isVisible(GET_APPROVAL_GET_A_QUOTE_XPATH, true, 1);
-        weGetApprovalQuote.click();
+        isVisible(GET_APPROVAL_GET_A_QUOTE_XPATH, 0);
+        clickElement(GET_APPROVAL_GET_A_QUOTE_XPATH);
         loadingCheck();
         return new BuildQuotationPage( webDriver);
     }
 
     @Override
     public IPersonalDetailsPage clickInfoUpload() {
+
 //        isVisible(GET_APPROVAL_INFO_UPLOAD_XPATH, false, 15);
 //        weGetApprovalInfoUpload.click();
         loadingCheck();
@@ -139,6 +140,7 @@ public class GetApprovalSection extends Borrower implements IGetApprovalSection 
 
     @Override
     public IGetApprovalSection clickReviewAndSubmit() {
+
 //        isVisible(READY_TO_REVIEW_AND_SUBMIT_BUTTON_XPATH, true, 15);
 //        getWebElement(READY_TO_REVIEW_AND_SUBMIT_BUTTON_XPATH).click();
         loadingCheck();
@@ -158,7 +160,9 @@ public class GetApprovalSection extends Borrower implements IGetApprovalSection 
 
     @Override
     public IGetApprovalSection clickSubmitYourApplication() {
+
 //        #    And user clicks "Submit your application" //a[@wicketpath='main_c_form_form_root_c_w_pnlContent_c_w_btnSubmitApplication_submit']
+
 //        isVisible(GET_APPROVAL_SUBMIT_YOUR_APPLICATION_XPATH, true);
 //        getWebElement(GET_APPROVAL_SUBMIT_YOUR_APPLICATION_XPATH).click();
 //        weSubmitYourApplication.click();
@@ -173,9 +177,11 @@ public class GetApprovalSection extends Borrower implements IGetApprovalSection 
 //        #    And user checks... label main_c_form_form_root_c_w_pnlBeforeSubmit_c_w_chkDistanceMarketing_label following-sibling::span/a
         loadingCheck();
         isVisible(GET_APPROVAL_CHECK_DISTANCE_MARKETING_XPATH, true);
+
 //        getWebElement(GET_APPROVAL_CHECK_DISTANCE_MARKETING_XPATH).click();
         clickElement(GET_APPROVAL_CHECK_DISTANCE_MARKETING_XPATH);
         loadingCheck();
+
 //        weCheckDistanceMarketing.click();
         return this;
     }
@@ -187,6 +193,7 @@ public class GetApprovalSection extends Borrower implements IGetApprovalSection 
         isVisible(GET_APPROVAL_CHECK_STATUTORY_XPATH, true);
         getWebElement(GET_APPROVAL_CHECK_STATUTORY_XPATH).click();
         loadingCheck();
+
 //        weCheckStatutory.click();
         return this;
     }
@@ -198,21 +205,47 @@ public class GetApprovalSection extends Borrower implements IGetApprovalSection 
         isVisible(GET_APPROVAL_CHECK_DECLARATION_XPATH, true);
         getWebElement(GET_APPROVAL_CHECK_DECLARATION_XPATH).click();
         loadingCheck();
+
 //        weCheckDeclaration.click();
         return this;
     }
 
     @Override
+    public IGetApprovalSection checkCreditFraud() {
+        loadingCheck();
+        isVisible(GET_APPROVAL_CHECK_FRAUD_CREDIT_XPATH, true);
+        getWebElement(GET_APPROVAL_CHECK_FRAUD_CREDIT_XPATH).click();
+        loadingCheck();
+        return this;
+    }
+
+
+
+    @Override
     public IGetApprovalSection clickFinalSubmitApplication() {
+
 //        #  main_c_form_form_root_c_w_pnl-YourAppHasBeenSubmitted_c_w_lbl-YourAppHasBeenSubmittedTitle
 //        #    And user clicks "Submit a[@wicketpath='application" main_c_form_form_root_c_w_btnSubmitApplication_submit']
+        //todo Implement clickToAppearDisappear() approach
         loadingCheck();
-        isVisible(GET_APPROVAL_FINAL_SUBMIT_APPLICATION_XPATH, true);
-//        getWebElement(GET_APPROVAL_FINAL_SUBMIT_APPLICATION_XPATH).click();
-        clickElement(GET_APPROVAL_FINAL_SUBMIT_APPLICATION_XPATH);
+//        if(!isVisible(GET_APPROVAL_FINAL_SUBMIT_APPLICATION_ENABLED_XPATH, 1) && isVisible(GET_APPROVAL_FINAL_SUBMIT_APPLICATION_DISABLED_XPATH, 1))
+//            Assert.assertEquals("\n clickFinalSubmitApplication()\n Button is not active!! expected is opposite", true, false);
+
+     //   if(isVisible(GET_APPROVAL_FINAL_SUBMIT_APPLICATION_ENABLED_XPATH, true, 0))
+
+        waitForClickable(           GET_APPROVAL_FINAL_SUBMIT_APPLICATION_ENABLED_XPATH);
+
+        clickElement(               GET_APPROVAL_FINAL_SUBMIT_APPLICATION_ENABLED_XPATH);
+
+      //  else {
+      //      Assert.assertEquals("\n clickFinalSubmitApplication()\n Button is no longer present but !! expected is opposite", true, false);
+      //  }
         loadingCheck();
+//        isNotVisible(GET_APPROVAL_FINAL_SUBMIT_APPLICATION_ENABLED_XPATH, 5);// Assuring we are on page where is not enabled submit button
+//        isNotVisible(GET_APPROVAL_FINAL_SUBMIT_APPLICATION_DISABLED_XPATH, 5);// Or even disabled submit button is not there :]
         isVisible(GET_APPROVAL_CONFIRMATION_XPATH, true);
-        isVisible("//div[@wicketpath='main_c_form_form_root_c_w_pnl-YourAppHasBeenSubmitted_c_w_lbl-YourAppHasBeenSubmittedTitle_l' and contains(., 'Your application has been sent')]");
+        //isVisible("//div[@wicketpath='main_c_form_form_root_c_w_pnl-YourAppHasBeenSubmitted_c_w_lbl-YourAppHasBeenSubmittedTitle_l' and contains(., 'Your application has been sent')]");
+
 //        isVisible("//div[@wicketpath='main_c_form_embeddedFormWrapper_embeddedForm_1_form_root_c_w_pnlQuote_c_w_lblQuoteDescription']", true);
 //        isVisible("//div[@wicketpath='main_c_form_embeddedFormWrapper_embeddedForm_2_form_root_c_w_pnlCoapplicant_c_w_lblCoapplicantDescription']", true);
 //        isVisible("//div[@wicketpath='main_c_form_embeddedFormWrapper_embeddedForm_3_form_root_c_w_pnlForms_c_w_lblFormsDescription']", true);

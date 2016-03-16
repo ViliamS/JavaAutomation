@@ -39,7 +39,13 @@ public interface IGetApprovalSection {
     String GET_APPROVAL_CHECK_DISTANCE_MARKETING_XPATH = "//label[@wicketpath='main_c_form_form_root_c_w_pnlBeforeSubmit_c_w_chkDistanceMarketing_label']/following-sibling::span/a";
     String GET_APPROVAL_CHECK_STATUTORY_XPATH = "//label[@wicketpath='main_c_form_form_root_c_w_pnlBeforeSubmit_c_w_chkStatutory_label']/following-sibling::span/a";
     String GET_APPROVAL_CHECK_DECLARATION_XPATH = "//label[@wicketpath='main_c_form_form_root_c_w_pnlBeforeSubmit_c_w_chkDeclarations_label']/following-sibling::span/a";
-    String GET_APPROVAL_FINAL_SUBMIT_APPLICATION_XPATH  = "//a[@wicketpath='main_c_form_form_root_c_w_btnSubmitApplication_submit']";
+    String GET_APPROVAL_CHECK_FRAUD_CREDIT_XPATH = "//input[@wicketpath='main_c_form_form_root_c_w_pnlBeforeSubmit_c_w_chkCraAml_checkbox']/following-sibling::span/a";
+
+    String GET_APPROVAL_FINAL_SUBMIT_APPLICATION_ENABLED_XPATH = "//div[@wicketpath='main_c_form_form_root_c_w_pnlSubmitButton_c_w_btnSubmitApplication'][contains(@class,'widget-enabled')]"; //[not(contains(@class,'widget-disabled'))][contains(@class,'widget-enabled')]/em[not(contains(@class,'disabled'))]";
+    String GET_APPROVAL_FINAL_SUBMIT_APPLICATION_DISABLED_XPATH = "//div[@wicketpath='main_c_form_form_root_c_w_pnlSubmitButton_c_w_btnSubmitApplication'][contains(@class,'widget-disabled')]";//[not(contains(@class,'widget-enabled'))]/em[contains(@class,'ui-button-disabled') and contains(@class,'ui-state-disabled')]";
+
+
+
     String GET_APPROVAL_CONFIRMATION_XPATH  = "//div[@wicketpath='main_c_form_form_root_c_w_pnl-YourAppHasBeenSubmitted_c_w_lbl-YourAppHasBeenSubmittedTitle']";
 
     String getGetApprovalTitle();
@@ -55,6 +61,7 @@ public interface IGetApprovalSection {
     IGetApprovalSection checkDistanceMarketing();
     IGetApprovalSection checkStatutory();
     IGetApprovalSection checkDeclaration();
+    IGetApprovalSection checkCreditFraud();
     IGetApprovalSection clickFinalSubmitApplication();
 
     boolean isLoaded();

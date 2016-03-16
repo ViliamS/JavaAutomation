@@ -13,6 +13,14 @@ public class PersonalDetailsData extends DataModel {
         super(personalDetailsData);
     }
 
+    public String getFormType() {
+        return data.get("formType");
+    }
+
+    public void setFormType(String formType){
+        data.replace("formType", formType);
+    }
+
     public String getFirstName() {
         return data.get("firstName");
     }

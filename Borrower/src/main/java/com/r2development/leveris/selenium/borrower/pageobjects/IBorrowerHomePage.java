@@ -41,5 +41,6 @@ public interface IBorrowerHomePage {
     IBorrowerHomePage checkDistanceMarketing();
     IBorrowerHomePage checkStatutory();
     IBorrowerHomePage checkDeclaration();
+    IBorrowerHomePage checkCreditFraud();
     IBorrowerHomePage clickFinalSubmitApplication();
 }

@@ -9,6 +9,7 @@ Feature: Payday Loan
 
     Given Borrower processes the automatic registration
       | applicantId | test.automation@test.finfactory.com |
+#    Vili should comment this line and Tony should also & move api code ...
     When Borrower logs in via Automatic Registration
 #    When Payday Loan User clicks on Continue button
 #    Then Borrower clicks on Apply Online
@@ -30,11 +31,12 @@ Feature: Payday Loan
 
     And Borrower clicks on continue to get Payday Loan
     And Borrower fills in Payday Loan form
-      | LoanType        | Payday Loan |
-      | NetMonthlyIncome   | 21,000.00 |
-      | MonthlyExpenses    | 1,000.00  |
-      | NumberOfDependants | 1         |
-      | AmountToBorrow     | 500       |
+      | LoanType           | Payday Loan |
+      | NetMonthlyIncome   | 21,000.00   |
+      | MonthlyExpenses    | 1,000.00    |
+      | NumberOfDependants | 1           |
+      | AmountToBorrow     | 1,000.00    |
+
     When Payday Loan Borrower clicks on Continue button
     Then Borrower clicks on Apply Online
 
@@ -43,25 +45,26 @@ Feature: Payday Loan
 #    PERSONAL DETAILS
 #    When Borrower clicks "Borrower Personal Details"
     And Borrower fills in Personal Details
-      | firstName           | AutomationBGUI |
-      | lastName            | Tester         |
-      | gender              | Male           |
-      | dateOfBirth         | 01/01/1977     |
-      | nationality         | French         |
-      | maritalStatus       | single         |
-      | address line 1      | 18 Woodquay    |
-      | town/city           | Galway         |
-      | country             | Ireland        |
-      | county/state        | Galway         |
-#      | accommodation       | Property owner |
-#      | isLivingSince3years | yes            |
+      | formType            | Personal Details  |
+      | firstName           | AutomationGUI     |
+      | lastName            | Tester            |
+      | gender              | Male              |
+      | dateOfBirth         | 01/01/1977        |
+      | nationality         | French            |
+      | maritalStatus       | single            |
+      | address line 1      | 18 Woodquay       |
+      | town/city           | Galway            |
+      | country             | Ireland           |
+      | county/state        | Galway            |
+#      | accommodation       | Property owner     |
+#      | isLivingSince3years | yes                |
     And Borrower saves his personal details data
 
 #    EMPLOYMENT & INCOME
 #    When Borrower clicks "Borrower Employment Income"
 
     And Borrower fills in Employment and Income type Paye
-      | categoryIncome      | Paye        |
+      | formType            | Paye        |
       | occupation          | Artist      |
       | employerName        | Hot Peppers Paye |
       | employmentType      | Permanent   |
@@ -117,8 +120,38 @@ Feature: Payday Loan
     And Borrower clicks "Done"
 
 #    YOUR ACCOUNTS
+#    Vili
+#    And Borrower fills in Current account
+#      | formType           | Current account         |
+#      | accountProvider       | deWilliamS              |
+#      | statementDate         | 01/01/2000              |
+#      | accountName           | test Current Account    |
+#      | sortCode1             | 12                      |
+#      | sortCode2             | 34                      |
+#      | sortCode3             | 56                      |
+#      | accountNumber         | 1234567890              |
+#      | accountBalance        | 2001                    |
+#      | overdraftLimit        | 2002                    |
+#      | sourceOfSaving        | Gift                    |
+#      | regularMonthlySaving  | 200                     |
+#
+#    And Borrower fills in Savings account
+#      | formType           | Savings account         |
+#      | accountProvider       | deWilliamS              |
+## BUG OPO-280 - if added as second account the field disappears
+#      | statementDate         | 01/01/2000              |
+#      | accountName           | test Current Account    |
+#      | sortCode1             | 12                      |
+#      | sortCode2             | 34                      |
+#      | sortCode3             | 56                      |
+#      | accountNumber         | 0987654321              |
+#      | accountBalance        | 2001                    |
+#      | overdraftLimit        | 2002                    |
+#      | sourceOfSaving        | Gift                    |
+#      | regularMonthlySaving  | 200                     |
+#    Tony
     And Borrower fills in Current account
-      | accountType     | Current account         |
+      | formType     | Current account         |
       | accountProvider | test account provider   |
       | statementDate   | 01/01/2000              |
       | accountName     | test Current Account    |
@@ -132,7 +165,7 @@ Feature: Payday Loan
       | regularMonthlySaving | 200                |
 #    And Borrower clicks "ADD ACCOUNT"
 #    And Borrower clicks "Savings account"
-#    And Borrower fills in "Savings Account"
+#    And Borrower fills in Savings account
 #      | statementDate   | 01/01/2000              |
 #      | accountName     | test Current Account    |
 #      | sortCode1       | 12                      |
@@ -146,10 +179,8 @@ Feature: Payday Loan
 #    And Borrower clicks "ADD ACCOUNT"
 #    And Borrower clicks "Account scraping"
 #    And Borrower closes "scraping" form
-    And Borrower clicks Accounts "Done"
 
 #    And Borrower clicks "ADD ACCOUNT"
-
 #     BUG OPO-280 - As one of the impacts its not possible to add second current account as form is a lot different from the first one.... why?? hope would be answered in OPO-280
 #    And Borrower fills in Current account # BUG OPO-280
 #      | accountType           | Current Account         | # BUG OPO-280
@@ -165,23 +196,26 @@ Feature: Payday Loan
 #      | sourceOfSaving        | Gift                    | # BUG OPO-280
 #      | regularMonthlySaving  | 200                     | # BUG OPO-280
 
-#    And Borrower clicks Accounts "Done"
+    And Borrower clicks Accounts "Done"
 
 #    YOUR DEPENDANTS
     And Borrower hasn't dependants
 #  - negative way not adding any
-#    And Borrower has dependants - positive way is now included in whole form filling step definition and it is being automatically handled if present
-#
+#    And Borrower has dependants
+#  - positive way is now included in whole form filling step definition and it is being automatically handled if present
+##
 #    And Borrower fills in "Dependant form"
 #      | date Of Birth | 01/01/2000 |
 #
 #    And Borrower fills in "Dependant form"
 #      | date Of Birth | 01/01/2000 |
-
-#    And Borrower clicks "ADD DEPENDANT" - not mandatory to use but is available and it would work
+#
+#    And Borrower clicks "ADD DEPENDANT"
+#  - not mandatory to use but is available and it would work
+#
 #    And Borrower fills in "Dependant form"
 #      | date Of Birth | 01/01/2000 |
-
+#
 #    And Borrower clicks Dependants "Done"
 
 #    Financial Commitments

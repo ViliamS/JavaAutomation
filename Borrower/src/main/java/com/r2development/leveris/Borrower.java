@@ -33,9 +33,47 @@ public class Borrower /*implements IBorrower*/ {
     protected final String INDICATOR_SMALL_OFF = "//div[@wicketpath='wicketpath' and @id='busyIndicator1a0' and @style='display: none']";
     protected final String INDICATOR_SMALL_ON = "//div[@wicketpath='wicketpath' and @id='busyIndicator1a0' and @style='display: block']";
 
-    protected final Integer[] scrollDown = {50, 0};
+    protected final Integer scrollHorizontal = 50;
+    protected final Integer scrollVertical = 0;
 
     protected final String EXCEPTION_THERE_ARE_ERROR_ITEMS_XPATH = "//div[@wicketpath='main_c_form_dialogWrapper_dialog_feedbackBox1']/div[@class='errorbox']/ul/li/div";
+
+
+    protected void waitForClickable(String xpath){
+        WebDriverWait wait = new WebDriverWait(webDriver, DEFAULT_TIMEOUT);
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+    }
+
+    protected void waitForClickable(String xpath, int timeOut) {
+        WebDriverWait wait = new WebDriverWait(webDriver, timeOut);
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+    }
+
+
+        protected boolean clickToAppearDisappear(String xpathToClick, String xpathToAppear){
+        return clickToAppearDisappear(xpathToClick, xpathToAppear, xpathToClick);
+    }
+
+    //todo it is not tested yet just a blindly coded draft
+    protected boolean clickToAppearDisappear(String xpathToClick, String xpathToAppear, String xpathToDisappear){
+        log.info("clickToAppearDisappear(String xpathToClick = '" + xpathToClick + "', String xpathToAppear = '" + xpathToAppear + "', String xpathToDisappear = '" + xpathToDisappear + "')");
+        loadingCheck();
+        isVisible(xpathToClick, true, 5);
+        clickElement(xpathToClick);
+        loadingCheck();
+        if(isVisible(xpathToAppear, 5) && isNotVisible(xpathToDisappear, 5)) {
+            log.info("clickToAppearDisappear() have PASSED vybordelne!");
+            return true;
+        } else if(!isVisible(xpathToAppear, 5)) {
+            log.info("\n !!!! FAILED !!!! \n clickToAppearDisappear() Failed due to ---> xpath : '" + xpathToAppear + "' <--- \n Element didn't Appeared");
+            return false;
+        } else if(!isNotVisible(xpathToDisappear, 5)){
+            log.info("\n !!!! FAILED !!!! \n clickToAppearDisappear() Failed due to ---> xpath : '" + xpathToDisappear + "' <--- \n" +
+                    " Element is still visible!");
+            return false;
+        }
+        return false;
+    }
 
     /**
      * Java Time Since the Epoch
@@ -386,13 +424,6 @@ public class Borrower /*implements IBorrower*/ {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
     }
 
-    private void waitForVisibility(String xpath, int timeout_in_seconds, boolean getInfoLog) {
-        if (getInfoLog)
-            log.info("\n waitForVisibility ---> xpath: '" + xpath + "' <--- " + " with time-out: '" + timeout_in_seconds + "'\n");
-        WebDriverWait wait = new WebDriverWait(webDriver, timeout_in_seconds);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
-    }
-
     private void waitForVisibilityWithText(String xpath, String text, int timeout_in_seconds) {
         log.info("\n waitForVisibilityWithText ---> xpath: '" + xpath + "' <--- and on this text: " + text + " with time-out: '" + timeout_in_seconds + "'\n");
         WebDriverWait wait = new WebDriverWait(webDriver, timeout_in_seconds);
@@ -517,11 +548,10 @@ public class Borrower /*implements IBorrower*/ {
         return true;
     }
 
-    // TODO check change
     private boolean isVisibleLoadingCheck(String xpath, int timeout_in_seconds) {
 //        boolean toReturn = true;
         try {
-            waitForVisibility(xpath, timeout_in_seconds, false);
+            waitForVisibilityLoadingCheck(xpath, timeout_in_seconds);
         } catch (TimeoutException te) {
 //            toReturn = false;
             return false;
@@ -624,18 +654,17 @@ public class Borrower /*implements IBorrower*/ {
         webDriver.get(url);
     }
 
-    // TODO check splint down
-    private void horizontalVerticalScroll(Integer[] horizontalAndVertical){
-        if(horizontalAndVertical.length == 2)
-            scroll(horizontalAndVertical[0], horizontalAndVertical[1]);
-        else if (horizontalAndVertical.length == 1)
-            scroll(horizontalAndVertical[0], 0);
-    }
+//    private void horizontalVerticalScroll(Integer horizontal, Integer vertical){
+//        if(horizontalAndVertical.length == 2)
+//            scroll(horizontalAndVertical[0], horizontalAndVertical[1]);
+//        else if (horizontalAndVertical.length == 1)
+//            scroll(horizontalAndVertical[0], 0);
+//    }
 
-    private String moveToDropDownButton(String xpath, Integer[] horizontalAndVertical){
+    private String moveToDropDownButton(String xpath, Integer horizontal, Integer vertical){
         loadingCheck();
         moveTo(By.xpath(xpath));
-        horizontalVerticalScroll(horizontalAndVertical);
+        scroll(horizontal, vertical);
         String currentBy = xpath + "/following-sibling::button";
         waitForVisibility(currentBy);
         moveTo(currentBy);
@@ -673,7 +702,7 @@ public class Borrower /*implements IBorrower*/ {
 
     }
 
-    protected void selectFromDropDown(String xpath, String valueToSelect, Integer[] horizontalVerticalScroll){
+    protected void selectFromDropDown(String xpath, String valueToSelect, Integer horizontal, Integer vertical){
         log.info("\n selectFromDropDown: " + valueToSelect + " on ---> xpath: " + xpath + "\n");
         //By currentBy = moveToDropDownButton(xpath);
         //clickOnDropDownToShowList(currentBy)
@@ -681,8 +710,8 @@ public class Borrower /*implements IBorrower*/ {
           * that two rows above are redundant if compared to row below....
           * but row below is harder to read so keeping two rows above commented as hint
           */
-        clickOnDropDownToShowList( moveToDropDownButton( xpath, horizontalVerticalScroll ) );
-        horizontalVerticalScroll( horizontalVerticalScroll );
+        clickOnDropDownToShowList( moveToDropDownButton( xpath, horizontal, vertical ) );
+        scroll( horizontal, vertical );
         selectFromDisplayedDropDownList( valueToSelect );
         loadingCheck();
     }
@@ -724,6 +753,7 @@ public class Borrower /*implements IBorrower*/ {
 //        waitForVisibility(dropDownLocator, DEFAULT_TIMEOUT);
         moveTo(dropDownLocator);
         clickElement(dropDownLocator);
+        loadingCheck();
     }
 
     protected void type(String xpath, String valueToType) {
@@ -778,20 +808,20 @@ public class Borrower /*implements IBorrower*/ {
         }*/
         if ( !StringUtils.isEmpty(sendKeyType) ) {
             log.info("sendKeys " + sendKeyType + "");
-            sendKeysKeyType(currentBy, sendKeyType);
+            keyStroke(currentBy, sendKeyType);
         }
     }
 
-    private void sendKeysKeyType(String xpath, Keys sendKeyType){
-        sendKeysKeyType(By.xpath(xpath), sendKeyType);
+    private void keyStroke(String xpath, Keys sendKeyType){
+        keyStroke(By.xpath(xpath), sendKeyType);
     }
 
-    // TODO check change
-    private void sendKeysKeyType(By currentBy, Keys sendKeyType){
-        log.info("\n -------------------------------------- \n | sendKeysKeyType | \n byLocator ---> " + currentBy.toString() + " <--- | \n -------------------------------------- \n");
+    private void keyStroke(By currentBy, Keys sendKeyType){
+        log.info("\n -------------------------------------- \n | keyStroke | \n byLocator ---> " + currentBy.toString() + " <--- | \n -------------------------------------- \n");
         webDriver.findElement(currentBy).sendKeys(sendKeyType);
     }
 
+    @Deprecated //todo because it doesn't work .... need to investigate
     protected void scroll(int vertical, @SuppressWarnings("SameParameterValue") int horizontal) {
         JavascriptExecutor jse = (JavascriptExecutor) webDriver;
         jse.executeScript("scroll(" + vertical + "," + horizontal + ")");

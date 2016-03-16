@@ -8,7 +8,6 @@ public interface IYourAccountsSection {
     String YOUR_ACCOUNTS_DIALOG_XPATH = "//div[contains(@aria-labelledby, 'ui-dialog-title-dialogWrapper')]/h3[text()='Your accounts']";
     String YOUR_ACCOUNTS_DESCRIPTION_XPATH = "//div[contains(@id, 'lblDeposit')]//span";
 
-    // TODO DUPLICATE XPATH
     String ACCOUNT_PROVIDER_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccountProvider_c_w_txtAccountProvider_tb']";
 
     String YOUR_ACCOUNTS_CURRENT_ACCOUNT_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_lnkCurrent_dialog']";
@@ -20,8 +19,8 @@ public interface IYourAccountsSection {
     String YOUR_ACCOUNTS_CURRENT_ACCOUNT_DIALOG_XPATH = "//a[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_lnkCurrent_submit']";
     String YOUR_ACCOUNTS_SAVING_ACCOUNT_DIALOG_XPATH = "//a[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_lnkSavings_submit']";
     String YOUR_ACCOUNTS_ACCOUNT_SCRAPING_DIALOG_XPATH = "//a[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_lnkAuto_submit']";
-    String YOUR_ACCOUNTS_REPORTS_XPATH = "//div[contains(@id, 'pnlDeposit')]";
 
+    String YOUR_ACCOUNTS_REPORTS_XPATH = "//div[contains(@id, 'pnlDeposit')]";
     String YOUR_ACCOUNTS_ACCOUNT_TYPE_XPATH = "//div[contains(@id, 'pnlDeposit')]//div[contains(@id, 'Type')]//span";     // to get text
     String YOUR_ACCOUNTS_ACCOUNT_DELETE_XPATH = "//div[contains(@id, 'pnlDeposit')]//a[contains(@wicketpath, 'lnkDelete')]";   // to delete
     String YOUR_ACCOUNTS_ACCOUNT_LABEL_AMOUNT_XPATH = "//div[contains(@id, 'pnlDeposit')]//div[contains(@id, 'Amount')]";            // to get text
