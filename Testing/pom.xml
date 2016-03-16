@@ -17,13 +17,13 @@
         <environment>dev2</environment>
         <domain>dv2app.opoqodev.com</domain>
         <borrower>http://dv2app.opoqodev.com/stable-borrower</borrower>
-        <!-- TODO check if we are using then delete after fixing -->
-        <underwriter>http://dv2app.opoqodev.com/underwriter</underwriter>
-        <!-- TODO check if we are using then delete after fixing -->
+        <underwriter>http://dv2app.opoqodev.com/stable-underwriter</underwriter>
         <partner>http://dv2app.opoqodev.com/partner</partner>
+        <domain.apollo>dv2apl.opoqodev.com</domain.apollo>
         <domain.investor>dv2pub.opoqodev.com</domain.investor>
         <investor.registration>http://dv2pub.opoqodev.com/register</investor.registration>
         <investor>http://dv2pub.opoqodev.com/</investor>
+        <apollo.sso>https://dv2apl.opoqodev.com/sso</apollo.sso>
         <database>jdbc:oracle:thin:@DV2000.LEVERIS</database>
         <automation.mode>dev</automation.mode>
         <active.screenshot>false</active.screenshot>
@@ -144,10 +144,20 @@
                         <!--suppress MavenModelInspection -->
                         <apollo.client>${apollo.client.url}</apollo.client>
                         <!--suppress MavenModelInspection -->
+                        <apollo.context.client>${apollo.ctx.client}</apollo.context.client>
+                        <!--suppress MavenModelInspection -->
                         <apollo.payment>${apollo.payment.url}</apollo.payment>
+                        <!--suppress MavenModelInspection -->
+                        <apollo.context.payment>${apollo.ctx.payment}</apollo.context.payment>
                         <!--suppress MavenModelInspection -->
                         <apollo.auth>${apollo.auth.url}</apollo.auth>
                         <!--crm.url=https://st1crm.loftkeys.com-->
+                        <!--suppress MavenModelInspection -->
+                        <investor>${investor.url}</investor>
+                        <!--suppress MavenModelInspection -->
+                        <apollo.sso>${apollo.sso.url}</apollo.sso>
+                        <!--suppress MavenModelInspection -->
+                        <domain.apollo>${domain.apollo}</domain.apollo>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

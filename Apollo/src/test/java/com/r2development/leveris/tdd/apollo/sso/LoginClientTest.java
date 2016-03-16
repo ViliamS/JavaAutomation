@@ -44,7 +44,7 @@ public class LoginClientTest {
         Assert.assertNotNull("Maven didn't load the System property Environment", System.getProperty("environment"));
         Assert.assertNotNull("Maven didn't load the System property Domain", System.getProperty("domain.apollo"));
         Assert.assertNotNull("Maven didn't load the System property Apollo.Client", System.getProperty("apollo.client"));
-        Assert.assertNotNull("Maven didn't load the System property Apollo.Client", System.getProperty("apollo.client"));
+//        Assert.assertNotNull("Maven didn't load the System property Apollo.Client", System.getProperty("apollo.client"));
         Assert.assertNotNull("Maven didn't load the System property Apollo.Payment", System.getProperty("apollo.payment"));
 
         HttpClientContext localContext = HttpUtils.initContext(System.getProperty("domain.apollo"), System.getProperty("apollo.context.client"));

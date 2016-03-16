@@ -58,7 +58,8 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
     public void open_leveris_automatic_registration_page() throws IOException {
         String automaticRegistrationResponse = requestHttpGet(
                 httpClient,
-                "http://dv2app.opoqodev.com/stable-borrower/home?useCase=automaticregistration",
+//                "http://dv2app.opoqodev.com/stable-borrower/home?useCase=automaticregistration",
+                System.getProperty("borrower") + "/home?useCase=automaticregistration",
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -79,7 +80,8 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
 
         requestHttpGet(
                 httpClient,
-                "http://dv2app.opoqodev.com/stable-borrower/",
+//                "http://dv2app.opoqodev.com/stable-borrower/",
+                System.getProperty("borrower"),
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");

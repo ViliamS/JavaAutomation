@@ -1,5 +1,5 @@
 
-@login @logout
+#@login @logout
 Feature: Apollo Login Payment
 
   Scenario:

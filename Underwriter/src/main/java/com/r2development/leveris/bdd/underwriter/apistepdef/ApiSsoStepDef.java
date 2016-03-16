@@ -75,10 +75,11 @@ public class ApiSsoStepDef extends ApiOpoqoUnderwriterStepDef {
 
         ApiSupportHttpClientStepDef.getNewInstanceHttpClientContext(System.getProperty("domain.apollo"), System.getProperty("apollo.context." + application.toLowerCase()));
 
-        String referer = "https://dv2apl.opoqodev.com/sso/?host=http://dv2apl.opoqodev.com/" + application.toLowerCase() + "/&application=" + application.toUpperCase();
-        String entity = "{\"authProcessId\":null,\"authProcessStepValues\":[{\"authDetailCode\":\"LDAPUSERNAME\",\"value\":\"u1@abakus.com\"},{\"authDetailCode\":\"LDAPPWD\",\"value\":\"Password1122\"}],\"operation\":\"LOGIN\",\"originalRequest\":{\"url\":\"http://dv2apl.opoqodev.com/" + application.toLowerCase() + "/\",\"applicationCode\":\"" + application.toUpperCase() + "\"},\"scenarioCode\":\"LDAP_USR_PWD\"}";
+//        String referer = "https://dv2apl.opoqodev.com/sso/?host=http://dv2apl.opoqodev.com/" + application.toLowerCase() + "/&application=" + application.toUpperCase();
+        String referer = System.getProperty("apollo.sso") + "/?host=http://" + System.getProperty("domain.apollo") + "/" + application.toLowerCase() + "/&application=" + application.toUpperCase();
+        String entity = "{\"authProcessId\":null,\"authProcessStepValues\":[{\"authDetailCode\":\"LDAPUSERNAME\",\"value\":\"u1@abakus.com\"},{\"authDetailCode\":\"LDAPPWD\",\"value\":\"Password1122\"}],\"operation\":\"LOGIN\",\"originalRequest\":{\"url\":\"http://" + System.getProperty("domain.apollo") + "/" + application.toLowerCase() + "/\",\"applicationCode\":\"" + application.toUpperCase() + "\"},\"scenarioCode\":\"LDAP_USR_PWD\"}";
 
-        HttpPost httpPostValidateAuthProcessStep = new HttpPost("https://dv2apl.opoqodev.com/sso/api/public/sso/validateAuthProcessStep");
+        HttpPost httpPostValidateAuthProcessStep = new HttpPost( System.getProperty("apollo.sso") + "/api/public/sso/validateAuthProcessStep");
         httpPostValidateAuthProcessStep.setHeader("Content-Type", "application/json; charset=UTF-8");
         httpPostValidateAuthProcessStep.setHeader("Referer", referer);
         StringEntity se = new StringEntity(entity);
@@ -103,7 +104,8 @@ public class ApiSsoStepDef extends ApiOpoqoUnderwriterStepDef {
 
         String authenticateResponse = requestHttpGet(
                     httpClient,
-                    "http://dv2app.opoqodev.com/stable-underwriter/home?useCase=authenticate&ticket=" + ssoTicket,
+//                    "http://dv2app.opoqodev.com/stable-underwriter/home?useCase=authenticate&ticket=" + ssoTicket,
+                    System.getProperty("underwriter") + "/home?useCase=authenticate&ticket=" + ssoTicket,
                     new LinkedHashMap<String, String>() {
                         {
                             put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -138,12 +140,13 @@ public class ApiSsoStepDef extends ApiOpoqoUnderwriterStepDef {
 
         String logoutResponse = requestHttpPost(
                 httpClient,
-                "http://dv2apl.opoqodev.com/client/api/private/sso/logout",
+//                "http://dv2apl.opoqodev.com/client/api/private/sso/logout",
+                System.getProperty("apollo.client") + "/api/private/sso/logout",
                 new LinkedHashMap<String, String>() {
                     {
                         put("accept", "*/*");
                         put("content-type", "application/json");
-                        put("Referer", "http://dv2apl.opoqodev.com/" + application.toLowerCase());
+                        put("Referer", System.getProperty("domain.apollo") + "/" + application.toLowerCase());
                     }
                 },
                 new LinkedHashMap<String, String>() {},
@@ -156,6 +159,6 @@ public class ApiSsoStepDef extends ApiOpoqoUnderwriterStepDef {
         JsonParser jsonParser = new JsonParser();
         JsonObject jsonObject = (JsonObject) jsonParser.parse(logoutResponse);
 
-        Assert.assertEquals("We should have one \"casUrl\" element", "https://dv2apl.opoqodev.com/sso/", jsonObject.get("casUrl").getAsString());
+        Assert.assertEquals("We should have one \"casUrl\" element", System.getProperty("apollo.sso") + "/", jsonObject.get("casUrl").getAsString());
     }
 }
