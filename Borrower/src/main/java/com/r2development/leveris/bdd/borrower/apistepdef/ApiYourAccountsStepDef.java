@@ -38,25 +38,25 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
     }
 
     @Given("^(Borrower) fills in (Current account|Savings account|Account scraping)$")
-    public void user_fills_in_account(String userType, String accountType, List<String> accountDataMap) throws IOException {
+    public void user_fills_in_account(String userType, String formType, List<String> accountDataMap) throws IOException {
         AccountData accountData = new AccountData(accountDataMap);
-        user_clicks_an_account_type(accountData.get("accountType"));
+        user_clicks_an_account_type(formType);
 //        yourAccountsPage.getTitle();
         if (!StringUtils.isEmpty(accountData.get("statementDate")))
-            user_types_the_statement_date(accountType, accountData.get("statementDate"));
-        user_types_his_account_provider(accountType, accountData.get("accountProvider"));
-        user_types_his_account_name(accountType, accountData.get("accountName"));
-        user_types_his_sort_code_1(accountType, accountData.get("sortCode1"));
-        user_types_his_sort_code_2(accountType, accountData.get("sortCode2"));
-        user_types_his_sort_code_3(accountType, accountData.get("sortCode3"));
+            user_types_the_statement_date(formType, accountData.get("statementDate"));
+        user_types_his_account_provider(formType, accountData.get("accountProvider"));
+        user_types_his_account_name(formType, accountData.get("accountName"));
+        user_types_his_sort_code_1(formType, accountData.get("sortCode1"));
+        user_types_his_sort_code_2(formType, accountData.get("sortCode2"));
+        user_types_his_sort_code_3(formType, accountData.get("sortCode3"));
 //        user_types_his_iban(currentOrSaving, accountData.get("IBAN"));
-        user_types_his_account_number(accountType, accountData.get("accountNumber"));
-        user_types_his_account_balance(accountType, accountData.get("accountBalance"));
+        user_types_his_account_number(formType, accountData.get("accountNumber"));
+        user_types_his_account_balance(formType, accountData.get("accountBalance"));
         if ( !StringUtils.isEmpty(accountData.get("overdraftLimit")))
-            user_types_his_overdraft_limit(accountType, accountData.get("overdraftLimit"));
-        user_selects_his_source_of_saving(accountType, accountData.get("sourceOfSaving"));
+            user_types_his_overdraft_limit(formType, accountData.get("overdraftLimit"));
+        user_selects_his_source_of_saving(formType, accountData.get("sourceOfSaving"));
         if ( !StringUtils.isEmpty(accountData.get("regularMonthlySaving")))
-            user_types_his_regular_monthly_saving(accountType, accountData.get("regularMonthlySaving"));
+            user_types_his_regular_monthly_saving(formType, accountData.get("regularMonthlySaving"));
         user_clicks_add_this_account();
     }
 

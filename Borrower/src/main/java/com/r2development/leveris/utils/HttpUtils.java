@@ -1,7 +1,9 @@
 package com.r2development.leveris.utils;
 
+
 import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpEntity;
@@ -25,13 +27,16 @@ import org.apache.http.util.EntityUtils;
 import org.joda.time.DateTime;
 import org.joda.time.Instant;
 import org.joda.time.Interval;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class HttpUtils {
 
@@ -154,7 +159,7 @@ public class HttpUtils {
 
         HttpResponse response = httpClient.execute(httpPost, localContext);
 
-//        assertTrue(response.getStatusLine().getStatusCode() == 200 || response.getStatusLine().getStatusCode() == 302);
+        assertTrue(response.getStatusLine().getStatusCode() == 200 || response.getStatusLine().getStatusCode() == 302);
 
         HttpEntity httpEntity = response.getEntity();
         if ( !consumeQuietly ) {
@@ -167,6 +172,50 @@ public class HttpUtils {
         }
 
         HttpClientUtils.closeQuietly(response);
+
+        Document response2Jsoup = Jsoup.parse(toReturn);
+        String errorMessage = StringUtils.EMPTY;
+        if ( toReturn.contains("error.UnknownErrorPage") ) {
+            Elements divPageWrapper = response2Jsoup.select("div[class=page-wrapper]");
+            errorMessage = prettyFormat(divPageWrapper.html(), 2);
+
+            if ( divPageWrapper.select("div[class=content-error") != null )
+                errorMessage = prettyFormat(divPageWrapper.select("div[class=content-error").html(), 2);
+
+            assertFalse(errorMessage, true);
+        }
+        else if ( toReturn.contains("component.error") ) {
+            errorMessage = prettyFormat(StringEscapeUtils.unescapeXml(response2Jsoup.select("component").html()), 2);
+            assertFalse(errorMessage, true);
+        }
+        else if ( toReturn.contains("Field is required.") && toReturn.contains("<li class=\"widget-label error\"") ) {
+            errorMessage = prettyFormat(StringEscapeUtils.unescapeXml(response2Jsoup.select("component[id~=feedback]").html()), 2);
+            assertFalse(errorMessage, true);
+        }
+        else if ( toReturn.contains("A JavaScript error occurred while processing custom server")) {
+            errorMessage = prettyFormat(StringEscapeUtils.unescapeXml(response2Jsoup.select("component[id~=feedback]").html()), 2);
+            assertFalse(errorMessage, true);
+        }
+
+        /*
+        <?xml version="1.0" encoding="UTF-8"?><ajax-response><evaluate><![CDATA[scTimeVar = new Date().getTime();]]></evaluate><component id="feedback578" ><![CDATA[<div class="feedbackbox" id="feedback578" wicketpath="main_c_form_dialogWrapper_dialog_feedbackBox1_feedback" aria-live="assertive"><!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.desktop.component.feedback.FormFeedbackPanel BEGIN -->
+        <ul class="feedbackul" wicketpath="main_c_form_dialogWrapper_dialog_feedbackBox1_feedback_feedbackul">
+        <li class="widget-label error" onclick="return feedback.clickFocus(this);" id="id0607" wicketpath="main_c_form_dialogWrapper_dialog_feedbackBox1_feedback_feedbackul_messages_0" data-for="form56d">
+        <a href="javascript:void(0);" class="close ui-corner-all" onclick="return feedback.close($(this), event);" wicketpath="main_c_form_dialogWrapper_dialog_feedbackBox1_feedback_feedbackul_messages_0_close" title="Hide message">
+        <span class="ui-icon ui-icon-closethick">Hide message</span>
+        </a>
+        <div class="title-single" server="true" wicketpath="main_c_form_dialogWrapper_dialog_feedbackBox1_feedback_feedbackul_messages_0_title">EFEGEN00043: A JavaScript error occurred while processing custom server validations:TypeError: Cannot read property &quot;inputText&quot; from null (sc_validate_validationScript.EmploymentAndIncomeEdit#26)</div>
+
+        </li>
+        </ul>
+        <!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.desktop.component.feedback.FormFeedbackPanel END --></div>]]></component><evaluate><![CDATA[window.showLastBusyIndicator && showLastBusyIndicator();]]></evaluate><evaluate><![CDATA[
+                SC.utils.resetWidgets('dialog52c');
+        $('#feedbackBox156e').show();]]></evaluate><evaluate encoding="wicket1"><![CDATA[feedback.synchronizeAriaIds([{"elm":"form56d","lbl":"id0607"}]^);]]></evaluate><evaluate><![CDATA[niceButtons();]]></evaluate><evaluate><![CDATA[window.hideLastBusyIndicator && hideLastBusyIndicator();]]></evaluate><evaluate><![CDATA[
+        if (window.scConsole) {
+            scConsole.log('ajax request', 'server time', 10);
+            scConsole.log('ajax request', 'client time', new Date().getTime() - scTimeVar);}]]></evaluate></ajax-response>
+        */
+
         return toReturn;
     }
 
@@ -222,5 +271,45 @@ public class HttpUtils {
 //        }
 //    }
 
+    private static String prettyFormat(String input, int indent) {
+        /*
+        try {
+            Source xmlInput = new StreamSource(new StringReader(input));
+            StringWriter stringWriter = new StringWriter();
+            StreamResult xmlOutput = new StreamResult(stringWriter);
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            transformerFactory.setAttribute("indent-number", indent);
+            Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.transform(xmlInput, xmlOutput);
+            return xmlOutput.getWriter().toString();
+        } catch (Exception e) {
+            throw new RuntimeException(e); // simple exception handling, please review it
+        }
+        */
+
+//        try {
+//            final org.w3c.dom.Document document = parseXmlFile(input);
+//
+//            OutputFormat format = new OutputFormat(document);
+//            format.setLineWidth(65);
+//            format.setIndenting(true);
+//            format.setIndent(indent);
+//            Writer out = new StringWriter();
+//            XMLSerializer serializer = new XMLSerializer(out, format);
+//            serializer.serialize(document);
+//
+//            return out.toString();
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+
+        Document.OutputSettings settings = new Document.OutputSettings();
+        settings.charset("utf-8").indentAmount(indent).outline(true).prettyPrint();
+
+        Document doc = Jsoup.parse(input);
+        doc.outputSettings(settings);
+        return doc.html();
+    }
 
 }

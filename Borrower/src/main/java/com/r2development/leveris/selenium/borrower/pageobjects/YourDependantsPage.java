@@ -1,6 +1,7 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
 import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import com.r2development.leveris.selenium.borrower.pageobjects.sectionobjects.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -16,6 +17,9 @@ public class YourDependantsPage extends HeaderAndBottomAndFormsMenuSection imple
         headerSection = new HeaderSection(webDriver);
         formsMenu = new FormsMenu(webDriver);
         yourDependantsSection = new YourDependantsSection(webDriver);
+
+
+
         bottomSection = new BottomSection(webDriver);
     }
 
@@ -54,7 +58,7 @@ public class YourDependantsPage extends HeaderAndBottomAndFormsMenuSection imple
 
     @Override
     public IYourDependantsPage typeDateOfBirth(String dateOfBirth) {
-        yourDependantsSection.typeDateOfBirth(dateOfBirth);
+//        yourDependantsSection.typeDateOfBirth(dateOfBirth);
         return this;
     }
 

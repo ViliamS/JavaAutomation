@@ -2,6 +2,8 @@ package com.r2development.leveris.selenium.borrower.pageobjects;
 
 import com.r2development.leveris.Borrower;
 import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import com.r2development.leveris.selenium.borrower.pageobjects.sectionobjects.IQuoteLandingSection;
+import com.r2development.leveris.selenium.borrower.pageobjects.sectionobjects.QuoteLandingSection;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

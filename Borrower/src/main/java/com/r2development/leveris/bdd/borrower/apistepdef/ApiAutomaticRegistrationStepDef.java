@@ -176,6 +176,6 @@ public class ApiAutomaticRegistrationStepDef extends ApiOpoqoBorrowerStepDef {
 //            user_types_coapplicant_email(automaticRegistrationData.get("coapplicantId"));
 //        }
         user_clicks_create_new_user();
-//        user_logs_in_via_automatic_registration();
+        user_logs_in_via_automatic_registration();
     }
 }

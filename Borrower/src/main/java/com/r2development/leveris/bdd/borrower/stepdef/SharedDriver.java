@@ -3,6 +3,7 @@ package com.r2development.leveris.bdd.borrower.stepdef;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.openqa.selenium.OutputType;
@@ -65,12 +66,54 @@ public class SharedDriver extends EventFiringWebDriver {
 //    }
 
     public static WebDriver execute(String browser) {
+
+////        Proxy seleniumProxy = null;
+//        DesiredCapabilities capabilities = null;
+//        if ( System.getProperty("Proxy") != null && BooleanUtils.toBoolean(System.getProperty("Proxy"))) {
+//            proxyServer = new HarProxyServer();
+////            proxyServer.startProxyServer();
+////            proxyServer.setCapture();
+////
+////            seleniumProxy = proxyServer.getSeleniumProxy();
+//            capabilities = new DesiredCapabilities();
+////            capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+////            capabilities.setCapability(CapabilityType.PROXY, seleniumProxy);
+//        }
+
         WebDriver toReturn = null;
         if ( StringUtils.isEmpty(browser) )
             browser = "chrome";
 
         switch (browser) {
             case "chrome":
+
+//                ChromeOptions options = new ChromeOptions();
+//                options.addArguments("ui-prioritize-in-gpu-process");
+//                userdata = "user-data-dir=/target/" + System.getProperty("timestamp") + RandomStringUtils.random(5, true, true);
+////                options.addArguments(userdata);
+////                options.addArguments("--start-maximized");
+////                options.addArguments("--window-position=200,50");
+////                options.addArguments("--window-size=1440,900");
+////                options.addArguments("--proxy-server=localhost:8080");
+//
+//                if ( System.getProperty("Proxy") != null && BooleanUtils.toBoolean(System.getProperty("Proxy"))) {
+//                    //noinspection ConstantConditions
+////                    capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+//                    webDriver = new ChromeDriver(capabilities);
+////                    proxyServer.newHar(new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date()));
+//                } else {
+//                    if ( webDriver != null)
+//                        webDriver = null;
+//
+//                    webDriver = new ChromeDriver(options);
+////                    webDriver = new ChromeDriver();
+//                    if ( webDriver.toString().contains("(null)") )
+//                        webDriver = new ChromeDriver(options);
+//
+////                    injector.createChildInjector("BorrowerDependenciesModule");
+////                    injector.injectMembers(webDriver);
+//                }
+
                 toReturn = new ChromeDriver();
                 break;
             case "firefox":
@@ -135,6 +178,10 @@ public class SharedDriver extends EventFiringWebDriver {
             scenario.embed(screenshot, "image/png");
         } catch (WebDriverException somePlatformsDontSupportScreenshots) {
             System.err.println(somePlatformsDontSupportScreenshots.getMessage());
+        }
+
+        if ( System.getProperty("Proxy") != null && BooleanUtils.toBoolean(System.getProperty("Proxy"))) {
+//                proxyServer.stopProxyServer();
         }
     }
 

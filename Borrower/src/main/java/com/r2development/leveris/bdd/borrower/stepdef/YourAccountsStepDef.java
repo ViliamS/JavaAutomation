@@ -4,19 +4,17 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.AccountData;
 import com.r2development.leveris.di.IUser;
-import com.r2development.leveris.selenium.borrower.pageobjects.IFormsMenu;
 import com.r2development.leveris.selenium.borrower.pageobjects.IYourAccountsPage;
 import com.r2development.leveris.selenium.borrower.pageobjects.YourAccountsPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
-import java.util.List;
+import java.util.Map;
 
 @Singleton
 public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312Workaround*/ {
@@ -37,7 +35,7 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
     }
 
     @Given("^(Borrower) fills in (Current account|Savings account|Account scraping)$")
-    public void borrower_fills_in_account(String userType, String accountType, List<String> accountDataMap) {
+    public void borrower_fills_in_account(String userType, String accountType, Map<String, String> accountDataMap) {
         AccountData accountData = new AccountData(accountDataMap);
 
         Assert.assertEquals(
@@ -47,50 +45,45 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
                 accountData.getAccountType());
 
         yourAccountsPage.getTitle();
+
         borrower_clicks_an_account_type(userType, accountType);
-
-//      borrower_types_his_account_provider(userType, accountType, accountData.get("accountProvider"));
-        borrower_types_his_account_provider(userType, accountType, accountData.getAccountProvider());
-
-//      if (!StringUtils.isEmpty(accountData.get("statementDate")))
-//          borrower_types_the_statement_date(userType, accountType, accountData.get("statementDate"));
-        if (!StringUtils.isEmpty(accountData.getStatementDate()))
-            borrower_types_the_statement_date(userType, accountType, accountData.getStatementDate());
-
-//      borrower_types_his_account_name(userType, accountType, accountData.get("accountName"));
-        borrower_types_his_account_name(userType, accountType, accountData.getAccountName());
-
-//      borrower_types_his_sort_code_1(userType, accountType, accountData.get("sortCode1"));
-        borrower_types_his_sort_code_1(userType, accountType, accountData.getSortCode1());
-
-//      borrower_types_his_sort_code_2(userType, accountType, accountData.get("sortCode2"));
-        borrower_types_his_sort_code_2(userType, accountType, accountData.getSortCode2());
-
-//      borrower_types_his_sort_code_3(userType, accountType, accountData.get("sortCode3"));
-        borrower_types_his_sort_code_3(userType, accountType, accountData.getSortCode3());
-
-//      borrower_types_his_account_number(userType, accountType, accountData.get("accountNumber"));
-        borrower_types_his_account_number(userType, accountType, accountData.getAccountNumber());
-
-//      borrower_types_his_account_balance(userType, accountType, accountData.get("accountBalance"));
-        borrower_types_his_account_balance(userType, accountType, accountData.getAccountBalance());
-
-//      if ( !StringUtils.isEmpty(accountData.get("overdraftLimit")))
-//          borrower_types_his_overdraft_limit(userType, accountType, accountData.get("overdraftLimit"));
-        if ( !StringUtils.isEmpty(accountData.getOverdraftLimit()))
-            borrower_types_his_overdraft_limit(userType, accountType, accountData.getOverdraftLimit());
-
-//      borrower_selects_his_source_of_saving(userType, accountType, accountData.get("sourceOfSaving"));
-        borrower_selects_his_source_of_saving(userType, accountType, accountData.getSourceOfSaving());
-
-//      if ( !StringUtils.isEmpty(accountData.get("regularMonthlySaving")))
-//          borrower_types_his_regular_monthly_saving(userType, accountType, accountData.get("regularMonthlySaving"));
-        if ( !StringUtils.isEmpty(accountData.getRegularMonthlySaving()))
-            borrower_types_his_regular_monthly_saving(userType, accountType, accountData.getRegularMonthlySaving());
-
+        borrower_fill_in_account_form(accountData.getData());
         borrower_clicks_add_this_account(userType);
+
     }
 
+    @And("^(Borrower) clicks (Current account|Savings account|Account scraping)$")
+    public void borrower_clicks_an_account_type(String userType, String accountType) {
+        yourAccountsPage.selectAccountType(accountType);
+    }
+
+//    private void borrower_fill_in_account_form(DataModel data) {
+//        yourAccountsPage.fillIn(data);
+//    }
+
+    private void borrower_fill_in_account_form(Map<String, String> data) {
+        yourAccountsPage.fillIn(data);
+    }
+
+    @When("^(Borrower) clicks \"ADD THIS ACCOUNT\"$")
+    public void borrower_clicks_add_this_account(String userType) {
+        yourAccountsPage.clickAddThisAccount();
+    }
+
+    @When("^(Borrower) types the (Current|Savings) statement date: (.*)")
+    public void borrower_types_the_statement_date(String userType, String currentOrSaving, String statementDate) {
+        switch (currentOrSaving) {
+            case "Current":
+                yourAccountsPage.typeCurrentStatementDate(statementDate);
+                break;
+            case "Savings":
+                yourAccountsPage.typeSavingsStatementDate(statementDate);
+                break;
+        }
+    }
+
+
+/*
     @When("^(Borrower) clicks \"ADD ACCOUNT\"$")
     public void borrower_clicks_add_account(String userType) throws InterruptedException {
         yourAccountsPage.clickAddAccount();
@@ -123,11 +116,6 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
 
     @And("^(Borrower) clicks \"ADD ACCOUNT MANUALLY\"$")
     public void borrower_clicks_add_account_manually(String userType) {
-    }
-
-    @And("^(Borrower) clicks (Current account|Savings account|Account scraping)$")
-    public void borrower_clicks_an_account_type(String userType, String accountType) {
-        yourAccountsPage.selectAccountType(accountType);
     }
 
     @When("^(Borrower) types the (Current|Savings) statement date: (.*)")
@@ -319,5 +307,7 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
     @And("^(Borrower) verifies account data$")
     public void borrower_verifies_account_data() {
 //        yourAccountsPage.validateAccounts();
-    }*/
+    }
+*/
+
 }

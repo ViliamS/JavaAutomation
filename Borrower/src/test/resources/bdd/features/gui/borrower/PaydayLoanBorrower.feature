@@ -10,7 +10,7 @@ Feature: Payday Loan
     Given Borrower processes the automatic registration
       | applicantId | test.automation@test.finfactory.com |
 #    Vili should comment this line and Tony should also & move api code ...
-    When Borrower logs in via Automatic Registration
+#    When Borrower logs in via Automatic Registration
 #    When Payday Loan User clicks on Continue button
 #    Then Borrower clicks on Apply Online
 #    And this registration data, user processes the registration (format2)
@@ -31,7 +31,7 @@ Feature: Payday Loan
 
     And Borrower clicks on continue to get Payday Loan
     And Borrower fills in Payday Loan form
-      | LoanType           | Payday Loan |
+      | formType           | Payday Loan |
       | NetMonthlyIncome   | 21,000.00   |
       | MonthlyExpenses    | 1,000.00    |
       | NumberOfDependants | 1           |
@@ -62,61 +62,43 @@ Feature: Payday Loan
 
 #    EMPLOYMENT & INCOME
 #    When Borrower clicks "Borrower Employment Income"
-
-    And Borrower fills in Employment and Income type Paye
-      | formType            | Paye        |
-      | occupation          | Artist      |
-      | employerName        | Hot Peppers Paye |
-      | employmentType      | Permanent   |
-      | startDate           | 05/11/2013  |
-      | isCurrentEmployment | yes         |
-      | netMonthlyIncome    | 124000      |
-#    And Borrower clicks "ADD EMPLOYMENT"
 #    And Borrower fills in Employment and Income type Paye
-#      | categoryIncome      | Paye        |
+#      | formType            | Paye        |
 #      | occupation          | Artist      |
 #      | employerName        | Hot Peppers Paye |
 #      | employmentType      | Permanent   |
 #      | startDate           | 05/11/2013  |
 #      | isCurrentEmployment | yes         |
 #      | netMonthlyIncome    | 124000      |
-#    And Borrower fills in Employment and Income type Self Employed
-#      | categoryIncome      | Self Employed      |
-#      | occupation          | Artist             |
-#      | businessName        | testBusinessName   |
-#      | addressLine1        | 18 Woodquay        |
-#      | townCity            | Galway             |
-#      | country             | Ireland            |
-#      | countyState         | Galway             |
-#      | businessNature      | testNatureBusiness |
-#      | startDate           | 05/11/2013         |
-#      | isCurrentEmployment | yes                |
-#      | netMonthlyIncome    | 124000             |
+    And Borrower fills in Employment and Income type Self Employed
+      | formType            | Self Employed      |
+      | occupation          | Artist             |
+      | businessName        | testBusinessName   |
+      | addressLine1        | 18 Woodquay        |
+      | addressLine2        | Galway             |
+      | townCity            | Galway             |
+      | country             | Ireland            |
+      | countyState         | Galway             |
+      | businessNature      | testNatureBusiness |
+      | startDate           | 05/11/2013         |
+      | endDate             | 06/12/2014         |
+      | isCurrentEmployment | yes                |
+      | netMonthlyIncome    | 124000             |
 #    And Borrower clicks "ADD EMPLOYMENT"
-#    And Borrower fills in "Employment Income"
-#      | categoryIncome      | Civil Servant |
-#      | occupation          | Artist        |
-#      | employerName        | Hot Peppers Civil Servant  |
-#      | employmentType      | Permanent     |
-#      | startDate           | 05/11/2013    |
-#      | isCurrentEmployment | yes           |
-#      | netMonthlyIncome    | 124000        |
-#    And Borrower clicks "ADD EMPLOYMENT"
-#    And Borrower fills in "Employment Income"
-#      | categoryIncome      | Unemployed/Homemaker |
-#      | startDate           | 05/11/2013           |
-#      | isCurrentEmployment | yes                  |
-#    And Borrower clicks "ADD EMPLOYMENT"
-#    And Borrower fills in "Employment Income"
-#      | categoryIncome      | Unemployed/Homemaker |
+#    And Borrower fills in Employment and Income type Unemployed/Homemaker
+#      | formType            | Unemployed/Homemaker |
 #      | startDate           | 13/11/2013           |
 #      | endDate             | 13/12/2014           |
+#      | isCurrentEmployment | yes                  |
 #    And Borrower clicks "ADD EMPLOYMENT"
-#    And Borrower fills in "Employment Income"
-#      | categoryIncome         | Other                      |
+#    And Borrower fills in Employment and Income type Other
+#      | formType               | Other                      |
 #      | additionalIncomeSource | testAdditionalIncomeSource |
+#      | startDate              | 01/01/2000                 |
+#      | endDate                | 02/02/2002                 |
 #      | netMonthlyIncome       | 2000                       |
 #      | timeEarningIncome      | 200                        |
+#      | isCurrentEmployment    | yes                        |
     And Borrower clicks "Done"
 
 #    YOUR ACCOUNTS
@@ -241,10 +223,10 @@ Feature: Payday Loan
 
 #    FINAL STAGE 1
 #    And borrower finalizes the Borrower Phase
-    And Borrower clicks "Review and Submit"
-    And Borrower checks "Distance Marketing"
-    And Borrower checks "Statutory"
-    And Borrower checks "Declaration"
-    And Borrower checks "Fraud Credit check"
-#    And Borrower clicks "Submit your application"
-    And finally, Borrower clicks "Submit Application"
+#    And Borrower clicks "Review and Submit"
+#    And Borrower checks "Distance Marketing"
+#    And Borrower checks "Statutory"
+#    And Borrower checks "Declaration"
+#    And Borrower checks "Fraud Credit check"
+##    And Borrower clicks "Submit your application"
+#    And finally, Borrower clicks "Submit Application"

@@ -41,7 +41,6 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
     }
 
     @Given("(Borrower) fills in Employment and Income type (Paye|Self Employed|Civil Servant|Unemployed/Homemaker|Other)$")
-//    public void user_fills_in_employment_income(String borrowerOrCoapplicant, Map<String, String> employmentIncomeDataMap) throws InterruptedException {
     public void user_fills_in_employment_income(String borrowerOrCoapplicant, String employmentCategory, List<String> employmentIncomeDataMap) throws InterruptedException {
 //        workaroundCLV312(borrowerOrCoapplicant);
         EmploymentIncomeData employmentIncomeData = new EmploymentIncomeData(employmentIncomeDataMap);

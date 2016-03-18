@@ -29,6 +29,10 @@ public interface IYourAccountsPage {
     Map<Integer, YourAccount> getAccountsOf(String accountType);
     Map<Integer, YourAccount> getAllAccounts();
 
+//    void fillIn(DataModel data);
+    IYourAccountsPage fillIn(Map<String, String> data);
+    IYourAccountsPage clickSaveAndClose();
+
     IYourAccountsPage typeAccountProvider(String accountProvider);
     IYourAccountsPage typeCurrentStatementDate(String statementDate);
     IYourAccountsPage typeCurrentAccountName(String accountName);
@@ -57,4 +61,5 @@ public interface IYourAccountsPage {
     IYourAccountsPage typeSavingRegularMonthlySavings(String savingRegularMonthlySavings);
 
     IYourAccountsPage closeScraping();
+
 }
