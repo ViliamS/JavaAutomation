@@ -36,9 +36,9 @@ public class YourDependantsStepDef /*extends BorrowerStepDef*/ /*implements CLV3
     public void user_fills_in_account(String userType, List<String> accountDataMap) throws InterruptedException {
         DependantData dependantData = new DependantData(accountDataMap);
 
-        if (!StringUtils.isEmpty(dependantData.get("date Of Birth"))){
+        if (!StringUtils.isEmpty(dependantData.getDateOfBirth())){
             user_clicks_add_dependant(userType);
-            user_types_dependant_date_of_birth(userType, dependantData.get("date Of Birth"));
+            user_types_dependant_date_of_birth(userType, dependantData.getDateOfBirth());
         }
         user_clicks_save_and_close(userType);
     }
@@ -71,6 +71,8 @@ public class YourDependantsStepDef /*extends BorrowerStepDef*/ /*implements CLV3
     @And("^(Borrower) clicks \"ADD DEPENDANT\"$")
     public void user_clicks_add_dependant(String userType) {
         yourDependantsPage.clickAddDependant();
+
+
     }
 
     @And("^(Borrower) clicks Dependants \"NEXT\"$")

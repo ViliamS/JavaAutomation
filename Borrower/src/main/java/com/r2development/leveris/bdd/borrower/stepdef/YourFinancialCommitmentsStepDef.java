@@ -4,15 +4,13 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.FinancialData;
 import com.r2development.leveris.di.IUser;
-import com.r2development.leveris.selenium.borrower.pageobjects.IBorrowerHomePage;
-import com.r2development.leveris.selenium.borrower.pageobjects.IPersonalDetailsPage;
-import com.r2development.leveris.selenium.borrower.pageobjects.IYourFinancialCommitmentsPage;
-import com.r2development.leveris.selenium.borrower.pageobjects.YourFinancialCommitmentsPage;
+import com.r2development.leveris.selenium.borrower.pageobjects.*;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
 import java.util.List;
@@ -22,97 +20,101 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
 
     private static final Log log = LogFactory.getLog(YourFinancialCommitmentsStepDef.class);
 
-    private WebDriver webDriver;
+    private SharedDriver webDriver;
     @Inject
     private IUser user;
 
     private IBorrowerHomePage borrowerHomePage;
     private IPersonalDetailsPage borrowerPersonalDetailsPage;
     private IYourFinancialCommitmentsPage yourFinancialCommitmentsPage;
+    private IFormsMenu formsMenu;
 
     @Inject
     public YourFinancialCommitmentsStepDef(SharedDriver webDriver) {
         yourFinancialCommitmentsPage = new YourFinancialCommitmentsPage(webDriver);
     }
 
-    @Given("^(Borrower) fills in \"Financial forn\"$")
-    public void user_fills_in_financial(String userType, List<String> financialListData) {
+    @Given("^(Borrower) fills in (Personal Loan|Credit Card|Maintenance Payment|Other|Car Loan|Student Loan|Rent|Utilities|Childcare|Mortgage)$")
+    public void user_fills_in_financial(String userType, String formType, List<String> financialListData) {
         FinancialData financialData = new FinancialData(financialListData);
 
-        user_clicks_financial_loan_type(userType, financialData.get("financialType"));
-        switch (financialData.get("financialType")) {
-            case "Personal":
-                yourFinancialCommitmentsPage.typePersonalOutstandingBalanceAmount(financialData.get("outstandingBalanceAmount"));
-                yourFinancialCommitmentsPage.typePersonalFinancialInstitution(financialData.get("financialInstitution"));
-                yourFinancialCommitmentsPage.typePersonalLoanPurpose(financialData.get("loanPurpose"));
-                yourFinancialCommitmentsPage.typePersonalFinalRepaymentDate(financialData.get("finalRepaymentDate"));
-                yourFinancialCommitmentsPage.selectPersonalPaymentFrequency(financialData.get("paymentFrequency"));
-                yourFinancialCommitmentsPage.typePersonalRepaymentAmount(financialData.get("repaymentAmount"));
+        Assert.assertEquals("Form Type from table under step definition do not match the financial commitment in the step definition", formType, financialData.getFormType());
+
+        user_clicks_financial_loan_type(userType, financialData.getFormType());
+
+        switch (financialData.getFormType()) {
+            case "Personal Loan":
+                yourFinancialCommitmentsPage.typePersonalOutstandingBalanceAmount(financialData.getOutstandingAmount());
+                yourFinancialCommitmentsPage.typePersonalFinancialInstitution(financialData.getFinancialInstitution());
+                yourFinancialCommitmentsPage.typePersonalLoanPurpose(financialData.getPurposeOfTheLoan());
+                yourFinancialCommitmentsPage.typePersonalFinalRepaymentDate(financialData.getFinalRepaymentDate());
+                yourFinancialCommitmentsPage.selectPersonalPaymentFrequency(financialData.getPaymentFrequency());
+                yourFinancialCommitmentsPage.typePersonalRepaymentAmount(financialData.getRepaymentAmount());
                 break;
             case "Credit Card":
-                yourFinancialCommitmentsPage.typeCreditcRepaymentAmount(financialData.get("repaymentAmount"));
-                yourFinancialCommitmentsPage.typeCreditcProvider(financialData.get("provider"));
-                yourFinancialCommitmentsPage.selectCreditcType(financialData.get("type"));
-                yourFinancialCommitmentsPage.typeCreditcLimit(financialData.get("limit"));
-                yourFinancialCommitmentsPage.typeCreditcBalance(financialData.get("balance"));
+                yourFinancialCommitmentsPage.typeCreditcRepaymentAmount(financialData.getRepaymentAmount());
+                yourFinancialCommitmentsPage.typeCreditcProvider(financialData.getCardProvider());
+                yourFinancialCommitmentsPage.selectCreditcType(financialData.getCardType());
+                yourFinancialCommitmentsPage.typeCreditcLimit(financialData.getCardLimit());
+                yourFinancialCommitmentsPage.typeCreditcBalance(financialData.getCardBalance());
                 break;
             case "Maintenance Payment":
-                yourFinancialCommitmentsPage.typeMaintenancepPayment(financialData.get("payment"));
+                yourFinancialCommitmentsPage.typeMaintenancepPayment(financialData.getMonthlyMaintenancePayment());
                 break;
             case "Other":
-                yourFinancialCommitmentsPage.typeOtherRepaymentAmount(financialData.get("repaymentAmount"));
-                yourFinancialCommitmentsPage.typeOtherValue(financialData.get("value"));
-                yourFinancialCommitmentsPage.typeOtherDescription(financialData.get("description"));
+                yourFinancialCommitmentsPage.typeOtherRepaymentAmount(financialData.getRepaymentAmount());
+                yourFinancialCommitmentsPage.typeOtherValue(financialData.getValue());
+                yourFinancialCommitmentsPage.typeOtherDescription(financialData.getDescription());
                 break;
-            case "Car":
-                yourFinancialCommitmentsPage.typeCarOutstandingBalanceAmount(financialData.get("outstandingBalanceAmount"));
-                yourFinancialCommitmentsPage.typeCarFinancialInstitution(financialData.get("financialInstitution"));
-                yourFinancialCommitmentsPage.typeCarFinalRepaymentDate(financialData.get("finalRepaymentDate"));
-                yourFinancialCommitmentsPage.selectCarPaymentFrequency(financialData.get("paymentFrequency"));
-                yourFinancialCommitmentsPage.typeCarRepaymentAmount(financialData.get("repaymentAmount"));
+            case "Car Loan":
+                yourFinancialCommitmentsPage.typeCarOutstandingBalanceAmount(financialData.getOutstandingAmount());
+                yourFinancialCommitmentsPage.typeCarFinancialInstitution(financialData.getFinancialInstitution());
+                yourFinancialCommitmentsPage.typeCarFinalRepaymentDate(financialData.getFinalRepaymentDate());
+                yourFinancialCommitmentsPage.selectCarPaymentFrequency(financialData.getPaymentFrequency());
+                yourFinancialCommitmentsPage.typeCarRepaymentAmount(financialData.getRepaymentAmount());
                 break;
-            case "Student":
-                yourFinancialCommitmentsPage.typeStudentOutstandingBalanceAmount(financialData.get("outstandingBalanceAmount"));
-                yourFinancialCommitmentsPage.typeStudentFinancialInstitution(financialData.get("financialInstitution"));
-                yourFinancialCommitmentsPage.typeStudentFinalRepaymentDate(financialData.get("finalRepaymentDate"));
-                yourFinancialCommitmentsPage.selectStudentPaymentFrequency(financialData.get("paymentFrequency"));
-                yourFinancialCommitmentsPage.typeStudentRepaymentAmount(financialData.get("repaymentAmount"));
+            case "Student Loan":
+                yourFinancialCommitmentsPage.typeStudentOutstandingBalanceAmount(financialData.getOutstandingAmount());
+                yourFinancialCommitmentsPage.typeStudentFinancialInstitution(financialData.getFinancialInstitution());
+                yourFinancialCommitmentsPage.typeStudentFinalRepaymentDate(financialData.getFinalRepaymentDate());
+                yourFinancialCommitmentsPage.selectStudentPaymentFrequency(financialData.getPaymentFrequency());
+                yourFinancialCommitmentsPage.typeStudentRepaymentAmount(financialData.getRepaymentAmount());
                 break;
             case "Rent":
                 //optional
-                yourFinancialCommitmentsPage.selectRentPaymentFrequency(financialData.get("repaymentFrequency"));
-                yourFinancialCommitmentsPage.typeRentRepaymentAmount(financialData.get("repaymentAmount"));
+                yourFinancialCommitmentsPage.selectRentPaymentFrequency(financialData.getPaymentFrequency());
+                yourFinancialCommitmentsPage.typeRentRepaymentAmount(financialData.getRepaymentAmount());
                 //optional
-                yourFinancialCommitmentsPage.typeRentNote(financialData.get("note"));
+                yourFinancialCommitmentsPage.typeRentNote(financialData.getNote());
                 break;
             case "Utilities":
                 //optional
-                yourFinancialCommitmentsPage.selectUtilitiesPaymentFrequency(financialData.get("paymentFrequency"));
-                yourFinancialCommitmentsPage.typeUtilitiesRepaymentAmount(financialData.get("repaymentAmount"));
+                yourFinancialCommitmentsPage.selectUtilitiesPaymentFrequency(financialData.getPaymentFrequency());
+                yourFinancialCommitmentsPage.typeUtilitiesRepaymentAmount(financialData.getRepaymentAmount());
                 //optional
-                yourFinancialCommitmentsPage.typeUtilitiesNote(financialData.get("note"));
+                yourFinancialCommitmentsPage.typeUtilitiesNote(financialData.getNote());
                 break;
-            case "Child Care":
+            case "Childcare":
                 //optional
-                yourFinancialCommitmentsPage.selectChildCarePaymentFrequency(financialData.get("paymentFrequency"));
-                yourFinancialCommitmentsPage.typeChildCareRepaymentAmount(financialData.get("repaymentAmount"));
+                yourFinancialCommitmentsPage.selectChildCarePaymentFrequency(financialData.getPaymentFrequency());
+                yourFinancialCommitmentsPage.typeChildCareRepaymentAmount(financialData.getRepaymentAmount());
                 //optional
-                yourFinancialCommitmentsPage.typeChildCareNote(financialData.get("note"));
+                yourFinancialCommitmentsPage.typeChildCareNote(financialData.getNote());
                 break;
             case "Mortgage":
-                yourFinancialCommitmentsPage.typeMortgageOutstandingBalanceAmount(financialData.get("outstandingBalanceAmount"));
-                yourFinancialCommitmentsPage.typeMortgageFinancialInstitution(financialData.get("financialInstitution"));
+                yourFinancialCommitmentsPage.typeMortgageOutstandingBalanceAmount(financialData.getOutstandingAmount());
+                yourFinancialCommitmentsPage.typeMortgageFinancialInstitution(financialData.getFinancialInstitution());
                 //optional
-                yourFinancialCommitmentsPage.typeMortgageFinalRepaymentDate(financialData.get("finalRepaymentDate"));
-                yourFinancialCommitmentsPage.typeMortgageRepaymentAmount(financialData.get("repaymentAmount"));
+                yourFinancialCommitmentsPage.typeMortgageFinalRepaymentDate(financialData.getFinalRepaymentDate());
+                yourFinancialCommitmentsPage.typeMortgageRepaymentAmount(financialData.getRepaymentAmount());
                 break;
             default:
-
         }
+        yourFinancialCommitmentsPage.clickSaveAndClose();
     }
 
-    @When("^(Borrower) has(n't)? financial commitments$")
-    public void user_has_financial_commitments(String usertType, String hasCommitments) throws InterruptedException {
+    @When("^Borrower has(n't)? financial commitments$")
+    public void user_has_financial_commitments(String hasCommitments) throws InterruptedException {
 
         if (hasCommitments == null) {
 //            yourFinancialCommitmentsPage.clickSingleYes();
@@ -124,7 +126,7 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
         }
     }
 
-    @Given("^(Borrower) clicks Financial (Personal|Credit Card|Maintenance Payment|Other|Car|Studen|Rent|Utilities|ChildCare|Mortgage) Loan$")
+    @Given("^(Borrower) selects (Personal Loan|Credit Card|Maintenance Payment|Other|Car Loan|Student Loan|Rent|Utilities|Childcare|Mortgage) as his financial commitment$")
     public void user_clicks_financial_loan_type(String usertType, String financialTypeLoan) {
         yourFinancialCommitmentsPage.clickFinancialType(financialTypeLoan);
     }
@@ -299,9 +301,7 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
         yourFinancialCommitmentsPage.typeStudentRepaymentAmount(repaymentAmount);
     }
 
-
 //    rent
-
     @And("^(Borrower) selects Rent Payment Frequency : (Weekly|Fortnightly|Monthly|Yearly)$")
     public void user_selects_rent_payment_frequency(String usertType, String repaymentFrequency) {
         //optional
@@ -319,9 +319,7 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
         yourFinancialCommitmentsPage.typeRentNote(note);
     }
 
-
 //    utilities
-
     @And("^(Borrower) types Utilities payment frequency : (Weekly|Fortnightly|Monthly|Yearly)$")
     public void user_types_utilities_payment_frequency(String usertType, String paymentFrequency) {
         //optional
@@ -339,9 +337,7 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
         yourFinancialCommitmentsPage.typeUtilitiesNote(note);
     }
 
-
 //    childcare
-
     @And("^(Borrower) selects Child Care Payment Frequency : (Weekly|Fortnightly|Monthly|Yearly)$")
     public void user_types_child_care_payment_frequency(String usertType, String paymentFrequency) {
         //optional
@@ -359,9 +355,7 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
         yourFinancialCommitmentsPage.typeChildCareNote(note);
     }
 
-
 //    mortgage
-
     @And("^(Borrower) types Mortgage Outstanding Balance Amount : (.*)$")
     public void user_types_mortgage_outstanding_balance_amount(String usertType, String outstandingBalanceAmount) {
         yourFinancialCommitmentsPage.typeMortgageOutstandingBalanceAmount(outstandingBalanceAmount);
@@ -383,175 +377,10 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
         yourFinancialCommitmentsPage.typeMortgageRepaymentAmount(repaymentAmount);
     }
 
+    @And("^Borrower clicks on Financial commitments link$")
+    public void borrower_clicks_on_financial_commitments_link(){
+        formsMenu = new FormsMenu(webDriver);
+        formsMenu.clickFinancialCommitments();
+    }
 
-//    @When("^(Borrower) selects (Personal Loan|Credit Card|Maintenance Payment|Other|Car Loan|Student Loan) as financial commitment type$")
-//    public void user_selects_as_financial_commitment_type(String type) {
-//        yourFinancialCommitmentsPage.selectFinancialCommitmentType(type);
-//    }
-
-//    @Override
-//    public void workaroundCLV312(String borrowerOrCoapplicant) {
-//        borrowerHomePage.clickInfoUpload();
-//
-//        boolean toGoOn = false;
-//        while ( !toGoOn ) {
-//            try {
-//                ((IFormsMenu)borrowerPersonalDetailsPage).clickFinancialCommitments("double");
-//                yourFinancialCommitmentsPage.getTitle();
-//                toGoOn = true;
-//            } catch (TimeoutException te) {
-//                log.debug("Issues of getting Financial Commitments page.");
-//            }
-//        }
-//    }
-
-//    @And("^this commitment is applied to (borrower)$")
-//    public void this_commitment_is_applied_to(String toWhom) {
-//        yourFinancialCommitmentsPage.checkFinancialCommitmentAppliesToBorrower(user.getFirstName());
-//    }
-
-//    @And("^(Borrower) clicks Financial Commitment \"CANCEL\"$")
-//    public void user_clicks_financial_commitment_cancel() {
-//        yourFinancialCommitmentsPage.clickCancel();
-//    }
-
-//    @And("^(Borrower) clicks \"ADD THIS LIABILITY\"$")
-//    public void user_clicks_add_this_liability() {
-//        yourFinancialCommitmentsPage.clickAddThisLiability();
-//    }
-
-//    @And("^(Borrower) clicks \"ADD LIABILITY\"$")
-//    public void user_clicks_add_liability() {
-//        yourFinancialCommitmentsPage.clickAddLiability();
-//    }
-
-//    @And("^(Borrower) clicks \"EDIT THIS LIABILITY\"$")
-//    public void user_clicks_edit_this_liability() {
-//        yourFinancialCommitmentsPage.clickEditThisLiability();
-//    }
-
-//    @And("^(Borrower) types Personal Loan balance: (.*)$")
-//    public void user_types_personal_loan_balance(String balance) {
-//        yourFinancialCommitmentsPage.typePersonalLoanBalance(balance);
-//    }
-
-//    @And("^(Borrower) types Personal Loan institution: (.*)$")
-//    public void user_types_personal_loan_institution(String institution) {
-//        yourFinancialCommitmentsPage.typePersonalLoanInstitution(institution);
-//    }
-
-//    @And("^(Borrower) selects (Weekly|Fortnightly|Monthly|Yearly) as Personal Loan repayment frequency$")
-//    public void user_selects_as_personal_loan_repayment_frequency(String repaymentFrequency) {
-//        yourFinancialCommitmentsPage.selectPersonalLoanRepaymentFrequency(repaymentFrequency);
-//    }
-
-//    @And("^(Borrower) types Personal Loan purpose: (.*)$")
-//    public void user_types_personal_loan_purpose(String purpose) {
-//        yourFinancialCommitmentsPage.typePersonalLoanPurpose(purpose);
-//    }
-
-//    @And("^(Borrower) types Personal Loan final repayment date: (.*)$")
-//    public void user_types_personal_loan_final_repayment_date(String finalRepaymentDate) {
-//        yourFinancialCommitmentsPage.typePersonalLoanFinalRepaymentDate(finalRepaymentDate);
-//    }
-
-//    @And("^(Borrower) types Personal Loan repayment amount: (.*)$")
-//    public void user_types_personal_loan_repayment_amount(String repaymentAmount) {
-//        yourFinancialCommitmentsPage.typePersonalLoanRepaymentAmount(repaymentAmount);
-//    }
-
-//    @And("^(Borrower) types Credit Card repayment amount: (.*)$")
-//    public void user_types_credit_card_repayment_amount(String repaymentAmount) {
-//        yourFinancialCommitmentsPage.typeCreditCardRepaymentAmount(repaymentAmount);
-//    }
-
-//    @And("^(Borrower) types Credit Card provider: (.*)$")
-//    public void user_types_credit_card_provider(String provider) {
-//        yourFinancialCommitmentsPage.typeCreditCardProvider(provider);
-//    }
-
-//    @And("^(Borrower) selects (VISA|Mastercard|American Express|Store Card|Other) as Credit Card type$")
-//    public void user_selects_as_credit_card_type(String type) {
-//        yourFinancialCommitmentsPage.selectCreditCardType(type);
-//    }
-
-//    @And("^(Borrower) types Credit Card limit: (.*)$")
-//    public void user_types_credit_card_limit(String limit) {
-//        yourFinancialCommitmentsPage.typeCreditCardLimit(limit);
-//    }
-
-//    @And("^(Borrower) types Credit Card balance: (.*)$")
-//    public void user_types_credit_card_balance(String balance) {
-//        yourFinancialCommitmentsPage.typeCreditCardBalance(balance);
-//    }
-
-//    @And("^(Borrower) types Maintenance Monthly payment: (.*)$")
-//    public void user_types_maintenance_monthly_payment(String payment) {
-//        yourFinancialCommitmentsPage.typeMaintenanceMonthlyPayment(payment);
-//    }
-
-//    @And("^(Borrower) types Other Commitment repayment amount: (.*)$")
-//    public void user_types_other_repayment_amount(String repaymentAmount) {
-//        yourFinancialCommitmentsPage.typeOtherRepaymentAmount(repaymentAmount);
-//    }
-
-//    @And("^(Borrower) types Other Commitment value: (.*)$")
-//    public void user_types_other_value(String value) {
-//        yourFinancialCommitmentsPage.typeOtherValue(value);
-//    }
-
-//    @And("^(Borrower) types Other Commitment description: (.*)$")
-//    public void user_types_other_description(String description) {
-//        yourFinancialCommitmentsPage.typeOtherDescription(description);
-//    }
-
-//    @And("^(Borrower) types Car Loan balance: (.*)$")
-//    public void user_types_car_loan_balance(String balance) {
-//        yourFinancialCommitmentsPage.typeCarLoanBalance(balance);
-//    }
-
-//    @And("^(Borrower) types Car Loan institution: (.*)")
-//    public void user_types_car_loan_institution(String institution) {
-//        yourFinancialCommitmentsPage.typeCarLoanInstitution(institution);
-//    }
-
-//    @And("^(Borrower) selects (Weekly|Fortnightly|Monthly|Yearly) as Car Loan repayment frequency$")
-//    public void user_selects_as_car_loan_repayment_frequency(String repaymentFrequency) {
-//        yourFinancialCommitmentsPage.selectCarLoanRepaymentFrequency(repaymentFrequency);
-//    }
-
-//    @And("^(Borrower) types Car Loan final repayment date: (.*)")
-//    public void user_types_car_loan_final_repayment_date(String finalRepaymentDate) {
-//        yourFinancialCommitmentsPage.typeCarLoanFinalRepaymentDate(finalRepaymentDate);
-//    }
-
-//    @And("^(Borrower) types Car Loan repayment amount: (.*)")
-//    public void user_types_car_loan_repayment_amount(String repaymentAmount) {
-//        yourFinancialCommitmentsPage.typeCarLoanRepaymentAmount(repaymentAmount);
-//    }
-
-//    @And("^(Borrower) types Student Loan balance: (.*)")
-//    public void user_types_student_loan_balance(String balance) {
-//        yourFinancialCommitmentsPage.typeStudentLoanBalance(balance);
-//    }
-
-//    @And("^(Borrower) types Student Loan institution: (.*)")
-//    public void user_types_student_loan_institution(String institution) {
-//        yourFinancialCommitmentsPage.typeStudentLoanInstitution(institution);
-//    }
-
-//    @And("^(Borrower) selects (Weekly|Fortnightly|Monthly|Yearly) as Student Loan repayment frequency$")
-//    public void user_selects_as_student_loan_repayment_frequency(String repaymentFrequency) {
-//        yourFinancialCommitmentsPage.selectStudentLoanRepaymentFrequency(repaymentFrequency);
-//    }
-
-//    @And("^(Borrower) types Student Loan final repayment date: (.*)")
-//    public void user_types_student_loan_final_repayment_date(String finalRepaymentDate) {
-//        yourFinancialCommitmentsPage.typeStudentLoanFinalRepaymentDate(finalRepaymentDate);
-//    }
-
-//    @And("^(Borrower) types Student Loan repayment amount: (.*)$")
-//    public void user_types_student_loan_repayment_amount(String repaymentAmount) {
-//        yourFinancialCommitmentsPage.typeStudentLoanRepaymentAmount(repaymentAmount);
-//    }
 }

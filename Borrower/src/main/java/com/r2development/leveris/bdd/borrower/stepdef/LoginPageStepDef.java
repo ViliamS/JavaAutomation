@@ -2,6 +2,7 @@ package com.r2development.leveris.bdd.borrower.stepdef;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.r2development.leveris.bdd.borrower.model.LoginData;
 import com.r2development.leveris.di.IUser;
 import com.r2development.leveris.qa.utils.Orasql;
 import com.r2development.leveris.selenium.borrower.pageobjects.*;
@@ -69,6 +70,26 @@ public class LoginPageStepDef /*extends BorrowerStepDef*/ {
     @When("^Borrower wants to (show|hide) his password in Login page$")
     public void user_wants_to_his_password(String showOrHide) {
         loginPage = (showOrHide.equals("show") ? loginPage.clickShowPassword() : loginPage.clickHidePassword());
+    }
+
+    @Given("^Borrower loggins into application$")
+    public void borrower_loggins_into_application(List<String> login){
+
+        LoginData loginData = new LoginData(login);
+
+        welcomePage = new WelcomePage(webDriver, true);
+        loginPage = welcomePage.clickSignIn();
+        log.info("\n --------------------------------------------------------------------------------------------------- \n" +
+                " | \n ---> Email : " + loginData.get("email") + " <--- \n" +
+                " | \n --------------------------------------------------------------------------------------------------- \n");
+        user_types_his_login(loginData.get("email"));
+        log.info("\n --------------------------------- \n" +
+                " | \n ---> Pwd : " + loginData.get("password") + " <--- \n" +
+                " | \n --------------------------------- \n");
+        user_types_his_pwd(loginData.get("password"));
+        user_logs_in();
+
+
     }
 
     @Then("^Home Borrower Page is loaded$")

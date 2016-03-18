@@ -3,7 +3,6 @@ package com.r2development.leveris.selenium.borrower.pageobjects;
 import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.junit.Assert;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,7 +15,9 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
 
     private static final Log log = LogFactory.getLog(YourAccountsSection.class);
 
-//    @Inject
+    protected IYourDependantsSection yourDependantsSection;
+
+    //    @Inject
     public YourAccountsSection(SharedDriver webDriver) {
         super(webDriver);
         headerSection = new HeaderSection(webDriver);
@@ -26,133 +27,20 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
 
     @FindBy ( xpath = YOUR_ACCOUNTS_TITLE_XPATH )
     WebElement weAccountsTitle;
-    @FindBy ( xpath = YOUR_ACCOUNTS_DIALOG_XPATH )
-    WebElement weAccountsDialogTitle;
     @FindBy ( xpath = YOUR_ACCOUNTS_DESCRIPTION_XPATH )
     WebElement weAccountsDescription;
-
-    @FindBy ( xpath = YOUR_ACCOUNTS_CURRENT_ACCOUNT_XPATH )
-    WebElement weAccountsCurrentAccount;
-    @FindBy ( xpath = YOUR_ACCOUNTS_SAVING_ACCOUNT_XPATH )
-    WebElement weAccountsSavingAccount;
-    @FindBy ( xpath = YOUR_ACCOUNTS_ACCOUNT_SCRAPING_XPATH )
-    WebElement weAccountsAccountScraping;
-
-    @FindBy ( xpath = YOUR_ACCOUNTS_REPORTS_XPATH )
-    WebElement weAccountsReports;
-    @FindBy ( xpath = YOUR_ACCOUNTS_ACCOUNT_TYPE_XPATH )
-    WebElement weAccountsAccountType;     // to get text
-    @FindBy ( xpath = YOUR_ACCOUNTS_ACCOUNT_DELETE_XPATH )
-    WebElement weAccountsAccountDelete;   // to delete
-    @FindBy ( xpath = YOUR_ACCOUNTS_ACCOUNT_LABEL_AMOUNT_XPATH )
-    WebElement weAccountsAccountLabelAmount;            // to get text
-    @FindBy ( xpath = YOUR_ACCOUNTS_ACCOUNT_OWNER_XPATH )
-    WebElement weAccountsAccountOwner;              // to get
-    @FindBy ( xpath = YOUR_ACCOUNTS_ACCOUNT_AMOUNT_XPATH )
-    WebElement weAccountsAccountAmount;
-    @FindBy ( xpath = YOUR_ACCOUNTS_ADD_ACCOUNT_XPATH )
-    WebElement weAccountsAddAccount;
-    @FindBy ( xpath = YOUR_ACCOUNTS_NEXT_XPATH )
-    WebElement weAccountsNext;
-    @FindBy ( xpath = YOUR_ACCOUNTS_CANCEL_XPATH )
-    WebElement weAccountsCancel;
-    @FindBy ( xpath = YOUR_ACCOUNTS_ADD_THIS_ACCOUNT_XPATH )
-    WebElement weAccountsAddThisAccount;
-
-
-    // Current Account
-    @FindBy ( xpath = YOUR_ACCOUNTS_CURRENT_ACCOUNT_STATEMENT_DATE_LABEL_XPATH )
-    WebElement weAccountsCurrentStatementDateLabel;
-    @FindBy ( xpath = YOUR_ACCOUNTS_CURRENT_ACCOUNT_STATEMENT_DATE_INPUT_XPATH )
-    WebElement weAccountsCurrentStatementDateInput;
-
-//    String YOUR_ACCOUNTS_CURRENT_ACCOUNT_NAME_LABEL_XPATH = "main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccNumb_c_w_txtAccName_label";
-    @FindBy ( xpath = YOUR_ACCOUNTS_CURRENT_ACCOUNT_NAME_INPUT_XPATH )
-    WebElement weAccountsCurrentAccountName;
-//    String YOUR_ACCOUNTS_CURRENT_ACCOUNT_SORT_CODE_1_LABEL_XPATH = "main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccNumb_c_w_txtSortCode1_label";
     @FindBy ( xpath =  YOUR_ACCOUNTS_CURRENT_ACCOUNT_SORT_CODE_1_INPUT_XPATH )
     WebElement weAccountsCurrentSortCode1;
     @FindBy ( xpath = YOUR_ACCOUNTS_CURRENT_ACCOUNT_SORT_CODE_2_INPUT_XPATH )
     WebElement weAccountsCurrentSortCode2;
     @FindBy ( xpath = YOUR_ACCOUNTS_CURRENT_ACCOUNT_SORT_CODE_3_INPUT_XPATH )
     WebElement weAccountsCurrentSortCode3;
-//    String YOUR_ACCOUNTS_CURRENT_ACCOUNT_NUMBER_LABEL_XPATH = "main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccNumb_c_w_txtAccnumber_label";
     @FindBy ( xpath = YOUR_ACCOUNTS_CURRENT_ACCOUNT_NUMBER_INPUT_XPATH )
     WebElement weAccountsCurrentAccountNumber;
-
-    @FindBy ( xpath = YOUR_ACCOUNTS_CURRENT_ACCOUNT_PROVIDER_LABEL_XPATH )
-    WebElement weAccountsCurrentProviderLabel;
-    @FindBy ( xpath = YOUR_ACCOUNTS_CURRENT_ACCOUNT_PROVIDER_INPUT_XPATH )
-    WebElement weAccountsCurrentProviderInput;
-    @FindBy ( xpath = YOUR_ACCOUNTS_CURRENT_ACCOUNT_IBAN_LABEL_XPATH )
-    WebElement weAccountsCurrentIbanLabel;
     @FindBy ( xpath = YOUR_ACCOUNTS_CURRENT_ACCOUNT_IBAN_INPUT_XPATH )
     WebElement weAccountsCurrentIbanInput;
-    @FindBy ( xpath = YOUR_ACCOUNTS_CURRENT_ACCOUNT_BALANCE_LABEL_XPATH )
-    WebElement weAccountsCurrentAccountBalanceLabel;
     @FindBy ( xpath = YOUR_ACCOUNTS_CURRENT_ACCOUNT_BALANCE_INPUT_XPATH )
     WebElement weAccountsCurrentAccountBalanceInput;
-    @FindBy ( xpath = YOUR_ACCOUNTS_CURRENT_ACCOUNT_OVERDRAFT_LABEL_XPATH )
-    WebElement weAccountsCurrentAccountOverdraftLabel;
-    @FindBy ( xpath = YOUR_ACCOUNTS_CURRENT_ACCOUNT_OVERDRAFT_INPUT_XPATH )
-    WebElement weAccountsCurrentAccountOverdraftInput;
-    @FindBy ( xpath = YOUR_ACCOUNTS_CURRENT_ACCOUNT_SAVING_SOURCE_LABEL_XPATH )
-    WebElement weAccountsCurrentAccountSavingSourceLabel;
-    @FindBy ( xpath = YOUR_ACCOUNTS_CURRENT_ACCOUNT_SAVING_SOURCE_INPUT_XPATH )
-    WebElement weAccountsCurrentAccountSavingSourceIntput;
-    @FindBy ( xpath = YOUR_ACCOUNTS_CURRENT_ACCOUNT_REGULAR_MONTHLY_SAVINGS_LABEL_XPATH )
-    WebElement weAccountsCurrentRegularMonthlySavingsLabel;
-    @FindBy ( xpath = YOUR_ACCOUNTS_CURRENT_ACCOUNT_REGULAR_MONTHLY_SAVINGS_INPUT_XPATH )
-    WebElement weAccountsCurrentRegularMonthlySavingsInput;
-
-    // Savings Account
-    @FindBy ( xpath = YOUR_ACCOUNTS_SAVING_ACCOUNT_STATEMENT_DATE_LABEL_XPATH )
-    WebElement weAccountsSavingStatementDateLabel;
-    @FindBy ( xpath = YOUR_ACCOUNTS_SAVING_ACCOUNT_STATEMENT_DATE_INPUT_XPATH )
-    WebElement weAccountsSavingStatementDateInput;
-
-    //    String YOUR_ACCOUNTS_SAVING_ACCOUNT_NAME_LABEL_XPATH = "main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccNumb_c_w_txtAccName_label";
-    @FindBy ( xpath = YOUR_ACCOUNTS_SAVING_ACCOUNT_NAME_INPUT_XPATH )
-    WebElement weAccountsSavingAccountName;
-    //    String YOUR_ACCOUNTS_SAVING_ACCOUNT_SORT_CODE_1_LABEL_XPATH = "main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccNumb_c_w_txtSortCode1_label";
-    @FindBy ( xpath =  YOUR_ACCOUNTS_SAVING_ACCOUNT_SORT_CODE_1_INPUT_XPATH )
-    WebElement weAccountsSavingSortCode1;
-    @FindBy ( xpath = YOUR_ACCOUNTS_SAVING_ACCOUNT_SORT_CODE_2_INPUT_XPATH )
-    WebElement weAccountsSavingSortCode2;
-    @FindBy ( xpath = YOUR_ACCOUNTS_SAVING_ACCOUNT_SORT_CODE_3_INPUT_XPATH )
-    WebElement weAccountsSavingSortCode3;
-    //    String YOUR_ACCOUNTS_SAVING_ACCOUNT_NUMBER_LABEL_XPATH = "main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccNumb_c_w_txtAccnumber_label";
-    @FindBy ( xpath = YOUR_ACCOUNTS_SAVING_ACCOUNT_NUMBER_INPUT_XPATH )
-    WebElement weAccountsSavingAccountNumber;
-
-    @FindBy ( xpath = YOUR_ACCOUNTS_SAVING_ACCOUNT_PROVIDER_LABEL_XPATH )
-    WebElement weAccountsSavingProviderLabel;
-    @FindBy ( xpath = YOUR_ACCOUNTS_SAVING_ACCOUNT_PROVIDER_INPUT_XPATH )
-    WebElement weAccountsSavingProviderInput;
-    @FindBy ( xpath = YOUR_ACCOUNTS_SAVING_ACCOUNT_IBAN_LABEL_XPATH )
-    WebElement weAccountsSavingIbanLabel;
-    @FindBy ( xpath = YOUR_ACCOUNTS_SAVING_ACCOUNT_IBAN_INPUT_XPATH )
-    WebElement weAccountsSavingIbanInput;
-    @FindBy ( xpath = YOUR_ACCOUNTS_SAVING_ACCOUNT_BALANCE_LABEL_XPATH )
-    WebElement weAccountsSavingAccountBalanceLabel;
-    @FindBy ( xpath = YOUR_ACCOUNTS_SAVING_ACCOUNT_BALANCE_INPUT_XPATH )
-    WebElement weAccountsSavingAccountBalanceInput;
-    @FindBy ( xpath = YOUR_ACCOUNTS_SAVING_ACCOUNT_OVERDRAFT_LABEL_XPATH )
-    WebElement weAccountsSavingAccountOverdraftLabel;
-    @FindBy ( xpath = YOUR_ACCOUNTS_SAVING_ACCOUNT_OVERDRAFT_INPUT_XPATH )
-    WebElement weAccountsSavingAccountOverdraftInput;
-    @FindBy ( xpath = YOUR_ACCOUNTS_SAVING_ACCOUNT_SAVING_SOURCE_LABEL_XPATH )
-    WebElement weAccountsSavingAccountSavingSourceLabel;
-    @FindBy ( xpath = YOUR_ACCOUNTS_SAVING_ACCOUNT_SAVING_SOURCE_INPUT_XPATH )
-    WebElement weAccountsSavingAccountSavingSourceIntput;
-    @FindBy ( xpath = YOUR_ACCOUNTS_SAVING_ACCOUNT_REGULAR_MONTHLY_SAVINGS_LABEL_XPATH )
-    WebElement weAccountsSavingRegularMonthlySavingsLabel;
-    @FindBy ( xpath = YOUR_ACCOUNTS_SAVING_ACCOUNT_REGULAR_MONTHLY_SAVINGS_INPUT_XPATH )
-    WebElement weAccountsSavingRegularMonthlySavingsInput;
-
-    // Account Scraping
-    @FindBy ( xpath = YOUR_ACCOUNTS_SCRAPING_CLOSE_XPATH )
-    WebElement weAccountScrapingClose;
 
     @Override
     public String getTitle() {
@@ -320,7 +208,8 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
     public IYourDependantsPage clickDone() {
         loadingCheck();
         isVisible(YOUR_ACCOUNTS_DONE_XPATH, 0);
-        clickElement(YOUR_ACCOUNTS_DONE_XPATH);
+        //todo Anthony review that this is fine as its quite needed.
+        clickElementLoop(YOUR_ACCOUNTS_DONE_XPATH, IYourDependantsSection.YOUR_DEPENDANTS_TITLE_XPATH);
         loadingCheck();
         return new YourDependantsPage(webDriver);
     }
@@ -393,30 +282,30 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
         return null;
     }
 
-    @Override
-    public IYourAccountsSection typeAccountProvider(String accountProvider){
-        loadingCheck();
-        isVisible(ACCOUNT_PROVIDER_INPUT_XPATH, 0);
-        type(ACCOUNT_PROVIDER_INPUT_XPATH, accountProvider);
-        loadingCheck();
-        return this;
-    }
+//    @Override
+//    public IYourAccountsSection typeAccountProvider(String accountProvider){
+//        loadingCheck();
+//        isVisible(ACCOUNT_PROVIDER_INPUT_XPATH, 0);
+//        type(ACCOUNT_PROVIDER_INPUT_XPATH, accountProvider);
+//        loadingCheck();
+//        return this;
+//    }
 
     @Override
     public IYourAccountsSection typeCurrentStatementDate(String statementDate) {
         loadingCheck();
-        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_STATEMENT_DATE_INPUT_XPATH, 0);
-        type(YOUR_ACCOUNTS_CURRENT_ACCOUNT_STATEMENT_DATE_INPUT_XPATH, statementDate);
+        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_STATEMENT_DATE_INPUT_XPATH, 10);
+        clickElement(YOUR_ACCOUNTS_CURRENT_ACCOUNT_STATEMENT_DATE_INPUT_XPATH);
+        typeEndWithTab(YOUR_ACCOUNTS_CURRENT_ACCOUNT_STATEMENT_DATE_INPUT_XPATH, statementDate, true);
         loadingCheck();
         return this;
     }
 
     @Override
-    public IYourAccountsSection typeCurrentAccountName(String accountName) {
+    public IYourAccountsSection typeCurrentAccountHolderName(String accountHolderName) {
         loadingCheck();
-        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_NUMBER_INPUT_XPATH, 0);
-        weAccountsCurrentAccountName.clear();
-        weAccountsCurrentAccountName.sendKeys(accountName);
+        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_HOLDER_NAME_INPUT_XPATH, 0);
+        type(YOUR_ACCOUNTS_CURRENT_ACCOUNT_HOLDER_NAME_INPUT_XPATH, accountHolderName);
         loadingCheck();
         return this;
     }
@@ -461,15 +350,15 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
         return this;
     }
 
-    @Deprecated @Override
-    public IYourAccountsSection typeCurrentAccountProvider(String accountProvider) {
-        loadingCheck();
-        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_PROVIDER_INPUT_XPATH, 0);
-        weAccountsCurrentProviderInput.clear();
-        weAccountsCurrentProviderInput.sendKeys(accountProvider);
-        loadingCheck();
-        return this;
-    }
+//    @Deprecated @Override
+//    public IYourAccountsSection typeCurrentAccountProvider(String accountProvider) {
+//        loadingCheck();
+//        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_PROVIDER_INPUT_XPATH, 0);
+//        weAccountsCurrentProviderInput.clear();
+//        weAccountsCurrentProviderInput.sendKeys(accountProvider);
+//        loadingCheck();
+//        return this;
+//    }
 
     @Override
     public IYourAccountsSection typeCurrentIban(String iban) {
@@ -522,17 +411,18 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
     @Override
     public IYourAccountsSection typeSavingStatementDate(String statementDate) {
         loadingCheck();
-        isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_STATEMENT_DATE_INPUT_XPATH, 0);
+        isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_STATEMENT_DATE_INPUT_XPATH, 10);
         type(YOUR_ACCOUNTS_SAVING_ACCOUNT_STATEMENT_DATE_INPUT_XPATH, statementDate);
         loadingCheck();
         return this;
     }
 
     @Override
-    public IYourAccountsSection typeSavingsAccountName(String accountName) {
+    public IYourAccountsSection typeSavingsAccountHolderName(String accountHolderName) {
         loadingCheck();
-        isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_NAME_INPUT_XPATH, 0);
-        type(YOUR_ACCOUNTS_SAVING_ACCOUNT_NAME_INPUT_XPATH, accountName);
+        isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_HOLDER_NAME_INPUT_XPATH, 0);
+        clickElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_HOLDER_NAME_INPUT_XPATH);
+        type(YOUR_ACCOUNTS_SAVING_ACCOUNT_HOLDER_NAME_INPUT_XPATH, accountHolderName);
         loadingCheck();
         return this;
     }
@@ -565,12 +455,12 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
         return this;
     }
 
-    @Deprecated @Override
-    public IYourAccountsSection typeSavingAccountProvider(String accountProvider) {
-        sendKeysElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_PROVIDER_INPUT_XPATH, accountProvider, 60);
-        loadingCheck();
-        return this;
-    }
+//    @Override
+//    public IYourAccountsSection typeSavingAccountProvider(String accountProvider) {
+//        sendKeysElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_PROVIDER_INPUT_XPATH, accountProvider, 60);
+//        loadingCheck();
+//        return this;
+//    }
 
     @Override
     public IYourAccountsSection typeSavingIban(String iban) {

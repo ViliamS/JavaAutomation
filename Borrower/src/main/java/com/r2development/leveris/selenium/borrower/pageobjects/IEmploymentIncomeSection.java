@@ -14,17 +14,17 @@ package com.r2development.leveris.selenium.borrower.pageobjects;
 
     String EMPLOYMENT_INCOMES_DIALOG_XPATH = "//div[@wicketpath='main_c_form_dialogWrapper_dialog']";
 
-    String EMPLOYMENT_INCOMES_ADD_PAYE_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_lnkAddPaye_dialog']";
-    String EMPLOYMENT_INCOMES_ADD_SELF_EMPLOYED_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_lnkAddSelfEmployed_dialog']";
-    String EMPLOYMENT_INCOMES_ADD_CIVIL_SERVANT_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_lnkAddCivilServant_dialog']";
-    String EMPLOYMENT_INCOMES_ADD_UNEMPLOYED_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_lnkAddUnemployment_dialog']";
-    String EMPLOYMENT_INCOMES_ADD_OTHER_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_lnkAddHomemaker_dialog']";
+    String EMPLOYMENT_INCOMES_ADD_PAYE_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_pnlPaye_c_w_lnkAddPaye_dialog']";
+    String EMPLOYMENT_INCOMES_ADD_SELF_EMPLOYED_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_pnlSelfEmployed_c_w_lnkAddSelfEmployed_dialog']";
+//    String EMPLOYMENT_INCOMES_ADD_CIVIL_SERVANT_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_lnkAddCivilServant_dialog']";
+    String EMPLOYMENT_INCOMES_ADD_UNEMPLOYED_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_pnlUnemployed_c_w_lnkAddUnemployment_dialog']";
+    String EMPLOYMENT_INCOMES_ADD_OTHER_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_pnlOther_c_w_lnkAddHomemaker_dialog']";
 
-    String EMPLOYMENT_INCOMES_DIALOG_ADD_PAYE_XPATH = "//a[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_lnkAddPaye_submit']";
-    String EMPLOYMENT_INCOMES_DIALOG_ADD_SELF_EMPLOYED_XPATH = "//a[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_lnkAddSelfEmployed_submit']";
-    String EMPLOYMENT_INCOMES_DIALOG_ADD_CIVIL_SERVANT_XPATH = "//a[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_lnkAddCivilServant_submit']";
-    String EMPLOYMENT_INCOMES_DIALOG_ADD_UNEMPLOYED_XPATH = "//a[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_lnkAddUnemployment_submit']";
-    String EMPLOYMENT_INCOMES_DIALOG_ADD_OTHER_XPATH = "//a[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_lnkAddHomemaker_submit']";
+    String EMPLOYMENT_INCOMES_DIALOG_ADD_PAYE_XPATH = "//a[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_pnlPaye_c_w_lnkAddPaye_submit']";
+    String EMPLOYMENT_INCOMES_DIALOG_ADD_SELF_EMPLOYED_XPATH = "//a[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_pnlSelfEmployed_c_w_lnkAddSelfEmployed_submit']";
+//    String EMPLOYMENT_INCOMES_DIALOG_ADD_CIVIL_SERVANT_XPATH = "//a[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_pnlUnemployed_c_w_lnkAddUnemployment_submit']";
+    String EMPLOYMENT_INCOMES_DIALOG_ADD_UNEMPLOYED_XPATH = "//a[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_pnlUnemployed_c_w_lnkAddUnemployment_submit']";
+    String EMPLOYMENT_INCOMES_DIALOG_ADD_OTHER_XPATH = "//a[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_pnlOther_c_w_lnkAddHomemaker_submit']";
 
     String INPUT_OCCUPATION_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlDetail_c_w_pnlEmployed_c_w_cmbJobTitle_v']";
     String INPUT_EMPLOYMENT_NAME_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlDetail_c_w_pnlEmployed_c_w_txtEmployerName_tb']";

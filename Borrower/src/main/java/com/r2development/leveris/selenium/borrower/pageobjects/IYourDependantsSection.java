@@ -19,10 +19,9 @@ public interface IYourDependantsSection {
     String YOUR_DEPENDANTS_SAVE_AND_CLOSE_XPATH = "//a[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_btnAddDependent_submit']";
 
    // String YOUR_DEPENDANTS_ADD_DEPENDANTS_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_btnAddDependant_dialog' and contains(., 'Add a dependant')]";
-    String YOUR_DEPENDANTS_ADD_DEPENDANTS_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlDepList_c_w_btnAddDep_dialog']/span[text()='Add']";
+    String YOUR_DEPENDANTS_ADD_DEPENDANTS_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlDepList_c_w_btnAddDep_dialog']";
 
     String YOUR_DEPENDANTS_ADD_DEPENDANT_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_btnAddDependant_dialog']";
-    String YOUR_DEPENDANTS_ADD_DEPENDANT2_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlDepList_c_w_btnAddDep_dialog']";
     String YOUR_DEPENDANTS_EDIT_THIS_DEPENDANT_XPATH = "//a[contains(., 'EDIT THIS DEPENDENT')]";
     String YOUR_DEPENDANTS_CANCEL_DEPENDANT_XPATH = "//a[contains(., 'CANCEL')]";
     String YOUR_DEPENDANTS_NEXT_DEPENDANT_XPATH = "//a[contains(., 'Next section')]";

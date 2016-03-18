@@ -42,23 +42,20 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
 
         Assert.assertEquals(
                 "'Filling of formType : '" + accountType + "' have Failed StepDef list data check \n " +
-                        "accountType = '" + accountType + "' should equals to the accountData.getAccountType() : '" + accountData.getAccountType() + "'",
+                        "accountType = '" + accountType + "' should equals to the accountData.getFormType() : '" + accountData.getFormType() + "'",
                 accountType,
-                accountData.getAccountType());
+                accountData.getFormType());
 
         yourAccountsPage.getTitle();
         borrower_clicks_an_account_type(userType, accountType);
 
 //      borrower_types_his_account_provider(userType, accountType, accountData.get("accountProvider"));
-        borrower_types_his_account_provider(userType, accountType, accountData.getAccountProvider());
+        borrower_types_his_account_holder_name(userType, accountType, accountData.getAccountHolderName());
 
 //      if (!StringUtils.isEmpty(accountData.get("statementDate")))
 //          borrower_types_the_statement_date(userType, accountType, accountData.get("statementDate"));
         if (!StringUtils.isEmpty(accountData.getStatementDate()))
             borrower_types_the_statement_date(userType, accountType, accountData.getStatementDate());
-
-//      borrower_types_his_account_name(userType, accountType, accountData.get("accountName"));
-        borrower_types_his_account_name(userType, accountType, accountData.getAccountName());
 
 //      borrower_types_his_sort_code_1(userType, accountType, accountData.get("sortCode1"));
         borrower_types_his_sort_code_1(userType, accountType, accountData.getSortCode1());
@@ -130,30 +127,31 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
         yourAccountsPage.selectAccountType(accountType);
     }
 
-    @When("^(Borrower) types the (Current|Savings) statement date: (.*)")
+    @When("^(Borrower) types the (Current account|Savings account) statement date: (.*)")
     public void borrower_types_the_statement_date(String userType, String currentOrSaving, String statementDate) {
         switch (currentOrSaving) {
-            case "Current":
+            case "Current account":
                 yourAccountsPage.typeCurrentStatementDate(statementDate);
                 break;
-            case "Savings":
+            case "Savings account":
                 yourAccountsPage.typeSavingsStatementDate(statementDate);
                 break;
         }
     }
 
-    @And("^(Borrower) types his (Current account|Savings account) name: (.*)$")
-    public void borrower_types_his_account_name(String userType, String currentOrSavings, String accountName) {
+    @And("^(Borrower) types his (Current account|Savings account) Account holder name: (.*)$")
+    public void borrower_types_his_account_holder_name(String userType, String currentOrSavings, String accountHolderName) {
         switch (currentOrSavings) {
             case "Current account":
-                yourAccountsPage.typeCurrentAccountName(accountName);
+                yourAccountsPage.typeCurrentAccountHolderName(accountHolderName);
                 break;
             case "Savings account":
-                yourAccountsPage.typeSavingsAccountName(accountName);
+                yourAccountsPage.typeSavingsAccountHolderName(accountHolderName);
                 break;
         }
 
     }
+
 
     @And("^(Borrower) types his (Current account|Savings account) sort code 1: (.*)$")
     public void borrower_types_his_sort_code_1(String userType, String currentOrSavings, String sortCode1) {
@@ -203,17 +201,17 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
         }
     }
 
-    @And("^(Borrower) types his (Current account|Savings account) provider: (.*)$")
-    public void borrower_types_his_account_provider(String userType, String currentOrSavings, String accountProvider) {
-        switch (currentOrSavings) {
-            case "Current account":
-                yourAccountsPage.typeCurrentAccountProvider(accountProvider);
-                break;
-            case "Savings account":
-                yourAccountsPage.typeSavingAccountProvider(accountProvider);
-                break;
-        }
-    }
+//    @And("^(Borrower) types his (Current account|Savings account) provider: (.*)$")
+//    public void borrower_types_his_account_provider(String userType, String currentOrSavings, String accountProvider) {
+//        switch (currentOrSavings) {
+//            case "Current account":
+//                yourAccountsPage.typeCurrentAccountProvider(accountProvider);
+//                break;
+//            case "Savings account":
+//                yourAccountsPage.typeSavingAccountProvider(accountProvider);
+//                break;
+//        }
+//    }
 
     @And("^(Borrower) types his (Current account|Savings account) IBAN: (.*)")
     public void borrower_types_his_iban(String userType, String currentOrSavings, String iban) {

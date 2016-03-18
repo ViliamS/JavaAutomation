@@ -7,26 +7,38 @@ public interface IYourFinancialCommitmentsSection {
     String FINANCIAL_DIALOG_DESCRIPTION_XPATH = "//div[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_lblNoEmpText_l']";
     String FINANCIAL_DIALOG_DESCRIPTION2_XPATH = "//div[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_lblNoEmpText_l']";
 
-    String FINANCIAL_PERSONAL_LOAN_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_lnkAddPersonalLoan_dialog']";
-    String FINANCIAL_DIALOG_PERSONAL_LOAN_XPATH = "//a[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_lnkAddPersonalLoan_submit']";
-    String FINANCIAL_CREDIT_CARD_XPATH = "//a[@wickeptpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_lnkAddCreditCard_dialog']";
-    String FINANCIAL_DIALOG_CREDIT_CARD_XPATH = "//a[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_lnkAddCreditCard_submit']";
-    String FINANCIAL_MAINTENANCE_PAYMENT_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_lnkAddMaintenancePayment_dialog']";
-    String FINANCIAL_DIALOG_MAINTENANCE_PAYMENT_XPATH = "//a[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_lnkAddMaintenancePayment_submit']";
-    String FINANCIAL_OTHER_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_lnkAddOther_dialog']";
-    String FINANCIAL_DIALOG_OTHER_XPATH = "//a[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_lnkAddOther_submit']";
-    String FINANCIAL_CAR_LOAN_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_lnkAddCarLoan_dialog']";
-    String FINANCIAL_DIALOG_CAR_LOAN_XPATH = "//a[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_lnkAddCarLoan_submit']";
-    String FINANCIAL_STUDENT_LOAN_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_lnkAddStudentLoan_dialog']";
-    String FINANCIAL_DIALOG_STUDENT_LOAN_XPATH = "//a[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_lnkAddStudentLoan_submit']";
-    String FINANCIAL_RENT_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_pnlAddExpanses_c_w_lnkRent_dialog']";
-    String FINANCIAL_DIALOG_RENT_XPATH = "//a[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_pnl-737_c_w_lnkRent_submit']";
-    String FINANCIAL_UTILITIES_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_pnlAddExpanses_c_w_lnkUtilities_dialog']";
-    String FINANCIAL_DIALOG_UTILITIES_XPATH = "//a[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_pnl-737_c_w_lnkUtilities_submit']";
-    String FINANCIAL_CHILDCARE_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_pnlAddExpanses_c_w_lnkChildcare_dialog']";
-    String FINANCIAL_DIALOG_CHILD_CARE_XPATH = "//a[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_pnl-737_c_w_lnkChildcare_submit']";
-    String FINANCIAL_MORTGAGE_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_pnlAddExpanses_c_w_lnkMortage_dialog']";
-    String FINANCIAL_DIALOG_MORTGAGE_XPATH = "//a[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_pnl-737_c_w_lnkMortgage_submit']";
+    String DIALOG = "[contains(@wicketpath,'dialogWrapper')]";
+    String LABEL = "[contains(@wicketpath,'label')]";
+
+    String FINANCIAL_PERSONAL_LOAN_XPATH = "//a[contains(@wicketpath,'pnlNoEmplyments') and contains(@wicketpath,'lnkAddPersonalLoan')]";
+    String FINANCIAL_DIALOG_PERSONAL_LOAN_XPATH = FINANCIAL_PERSONAL_LOAN_XPATH + DIALOG;
+
+    String FINANCIAL_CREDIT_CARD_XPATH = "//a[contains(@wicketpath,'pnlNoEmplyments') and contains(@wicketpath,'lnkAddCreditCard')]";
+    String FINANCIAL_DIALOG_CREDIT_CARD_XPATH = FINANCIAL_CREDIT_CARD_XPATH + DIALOG;
+
+    String FINANCIAL_MAINTENANCE_PAYMENT_XPATH = "//a[contains(@wicketpath,'pnlNoEmplyments') and contains(@wicketpath,'lnkAddMaintenancePayment')]";
+    String FINANCIAL_DIALOG_MAINTENANCE_PAYMENT_XPATH = FINANCIAL_MAINTENANCE_PAYMENT_XPATH + DIALOG;
+
+    String FINANCIAL_OTHER_XPATH = "//a[contains(@wicketpath,'pnlNoEmplyments') and contains(@wicketpath,'lnkAddOther')]";
+    String FINANCIAL_DIALOG_OTHER_XPATH = FINANCIAL_OTHER_XPATH + DIALOG;
+
+    String FINANCIAL_CAR_LOAN_XPATH = "//a[contains(@wicketpath,'pnlNoEmplyments') and contains(@wicketpath,'lnkAddCarLoan')]";
+    String FINANCIAL_DIALOG_CAR_LOAN_XPATH = FINANCIAL_CAR_LOAN_XPATH + DIALOG;
+
+    String FINANCIAL_STUDENT_LOAN_XPATH = "//a[contains(@wicketpath,'pnlNoEmplyments') and contains(@wicketpath,'lnkAddStudentLoan')]";
+    String FINANCIAL_DIALOG_STUDENT_LOAN_XPATH = FINANCIAL_STUDENT_LOAN_XPATH + DIALOG;
+
+    String FINANCIAL_RENT_XPATH = "//a[contains(@wicketpath,'pnlNoEmplyments') and contains(@wicketpath,'lnkRent')]";
+    String FINANCIAL_DIALOG_RENT_XPATH = FINANCIAL_RENT_XPATH + DIALOG;
+
+    String FINANCIAL_UTILITIES_XPATH = "//a[contains(@wicketpath,'pnlNoEmplyments') and contains(@wicketpath,'lnkUtilities')]";
+    String FINANCIAL_DIALOG_UTILITIES_XPATH = FINANCIAL_UTILITIES_XPATH + DIALOG;
+
+    String FINANCIAL_CHILDCARE_XPATH = "//a[contains(@wicketpath,'pnlNoEmplyments') and contains(@wicketpath,'lnkChildcare')]";
+    String FINANCIAL_DIALOG_CHILD_CARE_XPATH = FINANCIAL_CHILDCARE_XPATH + DIALOG;
+
+    String FINANCIAL_MORTGAGE_XPATH = "//a[contains(@wicketpath,'pnlNoEmplyments') and contains(@wicketpath,'lnkMortgage')]";
+    String FINANCIAL_DIALOG_MORTGAGE_XPATH = FINANCIAL_MORTGAGE_XPATH + DIALOG;
 
     String FINANCIAL_CONTAINER_XPATH = "//div[@wicketpath='main_c_form_dialogWrapper']";
 
@@ -40,78 +52,91 @@ public interface IYourFinancialCommitmentsSection {
     String FINANCIAL_COMMITMENTS_NEXT_XPATH = "//a[contains(., 'Next section')]";
     String FINANCIAL_WAIT_I_HAVE = "";
 
+// Shared
+    String REPAYMENT_AMOUNT_XPATH = "//input[contains(@wicketpath,'pnlAddNew') and contains(@wicketpath,'RepaymentAmount')]";
+    String PAYMENT_FREQUENCY_LABEL_XPATH = "//label[contains(@wicketpath,'pnlAddNew') and contains(@wicketpath,'PaymentFreq') and contains(@wicketpath,'RepaymentFrequency_label')]";
+    String OUTSTANDING_AMOUNT_XPATH = "//input[contains(@wicketpath,'pnlAddNew') and contains(@wicketpath,'OutstandingAmount')]";
+    String PAYMENT_FREQUENCY_INPUT_XPATH = "//input[contains(@wicketpath,'pnlAddNew') and contains(@wicketpath,'PaymentFreq') and contains(@wicketpath,'RepaymentFrequency')]";
+    String NOTE_TEXTAREA_XPATH = "//textarea[contains(@wicketpath,'pnlAddNew') and contains(@wicketpath,'Note') and contains(@wicketpath,'Note_textarea')]";
+    String FINANCIAL_INSTITUTION_XPATH = "//input[contains(@wicketpath,'pnlAddNew') and contains(@wicketpath,'PersonalLoan') and contains(@wicketpath,'FinancialInstitution')]";
+    String FINAL_REPAYMENT_DATE = "//input[contains(@wicketpath,'pnlAddNew') and contains(@wicketpath,'PersonalLoan') and contains(@wicketpath,'FinalRepaymentDate')]";
+
+
 //    Personal Loan Details
-    String FINANCIAL_PERSONAL_OUTSTANDING_BALANCE_AMOUNT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlOutstandingAmount_c_w_crbOutstandingLoanAmount_tb']";
-    String FINANCIAL_PERSONAL_FINANCIAL_INSTITUTION_XPATH = "/input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlPersonalLoan_c_w_txtFinancialInstitution_tb']";
-    String FINANCIAL_PERSONAL_LOAN_PURPOSE_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlPersonalLoan_c_w_txtLoanPurpose_tb']";
-    String FINANCIAL_PERSONAL_FINAL_REPAYMENT_DATE_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlPersonalLoan_c_w_txtFinalRepaymentDate_tb']";
-    String FINANCIAL_PERSONAL_PAYMENT_FREQUENCY_LABEL_XPATH = "//label[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlPaymentFreq_c_w_cmbRepaymentFrequency_label']";
-    String FINANCIAL_PERSONAL_PAYMENT_FREQUENCY_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlPaymentFreq_c_w_cmbRepaymentFrequency_v']";
-    String FINANCIAL_PERSONAL_REPAYMENT_AMOUNT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlRepaymentAmount_c_w_crbRepaymentAmount_tb']";
-
+    String FINANCIAL_PERSONAL_OUTSTANDING_BALANCE_AMOUNT_XPATH = "//input[contains(@wicketpath,'pnlAddNew')][contains(@wicketpath,'OutstandingLoanAmount')]" + DIALOG;
+    String FINANCIAL_PERSONAL_FINANCIAL_INSTITUTION_XPATH = "//input[contains(@wicketpath,'pnlAddNew')][contains(@wicketpath,'FinancialInstitution')]" + DIALOG;
+    String FINANCIAL_PERSONAL_LOAN_PURPOSE_XPATH = "//input[contains(@wicketpath,'pnlAddNew') and contains(@wicketpath,'PersonalLoan') and contains(@wicketpath,'txtLoanPurpose')]" + DIALOG;
+    String FINANCIAL_PERSONAL_FINAL_REPAYMENT_DATE_XPATH = "//input[contains(@wicketpath,'pnlAddNew') and contains(@wicketpath,'PersonalLoan') and contains(@wicketpath,'RepaymentDate')]" + DIALOG;
+    String FINANCIAL_PERSONAL_PAYMENT_FREQUENCY_INPUT_XPATH = PAYMENT_FREQUENCY_INPUT_XPATH + DIALOG;
+    String FINANCIAL_PERSONAL_REPAYMENT_AMOUNT_XPATH = REPAYMENT_AMOUNT_XPATH + DIALOG;
+    
 //    credit card
-    String FINANCIAL_CREDITC_REPAYMENT_AMOUNT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlRepaymentAmount_c_w_crbRepaymentAmount_tb']";
-    String FINANCIAL_CREDITC_PROVIDER_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlCreditCard_c_w_txtCardProvider_tb']";
-    String FINANCIAL_CREDITC_CARD_TYPE_LABEL_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlCreditCard_c_w_cmbCardType_label']";
-    String FINANCIAL_CREDITC_CARD_TYPE_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlCreditCard_c_w_cmbCardType_combobox']";
-    String FINANCIAL_CREDITC_CARD_LIMIT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlCreditCard_c_w_crbCardLimit_tb']";
-    String FINANCIAL_CREDITC_CARD_BALANCE_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlCreditCard_c_w_crbCardBalance_tb']";
-
+    String FINANCIAL_CREDITC_REPAYMENT_AMOUNT_XPATH = REPAYMENT_AMOUNT_XPATH + DIALOG;
+    String FINANCIAL_CREDITC_PROVIDER_XPATH = "//input[contains(@wicketpath,'pnlAddNew') and contains(@wicketpath,'CreditCard') and contains(@wicketpath,'CardProvider')]" + DIALOG;
+    String FINANCIAL_CREDITC_CARD_TYPE_LABEL_XPATH = "//label[contains(@wicketpath,'pnlAddNew') and contains(@wicketpath,'CreditCard') and contains(@wicketpath,'CardType_label')]" + LABEL +DIALOG;
+    String FINANCIAL_CREDITC_CARD_TYPE_XPATH = "//input[contains(@wicketpath,'pnlAddNew')][contains(@wicketpath,'CreditCard')][contains(@wicketpath,'CardType')]" + DIALOG;
+    String FINANCIAL_CREDITC_CARD_LIMIT_XPATH = "//input[contains(@wicketpath,'pnlAddNew') and contains(@wicketpath,'CreditCard') and contains(@wicketpath,'CardLimit')]" + DIALOG;
+    String FINANCIAL_CREDITC_CARD_BALANCE_XPATH = "//input[contains(@wicketpath,'pnlAddNew') and contains(@wicketpath,'CreditCard') and contains(@wicketpath,'CardBalance')]" + DIALOG;
+    
 //    maintenance payment
-    String FINANCIAL_MAINTENANCEP_PAYMENT_XPATH = "/inputa[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlMaintenance_c_w_crbMaintenancePayment_tb']";
-
+    String FINANCIAL_MAINTENANCEP_PAYMENT_XPATH = "//input[contains(@wicketpath,'pnlAddNew') and contains(@wicketpath,'Maintenance') and contains(@wicketpath,'MaintenancePayment')]" + DIALOG;
+    
 //    other
-    String FINANCIAL_OTHER_REPAYMENT_AMOUNT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlRepaymentAmount_c_w_crbRepaymentAmount_tb']";
-    String FINANCIAL_OTHER_VALUE_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlOtherValue_c_w_crbValue_tb']";
-    String FINANCIAL_OTHER_DESCRIPTION_XPATH = "//textarea[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlOtherValue_c_w_txaDescription_textarea']";
-
-//    car loan
-    String FINANCIAL_CAR_OUTSTANDING_BALANCE_AMOUNT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlOutstandingAmount_c_w_crbOutstandingLoanAmount_tb']";
-    String FINANCIAL_CAR_FINANCIAL_INSTITUTION_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlPersonalLoan_c_w_txtFinancialInstitution_tb']";
-    String FINANCIAL_CAR_FINAL_REPAYMENT_DATE_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlPersonalLoan_c_w_txtFinalRepaymentDate_tb']";
-    String FINANCIAL_CAR_PAYMENT_FREQUENCY_LABEL_XPATH = "//label[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlPaymentFreq_c_w_cmbRepaymentFrequency_label']";
-    String FINANCIAL_CAR_PAYMENT_FREQUENCY_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlPaymentFreq_c_w_cmbRepaymentFrequency_v']";
-    String FINANCIAL_CAR_REPAYMENT_AMOUNT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlRepaymentAmount_c_w_crbRepaymentAmount_tb']";
-
-//    student loan
-    String FINANCIAL_STUDENT_OUTSTANDING_BALANCE_AMOUNT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlOutstandingAmount_c_w_crbOutstandingLoanAmount_tb']";
-    String FINANCIAL_STUDENT_FINANCIAL_INSTITUTION_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlPersonalLoan_c_w_txtFinancialInstitution_tb']";
-    String FINANCIAL_STUDENT_FINAL_REPAYMENT_DATE_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlPersonalLoan_c_w_txtFinalRepaymentDate_tb']";
-    String FINANCIAL_STUDENT_PAYMENT_FREQUENCY_LABEL_XPATH = "//label[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlPaymentFreq_c_w_cmbRepaymentFrequency_label']";
-    String FINANCIAL_STUDENT_PAYMENT_FREQUENCY_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlPaymentFreq_c_w_cmbRepaymentFrequency_v']";
-    String FINANCIAL_STUDENT_REPAYMENT_AMOUNT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlRepaymentAmount_c_w_crbRepaymentAmount_tb']";
+    String FINANCIAL_OTHER_REPAYMENT_AMOUNT_XPATH = REPAYMENT_AMOUNT_XPATH + DIALOG;
+    String FINANCIAL_OTHER_VALUE_XPATH = "//input[contains(@wicketpath,'pnlAddNew') and contains(@wicketpath,'OtherValue') and contains(@wicketpath,'Value')]" + DIALOG;
+    String FINANCIAL_OTHER_DESCRIPTION_XPATH = "//textarea[contains(@wicketpath,'pnlAddNew') and contains(@wicketpath,'OtherValue') and contains(@wicketpath,'Description_textarea')]" + DIALOG;
+    
+    //    car loan
+    String FINANCIAL_CAR_OUTSTANDING_BALANCE_AMOUNT_XPATH = OUTSTANDING_AMOUNT_XPATH + DIALOG;
+    String FINANCIAL_CAR_FINANCIAL_INSTITUTION_XPATH = FINANCIAL_INSTITUTION_XPATH + DIALOG;
+    String FINANCIAL_CAR_FINAL_REPAYMENT_DATE_XPATH = FINAL_REPAYMENT_DATE + DIALOG;
+    String FINANCIAL_CAR_PAYMENT_FREQUENCY_LABEL_XPATH = PAYMENT_FREQUENCY_LABEL_XPATH + DIALOG;
+    String FINANCIAL_CAR_PAYMENT_FREQUENCY_INPUT_XPATH = PAYMENT_FREQUENCY_INPUT_XPATH + DIALOG;
+    String FINANCIAL_CAR_REPAYMENT_AMOUNT_XPATH = REPAYMENT_AMOUNT_XPATH + DIALOG;
+    
+    //    student loan
+    String FINANCIAL_STUDENT_OUTSTANDING_BALANCE_AMOUNT_XPATH = OUTSTANDING_AMOUNT_XPATH + DIALOG;
+    String FINANCIAL_STUDENT_FINANCIAL_INSTITUTION_XPATH = FINANCIAL_INSTITUTION_XPATH + DIALOG;
+    String FINANCIAL_STUDENT_FINAL_REPAYMENT_DATE_XPATH = FINAL_REPAYMENT_DATE + DIALOG;
+    String FINANCIAL_STUDENT_PAYMENT_FREQUENCY_LABEL_XPATH = PAYMENT_FREQUENCY_LABEL_XPATH + DIALOG;
+    String FINANCIAL_STUDENT_PAYMENT_FREQUENCY_INPUT_XPATH = PAYMENT_FREQUENCY_INPUT_XPATH + DIALOG;
+    String FINANCIAL_STUDENT_REPAYMENT_AMOUNT_XPATH = REPAYMENT_AMOUNT_XPATH + DIALOG;
 
 //    rent
-    String FINANCIAL_RENT_PAYMENT_FREQUENCY_LABEL_XPATH = "//label[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlPaymentFreq_c_w_cmbRepaymentFrequency_label']";
+    String FINANCIAL_RENT_PAYMENT_FREQUENCY_LABEL_XPATH = PAYMENT_FREQUENCY_LABEL_XPATH + DIALOG;
     //optional
-    String FINANCIAL_RENT_PAYMENT_FREQUENCY_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlPaymentFreq_c_w_cmbRepaymentFrequency_v']";
-    String FINANCIAL_RENT_REPAYMENT_AMOUNT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlRepaymentAmount_c_w_crbRepaymentAmount_tb']";
+    String FINANCIAL_RENT_PAYMENT_FREQUENCY_INPUT_XPATH = PAYMENT_FREQUENCY_INPUT_XPATH + DIALOG;
+    String FINANCIAL_RENT_REPAYMENT_AMOUNT_XPATH = REPAYMENT_AMOUNT_XPATH + DIALOG;
     //optional
-    String FINANCIAL_RENT_NOTE_XPATH = "//textarea[@wicketpath='textarea -> main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlNote_c_w_txaNote_textarea']";
+    String FINANCIAL_RENT_NOTE_XPATH = "//textarea[contains(@wicketpath,'pnlAddNew') and contains(@wicketpath,'Note') and contains(@wicketpath,'txaNote_textarea')]" + DIALOG;
 
 //    utilities
-    String FINANCIAL_UTILITIES_PAYMENT_FREQUENCY_LABEL_XPATH = "//label[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlPaymentFreq_c_w_cmbRepaymentFrequency_label']";
+    String FINANCIAL_UTILITIES_PAYMENT_FREQUENCY_LABEL_XPATH = PAYMENT_FREQUENCY_LABEL_XPATH + DIALOG;
+    
     //optional
-    String FINANCIAL_UTILITIES_PAYMENT_FREQUENCY_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlPaymentFreq_c_w_cmbRepaymentFrequency_v']";
-    String FINANCIAL_UTILITIES_REPAYMENT_AMOUNT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlRepaymentAmount_c_w_crbRepaymentAmount_tb']";
+    String FINANCIAL_UTILITIES_PAYMENT_FREQUENCY_INPUT_XPATH = PAYMENT_FREQUENCY_INPUT_XPATH + DIALOG;
+    String FINANCIAL_UTILITIES_REPAYMENT_AMOUNT_XPATH = REPAYMENT_AMOUNT_XPATH + DIALOG;
+
     //optional
-    String FINANCIAL_UTILITIES_NOTE_XPATH = "//textarea[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlNote_c_w_txaNote_textarea']";
+    String FINANCIAL_UTILITIES_NOTE_XPATH = NOTE_TEXTAREA_XPATH + DIALOG;
 
 //    childcare
-    String FINANCIAL_CHILDCARE_PAYMENT_FREQUENCY_LABEL_XPATH = "//label[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlPaymentFreq_c_w_cmbRepaymentFrequency_label']";
+    String FINANCIAL_CHILDCARE_PAYMENT_FREQUENCY_LABEL_XPATH = PAYMENT_FREQUENCY_LABEL_XPATH + DIALOG;
+    
     //optional
-    String FINANCIAL_CHILDCARE_PAYMENT_FREQUENCY_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlPaymentFreq_c_w_cmbRepaymentFrequency_v']";
-    String FINANCIAL_CHILDCARE_REPAYMENT_AMOUNT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlRepaymentAmount_c_w_crbRepaymentAmount_tb']";
+    String FINANCIAL_CHILDCARE_PAYMENT_FREQUENCY_INPUT_XPATH = PAYMENT_FREQUENCY_INPUT_XPATH + DIALOG;
+    String FINANCIAL_CHILDCARE_REPAYMENT_AMOUNT_XPATH = REPAYMENT_AMOUNT_XPATH + DIALOG;
+
     //optional
-    String FINANCIAL_CHILDCARE_NOTE_XPATH = "//textarea[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlNote_c_w_txaNote_textarea']";
+    String FINANCIAL_CHILDCARE_NOTE_XPATH = NOTE_TEXTAREA_XPATH + DIALOG;
 
 //    mortgage
-    String FINANCIAL_MORTGAGE_OUTSTANDING_BALANCE_AMOUNT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlOutstandingAmount_c_w_crbOutstandingLoanAmount_tb']";
-    String FINANCIAL_MORTGAGE_FINANCIAL_INSTITUTION_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlPersonalLoan_c_w_txtFinancialInstitution_tb']";
-    //optional
-    String FINANCIAL_MORTGAGE_FINAL_REPAYMENT_DATE_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlPersonalLoan_c_w_txtFinalRepaymentDate_tb']";
-    String FINANCIAL_MORTGAGE_REPAYMENT_AMOUNT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlRepaymentAmount_c_w_crbRepaymentAmount_tb']";
+    String FINANCIAL_MORTGAGE_OUTSTANDING_BALANCE_AMOUNT_XPATH = OUTSTANDING_AMOUNT_XPATH + DIALOG;
+    String FINANCIAL_MORTGAGE_FINANCIAL_INSTITUTION_XPATH = FINANCIAL_INSTITUTION_XPATH + DIALOG;
 
+    //optional
+    String FINANCIAL_MORTGAGE_FINAL_REPAYMENT_DATE_XPATH = FINAL_REPAYMENT_DATE + DIALOG;
+    String FINANCIAL_MORTGAGE_REPAYMENT_AMOUNT_XPATH = REPAYMENT_AMOUNT_XPATH + DIALOG;
 
     String getTitle();
     String getDialogTitle();
@@ -171,14 +196,14 @@ public interface IYourFinancialCommitmentsSection {
     IYourFinancialCommitmentsSection typePersonalRepaymentAmount(String repaymentAmount);
 
     //    credit card
-    IYourFinancialCommitmentsSection typeCreditcRepaymentAmount(String repaymentAmount);
-    IYourFinancialCommitmentsSection typeCreditcProvider(String provider);
-    IYourFinancialCommitmentsSection selectCreditcType(String type);
-    IYourFinancialCommitmentsSection typeCreditcLimit(String limit);
-    IYourFinancialCommitmentsSection typeCreditcBalance(String balance);
+    IYourFinancialCommitmentsSection typeCreditCardRepaymentAmount(String repaymentAmount);
+    IYourFinancialCommitmentsSection typeCreditCardProvider(String provider);
+    IYourFinancialCommitmentsSection selectCreditCardType(String type);
+    IYourFinancialCommitmentsSection typeCreditCardLimit(String limit);
+    IYourFinancialCommitmentsSection typeCreditCardBalance(String balance);
 
     //    maintenance payment
-    IYourFinancialCommitmentsSection typeMaintenancepPayment(String payment);
+    IYourFinancialCommitmentsSection typeMaintenancePayment(String payment);
 
     //    other
     IYourFinancialCommitmentsSection typeOtherRepaymentAmount(String repaymentAmount);

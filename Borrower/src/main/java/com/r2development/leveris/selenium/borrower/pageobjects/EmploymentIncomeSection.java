@@ -16,143 +16,8 @@ public class EmploymentIncomeSection extends Borrower implements IEmploymentInco
 
     private static final Log log = LogFactory.getLog(EmploymentIncomeSection.class.getName());
 
-    @FindBy ( xpath = EMPLOYMENT_INCOMES_TITLE_XPATH )
-    protected WebElement weEI_Title;
     @FindBy ( xpath = EMPLOYMENT_INCOMES_DESCRIPTION_XPATH )
     protected WebElement weEI_Description;
-
-    @FindBy ( xpath = EMPLOYMENT_INCOMES_CATEGORY_XPATH )
-    protected WebElement weEI_Category;
-
-//    // case PAYE
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_PAYE_CONTAINER_XPATH )
-//    protected WebElement weEIP_Container;
-//
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_PAYE_OCCUPATION_XPATH )
-//    protected WebElement weEIP_Occupation;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_PAYE_EMPLOYER_NAME_XPATH )
-//    protected WebElement weEIP_EmployerName;
-//    // Contract, Permanent, Temporary
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_PAYE_EMPLOYMENT_TYPE_XPATH )
-//    protected WebElement weEIP_EmploymentType;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_PAYE_STARTDATE_XPATH )
-//    protected WebElement weEIP_StartDate;
-//    // case PAY Contract
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_PAYE_MANDATORY_ENDDATE_XPATH )
-//    protected WebElement weEIP_MandatoryEndDate;
-//    // case PAY Permanent, Temporary
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_PAYE_ENDDATE_XPATH )
-//    protected WebElement weEIP_EndDate;
-//    @FindBy ( xpath = EMPLOYMENT_INCOME_NET_MONTHLY_INCOME_XPATH )
-//    protected WebElement weEIP_NetMonthlyIncome;
-//    // case not valid for PAY Contract only for Permanent, Temporary
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_PAYE_CURRENTLY_XPATH )
-//    protected WebElement weEIP_Currently;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_PAYE_GROSS_SALARY_XPATH )
-//    protected WebElement weEIP_GrossSalary;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_PAYE_REGULAR_OVERTIME_XPATH )
-//    protected WebElement weEIP_RegularOvertime;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_PAYE_REGULAR_GUARANTEED_BONUS_XPATH )
-//    protected WebElement weEIP_RegularGuaranteedBonus;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_PAYE_GUARANTEED_COMMISSION_XPATH )
-//    protected WebElement weEIP_GuaranteedCommission;
-//
-//    // case SELF_EMPLOYED
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_SELFEMPLOYED_CONTAINER_XPATH )
-//    protected WebElement weEISE_Container;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_SELFEMPLOYED_OCCUPATION_XPATH )
-//    protected WebElement weEISE_Occupation; // select
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_SELFEMPLOYED_BUSINESS_NAME_XPATH )
-//    protected WebElement weEISE_BusinessName;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_SELFEMPLOYED_ADDRESS_LINE1_XPATH )
-//    protected WebElement weEISE_AddressLine1;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_SELFEMPLOYED_ADDRESS_LINE2_XPATH )
-//    protected WebElement weEISE_AddressLine2;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_SELFEMPLOYED_TOWNCITY_XPATH )
-//    protected WebElement weEISE_TownCity;
-//    // if country is Ireland
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_SELFEMPLOYED_COUNTYSTATE_XPATH )
-//    protected WebElement weEISE_CountyState; // select
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_SELFEMPLOYED_COUNTRY_XPATH )
-//    protected WebElement weEISE_Country; // select
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_SELFEMPLOYED_BUSINESS_NATURE_XPATH )
-//    protected WebElement weEISE_BusinessNature;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_SELFEMPLOYED_STARTDATE_XPATH )
-//    protected WebElement weEISE_StartDate;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_SELFEMPLOYED_ENDDATE_XPATH )
-//    protected WebElement weEISE_EndDate;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_SELFEMPLOYED_CURRENTLY_XPATH )
-//    protected WebElement weEISE_Currently;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_SELFEMPLOYED_NETPROFIT_LASTYEAR_XPATH )
-//    protected WebElement weEISE_NetProfitLastYear;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_SELFEMPLOYED_NETPROFIT_PREVIOUSYEAR_XPATH )
-//    protected WebElement weEISE_NetProfitPreviousYear;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_SELFEMPLOYED_ACCOUNTANT_NAME_XPATH )
-//    protected WebElement weEISE_AccountantName;
-//
-//    // case CIVIL_SERVANT
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_CIVIL_SERVANT_CONTAINER_XPATH )
-//    protected WebElement weEICS_Container;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_CIVIL_SERVANT_OCCUPATION_XPATH )
-//    protected WebElement weEICS_Occupation;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_CIVIL_SERVANT_EMPLOYER_NAME_XPATH )
-//    protected WebElement weEICS_EmployerName;
-//    // Contract, Permanent, Temporary
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_CIVIL_SERVANT_EMPLOYMENT_TYPE_XPATH )
-//    protected WebElement weEICS_EmploymentType;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_CIVIL_SERVANT_STARTDATE_XPATH )
-//    protected WebElement weEICS_StartDate;
-//    // case PAY Contract
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_CIVIL_SERVANT_MANDATORY_ENDDATE_XPATH )
-//    protected WebElement weEICS_MandatoryEndDate;
-//    // case PAY Permanent, Temporary
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_CIVIL_SERVANT_ENDDATE_XPATH )
-//    protected WebElement weEICS_EndDate;
-//    // case not valid for PAY Contract only for Permanent, Temporary
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_CIVIL_SERVANT_CURRENTLY_XPATH )
-//    protected WebElement weEICS_Currently;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_CIVIL_SERVANT_GROSS_SALARY_XPATH )
-//    protected WebElement weEICS_GrossSalary;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_CIVIL_SERVANT_REGULAR_OVERTIME_XPATH )
-//    protected WebElement weEICS_RegularOvertime;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_CIVIL_SERVANT_REGULAR_GUARANTEED_BONUS_XPATH )
-//    protected WebElement weEICS_RegularGuaranteedBonus;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_CIVIL_SERVANT_GUARANTEED_COMMISSION_XPATH )
-//    protected WebElement weEICS_GuaranteedCommission;
-//
-//    // case UNEMPLOYED_HOMEMAKER
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_UNEMPLOYED_HOMEMAKER_CONTAINER_XPATH )
-//    protected WebElement weEIUH_Container;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_UNEMPLOYED_HOMEMAKER_STARTDATE_XPATH )
-//    protected WebElement weEIUH_StartDate;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_UNEMPLOYED_HOMEMAKER_ENDDATE_XPATH )
-//    protected WebElement weEIUH_EndDate;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_UNEMPLOYED_HOMEMAKER_CURRENTLY )
-//    protected WebElement weEIUH_Currently;
-//
-//    // case OTHER
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_OTHERS_CONTAINER_XPATH )
-//    protected WebElement weEIO_Container;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_OTHERS_SOURCE_INCOME_XPATH )
-//    protected WebElement weEIO_SourceIncome;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_OTHERS_GROSS_INCOMES_XPATH )
-//    protected WebElement weEIO_GrossIncomes;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_OTHERS_TIME_EARNING_INCOME_XPATH )
-//    protected WebElement weEIO_TimeEarningIncome;
-//
-//    @FindBy( xpath = REPORT_INCOMES_XPATH )
-//    protected WebElement weReportIncomes;
-////    @FindBys( ) // to google it how to use it
-////    @FindBys( FindBys[] = REPORT_INCOMES_XPATH )
-////    WebElement[] weReportIncomes;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_CANCEL_XPATH )
-//    protected WebElement weEmploymentIncomesCancel;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_ADD_EMPLOYMENT_XPATH )
-//    protected WebElement weEmploymentIncomesAddEmployment;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_ADD_THIS_EMPLOYMENT_XPATH )
-//    protected WebElement weEmploymentIncomesAddThisEmployment;
-//    @FindBy ( xpath = EMPLOYMENT_INCOMES_DONE_XPATH )
-//    protected WebElement weEmploymentIncomesDone;
 
 //    @Inject
     public EmploymentIncomeSection(SharedDriver webDriver) {
@@ -217,13 +82,13 @@ public class EmploymentIncomeSection extends Borrower implements IEmploymentInco
                 loadingCheck();
                 break;
 
-            case "Civil Servant":
-                if ( isVisible(EMPLOYMENT_INCOMES_ADD_CIVIL_SERVANT_XPATH, 0) )
-                    clickElementViaJavascript(EMPLOYMENT_INCOMES_ADD_CIVIL_SERVANT_XPATH);
-                else
-                    clickElementViaJavascript(EMPLOYMENT_INCOMES_DIALOG_ADD_CIVIL_SERVANT_XPATH);
-                loadingCheck();
-                break;
+//            case "Civil Servant":
+//                if ( isVisible(EMPLOYMENT_INCOMES_ADD_CIVIL_SERVANT_XPATH, 0) )
+//                    clickElementViaJavascript(EMPLOYMENT_INCOMES_ADD_CIVIL_SERVANT_XPATH);
+//                else
+//                    clickElementViaJavascript(EMPLOYMENT_INCOMES_DIALOG_ADD_CIVIL_SERVANT_XPATH);
+//                loadingCheck();
+//                break;
 
             case "Unemployed/Homemaker":
                 if ( isVisible(EMPLOYMENT_INCOMES_ADD_UNEMPLOYED_XPATH, 0) )

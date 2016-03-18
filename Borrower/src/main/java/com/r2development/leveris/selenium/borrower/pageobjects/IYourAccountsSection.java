@@ -39,8 +39,10 @@ public interface IYourAccountsSection {
     // Current Account
     String YOUR_ACCOUNTS_CURRENT_ACCOUNT_STATEMENT_DATE_LABEL_XPATH = "//label[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlStatementDate_c_w_txtStatementDate_label']";
     String YOUR_ACCOUNTS_CURRENT_ACCOUNT_STATEMENT_DATE_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlStatementDate_c_w_txtStatementDate_tb']";
-    String YOUR_ACCOUNTS_CURRENT_ACCOUNT_NAME_LABEL_XPATH = "//label[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccNumb_c_w_txtAccName_label";
-    String YOUR_ACCOUNTS_CURRENT_ACCOUNT_NAME_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccNumb_c_w_txtAccName_tb']";
+
+    String YOUR_ACCOUNTS_CURRENT_ACCOUNT_HOLDER_NAME_LABEL_XPATH = "//label[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccNumb_c_w_txtAccName_label";
+    String YOUR_ACCOUNTS_CURRENT_ACCOUNT_HOLDER_NAME_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccNumb_c_w_txtAccName_tb']";
+
     String YOUR_ACCOUNTS_CURRENT_ACCOUNT_SORT_CODE_1_LABEL_XPATH = "//label[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccNumb_c_w_txtSortCode1_label']";
     String YOUR_ACCOUNTS_CURRENT_ACCOUNT_SORT_CODE_1_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccNumb_c_w_txtSortCode1_tb']";
     String YOUR_ACCOUNTS_CURRENT_ACCOUNT_SORT_CODE_2_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccNumb_c_w_txtSortCode2_tb']";
@@ -48,10 +50,10 @@ public interface IYourAccountsSection {
     String YOUR_ACCOUNTS_CURRENT_ACCOUNT_NUMBER_LABEL_XPATH = "//label[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccNumb_c_w_txtAccnumber_label']";
     String YOUR_ACCOUNTS_CURRENT_ACCOUNT_NUMBER_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccNumb_c_w_txtAccnumber_tb']";
 
-    String YOUR_ACCOUNTS_CURRENT_ACCOUNT_PROVIDER_LABEL_XPATH = "//label[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccountProvider_c_w_txtAccountProvider_label']";
-    String YOUR_ACCOUNTS_CURRENT_ACCOUNT_PROVIDER_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccountProvider_c_w_txtAccountProvider_tb']"; //label[contains(., 'Account provider')]/following-sibling::input";
+//    String YOUR_ACCOUNTS_CURRENT_ACCOUNT_PROVIDER_LABEL_XPATH = "//label[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccountProvider_c_w_txtAccountProvider_label']";
+//    String YOUR_ACCOUNTS_CURRENT_ACCOUNT_PROVIDER_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccountProvider_c_w_txtAccountProvider_tb']";
     String YOUR_ACCOUNTS_CURRENT_ACCOUNT_IBAN_LABEL_XPATH = "//label[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlLastFourDigits_c_w_txtIban_label']";
-    String YOUR_ACCOUNTS_CURRENT_ACCOUNT_IBAN_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlLastFourDigits_c_w_txtIban_tb']"; //label[contains(., 'IBAN')]/following-sibling::input";
+    String YOUR_ACCOUNTS_CURRENT_ACCOUNT_IBAN_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlLastFourDigits_c_w_txtIban_tb']";
     String YOUR_ACCOUNTS_CURRENT_ACCOUNT_BALANCE_LABEL_XPATH = "//label[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccountBalance_c_w_crbAccountBalance_label']";
     String YOUR_ACCOUNTS_CURRENT_ACCOUNT_BALANCE_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccountBalance_c_w_crbAccountBalance_tb']";
     String YOUR_ACCOUNTS_CURRENT_ACCOUNT_OVERDRAFT_LABEL_XPATH = "//label[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlOverDraft_c_w_crbOverdraft_label']";
@@ -65,17 +67,21 @@ public interface IYourAccountsSection {
     // Savings Account
     String YOUR_ACCOUNTS_SAVING_ACCOUNT_STATEMENT_DATE_LABEL_XPATH = "//label[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlStatementDate_c_w_txtStatementDate_label']";
     String YOUR_ACCOUNTS_SAVING_ACCOUNT_STATEMENT_DATE_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlStatementDate_c_w_txtStatementDate_tb']";
-    String YOUR_ACCOUNTS_SAVING_ACCOUNT_NAME_LABEL_XPATH = "//label[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccNumb_c_w_txtAccName_label']";
-    String YOUR_ACCOUNTS_SAVING_ACCOUNT_NAME_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccNumb_c_w_txtAccName_tb']";
+
+    String YOUR_ACCOUNTS_SAVING_ACCOUNT_HOLDER_NAME_LABEL_XPATH = "//label[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccNumb_c_w_txtAccName_label']";
+    String YOUR_ACCOUNTS_SAVING_ACCOUNT_HOLDER_NAME_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccNumb_c_w_txtAccName_tb']";
+
     String YOUR_ACCOUNTS_SAVING_ACCOUNT_SORT_CODE_1_LABEL_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccNumb_c_w_txtSortCode1_label']";
     String YOUR_ACCOUNTS_SAVING_ACCOUNT_SORT_CODE_1_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccNumb_c_w_txtSortCode1_tb']";
+
     String YOUR_ACCOUNTS_SAVING_ACCOUNT_SORT_CODE_2_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccNumb_c_w_txtSortCode2_tb']";
     String YOUR_ACCOUNTS_SAVING_ACCOUNT_SORT_CODE_3_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccNumb_c_w_txtSortCode3_tb']";
+
     String YOUR_ACCOUNTS_SAVING_ACCOUNT_NUMBER_LABEL_XPATH = "//label[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccNumb_c_w_txtAccnumber_tb']";
     String YOUR_ACCOUNTS_SAVING_ACCOUNT_NUMBER_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccNumb_c_w_txtAccnumber_tb']";
 
-    String YOUR_ACCOUNTS_SAVING_ACCOUNT_PROVIDER_LABEL_XPATH = "//label[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccountProvider_c_w_txtAccountProvider_label']";
-    String YOUR_ACCOUNTS_SAVING_ACCOUNT_PROVIDER_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccountProvider_c_w_txtAccountProvider_tb']"; //label[contains(., 'Account provider')]/following-sibling::input";
+//    String YOUR_ACCOUNTS_SAVING_ACCOUNT_PROVIDER_LABEL_XPATH = "//label[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccountProvider_c_w_txtAccountProvider_label']";
+//    String YOUR_ACCOUNTS_SAVING_ACCOUNT_PROVIDER_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccountProvider_c_w_txtAccountProvider_tb']";
     String YOUR_ACCOUNTS_SAVING_ACCOUNT_IBAN_LABEL_XPATH = "//label[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlLastFourDigits_c_w_txtIban_label']";
     String YOUR_ACCOUNTS_SAVING_ACCOUNT_IBAN_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlLastFourDigits_c_w_txtIban_tb']"; //label[contains(., 'IBAN')]/following-sibling::input";
     String YOUR_ACCOUNTS_SAVING_ACCOUNT_BALANCE_LABEL_XPATH = "//label[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccountBalance_c_w_crbAccountBalance_label']";
@@ -118,14 +124,13 @@ public interface IYourAccountsSection {
     Map<Integer, YourAccount> getAccountsOf(String accountType);
     Map<Integer, YourAccount> getAllAccounts();
 
-    IYourAccountsSection typeAccountProvider(String accountProvider);
     IYourAccountsSection typeCurrentStatementDate(String statementDate);
-    IYourAccountsSection typeCurrentAccountName(String accountName);
+    IYourAccountsSection typeCurrentAccountHolderName(String accountName);
     IYourAccountsSection typeCurrentSortCode1(String sortCode1);
     IYourAccountsSection typeCurrentSortCode2(String sortCode2);
     IYourAccountsSection typeCurrentSortCode3(String sortCode3);
     IYourAccountsSection typeCurrentAccountNumber(String accountNumber);
-    IYourAccountsSection typeCurrentAccountProvider(String accountProvider);
+//    IYourAccountsSection typeCurrentAccountProvider(String accountProvider);
     IYourAccountsSection typeCurrentIban(String iban);
     IYourAccountsSection typeCurrentAccountBalance(String accountBalance);
     IYourAccountsSection typeCurrentOverdraftLimit(String overdraftLimit);
@@ -133,12 +138,12 @@ public interface IYourAccountsSection {
     IYourAccountsSection typeCurrentRegularMonthlySavings(String regularMonthlySavings);
 
     IYourAccountsSection typeSavingStatementDate(String statementDate);
-    IYourAccountsSection typeSavingsAccountName(String accountName);
+    IYourAccountsSection typeSavingsAccountHolderName(String accountName);
     IYourAccountsSection typeSavingsSortCode1(String sortCode1);
     IYourAccountsSection typeSavingsSortCode2(String sortCode2);
     IYourAccountsSection typeSavingsSortCode3(String sortCode3);
     IYourAccountsSection typeSavingsAccountNumber(String accountNumber);
-    IYourAccountsSection typeSavingAccountProvider(String accountProvider);
+//    IYourAccountsSection typeSavingAccountProvider(String accountProvider);
     IYourAccountsSection typeSavingIban(String iban);
     IYourAccountsSection typeSavingAccountBalance(String accountBalance);
     IYourAccountsSection typeSavingOverdraftLimit(String savingOverdraftLimit);

@@ -14,7 +14,7 @@ import org.openqa.selenium.WebDriver;
 public class MainFormsProcessesStepDef /*extends BorrowerStepDef*/ implements CLV312Workaround {
 
     private static final Log log = LogFactory.getLog(MainFormsProcessesStepDef.class);
-    private final WebDriver webDriver;
+    private final SharedDriver webDriver;
 
     @Inject
     IUser user;
@@ -34,12 +34,13 @@ public class MainFormsProcessesStepDef /*extends BorrowerStepDef*/ implements CL
 //        super(webDriver);
         this.webDriver = webDriver;
         borrowerHomePage = new BorrowerHomePage(webDriver);
+
     }
 
     // "proxy page"
     @And("^Borrower processes \"Forms\"$")
     public void user_processes_Forms() {
-        borrowerHomePage.clickInfoUpload();
+        borrowerPersonalDetailsPage = borrowerHomePage.clickInfoUpload();
         currentPage = (IFormsMenu) borrowerPersonalDetailsPage;
     }
 
@@ -55,7 +56,7 @@ public class MainFormsProcessesStepDef /*extends BorrowerStepDef*/ implements CL
 
     @When("^Borrower clicks \"Borrower Personal Details\"$")
     public void user_clicks_Borrower_Personal_Details() {
-        workaroundCLV312("borrower");
+//        workaroundCLV312("borrower");
         currentPage.clickSingleBorrowerPersonalDetails();
         currentPage = (IFormsMenu) borrowerPersonalDetailsPage;
     }
@@ -95,13 +96,17 @@ public class MainFormsProcessesStepDef /*extends BorrowerStepDef*/ implements CL
 
     @When("^Borrower clicks \"Financial Commitments\"$")
     public void clickFinancialCommitments() {
+
         currentPage.clickFinancialCommitments();
+
         currentPage = (IFormsMenu) yourFinancialCommitmentsPage;
     }
 
     @When("^Borrower clicks \"Document Upload\"$")
     public void clickDocumentUpload() {
+
         currentPage.clickDocumentUpload();
+
         currentPage = (IFormsMenu) documentUploadPage;
     }
 

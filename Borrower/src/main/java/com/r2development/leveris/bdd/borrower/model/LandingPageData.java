@@ -19,7 +19,7 @@ public class LandingPageData extends DataModel {
         return getData();
     }
 
-    public String getLoanType(){ return data.get("LoanType"); }
+    public String getFormType(){ return data.get("formType"); }
 
     public String getUpToAmount(){ return data.get("UpToAmount"); }
 

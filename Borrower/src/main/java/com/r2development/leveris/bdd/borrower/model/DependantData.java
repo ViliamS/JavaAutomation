@@ -15,4 +15,8 @@ public class DependantData extends DataModel {
 
 //    public DependantData(Map<String, DependantData> dependantData) { super(dependantData); }
 
+    public String getDateOfBirth(){
+        return data.get("dateOfBirth");
+    }
+
 }

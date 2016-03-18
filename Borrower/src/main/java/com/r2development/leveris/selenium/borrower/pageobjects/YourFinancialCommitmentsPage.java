@@ -8,15 +8,14 @@ import org.apache.commons.logging.LogFactory;
 
 public class YourFinancialCommitmentsPage extends HeaderAndBottomAndFormsMenuSection implements IYourFinancialCommitmentsPage {
     
-    private static final Log log = LogFactory.getLog(YourFinancialCommitmentsPage.class);
+    private static final Log log = LogFactory.getLog(YourFinancialCommitmentsPage.class.getName());
     
-//    IFormsMenu formsMenu;
+    IFormsMenu formsMenu;
 
     @Inject
     private IUser user;
     protected IYourFinancialCommitmentsSection yourFinancialCommitmentsSection;
 
-//    @Inject
     public YourFinancialCommitmentsPage(SharedDriver webDriver) {
         super(webDriver);
         headerSection = new HeaderSection(webDriver);
@@ -265,37 +264,37 @@ public class YourFinancialCommitmentsPage extends HeaderAndBottomAndFormsMenuSec
 
     @Override
     public IYourFinancialCommitmentsPage typeCreditcRepaymentAmount(String repaymentAmount) {
-        yourFinancialCommitmentsSection.typeCreditcRepaymentAmount(repaymentAmount);
+        yourFinancialCommitmentsSection.typeCreditCardRepaymentAmount(repaymentAmount);
         return this;
     }
 
     @Override
     public IYourFinancialCommitmentsPage typeCreditcProvider(String provider) {
-        yourFinancialCommitmentsSection.typeCreditcProvider(provider);
+        yourFinancialCommitmentsSection.typeCreditCardProvider(provider);
         return this;
     }
 
     @Override
     public IYourFinancialCommitmentsPage selectCreditcType(String type) {
-        yourFinancialCommitmentsSection.selectCreditcType(type);
+        yourFinancialCommitmentsSection.selectCreditCardType(type);
         return this;
     }
 
     @Override
     public IYourFinancialCommitmentsPage typeCreditcLimit(String limit) {
-        yourFinancialCommitmentsSection.typeCreditcLimit(limit);
+        yourFinancialCommitmentsSection.typeCreditCardLimit(limit);
         return this;
     }
 
     @Override
     public IYourFinancialCommitmentsPage typeCreditcBalance(String balance) {
-        yourFinancialCommitmentsSection.typeCreditcBalance(balance);
+        yourFinancialCommitmentsSection.typeCreditCardBalance(balance);
         return this;
     }
 
     @Override
     public IYourFinancialCommitmentsPage typeMaintenancepPayment(String payment) {
-        yourFinancialCommitmentsSection.typeMaintenancepPayment(payment);
+        yourFinancialCommitmentsSection.typeMaintenancePayment(payment);
         return this;
     }
 

@@ -17,6 +17,10 @@ public class PersonalDetailsData extends DataModel {
         return data.get("formType");
     }
 
+    public String getMaritalStatus() { return data.get("maritalStatus"); }
+
+    public String getNationality() { return data.get("nationality"); }
+
     public void setFormType(String formType){
         data.replace("formType", formType);
     }
@@ -72,6 +76,8 @@ public class PersonalDetailsData extends DataModel {
     public String getCountyState() {
         return data.get("county/state");
     }
+
+    public String getCountry() { return data.get("country"); }
 
     public void setCountyState(String countyState) {
         data.replace("county/state", countyState);

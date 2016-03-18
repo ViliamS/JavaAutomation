@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection implements IYourAccountsPage {
 
-    private static final Log log = LogFactory.getLog(YourAccountsPage.class);
+    private static final Log log = LogFactory.getLog(YourAccountsPage.class.getName());
 
     protected IYourAccountsSection yourAccountsSection;
     protected IYourDependantsPage yourDependantsPage;
@@ -83,21 +83,21 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
     @Override
     public IYourDependantsPage clickDone() {
         yourDependantsPage = yourAccountsSection.clickDone();
-
+/*
         try {
             yourDependantsPage.getTitle();
-        } catch ( TimeoutException te ) {
+        } catch ( Exception e ) {
             boolean toGoOn = false;
             while ( !toGoOn ) {
                 try {
                     yourDependantsPage = yourAccountsSection.clickDone();
                     yourDependantsPage.getTitle();
                     toGoOn = true;
-                } catch ( TimeoutException te2) {
+                } catch ( TimeoutException e2) {
                     log.debug("Problem of clicking on Your Account Done or getting the Dependant title.");
                 }
             }
-        }
+        }*/
         return yourDependantsPage;
     }
 
@@ -159,11 +159,11 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
         return yourAccountsSection.getAllAccounts();
     }
 
-    @Override
-    public IYourAccountsPage typeAccountProvider(String accountProvider){
-        yourAccountsSection.typeAccountProvider(accountProvider);
-        return this;
-    }
+//    @Override
+//    public IYourAccountsPage typeAccountProvider(String accountProvider){
+//        yourAccountsSection.typeAccountProvider(accountProvider);
+//        return this;
+//    }
 
     @Override
     public IYourAccountsPage typeCurrentStatementDate(String statementDate) {
@@ -172,8 +172,8 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
     }
 
     @Override
-    public IYourAccountsPage typeCurrentAccountName(String accountName) {
-        yourAccountsSection.typeCurrentAccountName(accountName);
+    public IYourAccountsPage typeCurrentAccountHolderName(String accountHolderName) {
+        yourAccountsSection.typeCurrentAccountHolderName(accountHolderName);
         return this;
     }
 
@@ -201,11 +201,11 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
         return this;
     }
 
-    @Override
-    public IYourAccountsPage typeCurrentAccountProvider(String accountProvider) {
-        yourAccountsSection.typeCurrentAccountProvider(accountProvider);
-        return this;
-    }
+//    @Override
+//    public IYourAccountsPage typeCurrentAccountProvider(String accountProvider) {
+//        yourAccountsSection.typeCurrentAccountProvider(accountProvider);
+//        return this;
+//    }
 
     @Override
     public IYourAccountsPage typeCurrentIban(String iban) {
@@ -244,8 +244,8 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
     }
 
     @Override
-    public IYourAccountsPage typeSavingsAccountName(String accountName) {
-        yourAccountsSection.typeSavingsAccountName(accountName);
+    public IYourAccountsPage typeSavingsAccountHolderName(String accountHolderName) {
+        yourAccountsSection.typeSavingsAccountHolderName(accountHolderName);
         return this;
     }
 
@@ -273,11 +273,11 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
         return this;
     }
 
-    @Override
-    public IYourAccountsPage typeSavingAccountProvider(String accountProvider) {
-        yourAccountsSection.typeSavingAccountProvider(accountProvider);
-        return this;
-    }
+//    @Override
+//    public IYourAccountsPage typeSavingAccountProvider(String accountProvider) {
+//        yourAccountsSection.typeSavingAccountProvider(accountProvider);
+//        return this;
+//    }
 
     @Override
     public IYourAccountsPage typeSavingIban(String iban) {

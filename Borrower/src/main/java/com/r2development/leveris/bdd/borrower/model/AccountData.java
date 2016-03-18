@@ -13,20 +13,20 @@ public class AccountData extends DataModel {
         super(accountData);
     }
 
-    public String getAccountType() {
-        return data.get("accountType");
+    public String getFormType() {
+        return data.get("formType");
     }
 
     public void setAccountType(String accountType){
         data.replace("accountType", accountType);
     }
 
-    public String getAccountProvider() {
-        return data.get("accountProvider");
+    public String getAccountHolderName() {
+        return data.get("accountHolderName");
     }
 
-    public void setAccountProvider(String accountProvider){
-        data.replace("accountProvider", accountProvider);
+    public void setAccountHolderName(String accountHolderName){
+        data.replace("accountHolderName", accountHolderName);
     }
 
     public String getStatementDate() {
@@ -68,7 +68,6 @@ public class AccountData extends DataModel {
     public void setSortCode3(String sortCode3){
         data.replace("sortCode3", sortCode3);
     }
-
 
     public String getAccountNumber() {
         return data.get("accountNumber");
@@ -125,7 +124,6 @@ public class AccountData extends DataModel {
      | accountType           | Current Account         |
      | accountProvider       | deWilliamS              |
      | statementDate         | 01/01/2000              |
-     | accountName           | test Current Account    |
      | sortCode1             | 12                      |
      | sortCode2             | 34                      |
      | sortCode3             | 56                      |
@@ -141,7 +139,6 @@ public class AccountData extends DataModel {
      | accountProvider       | deWilliamS              |
      # BUG OPO-280 - if added as second account the field disappears
      | statementDate         | 01/01/2000              |
-     | accountName           | test Current Account    |
      | sortCode1             | 12                      |
      | sortCode2             | 34                      |
      | sortCode3             | 56                      |

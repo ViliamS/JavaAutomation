@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class YourDependantsSection extends Borrower implements IYourDependantsSection {
 
-    private static final Log log = LogFactory.getLog(YourDependantsSection.class);
+    private static final Log log = LogFactory.getLog(YourDependantsSection.class.getName());
 
     @FindBy(xpath = YOUR_DEPENDANTS_TITLE_XPATH)
     protected WebElement weYourDependantTitle;
@@ -71,8 +71,8 @@ public class YourDependantsSection extends Borrower implements IYourDependantsSe
     @Override
     public String getTitle() {
         loadingCheck();
-        isVisible(YOUR_DEPENDANTS_TITLE_XPATH, 0);
-        return weYourDependantTitle.getText();
+        isVisible(YOUR_DEPENDANTS_TITLE_XPATH, 5);
+        return getText(YOUR_DEPENDANTS_TITLE_XPATH);
     }
 
     @Override
@@ -135,29 +135,19 @@ public class YourDependantsSection extends Borrower implements IYourDependantsSe
 //        weYourDependantsDateOfBirthInput.click();
 //        weYourDependantsDateOfBirthInput.sendKeys(dateOfBirth);
         loadingCheck();
-        type(YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH, dateOfBirth);
+        clickElement(YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH);
+        typeEndWithTab(YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH, dateOfBirth, true);
         loadingCheck();
-        if (isVisible("//div[@id='ui-datepicker-div']", 0)) {
-            isVisible("//div[@id='ui-datepicker-div']//button[@data-event='click' and contains(., 'Done')]");
-            clickElement("//div[@id='ui-datepicker-div']//button[@data-event='click' and contains(., 'Done')]");
-        }
+//        if (isVisible("//div[@id='ui-datepicker-div']", 0)) {
+//            isVisible("//div[@id='ui-datepicker-div']//button[@data-event='click' and contains(., 'Done')]");
+//            clickElement("//div[@id='ui-datepicker-div']//button[@data-event='click' and contains(., 'Done')]");
+//        }
         return this;
     }
 
     @Override
     public IYourDependantsSection clickAddThisDependant() {
-        loadingCheck();
-        if(isVisible(YOUR_DEPENDANTS_ADD_THIS_DEPENDANT_XPATH, 0)) {
-            clickElement(YOUR_DEPENDANTS_ADD_THIS_DEPENDANT_XPATH);
-            return this;
-        } else if((isVisible(YOUR_DEPENDANTS_ADD_DEPENDANTS_XPATH, 0) || isVisible(YOUR_DEPENDANTS_ADD_DEPENDANT2_XPATH, 0)) && !isNotVisible(YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH, 0)) {
-            clickAddDependant();
-            return this;
-        } else if(isVisible(YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH, 0))
-            return this;
-
-        Assert.assertTrue("We've got lost!!! go home looser ", false);
-        return this;
+        return clickAddThisDependant();
     }
 
     private Map<String, String> formExceptionDetails(){
@@ -202,46 +192,95 @@ public class YourDependantsSection extends Borrower implements IYourDependantsSe
         return this;
     }
 
-    @Override
-    public IYourDependantsSection clickAddDependant() {
-        loadingCheck();
-
-        if (!isVisible(YOUR_DEPENDANTS_ADD_DEPENDANTS_XPATH, 0) && !isVisible(YOUR_DEPENDANTS_SAVE_AND_CLOSE_XPATH, 0) && !isVisible(YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH, 0) && !isVisible(FINANCIAL_COMMITMENTS_NAVIGATION_CHECK_XPATH, 0)) {
-            if (isVisible(YOUR_DEPENDANTS_ADD_DEPENDANT2_XPATH, 0) && !isVisible(FINANCIAL_COMMITMENTS_NAVIGATION_CHECK_XPATH, 0)) {
-                clickElement(YOUR_DEPENDANTS_ADD_DEPENDANT2_XPATH, YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH);
-            } else {
-                if(isVisible(FINANCIAL_COMMITMENTS_NAVIGATION_CHECK_XPATH)) {
-                    log.info("\n ---------------------------------------------------------------------- \n" +
-                            " | Navigation problem we are already on Your financial commitments page | \n" +
-                            " ----------------------------------------------------------------------- \n");
-                    return this;
-                }
-                else {
-                    log.info("\n ------------------------------------------------------------------------ \n" +
-                            " | Navigation problem we are lost .... We should be Dependants main screen   | \n" +
-                            " | Or on your financial commitments page but none of those is being detected | \n" +
-                            " ------------------------------------------------------------------------- \n");
-                return this;
-                }
-            }
-        } else if(isVisible(YOUR_DEPENDANTS_ADD_DEPENDANTS_XPATH, 10)) {
-            clickElement(YOUR_DEPENDANTS_ADD_DEPENDANTS_XPATH, YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH);
-        }
-
-//        try {
-//            isVisible(YOUR_DEPENDANTS_ADD_DEPENDANT_XPATH, true);
-//            clickElement(YOUR_DEPENDANTS_ADD_DEPENDANT_XPATH);
-//            // getWebElement(YOUR_DEPENDANTS_ADD_DEPENDANT_XPATH).click();
-//            //        weYourDependantsAddDependant.click();
-//        } catch (Exception e) {
-//            isVisible(YOUR_DEPENDANTS_ADD_DEPENDANT2_XPATH, true);
-//            clickElementViaJavascript(YOUR_DEPENDANTS_ADD_DEPENDANT2_XPATH, YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH);
-//        }
+    private boolean isDependantFormLoaded(){
         loadingCheck();
         isVisible(YOUR_DEPENDANTS_PANEL_XPATH, true, 0);
         isVisible(YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH, true, 0);
         isVisible(YOUR_DEPENDANTS_ADD_DEPENDANT_XPATH, true, 0);
+        return true;
+    }
+
+    private boolean isFirstScreenDisplayed(){
+        if(!isVisible(YOUR_DEPENDANTS_ADD_DEPENDANTS_XPATH, 10)) {
+            try {
+                clickElementViaJavascript(YOUR_DEPENDANTS_ADD_DEPENDANT_XPATH, YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH);
+            } catch (Exception x){
+                log.info("First screen was detected but clicking failed so trying to call second screen");
+                Assert.assertEquals(
+                        "Clicking on the second screen failed as well so test is quiting" +
+                                "\n ------------------------------------------------------------- \n" +
+                                "            Baikonur, we have a problem !!! " +
+                                "\n ------------------------------------------------------------- \n",
+                        isFirstDependantAlreadyAdded(),
+                        true
+                );
+            }
+            isDependantFormLoaded();
+            return true;
+        }
+        return false;
+    }
+
+    protected boolean isFirstDependantAlreadyAdded() {
+
+
+//
+//        if(isVisible(YOUR_DEPENDANTS_ADD_DEPENDANTS_XPATH, 10)){
+//            clickElementViaJavascript(YOUR_DEPENDANTS_ADD_DEPENDANTS_XPATH, YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH);
+//            isDependantFormLoaded();
+//            return true;
+//        }
+//        log.info("Second screen was not loaded");
+//        return false;
+
+    return false;
+    }
+
+    @Override
+    public IYourDependantsSection clickAddDependant() {
+        loadingCheck();
+
+        if(!isVisible(YOUR_DEPENDANTS_ADD_DEPENDANTS_XPATH, 1) && isVisible(YOUR_DEPENDANTS_ADD_DEPENDANT_XPATH, 1)){
+            try {
+                clickElement(YOUR_DEPENDANTS_ADD_DEPENDANT_XPATH, YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH);
+                return this;
+            } catch (Exception x){
+                Assert.assertTrue("Baikonur we are on fire", false);
+            }
+        }
+
+        if(isVisible(YOUR_DEPENDANTS_ADD_DEPENDANTS_XPATH, 1) && !isVisible(YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH, 1)){
+            clickElement(YOUR_DEPENDANTS_ADD_DEPENDANTS_XPATH, YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH);
+            return this;
+
+        } else if(isVisible(YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH, 1)){
+            return this;
+        }
+
+        Assert.assertTrue(false);
         return this;
+
+
+//        loadingCheck();
+//
+//        if(isFirstScreenDisplayed()) {
+//            return this;
+//        } else if(isFirstDependantAlreadyAdded()) {
+//            return this;
+//        } else {
+//            log.info("\n ------------------------------------------------------------------------ \n" +
+//                    " | Navigation problem we are lost .... We should be Dependants main screen   | \n" +
+//                    " | Or on your financial commitments page but none of those is being detected | \n" +
+//                    " ------------------------------------------------------------------------- \n");
+//
+//            Assert.assertEquals("\n ------------------------------------------------------------------------ \n" +
+//                                "            Baikonur, we have a problem !!! " +
+//                                "\n ------------------------------------------------------------------------ \n",
+//                    true,
+//                    false
+//            );
+//        }
+//        return this;
     }
 
     @Override

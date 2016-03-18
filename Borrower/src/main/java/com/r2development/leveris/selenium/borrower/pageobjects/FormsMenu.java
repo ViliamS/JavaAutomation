@@ -143,7 +143,7 @@ public class FormsMenu extends Borrower implements IFormsMenu {
         isVisible(BORROWER_EMPLOYMENT_INCOME_SINGLE_XPATH, true, 10);
 //        getWebElement(BORROWER_EMPLOYMENT_INCOME_SINGLE_XPATH).click();
         clickElement(BORROWER_EMPLOYMENT_INCOME_SINGLE_XPATH);
-        return this;
+        return new EmploymentIncomesPage(webDriver);
     }
 
     @Override
