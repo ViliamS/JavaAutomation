@@ -16,7 +16,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
-import org.junit.Assert;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
@@ -42,6 +41,8 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
     IUser user;
     @Inject
     IHttpResponse httpResponse;
+
+    private boolean isThereEmpList = false;
 
     @Inject
     public ApiEmploymentAndIncomeStepDef(IHttpResponse httpResponse) {
@@ -247,6 +248,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
         final String finalFixCategory = fixCategory;
 
         Elements divEmploymentTypeAddElements = empListDoc2.select("div[data-path~=pnlNoEmplyments").select("div[data-path~=lnkAdd" + finalFixCategory + "]");
+        Elements divEmploymentTypeAddElements2 = null;
         Map<String, String> wicketInterfaceMap = new LinkedHashMap<>();
         String linkAdd = null;
         String currentKey = "linkAdd";
@@ -265,8 +267,9 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
             }
         }
         else if ( divEmploymentTypeAddElements.size() == 0 ) {
-            divEmploymentTypeAddElements = empListDoc2.select("div[data-path~=pnlEmpList btnAdd]");
-            for (Element current : divEmploymentTypeAddElements) {
+            isThereEmpList = true;
+            divEmploymentTypeAddElements2 = empListDoc2.select("div[data-path~=pnlEmpList btnAdd]");
+            for (Element current : divEmploymentTypeAddElements2) {
 //                String currentKey = current.attr("data-path").split(" ")[1];
                 String currentOnClick = current.select("a[wicketpath=main_c_form_form_root_c_w_pnlEmpList_c_w_btnAddEmp_dialog]").attr("onclick");
                 Pattern pWicketInterface = Pattern.compile("\\?wicket:interface=(.*)&");
@@ -305,6 +308,31 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
 
         switch ( fixCategory ) {
             case "Paye":
+
+                if ( divEmploymentTypeAddElements2 != null && divEmploymentTypeAddElements2.size() == 1) {
+
+                    String addResponse = requestHttpPost(
+                            httpClient,
+                            System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:pnlNoEmplyments:c:w:pnlPaye:c:w:lnkAddPaye:submit::IBehaviorListener:0:",
+                            new LinkedHashMap<String, String>() {
+                                {
+                                    put("Accept", "text/xml");
+                                    put("Content-Type", "application/x-www-form-urlencoded");
+                                }
+                            },
+                            new LinkedHashMap<String, String>() {
+                                {
+                                    put("stepToken", "1");
+                                    put("root:c:w:pnlNoEmplyments:c:w:pnlPaye:c:w:lnkAddPaye:submit", "1");
+                                }
+                            },
+                            localContext,
+                            CONSUME_QUIETLY
+                    );
+                    httpResponse.setHttpResponse(addResponse);
+
+                }
+
                 requestHttpPost(
                         httpClient,
                         System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog::IFormChangeListener:2:-1",
@@ -316,40 +344,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                         },
                         new LinkedHashMap<String, String>() {
                             {
-                                put("data", "{\"widgets\":[{\"widget\":\"pnlDetail pnlSelfEmployed pnlCounty pnlIrelandCounty\n" +
-                                        " cmbIrelandCounty\",\"data\":{\"enable\":true}},{\"widget\":\"pnlDetail pnlSelfEmployed\n" +
-                                        " pnlCounty pnlIrelandCounty\",\"data\":{\"enable\":true}},{\"widget\":\"pnlDetail\n" +
-                                        " pnlSelfEmployed pnlCounty pnlIrelandCounty\",\"data\":{\"visible\":true},\"delta\n" +
-                                        "\":40,\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlSelfEmployed pnlCounty\n" +
-                                        " pnlIrelandCounty\",\"data\":{\"visible\":true},\"delta\":0,\"visibleEvent\n" +
-                                        "\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed txtEmployerName\",\"data\"\n" +
-                                        ":{\"visible\":true},\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed\n" +
-                                        " cmbEmplType\",\"data\":{\"visible\":true},\"visibleEvent\":\"show\"},{\n" +
-                                        "\"widget\":\"pnlDetail pnlEmployed txtEmplStartDate\",\"data\":{\"visible\":true\n" +
-                                        "},\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed pnlEmplCurrently\n" +
-                                        " chkEmplCurrently\",\"data\":{\"visible\":true},\"visibleEvent\":\"show\"}\n" +
-                                        ",{\"widget\":\"pnlDetail pnlEmployed pnlEmplPayeServant crbEmplGrossSalary\",\"data\n" +
-                                        "\":{\"visible\":true},\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail\n" +
-                                        " pnlEmployed pnlEmplPayeServant crbEmplGrossBonus\",\"data\":{\"visible\":true}\n" +
-                                        ",\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed pnlEmplPayeServant\n" +
-                                        " crbEmplGrossOvertime\",\"data\":{\"visible\":true},\"visibleEvent\":\"show\"\n" +
-                                        "},{\"widget\":\"pnlDetail pnlEmployed\",\"data\":{\"visible\":true},\"delta\n" +
-                                        "\":520,\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed pnlNetIncomeEmpl\n" +
-                                        "\",\"data\":{\"visible\":true},\"delta\":80,\"visibleEvent\":\"show\"}\n" +
-                                        ",{\"widget\":\"pnlDetail pnlEmployed pnlEmplPayeServant\",\"data\":{\"visible\n" +
-                                        "\":false},\"delta\":-150,\"visibleEvent\":\"hide\"},{\"widget\":\"pnlDetail\n" +
-                                        " pnlEmployed pnlEmplPayeServant\",\"data\":{\"enable\":false}},{\"widget\"\n" +
-                                        ":\"pnlDetail pnlSelfEmployed\",\"data\":{\"enable\":false}},{\"widget\":\n" +
-                                        "\"pnlDetail pnlNetIcomeSelf\",\"data\":{\"visible\":false},\"delta\":-70,\"visibleEvent\n" +
-                                        "\":\"hide\"},{\"widget\":\"pnlDetail pnlNetIcomeSelf\",\"data\":{\"enable\n" +
-                                        "\":false}},{\"widget\":\"pnlDetail pnlOther\",\"data\":{\"enable\":false\n" +
-                                        "}},{\"widget\":\"pnlDetail pnlOtherIncome\",\"data\":{\"enable\":false}\n" +
-                                        "},{\"widget\":\"pnlDetail pnlNetIcomeOther\",\"data\":{\"visible\":false}\n" +
-                                        ",\"delta\":-70,\"visibleEvent\":\"hide\"},{\"widget\":\"pnlDetail pnlNetIcomeOther\n" +
-                                        "\",\"data\":{\"enable\":false}},{\"widget\":\"pnlDetail pnlUnemployed\"\n" +
-                                        ",\"data\":{\"enable\":false}},{\"widget\":\"pnlDetail pnlSelfEmployed txtBusinessEndDate\n" +
-                                        "\",\"data\":{\"enable\":true}},{\"widget\":\"pnlDetail pnlUnemployed txtUnemployedEndDate\n" +
-                                        "\",\"data\":{\"enable\":true}}]}");
+                                put("data", "{\"widgets\":[{\"widget\":\"pnlDetail pnlSelfEmployed pnlCounty pnlIrelandCounty cmbIrelandCounty\",\"data\":{\"enable\":true}},{\"widget\":\"pnlDetail pnlSelfEmployed pnlCounty pnlIrelandCounty\",\"data\":{\"enable\":true}},{\"widget\":\"pnlDetail pnlSelfEmployed pnlCounty pnlIrelandCounty\",\"data\":{\"visible\":true},\"delta\":40,\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlSelfEmployed pnlCounty pnlIrelandCounty\",\"data\":{\"visible\":true},\"delta\":0,\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed txtEmployerName\",\"data\":{\"visible\":true},\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed cmbEmplType\",\"data\":{\"visible\":true},\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed txtEmplStartDate\",\"data\":{\"visible\":true},\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed pnlEmplCurrently chkEmplCurrently\",\"data\":{\"visible\":true},\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed pnlEmplPayeServant crbEmplGrossSalary\",\"data\":{\"visible\":true},\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed pnlEmplPayeServant crbEmplGrossBonus\",\"data\":{\"visible\":true},\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed pnlEmplPayeServant crbEmplGrossOvertime\",\"data\":{\"visible\":true},\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed\",\"data\":{\"visible\":true},\"delta\":520,\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed pnlNetIncomeEmpl\",\"data\":{\"visible\":true},\"delta\":80,\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed pnlEmplPayeServant\",\"data\":{\"visible\":false},\"delta\":-150,\"visibleEvent\":\"hide\"},{\"widget\":\"pnlDetail pnlEmployed pnlEmplPayeServant\",\"data\":{\"enable\":false}},{\"widget\":\"pnlDetail pnlSelfEmployed\",\"data\":{\"enable\":false}},{\"widget\":\"pnlDetail pnlNetIcomeSelf\",\"data\":{\"visible\":false},\"delta\":-70,\"visibleEvent\":\"hide\"},{\"widget\":\"pnlDetail pnlNetIcomeSelf\",\"data\":{\"enable\":false}},{\"widget\":\"pnlDetail pnlOther\",\"data\":{\"enable\":false}},{\"widget\":\"pnlDetail pnlOtherIncome\",\"data\":{\"enable\":false}},{\"widget\":\"pnlDetail pnlNetIcomeOther\",\"data\":{\"visible\":false},\"delta\":-70,\"visibleEvent\":\"hide\"},{\"widget\":\"pnlDetail pnlNetIcomeOther\",\"data\":{\"enable\":false}},{\"widget\":\"pnlDetail pnlOtherDates\",\"data\":{\"enable\":false}},{\"widget\":\"pnlDetail pnlUnemployed\",\"data\":{\"enable\":false}},{\"widget\":\"pnlDetail pnlSelfEmployed txtBusinessEndDate\",\"data\":{\"enable\":true}},{\"widget\":\"pnlDetail pnlUnemployed txtUnemployedEndDate\",\"data\":{\"enable\":true}},{\"widget\":\"pnlDetail pnlOtherDates txtOtherEndDate\",\"data\":{\"enable\":true}}]}");
                             }
                         },
                         localContext,
@@ -357,6 +352,31 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                 );
                 break;
             case "SelfEmployed":
+
+                if ( divEmploymentTypeAddElements2 != null && divEmploymentTypeAddElements2.size() == 1) {
+
+                    String addResponse = requestHttpPost(
+                            httpClient,
+                            System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:pnlNoEmplyments:c:w:pnlSelfEmployed:c:w:lnkAddSelfEmployed:submit::IBehaviorListener:0:",
+                            new LinkedHashMap<String, String>() {
+                                {
+                                    put("Accept", "text/xml");
+                                    put("Content-Type", "application/x-www-form-urlencoded");
+                                }
+                            },
+                            new LinkedHashMap<String, String>() {
+                                {
+                                    put("stepToken", "1");
+                                    put("root:c:w:pnlNoEmplyments:c:w:pnlSelfEmployed:c:w:lnkAddSelfEmployed:submit", "1");
+                                }
+                            },
+                            localContext,
+                            CONSUME_QUIETLY
+                    );
+                    httpResponse.setHttpResponse(addResponse);
+
+                }
+
                 requestHttpPost(
                         httpClient,
                         System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog::IFormChangeListener:2:-1",
@@ -378,64 +398,64 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
 
                 );
                 break;
-            case "CivilServant":
-                requestHttpPost(
-                        httpClient,
-                        System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog::IFormChangeListener:2:-1",
-                        new LinkedHashMap<String, String>() {
-                            {
-                                put("Accept", "text/xml");
-                                put("Content-Type", "application/x-www-form-urlencoded");
-                            }
-                        },
-                        new LinkedHashMap<String, String>() {
-                            {
-                                put("data", "{\"widgets\":[{\"widget\":\"pnlDetail pnlEmployed txtEmployerName\",\"data\"\n" +
-                                        ":{\"visible\":true},\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed\n" +
-                                        " cmbEmplType\",\"data\":{\"visible\":true},\"visibleEvent\":\"show\"},{\n" +
-                                        "\"widget\":\"pnlDetail pnlEmployed txtEmplStartDate\",\"data\":{\"visible\":true\n" +
-                                        "},\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed pnlEmplCurrently\n" +
-                                        " chkEmplCurrently\",\"data\":{\"visible\":true},\"visibleEvent\":\"show\"}\n" +
-                                        ",{\"widget\":\"pnlDetail pnlEmployed pnlEmplPayeServant crbEmplGrossSalary\",\"data\n" +
-                                        "\":{\"visible\":true},\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail\n" +
-                                        " pnlEmployed pnlEmplPayeServant crbEmplGrossBonus\",\"data\":{\"visible\":true}\n" +
-                                        ",\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed pnlEmplPayeServant\n" +
-                                        " crbEmplGrossOvertime\",\"data\":{\"visible\":true},\"visibleEvent\":\"show\"\n" +
-                                        "},{\"widget\":\"pnlDetail pnlEmployed\",\"data\":{\"visible\":true},\"delta\n" +
-                                        "\":600,\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed pnlEmplPayeServant\n" +
-                                        "\",\"data\":{},\"delta\":-150,\"visibleEvent\":\"hide\"},{\"widget\"\n" +
-                                        ":\"pnlDetail pnlEmployed pnlEmplPayeServant crbEmplGrossSalary\",\"data\":{}},\n" +
-                                        "{\"widget\":\"pnlDetail pnlEmployed pnlEmplPayeServant crbEmplGrossOvertime\",\"data\n" +
-                                        "\":{}},{\"widget\":\"pnlDetail pnlEmployed pnlEmplPayeServant crbEmplGrossBonus\n" +
-                                        "\",\"data\":{}},{\"widget\":\"pnlDetail pnlEmployed pnlEmplPayeServant crbCommision\n" +
-                                        "\",\"data\":{}},{\"widget\":\"pnlDetail pnlEmployed pnlEmplPayeServant\",\n" +
-                                        "\"data\":{}},{\"widget\":\"pnlDetail pnlSelfEmployed\",\"data\":{\"enable\n" +
-                                        "\":false}},{\"widget\":\"pnlDetail pnlSelfEmployed pnlProfit\",\"data\":{\n" +
-                                        "},\"delta\":-160,\"visibleEvent\":\"hide\"},{\"widget\":\"pnlDetail pnlSelfEmployed\n" +
-                                        " pnlProfit txtAccountantNamePractice\",\"data\":{}},{\"widget\":\"pnlDetail\n" +
-                                        " pnlSelfEmployed pnlProfit crbNetProfitLastyear\",\"data\":{}},{\"widget\":\n" +
-                                        "\"pnlDetail pnlSelfEmployed pnlProfit crbNetProfitPreviousYear\",\"data\":{}},\n" +
-                                        "{\"widget\":\"pnlDetail pnlSelfEmployed pnlProfit\",\"data\":{}},{\"widget\n" +
-                                        "\":\"pnlDetail pnlNetIcomeSelf\",\"data\":{\"visible\":false},\"delta\":-70\n" +
-                                        ",\"visibleEvent\":\"hide\"},{\"widget\":\"pnlDetail pnlNetIcomeSelf\",\"data\n" +
-                                        "\":{\"enable\":false}},{\"widget\":\"pnlDetail pnlOther\",\"data\":{\n" +
-                                        "\"enable\":false}},{\"widget\":\"pnlDetail pnlOtherIncome\",\"data\":{}\n" +
-                                        ",\"delta\":-70,\"visibleEvent\":\"hide\"},{\"widget\":\"pnlDetail pnlOtherIncome\n" +
-                                        " crbGrossIncome\",\"data\":{}},{\"widget\":\"pnlDetail pnlOtherIncome txtOtherIncomeTime\n" +
-                                        "\",\"data\":{}},{\"widget\":\"pnlDetail pnlOtherIncome\",\"data\":{\n" +
-                                        "}},{\"widget\":\"pnlDetail pnlNetIcomeOther\",\"data\":{\"visible\":false\n" +
-                                        "},\"delta\":-70,\"visibleEvent\":\"hide\"},{\"widget\":\"pnlDetail pnlNetIcomeOther\n" +
-                                        "\",\"data\":{\"enable\":false}},{\"widget\":\"pnlDetail pnlUnemployed\"\n" +
-                                        ",\"data\":{\"enable\":false}},{\"widget\":\"pnlDetail pnlSelfEmployed txtBusinessEndDate\n" +
-                                        "\",\"data\":{\"enable\":true}},{\"widget\":\"pnlDetail pnlUnemployed txtUnemployedEndDate\n" +
-                                        "\",\"data\":{\"enable\":true}}]}"
-                                );
-                            }
-                        },
-                        localContext,
-                        CONSUME_QUIETLY
-
-                );
+//            case "CivilServant":
+//                requestHttpPost(
+//                        httpClient,
+//                        System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog::IFormChangeListener:2:-1",
+//                        new LinkedHashMap<String, String>() {
+//                            {
+//                                put("Accept", "text/xml");
+//                                put("Content-Type", "application/x-www-form-urlencoded");
+//                            }
+//                        },
+//                        new LinkedHashMap<String, String>() {
+//                            {
+//                                put("data", "{\"widgets\":[{\"widget\":\"pnlDetail pnlEmployed txtEmployerName\",\"data\"\n" +
+//                                        ":{\"visible\":true},\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed\n" +
+//                                        " cmbEmplType\",\"data\":{\"visible\":true},\"visibleEvent\":\"show\"},{\n" +
+//                                        "\"widget\":\"pnlDetail pnlEmployed txtEmplStartDate\",\"data\":{\"visible\":true\n" +
+//                                        "},\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed pnlEmplCurrently\n" +
+//                                        " chkEmplCurrently\",\"data\":{\"visible\":true},\"visibleEvent\":\"show\"}\n" +
+//                                        ",{\"widget\":\"pnlDetail pnlEmployed pnlEmplPayeServant crbEmplGrossSalary\",\"data\n" +
+//                                        "\":{\"visible\":true},\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail\n" +
+//                                        " pnlEmployed pnlEmplPayeServant crbEmplGrossBonus\",\"data\":{\"visible\":true}\n" +
+//                                        ",\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed pnlEmplPayeServant\n" +
+//                                        " crbEmplGrossOvertime\",\"data\":{\"visible\":true},\"visibleEvent\":\"show\"\n" +
+//                                        "},{\"widget\":\"pnlDetail pnlEmployed\",\"data\":{\"visible\":true},\"delta\n" +
+//                                        "\":600,\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed pnlEmplPayeServant\n" +
+//                                        "\",\"data\":{},\"delta\":-150,\"visibleEvent\":\"hide\"},{\"widget\"\n" +
+//                                        ":\"pnlDetail pnlEmployed pnlEmplPayeServant crbEmplGrossSalary\",\"data\":{}},\n" +
+//                                        "{\"widget\":\"pnlDetail pnlEmployed pnlEmplPayeServant crbEmplGrossOvertime\",\"data\n" +
+//                                        "\":{}},{\"widget\":\"pnlDetail pnlEmployed pnlEmplPayeServant crbEmplGrossBonus\n" +
+//                                        "\",\"data\":{}},{\"widget\":\"pnlDetail pnlEmployed pnlEmplPayeServant crbCommision\n" +
+//                                        "\",\"data\":{}},{\"widget\":\"pnlDetail pnlEmployed pnlEmplPayeServant\",\n" +
+//                                        "\"data\":{}},{\"widget\":\"pnlDetail pnlSelfEmployed\",\"data\":{\"enable\n" +
+//                                        "\":false}},{\"widget\":\"pnlDetail pnlSelfEmployed pnlProfit\",\"data\":{\n" +
+//                                        "},\"delta\":-160,\"visibleEvent\":\"hide\"},{\"widget\":\"pnlDetail pnlSelfEmployed\n" +
+//                                        " pnlProfit txtAccountantNamePractice\",\"data\":{}},{\"widget\":\"pnlDetail\n" +
+//                                        " pnlSelfEmployed pnlProfit crbNetProfitLastyear\",\"data\":{}},{\"widget\":\n" +
+//                                        "\"pnlDetail pnlSelfEmployed pnlProfit crbNetProfitPreviousYear\",\"data\":{}},\n" +
+//                                        "{\"widget\":\"pnlDetail pnlSelfEmployed pnlProfit\",\"data\":{}},{\"widget\n" +
+//                                        "\":\"pnlDetail pnlNetIcomeSelf\",\"data\":{\"visible\":false},\"delta\":-70\n" +
+//                                        ",\"visibleEvent\":\"hide\"},{\"widget\":\"pnlDetail pnlNetIcomeSelf\",\"data\n" +
+//                                        "\":{\"enable\":false}},{\"widget\":\"pnlDetail pnlOther\",\"data\":{\n" +
+//                                        "\"enable\":false}},{\"widget\":\"pnlDetail pnlOtherIncome\",\"data\":{}\n" +
+//                                        ",\"delta\":-70,\"visibleEvent\":\"hide\"},{\"widget\":\"pnlDetail pnlOtherIncome\n" +
+//                                        " crbGrossIncome\",\"data\":{}},{\"widget\":\"pnlDetail pnlOtherIncome txtOtherIncomeTime\n" +
+//                                        "\",\"data\":{}},{\"widget\":\"pnlDetail pnlOtherIncome\",\"data\":{\n" +
+//                                        "}},{\"widget\":\"pnlDetail pnlNetIcomeOther\",\"data\":{\"visible\":false\n" +
+//                                        "},\"delta\":-70,\"visibleEvent\":\"hide\"},{\"widget\":\"pnlDetail pnlNetIcomeOther\n" +
+//                                        "\",\"data\":{\"enable\":false}},{\"widget\":\"pnlDetail pnlUnemployed\"\n" +
+//                                        ",\"data\":{\"enable\":false}},{\"widget\":\"pnlDetail pnlSelfEmployed txtBusinessEndDate\n" +
+//                                        "\",\"data\":{\"enable\":true}},{\"widget\":\"pnlDetail pnlUnemployed txtUnemployedEndDate\n" +
+//                                        "\",\"data\":{\"enable\":true}}]}"
+//                                );
+//                            }
+//                        },
+//                        localContext,
+//                        CONSUME_QUIETLY
+//
+//                );
 
                 /*
                 requestHttpPost(
@@ -460,8 +480,33 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                         CONSUME_QUIETLY
                 );
                 */
-                break;
+//                break;
             case "Unemployment":
+
+                if ( divEmploymentTypeAddElements2 != null && divEmploymentTypeAddElements2.size() == 1) {
+
+                    String addResponse = requestHttpPost(
+                            httpClient,
+                            System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:pnlNoEmplyments:c:w:pnlUnemployed:c:w:lnkAddUnemployment:submit::IBehaviorListener:0:",
+                            new LinkedHashMap<String, String>() {
+                                {
+                                    put("Accept", "text/xml");
+                                    put("Content-Type", "application/x-www-form-urlencoded");
+                                }
+                            },
+                            new LinkedHashMap<String, String>() {
+                                {
+                                    put("stepToken", "1");
+                                    put("root:c:w:pnlNoEmplyments:c:w:pnlUnemployed:c:w:lnkAddUnemployment:submit", "1");
+                                }
+                            },
+                            localContext,
+                            CONSUME_QUIETLY
+                    );
+                    httpResponse.setHttpResponse(addResponse);
+
+                }
+
                 requestHttpPost(
                         httpClient,
                         System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog::IFormChangeListener:2:-1",
@@ -483,6 +528,31 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                 );
                 break;
             case "Homemaker":
+
+                if ( divEmploymentTypeAddElements2 != null && divEmploymentTypeAddElements2.size() == 1) {
+
+                    String addResponse = requestHttpPost(
+                            httpClient,
+                            System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:pnlNoEmplyments:c:w:pnlOther:c:w:lnkAddHomemaker:submit::IBehaviorListener:0:",
+                            new LinkedHashMap<String, String>() {
+                                {
+                                    put("Accept", "text/xml");
+                                    put("Content-Type", "application/x-www-form-urlencoded");
+                                }
+                            },
+                            new LinkedHashMap<String, String>() {
+                                {
+                                    put("stepToken", "1");
+                                    put("root:c:w:pnlNoEmplyments:c:w:pnlOther:c:w:lnkAddHomemaker:submit", "1");
+                                }
+                            },
+                            localContext,
+                            CONSUME_QUIETLY
+                    );
+                    httpResponse.setHttpResponse(addResponse);
+
+                }
+
                 requestHttpPost(
                         httpClient,
                         System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog::IFormChangeListener:2:-1",
@@ -961,9 +1031,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
     private void borrower_coapplicant_user_types_category_address_line1(Map<String, String> employmentIncomesParameters, String category, String addressLine1) {
         switch (category) {
             case "Self Employed":
-//                employmentIncomesParameters.put("root:c:w:pnlDetail:c:w:pnlSelfEmployed:c:w:pnlAddressField1:data:", "{\"countryCode\":\"IE\",\"route\":\"Woodquay\",\"streetNumber\":\"18-19\",\"postalCode\":\"\",\"region\":\"Galway\",\"houseNumber\":\"\",\"inputText\":\"18-19 Woodquay\",\"county\":\"Galway\"}");
-                employmentIncomesParameters.put("root:c:w:pnlDetail:c:w:pnlSelfEmployed:c:w:pnlAddressField1:data:", "{\"countryCode\":\"IE\",\"route\":\"Woodquay\",\"streetNumber\":\"18\",\"postalCode\":\"\",\"region\":\"Galway\",\"houseNumber\":\"\",\"inputText\":\"18-19 Woodquay\",\"county\":\"Galway\"}");
-                employmentIncomesParameters.put("root:c:w:pnlAddressField:data", "{\"inputText\":\"18-19 Woodquay\"}");
+                employmentIncomesParameters.put("root:c:w:pnlDetail:c:w:pnlSelfEmployed:c:w:pnlAddressField1:data", "{\"countryCode\":\"IE\",\"route\":\"Woodquay\",\"streetNumber\":\"18-19\",\"postalCode\":\"\",\"region\":\"Galway\",\"houseNumber\":\"\",\"inputText\":\"18-19 Woodquay\",\"county\":\"Galway\"}");
                 break;
         }
     }
@@ -1166,19 +1234,13 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
             }
         }
 
-        String currentWorkflow = StringUtils.EMPTY;
-        if ( httpResponse.getHttpResponse().contains("btnEmploymentAdd") )
-            currentWorkflow = "btnEmployment";
-        else
-            currentWorkflow = "";
-
         String stepToken = currentFormDoc2.select("input[name=stepToken]").attr("value");
 
         finalEmploymentIncomeParameters.put("root:c:w:pnlDetail:c:w:txtHiddenId:tb", "");
         finalEmploymentIncomeParameters.put("stepToken", stepToken);
         finalEmploymentIncomeParameters.put("root:c:w:pnlDetail:c:w:btnEmploymentAdd:submit", "1");
 
-        String employmentAddReponse = requestHttpPost(
+        String employmentAddResponse = requestHttpPost(
                 httpClient,
 //                "https://st1app.loftkeys.com/borrower/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:pnlDetail:c:w:btnEmploymentAdd:submit::IBehaviorListener:0:",
                 System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:pnlDetail:c:w:btnEmploymentAdd:submit::IBehaviorListener:0:",
@@ -1192,6 +1254,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                 localContext,
                 CONSUME_QUIETLY
         );
+        httpResponse.setHttpResponse(employmentAddResponse);
 
         // (Paye|Self Employed|Civil Servant|Unemployed/Homemaker|Other)
         String finalCategory = StringUtils.EMPTY;
@@ -1218,25 +1281,25 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                 break;
         }
 
-        if ( currentWorkflow.equals("btnEmployment")) {
-            String lnkAddResponse = requestHttpPost(
-                    httpClient,
-                    //                System.getProperty("borrower") + "/form.2?wicket:interface=" + finalWicketInterface + ":",
-                    //                System.getProperty("borrower") + "/form.2?wicket:interface=" + :1:main:c:form:form:root:c:w:pnlEmpList:c:w:btnAddEmp:close::IBehaviorListener:0:-1",
-//                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:lnkAdd" + finalCategory + ":close::IBehaviorListener:0:-1",
-                    System.getProperty("borrower") + "/form.2?wicket:interface=" + linkClose,
-                    new LinkedHashMap<String, String>() {
-                        {
-                            put("Accept", "text/xml");
-                            put("Content-Type", "application/x-www-form-urlencoded");
-                        }
-                    },
-                    new LinkedHashMap<String, String>() {
-                    },
-                    localContext,
-                    CONSUME_QUIETLY
-            );
+        if ( isThereEmpList )
+            linkClose = "1:main:c:form:form:root:c:w:pnlEmpList:c:w:btnAddEmp:close::IBehaviorListener:0:";
 
+//        if ( currentWorkflow.equals("btnEmployment")) {
+        String lnkCloseResponse = requestHttpPost(
+                httpClient,
+                System.getProperty("borrower") + "/form.2?wicket:interface=" + linkClose,
+                new LinkedHashMap<String, String>() {
+                    {
+                        put("Accept", "text/xml");
+                        put("Content-Type", "application/x-www-form-urlencoded");
+                    }
+                },
+                new LinkedHashMap<String, String>() {},
+                localContext,
+                CONSUME_QUIETLY
+        );
+
+        if ( !isThereEmpList ) {
             String addEmplCompleted = requestHttpPost(
                     httpClient,
                     System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnHiddenSubmit:submit::IBehaviorListener:0:",
@@ -1255,25 +1318,12 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                     localContext,
                     CONSUME_QUIETLY
             );
-//            httpResponse.setHttpResponse(addEmplCompleted);
+            httpResponse.setHttpResponse(addEmplCompleted);
         }
         else {
-            /*
-            String closeReponse = requestHttpGet(
-                    httpClient,
-                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlEmpList:c:w:btnAddEmp:close::IBehaviorListener:0:",
-                    new LinkedHashMap<String, String>() {
-                        {
-                            put("Accept", "text/xml");
-                        }
-                    },
-                    localContext,
-                    CONSUME_QUIETLY
-            );
-
             String addEmplCompleted = requestHttpPost(
                     httpClient,
-                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnHiddenSubmit:submit::IBehaviorListener:0:-1",
+                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnHidenRefresh:submit::IBehaviorListener:0:",
                     new LinkedHashMap<String, String>() {
                         {
                             put("Accept", "text/xml");
@@ -1290,7 +1340,6 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                     CONSUME_QUIETLY
             );
             httpResponse.setHttpResponse(addEmplCompleted);
-            */
         }
     }
 
@@ -1352,11 +1401,6 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
 
         String stepToken = currentFormDoc2.select("input[name=stepToken]").attr("value");
 
-//        finalEmploymentIncomeParameters.put("root:c:w:pnlDetail:c:w:txtHiddenId:tb", "");
-//        finalEmploymentIncomeParameters.put("stepToken", stepToken);
-//        finalEmploymentIncomeParameters.put("root:c:w:pnlDetail:c:w:btnEmploymentAdd:submit", "1");
-
-
         String yourAccountPageResponse = requestHttpPost(
                 httpClient,
                 System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlEmpList:c:w:btnImDone:submit::IBehaviorListener:0:",
@@ -1377,6 +1421,6 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
         );
         httpResponse.setHttpResponse(yourAccountPageResponse);
 
-        Assert.assertEquals("in purpose", 1);
+//        Assert.assertEquals("failure on purpose", 1);
     }
 }

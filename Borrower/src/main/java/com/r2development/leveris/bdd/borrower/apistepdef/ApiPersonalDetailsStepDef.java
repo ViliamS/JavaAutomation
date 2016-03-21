@@ -62,8 +62,14 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
 
         personalDetailsData = new PersonalDetailsData(personalDetailsDataMap);
 //        borrower_coapplicant_user_sees_his_name_in_the_title(borrowerOrCoapplicant);
+        if (!StringUtils.isEmpty(personalDetailsData.getTitle()))
+            borrower_coapplicant_user_types_his_title(borrowerOrCoapplicant, personalDetailsData.getTitle());
         borrower_coapplicant_user_types_his_firstname(borrowerOrCoapplicant, personalDetailsData.getFirstName());
         borrower_coapplicant_user_types_his_lastname(borrowerOrCoapplicant, personalDetailsData.getLastName());
+        if ( !StringUtils.isEmpty(personalDetailsData.getMiddleName()) )
+            borrower_coapplicant_user_types_his_middle_name(borrowerOrCoapplicant, personalDetailsData.getMiddleName());
+        if ( !StringUtils.isEmpty(personalDetailsData.getSuffix()))
+            borrower_coapplicant_user_types_his_suffix(borrowerOrCoapplicant, personalDetailsData.getSuffix());
         borrower_coapplicant_user_checks_his_gender(borrowerOrCoapplicant, personalDetailsData.getGender());
         borrower_coapplicant_user_types_his_date_of_birth(borrowerOrCoapplicant, personalDetailsData.getDateOfBirth());
         borrower_coapplicant_user_selects_his_marital_status(borrowerOrCoapplicant, personalDetailsData.get("maritalStatus"));
@@ -87,6 +93,11 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
+    @Given("^(Borrower) types his title : (.*)$")
+    public void borrower_coapplicant_user_types_his_title(String borrowerOrCoapplicant, String title) {
+        borrowerPersonalDetailsParameters.put("root:c:w:pnlCoLoanTitle:c:w:txtTitle:tb", title);
+    }
+
     @Given("^(Borrower) types his firstname : (.*)$")
     public void borrower_coapplicant_user_types_his_firstname(String borrowerOrCoapplicant, String firstName) {
 //        DateTime now = DateTime.now();
@@ -101,7 +112,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
 //
 //                }
 //                borrowerPersonalDetailsParameters.put("root:c:w:txtFirstName:tb", firstName + now.toString("yyyyDDmmHH"));
-                borrowerPersonalDetailsParameters.put("root:c:w:txtFirstName:tb", firstName + System.getProperty("timestamp"));
+                borrowerPersonalDetailsParameters.put("root:c:w:pnlNames:c:w:txtFirstName:tb", firstName + System.getProperty("timestamp"));
 //                user.setFirstName(firstName + now.toString("yyyyDDmmHH"));
                 user.setFirstName(firstName + System.getProperty("timestamp"));
                 break;
@@ -127,7 +138,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
 //                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setLastname(lastname);
-                borrowerPersonalDetailsParameters.put("root:c:w:txtLastName:tb", lastname);
+                borrowerPersonalDetailsParameters.put("root:c:w:pnlNames:c:w:txtLastName:tb", lastname);
                 break;
 //            case "coapplicant":
 //                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setLastname(lastname);
@@ -136,6 +147,16 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
+    }
+
+    @Given("^(Borrower) types his middle name : (.*)$")
+    public void borrower_coapplicant_user_types_his_middle_name(String borrowerOrCoapplicant, String middleName) {
+        borrowerPersonalDetailsParameters.put("root:c:w:pnlCoLoanNamesSuff:c:w:txtMiddleName:tb", middleName);
+    }
+
+    @Given("^(Borrower) types his suffix : (.*)$")
+    public void borrower_coapplicant_user_types_his_suffix(String borrowerOrCoapplicant, String suffix) {
+        borrowerPersonalDetailsParameters.put("root:c:w:pnlCoLoanNamesSuff:c:w:txtSuffix:tb", suffix);
     }
 
     @Given("^(Borrower) checks his gender : (Male|Female)$")
@@ -259,7 +280,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Given("^(Borrower) types the number of resident years : ([\\d]+)$")
+    @Deprecated @Given("^(Borrower) types the number of resident years : ([\\d]+)$")
     public void borrower_coapplicant_user_types_the_number_resident_years(String borrowerOrCoapplicant, String residentYear) {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
@@ -271,7 +292,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Given("^(Borrower) checks if he (is not|is) requiring a visa$")
+    @Deprecated @Given("^(Borrower) checks if he (is not|is) requiring a visa$")
     public void borrower_coapplicant_user_checks_if_requiring_visa(String borrowerOrCoapplicant, String sRequiringVisa) throws IOException {
 //        boolean bRequiredVisa = ( StringUtils.isEmpty(sRequiringVisa) ? false : ( sRequiringVisa.equals("is") ? true : false));
         boolean bRequiredVisa = (!StringUtils.isEmpty(sRequiringVisa) && sRequiringVisa.equals("is"));
@@ -383,7 +404,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Given("^(Borrower) types his residency address in line 1 : (.*)$")
+    @Deprecated @Given("^(Borrower) types his residency address in line 1 : (.*)$")
     public void borrower_coapplicant_user_types_his_residency_address_line_1(String borrowerOrCoapplicant, String residencyAddressLine1) {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
@@ -395,7 +416,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Given("^(Borrower) types his residency address in line 2 : (.*)$")
+    @Deprecated @Given("^(Borrower) types his residency address in line 2 : (.*)$")
     public void borrower_coapplicant_user_types_his_residency_address_line_2(String borrowerOrCoapplicant, String residencyAddressLine2) {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
@@ -409,7 +430,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Given("^(Borrower) types his residency town/city : (.*)$")
+    @Deprecated @Given("^(Borrower) types his residency town/city : (.*)$")
     public void borrower_coapplicant_user_types_his_residency_towncity(String borrowerOrCoapplicant, String residencyTownCity) {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
@@ -423,7 +444,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Given("^(Borrower) selects his residency county/state : (.*)$")
+    @Deprecated @Given("^(Borrower) selects his residency county/state : (.*)$")
     public void borrower_coapplicant_user_selects_his_residency_countystate(String borrowerOrCoapplicant, String residencyCountyState) {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
@@ -438,7 +459,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Given("^(Borrower) types his postcode/zip : (.*)$")
+    @Deprecated @Given("^(Borrower) types his postcode/zip : (.*)$")
     public void borrower_coapplicant_user_types_his_postcode_zip(String borrowerOrCoapplicant, String residencyPostcodeZip) {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
@@ -452,7 +473,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Given("^(Borrower) selects his residency country : (.*)")
+    @Deprecated@Given("^(Borrower) selects his residency country : (.*)")
     public void borrower_coapplicant_user_selects_his_residency_country(String borrowerOrCoapplicant, String residencyCountry) throws IOException {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
@@ -491,7 +512,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Given("^(Borrower) selects his residency accommodation : (Rented on contract|Rented from family/friends|Property owner|Others)$")
+    @Deprecated @Given("^(Borrower) selects his residency accommodation : (Rented on contract|Rented from family/friends|Property owner|Others)$")
     public void borrower_coapplicant_user_selects_his_residency_accommodation(String borrowerOrCoapplicant, String residencyAccommodation) throws IOException {
 
         switch (residencyAccommodation) {
@@ -556,7 +577,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Given("^(Borrower) types his residency rent : (.*)$")
+    @Deprecated @Given("^(Borrower) types his residency rent : (.*)$")
     public void borrower_coapplicant_user_types_his_residency_rent(String borrowerOrCoapplicant, String residencyRent) {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
@@ -568,7 +589,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Given("^(Borrower) checks if he (is not|is) living since 3 years$")
+    @Deprecated @Given("^(Borrower) checks if he (is not|is) living since 3 years$")
     public void borrower_coapplicant_user_checks_if_he_is_living_since_3_years(String borrowerOrCoapplicant, String sLivedLast3Years) throws IOException {
         boolean bLivedLast3Years = sLivedLast3Years.equals("yes");
         switch(borrowerOrCoapplicant) {
@@ -612,7 +633,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Given("^(Borrower) types his previous residency address in line 1 : (.*)$")
+    @Deprecated @Given("^(Borrower) types his previous residency address in line 1 : (.*)$")
     public void borrower_coapplicant_user_types_his_previous_residency_address_line1(String borrowerOrCoapplicant, String previousResidencyAddressLine1) {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
@@ -624,7 +645,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Given("^(Borrower) types his previous residency address in line 2 : (.*)$")
+    @Deprecated @Given("^(Borrower) types his previous residency address in line 2 : (.*)$")
     public void borrower_coapplicant_user_types_his_previous_residency_address_line2(String borrowerOrCoapplicant, String previousResidencyAddressLine2) {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
@@ -636,7 +657,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Given("^(Borrower) types his previous residency town/city : (.*)$")
+    @Deprecated @Given("^(Borrower) types his previous residency town/city : (.*)$")
     public void borrower_coapplicant_user_types_his_previous_residency_towncity(String borrowerOrCoapplicant, String previousResidencyTownCity) {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
@@ -648,7 +669,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Given("^(Borrower) selects his previous residency county/state : (.*)$")
+    @Deprecated @Given("^(Borrower) selects his previous residency county/state : (.*)$")
     public void borrower_coapplicant_user_selects_his_previous_residency_countystate(String borrowerOrCoapplicant, String residencyCountyState) {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
@@ -663,7 +684,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Given("^(Borrower) types his previous residency postcode/zip : (.*)$")
+    @Deprecated @Given("^(Borrower) types his previous residency postcode/zip : (.*)$")
     public void borrower_coapplicant_user_types_his_previous_residency_postcodezip(String borrowerOrCoapplicant, String previousResidencyPostcodeZip) {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
@@ -675,7 +696,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Given("^(Borrower) selects his previous residency country : (.*)$")
+    @Deprecated @Given("^(Borrower) selects his previous residency country : (.*)$")
     public void borrower_coapplicant_user_selects_his_previous_residency_country(String borrowerOrCoapplicant, String previousResidencyCountry) {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
@@ -687,7 +708,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Given("^(Borrower) types his previous residency country : (.*)$")
+    @Deprecated @Given("^(Borrower) types his previous residency country : (.*)$")
     public void borrower_coapplicant_user_types_his_previous_residency_country(String borrowerOrCoapplicant, String previousResidencyCountry) {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
@@ -699,7 +720,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Given("^(Borrower) saves his personal details data$")
+    @Deprecated @Given("^(Borrower) saves his personal details data$")
     public void borrower_coapplicant_user_saves(String borrowerOrCoapplicant) throws IOException{
 
         Map<String, String> finalPersonalDetailsParameters = new HashMap<>();

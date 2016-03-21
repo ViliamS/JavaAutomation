@@ -21,6 +21,10 @@ public class PersonalDetailsData extends DataModel {
         data.replace("formType", formType);
     }
 
+    public String getTitle() { return data.get("title"); }
+
+    public void setTitle(String title) { data.replace("title", title); }
+
     public String getFirstName() {
         return data.get("firstName");
     }
@@ -36,6 +40,14 @@ public class PersonalDetailsData extends DataModel {
     public void setLastName(String lastName) {
         data.replace("lastName", lastName);
     }
+
+    public String getMiddleName() { return data.get("middleName"); }
+
+    public void setMiddleName(String middleName) { data.replace("middleName", middleName); }
+
+    public String getSuffix() { return data.get("suffix"); }
+
+    public void setSuffix(String suffix) { data.replace("suffix", suffix); }
 
     public String getGender() {
         return data.get("gender");
