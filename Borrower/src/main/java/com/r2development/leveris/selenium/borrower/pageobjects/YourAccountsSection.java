@@ -350,15 +350,14 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
         return this;
     }
 
-//    @Deprecated @Override
-//    public IYourAccountsSection typeCurrentAccountProvider(String accountProvider) {
-//        loadingCheck();
-//        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_PROVIDER_INPUT_XPATH, 0);
-//        weAccountsCurrentProviderInput.clear();
-//        weAccountsCurrentProviderInput.sendKeys(accountProvider);
-//        loadingCheck();
-//        return this;
-//    }
+    @Override
+    public IYourAccountsSection typeCurrentAccountProvider(String accountProvider) {
+        loadingCheck();
+        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_PROVIDER_INPUT_XPATH, 0);
+        type(YOUR_ACCOUNTS_CURRENT_ACCOUNT_PROVIDER_INPUT_XPATH, accountProvider);
+        loadingCheck();
+        return this;
+    }
 
     @Override
     public IYourAccountsSection typeCurrentIban(String iban) {
@@ -455,12 +454,12 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
         return this;
     }
 
-//    @Override
-//    public IYourAccountsSection typeSavingAccountProvider(String accountProvider) {
-//        sendKeysElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_PROVIDER_INPUT_XPATH, accountProvider, 60);
-//        loadingCheck();
-//        return this;
-//    }
+    @Override
+    public IYourAccountsSection typeSavingAccountProvider(String accountProvider) {
+        sendKeysElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_PROVIDER_INPUT_XPATH, accountProvider, 60);
+        loadingCheck();
+        return this;
+    }
 
     @Override
     public IYourAccountsSection typeSavingIban(String iban) {

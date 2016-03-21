@@ -98,4 +98,16 @@ public class PersonalDetailsData extends DataModel {
     public void setIsLivingSince3years(String isLivingSince3years) {
         data.replace("isLivingSince3years", isLivingSince3years);
     }
+
+    public String getTitle(){
+        return data.get("title");
+    }
+
+    public String getMiddleName(){
+        return data.get("middleName");
+    }
+
+    public String getSuffix(){
+        return data.get("suffix");
+    }
 }

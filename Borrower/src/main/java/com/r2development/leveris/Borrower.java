@@ -222,7 +222,7 @@ public class Borrower /*implements IBorrower*/ {
     }
 
     protected void clickElementLoop(String xpath, String expectedClickableXpath){
-        log.info("\nclickElementLoop(\n xpath ---> '" + xpath+ "', ' \n expectedClickableXpath --->" + expectedClickableXpath + "')");
+        log.info("\n clickElementLoop(\n xpath ---> '" + xpath+ "', ' \n expectedClickableXpath --->" + expectedClickableXpath + "')");
         clickElement(xpath, expectedClickableXpath, 30);
         try {
             isVisible(expectedClickableXpath, 5);

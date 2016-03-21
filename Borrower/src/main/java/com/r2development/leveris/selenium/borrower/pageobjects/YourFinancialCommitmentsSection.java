@@ -55,6 +55,9 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
     public IYourFinancialCommitmentsSection clickFinancialType(String financialType) {
         log.info("clickFinancialType logical crossroad ---> financialType = '" + financialType + "'");
 
+        if(!isVisible(FINANCIAL_PERSONAL_LOAN_XPATH, 5))
+            clickAdd();
+
         switch (financialType) {
             case "Personal Loan":
                 this.clickAllPersonal();

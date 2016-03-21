@@ -50,31 +50,33 @@ Feature: Payday Loan
 #    When Borrower clicks "Borrower Personal Details"
     And Borrower fills in Personal Details
       | formType            | Personal Details  |
+      | title               | Mr.               |
       | firstName           | AutomationGUI     |
+      | middleName          | Amazing           |
       | lastName            | Tester            |
+      | suffix              | the Greatest      |
       | gender              | Male              |
       | dateOfBirth         | 01/01/1977        |
       | nationality         | French            |
       | maritalStatus       | single            |
-      | address line 1      | 18 Woodquay       |
-      | town/city           | Galway            |
-      | country             | Ireland           |
-      | county/state        | Galway            |
 #      | accommodation       | Property owner     |
 #      | isLivingSince3years | yes                |
     And Borrower saves his personal details data
+
+    And Borrower fills in Current residency
+      | formType | Current residency |
 
 #    EMPLOYMENT & INCOME
 #    When Borrower clicks "Borrower Employment Income"
 
     And Borrower fills in Employment and Income type Paye
-      | formType            | Paye        |
-      | occupation          | Artist      |
-      | employerName        | Hot Peppers Paye |
-      | employmentType      | Permanent   |
-      | startDate           | 05/11/2013  |
-      | isCurrentEmployment | yes         |
-      | netMonthlyIncome    | 124000      |
+      | formType            | Paye              |
+      | occupation          | Artist            |
+      | employerName        | Hot Peppers Paye  |
+      | employmentType      | Permanent         |
+      | startDate           | 05/11/2013        |
+      | isCurrentEmployment | yes               |
+      | netMonthlyIncome    | 124000            |
 
 #    And Borrower clicks "ADD EMPLOYMENT"
 #    And Borrower fills in Employment and Income type Paye
@@ -125,16 +127,15 @@ Feature: Payday Loan
 #      | timeEarningIncome      | 200                        |
     And Borrower clicks "Done"
 
-#    YOUR ACCOUNTS
-#    Vili
     And Borrower fills in Current account
       | formType              | Current account         |
+      | statementDate         | 21/03/2016              |
+      | accountProvider       | CSOB                    |
       | accountHolderName     | deWilliamS              |
-      | statementDate         | 01/01/2000              |
       | sortCode1             | 12                      |
       | sortCode2             | 34                      |
       | sortCode3             | 56                      |
-      | accountNumber         | 1234567890              |
+      | accountNumber         | 1234567                 |
       | accountBalance        | 2001                    |
       | overdraftLimit        | 2002                    |
       | sourceOfSaving        | Gift                    |
@@ -142,13 +143,13 @@ Feature: Payday Loan
 
     And Borrower fills in Savings account
       | formType              | Savings account         |
+      | statementDate         | 21/03/2016              |
+      | accountProvider       | AccProvider             |
       | accountHolderName     | deWilliamS              |
-# BUG OPO-280 - if added as second account the field disappears
-      | statementDate         | 01/01/2000              |
       | sortCode1             | 12                      |
       | sortCode2             | 34                      |
       | sortCode3             | 56                      |
-      | accountNumber         | 0987654321              |
+      | accountNumber         | 09876543                |
       | accountBalance        | 2001                    |
       | overdraftLimit        | 2002                    |
       | sourceOfSaving        | Gift                    |
@@ -203,11 +204,8 @@ Feature: Payday Loan
 
     And Borrower clicks Accounts "Done"
 
-#    YOUR DEPENDANTS
 #    And Borrower hasn't dependants
-#  - negative way not adding any
     And Borrower has dependants
-#  - positive way is now included in whole form filling step definition and it is being automatically handled if present
 
     And Borrower fills in "Dependant form"
       | dateOfBirth | 01/01/2000 |

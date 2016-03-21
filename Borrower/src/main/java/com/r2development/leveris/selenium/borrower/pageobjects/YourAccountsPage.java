@@ -83,21 +83,6 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
     @Override
     public IYourDependantsPage clickDone() {
         yourDependantsPage = yourAccountsSection.clickDone();
-/*
-        try {
-            yourDependantsPage.getTitle();
-        } catch ( Exception e ) {
-            boolean toGoOn = false;
-            while ( !toGoOn ) {
-                try {
-                    yourDependantsPage = yourAccountsSection.clickDone();
-                    yourDependantsPage.getTitle();
-                    toGoOn = true;
-                } catch ( TimeoutException e2) {
-                    log.debug("Problem of clicking on Your Account Done or getting the Dependant title.");
-                }
-            }
-        }*/
         return yourDependantsPage;
     }
 
@@ -159,12 +144,6 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
         return yourAccountsSection.getAllAccounts();
     }
 
-//    @Override
-//    public IYourAccountsPage typeAccountProvider(String accountProvider){
-//        yourAccountsSection.typeAccountProvider(accountProvider);
-//        return this;
-//    }
-
     @Override
     public IYourAccountsPage typeCurrentStatementDate(String statementDate) {
         yourAccountsSection.typeCurrentStatementDate(statementDate);
@@ -201,11 +180,11 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
         return this;
     }
 
-//    @Override
-//    public IYourAccountsPage typeCurrentAccountProvider(String accountProvider) {
-//        yourAccountsSection.typeCurrentAccountProvider(accountProvider);
-//        return this;
-//    }
+    @Override
+    public IYourAccountsPage typeCurrentAccountProvider(String accountProvider) {
+        yourAccountsSection.typeCurrentAccountProvider(accountProvider);
+        return this;
+    }
 
     @Override
     public IYourAccountsPage typeCurrentIban(String iban) {
@@ -273,11 +252,11 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
         return this;
     }
 
-//    @Override
-//    public IYourAccountsPage typeSavingAccountProvider(String accountProvider) {
-//        yourAccountsSection.typeSavingAccountProvider(accountProvider);
-//        return this;
-//    }
+    @Override
+    public IYourAccountsPage typeSavingAccountProvider(String accountProvider) {
+        yourAccountsSection.typeSavingAccountProvider(accountProvider);
+        return this;
+    }
 
     @Override
     public IYourAccountsPage typeSavingIban(String iban) {

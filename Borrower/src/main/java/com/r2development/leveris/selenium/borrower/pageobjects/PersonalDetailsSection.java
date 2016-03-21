@@ -114,6 +114,15 @@ public class PersonalDetailsSection extends Borrower implements IPersonalDetails
     }
 
     @Override
+    public IPersonalDetailsSection setTitle(String title){
+        loadingCheck();
+        isVisible(TITLE_INPUT_XPATH);
+        type(TITLE_INPUT_XPATH, title);
+        loadingCheck();
+        return this;
+    }
+
+    @Override
     public IPersonalDetailsSection setFirstname(String firstName) {
         loadingCheck();
         isVisible(FIRSTNAME_XPATH, true, 0);
@@ -124,11 +133,29 @@ public class PersonalDetailsSection extends Borrower implements IPersonalDetails
     }
 
     @Override
+    public IPersonalDetailsSection setMiddleName(String middleName){
+        loadingCheck();
+        isVisible(MIDDLENAME_INPUT_XPATH);
+        type(MIDDLENAME_INPUT_XPATH, middleName);
+        loadingCheck();
+        return this;
+    }
+
+    @Override
     public IPersonalDetailsSection setLastname(String lastName) {
         loadingCheck();
         isVisible(LASTNAME_XPATH, true, 0);
         weLastName.clear();
         weLastName.sendKeys(lastName);
+        loadingCheck();
+        return this;
+    }
+
+    @Override
+    public IPersonalDetailsSection setSuffix(String suffix){
+        loadingCheck();
+        isVisible(SUFFIX_INPUT_XPATH);
+        type(SUFFIX_INPUT_XPATH, suffix);
         loadingCheck();
         return this;
     }

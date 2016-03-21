@@ -37,6 +37,10 @@ public class AccountData extends DataModel {
         data.replace("statementDate", statementDate);
     }
 
+    public String getAccountProvider(){
+        return data.get("accountProvider");
+    }
+
     public String getAccountName() {
         return data.get("accountName");
     }

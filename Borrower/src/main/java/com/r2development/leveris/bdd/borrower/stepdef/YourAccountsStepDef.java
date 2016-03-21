@@ -49,39 +49,28 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
         yourAccountsPage.getTitle();
         borrower_clicks_an_account_type(userType, accountType);
 
-//      borrower_types_his_account_provider(userType, accountType, accountData.get("accountProvider"));
-        borrower_types_his_account_holder_name(userType, accountType, accountData.getAccountHolderName());
-
-//      if (!StringUtils.isEmpty(accountData.get("statementDate")))
-//          borrower_types_the_statement_date(userType, accountType, accountData.get("statementDate"));
         if (!StringUtils.isEmpty(accountData.getStatementDate()))
             borrower_types_the_statement_date(userType, accountType, accountData.getStatementDate());
 
-//      borrower_types_his_sort_code_1(userType, accountType, accountData.get("sortCode1"));
+        borrower_types_his_account_provider(userType, accountType, accountData.getAccountProvider());
+
+        borrower_types_his_account_holder_name(userType, accountType, accountData.getAccountHolderName());
+
         borrower_types_his_sort_code_1(userType, accountType, accountData.getSortCode1());
 
-//      borrower_types_his_sort_code_2(userType, accountType, accountData.get("sortCode2"));
         borrower_types_his_sort_code_2(userType, accountType, accountData.getSortCode2());
 
-//      borrower_types_his_sort_code_3(userType, accountType, accountData.get("sortCode3"));
         borrower_types_his_sort_code_3(userType, accountType, accountData.getSortCode3());
 
-//      borrower_types_his_account_number(userType, accountType, accountData.get("accountNumber"));
         borrower_types_his_account_number(userType, accountType, accountData.getAccountNumber());
 
-//      borrower_types_his_account_balance(userType, accountType, accountData.get("accountBalance"));
         borrower_types_his_account_balance(userType, accountType, accountData.getAccountBalance());
 
-//      if ( !StringUtils.isEmpty(accountData.get("overdraftLimit")))
-//          borrower_types_his_overdraft_limit(userType, accountType, accountData.get("overdraftLimit"));
         if ( !StringUtils.isEmpty(accountData.getOverdraftLimit()))
             borrower_types_his_overdraft_limit(userType, accountType, accountData.getOverdraftLimit());
 
-//      borrower_selects_his_source_of_saving(userType, accountType, accountData.get("sourceOfSaving"));
         borrower_selects_his_source_of_saving(userType, accountType, accountData.getSourceOfSaving());
 
-//      if ( !StringUtils.isEmpty(accountData.get("regularMonthlySaving")))
-//          borrower_types_his_regular_monthly_saving(userType, accountType, accountData.get("regularMonthlySaving"));
         if ( !StringUtils.isEmpty(accountData.getRegularMonthlySaving()))
             borrower_types_his_regular_monthly_saving(userType, accountType, accountData.getRegularMonthlySaving());
 
@@ -201,17 +190,17 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
         }
     }
 
-//    @And("^(Borrower) types his (Current account|Savings account) provider: (.*)$")
-//    public void borrower_types_his_account_provider(String userType, String currentOrSavings, String accountProvider) {
-//        switch (currentOrSavings) {
-//            case "Current account":
-//                yourAccountsPage.typeCurrentAccountProvider(accountProvider);
-//                break;
-//            case "Savings account":
-//                yourAccountsPage.typeSavingAccountProvider(accountProvider);
-//                break;
-//        }
-//    }
+    @And("^(Borrower) types his (Current account|Savings account) provider: (.*)$")
+    public void borrower_types_his_account_provider(String userType, String currentOrSavings, String accountProvider) {
+        switch (currentOrSavings) {
+            case "Current account":
+                yourAccountsPage.typeCurrentAccountProvider(accountProvider);
+                break;
+            case "Savings account":
+                yourAccountsPage.typeSavingAccountProvider(accountProvider);
+                break;
+        }
+    }
 
     @And("^(Borrower) types his (Current account|Savings account) IBAN: (.*)")
     public void borrower_types_his_iban(String userType, String currentOrSavings, String iban) {

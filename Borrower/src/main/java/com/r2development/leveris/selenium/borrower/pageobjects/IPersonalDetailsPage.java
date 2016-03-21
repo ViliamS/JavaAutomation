@@ -4,8 +4,11 @@ public interface IPersonalDetailsPage {
     String getTitle();
     boolean isTitle(String FirstName);
 
+    IPersonalDetailsPage setTitle(String title);
     IPersonalDetailsPage setFirstname(String FirstName);
     IPersonalDetailsPage setLastname(String LastName);
+    IPersonalDetailsPage setMiddleName(String middleName);
+    IPersonalDetailsPage setSuffix(String suffix);
 
     boolean isGenderLabel();
     IPersonalDetailsPage checkGenderMale();

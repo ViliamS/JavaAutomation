@@ -9,17 +9,14 @@ import org.apache.commons.logging.LogFactory;
 public class YourFinancialCommitmentsPage extends HeaderAndBottomAndFormsMenuSection implements IYourFinancialCommitmentsPage {
     
     private static final Log log = LogFactory.getLog(YourFinancialCommitmentsPage.class.getName());
-    
-    IFormsMenu formsMenu;
 
     @Inject
     private IUser user;
-    protected IYourFinancialCommitmentsSection yourFinancialCommitmentsSection;
+    private IYourFinancialCommitmentsSection yourFinancialCommitmentsSection;
 
     public YourFinancialCommitmentsPage(SharedDriver webDriver) {
         super(webDriver);
         headerSection = new HeaderSection(webDriver);
-        formsMenu = new FormsMenu(webDriver);
         yourFinancialCommitmentsSection = new YourFinancialCommitmentsSection(webDriver);
         bottomSection = new BottomSection(webDriver);
     }
@@ -444,7 +441,7 @@ public class YourFinancialCommitmentsPage extends HeaderAndBottomAndFormsMenuSec
 
     @Override
     public IYourFinancialCommitmentsPage typeMortgageFinalRepaymentDate(String finalRepaymentDate) {
-        yourFinancialCommitmentsSection.typeMortgageFinancialInstitution(finalRepaymentDate);
+        yourFinancialCommitmentsSection.typeMortgageFinalRepaymentDate(finalRepaymentDate);
         return this;
     }
 
