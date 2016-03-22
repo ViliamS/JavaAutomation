@@ -10,7 +10,8 @@ public interface IYourAccountsSection {
 
     String ACCOUNT_PROVIDER_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccountProvider_c_w_txtAccountProvider_tb']";
 
-    String YOUR_ACCOUNTS_CURRENT_ACCOUNT_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_lnkCurrent_dialog']";
+    String YOUR_ACCOUNTS_CURRENT_ACCOUNT_XPATH = "//div[@data-path='pnlNoEmplyments lnkCurrent']/a";
+    //div[@data-path='pnlNoEmplyments lnkCurrent']
     String YOUR_ACCOUNTS_SAVING_ACCOUNT_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_lnkSavings_dialog']";
     String YOUR_ACCOUNTS_ACCOUNT_SCRAPING_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_lnkAuto_dialog']";
 
@@ -158,21 +159,21 @@ public interface IYourAccountsSection {
     IYourAccountsSection typeCurrentIban(String iban);
     IYourAccountsSection typeCurrentAccountBalance(String accountBalance);
     IYourAccountsSection typeCurrentOverdraftLimit(String overdraftLimit);
-    IYourAccountsSection selectCurrentSavingSource(String savingSource);
+    IYourAccountsSection selectCurrentSavingsSource(String savingSource);
     IYourAccountsSection typeCurrentRegularMonthlySavings(String regularMonthlySavings);
 
-    IYourAccountsSection typeSavingStatementDate(String statementDate);
+    IYourAccountsSection typeSavingsStatementDate(String statementDate);
     IYourAccountsSection typeSavingsAccountHolderName(String accountName);
     IYourAccountsSection typeSavingsSortCode1(String sortCode1);
     IYourAccountsSection typeSavingsSortCode2(String sortCode2);
     IYourAccountsSection typeSavingsSortCode3(String sortCode3);
     IYourAccountsSection typeSavingsAccountNumber(String accountNumber);
-    IYourAccountsSection typeSavingAccountProvider(String accountProvider);
-    IYourAccountsSection typeSavingIban(String iban);
-    IYourAccountsSection typeSavingAccountBalance(String accountBalance);
-    IYourAccountsSection typeSavingOverdraftLimit(String savingOverdraftLimit);
-    IYourAccountsSection selectSavingSourceSavings(String sourceSaving);
-    IYourAccountsSection typeSavingRegularMonthlySavings(String savingRegularMonthlySavings);
+    IYourAccountsSection typeSavingsAccountProvider(String accountProvider);
+    IYourAccountsSection typeSavingsIban(String iban);
+    IYourAccountsSection typeSavingsAccountBalance(String accountBalance);
+    IYourAccountsSection typeSavingsOverdraftLimit(String savingOverdraftLimit);
+    IYourAccountsSection selectSavingsSourceOfSavings(String sourceSaving);
+    IYourAccountsSection typeSavingsRegularMonthlySavings(String savingRegularMonthlySavings);
 
     IYourAccountsSection closeScraping();
 }

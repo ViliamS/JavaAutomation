@@ -30,16 +30,16 @@ import static org.junit.Assert.assertNotNull;
 @Singleton
 public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
 
-    private static final Log log = LogFactory.getLog(GetAQuoteStepDef.class);
+    private static final Log log = LogFactory.getLog(GetAQuoteStepDef.class.getName());
 
     private boolean toSkip = false;
     private final SharedDriver webDriver;
 
     @Inject
     IUser user;
-    IBorrowerHomePage borrowerHomePage;
-    IWelcomePage welcomePage;
-    IBuildQuotationPage buildQuotationPage;
+    private IBorrowerHomePage borrowerHomePage;
+    private IWelcomePage welcomePage;
+    private IBuildQuotationPage buildQuotationPage;
 
     @Inject
     GetAQuoteStepDef(SharedDriver webDriver) {

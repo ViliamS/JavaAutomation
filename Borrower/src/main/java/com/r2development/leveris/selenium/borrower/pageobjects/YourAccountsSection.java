@@ -25,41 +25,24 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
         PageFactory.initElements(webDriver, this);
     }
 
-    @FindBy ( xpath = YOUR_ACCOUNTS_TITLE_XPATH )
-    WebElement weAccountsTitle;
-    @FindBy ( xpath = YOUR_ACCOUNTS_DESCRIPTION_XPATH )
-    WebElement weAccountsDescription;
-    @FindBy ( xpath =  YOUR_ACCOUNTS_CURRENT_ACCOUNT_SORT_CODE_1_INPUT_XPATH )
-    WebElement weAccountsCurrentSortCode1;
-    @FindBy ( xpath = YOUR_ACCOUNTS_CURRENT_ACCOUNT_SORT_CODE_2_INPUT_XPATH )
-    WebElement weAccountsCurrentSortCode2;
-    @FindBy ( xpath = YOUR_ACCOUNTS_CURRENT_ACCOUNT_SORT_CODE_3_INPUT_XPATH )
-    WebElement weAccountsCurrentSortCode3;
-    @FindBy ( xpath = YOUR_ACCOUNTS_CURRENT_ACCOUNT_NUMBER_INPUT_XPATH )
-    WebElement weAccountsCurrentAccountNumber;
-    @FindBy ( xpath = YOUR_ACCOUNTS_CURRENT_ACCOUNT_IBAN_INPUT_XPATH )
-    WebElement weAccountsCurrentIbanInput;
-    @FindBy ( xpath = YOUR_ACCOUNTS_CURRENT_ACCOUNT_BALANCE_INPUT_XPATH )
-    WebElement weAccountsCurrentAccountBalanceInput;
-
     @Override
     public String getTitle() {
         loadingCheck();
         isVisible(YOUR_ACCOUNTS_TITLE_XPATH, 0);
-        return weAccountsTitle.getText();
+        return getText(YOUR_ACCOUNTS_TITLE_XPATH);
     }
 
     @Override
     public String getDialogTitle() {
         loadingCheck();
-        return weAccountsTitle.getText();
+        return getText(YOUR_ACCOUNTS_DIALOG_XPATH);
     }
 
     @Override
     public String getDescription() {
         loadingCheck();
         isVisible(YOUR_ACCOUNTS_DESCRIPTION_XPATH, 0);
-        return weAccountsDescription.getText();
+        return getText(YOUR_ACCOUNTS_DESCRIPTION_XPATH);
     }
 
     @Override
@@ -146,7 +129,6 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
         return this;
     }
 
-
     private Map<String, String> formExceptionDetails(){
         Map<String, String> formExceptionDetails = new LinkedHashMap<>();
         formExceptionDetails.put(
@@ -182,7 +164,6 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
         clickElement(YOUR_ACCOUNTS_ADD_THIS_ACCOUNT_XPATH);
         loadingCheck();
         formSubmitPostSync(YOUR_ACCOUNTS_ADD_THIS_ACCOUNT_XPATH, formExceptionDetails());
-
 //        try{
 //            isNotVisible(YOUR_ACCOUNTS_ADD_THIS_ACCOUNT_XPATH, true, 5);
 //        } catch(Exception x){
@@ -208,7 +189,6 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
     public IYourDependantsPage clickDone() {
         loadingCheck();
         isVisible(YOUR_ACCOUNTS_DONE_XPATH, 0);
-        //todo Anthony review that this is fine as its quite needed.
         clickElementLoop(YOUR_ACCOUNTS_DONE_XPATH, IYourDependantsSection.YOUR_DEPENDANTS_TITLE_XPATH);
         loadingCheck();
         return new YourDependantsPage(webDriver);
@@ -282,15 +262,6 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
         return null;
     }
 
-//    @Override
-//    public IYourAccountsSection typeAccountProvider(String accountProvider){
-//        loadingCheck();
-//        isVisible(ACCOUNT_PROVIDER_INPUT_XPATH, 0);
-//        type(ACCOUNT_PROVIDER_INPUT_XPATH, accountProvider);
-//        loadingCheck();
-//        return this;
-//    }
-
     @Override
     public IYourAccountsSection typeCurrentStatementDate(String statementDate) {
         loadingCheck();
@@ -314,8 +285,7 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
     public IYourAccountsSection typeCurrentSortCode1(String sortCode1) {
         loadingCheck();
         isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_SORT_CODE_1_INPUT_XPATH, 0);
-        weAccountsCurrentSortCode1.clear();
-        weAccountsCurrentSortCode1.sendKeys(sortCode1);
+        type(YOUR_ACCOUNTS_CURRENT_ACCOUNT_SORT_CODE_1_INPUT_XPATH, sortCode1);
         loadingCheck();
         return this;
     }
@@ -324,8 +294,7 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
     public IYourAccountsSection typeCurrentSortCode2(String sortCode2) {
         loadingCheck();
         isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_SORT_CODE_2_INPUT_XPATH, 0);
-        weAccountsCurrentSortCode2.clear();
-        weAccountsCurrentSortCode2.sendKeys(sortCode2);
+        type(YOUR_ACCOUNTS_CURRENT_ACCOUNT_SORT_CODE_2_INPUT_XPATH, sortCode2);
         loadingCheck();
         return this;
     }
@@ -334,8 +303,7 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
     public IYourAccountsSection typeCurrentSortCode3(String sortCode3) {
         loadingCheck();
         isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_SORT_CODE_3_INPUT_XPATH, 0);
-        weAccountsCurrentSortCode3.clear();
-        weAccountsCurrentSortCode3.sendKeys(sortCode3);
+        type(YOUR_ACCOUNTS_CURRENT_ACCOUNT_SORT_CODE_3_INPUT_XPATH, sortCode3);
         loadingCheck();
         return this;
     }
@@ -344,8 +312,7 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
     public IYourAccountsSection typeCurrentAccountNumber(String accountNumber) {
         loadingCheck();
         isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_NUMBER_INPUT_XPATH, 0);
-        weAccountsCurrentAccountNumber.clear();
-        weAccountsCurrentAccountNumber.sendKeys(accountNumber);
+        type(YOUR_ACCOUNTS_CURRENT_ACCOUNT_NUMBER_INPUT_XPATH, accountNumber);
         loadingCheck();
         return this;
     }
@@ -363,8 +330,7 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
     public IYourAccountsSection typeCurrentIban(String iban) {
         loadingCheck();
         isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_IBAN_INPUT_XPATH, 0);
-        weAccountsCurrentIbanInput.clear();
-        weAccountsCurrentIbanInput.sendKeys(iban);
+        type(YOUR_ACCOUNTS_CURRENT_ACCOUNT_IBAN_INPUT_XPATH, iban);
         loadingCheck();
         return this;
     }
@@ -373,8 +339,7 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
     public IYourAccountsSection typeCurrentAccountBalance(String accountBalance) {
         loadingCheck();
         isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_BALANCE_INPUT_XPATH, 0);
-        weAccountsCurrentAccountBalanceInput.clear();
-        weAccountsCurrentAccountBalanceInput.sendKeys(accountBalance);
+        type(YOUR_ACCOUNTS_CURRENT_ACCOUNT_BALANCE_INPUT_XPATH, accountBalance);
         loadingCheck();
         return this;
     }
@@ -389,7 +354,7 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
     }
 
     @Override
-    public IYourAccountsSection selectCurrentSavingSource(String savingSource) {
+    public IYourAccountsSection selectCurrentSavingsSource(String savingSource) {
         loadingCheck();
         isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_SAVING_SOURCE_SELECT_XPATH, 0);
         selectFromDropDown(YOUR_ACCOUNTS_CURRENT_ACCOUNT_SAVING_SOURCE_SELECT_XPATH, savingSource, scrollHorizontal, scrollVertical);
@@ -406,9 +371,8 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
         return this;
     }
 
-
     @Override
-    public IYourAccountsSection typeSavingStatementDate(String statementDate) {
+    public IYourAccountsSection typeSavingsStatementDate(String statementDate) {
         loadingCheck();
         isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_STATEMENT_DATE_INPUT_XPATH, 10);
         type(YOUR_ACCOUNTS_SAVING_ACCOUNT_STATEMENT_DATE_INPUT_XPATH, statementDate);
@@ -455,35 +419,35 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
     }
 
     @Override
-    public IYourAccountsSection typeSavingAccountProvider(String accountProvider) {
+    public IYourAccountsSection typeSavingsAccountProvider(String accountProvider) {
         sendKeysElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_PROVIDER_INPUT_XPATH, accountProvider, 60);
         loadingCheck();
         return this;
     }
 
     @Override
-    public IYourAccountsSection typeSavingIban(String iban) {
+    public IYourAccountsSection typeSavingsIban(String iban) {
         sendKeysElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_IBAN_INPUT_XPATH, iban, 60);
         loadingCheck();
         return this;
     }
 
     @Override
-    public IYourAccountsSection typeSavingAccountBalance(String accountBalance) {
+    public IYourAccountsSection typeSavingsAccountBalance(String accountBalance) {
         sendKeysElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_BALANCE_INPUT_XPATH, accountBalance, 60);
         loadingCheck();
         return this;
     }
 
     @Override
-    public IYourAccountsSection typeSavingOverdraftLimit(String savingOverdraftLimit) {
+    public IYourAccountsSection typeSavingsOverdraftLimit(String savingOverdraftLimit) {
         sendKeysElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_OVERDRAFT_INPUT_XPATH, savingOverdraftLimit, 60);
         loadingCheck();
         return this;
     }
 
     @Override
-    public IYourAccountsSection selectSavingSourceSavings(String sourceSaving) {
+    public IYourAccountsSection selectSavingsSourceOfSavings(String sourceSaving) {
         loadingCheck();
         isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_SAVING_SOURCE_SELECT_XPATH, 0);
         selectFromDropDown(YOUR_ACCOUNTS_SAVING_ACCOUNT_SAVING_SOURCE_SELECT_XPATH, sourceSaving, scrollHorizontal, scrollVertical);
@@ -492,14 +456,13 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
     }
 
     @Override
-    public IYourAccountsSection typeSavingRegularMonthlySavings(String savingRegularMonthlySavings) {
+    public IYourAccountsSection typeSavingsRegularMonthlySavings(String savingRegularMonthlySavings) {
         loadingCheck();
         isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_REGULAR_MONTHLY_SAVINGS_INPUT_XPATH, 0);
         type(YOUR_ACCOUNTS_SAVING_ACCOUNT_REGULAR_MONTHLY_SAVINGS_INPUT_XPATH, savingRegularMonthlySavings);
         loadingCheck();
         return this;
     }
-
 
     @Override
     public IYourAccountsSection closeScraping() {
@@ -509,5 +472,4 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
         loadingCheck();
         return this;
     }
-
 }

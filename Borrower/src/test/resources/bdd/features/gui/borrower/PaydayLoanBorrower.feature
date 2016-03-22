@@ -78,18 +78,17 @@ Feature: Payday Loan
       | isCurrentEmployment | yes               |
       | netMonthlyIncome    | 124000            |
 
-#    And Borrower clicks "ADD EMPLOYMENT"
 #    And Borrower fills in Employment and Income type Paye
 #      | formType            | Paye        |
-#      | categoryIncome      | Paye        |
 #      | occupation          | Artist      |
 #      | employerName        | Hot Peppers Paye |
 #      | employmentType      | Permanent   |
 #      | startDate           | 05/11/2013  |
 #      | isCurrentEmployment | yes         |
 #      | netMonthlyIncome    | 124000      |
+#
 #    And Borrower fills in Employment and Income type Self Employed
-#      | categoryIncome      | Self Employed      |
+#      | formType            | Self Employed      |
 #      | occupation          | Artist             |
 #      | businessName        | testBusinessName   |
 #      | addressLine1        | 18 Woodquay        |
@@ -100,31 +99,18 @@ Feature: Payday Loan
 #      | startDate           | 05/11/2013         |
 #      | isCurrentEmployment | yes                |
 #      | netMonthlyIncome    | 124000             |
-#    And Borrower clicks "ADD EMPLOYMENT"
-#    And Borrower fills in "Employment Income"
-#      | categoryIncome      | Civil Servant |
-#      | occupation          | Artist        |
-#      | employerName        | Hot Peppers Civil Servant  |
-#      | employmentType      | Permanent     |
-#      | startDate           | 05/11/2013    |
-#      | isCurrentEmployment | yes           |
-#      | netMonthlyIncome    | 124000        |
-#    And Borrower clicks "ADD EMPLOYMENT"
-#    And Borrower fills in "Employment Income"
-#      | categoryIncome      | Unemployed/Homemaker |
+#
+#    And Borrower fills in Employment and Income type Unemployed/Homemaker
+#      | formType            | Unemployed/Homemaker |
 #      | startDate           | 05/11/2013           |
 #      | isCurrentEmployment | yes                  |
-#    And Borrower clicks "ADD EMPLOYMENT"
-#    And Borrower fills in "Employment Income"
-#      | categoryIncome      | Unemployed/Homemaker |
-#      | startDate           | 13/11/2013           |
-#      | endDate             | 13/12/2014           |
-#    And Borrower clicks "ADD EMPLOYMENT"
-#    And Borrower fills in "Employment Income"
-#      | categoryIncome         | Other                      |
+#
+#    And Borrower fills in Employment and Income type Other
+#      | formType               | Other                      |
 #      | additionalIncomeSource | testAdditionalIncomeSource |
 #      | netMonthlyIncome       | 2000                       |
 #      | timeEarningIncome      | 200                        |
+
     And Borrower clicks "Done"
 
     And Borrower fills in Current account
@@ -231,31 +217,23 @@ Feature: Payday Loan
       | paymentFrequency      | Monthly       |
       | repaymentAmount       | 2500          |
 
-#    And Borrower clicks financial Add
-#
-#    Then Borrower fills in Credit Card
-#      | formType              | Credit Card |
-#      | repaymentAmount       | 2500        |
-#      | cardProvider          | Friend      |
-#      | cardType              | VISA        |
-#      | cardLimit             | 50000       |
-#      | cardBalance           | 45000       |
-
-    And Borrower clicks financial Add
+    Then Borrower fills in Credit Card
+      | formType              | Credit Card |
+      | repaymentAmount       | 2500        |
+      | cardProvider          | Friend      |
+      | cardType              | VISA        |
+      | cardLimit             | 50000       |
+      | cardBalance           | 45000       |
 
     Then Borrower fills in Maintenance Payment
       | formType                  | Maintenance Payment |
       | monthlyMaintenancePayment | 1000                |
-
-    And Borrower clicks financial Add
 
     Then Borrower fills in Other
       | formType        | Other     |
       | repaymentAmount | 2500      |
       | value           | 5000      |
       | description     | text1232  |
-
-    And Borrower clicks financial Add
 
     Then Borrower fills in Car Loan
       | formType              | Car Loan   |
@@ -265,8 +243,6 @@ Feature: Payday Loan
       | paymentFrequency      | Weekly     |
       | repaymentAmount       | 15000      |
 
-    And Borrower clicks financial Add
-
     Then Borrower fills in Student Loan
       | formType              | Student Loan |
       | outstandingAmount     | 5000         |
@@ -275,15 +251,11 @@ Feature: Payday Loan
       | paymentFrequency      | Fortnightly  |
       | repaymentAmount       | 50000        |
 
-    And Borrower clicks financial Add
-
     Then Borrower fills in Rent
       | formType          | Rent    |
       | paymentFrequency  | Yearly  |
       | repaymentAmount   | 15000   |
       | note              | ABC123  |
-
-    And Borrower clicks financial Add
 
     Then Borrower fills in Utilities
       | formType          | Utilities |
@@ -291,15 +263,11 @@ Feature: Payday Loan
       | repaymentAmount   | 2500      |
       | note              | wsad8546  |
 
-    And Borrower clicks financial Add
-
     Then Borrower fills in Childcare
       | formType          | Childcare |
       | paymentFrequency  | Weekly    |
       | repaymentAmount   | 250       |
       | note              | wsad8546  |
-
-    And Borrower clicks financial Add
 
     Then Borrower fills in Mortgage
       | formType              | Mortgage     |

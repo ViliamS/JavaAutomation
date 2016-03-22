@@ -72,5 +72,4 @@ public class QuoteQuickLoanSection extends Borrower implements IQuoteQuickLoanSe
         loadingCheck();
         return new QuoteConfigurationPage(webDriver);
     }
-
 }

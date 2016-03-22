@@ -20,11 +20,7 @@ public interface ITopBannerMenu {
             TOP_BANNER_REGISTER_XPATH = DIV + MENU_WRAPER_WICKET + A + REGISTER_WICKET + SPAN + LINK_TEXT_WICKET + TEXT_REGISTER,
             TOP_BANNER_CHAT_NOW_XPATH = DIV + MENU_WRAPER_WICKET + A + CHAT_NOW_WICKET + SPAN + LINK_TEXT_WICKET + TEXT_CHAT_NOW;
 
-
     ITopBannerMenu clickSignIn();
-
     ITopBannerMenu clickRegister();
-
     ITopBannerMenu clickChatNow();
-
 }

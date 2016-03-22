@@ -111,3 +111,27 @@ public class PersonalDetailsData extends DataModel {
         return data.get("suffix");
     }
 }
+
+/**
+
+ public String get() {
+ return data.get("");
+ }
+
+ public void set(String ){
+ data.replace("", );
+ }
+
+ And Borrower fills in Personal Details
+ | formType            | Personal Details  |
+ | title               | Mr.               |
+ | firstName           | AutomationGUI     |
+ | middleName          | Amazing           |
+ | lastName            | Tester            |
+ | suffix              | the Greatest      |
+ | gender              | Male              |
+ | dateOfBirth         | 01/01/1987        |
+ | nationality         | French            |
+ | maritalStatus       | single            |
+
+ */

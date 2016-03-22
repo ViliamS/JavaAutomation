@@ -4,6 +4,7 @@ import com.r2development.leveris.Borrower;
 import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Assert;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -55,8 +56,18 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
     public IYourFinancialCommitmentsSection clickFinancialType(String financialType) {
         log.info("clickFinancialType logical crossroad ---> financialType = '" + financialType + "'");
 
+        loadingCheck();
         if(!isVisible(FINANCIAL_PERSONAL_LOAN_XPATH, 5))
-            clickAdd();
+            try {
+                clickAdd();
+            } catch(Exception x){
+                if(isVisible(FINANCIAL_ADD_XPATH, 1) && !isVisible(FINANCIAL_PERSONAL_LOAN_XPATH, 1) && !isVisible(FINANCIAL_SAVE_AND_CLOSE_XPATH, 1))
+                    clickAdd();
+                else if(isVisible(FINANCIAL_PERSONAL_LOAN_XPATH, 1))
+                    clickFinancialType(financialType);
+                else if(isVisible(FINANCIAL_SAVE_AND_CLOSE_XPATH, 1))
+                    Assert.assertTrue("We already choose the Financial commitment so failing due to navigation error", false);
+            }
 
         switch (financialType) {
             case "Personal Loan":
@@ -517,8 +528,9 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
 
     @Override
     public IYourFinancialCommitmentsSection clickDone() {
-        log.info("clickDone by xpath ---> " + FINANCIAL_DONE_XPATH + "<---");
-
+        log.info("\n ------------------------------------------ \n" +
+                "| IYourFinancialCommitmentsSection.clickDone() \n" +
+                "| by xpath ---> " + FINANCIAL_DONE_XPATH + "<---");
         loadingCheck();
         isVisible(FINANCIAL_DONE_XPATH, true);
         clickElement(FINANCIAL_DONE_XPATH);
@@ -528,7 +540,9 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
 
     @Override
     public IYourFinancialCommitmentsSection clickAdd() {
-        log.info("clickAdd by xpath ---> " + FINANCIAL_ADD_XPATH + "<---");
+        log.info("\n ------------------------------------------ \n" +
+                "| IYourFinancialCommitmentsSection.clickAdd() \n" +
+                "| by xpath ---> " + FINANCIAL_ADD_XPATH + "<---");
         loadingCheck();
         isVisible(FINANCIAL_ADD_XPATH, true);
         clickElementLoop(FINANCIAL_ADD_XPATH, FINANCIAL_DIALOG_PERSONAL_LOAN_XPATH);

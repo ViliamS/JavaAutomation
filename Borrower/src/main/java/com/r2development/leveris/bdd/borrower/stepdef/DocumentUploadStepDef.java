@@ -15,7 +15,7 @@ import org.openqa.selenium.WebDriver;
 //@Singleton
 public class DocumentUploadStepDef /*extends BorrowerStepDef*/ implements CLV312Workaround {
 
-    private static final Log log = LogFactory.getLog(DocumentUploadStepDef.class);
+    private static final Log log = LogFactory.getLog(DocumentUploadStepDef.class.getName());
 
     enum DOCUMENT {
         PROOF_IDENTITY,
@@ -34,9 +34,9 @@ public class DocumentUploadStepDef /*extends BorrowerStepDef*/ implements CLV312
     }
     @Inject
     IUser user;
-    IDocumentUploadPage documentUploadPage;
-    IBorrowerHomePage borrowerHomePage;
-    IPersonalDetailsPage borrowerPersonalDetailsPage;
+    private IDocumentUploadPage documentUploadPage;
+    private IBorrowerHomePage borrowerHomePage;
+    private IPersonalDetailsPage borrowerPersonalDetailsPage;
     private final WebDriver webDriver;
 
     @Inject

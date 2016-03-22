@@ -12,12 +12,12 @@ import org.apache.commons.logging.LogFactory;
 @Singleton
 public class WelcomePageStepDef /*extends BorrowerStepDef*/ {
 
-    private static final Log log = LogFactory.getLog(WelcomePageStepDef.class);
+    private static final Log log = LogFactory.getLog(WelcomePageStepDef.class.getName());
 
-    IWelcomePage welcomePage;
-    IRegisterPage registerPage;
-    ILoginPage loginPage;
-    IBuildQuotationPage buildQuotationPage;
+    private IWelcomePage welcomePage;
+    private IRegisterPage registerPage;
+    private ILoginPage loginPage;
+    private IBuildQuotationPage buildQuotationPage;
 
     private final SharedDriver webDriver;
 

@@ -19,7 +19,7 @@ import java.util.List;
 @Singleton
 public class YourDependantsStepDef /*extends BorrowerStepDef*/ /*implements CLV312Workaround*/ {
 
-    private static final Log log = LogFactory.getLog(YourDependantsStepDef.class);
+    private static final Log log = LogFactory.getLog(YourDependantsStepDef.class.getName());
 
     private WebDriver webDriver;
     @Inject

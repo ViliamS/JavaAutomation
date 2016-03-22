@@ -80,6 +80,41 @@ public class EmploymentIncomeData extends DataModel {
     public String getTimeEarningIncome(){
         return data.get("timeEarningIncome");
     }
-
 }
 
+/**
+
+ And Borrower fills in Employment and Income type Paye
+ | formType            | Paye              |
+ | occupation          | Artist            |
+ | employerName        | Hot Peppers Paye  |
+ | employmentType      | Permanent         |
+ | startDate           | 05/11/2013        |
+ | isCurrentEmployment | yes               |
+ | netMonthlyIncome    | 124000            |
+
+ And Borrower fills in Employment and Income type Self Employed
+ | categoryIncome      | Self Employed      |
+ | occupation          | Artist             |
+ | businessName        | testBusinessName   |
+ | addressLine1        | 18 Woodquay        |
+ | townCity            | Galway             |
+ | country             | Ireland            |
+ | countyState         | Galway             |
+ | businessNature      | testNatureBusiness |
+ | startDate           | 05/11/2013         |
+ | isCurrentEmployment | yes                |
+ | netMonthlyIncome    | 124000             |
+
+ And Borrower fills in Employment and Income type Unemployed/Homemaker
+ | formType            | Unemployed/Homemaker |
+ | startDate           | 05/11/2013           |
+ | isCurrentEmployment | yes                  |
+
+ And Borrower fills in Employment and Income type Other
+ | formType               | Other                      |
+ | additionalIncomeSource | testAdditionalIncomeSource |
+ | netMonthlyIncome       | 2000                       |
+ | timeEarningIncome      | 200                        |
+
+ */

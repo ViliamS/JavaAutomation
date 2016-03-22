@@ -14,7 +14,7 @@ import org.apache.commons.logging.LogFactory;
 @Singleton
 public class VerifyEmailPageStepDef /*extends BorrowerStepDef*/ {
 
-    private static final Log log = LogFactory.getLog(VerifyEmailPageStepDef.class);
+    private static final Log log = LogFactory.getLog(VerifyEmailPageStepDef.class.getName());
     private SharedDriver webdriver;
 
     IVerifyEmailPage verifyEmailPage;

@@ -32,5 +32,4 @@ public class YourResidenciesPage extends Borrower implements IYourResidenciesPag
     public IEmploymentIncomesPage clickNext(){
         return yourResidenciesSection.clickNext();
     }
-
 }

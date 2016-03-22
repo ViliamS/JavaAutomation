@@ -9,6 +9,8 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
 
 import java.util.List;
@@ -19,13 +21,15 @@ import java.util.List;
 @Singleton
 public class LandingPageStepDef /*extends BorrowerStepDef*/ {
 
-    IQuoteLandingPage quoteLandingPage;
-    IQuotePaydayLoanPage quotePaydayLoanPage;
-    IQuoteQuickLoanPage quoteQuickLoanPage;
-    IQuoteConfigurationPage quoteConfigurationPage;
-    IRegisterPage registerPage;
-    LandingPageData loanData;
-    IAutomaticRegistrationPage automaticRegistrationPage;
+    private static final Log log = LogFactory.getLog(LandingPageStepDef.class.getName());
+
+    private IQuoteLandingPage quoteLandingPage;
+    private IQuotePaydayLoanPage quotePaydayLoanPage;
+    private IQuoteQuickLoanPage quoteQuickLoanPage;
+    private IQuoteConfigurationPage quoteConfigurationPage;
+    private IRegisterPage registerPage;
+    private LandingPageData loanData;
+    private IAutomaticRegistrationPage automaticRegistrationPage;
 
 //    public LandingPageStepDef() {
 //        quoteLandingPage = new QuoteLandingPage(WebDriverService.getWebDriverInstance());

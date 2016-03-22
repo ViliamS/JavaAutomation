@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class QuoteConfigurationPage extends Borrower implements IQuoteConfigurationPage {
 
-    IQuoteConfigurationSection quotationConfigurationSection;
+    private IQuoteConfigurationSection quotationConfigurationSection;
 
     private static final Log log = LogFactory.getLog(QuoteConfigurationPage.class.getName());
 

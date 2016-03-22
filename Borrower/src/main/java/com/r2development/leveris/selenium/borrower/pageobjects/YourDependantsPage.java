@@ -100,6 +100,4 @@ public class YourDependantsPage extends HeaderAndBottomAndFormsMenuSection imple
         yourDependantsSection.deleteDependant(index);
         return this;
     }
-
-
 }

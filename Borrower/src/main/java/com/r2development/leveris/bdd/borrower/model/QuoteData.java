@@ -71,7 +71,6 @@ public class QuoteData extends DataModel {
         return data.get("borrowerIncomeType");
     }
 
-
     public void setBorrowerIncomeType(String borrowerIncomeType) {
         data.replace("borrowerIncomeType", borrowerIncomeType);
     }
@@ -140,3 +139,21 @@ public class QuoteData extends DataModel {
         data.replace("minimumDeposit", minimumDeposit);
     }
 }
+/**
+
+ public String get() {
+ return data.get("");
+ }
+
+ public void set(String ){
+ data.replace("", );
+ }
+
+ And Borrower fills in Payday Loan form
+ | formType           | Payday Loan |
+ | NetMonthlyIncome   | 21,000.00   |
+ | MonthlyExpenses    | 1,000.00    |
+ | NumberOfDependants | 1           |
+ | AmountToBorrow     | 1,000.00    |
+
+ */

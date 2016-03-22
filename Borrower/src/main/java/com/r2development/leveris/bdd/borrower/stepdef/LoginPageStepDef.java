@@ -23,15 +23,15 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @Singleton
 public class LoginPageStepDef /*extends BorrowerStepDef*/ {
 
-    private static final Log log = LogFactory.getLog(LoginPageStepDef.class);
+    private static final Log log = LogFactory.getLog(LoginPageStepDef.class.getName());
     private final SharedDriver webDriver;
 
     @Inject
     IUser user;
-    ILoginPage loginPage;
-    IBorrowerHomePage borrowerHomePage;
-    IWelcomePage welcomePage;
-    IBuildQuotationPage buildQuotationPage;
+    private ILoginPage loginPage;
+    private IBorrowerHomePage borrowerHomePage;
+    private IWelcomePage welcomePage;
+    private IBuildQuotationPage buildQuotationPage;
 
     @Inject
     LoginPageStepDef(SharedDriver webDriver/*, IUser user*/) {

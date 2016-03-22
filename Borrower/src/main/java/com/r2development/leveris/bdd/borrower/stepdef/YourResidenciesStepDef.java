@@ -16,15 +16,15 @@ import java.util.List;
 
 public class YourResidenciesStepDef {
 
-    private static final Log log = LogFactory.getLog(YourResidenciesStepDef.class);
+    private static final Log log = LogFactory.getLog(YourResidenciesStepDef.class.getName());
 
     private final WebDriver webDriver;
 
     @Inject
     IUser user;
-    IBorrowerHomePage borrowerHomePage;
-    IPersonalDetailsPage borrowerPersonalDetailsPage;
-    IYourResidenciesPage yourResidenciesPage;
+    private IBorrowerHomePage borrowerHomePage;
+    private IPersonalDetailsPage borrowerPersonalDetailsPage;
+    private IYourResidenciesPage yourResidenciesPage;
 
     @Inject
     YourResidenciesStepDef(SharedDriver webDriver/*, IUser user*/) {
@@ -149,5 +149,4 @@ public class YourResidenciesStepDef {
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
     }
-
 }

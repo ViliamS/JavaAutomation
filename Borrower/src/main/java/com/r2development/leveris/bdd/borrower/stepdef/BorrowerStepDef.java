@@ -9,31 +9,31 @@ import org.openqa.selenium.WebDriver;
 
 public class BorrowerStepDef /*extends Abakus*/ /*implements IBorrower*/ {
 
-    private static final Log log = LogFactory.getLog(BorrowerStepDef.class);
+    private static final Log log = LogFactory.getLog(BorrowerStepDef.class.getName());
 
-    IWelcomePage welcomePage;
-    IRegisterPage registerPage;
-    ILoginPage loginPage;
-    IAutomaticRegistrationPage automaticRegistrationPage;
-    IVerifyEmailPage verifyEmailPage;
-    IBuildQuotationPage buildQuotationPage;
-    IBorrowerHomePage borrowerHomePage;
-    INewPasswordPage newPasswordPage;
-    IFormsMenu formsMenu;
-    IPersonalDetailsPage borrowerPersonalDetailsPage;
-    IPersonalDetailsPage coapplicantPersonalDetailsPage;
-    IEmploymentIncomesPage borrowerEmploymentIncomesPage;
-    IEmploymentIncomesPage coapplicantEmploymentIncomesPage;
-    IYourAccountsPage yourAccountsPage;
-    IYourDependantsPage yourDependantsPage;
-    IYourFinancialCommitmentsPage yourFinancialCommitmentsPage;
-    IDocumentUploadPage documentUploadPage;
-    IFormsMenu currentPage;
+    private IWelcomePage welcomePage;
+    private IRegisterPage registerPage;
+    private ILoginPage loginPage;
+    private IAutomaticRegistrationPage automaticRegistrationPage;
+    private IVerifyEmailPage verifyEmailPage;
+    private IBuildQuotationPage buildQuotationPage;
+    private IBorrowerHomePage borrowerHomePage;
+    private INewPasswordPage newPasswordPage;
+    private IFormsMenu formsMenu;
+    private IPersonalDetailsPage borrowerPersonalDetailsPage;
+    private IPersonalDetailsPage coapplicantPersonalDetailsPage;
+    private IEmploymentIncomesPage borrowerEmploymentIncomesPage;
+    private IEmploymentIncomesPage coapplicantEmploymentIncomesPage;
+    private IYourAccountsPage yourAccountsPage;
+    private IYourDependantsPage yourDependantsPage;
+    private IYourFinancialCommitmentsPage yourFinancialCommitmentsPage;
+    private IDocumentUploadPage documentUploadPage;
+    private IFormsMenu currentPage;
 
-    IQuoteLandingPage quoteLandingPage;
-    IQuoteQuickLoanPage quoteQuickLoanPage;
-    IQuotePaydayLoanPage quotePaydayLoanPage;
-    IQuoteConfigurationPage quoteConfigurationPage;
+    private IQuoteLandingPage quoteLandingPage;
+    private IQuoteQuickLoanPage quoteQuickLoanPage;
+    private IQuotePaydayLoanPage quotePaydayLoanPage;
+    private IQuoteConfigurationPage quoteConfigurationPage;
 //    IRegisterPage registerPage;
 
     ITopBannerMenu topBannerMenu;

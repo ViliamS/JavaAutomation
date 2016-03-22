@@ -102,5 +102,4 @@ public interface IYourFinancialCommitmentsPage {
     //optional
     IYourFinancialCommitmentsPage typeMortgageFinalRepaymentDate(String finalRepaymentDate);
     IYourFinancialCommitmentsPage typeMortgageRepaymentAmount(String repaymentAmount);
-
 }

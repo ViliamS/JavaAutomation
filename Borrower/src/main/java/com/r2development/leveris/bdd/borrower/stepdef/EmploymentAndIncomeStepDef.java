@@ -20,16 +20,16 @@ import static org.junit.Assert.assertEquals;
 @Singleton
 public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements CLV312Workaround*/ {
 
-    private static final Log log = LogFactory.getLog(EmploymentAndIncomeStepDef.class);
+    private static final Log log = LogFactory.getLog(EmploymentAndIncomeStepDef.class.getName());
 
     private final WebDriver webDriver;
     @Inject
     IUser user;
-    IBorrowerHomePage borrowerHomePage;
-    IPersonalDetailsPage borrowerPersonalDetailsPage;
+    private IBorrowerHomePage borrowerHomePage;
+    private IPersonalDetailsPage borrowerPersonalDetailsPage;
 //    IEmploymentIncomesPage coapplicantEmploymentIncomesPage;
-    IEmploymentIncomesPage borrowerEmploymentIncomesPage;
-    IYourAccountsPage yourAccountsPage;
+    private IEmploymentIncomesPage borrowerEmploymentIncomesPage;
+    private IYourAccountsPage yourAccountsPage;
 
     @Inject
     EmploymentAndIncomeStepDef(SharedDriver webDriver/*, IUser user*/) {

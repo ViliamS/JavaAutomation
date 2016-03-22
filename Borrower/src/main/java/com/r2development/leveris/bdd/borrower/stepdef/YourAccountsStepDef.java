@@ -21,14 +21,14 @@ import java.util.List;
 @Singleton
 public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312Workaround*/ {
 
-    private static final Log log = LogFactory.getLog(YourAccountsStepDef.class);
+    private static final Log log = LogFactory.getLog(YourAccountsStepDef.class.getName());
 
     private WebDriver webDriver;
 
     @Inject
     private IUser user;
 
-    IYourAccountsPage yourAccountsPage;
+    private IYourAccountsPage yourAccountsPage;
 
     @Inject
     public YourAccountsStepDef(SharedDriver webDriver/*, IUser user*/) {
@@ -197,7 +197,7 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
                 yourAccountsPage.typeCurrentAccountProvider(accountProvider);
                 break;
             case "Savings account":
-                yourAccountsPage.typeSavingAccountProvider(accountProvider);
+                yourAccountsPage.typeSavingsAccountProvider(accountProvider);
                 break;
         }
     }
@@ -209,7 +209,7 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
                 yourAccountsPage.typeCurrentIban(iban);
                 break;
             case "Savings account":
-                yourAccountsPage.typeSavingIban(iban);
+                yourAccountsPage.typeSavingsIban(iban);
                 break;
         }
     }
@@ -233,7 +233,7 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
                 yourAccountsPage.typeCurrentOverdraftLimit(overdraftLimit);
                 break;
             case "Savings account":
-                yourAccountsPage.typeSavingOverdraftLimit(overdraftLimit);
+                yourAccountsPage.typeSavingsOverdraftLimit(overdraftLimit);
                 break;
         }
     }
@@ -242,10 +242,10 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
     public void borrower_selects_his_source_of_saving(String userType, String currentOrSavings, String sourceOfSavings) {
         switch (currentOrSavings) {
             case "Current account":
-                yourAccountsPage.selectCurrentSavingSource(sourceOfSavings);
+                yourAccountsPage.selectCurrentSavingsSource(sourceOfSavings);
                 break;
             case "Savings account":
-                yourAccountsPage.selectSavingSourceSavings(sourceOfSavings);
+                yourAccountsPage.selectSavingsSourceOfSavings(sourceOfSavings);
                 break;
         }
     }
@@ -257,7 +257,7 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
                 yourAccountsPage.typeCurrentRegularMonthlySavings(regularMonthlySaving);
                 break;
             case "Savings account":
-                yourAccountsPage.typeSavingRegularMonthlySavings(regularMonthlySaving);
+                yourAccountsPage.typeSavingsRegularMonthlySavings(regularMonthlySaving);
                 break;
         }
     }
@@ -290,17 +290,17 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
 
     @And("^(Borrower) types his Savings account provider: (.*)$")
     public void borrower_types_his_savings_account_provider(String accountProvider) {
-        yourAccountsPage.typeSavingAccountProvider(accountProvider);
+        yourAccountsPage.typeSavingsAccountProvider(accountProvider);
     }
 
     @And("^(Borrower) types his Savings IBAN: (.*)")
     public void borrower_type_savings_iban(String iban) {
-        yourAccountsPage.typeSavingIban(iban);
+        yourAccountsPage.typeSavingsIban(iban);
     }
 
     @And("^(Borrower) types his Savings account balance: (.*)$")
     public void borrower_types_his_savings_account_balance(String accountBalance) {
-        yourAccountsPage.typeSavingAccountBalance(accountBalance);
+        yourAccountsPage.typeSavingsAccountBalance(accountBalance);
     }
 
     @And("^(Borrower) verifies account data$")

@@ -13,21 +13,21 @@ import org.openqa.selenium.WebDriver;
 @Singleton
 public class MainFormsProcessesStepDef /*extends BorrowerStepDef*/ implements CLV312Workaround {
 
-    private static final Log log = LogFactory.getLog(MainFormsProcessesStepDef.class);
+    private static final Log log = LogFactory.getLog(MainFormsProcessesStepDef.class.getName());
     private final SharedDriver webDriver;
 
     @Inject
     IUser user;
-    IBorrowerHomePage borrowerHomePage;
-    IPersonalDetailsPage borrowerPersonalDetailsPage;
-    IEmploymentIncomesPage borrowerEmploymentIncomesPage;
-    IPersonalDetailsPage coapplicantPersonalDetailsPage;
-    IEmploymentIncomesPage coapplicantEmploymentIncomesPage;
-    IYourAccountsPage yourAccountsPage;
-    IFormsMenu currentPage;
-    IDocumentUploadPage documentUploadPage;
-    IYourFinancialCommitmentsPage yourFinancialCommitmentsPage;
-    IYourDependantsPage yourDependantsPage;
+    private IBorrowerHomePage borrowerHomePage;
+    private IPersonalDetailsPage borrowerPersonalDetailsPage;
+    private IEmploymentIncomesPage borrowerEmploymentIncomesPage;
+    private IPersonalDetailsPage coapplicantPersonalDetailsPage;
+    private IEmploymentIncomesPage coapplicantEmploymentIncomesPage;
+    private IYourAccountsPage yourAccountsPage;
+    private IFormsMenu currentPage;
+    private IDocumentUploadPage documentUploadPage;
+    private IYourFinancialCommitmentsPage yourFinancialCommitmentsPage;
+    private IYourDependantsPage yourDependantsPage;
 
     @Inject
     public MainFormsProcessesStepDef(SharedDriver webDriver) {

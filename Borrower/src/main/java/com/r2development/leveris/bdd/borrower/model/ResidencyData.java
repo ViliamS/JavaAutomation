@@ -42,5 +42,4 @@ public class ResidencyData extends DataModel {
     public void setCountyState(String countyState) {
         data.replace("county/state", countyState);
     }
-
 }

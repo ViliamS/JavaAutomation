@@ -42,6 +42,4 @@ public class YourResidenciesSection extends Borrower implements IYourResidencies
         loadingCheck();
         return new EmploymentIncomesPage(webDriver);
     }
-
-
 }

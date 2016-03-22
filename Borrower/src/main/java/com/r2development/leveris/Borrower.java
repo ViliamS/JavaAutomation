@@ -136,7 +136,12 @@ public class Borrower /*implements IBorrower*/ {
             BUSY_INDICATOR_NONE2 = "//div[@wicketpath='busyIndicator'][contains(@style,'display: none')][not(contains(@style,'display: block'))]",
             BUSY_INDICATOR_NONE3 = "//div[@class='dblclick-fix-layer'][contains(@style,'display: none')][not(contains(@style,'display: block'))]";
 
-    protected void loadingCheck(){
+    public void loadingCheck(){
+        if(!System.getProperty("modeRun").equalsIgnoreCase(SharedDriver.PHANTOMJS))
+            loadingCheck("");
+    }
+
+    private void loadingCheck(String phantomjs){
         for(int i = 0; i < 3; i++){
             if((i > 1) && (isLoadingBlock()))
                 notLoading(i);
@@ -443,6 +448,7 @@ public class Borrower /*implements IBorrower*/ {
 
     private void waitForVisibility(String xpath, int timeout_in_seconds) {
         log.info("\n waitForVisibility ---> xpath: '" + xpath + "' <--- " + " with time-out: '" + timeout_in_seconds + "'\n");
+        loadingCheck();
         WebDriverWait wait = new WebDriverWait(webDriver, timeout_in_seconds);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
     }

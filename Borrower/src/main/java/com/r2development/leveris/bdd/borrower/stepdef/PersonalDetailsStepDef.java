@@ -20,14 +20,14 @@ import java.util.List;
 @Singleton
 public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ /*implements CLV312Workaround*/ {
 
-    private static final Log log = LogFactory.getLog(PersonalDetailsStepDef.class);
+    private static final Log log = LogFactory.getLog(PersonalDetailsStepDef.class.getName());
 
     private final WebDriver webDriver;
 
     @Inject
     IUser user;
-    IBorrowerHomePage borrowerHomePage;
-    IPersonalDetailsPage borrowerPersonalDetailsPage;
+    private IBorrowerHomePage borrowerHomePage;
+    private IPersonalDetailsPage borrowerPersonalDetailsPage;
 
     @Inject
     PersonalDetailsStepDef(SharedDriver webDriver/*, IUser user*/) {
@@ -403,5 +403,4 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ /*implements CLV
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
     }
-
 }

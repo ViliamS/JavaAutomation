@@ -378,7 +378,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlStatementDate:c:w:txtStatementDate:tb", statementDate);
                 break;
             case "Savings account":
-//                yourAccountsPage.typeSavingStatementDate(statementDate);
+//                yourAccountsPage.typeSavingsStatementDate(statementDate);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlStatementDate:c:w:txtStatementDate:tb", statementDate);
                 break;
         }
@@ -392,7 +392,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccountProvider:c:w:txtAccountProvider:tb", accountProvider);
                 break;
             case "Savings account":
-//                yourAccountsPage.typeSavingAccountProvider(accountProvider);
+//                yourAccountsPage.typeSavingsAccountProvider(accountProvider);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccountProvider:c:w:txtAccountProvider:tb", accountProvider);
                 break;
         }
@@ -406,7 +406,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlLastFourDigits:c:w:txtIban:tb", iban);
                 break;
             case "Savings account":
-//                yourAccountsPage.typeSavingIban(iban);
+//                yourAccountsPage.typeSavingsIban(iban);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlLastFourDigits:c:w:txtIban:tb", iban);
                 break;
         }
@@ -476,7 +476,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccountBalance:c:w:crbAccountBalance:tb", accountBalance);
                 break;
             case "Savings account":
-//                yourAccountsPage.typeSavingAccountBalance(accountBalance);
+//                yourAccountsPage.typeSavingsAccountBalance(accountBalance);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccountBalance:c:w:crbAccountBalance:tb", accountBalance);
                 break;
         }
@@ -490,7 +490,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlOverDraft:c:w:crbOverdraft:tb", overdraftLimit);
                 break;
             case "Savings account":
-//                yourAccountsPage.typeSavingOverdraftLimit(overdraftLimit);
+//                yourAccountsPage.typeSavingsOverdraftLimit(overdraftLimit);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlOverDraft:c:w:crbOverdraft:tb", overdraftLimit);
                 break;
         }
@@ -531,11 +531,11 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
 
         switch (currentOrSavings) {
             case "Current account":
-//                yourAccountsPage.selectCurrentSavingSource(sourceOfSavings);
+//                yourAccountsPage.selectCurrentSavingsSource(sourceOfSavings);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlSourceOfSavings:c:w:cmbSourceOfSavings:combobox", abbreviationSavingSource);
                 break;
             case "Savings account":
-//                yourAccountsPage.selectSavingSourceSavings(sourceOfSavings);
+//                yourAccountsPage.selectSavingsSourceOfSavings(sourceOfSavings);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlSourceOfSavings:c:w:cmbSourceOfSavings:combobox", abbreviationSavingSource);
                 break;
         }
@@ -549,7 +549,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlRegularMonthlySavings:c:w:crbRegularMonthlySavings:tb", regularMonthlySaving);
                 break;
             case "Savings account":
-//                yourAccountsPage.typeSavingRegularMonthlySavings(regularMonthlySaving);
+//                yourAccountsPage.typeSavingsRegularMonthlySavings(regularMonthlySaving);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlRegularMonthlySavings:c:w:crbRegularMonthlySavings:tb", regularMonthlySaving);
                 break;
         }
@@ -639,29 +639,29 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
 
     @And("^Borrower types his Savings account provider: (.*)$")
     public void user_types_his_savings_account_provider(String accountProvider) {
-//        yourAccountsPage.typeSavingAccountProvider(accountProvider);
+//        yourAccountsPage.typeSavingsAccountProvider(accountProvider);
 //        accountParameters.put("root:c:w:pnlAddSource:c:w:pnlLastFourDigits:c:w:txtIban:tb", "IE92BOFI90001710027952");
     }
 
     @And("^Borrower types his Savings IBAN: (.*)")
     public void user_type_savings_iban(String iban) {
-//        yourAccountsPage.typeSavingIban(iban);
+//        yourAccountsPage.typeSavingsIban(iban);
     }
 
     @And("^Borrower types his Savings account balance: (.*)$")
     public void user_types_his_savings_account_balance(String accountBalance) {
-//        yourAccountsPage.typeSavingAccountBalance(accountBalance);
+//        yourAccountsPage.typeSavingsAccountBalance(accountBalance);
 //        accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccountBalance:c:w:crbAccountBalance:tb", "20000");
     }
 
     @And("^Borrower selects (Gift|Inheritance|Accident Claim|Redundancy|Income from Regular Savings|Other) as Source of savings")
     public void user_selects_his_source_of_savings(String sourceSavings) {
-//        yourAccountsPage.selectSavingSourceSavings(sourceSavings);
+//        yourAccountsPage.selectSavingsSourceOfSavings(sourceSavings);
     }
 
     @And("^Borrower types his Savings regular monthly: (.*)$")
     public void user_types_his_Savings_regular_monthly(String regularMonthly) {
-//        yourAccountsPage.typeSavingRegularMonthlySavings(regularMonthly);
+//        yourAccountsPage.typeSavingsRegularMonthlySavings(regularMonthly);
 
     }
 

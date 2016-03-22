@@ -18,7 +18,7 @@ import java.util.List;
 @Singleton
 public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*implements CLV312Workaround*/ {
 
-    private static final Log log = LogFactory.getLog(YourFinancialCommitmentsStepDef.class);
+    private static final Log log = LogFactory.getLog(YourFinancialCommitmentsStepDef.class.getName());
 
     private SharedDriver webDriver;
     @Inject

@@ -179,17 +179,23 @@
             <version>${com-r2development-leveris-qa.data-validator.version}</version>
         </dependency>
 
-        <!-- Testing -->
         <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>${org-seleniumhq-selenium.selenium-java.version}</version>
+            <groupId>com.github.detro.ghostdriver</groupId>
+            <artifactId>phantomjsdriver</artifactId>
+            <version>1.1.0</version>
         </dependency>
+
+        <!-- Testing -->
         <!--<dependency>-->
             <!--<groupId>org.seleniumhq.selenium</groupId>-->
-            <!--<artifactId>selenium-server-standalone</artifactId>-->
-            <!--<version>2.43.1</version>-->
+            <!--<artifactId>selenium-java</artifactId>-->
+            <!--<version>${org-seleniumhq-selenium.selenium-java.version}</version>-->
         <!--</dependency>-->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-server-standalone</artifactId>
+            <version>2.43.1</version>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
