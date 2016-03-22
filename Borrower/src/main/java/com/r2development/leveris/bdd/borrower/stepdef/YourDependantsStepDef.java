@@ -17,9 +17,9 @@ import org.openqa.selenium.WebDriver;
 import java.util.List;
 
 @Singleton
-public class YourDependantsStepDef /*extends BorrowerStepDef*/ /*implements CLV312Workaround*/ {
+public class YourDependantsStepDef {
 
-    private static final Log log = LogFactory.getLog(YourDependantsStepDef.class);
+    private static final Log log = LogFactory.getLog(YourDependantsStepDef.class.getName());
 
     private WebDriver webDriver;
     @Inject
@@ -36,9 +36,9 @@ public class YourDependantsStepDef /*extends BorrowerStepDef*/ /*implements CLV3
     public void user_fills_in_account(String userType, List<String> accountDataMap) throws InterruptedException {
         DependantData dependantData = new DependantData(accountDataMap);
 
-        if (!StringUtils.isEmpty(dependantData.get("date Of Birth"))){
+        if (!StringUtils.isEmpty(dependantData.getDateOfBirth())){
             user_clicks_add_dependant(userType);
-            user_types_dependant_date_of_birth(userType, dependantData.get("date Of Birth"));
+            user_types_dependant_date_of_birth(userType, dependantData.getDateOfBirth());
         }
         user_clicks_save_and_close(userType);
     }
@@ -86,5 +86,6 @@ public class YourDependantsStepDef /*extends BorrowerStepDef*/ /*implements CLV3
     @And("^(Borrower) clicks Dependants \"Done\"$")
     public void user_clicks_dependants_done(String userType) {
         yourDependantsPage.clickDone();
+
     }
 }

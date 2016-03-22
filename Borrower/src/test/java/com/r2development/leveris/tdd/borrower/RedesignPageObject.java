@@ -3,8 +3,6 @@ package com.r2development.leveris.tdd.borrower;
 import com.r2development.leveris.selenium.borrower.pageobjects.IYourAccountsPage;
 import com.r2development.leveris.selenium.borrower.pageobjects.YourAccountsPage;
 
-import java.util.LinkedHashMap;
-
 /**
  * Created by anthonymottot on 18/03/2016.
  */
@@ -16,7 +14,7 @@ public class RedesignPageObject {
         yourAccountsPage
             .selectAccount("Current account")
             .typeCurrentStatementDate("01/01/2000")
-            .typeCurrentAccountName("test")
+//            .typeCurrentAccountName("test")
             .typeCurrentSortCode1("12")
             .typeCurrentSortCode2("34")
             .typeCurrentSortCode3("56")
@@ -25,48 +23,48 @@ public class RedesignPageObject {
             .typeCurrentOverdraftLimit("2001")
             .selectCurrentSavingSource("Gift")
             .typeCurrentRegularMonthlySavings("2002")
-            .clickSaveAndClose()
+//            .clickSaveAndClose()
 
-            .fillIn(
-                new LinkedHashMap<String, String>() {
-                    {
-                        put("formType","Current account");
-                        put("accountProvider","test account provider");
-                        put("statementDate","01/01/2000");
-                        put("accountName","test Current Account");
-                        put("sortCode1","12");
-                        put("sortCode2","34");
-                        put("sortCode3","56");
-                        put("accountNumber","1234567890");
-                        put("accountBalance","2001");
-                        put("overdraftLimit","2002");
-                        put("sourceOfSaving","Gift");
-                        put("regularMonthlySaving","200");
-                    }
-                }
-            )
+//            .fillIn(
+//                new LinkedHashMap<String, String>() {
+//                    {
+//                        put("formType","Current account");
+//                        put("accountProvider","test account provider");
+//                        put("statementDate","01/01/2000");
+//                        put("accountName","test Current Account");
+//                        put("sortCode1","12");
+//                        put("sortCode2","34");
+//                        put("sortCode3","56");
+//                        put("accountNumber","1234567890");
+//                        put("accountBalance","2001");
+//                        put("overdraftLimit","2002");
+//                        put("sourceOfSaving","Gift");
+//                        put("regularMonthlySaving","200");
+//                    }
+//                }
+//            )
 
             .selectAccount("Savings account")
-            .typeSavingAccountProvider("testSaving")
-            .clickSaveAndClose()
+//            .typeSavingAccountProvider("testSaving")
+//            .clickSaveAndClose()
 
-            .fillIn(
-                new LinkedHashMap<String, String>() {
-                    {
-                        put("formType","Current account");
-                        put("statementDate","01/01/2000");
-                        put("accountName","test Current Account");
-                        put("sortCode1","12");
-                        put("sortCode2","34");
-                        put("sortCode3","56");
-                        put("accountNumber","1234567890");
-                        put("accountBalance","2001");
-                        put("overdraftLimit","2002");
-                        put("sourceOfSaving","Gift");
-                        put("regularMonthlySaving","200");
-                    }
-                }
-            )
+//            .fillIn(
+//                new LinkedHashMap<String, String>() {
+//                    {
+//                        put("formType","Current account");
+//                        put("statementDate","01/01/2000");
+//                        put("accountName","test Current Account");
+//                        put("sortCode1","12");
+//                        put("sortCode2","34");
+//                        put("sortCode3","56");
+//                        put("accountNumber","1234567890");
+//                        put("accountBalance","2001");
+//                        put("overdraftLimit","2002");
+//                        put("sourceOfSaving","Gift");
+//                        put("regularMonthlySaving","200");
+//                    }
+//                }
+//            )
 
             .clickDone();
     }

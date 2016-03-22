@@ -29,13 +29,9 @@ public interface IYourAccountsPage {
     Map<Integer, YourAccount> getAccountsOf(String accountType);
     Map<Integer, YourAccount> getAllAccounts();
 
-//    void fillIn(DataModel data);
-    IYourAccountsPage fillIn(Map<String, String> data);
-    IYourAccountsPage clickSaveAndClose();
-
-    IYourAccountsPage typeAccountProvider(String accountProvider);
+//    IYourAccountsPage typeAccountProvider(String accountProvider);
     IYourAccountsPage typeCurrentStatementDate(String statementDate);
-    IYourAccountsPage typeCurrentAccountName(String accountName);
+    IYourAccountsPage typeCurrentAccountHolderName(String accountName);
     IYourAccountsPage typeCurrentSortCode1(String sortCode1);
     IYourAccountsPage typeCurrentSortCode2(String sortCode2);
     IYourAccountsPage typeCurrentSortCode3(String sortCode3);
@@ -48,12 +44,12 @@ public interface IYourAccountsPage {
     IYourAccountsPage typeCurrentRegularMonthlySavings(String regularMonthlySavings);
 
     IYourAccountsPage typeSavingsStatementDate(String statementDate);
-    IYourAccountsPage typeSavingsAccountName(String accountName);
+    IYourAccountsPage typeSavingsAccountHolderName(String accountName);
     IYourAccountsPage typeSavingsSortCode1(String sortCode1);
     IYourAccountsPage typeSavingsSortCode2(String sortCode2);
     IYourAccountsPage typeSavingsSortCode3(String sortCode3);
     IYourAccountsPage typeSavingsAccountNumber(String accountNumber);
-    IYourAccountsPage typeSavingAccountProvider(String accountProvider);
+    IYourAccountsPage typeSavingsAccountProvider(String accountProvider);
     IYourAccountsPage typeSavingIban(String iban);
     IYourAccountsPage typeSavingAccountBalance(String accountBalance);
     IYourAccountsPage typeSavingOverdraftLimit(String savingOverdrafLimit);
@@ -61,5 +57,4 @@ public interface IYourAccountsPage {
     IYourAccountsPage typeSavingRegularMonthlySavings(String savingRegularMonthlySavings);
 
     IYourAccountsPage closeScraping();
-
 }

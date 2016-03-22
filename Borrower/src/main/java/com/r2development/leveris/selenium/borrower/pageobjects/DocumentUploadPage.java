@@ -4,7 +4,6 @@ import com.google.inject.Inject;
 import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import com.r2development.leveris.di.IUser;
 import com.r2development.leveris.di.User;
-import com.r2development.leveris.selenium.borrower.pageobjects.sectionobjects.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

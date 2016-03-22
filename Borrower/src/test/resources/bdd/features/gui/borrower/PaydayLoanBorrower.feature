@@ -4,14 +4,24 @@ Feature: Payday Loan
 
   Background:
     Given Open Leveris Automatic Registration Page
+#    Given Open Leveris Quote Landing page
 
-  Scenario: Payday Load
+  Scenario: Payday Loan
 
+#----- begin With automatic
     Given Borrower processes the automatic registration
       | applicantId | test.automation@test.finfactory.com |
-#    Vili should comment this line and Tony should also & move api code ...
-#    When Borrower logs in via Automatic Registration
-#    When Payday Loan User clicks on Continue button
+#----- end with automatic
+
+#----- begin without automatic
+#    When Borrower clicks on continue to get Payday Loan
+#    And Borrower fills in Payday Loan form
+#      | formType           | Payday Loan |
+#      | NetMonthlyIncome   | 21,000.00   |
+#      | MonthlyExpenses    | 1,000.00    |
+#      | NumberOfDependants | 1           |
+#      | AmountToBorrow     | 1,000.00    |
+#    When Payday Loan Borrower clicks on Continue button
 #    Then Borrower clicks on Apply Online
 #    And this registration data, user processes the registration (format2)
 #      | firstName         | AutomationSB                               |
@@ -20,13 +30,16 @@ Feature: Payday Loan
 #      | password          | Password1122+                              |
 #      | termsBusiness     | accepts                                    |
 #      | protectionPolicy  | accepts                                    |
+#----- end without automatic
 
 #    Then user goes to gmail
 #    And user goes to CRM
 
 #    Then Borrower logs in as his account is activated
+#     Then Borrower logs in as his account is activated via DB
 #    When Borrower clicks "Create new user"
 
+#------ begin With automatic
     Then Borrower clicks "Quote" task
 
     And Borrower clicks on continue to get Payday Loan
@@ -39,6 +52,7 @@ Feature: Payday Loan
 
     When Payday Loan Borrower clicks on Continue button
     Then Borrower clicks on Apply Online
+#------ end With automatic
 
     And Borrower processes "Forms"
 
@@ -46,7 +60,7 @@ Feature: Payday Loan
 #    When Borrower clicks "Borrower Personal Details"
     And Borrower fills in Personal Details
       | formType            | Personal Details  |
-      | firstName           | AutomationGUI     |
+      | firstName           | AutomationAPI     |
       | lastName            | Tester            |
       | gender              | Male              |
       | dateOfBirth         | 01/01/1977        |
@@ -61,15 +75,24 @@ Feature: Payday Loan
     And Borrower saves his personal details data
 
 #    EMPLOYMENT & INCOME
-#    When Borrower clicks "Borrower Employment Income"
-#    And Borrower fills in Employment and Income type Paye
-#      | formType            | Paye        |
-#      | occupation          | Artist      |
-#      | employerName        | Hot Peppers Paye |
-#      | employmentType      | Permanent   |
-#      | startDate           | 05/11/2013  |
-#      | isCurrentEmployment | yes         |
-#      | netMonthlyIncome    | 124000      |
+    And Borrower fills in Employment and Income type Paye
+      | formType            | Paye        |
+      | occupation          | Artist      |
+      | employerName        | Hot Peppers Paye |
+      | employmentType      | Permanent   |
+      | startDate           | 05/11/2013  |
+      | endDate             | 06/12/2014  |
+      | isCurrentEmployment | yes         |
+      | netMonthlyIncome    | 124000      |
+    And Borrower fills in Employment and Income type Paye
+      | formType            | Paye        |
+      | occupation          | Artist      |
+      | employerName        | Hot Peppers Paye |
+      | employmentType      | Permanent   |
+      | startDate           | 05/11/2013  |
+      | endDate             | 06/12/2014  |
+      | isCurrentEmployment | yes         |
+      | netMonthlyIncome    | 124000      |
     And Borrower fills in Employment and Income type Self Employed
       | formType            | Self Employed      |
       | occupation          | Artist             |
@@ -82,41 +105,24 @@ Feature: Payday Loan
       | businessNature      | testNatureBusiness |
       | startDate           | 05/11/2013         |
       | endDate             | 06/12/2014         |
-      | isCurrentEmployment | yes                |
+#      | isCurrentEmployment | yes                |
       | netMonthlyIncome    | 124000             |
-#    And Borrower clicks "ADD EMPLOYMENT"
-#    And Borrower fills in Employment and Income type Unemployed/Homemaker
-#      | formType            | Unemployed/Homemaker |
-#      | startDate           | 13/11/2013           |
-#      | endDate             | 13/12/2014           |
-#      | isCurrentEmployment | yes                  |
-#    And Borrower clicks "ADD EMPLOYMENT"
-#    And Borrower fills in Employment and Income type Other
-#      | formType               | Other                      |
-#      | additionalIncomeSource | testAdditionalIncomeSource |
-#      | startDate              | 01/01/2000                 |
-#      | endDate                | 02/02/2002                 |
-#      | netMonthlyIncome       | 2000                       |
-#      | timeEarningIncome      | 200                        |
-#      | isCurrentEmployment    | yes                        |
+    And Borrower fills in Employment and Income type Unemployed/Homemaker
+      | formType            | Unemployed/Homemaker |
+      | startDate           | 13/11/2013           |
+      | endDate             | 13/12/2014           |
+      | isCurrentEmployment | yes                  |
+    And Borrower fills in Employment and Income type Other
+      | formType               | Other                      |
+      | additionalIncomeSource | testAdditionalIncomeSource |
+      | startDate              | 01/01/2000                 |
+      | endDate                | 02/02/2002                 |
+      | netMonthlyIncome       | 2000                       |
+      | timeEarningIncome      | 200                        |
+      | isCurrentEmployment    | yes                        |
     And Borrower clicks "Done"
 
 #    YOUR ACCOUNTS
-#    Vili
-#    And Borrower fills in Current account
-#      | formType           | Current account         |
-#      | accountProvider       | deWilliamS              |
-#      | statementDate         | 01/01/2000              |
-#      | accountName           | test Current Account    |
-#      | sortCode1             | 12                      |
-#      | sortCode2             | 34                      |
-#      | sortCode3             | 56                      |
-#      | accountNumber         | 1234567890              |
-#      | accountBalance        | 2001                    |
-#      | overdraftLimit        | 2002                    |
-#      | sourceOfSaving        | Gift                    |
-#      | regularMonthlySaving  | 200                     |
-#
 #    And Borrower fills in Savings account
 #      | formType           | Savings account         |
 #      | accountProvider       | deWilliamS              |
@@ -133,31 +139,64 @@ Feature: Payday Loan
 #      | regularMonthlySaving  | 200                     |
 #    Tony
     And Borrower fills in Current account
-      | formType     | Current account         |
-      | accountProvider | test account provider   |
+      | formType        | Current account         |
       | statementDate   | 01/01/2000              |
-      | accountName     | test Current Account    |
+      | accountProvider | test account provider 1 |
+# TODO .... set with the user inject value
+      | accountHolderName | AutomationAPI         |
+#      | accountName     | test Current Account 1 |
       | sortCode1       | 12                      |
       | sortCode2       | 34                      |
       | sortCode3       | 56                      |
-      | accountNumber   | 1234567890              |
+      | accountNumber   | 1234567                 |
+      | accountBalance  | 2001                    |
+      | overdraftLimit  | 2002                    |
+      | sourceOfSaving  | Gift                    |
+      | regularMonthlySaving | 200                |
+    And Borrower fills in Current account
+      | formType        | Current account         |
+      | statementDate   | 01/01/2001              |
+      | accountProvider | test account provider 2 |
+      | accountHolderName | AutomationAPI         |
+#      | accountName     | test Current Account 2 |
+      | sortCode1       | 12                      |
+      | sortCode2       | 34                      |
+      | sortCode3       | 56                      |
+      | accountNumber   | 1234568                 |
       | accountBalance  | 2001                    |
       | overdraftLimit  | 2002                    |
       | sourceOfSaving  | Gift                    |
       | regularMonthlySaving | 200                |
 #    And Borrower clicks "ADD ACCOUNT"
 #    And Borrower clicks "Savings account"
-#    And Borrower fills in Savings account
-#      | statementDate   | 01/01/2000              |
-#      | accountName     | test Current Account    |
-#      | sortCode1       | 12                      |
-#      | sortCode2       | 34                      |
-#      | sortCode3       | 56                      |
-#      | accountNumber   | 0987654321              |
-#      | accountBalance  | 2001                    |
-##      | overdraftLimit  | 2002                    |
-#      | sourceOfSaving  | Gift                    |
-#      | regularMonthlySaving | 200                |
+    And Borrower fills in Savings account
+      | formType        | Savings account         |
+      | statementDate   | 01/01/2000              |
+      | accountProvider | test account provider 3 |
+      | accountHolderName | AutomationAPI         |
+#      | accountName     | test Current Account 3 |
+      | sortCode1       | 12                      |
+      | sortCode2       | 34                      |
+      | sortCode3       | 56                      |
+      | accountNumber   | 0987654                 |
+      | accountBalance  | 2001                    |
+#      | overdraftLimit  | 2002                    |
+      | sourceOfSaving  | Gift                    |
+      | regularMonthlySaving | 200                |
+    And Borrower fills in Savings account
+      | formType        | Savings account         |
+      | statementDate   | 01/01/2000              |
+      | accountProvider | test account provider 4 |
+      | accountHolderName | AutomationAPI 4       |
+#      | accountName     | test Current Account 4 |
+      | sortCode1       | 12                      |
+      | sortCode2       | 34                      |
+      | sortCode3       | 56                      |
+      | accountNumber   | 9987654                 |
+      | accountBalance  | 2001                    |
+#      | overdraftLimit  | 2002                    |
+      | sourceOfSaving  | Gift                    |
+      | regularMonthlySaving | 200                |
 #    And Borrower clicks "ADD ACCOUNT"
 #    And Borrower clicks "Account scraping"
 #    And Borrower closes "scraping" form
@@ -181,33 +220,79 @@ Feature: Payday Loan
     And Borrower clicks Accounts "Done"
 
 #    YOUR DEPENDANTS
-    And Borrower hasn't dependants
-#  - negative way not adding any
+#    And Borrower hasn't dependants
 #    And Borrower has dependants
-#  - positive way is now included in whole form filling step definition and it is being automatically handled if present
-##
-#    And Borrower fills in "Dependant form"
-#      | date Of Birth | 01/01/2000 |
-#
-#    And Borrower fills in "Dependant form"
-#      | date Of Birth | 01/01/2000 |
-#
-#    And Borrower clicks "ADD DEPENDANT"
-#  - not mandatory to use but is available and it would work
-#
-#    And Borrower fills in "Dependant form"
-#      | date Of Birth | 01/01/2000 |
-#
-#    And Borrower clicks Dependants "Done"
+    And Borrower fills in "Dependant form"
+      | dateOfBirth | 01/01/2000 |
+    And Borrower fills in "Dependant form"
+      | dateOfBirth | 01/01/2000 |
+    And Borrower fills in "Dependant form"
+      | dateOfBirth | 01/01/2000 |
+    And Borrower clicks Dependants "Done"
 
 #    Financial Commitments
-#    When Borrower clicks "Financial Commitments"
-    And Borrower hasn't financial commitments
-
-#    FUNDING
-#    When Borrower clicks "Funding"
-# should be changed to I'm done :)
-#    Then Borrower clicks Funding "NEXT"
+#    And Borrower hasn't financial commitments
+#    When Borrower has financial commitments
+#    And Borrower clicks financial Add
+    Then Borrower fills in Personal Loan
+      | formType              | Personal Loan |
+      | outstandingAmount     | 1500          |
+      | financialInstitution  | HellsBank     |
+      | purposeOfTheLoan      | Debt repay    |
+      | finalRepaymentDate    | 01/03/2018    |
+      | paymentFrequency      | Monthly       |
+      | repaymentAmount       | 2500          |
+#    Then Borrower fills in Credit Card
+#      | formType              | Credit Card |
+#      | repaymentAmount       | 2500        |
+#      | cardProvider          | Friend      |
+#      | cardType              | VISA        |
+#      | cardLimit             | 50000       |
+#      | cardBalance           | 45000       |
+    Then Borrower fills in Maintenance Payment
+      | formType                  | Maintenance Payment |
+      | monthlyMaintenancePayment | 1000                |
+    Then Borrower fills in Other
+      | formType        | Other     |
+      | repaymentAmount | 2500      |
+      | value           | 5000      |
+      | description     | text1232  |
+    Then Borrower fills in Car Loan
+      | formType              | Car Loan   |
+      | outstandingAmount     | 2500       |
+      | financialInstitution  | Hell Bank  |
+      | finalRepaymentDate    | 31/03/2018 |
+      | paymentFrequency      | Weekly     |
+      | repaymentAmount       | 15000      |
+    Then Borrower fills in Student Loan
+      | formType              | Student Loan |
+      | outstandingAmount     | 5000         |
+      | financialInstitution  | Bank of Debt |
+      | finalRepaymentDate    | 01/03/2020   |
+      | paymentFrequency      | Fortnightly  |
+      | repaymentAmount       | 50000        |
+    Then Borrower fills in Rent
+      | formType          | Rent    |
+      | paymentFrequency  | Yearly  |
+      | repaymentAmount   | 15000   |
+      | note              | ABC123  |
+    Then Borrower fills in Utilities
+      | formType          | Utilities |
+      | paymentFrequency  | Weekly    |
+      | repaymentAmount   | 2500      |
+      | note              | wsad8546  |
+    Then Borrower fills in Childcare
+      | formType          | Childcare |
+      | paymentFrequency  | Weekly    |
+      | repaymentAmount   | 250       |
+      | note              | wsad8546  |
+    Then Borrower fills in Mortgage
+      | formType              | Mortgage     |
+      | outstandingAmount     | 5000         |
+      | financialInstitution  | Bank of Debt |
+      | finalRepaymentDate    | 01/03/2020   |
+      | repaymentAmount       | 50000        |
+    And Borrower clicks financial Done
 
 #    DOCUMENT UPLOAD
 #    And Borrower uploads required document
@@ -223,10 +308,9 @@ Feature: Payday Loan
 
 #    FINAL STAGE 1
 #    And borrower finalizes the Borrower Phase
-#    And Borrower clicks "Review and Submit"
-#    And Borrower checks "Distance Marketing"
-#    And Borrower checks "Statutory"
-#    And Borrower checks "Declaration"
-#    And Borrower checks "Fraud Credit check"
-##    And Borrower clicks "Submit your application"
-#    And finally, Borrower clicks "Submit Application"
+    And Borrower clicks "Review and Submit"
+    And Borrower checks "Distance Marketing"
+    And Borrower checks "Statutory"
+    And Borrower checks "Declaration"
+    And Borrower checks "Fraud Credit check"
+    And finally, Borrower clicks "Submit Application"

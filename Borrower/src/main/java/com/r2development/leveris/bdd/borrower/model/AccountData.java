@@ -13,20 +13,20 @@ public class AccountData extends DataModel {
         super(accountData);
     }
 
-    public String getAccountType() {
-        return data.get("accountType");
+    public String getFormType() {
+        return data.get("formType");
     }
 
     public void setAccountType(String accountType){
         data.replace("accountType", accountType);
     }
 
-    public String getAccountProvider() {
-        return data.get("accountProvider");
+    public String getAccountHolderName() {
+        return data.get("accountHolderName");
     }
 
-    public void setAccountProvider(String accountProvider){
-        data.replace("accountProvider", accountProvider);
+    public void setAccountHolderName(String accountHolderName){
+        data.replace("accountHolderName", accountHolderName);
     }
 
     public String getStatementDate() {
@@ -111,7 +111,6 @@ public class AccountData extends DataModel {
     }
 
     /**
-
     public String get() {
         return data.get("");
     }
@@ -119,13 +118,12 @@ public class AccountData extends DataModel {
     public void set(String ){
         data.replace("", );
     }
+    */
 
-     */
     /**
      | accountType           | Current Account         |
      | accountProvider       | deWilliamS              |
      | statementDate         | 01/01/2000              |
-     | accountName           | test Current Account    |
      | sortCode1             | 12                      |
      | sortCode2             | 34                      |
      | sortCode3             | 56                      |
@@ -135,13 +133,11 @@ public class AccountData extends DataModel {
      | sourceOfSaving        | Gift                    |
      | regularMonthlySaving  | 200                     |
 
-
      And Borrower fills in Savings account
      | accountType           | Savings account         |
      | accountProvider       | deWilliamS              |
      # BUG OPO-280 - if added as second account the field disappears
      | statementDate         | 01/01/2000              |
-     | accountName           | test Current Account    |
      | sortCode1             | 12                      |
      | sortCode2             | 34                      |
      | sortCode3             | 56                      |
@@ -150,9 +146,6 @@ public class AccountData extends DataModel {
      | overdraftLimit        | 2002                    |
      | sourceOfSaving        | Gift                    |
      | regularMonthlySaving  | 200                     |
-
-
-     *
      */
 
 

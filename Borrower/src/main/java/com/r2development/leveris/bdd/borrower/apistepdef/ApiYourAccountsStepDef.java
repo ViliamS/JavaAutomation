@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.AccountData;
 import com.r2development.leveris.di.IHttpResponse;
+import com.r2development.leveris.di.IUser;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
@@ -12,25 +13,32 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.r2development.leveris.utils.HttpUtils.*;
+import static org.junit.Assert.assertEquals;
 
 @Singleton
 public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
 
-    private static final Log log = LogFactory.getLog(ApiYourAccountsStepDef.class);
-
-    int countAccount = 0;
-
+    private static final Log log = LogFactory.getLog(ApiYourAccountsStepDef.class.getName());
 
     @Inject
+    private IUser user;
+    @Inject
     IHttpResponse httpResponse;
+
+    private boolean isThereAccountList = false;
+//    private int stepTokenAddThisSource = 1;
+    private int stepTokenHiddenSubmit = 1;
 
     @Inject
     public ApiYourAccountsStepDef(IHttpResponse httpResponse) {
@@ -38,37 +46,70 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
     }
 
     @Given("^(Borrower) fills in (Current account|Savings account|Account scraping)$")
-    public void user_fills_in_account(String userType, String formType, List<String> accountDataMap) throws IOException {
+    public void borrower_fills_in_account(String userType, String formType, Map<String, String> accountDataMap) throws IOException {
         AccountData accountData = new AccountData(accountDataMap);
-        user_clicks_an_account_type(formType);
-//        yourAccountsPage.getTitle();
-        if (!StringUtils.isEmpty(accountData.get("statementDate")))
-            user_types_the_statement_date(formType, accountData.get("statementDate"));
-        user_types_his_account_provider(formType, accountData.get("accountProvider"));
-        user_types_his_account_name(formType, accountData.get("accountName"));
-        user_types_his_sort_code_1(formType, accountData.get("sortCode1"));
-        user_types_his_sort_code_2(formType, accountData.get("sortCode2"));
-        user_types_his_sort_code_3(formType, accountData.get("sortCode3"));
-//        user_types_his_iban(currentOrSaving, accountData.get("IBAN"));
-        user_types_his_account_number(formType, accountData.get("accountNumber"));
-        user_types_his_account_balance(formType, accountData.get("accountBalance"));
-        if ( !StringUtils.isEmpty(accountData.get("overdraftLimit")))
-            user_types_his_overdraft_limit(formType, accountData.get("overdraftLimit"));
-        user_selects_his_source_of_saving(formType, accountData.get("sourceOfSaving"));
-        if ( !StringUtils.isEmpty(accountData.get("regularMonthlySaving")))
-            user_types_his_regular_monthly_saving(formType, accountData.get("regularMonthlySaving"));
-        user_clicks_add_this_account();
+
+        assertEquals(
+                "We should have the same employment and income category in step def calling and in the table",
+                formType,
+                accountData.getFormType()
+        );
+
+        borrower_clicks_an_account_type(userType, formType);
+
+        switch (formType) {
+
+            case "Current account":
+                if (!StringUtils.isEmpty(accountData.getStatementDate()))
+                    borrower_types_the_statement_date(userType, formType, accountData.getStatementDate());
+                borrower_types_his_account_provider(userType, formType, accountData.get("accountProvider"));
+                borrower_types_his_account_holder_name(userType, formType, accountData.getAccountHolderName());
+//                borrower_types_his_account_name(userType, formType, accountData.get("accountName"));
+                borrower_types_his_sort_code_1(userType, formType, accountData.get("sortCode1"));
+                borrower_types_his_sort_code_2(userType, formType, accountData.get("sortCode2"));
+                borrower_types_his_sort_code_3(userType, formType, accountData.get("sortCode3"));
+                borrower_types_his_account_number(userType, formType, accountData.get("accountNumber"));
+                borrower_types_his_account_balance(userType, formType, accountData.get("accountBalance"));
+                if (!StringUtils.isEmpty(accountData.get("overdraftLimit")))
+                    borrower_types_his_overdraft_limit(userType, formType, accountData.get("overdraftLimit"));
+                borrower_selects_his_source_of_saving(userType, formType, accountData.get("sourceOfSaving"));
+                if (!StringUtils.isEmpty(accountData.get("regularMonthlySaving")))
+                    borrower_types_his_regular_monthly_saving(userType, formType, accountData.get("regularMonthlySaving"));
+                break;
+            case "Savings account":
+                if (!StringUtils.isEmpty(accountData.get("statementDate")))
+                    borrower_types_the_statement_date(userType, formType, accountData.get("statementDate"));
+                borrower_types_his_account_provider(userType, formType, accountData.get("accountProvider"));
+                borrower_types_his_account_holder_name(userType, formType, accountData.getAccountHolderName());
+//                borrower_types_his_account_name(userType, formType, accountData.get("accountName"));
+                borrower_types_his_sort_code_1(userType, formType, accountData.get("sortCode1"));
+                borrower_types_his_sort_code_2(userType, formType, accountData.get("sortCode2"));
+                borrower_types_his_sort_code_3(userType, formType, accountData.get("sortCode3"));
+                borrower_types_his_account_number(userType, formType, accountData.get("accountNumber"));
+                borrower_types_his_account_balance(userType, formType, accountData.get("accountBalance"));
+                if (!StringUtils.isEmpty(accountData.get("overdraftLimit")))
+                    borrower_types_his_overdraft_limit(userType, formType, accountData.get("overdraftLimit"));
+                borrower_selects_his_source_of_saving(userType, formType, accountData.get("sourceOfSaving"));
+                if (!StringUtils.isEmpty(accountData.get("regularMonthlySaving")))
+                    borrower_types_his_regular_monthly_saving(userType, formType, accountData.get("regularMonthlySaving"));
+                break;
+            case "Account scrapping":
+                break;
+            default:
+        }
+
+        borrower_clicks_add_this_account(userType, formType);
     }
 
-    @When("^Borrower clicks \"ADD ACCOUNT\"$")
-    public void user_clicks_add_account() throws IOException {
+    @When("^(Borrower) clicks \"ADD ACCOUNT\"$")
+    public void borrower_clicks_add_account(String userType) throws IOException {
 
         Document yourAccountDoc = Jsoup.parse(httpResponse.getHttpResponse());
         TextNode textNodeYourAccount = yourAccountDoc.select("component[id~=form]").select("component[encoding~=wicket]").first().textNodes().get(0);
         Document yourAccountDoc2 = Jsoup.parse(textNodeYourAccount.text());
 
         Elements countElementAccount = yourAccountDoc2.select("div[wicketpath~=^main_c_form_form_root_c_w_pnlEmpList_c_w_rptEmployment_c_rows_\\d+_item_pnlItems$]");
-        countAccount = countElementAccount.size();
+//        countAccount = countElementAccount.size();
 
         String menuAccountResponse = requestHttpPost(
                 httpClient,
@@ -86,19 +127,28 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
         httpResponse.setHttpResponse(menuAccountResponse);
     }
 
-    @When("^Borrower clicks \"ADD THIS ACCOUNT\"$")
-    public void user_clicks_add_this_account() throws IOException {
+    @When("^(Borrower) clicks \"ADD THIS ACCOUNT\"$")
+    public void borrower_clicks_add_this_account(String userType, String accountType) throws IOException {
 
-        Document formToFillDoc = Jsoup.parse(httpResponse.getHttpResponse());
-        TextNode textNodeFormToFill = null;
-        try {
-            textNodeFormToFill = formToFillDoc.select("component[id~=dialog]").select("component[encoding~=wicket]").first().textNodes().get(0);
-        } catch ( NullPointerException npe ) {
-            textNodeFormToFill = formToFillDoc.select("component[id~=form]").select("component[encoding~=wicket]").first().textNodes().get(0);
+        Map<String, String> finalAccountParameters = new LinkedHashMap<>();
+        finalAccountParameters.putAll(accountParameters);
+
+        Document currentFormDoc = Jsoup.parse(httpResponse.getHttpResponse());
+        Document currentFormDoc2 = null;
+        String[] componentId = { "main", "form", "dialog" };
+        for ( int i=0; i<componentId.length; i++) {
+            try {
+                currentFormDoc2 = Jsoup.parse(currentFormDoc.select("component[id~="+componentId[i]+"]").select("component[encoding~=wicket]").first().text());
+                log.info("is " + componentId[i]);
+                break;
+            }
+            catch (NullPointerException npe) {
+                log.info("isnot " + componentId[i]);
+            }
         }
-        Document formToFillDoc2 = Jsoup.parse(textNodeFormToFill.text());
 
-        String stepToken = formToFillDoc2.select("input[name=stepToken]").attr("value");
+        String stepToken = currentFormDoc2.select("input[name=stepToken]").attr("value");
+        int stepTokenInt = Integer.parseInt(stepToken);
 
         accountParameters.put("root:c:w:txtId:tb", "");
         accountParameters.put("stepToken", stepToken);
@@ -118,23 +168,46 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                 CONSUME_QUIETLY
         );
 
-        if (countAccount == 0) {
+        String finalCategory = StringUtils.EMPTY;
+        String linkClose = StringUtils.EMPTY;
+        switch(accountType) { // BUG Internal CLV Framework ?!
+            case "Current account":
+                linkClose = ":1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:lnkCurrent:close::IBehaviorListener:0:-1";
+                break;
+            case "Savings account":
+                linkClose = ":1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:lnkSavings:close::IBehaviorListener:0:-1";
+                break;
+            case "Scrapping":
+//                :main:c:form:dialogWrapper:dialog:form:root:c:w:pnl-608:c:w:btnClose:cancel::IBehaviorListener:0:
+                linkClose = ":1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:lnkAuto:close::IBehaviorListener:0:-1";
+                break;
+            default:
+        }
 
-            requestHttpGet(
-                    httpClient,
-                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:lnkCurrent:close::IBehaviorListener:0:-1",
-                    new LinkedHashMap<String, String>() {
-                        {
-                            put("Accept", "text/xml");
-                        }
-                    },
-                    localContext,
-                    CONSUME_QUIETLY
-            );
+        if ( isThereAccountList ) {
+            linkClose = ":1:main:c:form:form:root:c:w:pnlEmpList:c:w:btnAdd:close::IBehaviorListener:0:-1";
+        }
 
-            String responseAddThisSource = requestHttpPost(
+        String lnkCloseResponse = requestHttpPost(
+                httpClient,
+                System.getProperty("borrower") + "/form.2?wicket:interface=" + linkClose,
+                new LinkedHashMap<String, String>() {
+                    {
+                        put("Accept", "text/xml");
+                        put("Content-Type", "application/x-www-form-urlencoded");
+                    }
+                },
+                new LinkedHashMap<String, String>() {
+                },
+                localContext,
+                CONSUME_QUIETLY
+        );
+
+        if ( isThereAccountList ) {
+//            String finalStepToken =  String.valueOf(stepTokenHiddenSubmit+1);
+            String responseHiddenThisSource = requestHttpPost(
                     httpClient,
-                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnHiddenSubmit:submit::IBehaviorListener:0:",
+                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnHiddenRefresh:submit::IBehaviorListener:0:-1",
                     new LinkedHashMap<String, String>() {
                         {
                             put("Accept", "text/xml");
@@ -143,32 +216,22 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                     },
                     new LinkedHashMap<String, String>() {
                         {
-                            put("stepToken", "1"); // TODO retrieve the stepToken
-                            put("root:c:w:btnHiddenSubmit:submit", "1");
+                            put("stepToken", "2");
+                            put("root:c:w:btnHiddenRefresh:submit", "1");
                         }
                     },
                     localContext,
                     CONSUME_QUIETLY
             );
-            httpResponse.setHttpResponse(responseAddThisSource);
+            httpResponse.setHttpResponse(responseHiddenThisSource);
         }
         else {
-
-            requestHttpGet(
+//            String finalStepToken = String.valueOf(Integer.parseInt(stepToken)+1);
+//            stepTokenHiddenSubmit = stepTokenHiddenSubmit + 1;
+//            String finalStepToken = String.valueOf(stepTokenHiddenSubmit);
+            String responseRefreshThisSource = requestHttpPost(
                     httpClient,
-                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlEmpList:c:w:btnAdd:close::IBehaviorListener:0:-1",
-                    new LinkedHashMap<String, String>() {
-                        {
-                            put("Accept", "text/xml");
-                        }
-                    },
-                    localContext,
-                    CONSUME_QUIETLY
-            );
-
-            String responseAddThisSource = requestHttpPost(
-                    httpClient,
-                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnHiddenRefresh:submit::IBehaviorListener:0:",
+                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnHiddenSubmit:submit::IBehaviorListener:0:-1",
                     new LinkedHashMap<String, String>() {
                         {
                             put("Accept", "text/xml");
@@ -184,12 +247,13 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                     localContext,
                     CONSUME_QUIETLY
             );
-            httpResponse.setHttpResponse(responseAddThisSource);
+            httpResponse.setHttpResponse(responseRefreshThisSource);
         }
+        isThereAccountList = true;
     }
 
     @When("^Borrower clicks Accounts \"NEXT\"$")
-    public void user_clicks_next() throws IOException {
+    public void borrower_clicks_next() throws IOException {
 //        yourAccountsPage.clickNext();
         requestHttpGet(
                 httpClient,
@@ -204,15 +268,26 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
         );
     }
 
-    @When("^Borrower clicks Accounts \"Done\"$")
-    public void user_clicks_done() throws IOException {
+    @When("^(Borrower) clicks Accounts \"Done\"$")
+    public void borrower_clicks_done(String userType) throws IOException {
 
-        Document yourAccountDoc = Jsoup.parse(httpResponse.getHttpResponse()); // ???? BUG CLV response from abakus
-//        TextNode textNodeYourAccount = yourAccountDoc.select("component[id~=form]").select("component[encoding~=wicket]").first().textNodes().get(0);
-//        Document yourAccountDoc2 = Jsoup.parse(textNodeYourAccount.text());
+        Document currentFormDoc = Jsoup.parse(httpResponse.getHttpResponse());
+        Document currentFormDoc2 = null;
+        String[] componentId = { "main", "form", "dialog" };
+        for ( int i=0; i<componentId.length; i++) {
+            try {
+                currentFormDoc2 = Jsoup.parse(currentFormDoc.select("component[id~="+componentId[i]+"]").select("component[encoding~=wicket]").first().text());
+                log.info("is " + componentId[i]);
+                break;
+            }
+            catch (NullPointerException npe) {
+                log.info("isnot " + componentId[i]);
+            }
+        }
 
-//        yourAccountsPage.clickDone();
-        requestHttpPost(
+        String stepToken = currentFormDoc2.select("input[name=stepToken]").attr("value");
+
+        String yourAccountPageResponse = requestHttpPost(
                 httpClient,
                 System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlEmpList:c:w:btnImDone:submit::IBehaviorListener:0:",
                 new LinkedHashMap<String, String>() {
@@ -223,58 +298,124 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                 },
                 new LinkedHashMap<String, String>() {
                     {
-                        put("stepToken", "2"); // TODO extract stepToken
+                        put("stepToken", stepToken); // TODO extract stepToken should be 3
                         put("root:c:w:pnlEmpList:c:w:btnImDone:submit", "1");
                     }
                 },
                 localContext,
                 CONSUME_QUIETLY
         );
+        httpResponse.setHttpResponse(yourAccountPageResponse);
     }
 
-    @And("^Borrower clicks \"ADD ACCOUNT MANUALLY\"$")
-    public void user_clicks_add_account_manually() {
-//        yourAccountsPage.clickAddAccountManually();
+//    @And("^(Borrower) selects (Other) account$")
+//    public void borrower_selects_account(String account){
+//        yourAccountsPage.selectAccount(account);
+//    }
+
+    @And("^(Borrower) clicks \"ADD ACCOUNT MANUALLY\"$")
+    public void borrower_clicks_add_account_manually(String userType) {
     }
 
-    @And("^Borrower clicks (Current account|Savings account|Account scraping)$")
-    public void user_clicks_an_account_type(String accountType) throws IOException {
+    @And("^(Borrower) clicks (Current account|Savings account|Account scraping)$")
+    public void borrower_clicks_an_account_type(String userType, String accountType) throws IOException {
 
-        Document menuAccountDoc = Jsoup.parse(httpResponse.getHttpResponse());
-//        TextNode textNodeMenuAccountDoc = menuAccountDoc.select("id~=main encoding~=wicket").first().textNodes().get(0);
-//        try {
-//            textNodeYourAccount = yourAccountDoc.select("component[id~=form]").select("component[encoding~=wicket]").first().textNodes().get(0);
-//        } catch ( Exception e ) {
-//            textNodeYourAccount = yourAccountDoc.select("component[id~=dialog]").select("component[encoding~=wicket]").first().textNodes().get(0);
-//        }
-//        Document menuAccountDoc2 = Jsoup.parse(textNodeMenuAccountDoc.text());
+        Document accountDoc = Jsoup.parse(httpResponse.getHttpResponse());
+        Document accountDoc2 = null;
+        String[] componentId = { "main", "form", "dialog" };
+        for ( int i=0; i<componentId.length; i++) {
+            try {
+                accountDoc2 = Jsoup.parse(accountDoc.select("component[id~="+componentId[i]+"]").select("component[encoding~=wicket]").first().text());
+                log.info("is " + componentId[i]);
+                break;
+            }
+            catch (NullPointerException npe) {
+                log.info("isnot " + componentId[i]);
+            }
+        }
 
-
-        String formToFillResponse = StringUtils.EMPTY;
-        switch (accountType) {
+        String fixCategory = StringUtils.EMPTY;
+        switch ( accountType ) {
             case "Current account":
-//                yourAccountsPage.clickCurrentAccount();
-                if ( countAccount == 0 ) {
-                    formToFillResponse = requestHttpPost(
-                            httpClient,
-                            System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:lnkCurrent:dialog::IBehaviorListener:0:",
-//                            ?wicket:interface=:1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:lnkCurrent:dialog::IBehaviorListener:0:
-                            new LinkedHashMap<String, String>() {
-                                {
-                                    put("Accept", "text/xml");
-                                    put("Content-Type", "application/x-www-form-urlencoded");
-                                }
-                            },
-                            accountParameters,
-                            localContext,
-                            CONSUME_QUIETLY
-                    );
-                    httpResponse.setHttpResponse(formToFillResponse);
-                }
-                else {
-//                :main:c:form:dialogWrapper:dialog:form:root:c:w:pnlNoEmplyments:c:w:lnkCurrent:submit::IBehaviorListener:0:
+                fixCategory = "Current";
+                break;
+            case "Savings account":
+                fixCategory = "Savings";
+                break;
+            case "Account scraping":
+                fixCategory = "Auto";
+                break;
+            default:
+                log.error("Huston, we have an issue on Fix Category Type");
+        }
+        final String finalFixCategory = fixCategory;
 
-                    requestHttpPost(
+//        Map<String, String> wicketInterfaceMap = new LinkedHashMap<>();
+        String linkAdd = null;
+//        String currentKey = "linkAdd";
+        if ( isThereAccountList ) {
+            Elements divAccountTypeAddElements = accountDoc2.select("div[data-path=pnlEmpList btnAdd]");
+            for (Element current : divAccountTypeAddElements) {
+                String currentKey = current.attr("data-path").split(" ")[1];
+                String currentOnClick = current.select("a[wicketpath=main_c_form_form_root_c_w_pnlEmpList_c_w_btnAdd_dialog]").attr("onclick");
+                Pattern pWicketInterface = Pattern.compile("\\?wicket:interface=(.*)&");
+                Matcher mWicketInterface = pWicketInterface.matcher(currentOnClick);
+                String currentWicketInterface = null;
+                while (mWicketInterface.find()) {
+                    currentWicketInterface = mWicketInterface.group(1);
+                }
+                linkAdd = currentWicketInterface;
+            }
+        }
+        else /*if ( divAccountTypeAddElements2.size() == 0)*/ {
+//            divAccountTypeAddElements2 = accountDoc2.select("div[data-path~=pnlEmpList btnAdd]");
+//            Elements divAccountTypeAddElements2 = null;
+            Elements divAccountTypeAddElements2 = accountDoc2.select("div[data-path~=pnlNoEmplyments").select("div[data-path~=lnk" + finalFixCategory + "]");
+            for (Element current : divAccountTypeAddElements2) {
+//                String currentKey = current.attr("data-path").split(" ")[1];
+                String currentOnClick = current.select("a[wicketpath~=main_c_form_form_root_c_w_pnlNoEmplyments_c_w_").select("a[wicketpath~=lnk" + finalFixCategory + "_dialog]").attr("onclick");
+                Pattern pWicketInterface = Pattern.compile("\\?wicket:interface=(.*)&");
+                Matcher mWicketInterface = pWicketInterface.matcher(currentOnClick);
+                String currentWicketInterface = null;
+                while (mWicketInterface.find()) {
+                    currentWicketInterface = mWicketInterface.group(1);
+                }
+//                wicketInterfaceMap.put(currentKey, currentWicketInterface);
+                linkAdd = currentWicketInterface;
+            }
+        }
+        final String finalLinkAdd = linkAdd;
+
+        Map<String, String> linkAddParameters = new LinkedHashMap<>();
+        if ( isThereAccountList ) {
+            String stepToken = accountDoc2.select("input[name=stepToken").attr("value");
+            linkAddParameters.put("stepToken", stepToken);
+        }
+
+        String employmentLinkAddResponse = requestHttpPost(
+                httpClient,
+//                        System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:lnkAddPaye:dialog::IBehaviorListener:0:",
+//                        System.getProperty("borrower") + "/form.2?wicket:interface=" + wicketInterfaceMap.get("lnkAdd" + finalFixCategory),
+                System.getProperty("borrower") + "/form.2?wicket:interface=" + finalLinkAdd,
+                new LinkedHashMap<String, String>() {
+                    {
+                        put("Accept", "text/xml");
+                        put("Content-Type", "application/x-www-form-urlencoded");
+                    }
+                },
+                linkAddParameters,
+                localContext,
+                CONSUME_QUIETLY
+        );
+        httpResponse.setHttpResponse(employmentLinkAddResponse);
+
+
+        String linkSubmitResponse = null;
+        switch ( fixCategory ) {
+            case "Current":
+
+                if ( isThereAccountList ) {
+                    linkSubmitResponse = requestHttpPost(
                             httpClient,
                             System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:pnlNoEmplyments:c:w:lnkCurrent:submit::IBehaviorListener:0:",
 
@@ -284,34 +425,50 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                                     put("Content-Type", "application/x-www-form-urlencoded");
                                 }
                             },
-                            accountParameters,
+                            new LinkedHashMap<String, String>() {
+                                {
+                                    put("stepToken", "1");
+                                    put("root:c:w:pnlNoEmplyments:c:w:lnkCurrent:submit", "1");
+                                }
+                            },
                             localContext,
                             CONSUME_QUIETLY
                     );
+                    httpResponse.setHttpResponse(linkSubmitResponse);
                 }
+
                 break;
-            case "Savings account":
-//                yourAccountsPage.clickSavingsAccount();
-                if ( countAccount == 0 ) {
-                    formToFillResponse = requestHttpPost(
+            case "Savings":
+
+                if ( isThereAccountList ) {
+                    linkSubmitResponse = requestHttpPost(
                             httpClient,
-                            System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:lnkSavings:dialog::IBehaviorListener:0:",
-//                            ?wicket:interface=:1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:lnkSavings:dialog::IBehaviorListener:0:
+//                            System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:pnlNoEmplyments:c:w:lnkCurrent:submit::IBehaviorListener:0:",
+                            System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:pnlNoEmplyments:c:w:lnkSavings:submit::IBehaviorListener:0:",
+
                             new LinkedHashMap<String, String>() {
                                 {
                                     put("Accept", "text/xml");
                                     put("Content-Type", "application/x-www-form-urlencoded");
                                 }
                             },
-                            accountParameters,
+                            new LinkedHashMap<String, String>() {
+                                {
+                                    put("stepToken", "1");
+                                    put("root:c:w:pnlNoEmplyments:c:w:lnkCurrent:submit", "1");
+                                }
+                            },
                             localContext,
                             CONSUME_QUIETLY
                     );
-                    httpResponse.setHttpResponse(formToFillResponse);
+                    httpResponse.setHttpResponse(linkSubmitResponse);
                 }
-                else {
-//                :main:c:form:dialogWrapper:dialog:form:root:c:w:pnlNoEmplyments:c:w:lnkSavings:submit::IBehaviorListener:0:
-                    requestHttpPost(
+
+                break;
+            case "Auto":
+
+                if ( isThereAccountList ) {
+                    linkSubmitResponse = requestHttpPost(
                             httpClient,
                             System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:pnlNoEmplyments:c:w:lnkSavings:submit::IBehaviorListener:0:",
                             new LinkedHashMap<String, String>() {
@@ -320,192 +477,167 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                                     put("Content-Type", "application/x-www-form-urlencoded");
                                 }
                             },
-                            accountParameters,
+                            new LinkedHashMap<String, String>() {
+                                {
+                                    put("stepToken", "1");
+                                    put("root:c:w:pnlNoEmplyments:c:w:lnkCurrent:submit", "1");
+                                }
+                            },
                             localContext,
                             CONSUME_QUIETLY
                     );
+                    httpResponse.setHttpResponse(linkSubmitResponse);
                 }
-                break;
-            case "Account scraping":
-                accountParameters = new LinkedHashMap<>();
-                accountParameters.put("stepToken", "1");
-                accountParameters.put("root:c:w:pnlNoEmplyments:c:w:lnkAuto:submit", "1");
 
-                if ( countAccount == 0 ) {
-                    String responseScraping = requestHttpPost(
-                            httpClient,
-                            System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:lnkAuto:dialog::IBehaviorListener:0:",
-//                            ?wicket:interface=:1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:lnkAuto:dialog::IBehaviorListener:0:
-                            new LinkedHashMap<String, String>() {
-                                {
-                                    put("Accept", "text/xml");
-                                    put("Content-Type", "application/x-www-form-urlencoded");
-                                }
-                            },
-                            accountParameters,
-                            localContext,
-                            CONSUME_QUIETLY
-                    );
-                    httpResponse.setHttpResponse(responseScraping);
-                }
-                else {
-//                :main:c:form:dialogWrapper:dialog:form:root:c:w:pnlNoEmplyments:c:w:lnkSavings:submit::IBehaviorListener:0:
-                    String responseScraping = requestHttpPost(
-                            httpClient,
-                            System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:pnlNoEmplyments:c:w:lnkSavings:submit::IBehaviorListener:0:-1",
-                            new LinkedHashMap<String, String>() {
-                                {
-                                    put("Accept", "text/xml");
-                                    put("Content-Type", "application/x-www-form-urlencoded");
-                                }
-                            },
-                            accountParameters,
-                            localContext,
-                            CONSUME_QUIETLY
-                    );
-                    httpResponse.setHttpResponse(responseScraping);
-                }
                 break;
+            default:
         }
-
     }
 
-    @When("^Borrower types the (Current account|Savings account) statement date: (.*)")
-    public void user_types_the_statement_date(String currentOrSaving, String statementDate) {
+    @When("^(Borrower) types the (Current account|Savings account) statement date: (.*)")
+    public void borrower_types_the_statement_date(String userType, String currentOrSaving, String statementDate) {
         switch (currentOrSaving) {
             case "Current account":
-//                yourAccountsPage.typeCurrentStatementDate(statementDate);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlStatementDate:c:w:txtStatementDate:tb", statementDate);
                 break;
             case "Savings account":
-//                yourAccountsPage.typeSavingStatementDate(statementDate);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlStatementDate:c:w:txtStatementDate:tb", statementDate);
                 break;
         }
     }
 
-    @And("^Borrower types his (Current account|Savings account) account provider: (.*)$")
-    public void user_types_his_account_provider(String currentOrSavings, String accountProvider) {
-        switch (currentOrSavings) {
+    @And("^(Borrower) types the (Current account|Savings account) account provider: (.*)")
+    public void borrower_types_his_account_provider(String userType, String currentOrSaving, String accountProvider) {
+        switch (currentOrSaving) {
             case "Current account":
-//                yourAccountsPage.typeCurrentAccountProvider(accountProvider);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccountProvider:c:w:txtAccountProvider:tb", accountProvider);
                 break;
             case "Savings account":
-//                yourAccountsPage.typeSavingAccountProvider(accountProvider);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccountProvider:c:w:txtAccountProvider:tb", accountProvider);
                 break;
         }
     }
 
-    @And("^Borrower types his (Current account|Savings account) IBAN: (.*)")
-    public void user_types_his_iban(String currentOrSavings, String iban) {
+    @And("^(Borrower) types his (Current account|Savings account) Account holder name: (.*)")
+    public void borrower_types_his_account_holder_name(String userType, String currentOrSavings, String accountHolderName) {
         switch (currentOrSavings) {
             case "Current account":
-//                yourAccountsPage.typeCurrentIban(iban);
-                accountParameters.put("root:c:w:pnlAddSource:c:w:pnlLastFourDigits:c:w:txtIban:tb", iban);
+                accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccNumb:c:w:txtAccName:tb", accountHolderName);
                 break;
             case "Savings account":
-//                yourAccountsPage.typeSavingIban(iban);
-                accountParameters.put("root:c:w:pnlAddSource:c:w:pnlLastFourDigits:c:w:txtIban:tb", iban);
+                accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccNumb:c:w:txtAccName:tb", accountHolderName);
                 break;
         }
     }
 
-    @And("^Borrower types his (Current account|Savings account) account name: (.*)")
-    public void user_types_his_account_name(String currentOrSavings, String accountName) {
-        switch (currentOrSavings) {
-            case "Current account":
-                accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccNumb:c:w:txtAccName:tb", accountName);
-                break;
-            case "Savings account":
-                accountParameters.put("", accountName);
-                break;
-        }
-    }
-
-    @And("^Borrower types his (Current account|Savings account) sort code: ([0-9]{2})")
-    public void user_types_his_sort_code_1(String currentOrSavings, String sortCode1) {
+    @And("^(Borrower) types his (Current account|Savings account) sort code 1: ([0-9]{2})")
+    public void borrower_types_his_sort_code_1(String userType, String currentOrSavings, String sortCode1) {
         switch (currentOrSavings) {
             case "Current account":
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccNumb:c:w:txtSortCode1:tb", sortCode1);
                 break;
             case "Savings account":
-                accountParameters.put("", sortCode1);
+                accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccNumb:c:w:txtSortCode1:tb", sortCode1);
+                break;
         }
     }
 
-    @And("^Borrower types his (Current account|Savings account) sort code 2: ([0-9]{2})")
-    public void user_types_his_sort_code_2(String currentOrSavings, String sortCode2) {
+    @And("^(Borrower) types his (Current account|Savings account) sort code 2: ([0-9]{2})")
+    public void borrower_types_his_sort_code_2(String userType, String currentOrSavings, String sortCode2) {
         switch (currentOrSavings) {
             case "Current account":
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccNumb:c:w:txtSortCode2:tb", sortCode2);
                 break;
             case "Savings account":
-                accountParameters.put("", sortCode2);
+                accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccNumb:c:w:txtSortCode2:tb", sortCode2);
+                break;
         }
     }
 
-    @And("^Borrower types his (Current account|Savings account) sort code 3: ([0-9]{2})")
-    public void user_types_his_sort_code_3(String currentOrSavings, String sortCode3) {
+    @And("^(Borrower) types his (Current account|Savings account) sort code 3: ([0-9]{2})")
+    public void borrower_types_his_sort_code_3(String userType, String currentOrSavings, String sortCode3) {
         switch (currentOrSavings) {
             case "Current account":
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccNumb:c:w:txtSortCode3:tb", sortCode3);
                 break;
             case "Savings account":
-                accountParameters.put("", sortCode3);
+                accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccNumb:c:w:txtSortCode3:tb", sortCode3);
+                break;
         }
     }
 
-    @And("^Borrower types his (Current account|Savings account) account number: (.*)")
-    public void user_types_his_account_number(String currentOrSavings, String accountNumber) {
+    @And("^(Borrower) types his (Current account|Savings account) account number: (.*)$")
+    public void borrower_types_his_account_number(String userType, String currentOrSavings, String accountNumber) {
         switch (currentOrSavings) {
             case "Current account":
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccNumb:c:w:txtAccnumber:tb", accountNumber);
                 break;
             case "Savings account":
-                accountParameters.put("", accountNumber);
+                accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccNumb:c:w:txtAccnumber:tb", accountNumber);
+                break;
         }
     }
 
-    @And("^Borrower types his (Current account|Savings account) account balance: (.*)$")
-    public void user_types_his_account_balance(String currentOrSavings, String accountBalance) {
+//    @And("^(Borrower) types his (Current account|Savings account) provider: (.*)$")
+//    public void borrower_types_his_account_provider(String userType, String currentOrSavings, String accountProvider) {
+//        switch (currentOrSavings) {
+//            case "Current account":
+//                yourAccountsPage.typeCurrentAccountProvider(accountProvider);
+//                break;
+//            case "Savings account":
+//                yourAccountsPage.typeSavingAccountProvider(accountProvider);
+//                break;
+//        }
+//    }
+
+    @And("^(Borrower) types his (Current account|Savings account) IBAN: (.*)")
+    public void borrower_types_his_iban(String userType, String currentOrSavings, String iban) {
         switch (currentOrSavings) {
             case "Current account":
-//                yourAccountsPage.typeCurrentAccountBalance(accountBalance);
+//                yourAccountsPage.typeCurrentIban(iban);
+                break;
+            case "Savings account":
+//                yourAccountsPage.typeSavingIban(iban);
+                break;
+        }
+    }
+
+    @And("^(Borrower) types his (Current account|Savings account) account balance: (.*)$")
+    public void borrower_types_his_account_balance(String userType, String currentOrSavings, String accountBalance) {
+        switch (currentOrSavings) {
+            case "Current account":
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccountBalance:c:w:crbAccountBalance:tb", accountBalance);
                 break;
             case "Savings account":
-//                yourAccountsPage.typeSavingAccountBalance(accountBalance);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccountBalance:c:w:crbAccountBalance:tb", accountBalance);
                 break;
         }
     }
 
-    @And("^Borrower types his (Current account|Savings account) overdraft limit: (.*)$")
-    public void user_types_his_overdraft_limit(String currentOrSavings, String overdraftLimit) {
+    @And("^(Borrower) types his (Current account|Savings account) overdraft limit: (.*)$")
+    public void borrower_types_his_overdraft_limit(String userType, String currentOrSavings, String overdraftLimit) {
         switch (currentOrSavings) {
             case "Current account":
-//                yourAccountsPage.typeCurrentOverdraftLimit(overdraftLimit);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlOverDraft:c:w:crbOverdraft:tb", overdraftLimit);
                 break;
             case "Savings account":
-//                yourAccountsPage.typeSavingOverdraftLimit(overdraftLimit);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlOverDraft:c:w:crbOverdraft:tb", overdraftLimit);
                 break;
         }
     }
 
-    @And("^Borrower selects his (Current account|Savings account) source of savings: (Gift|Inheritance|Accident Claim|Redundancy|Income from Regular Savings|Other)")
-    public void user_selects_his_source_of_saving(String currentOrSavings, String sourceOfSavings) {
+    @And("^(Borrower) selects his (Current account|Savings account) source of savings: (Gift|Inheritance|Accident Claim|Redundancy|Income from Regular Savings|Other)")
+    public void borrower_selects_his_source_of_saving(String userType, String currentOrSavings, String sourceOfSavings) {
 
-/*        <option selected="selected" value="">Choose One</option>
+/*
+        <option selected="selected" value="">Choose One</option>
         <option value="G">Gift</option>
         <option value="INH">Inheritance</option>
         <option value="ACC">Accident Claim</option>
         <option value="RDN">Redundancy</option>
         <option value="IRS">Income from Regular Savings</option>
-        <option value="OTH">Other</option>*/
+        <option value="OTH">Other</option>
+*/
 
         String abbreviationSavingSource = StringUtils.EMPTY;
         switch (sourceOfSavings) {
@@ -531,33 +663,28 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
 
         switch (currentOrSavings) {
             case "Current account":
-//                yourAccountsPage.selectCurrentSavingSource(sourceOfSavings);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlSourceOfSavings:c:w:cmbSourceOfSavings:combobox", abbreviationSavingSource);
                 break;
             case "Savings account":
-//                yourAccountsPage.selectSavingSourceSavings(sourceOfSavings);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlSourceOfSavings:c:w:cmbSourceOfSavings:combobox", abbreviationSavingSource);
                 break;
         }
     }
 
-    @And("^Borrower types his (Current account|Savings account) regular monthly saving: (.*)$")
-    public void user_types_his_regular_monthly_saving(String currentOrSavings, String regularMonthlySaving) {
+    @And("^(Borrower) types his (Current account|Savings account) regular monthly saving: (.*)$")
+    public void borrower_types_his_regular_monthly_saving(String userType, String currentOrSavings, String regularMonthlySaving) {
         switch (currentOrSavings) {
             case "Current account":
-//                yourAccountsPage.typeCurrentRegularMonthlySavings(regularMonthlySaving);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlRegularMonthlySavings:c:w:crbRegularMonthlySavings:tb", regularMonthlySaving);
                 break;
             case "Savings account":
-//                yourAccountsPage.typeSavingRegularMonthlySavings(regularMonthlySaving);
                 accountParameters.put("root:c:w:pnlAddSource:c:w:pnlRegularMonthlySavings:c:w:crbRegularMonthlySavings:tb", regularMonthlySaving);
                 break;
         }
     }
 
-
     @When("^Borrower closes \"scraping\" form$")
-    public void user_closes_scraping_form() throws IOException {
+    public void borrower_closes_scraping_form() throws IOException {
         Document yourAccountDoc = Jsoup.parse(httpResponse.getHttpResponse());
         TextNode textNodeYourAccount = null;
         try {
@@ -593,80 +720,4 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
 //                CONSUME_QUIETLY
 //        );
     }
-
-
-
-
-
-
-
-/*    @And("^Borrower types his Current account provider: (.*)$")
-    public void user_types_current_account_provider(String accountProvider) {
-//        yourAccountsPage.typeCurrentAccountProvider(accountProvider);
-        accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccountProvider:c:w:txtAccountProvider:tb", accountProvider);
-    }
-
-    @And("^Borrower types his Current IBAN: (.*)")
-    public void user_types_current_iban(String iban) {
-//        yourAccountsPage.typeCurrentIban(iban);
-        accountParameters.put("root:c:w:pnlAddSource:c:w:pnlLastFourDigits:c:w:txtIban:tb", iban);
-    }
-
-    @And("^Borrower types his Current account balance: (.*)$")
-    public void user_types_current_account_balance(String accountBalance) {
-//        yourAccountsPage.typeCurrentAccountBalance(accountBalance);
-        accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccountBalance:c:w:crbAccountBalance:tb", accountBalance);
-    }
-
-    @And("^Borrower types his Current savings source : (.*)$")
-    public void user_types_current_savings_source(String savingSource) {
-//        yourAccountsPage.typeCurrentSavingSource(savingSource);
-        String abbreviationSavingSource = StringUtils.EMPTY;
-        switch (savingSource) {
-            case "Gift":
-                abbreviationSavingSource = "G";
-                break;
-            default:
-        }
-        accountParameters.put("root:c:w:pnlAddSource:c:w:pnlSourceOfSavings:c:w:cmbSourceOfSavings:combobox", abbreviationSavingSource);
-    }
-
-    @And("^Borrower types his Current overdraft limit: (.*)$")
-    public void user_types_his_current_overdraft_limit(String overdraftLimit) {
-//        yourAccountsPage.typeCurrentOverdraftLimit(overdraftLimit);
-        accountParameters.put("root:c:w:pnlAddSource:c:w:pnlOverDraft:c:w:crbOverdraft:tb", "");
-    }
-
-    @And("^Borrower types his Savings account provider: (.*)$")
-    public void user_types_his_savings_account_provider(String accountProvider) {
-//        yourAccountsPage.typeSavingAccountProvider(accountProvider);
-//        accountParameters.put("root:c:w:pnlAddSource:c:w:pnlLastFourDigits:c:w:txtIban:tb", "IE92BOFI90001710027952");
-    }
-
-    @And("^Borrower types his Savings IBAN: (.*)")
-    public void user_type_savings_iban(String iban) {
-//        yourAccountsPage.typeSavingIban(iban);
-    }
-
-    @And("^Borrower types his Savings account balance: (.*)$")
-    public void user_types_his_savings_account_balance(String accountBalance) {
-//        yourAccountsPage.typeSavingAccountBalance(accountBalance);
-//        accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccountBalance:c:w:crbAccountBalance:tb", "20000");
-    }
-
-    @And("^Borrower selects (Gift|Inheritance|Accident Claim|Redundancy|Income from Regular Savings|Other) as Source of savings")
-    public void user_selects_his_source_of_savings(String sourceSavings) {
-//        yourAccountsPage.selectSavingSourceSavings(sourceSavings);
-    }
-
-    @And("^Borrower types his Savings regular monthly: (.*)$")
-    public void user_types_his_Savings_regular_monthly(String regularMonthly) {
-//        yourAccountsPage.typeSavingRegularMonthlySavings(regularMonthly);
-
-    }
-
-    @And("^Borrower verifies account data$")
-    public void user_verifies_account_data() {
-//        yourAccountsPage.validateAccounts();
-    }*/
 }

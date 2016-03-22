@@ -131,6 +131,32 @@ public class HttpUtils {
         }
 
         HttpClientUtils.closeQuietly(response);
+
+        Document response2Jsoup = Jsoup.parse(toReturn);
+        String errorMessage = StringUtils.EMPTY;
+
+        if (toReturn.contains("<!-- Page Class com.cleverlance.abakus.ib.borrower.web.ui.error.UnknownErrorPage -->")) {
+            Elements divPageWrapper = response2Jsoup.select("div[class=page-wrapper]");
+            errorMessage = prettyFormat(divPageWrapper.html(), 2);
+
+            if (divPageWrapper.select("div[class=content-error") != null)
+                errorMessage = prettyFormat(divPageWrapper.select("div[class=content-error").html(), 2);
+
+            assertFalse(errorMessage, true);
+        } else if (toReturn.contains("component.error")) {
+            errorMessage = prettyFormat(StringEscapeUtils.unescapeXml(response2Jsoup.select("component").html()), 2);
+            assertFalse(errorMessage, true);
+        } else if (toReturn.contains("Field is required.") && toReturn.contains("<li class=\"widget-label error\"")) {
+            errorMessage = prettyFormat(StringEscapeUtils.unescapeXml(response2Jsoup.select("component[id~=feedback]").html()), 2);
+            assertFalse(errorMessage, true);
+        } else if (toReturn.contains("A JavaScript error occurred while processing custom server")) {
+            errorMessage = prettyFormat(StringEscapeUtils.unescapeXml(response2Jsoup.select("component[id~=feedback]").html()), 2);
+            assertFalse(errorMessage, true);
+        } else if (toReturn.contains("Hide message")) {
+            errorMessage = prettyFormat(StringEscapeUtils.unescapeXml(response2Jsoup.select("component[id~=feedback]").html()), 2);
+            assertFalse(errorMessage, true);
+        }
+
         return toReturn;
     }
 
@@ -175,26 +201,28 @@ public class HttpUtils {
 
         Document response2Jsoup = Jsoup.parse(toReturn);
         String errorMessage = StringUtils.EMPTY;
-        if ( toReturn.contains("error.UnknownErrorPage") ) {
-            Elements divPageWrapper = response2Jsoup.select("div[class=page-wrapper]");
-            errorMessage = prettyFormat(divPageWrapper.html(), 2);
+        if ( !url.equals("http://dv2app.opoqodev.com/stable-borrower/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:btnHiddenSubmit:submit::IBehaviorListener:0:") && !url.equals("http://dv2app.opoqodev.com/stable-borrower/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnHidenRefresh:submit::IBehaviorListener:0:") ) {
+            if (toReturn.contains("<!-- Page Class com.cleverlance.abakus.ib.borrower.web.ui.error.UnknownErrorPage -->")) {
+                Elements divPageWrapper = response2Jsoup.select("div[class=page-wrapper]");
+                errorMessage = prettyFormat(divPageWrapper.html(), 2);
 
-            if ( divPageWrapper.select("div[class=content-error") != null )
-                errorMessage = prettyFormat(divPageWrapper.select("div[class=content-error").html(), 2);
+                if (divPageWrapper.select("div[class=content-error") != null)
+                    errorMessage = prettyFormat(divPageWrapper.select("div[class=content-error").html(), 2);
 
-            assertFalse(errorMessage, true);
-        }
-        else if ( toReturn.contains("component.error") ) {
-            errorMessage = prettyFormat(StringEscapeUtils.unescapeXml(response2Jsoup.select("component").html()), 2);
-            assertFalse(errorMessage, true);
-        }
-        else if ( toReturn.contains("Field is required.") && toReturn.contains("<li class=\"widget-label error\"") ) {
-            errorMessage = prettyFormat(StringEscapeUtils.unescapeXml(response2Jsoup.select("component[id~=feedback]").html()), 2);
-            assertFalse(errorMessage, true);
-        }
-        else if ( toReturn.contains("A JavaScript error occurred while processing custom server")) {
-            errorMessage = prettyFormat(StringEscapeUtils.unescapeXml(response2Jsoup.select("component[id~=feedback]").html()), 2);
-            assertFalse(errorMessage, true);
+                assertFalse(errorMessage, true);
+            } else if (toReturn.contains("component.error")) {
+                errorMessage = prettyFormat(StringEscapeUtils.unescapeXml(response2Jsoup.select("component").html()), 2);
+                assertFalse(errorMessage, true);
+            } else if (toReturn.contains("Field is required.") && toReturn.contains("<li class=\"widget-label error\"")) {
+                errorMessage = prettyFormat(StringEscapeUtils.unescapeXml(response2Jsoup.select("component[id~=feedback]").html()), 2);
+                assertFalse(errorMessage, true);
+            } else if (toReturn.contains("A JavaScript error occurred while processing custom server")) {
+                errorMessage = prettyFormat(StringEscapeUtils.unescapeXml(response2Jsoup.select("component[id~=feedback]").html()), 2);
+                assertFalse(errorMessage, true);
+            } else if (toReturn.contains("Hide message")) {
+                errorMessage = prettyFormat(StringEscapeUtils.unescapeXml(response2Jsoup.select("component[id~=feedback]").html()), 2);
+                assertFalse(errorMessage, true);
+            }
         }
 
         /*

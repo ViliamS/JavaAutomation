@@ -181,13 +181,18 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
     public void home_borrower_page_is_loaded() {
     }
 
+    @And("^Borrower logs in as his account is activated via DB$")
+    public void user_logs_in_as_his_account_is_activate_via_database() throws Exception {
+        activateAccount("db", user.getEmail());
+    }
+
     @And("^Borrower logs in as his account is activated$")
     public void user_logs_in_as_his_account_is_activated() throws Exception {
 
 //        activateAccount("db", user.getEmail());
 
-        user.setEmail("test.automation.api123456789@finfactory.com");
-        user.setPwd("Password1122+");
+//        user.setEmail("test.automation.api123456789@finfactory.com");
+//        user.setPwd("Password1122+");
 
         Assert.assertNotEquals("Should be different HttpClientContext object", localContext, initContext());
         HttpContext newLocalContext = newHttpClientContext(System.getProperty("domain.borrower"), "/stable-borrower");

@@ -9,6 +9,7 @@ import com.r2development.leveris.selenium.borrower.pageobjects.IPersonalDetailsP
 import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Assert;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 
@@ -73,6 +74,8 @@ public class DocumentUploadStepDef /*extends BorrowerStepDef*/ implements CLV312
 //        documentUploadPage.uploadAllDocuments(user);
         documentUploadPage.getTitle();
         documentUploadPage.uploadAllDocuments();
+
+        Assert.assertFalse("on purpose", true);
     }
 
     @Override

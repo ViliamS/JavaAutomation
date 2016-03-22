@@ -38,7 +38,6 @@ public class Borrower /*implements IBorrower*/ {
 
     protected final String EXCEPTION_THERE_ARE_ERROR_ITEMS_XPATH = "//div[@wicketpath='main_c_form_dialogWrapper_dialog_feedbackBox1']/div[@class='errorbox']/ul/li/div";
 
-
     protected void waitForClickable(String xpath){
         WebDriverWait wait = new WebDriverWait(webDriver, DEFAULT_TIMEOUT);
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
@@ -47,11 +46,6 @@ public class Borrower /*implements IBorrower*/ {
     protected void waitForClickable(String xpath, int timeOut) {
         WebDriverWait wait = new WebDriverWait(webDriver, timeOut);
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
-    }
-
-
-        protected boolean clickToAppearDisappear(String xpathToClick, String xpathToAppear){
-        return clickToAppearDisappear(xpathToClick, xpathToAppear, xpathToClick);
     }
 
     //todo it is not tested yet just a blindly coded draft
@@ -223,6 +217,25 @@ public class Borrower /*implements IBorrower*/ {
         return findAllBy(By.xpath(xpath));
     }
 
+    protected void clickElementLoop(String xpath, String expectedClickableXpath){
+        log.info("\nclickElementLoop(\n xpath ---> '" + xpath+ "', ' \n expectedClickableXpath --->" + expectedClickableXpath + "')");
+        clickElement(xpath, expectedClickableXpath, 30);
+        try {
+            isVisible(expectedClickableXpath, 5);
+        } catch ( Exception e ) {
+            boolean toGoOn = false;
+            while ( !toGoOn ) {
+                try {
+                    clickElement(xpath, expectedClickableXpath, 15);
+                    isVisible(expectedClickableXpath, 5);
+                    toGoOn = true;
+                } catch ( TimeoutException e2) {
+                    log.debug("Problem of clicking on Your Account Done or getting the Dependant title.");
+                }
+            }
+        }
+    }
+
     protected void clickElement(String xpath) {
         new WebDriverWait(webDriver, 10)
                 .ignoring(StaleElementReferenceException.class)
@@ -258,6 +271,11 @@ public class Borrower /*implements IBorrower*/ {
     }
 
     protected void clickElement(String xpath, @SuppressWarnings("SameParameterValue") String expectedClickableXpath) {
+        clickElement(xpath, expectedClickableXpath, 60);
+    }
+
+    protected void clickElement(String xpath, @SuppressWarnings("SameParameterValue") String expectedClickableXpath, int timeOut) {
+        loadingCheck();
         new WebDriverWait(webDriver, DEFAULT_TIMEOUT)
                 .ignoring(StaleElementReferenceException.class)
 //                .ignoring(WebDriverException.class)
@@ -265,12 +283,13 @@ public class Borrower /*implements IBorrower*/ {
                     try {
                         driver.findElement(By.xpath(xpath)).click();
                         loadingCheck();
+                        isVisible(expectedClickableXpath, true);
                     } catch (WebDriverException wde) {
                         log.debug("\n clickElement ---> xpath: " + xpath + " couldn't been found \n");
                     }
                     return true;
                 });
-        new WebDriverWait(webDriver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(expectedClickableXpath)));
+        new WebDriverWait(webDriver, timeOut).until(ExpectedConditions.elementToBeClickable(By.xpath(expectedClickableXpath)));
         log.info("\n clickElement ---> xpath: " + xpath + "and expect clickable xpath: " + expectedClickableXpath + "\n");
     }
 
@@ -761,7 +780,7 @@ public class Borrower /*implements IBorrower*/ {
         By currentBy = By.xpath(xpath);
         waitForVisibility(currentBy);
         moveTo(currentBy);
-//        webDriver.findElement(currentBy).clear();
+        webDriver.findElement(currentBy).clear();
         webDriver.findElement(currentBy).sendKeys(valueToType);
 //        webDriver.findElement(currentBy).sendKeys(Keys.ENTER);
         log.info("type on element with xpath: " + xpath + " \n and type a value: '" + valueToType + "'");

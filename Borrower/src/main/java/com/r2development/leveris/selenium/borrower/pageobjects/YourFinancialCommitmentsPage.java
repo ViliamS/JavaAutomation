@@ -3,21 +3,19 @@ package com.r2development.leveris.selenium.borrower.pageobjects;
 import com.google.inject.Inject;
 import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import com.r2development.leveris.di.IUser;
-import com.r2development.leveris.selenium.borrower.pageobjects.sectionobjects.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 public class YourFinancialCommitmentsPage extends HeaderAndBottomAndFormsMenuSection implements IYourFinancialCommitmentsPage {
     
-    private static final Log log = LogFactory.getLog(YourFinancialCommitmentsPage.class);
+    private static final Log log = LogFactory.getLog(YourFinancialCommitmentsPage.class.getName());
     
-//    IFormsMenu formsMenu;
+    IFormsMenu formsMenu;
 
     @Inject
     private IUser user;
     protected IYourFinancialCommitmentsSection yourFinancialCommitmentsSection;
 
-//    @Inject
     public YourFinancialCommitmentsPage(SharedDriver webDriver) {
         super(webDriver);
         headerSection = new HeaderSection(webDriver);
@@ -230,121 +228,121 @@ public class YourFinancialCommitmentsPage extends HeaderAndBottomAndFormsMenuSec
 
     @Override
     public IYourFinancialCommitmentsPage typePersonalOutstandingBalanceAmount(String outstandingBalanceAmount) {
-//        yourFinancialCommitmentsSection.typePersonalOutstandingBalanceAmount(outstandingBalanceAmount);
+        yourFinancialCommitmentsSection.typePersonalOutstandingBalanceAmount(outstandingBalanceAmount);
         return this;
     }
 
     @Override
     public IYourFinancialCommitmentsPage typePersonalFinancialInstitution(String financialInstitution) {
-//        yourFinancialCommitmentsSection.typePersonalFinancialInstitution(financialInstitution);
+        yourFinancialCommitmentsSection.typePersonalFinancialInstitution(financialInstitution);
         return this;
     }
 
     @Override
     public IYourFinancialCommitmentsPage typePersonalLoanPurpose(String loanPurpose) {
-//        yourFinancialCommitmentsSection.typePersonalLoanPurpose(loanPurpose);
+        yourFinancialCommitmentsSection.typePersonalLoanPurpose(loanPurpose);
         return this;
     }
 
     @Override
     public IYourFinancialCommitmentsPage typePersonalFinalRepaymentDate(String finalRepaymentDate) {
-//        yourFinancialCommitmentsSection.typePersonalFinalRepaymentDate(finalRepaymentDate);
+        yourFinancialCommitmentsSection.typePersonalFinalRepaymentDate(finalRepaymentDate);
         return this;
     }
 
     @Override
     public IYourFinancialCommitmentsPage selectPersonalPaymentFrequency(String paymentFrequency) {
-//        yourFinancialCommitmentsSection.selectPersonalPaymentFrequency(paymentFrequency);
+        yourFinancialCommitmentsSection.selectPersonalPaymentFrequency(paymentFrequency);
         return this;
     }
 
     @Override
     public IYourFinancialCommitmentsPage typePersonalRepaymentAmount(String repaymentAmount) {
-//        yourFinancialCommitmentsSection.typePersonalRepaymentAmount(repaymentAmount);
+        yourFinancialCommitmentsSection.typePersonalRepaymentAmount(repaymentAmount);
         return this;
     }
 
     @Override
     public IYourFinancialCommitmentsPage typeCreditcRepaymentAmount(String repaymentAmount) {
-//        yourFinancialCommitmentsSection.typeCreditcRepaymentAmount(repaymentAmount);
+        yourFinancialCommitmentsSection.typeCreditCardRepaymentAmount(repaymentAmount);
         return this;
     }
 
     @Override
     public IYourFinancialCommitmentsPage typeCreditcProvider(String provider) {
-//        yourFinancialCommitmentsSection.typeCreditcProvider(provider);
+        yourFinancialCommitmentsSection.typeCreditCardProvider(provider);
         return this;
     }
 
     @Override
     public IYourFinancialCommitmentsPage selectCreditcType(String type) {
-//        yourFinancialCommitmentsSection.selectCreditcType(type);
+        yourFinancialCommitmentsSection.selectCreditCardType(type);
         return this;
     }
 
     @Override
     public IYourFinancialCommitmentsPage typeCreditcLimit(String limit) {
-//        yourFinancialCommitmentsSection.typeCreditcLimit(limit);
+        yourFinancialCommitmentsSection.typeCreditCardLimit(limit);
         return this;
     }
 
     @Override
     public IYourFinancialCommitmentsPage typeCreditcBalance(String balance) {
-//        yourFinancialCommitmentsSection.typeCreditcBalance(balance);
+        yourFinancialCommitmentsSection.typeCreditCardBalance(balance);
         return this;
     }
 
     @Override
     public IYourFinancialCommitmentsPage typeMaintenancepPayment(String payment) {
-//        yourFinancialCommitmentsSection.typeMaintenancepPayment(payment);
+        yourFinancialCommitmentsSection.typeMaintenancePayment(payment);
         return this;
     }
 
     @Override
     public IYourFinancialCommitmentsPage typeOtherRepaymentAmount(String repaymentAmount) {
-//        yourFinancialCommitmentsSection.typeOtherRepaymentAmount(repaymentAmount);
+        yourFinancialCommitmentsSection.typeOtherRepaymentAmount(repaymentAmount);
         return this;
     }
 
     @Override
     public IYourFinancialCommitmentsPage typeOtherValue(String value) {
-//        yourFinancialCommitmentsSection.typeOtherValue(value);
+        yourFinancialCommitmentsSection.typeOtherValue(value);
         return this;
     }
 
     @Override
     public IYourFinancialCommitmentsPage typeOtherDescription(String description) {
-//        yourFinancialCommitmentsSection.typeOtherDescription(description);
+        yourFinancialCommitmentsSection.typeOtherDescription(description);
         return this;
     }
 
     @Override
     public IYourFinancialCommitmentsPage typeCarOutstandingBalanceAmount(String outstandingBalanceAmount) {
-//        yourFinancialCommitmentsSection.typeCarOutstandingBalanceAmount(outstandingBalanceAmount);
+        yourFinancialCommitmentsSection.typeCarOutstandingBalanceAmount(outstandingBalanceAmount);
         return this;
     }
 
     @Override
     public IYourFinancialCommitmentsPage typeCarFinancialInstitution(String financialInstitution) {
-//        yourFinancialCommitmentsSection.typeCarFinancialInstitution(financialInstitution);
+        yourFinancialCommitmentsSection.typeCarFinancialInstitution(financialInstitution);
         return this;
     }
 
     @Override
     public IYourFinancialCommitmentsPage typeCarFinalRepaymentDate(String finalRepaymentDate) {
-//        yourFinancialCommitmentsSection.typeCarFinalRepaymentDate(finalRepaymentDate);
+        yourFinancialCommitmentsSection.typeCarFinalRepaymentDate(finalRepaymentDate);
         return this;
     }
 
     @Override
     public IYourFinancialCommitmentsPage selectCarPaymentFrequency(String paymentFrequency) {
-//        yourFinancialCommitmentsSection.selectCarPaymentFrequency(paymentFrequency);
+        yourFinancialCommitmentsSection.selectCarPaymentFrequency(paymentFrequency);
         return this;
     }
 
     @Override
     public IYourFinancialCommitmentsPage typeCarRepaymentAmount(String repaymentAmount) {
-//        yourFinancialCommitmentsSection.typeCarRepaymentAmount(repaymentAmount);
+        yourFinancialCommitmentsSection.typeCarRepaymentAmount(repaymentAmount);
         return this;
     }
 
