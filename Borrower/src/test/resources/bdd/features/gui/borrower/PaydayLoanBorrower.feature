@@ -74,6 +74,9 @@ Feature: Payday Loan
 #      | isLivingSince3years | yes                |
     And Borrower saves his personal details data
 
+#    And Borrower fills in Current residency
+#      | formType | Current residency |
+
 #    EMPLOYMENT & INCOME
     And Borrower fills in Employment and Income type Paye
       | formType            | Paye        |

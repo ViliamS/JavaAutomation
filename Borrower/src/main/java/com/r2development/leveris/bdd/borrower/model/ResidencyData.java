@@ -45,21 +45,43 @@ public class ResidencyData extends DataModel {
         return data.get("countyState");
     }
 
+    public void setCountyState(String countyState) {
+        data.replace("countyState", countyState);
+    }
+
     public String getCountry() { return data.get("country"); }
+
+    public void setPostcodeZip(String postcodeZip) {
+        data.replace("postcode/zip", postcodeZip);
+    }
+
+    public String getPostcodeZip() { return data.get("postcode/zip"); }
 
     public void setCountry(String country) {
         data.replace("country", country);
     }
 
-    public void setCountyState(String countyState) {
-        data.replace("countyState", countyState);
+    public String getStartDate() {
+        return data.get("startDate");
     }
 
-    public String getPostcodeZip() {
-        return data.get("postcode/zip");
+    public void setStartDate(String postcodeZip) {
+        data.replace("startDate", postcodeZip);
     }
 
-    public void setPostcodeZip(String postcodeZip) {
-        data.replace("postcode/zip", postcodeZip);
+    public String getEndDate() {
+        return data.get("endDate");
+    }
+
+    public void setEndDate(String postcodeZip) {
+        data.replace("endDate", postcodeZip);
+    }
+
+    public String getResidentialStatus() {
+        return data.get("residentialStatus");
+    }
+
+    public void setResidentialStatus(String residentialStatus) {
+        data.replace("residentialStatus", residentialStatus);
     }
 }

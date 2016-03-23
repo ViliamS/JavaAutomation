@@ -16,6 +16,9 @@ import java.util.List;
 
 public class ApiYourResidenciesStepDef {
 
+
+
+
     private static final Log log = LogFactory.getLog(ApiYourResidenciesStepDef.class.getName());
 
     @Inject
@@ -153,6 +156,29 @@ public class ApiYourResidenciesStepDef {
         }
     }
 
+    @Given("^(Borrower) types (Current residency|Other/previous residency) start date : (.*)")
+    public void borrower_user_types_his_start_date(String userType, String formType, String startDate) {
+
+    }
+
+    @Given("^(Borrower) types (Current residency|Other/previous residency) end date : (.*)")
+    public void borrower_user_types_his_end_date(String userType, String formType, String end) {
+
+    }
+
+    @Given("^(Borrower) selects (Current residency|Other/previous residency) residential status: (.*)")
+    public void borrower_user_types_his_residential_status(String userType, String formType, String end) {
+//        <select class="content control combobox valid" name="root:c:w:pnlMortgageApplicationResidency:c:w:cmbResidentialStatus:combobox" id="combobox3ca" wicketpath="main_c_form_dialogWrapper_dialog_form_root_c_w_pnlMortgageApplicationResidency_c_w_cmbResidentialStatus_combobox" aria-readonly="false" aria-labelledby="label3c9" data-default="" data-readonly="false" data-enabled="true" aria-required="true" data-height="40" tabindex="3506" data-whisper="true" data-forcevalue="true" style="display:none;" data-button="true">
+//        <option selected="selected" value="">Choose One</option>
+//        <option value="OWN">Owner</option>
+//        <option value="LWP">Living with parents</option>
+//        <option value="TEN">Tenant</option>
+//        <option value="CTE">Council tenant</option>
+//        <option value="JOW">Joint owner</option>
+//        <option value="OTH">Other</option>
+//        </select>
+    }
+
     @Given("^(Borrower) clicks (Current residency|Other/previous residency) \"cancel\"$")
     public void borrower_user_clicks_cancel(String userType, String residencyType) {
 
@@ -160,6 +186,18 @@ public class ApiYourResidenciesStepDef {
 
     @Given("^(Borrower) clicks (Current residency|Other/previous residency) \"save and close\"")
     public void borrower_user_clicks_save_and_close(String userType, String formType) {
+
+//        root:c:w:pnlMortgageApplicationResidency:c:w:pnlAddressField:data:
+//        root:c:w:pnlMortgageApplicationResidency:c:w:txtAddressLine2:tb:
+//        root:c:w:pnlMortgageApplicationResidency:c:w:txtTownCity:tb:Galway
+//        root:c:w:pnlMortgageApplicationResidency:c:w:txtPostcode:tb:
+//        root:c:w:pnlMortgageApplicationResidency:c:w:cmbCountry:combobox:IE
+//        root:c:w:pnlMortgageApplicationResidency:c:w:txtStartDate:tb:28/02/2016
+//        root:c:w:pnlMortgageApplicationResidency:c:w:txtEndDate:tb:
+//        root:c:w:pnlMortgageApplicationResidency:c:w:cmbResidentialStatus:combobox:LWP
+//        root:c:w:txtHiddenPreviousAddrLine1Holder:tb:
+//        stepToken:1
+//        root:c:w:btnNext:submit:1
 
     }
 
