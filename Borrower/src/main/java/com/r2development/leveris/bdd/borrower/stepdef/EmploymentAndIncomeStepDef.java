@@ -20,16 +20,16 @@ import static org.junit.Assert.assertEquals;
 @Singleton
 public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements CLV312Workaround*/ {
 
-    private static final Log log = LogFactory.getLog(EmploymentAndIncomeStepDef.class);
+    private static final Log log = LogFactory.getLog(EmploymentAndIncomeStepDef.class.getName());
 
     private final WebDriver webDriver;
     @Inject
     IUser user;
-    IBorrowerHomePage borrowerHomePage;
-    IPersonalDetailsPage borrowerPersonalDetailsPage;
+    private IBorrowerHomePage borrowerHomePage;
+    private IPersonalDetailsPage borrowerPersonalDetailsPage;
 //    IEmploymentIncomesPage coapplicantEmploymentIncomesPage;
-    IEmploymentIncomesPage borrowerEmploymentIncomesPage;
-    IYourAccountsPage yourAccountsPage;
+    private IEmploymentIncomesPage borrowerEmploymentIncomesPage;
+    private IYourAccountsPage yourAccountsPage;
 
     @Inject
     EmploymentAndIncomeStepDef(SharedDriver webDriver/*, IUser user*/) {
@@ -41,93 +41,93 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
     }
 
     @Given("(Borrower) fills in Employment and Income type (Paye|Self Employed|Civil Servant|Unemployed/Homemaker|Other)$")
-    public void user_fills_in_employment_income(String borrowerOrCoapplicant, String employmentCategory, List<String> employmentIncomeDataMap) throws InterruptedException {
-//        workaroundCLV312(borrowerOrCoapplicant);
+//    public void user_fills_in_employment_income(String userType, Map<String, String> employmentIncomeDataMap) throws InterruptedException {
+    public void user_fills_in_employment_income(String userType, String formType, List<String> employmentIncomeDataMap) throws InterruptedException {
+//        workaroundCLV312(userType);
         EmploymentIncomeData employmentIncomeData = new EmploymentIncomeData(employmentIncomeDataMap);
 
         assertEquals(
                 "We should have the same employment and income category in step def calling and in the table",
-                employmentCategory,
-                employmentIncomeData.get("categoryIncome")
+                formType,
+                employmentIncomeData.getFormType()
         );
 
-        switch (employmentIncomeData.get("categoryIncome")) {
+        borrower_coapplicant_user_clicks_an_employment_and_income_category(userType, formType);
+
+        switch (formType) {
 
             case "Paye":
 
-                borrower_coapplicant_user_clicks_an_employment_and_income_category(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"));
-                borrower_coapplicant_user_selects_category_occupation(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("occupation"));
-                borrower_coapplicant_user_types_category_employer_name(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("employerName"));
-                borrower_coapplicant_user_selects_category_employer_type(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("employmentType"));
-                borrower_coapplicant_user_types_category_start_date(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("startDate"));
-                borrower_coapplicant_user_checks_unchecks_category_currently(borrowerOrCoapplicant, (employmentIncomeData.isCurrentEmployment() ? "checks" : "unchecks"), employmentIncomeData.get("categoryIncome"));
+
+                borrower_coapplicant_user_selects_category_occupation(userType, formType, employmentIncomeData.getOccupation());
+                borrower_coapplicant_user_types_category_employer_name(userType, formType, employmentIncomeData.getEmployerName());
+                borrower_coapplicant_user_selects_category_employer_type(userType, formType, employmentIncomeData.getEmploymentType());
+                borrower_coapplicant_user_types_category_start_date(userType, formType, employmentIncomeData.getStartDate());
+                borrower_coapplicant_user_checks_unchecks_category_currently(userType, (employmentIncomeData.isCurrentEmployment() ? "checks" : "unchecks"), formType);
 
                 if ( !employmentIncomeData.isCurrentEmployment() )
-                    borrower_coapplicant_user_types_category_end_date(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("endDate"));
-                borrower_coapplicant_user_types_category_net_monthly_income(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("netMonthlyIncome"));
+                    borrower_coapplicant_user_types_category_end_date(userType, formType, employmentIncomeData.getEndDate());
+                borrower_coapplicant_user_types_category_net_monthly_income(userType, formType, employmentIncomeData.getNetMonthlyIncome());
                 break;
 
             case "Self Employed":
-                borrower_coapplicant_user_clicks_an_employment_and_income_category(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"));
-                borrower_coapplicant_user_selects_category_occupation(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("occupation"));
-                borrower_coapplicant_user_types_category_business_name(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("businessName"));
-                borrower_coapplicant_user_types_category_address_line1(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("addressLine1"));
+                borrower_coapplicant_user_selects_category_occupation(userType, formType, employmentIncomeData.getOccupation());
+                borrower_coapplicant_user_types_category_business_name(userType, formType, employmentIncomeData.getBusinessName());
+                borrower_coapplicant_user_types_category_address_line1(userType, formType, employmentIncomeData.getAddressLine1());
 
-                if ( !StringUtils.isEmpty(employmentIncomeData.get("addressLine2")))
-                    borrower_coapplicant_user_types_category_address_line2(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("addressLine2"));
+                if ( !StringUtils.isEmpty(employmentIncomeData.getAddressLine2()))
+                    borrower_coapplicant_user_types_category_address_line2(userType, formType, employmentIncomeData.getAddressLine2());
 
-                borrower_coapplicant_user_types_category_town_city(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("townCity"));
+                borrower_coapplicant_user_types_category_town_city(userType, formType, employmentIncomeData.getTownCity());
 
-                if ( !StringUtils.isEmpty(employmentIncomeData.get("country")) ) {
-                    borrower_coapplicant_user_selects_category_country(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("country"));
+                if ( !StringUtils.isEmpty(employmentIncomeData.getCountry()) ) {
+                    borrower_coapplicant_user_selects_category_country(userType, formType, employmentIncomeData.getCountry());
 
-                    if ( !StringUtils.isEmpty(employmentIncomeData.get("country")) && employmentIncomeData.get("country").equals("Ireland") )
-                        borrower_coapplicant_user_types_category_county_state(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("countyState"));
+                    if ( !StringUtils.isEmpty(employmentIncomeData.getCountry()) && employmentIncomeData.getCountry().equals("Ireland") )
+                        borrower_coapplicant_user_types_category_county_state(userType, formType, employmentIncomeData.getCountyState());
                 }
 
-                borrower_coapplicant_user_types_category_nature_business(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("businessNature"));
-                borrower_coapplicant_user_types_category_start_date(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("startDate"));
-                borrower_coapplicant_user_checks_unchecks_category_currently(borrowerOrCoapplicant, (employmentIncomeData.isCurrentEmployment() ? "checks" : "unchecks"), employmentIncomeData.get("categoryIncome"));
+                borrower_coapplicant_user_types_category_nature_business(userType, formType, employmentIncomeData.getBusinessNature());
+                borrower_coapplicant_user_types_category_start_date(userType, formType, employmentIncomeData.getStartDate());
+                borrower_coapplicant_user_checks_unchecks_category_currently(userType, (employmentIncomeData.isCurrentEmployment() ? "checks" : "unchecks"), formType);
 
                 if ( !employmentIncomeData.isCurrentEmployment() )
-                    borrower_coapplicant_user_types_category_end_date(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("endDate"));
+                    borrower_coapplicant_user_types_category_end_date(userType, formType, employmentIncomeData.getEndDate());
 
-                borrower_coapplicant_user_types_category_net_monthly_income(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("netMonthlyIncome"));
+                borrower_coapplicant_user_types_category_net_monthly_income(userType, formType, employmentIncomeData.getNetMonthlyIncome());
                 break;
 
-            case "Civil Servant":
-                borrower_coapplicant_user_clicks_an_employment_and_income_category(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"));
-                borrower_coapplicant_user_selects_category_occupation(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("occupation"));
-                borrower_coapplicant_user_types_category_employer_name(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("employerName"));
-                borrower_coapplicant_user_selects_category_employer_type(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("employmentType"));
-                borrower_coapplicant_user_types_category_start_date(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("startDate"));
-                borrower_coapplicant_user_checks_unchecks_category_currently(borrowerOrCoapplicant, (employmentIncomeData.isCurrentEmployment() ? "checks" : "unchecks"), employmentIncomeData.get("categoryIncome"));
-
-                if ( !employmentIncomeData.isCurrentEmployment() )
-                    borrower_coapplicant_user_types_category_end_date(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("endDate"));
-                borrower_coapplicant_user_types_category_net_monthly_income(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("netMonthlyIncome"));
-                break;
+//            case "Civil Servant":
+//                borrower_coapplicant_user_clicks_an_employment_and_income_category(userType, formType);
+//                borrower_coapplicant_user_selects_category_occupation(userType, formType, employmentIncomeData.getOccupation());
+//                borrower_coapplicant_user_types_category_employer_name(userType, formType, employmentIncomeData.getEmployerName());
+//                borrower_coapplicant_user_selects_category_employer_type(userType, formType, employmentIncomeData.getEmploymentType());
+//                borrower_coapplicant_user_types_category_start_date(userType, formType, employmentIncomeData.getStartDate());
+//                borrower_coapplicant_user_checks_unchecks_category_currently(userType, (employmentIncomeData.isCurrentEmployment() ? "checks" : "unchecks"), formType);
+//
+//                if ( !employmentIncomeData.isCurrentEmployment() )
+//                    borrower_coapplicant_user_types_category_end_date(userType, formType, employmentIncomeData.getEndDate());
+//                borrower_coapplicant_user_types_category_net_monthly_income(userType, formType, employmentIncomeData.getNetMonthlyIncome());
+//                break;
 
             case "Unemployed/Homemaker":
-                borrower_coapplicant_user_clicks_an_employment_and_income_category(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"));
-                borrower_coapplicant_user_types_category_start_date(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("startDate"));
-                borrower_coapplicant_user_checks_unchecks_category_currently(borrowerOrCoapplicant, (employmentIncomeData.isCurrentEmployment() ? "checks" : "unchecks"), employmentIncomeData.get("categoryIncome"));
+                borrower_coapplicant_user_types_category_start_date(userType, formType, employmentIncomeData.getStartDate());
+                borrower_coapplicant_user_checks_unchecks_category_currently(userType, (employmentIncomeData.isCurrentEmployment() ? "checks" : "unchecks"), formType);
 
                 if ( !employmentIncomeData.isCurrentEmployment() )
-                    borrower_coapplicant_user_types_category_end_date(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("endDate"));
+                    borrower_coapplicant_user_types_category_end_date(userType, formType, employmentIncomeData.getEndDate());
                 break;
 
             case "Other":
-                borrower_coapplicant_user_clicks_an_employment_and_income_category(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"));
-                borrower_coapplicant_user_types_category_source_additional_income(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("additionalIncomeSource"));
-                borrower_coapplicant_user_types_category_net_monthly_income(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("netMonthlyIncome"));
-                borrower_coapplicant_user_types_category_time_earning_income(borrowerOrCoapplicant, employmentIncomeData.get("categoryIncome"), employmentIncomeData.get("timeEarningIncome"));
+                borrower_coapplicant_user_types_category_source_additional_income(userType, formType, employmentIncomeData.getAdditionalIncomeSource());
+                borrower_coapplicant_user_types_category_net_monthly_income(userType, formType, employmentIncomeData.getNetMonthlyIncome());
+                borrower_coapplicant_user_types_category_time_earning_income(userType, formType, employmentIncomeData.getTimeEarningIncome());
                 break;
 
             default:
                 log.error("Huston, we have a problem on selecting Employment&Income category");
         }
-        borrower_coapplicant_user_clicks_add_this_employment(borrowerOrCoapplicant);
+        borrower_coapplicant_user_clicks_add_this_employment(userType);
     }
 
     @Given("^(Borrower) sees his name in the Employment & Income title$")

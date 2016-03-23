@@ -29,7 +29,6 @@ public interface IYourAccountsPage {
     Map<Integer, YourAccount> getAccountsOf(String accountType);
     Map<Integer, YourAccount> getAllAccounts();
 
-//    IYourAccountsPage typeAccountProvider(String accountProvider);
     IYourAccountsPage typeCurrentStatementDate(String statementDate);
     IYourAccountsPage typeCurrentAccountHolderName(String accountName);
     IYourAccountsPage typeCurrentSortCode1(String sortCode1);
@@ -40,7 +39,7 @@ public interface IYourAccountsPage {
     IYourAccountsPage typeCurrentIban(String iban);
     IYourAccountsPage typeCurrentAccountBalance(String accountBalance);
     IYourAccountsPage typeCurrentOverdraftLimit(String overdraftLimit);
-    IYourAccountsPage selectCurrentSavingSource(String savingSource);
+    IYourAccountsPage selectCurrentSavingsSource(String savingSource);
     IYourAccountsPage typeCurrentRegularMonthlySavings(String regularMonthlySavings);
 
     IYourAccountsPage typeSavingsStatementDate(String statementDate);
@@ -50,11 +49,11 @@ public interface IYourAccountsPage {
     IYourAccountsPage typeSavingsSortCode3(String sortCode3);
     IYourAccountsPage typeSavingsAccountNumber(String accountNumber);
     IYourAccountsPage typeSavingsAccountProvider(String accountProvider);
-    IYourAccountsPage typeSavingIban(String iban);
+    IYourAccountsPage typeSavingsIban(String iban);
     IYourAccountsPage typeSavingAccountBalance(String accountBalance);
-    IYourAccountsPage typeSavingOverdraftLimit(String savingOverdrafLimit);
-    IYourAccountsPage selectSavingSourceSavings(String sourceSaving);
-    IYourAccountsPage typeSavingRegularMonthlySavings(String savingRegularMonthlySavings);
+    IYourAccountsPage typeSavingsOverdraftLimit(String savingOverdrafLimit);
+    IYourAccountsPage selectSavingsSourceOfSavings(String sourceSaving);
+    IYourAccountsPage typeSavingsRegularMonthlySavings(String savingRegularMonthlySavings);
 
     IYourAccountsPage closeScraping();
 }

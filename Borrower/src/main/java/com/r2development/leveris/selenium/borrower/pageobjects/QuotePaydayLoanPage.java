@@ -7,14 +7,9 @@ import org.apache.commons.logging.LogFactory;
 
 public class QuotePaydayLoanPage extends Borrower implements IQuotePaydayLoanPage {
 
-    public IQuotePaydayLoanSection quotePaydayLoanSection;
+    private IQuotePaydayLoanSection quotePaydayLoanSection;
 
     private static final Log log = LogFactory.getLog( QuoteQuickLoanPage.class.getName() );
-
-//    public QuotePaydayLoanPage() {
-//        super(WebDriverService.getWebDriverInstance());
-//        quotePaydayLoanSection = new QuotePaydayLoanSection(webDriver);
-//    }
 
 //    @Inject
     public QuotePaydayLoanPage(SharedDriver webDriver ) {
@@ -72,5 +67,4 @@ public class QuotePaydayLoanPage extends Borrower implements IQuotePaydayLoanPag
     public IQuoteConfigurationPage clickContinue(){
         return quotePaydayLoanSection.clickContinue();
     }
-
 }

@@ -48,193 +48,193 @@ public class EmploymentIncomesPage extends HeaderAndBottomAndFormsMenuSection im
 
     @Override
     public IEmploymentIncomesPage selectPaye_Occupation(String occupation) {
-//        employmentIncomeSection.selectPaye_Occupation(occupation);
+        employmentIncomeSection.selectPaye_Occupation(occupation);
         return this;
     }
 
     @Override
     public IEmploymentIncomesPage typePaye_EmploymentName(String employmentName) {
-//        employmentIncomeSection.typePaye_EmploymentName(employmentName);
+        employmentIncomeSection.typePaye_EmploymentName(employmentName);
         return this;
     }
 
     @Override
     public IEmploymentIncomesPage selectPaye_EmploymentType(String employmentType) {
-//        employmentIncomeSection.selectPaye_EmploymentType(employmentType);
+        employmentIncomeSection.selectPaye_EmploymentType(employmentType);
         return this;
     }
 
     @Override
     public IEmploymentIncomesPage typePaye_StartDate(String startDate) {
-//        employmentIncomeSection.typePaye_StartDate(startDate);
+        employmentIncomeSection.typePaye_StartDate(startDate);
         return this;
     }
 
     @Override
     public IEmploymentIncomesPage typePaye_EndDate(String endDate) {
-//        employmentIncomeSection.typePaye_EndDate(endDate);
+        employmentIncomeSection.typePaye_EndDate(endDate);
         return this;
     }
 
     @Override
     public IEmploymentIncomesPage checkPaye_Currently(String currently) {
-//        employmentIncomeSection.checkPaye_Currently(currently);
+        employmentIncomeSection.checkPaye_Currently(currently);
         return this;
     }
 
     @Override
     public IEmploymentIncomesPage typePaye_NetIncomeMonthly(String netIncomeMonthly) {
-//        employmentIncomeSection.typePaye_NetIncomeMonthly(netIncomeMonthly);
+        employmentIncomeSection.typePaye_NetIncomeMonthly(netIncomeMonthly);
         return this;
     }
 
     @Override
     public IEmploymentIncomesPage selectSelfEmployment_Occupation(String occupation) {
-//        employmentIncomeSection.selectSelfEmployment_Occupation(occupation);
+        employmentIncomeSection.selectSelfEmployment_Occupation(occupation);
         return this;
     }
 
     @Override
     public IEmploymentIncomesPage typeSelfEmployment_StartDate(String startDate) {
-//        employmentIncomeSection.typeSelfEmployment_StartDate(startDate);
+        employmentIncomeSection.typeSelfEmployment_StartDate(startDate);
         return this;
     }
 
     @Override
     public IEmploymentIncomesPage typeSelfEmployment_EndDate(String endDate) {
-//        employmentIncomeSection.typeSelfEmployment_EndDate(endDate);
+        employmentIncomeSection.typeSelfEmployment_EndDate(endDate);
         return this;
     }
 
     @Override
     public IEmploymentIncomesPage checkSelfEmployment_Currently(String currently) {
-//        employmentIncomeSection.checkSelfEmployment_Currently(currently);
+        employmentIncomeSection.checkSelfEmployment_Currently(currently);
         return this;
     }
 
     @Override
     public IEmploymentIncomesPage typeSelfEmployment_NetIncomeMonthly(String netIncomeMonthly) {
-//        employmentIncomeSection.typeSelfEmployment_NetIncomeMonthly(netIncomeMonthly);
+        employmentIncomeSection.typeSelfEmployment_NetIncomeMonthly(netIncomeMonthly);
         return this;
     }
 
     @Override
     public IEmploymentIncomesPage typeSelfEmployment_BusinessName(String businessNAme) {
-//        employmentIncomeSection.typeSelfEmployment_BusinessName(businessNAme);
+        employmentIncomeSection.typeSelfEmployment_BusinessName(businessNAme);
         return this;
     }
 
     @Override
     public IEmploymentIncomesPage typeSelfEmployment_AddressLine1(String addressLine1) {
-//        employmentIncomeSection.typeSelfEmployment_AddressLine1(addressLine1);
+        employmentIncomeSection.typeSelfEmployment_AddressLine1(addressLine1);
         return this;
     }
 
     @Override
     public IEmploymentIncomesPage typeSelfEmployment_AddressLine2(String addressLine2) {
-//        employmentIncomeSection.typeSelfEmployment_AddressLine2(addressLine2);
+        employmentIncomeSection.typeSelfEmployment_AddressLine2(addressLine2);
         return this;
     }
 
     @Override
     public IEmploymentIncomesPage typeSelfEmployment_TownCity(String townCity) {
-//        employmentIncomeSection.typeSelfEmployment_TownCity(townCity);
+        employmentIncomeSection.typeSelfEmployment_TownCity(townCity);
         return this;
     }
 
     @Override
     public IEmploymentIncomesPage selectSelfEmployment_CountyState(String countyState) {
-//        employmentIncomeSection.selectSelfEmployment_CountyState(countyState);
+        employmentIncomeSection.selectSelfEmployment_CountyState(countyState);
         return this;
     }
 
     @Override
     public IEmploymentIncomesPage selectSelfEmployment_Country(String country) {
-//        employmentIncomeSection.selectSelfEmployment_Country(country);
+        employmentIncomeSection.selectSelfEmployment_Country(country);
         return this;
     }
 
     @Override
     public IEmploymentIncomesPage typeSelfEmployment_BusinessNature(String businessNature) {
-//        employmentIncomeSection.typeSelfEmployment_BusinessNature(businessNature);
+        employmentIncomeSection.typeSelfEmployment_BusinessNature(businessNature);
         return this;
     }
 
     @Override
     public IEmploymentIncomesPage selectCivilServant_Occupation(String occupation) {
-//        employmentIncomeSection.selectCivilServant_Occupation(occupation);
+        employmentIncomeSection.selectCivilServant_Occupation(occupation);
         return this;
     }
 
     @Override
     public IEmploymentIncomesPage typeCivilServant_EmploymentName(String employmentName) {
-//        employmentIncomeSection.typeCivilServant_EmploymentName(employmentName);
+        employmentIncomeSection.typeCivilServant_EmploymentName(employmentName);
         return this;
     }
 
     @Override
     public IEmploymentIncomesPage selectCivilServant_EmploymentType(String employmentType) {
-//        employmentIncomeSection.selectCivilServant_EmploymentType(employmentType);
+        employmentIncomeSection.selectCivilServant_EmploymentType(employmentType);
         return this;
     }
 
     @Override
     public IEmploymentIncomesPage typeCivilServant_StartDate(String startDate) {
-//        employmentIncomeSection.typeCivilServant_StartDate(startDate);
+        employmentIncomeSection.typeCivilServant_StartDate(startDate);
         return this;
     }
 
     @Override
     public IEmploymentIncomesPage typeCivilServant_EndDate(String endDate) {
-//        employmentIncomeSection.typeCivilServant_EndDate(endDate);
+        employmentIncomeSection.typeCivilServant_EndDate(endDate);
         return this;
     }
 
     @Override
     public IEmploymentIncomesPage checkCivilServant_Currently(String currently) {
-//        employmentIncomeSection.checkCivilServant_Currently(currently);
+        employmentIncomeSection.checkCivilServant_Currently(currently);
         return this;
     }
 
     @Override
     public IEmploymentIncomesPage typeCivilServant_NetIncomeMonthly(String netIncomeMonthly) {
-//        employmentIncomeSection.typeCivilServant_NetIncomeMonthly(netIncomeMonthly);
+        employmentIncomeSection.typeCivilServant_NetIncomeMonthly(netIncomeMonthly);
         return this;
     }
 
     @Override
     public IEmploymentIncomesPage typeUnemployment_StartDate(String startDate) {
-//        employmentIncomeSection.typeUnemployment_StartDate(startDate);
+        employmentIncomeSection.typeUnemployment_StartDate(startDate);
         return this;
     }
 
     @Override
     public IEmploymentIncomesPage typeUnemployment_EndDate(String endDate) {
-//        employmentIncomeSection.typeUnemployment_EndDate(endDate);
+        employmentIncomeSection.typeUnemployment_EndDate(endDate);
         return this;
     }
 
     @Override
     public IEmploymentIncomesPage checkUnemployment_Currently(String currently) {
-//        employmentIncomeSection.checkUnemployment_Currently(currently);
+        employmentIncomeSection.checkUnemployment_Currently(currently);
         return this;
     }
 
     @Override
     public IEmploymentIncomesPage typeOther_NetIncomeMonthly(String netIncomeMonthly) {
-//        employmentIncomeSection.typeOther_NetIncomeMonthly(netIncomeMonthly);
+        employmentIncomeSection.typeOther_NetIncomeMonthly(netIncomeMonthly);
         return this;
     }
 
     @Override
     public IEmploymentIncomesPage typeOther_AdditionalIncomeSource(String additionalIncomeSource) {
-//        employmentIncomeSection.typeOther_AdditionalIncomeSource(additionalIncomeSource);
+        employmentIncomeSection.typeOther_AdditionalIncomeSource(additionalIncomeSource);
         return this;
     }
 
     @Override
     public IEmploymentIncomesPage typeOther_EarningTime(String earningTIme) {
-//        employmentIncomeSection.typeOther_EarningTime(earningTIme);
+        employmentIncomeSection.typeOther_EarningTime(earningTIme);
         return this;
     }
 

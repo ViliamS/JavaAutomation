@@ -8,7 +8,7 @@ public class PersonalDetailsPage extends HeaderAndBottomAndFormsMenuSection impl
 
     private static final Log log = LogFactory.getLog(PersonalDetailsPage.class);
 
-    protected IPersonalDetailsSection personalDetailsSection;
+    private IPersonalDetailsSection personalDetailsSection;
 
 //    @Inject
     public PersonalDetailsPage(SharedDriver webDriver) {
@@ -28,6 +28,24 @@ public class PersonalDetailsPage extends HeaderAndBottomAndFormsMenuSection impl
     public boolean isTitle(String firstName) {
         personalDetailsSection.isTitle(firstName);
         return true;
+    }
+
+    @Override
+    public IPersonalDetailsPage setTitle(String title){
+        personalDetailsSection.setTitle(title);
+        return this;
+    }
+
+    @Override
+    public IPersonalDetailsPage setMiddleName(String middleName){
+        personalDetailsSection.setMiddleName(middleName);
+        return this;
+    }
+
+    @Override
+    public IPersonalDetailsPage setSuffix(String suffix){
+        personalDetailsSection.setSuffix(suffix);
+        return this;
     }
 
     @Override

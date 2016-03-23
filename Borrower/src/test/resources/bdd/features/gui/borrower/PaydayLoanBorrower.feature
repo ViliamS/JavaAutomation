@@ -242,13 +242,13 @@ Feature: Payday Loan
       | finalRepaymentDate    | 01/03/2018    |
       | paymentFrequency      | Monthly       |
       | repaymentAmount       | 2500          |
-#    Then Borrower fills in Credit Card
-#      | formType              | Credit Card |
-#      | repaymentAmount       | 2500        |
-#      | cardProvider          | Friend      |
-#      | cardType              | VISA        |
-#      | cardLimit             | 50000       |
-#      | cardBalance           | 45000       |
+    Then Borrower fills in Credit Card
+      | formType              | Credit Card |
+      | repaymentAmount       | 2500        |
+      | cardProvider          | Friend      |
+      | cardType              | VISA        |
+      | cardLimit             | 50000       |
+      | cardBalance           | 45000       |
     Then Borrower fills in Maintenance Payment
       | formType                  | Maintenance Payment |
       | monthlyMaintenancePayment | 1000                |

@@ -25,13 +25,13 @@ import static org.junit.Assert.assertNotNull;
 @Singleton
 public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
 
-    private static final Log log = LogFactory.getLog(RegisterPageStepDef.class);
+    private static final Log log = LogFactory.getLog(RegisterPageStepDef.class.getName());
 
     private SharedDriver webDriver;
-    IWelcomePage welcomePage;
-    IRegisterPage registerPage;
-    IVerifyEmailPage verifyEmailPage;
-    ILoginPage loginPage;
+    private IWelcomePage welcomePage;
+    private IRegisterPage registerPage;
+    private IVerifyEmailPage verifyEmailPage;
+    private ILoginPage loginPage;
 
     @Inject
     IUser user;
@@ -215,5 +215,4 @@ public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
     public void user_resends() {
         verifyEmailPage.clickReSent2();
     }
-
 }

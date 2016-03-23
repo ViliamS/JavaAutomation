@@ -9,10 +9,6 @@ public class QuoteLandingSection extends Borrower implements IQuoteLandingSectio
 
     private static final Log log = LogFactory.getLog(QuoteLandingSection.class.getName());
 
-//    public QuoteLandingSection() {
-//        super(WebDriverService.getWebDriverInstance());
-//    }
-
 //    @Inject
     public QuoteLandingSection(SharedDriver webDriver) {
         super(webDriver);
@@ -20,14 +16,20 @@ public class QuoteLandingSection extends Borrower implements IQuoteLandingSectio
 
     @Override
     public IQuotePaydayLoanPage clickContinuePaydayLoanTealButton() {
-        clickElementViaJavascript(PAYDAY_LOAN_CONTINUE_BUTTON_XPATH, true);
+        if(System.getProperty("browser").equalsIgnoreCase(SharedDriver.PHANTOMJS))
+            clickElement(PAYDAY_LOAN_CONTINUE_BUTTON_XPATH);
+        else
+            clickElementViaJavascript(PAYDAY_LOAN_CONTINUE_BUTTON_XPATH, true);
         loadingCheck();
         return new QuotePaydayLoanPage(webDriver);
     }
 
     @Override
     public IQuoteQuickLoanPage clickContinueUnsecuredLoanRedButton(){
-        clickElementViaJavascript(UNSECURED_LOAN_CONTINUE_BUTTON_XPATH, true);
+        if(System.getProperty("browser").equalsIgnoreCase(SharedDriver.PHANTOMJS))
+            clickElement(UNSECURED_LOAN_CONTINUE_BUTTON_XPATH);
+        else
+            clickElementViaJavascript(UNSECURED_LOAN_CONTINUE_BUTTON_XPATH, true);
         loadingCheck();
         return new QuoteQuickLoanPage(webDriver);
     }
@@ -86,7 +88,4 @@ public class QuoteLandingSection extends Borrower implements IQuoteLandingSectio
     public String getFromAmountPerMonthValue() {
         return "Not Implemented";//weHeaderTitleFromAmountPerMonth.getAttribute("text");
     }
-
-
-
 }

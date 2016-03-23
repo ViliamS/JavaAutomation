@@ -45,8 +45,8 @@ public class VerifyEmailPage extends Borrower implements IVerifyEmailPage {
     @Override
     public IVerifyEmailPage clickReSent() {
         loadingCheck();
-        isVisible(VERIFY_EMAIL_RESEND_XPATH,1 );
-        weResend.click();
+        isVisible(VERIFY_EMAIL_RESEND_XPATH, 1);
+        clickElement(VERIFY_EMAIL_RESEND_XPATH);
         loadingCheck();
         return new VerifyEmailPage(webDriver);
     }
@@ -56,7 +56,7 @@ public class VerifyEmailPage extends Borrower implements IVerifyEmailPage {
         loadingCheck();
         isVisible(VERIFY_EMAIL_INPUT_XPATH, 1);
         isVisible(VERIFY_EMAIL_RESEND2_XPATH, 1);
-        weResend2.click();
+        clickElement(VERIFY_EMAIL_RESEND2_XPATH);
         loadingCheck();
         return this;
     }
@@ -65,8 +65,8 @@ public class VerifyEmailPage extends Borrower implements IVerifyEmailPage {
     public IVerifyEmailPage setEmail(String email) {
         loadingCheck();
         isVisible(VERIFY_EMAIL_INPUT_XPATH, 1);
-        weInputEmail.clear();
-        weInputEmail.sendKeys(email);
+        type(VERIFY_EMAIL_INPUT_XPATH, email);
+        loadingCheck();
         return this;
     }
 

@@ -9,14 +9,13 @@ import com.r2development.leveris.selenium.borrower.pageobjects.IPersonalDetailsP
 import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.junit.Assert;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 
 //@Singleton
 public class DocumentUploadStepDef /*extends BorrowerStepDef*/ implements CLV312Workaround {
 
-    private static final Log log = LogFactory.getLog(DocumentUploadStepDef.class);
+    private static final Log log = LogFactory.getLog(DocumentUploadStepDef.class.getName());
 
     enum DOCUMENT {
         PROOF_IDENTITY,
@@ -35,9 +34,9 @@ public class DocumentUploadStepDef /*extends BorrowerStepDef*/ implements CLV312
     }
     @Inject
     IUser user;
-    IDocumentUploadPage documentUploadPage;
-    IBorrowerHomePage borrowerHomePage;
-    IPersonalDetailsPage borrowerPersonalDetailsPage;
+    private IDocumentUploadPage documentUploadPage;
+    private IBorrowerHomePage borrowerHomePage;
+    private IPersonalDetailsPage borrowerPersonalDetailsPage;
     private final WebDriver webDriver;
 
     @Inject
@@ -74,8 +73,6 @@ public class DocumentUploadStepDef /*extends BorrowerStepDef*/ implements CLV312
 //        documentUploadPage.uploadAllDocuments(user);
         documentUploadPage.getTitle();
         documentUploadPage.uploadAllDocuments();
-
-        Assert.assertFalse("on purpose", true);
     }
 
     @Override

@@ -19,7 +19,7 @@ public class MessageSection extends Borrower implements IMessageSection {
     protected WebElement weGetOneNow;
 
 //    @Inject
-    public MessageSection(SharedDriver webDriver) {
+    MessageSection(SharedDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);
     }

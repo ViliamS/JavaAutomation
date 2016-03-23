@@ -185,10 +185,15 @@
             <!--<artifactId>selenium-java</artifactId>-->
             <!--<version>${org-seleniumhq-selenium.selenium-java.version}</version>-->
         <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.seleniumhq.selenium</groupId>-->
+            <!--<artifactId>selenium-server-standalone</artifactId>-->
+            <!--<version>2.43.1</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-server-standalone</artifactId>
-            <version>2.43.1</version>
+            <artifactId>selenium-server</artifactId>
+            <version>2.53.0</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -284,18 +289,11 @@
             <!--<scope>test</scope>-->
         <!--</dependency>-->
 
-        <!--<dependency>-->
-            <!--<groupId>com.github.detro.ghostdriver</groupId>-->
-            <!--<artifactId>phantomjsdriver</artifactId>-->
-            <!--<version>1.0.4</version>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.seleniumhq.selenium</groupId>-->
-            <!--<artifactId>selenium-server-standalone</artifactId>-->
-            <!--<version>2.43.1</version>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.github.detro</groupId>
+            <artifactId>phantomjsdriver</artifactId>
+            <version>1.2.0</version>
+        </dependency>
 
     </dependencies>
 

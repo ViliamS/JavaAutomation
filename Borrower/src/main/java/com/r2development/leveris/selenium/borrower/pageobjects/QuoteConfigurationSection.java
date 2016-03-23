@@ -44,7 +44,12 @@ public class QuoteConfigurationSection extends Borrower implements IQuoteConfigu
         log.info("APPLY ONLINE");
         loadingCheck();
         isVisible(APPLY_ONLINE_TEAL_BUTTON_XPATH2, 1);
-        clickElementViaJavascript(APPLY_ONLINE_TEAL_BUTTON_XPATH2, true);
+
+        if(System.getProperty("browser").equalsIgnoreCase(SharedDriver.PHANTOMJS))
+            clickElement(APPLY_ONLINE_TEAL_BUTTON_XPATH2);
+        else
+            clickElementViaJavascript(APPLY_ONLINE_TEAL_BUTTON_XPATH2, false);
+
         loadingCheck();
         return new RegisterPage(webDriver);
     }
@@ -60,8 +65,8 @@ public class QuoteConfigurationSection extends Borrower implements IQuoteConfigu
     public IQuoteConfigurationSection setLoanAmountInput(String amountToBorrow) {
         loadingCheck();
         isVisible(INPUT_AMOUNT_TO_BORROW_SLIDER_CONTROL_XPATH, 1);
-        webDriver.findElement(By.xpath(INPUT_AMOUNT_TO_BORROW_SLIDER_CONTROL_XPATH)).sendKeys(Keys.TAB);
-        type(INPUT_AMOUNT_TO_BORROW_SLIDER_CONTROL_XPATH, amountToBorrow);
+        typeEndWithTab(INPUT_AMOUNT_TO_BORROW_SLIDER_CONTROL_XPATH, amountToBorrow, true);
+//        webDriver.findElement(By.xpath(INPUT_AMOUNT_TO_BORROW_SLIDER_CONTROL_XPATH)).sendKeys(Keys.TAB);
         return this;
     }
 
@@ -74,8 +79,7 @@ public class QuoteConfigurationSection extends Borrower implements IQuoteConfigu
     public IQuoteConfigurationSection setMonthlyInstallmentInput(String monthlyRepayment){
         loadingCheck();
         isVisible(INPUT_MONTHLY_REPAYMENT_SLIDER_CONTROL_XPATH, 1);
-        webDriver.findElement(By.xpath(INPUT_MONTHLY_REPAYMENT_SLIDER_CONTROL_XPATH)).sendKeys(Keys.TAB);
-        type(INPUT_MONTHLY_REPAYMENT_SLIDER_CONTROL_XPATH, monthlyRepayment);
+        typeEndWithTab(INPUT_MONTHLY_REPAYMENT_SLIDER_CONTROL_XPATH, monthlyRepayment, true);
         return this;
     }
 

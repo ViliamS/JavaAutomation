@@ -20,5 +20,4 @@ public interface IYourDependantsPage {
     String getDependantAge(int index);
     IYourDependantsPage editDependant(int index);
     IYourDependantsPage deleteDependant(int index);
-
 }

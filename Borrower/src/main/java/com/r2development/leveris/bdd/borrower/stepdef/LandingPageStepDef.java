@@ -9,6 +9,8 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
 
 import java.util.List;
@@ -19,13 +21,15 @@ import java.util.List;
 @Singleton
 public class LandingPageStepDef /*extends BorrowerStepDef*/ {
 
-    IQuoteLandingPage quoteLandingPage;
-    IQuotePaydayLoanPage quotePaydayLoanPage;
-    IQuoteQuickLoanPage quoteQuickLoanPage;
-    IQuoteConfigurationPage quoteConfigurationPage;
-    IRegisterPage registerPage;
-    LandingPageData loanData;
-    IAutomaticRegistrationPage automaticRegistrationPage;
+    private static final Log log = LogFactory.getLog(LandingPageStepDef.class.getName());
+
+    private IQuoteLandingPage quoteLandingPage;
+    private IQuotePaydayLoanPage quotePaydayLoanPage;
+    private IQuoteQuickLoanPage quoteQuickLoanPage;
+    private IQuoteConfigurationPage quoteConfigurationPage;
+    private IRegisterPage registerPage;
+    private LandingPageData loanData;
+    private IAutomaticRegistrationPage automaticRegistrationPage;
 
 //    public LandingPageStepDef() {
 //        quoteLandingPage = new QuoteLandingPage(WebDriverService.getWebDriverInstance());
@@ -88,18 +92,18 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
 
     @And("^Borrower fills in (Payday Loan|Unsecured Loan) form$")
 //    public void user_fills_form (String loanType, Map<String, String> rawData){
-    public void user_fills_in_form ( String loanType, List<String> rawData) {
+    public void user_fills_in_form ( String formType, List<String> rawData) {
 
         this.loanData = new LandingPageData( rawData );
 
-        Assert.assertTrue(loanType + " doesn't equals to " + loanData.getLoanType(), loanType.equalsIgnoreCase(loanData.getLoanType()));
+        Assert.assertTrue(formType + " doesn't equals to " + loanData.getFormType(), formType.equalsIgnoreCase(loanData.getFormType()));
 
         if ( !StringUtils.isEmpty(loanData.getLoanPurpose()) )
-            user_selects_loan_purpose( loanType, loanData.getLoanPurpose() );
-        user_types_value_into_net_monthly_income_field( loanType, loanData.getNetMonthlyIncome() );
-        user_types_value_into_monthly_expenses_field( loanType, loanData.getMonthlyExpenses() );
-        user_types_value_into_number_of_dependants_field( loanType, loanData.getNumberOfDependants() );
-        user_types_value_into_amount_to_borrow_field( loanType, loanData.getLoanAmount() );
+            user_selects_loan_purpose( formType, loanData.getLoanPurpose() );
+        user_types_value_into_net_monthly_income_field( formType, loanData.getNetMonthlyIncome() );
+        user_types_value_into_monthly_expenses_field( formType, loanData.getMonthlyExpenses() );
+        user_types_value_into_number_of_dependants_field( formType, loanData.getNumberOfDependants() );
+        user_types_value_into_amount_to_borrow_field( formType, loanData.getLoanAmount() );
 
     }
 
@@ -295,7 +299,6 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
     public void gets_to_registration_page(){
         registerPage.isLoaded();
     }
-
 }
 
 

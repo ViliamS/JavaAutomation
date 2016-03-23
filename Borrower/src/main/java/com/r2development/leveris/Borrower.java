@@ -133,13 +133,15 @@ public class Borrower /*implements IBorrower*/ {
             BUSY_INDICATOR_NONE3 = "//div[@class='dblclick-fix-layer'][contains(@style,'display: none')][not(contains(@style,'display: block'))]";
 
     protected void loadingCheck(){
-        for(int i = 0; i < 3; i++){
-            if((i > 1) && (isLoadingBlock()))
-                notLoading(i);
-            if(isLoading())
-                notLoading(i);
-            if((i > 2) && (isLoadingBlock()))
-                notLoading(i);
+        if ( !System.getProperty("modeRun").equalsIgnoreCase(SharedDriver.PHANTOMJS)) {
+            for (int i = 0; i < 3; i++) {
+                if ((i > 1) && (isLoadingBlock()))
+                    notLoading(i);
+                if (isLoading())
+                    notLoading(i);
+                if ((i > 2) && (isLoadingBlock()))
+                    notLoading(i);
+            }
         }
     }
 
@@ -237,17 +239,25 @@ public class Borrower /*implements IBorrower*/ {
     }
 
     protected void clickElement(String xpath) {
-        new WebDriverWait(webDriver, 10)
-                .ignoring(StaleElementReferenceException.class)
-//                .ignoring(WebDriverException.class)
-                .until((WebDriver driver) -> {
-                    try {
-                        driver.findElement(By.xpath(xpath)).click();
-                    } catch (WebDriverException wde) {
-                        log.debug("\n clickElement ---> xpath: " + xpath + " can't be found now \n");
-                    }
-                    return true;
-                });
+
+        if ( !System.getProperty("modeRun").equalsIgnoreCase(SharedDriver.PHANTOMJS)) {
+            new WebDriverWait(webDriver, 10)
+                    .ignoring(StaleElementReferenceException.class)
+                    //                .ignoring(WebDriverException.class)
+                    .until((WebDriver driver) -> {
+                        try {
+                            driver.findElement(By.xpath(xpath)).click();
+                        } catch (WebDriverException wde) {
+                            log.debug("\n clickElement ---> xpath: " + xpath + " can't be found now \n");
+                        }
+                        return true;
+                    });
+        }
+        else {
+//            webDriver.executeScript("arguments[0].click();", findBy(xpath));
+            webDriver.executeScript("document.querySelector('[id^=\"submit\"]').click()");
+        }
+
         log.info("click on element with xpath: " + xpath);
     }
 
@@ -439,6 +449,7 @@ public class Borrower /*implements IBorrower*/ {
 
     private void waitForVisibility(String xpath, int timeout_in_seconds) {
         log.info("\n waitForVisibility ---> xpath: '" + xpath + "' <--- " + " with time-out: '" + timeout_in_seconds + "'\n");
+        loadingCheck();
         WebDriverWait wait = new WebDriverWait(webDriver, timeout_in_seconds);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
     }

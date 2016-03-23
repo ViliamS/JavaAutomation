@@ -221,8 +221,13 @@ public class HttpUtils {
                 assertFalse(errorMessage, true);
             } else if (toReturn.contains("Hide message")) {
                 errorMessage = prettyFormat(StringEscapeUtils.unescapeXml(response2Jsoup.select("component[id~=feedback]").html()), 2);
+                if ( errorMessage.contains("<body></body>")) {
+                    // TODO extract component central then extract <div class="feedback-form feedback-box-top-jump" id="feedbackBox1cd9" wicketpath="main_c_form_feedbackBox1">
+                }
                 assertFalse(errorMessage, true);
             }
+
+            // TODO to handle <!-- Page Class com.cleverlance.abakus.ib.borrower.web.ui.error.PageExpiredErrorPage -->
         }
 
         /*

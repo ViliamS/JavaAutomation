@@ -18,7 +18,7 @@ import java.util.List;
 @Singleton
 public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*implements CLV312Workaround*/ {
 
-    private static final Log log = LogFactory.getLog(YourFinancialCommitmentsStepDef.class);
+    private static final Log log = LogFactory.getLog(YourFinancialCommitmentsStepDef.class.getName());
 
     private WebDriver webDriver;
     @Inject
@@ -164,253 +164,253 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
     }
 
     @Given("^(Borrower) selects (Personal Loan|Credit Card|Maintenance Payment|Other|Car Loan|Student Loan|Rent|Utilities|Childcare|Mortgage) as his financial commitment$")
-    public void user_clicks_financial_loan_type(String usertType, String financialTypeLoan) {
+    public void user_clicks_financial_loan_type(String userType, String financialTypeLoan) {
         yourFinancialCommitmentsPage.clickFinancialType(financialTypeLoan);
     }
 
     @When("^(Borrower) clicks Financial I have none$")
-    public void user_clicks_i_have_none(String usertType) {
+    public void user_clicks_i_have_none(String userType) {
         yourFinancialCommitmentsPage.clickNone();
     }
 
     @When("^(Borrower) clicks Financial Cancel")
-    public void user_clicks_financial_cancel(String usertType) {
+    public void user_clicks_financial_cancel(String userType) {
         yourFinancialCommitmentsPage.clickCancel();
     }
 
     @When("^(Borrower) clicks Financial Save and Close")
-    public void user_clicks_financial_save_and_close(String usertType) {
+    public void user_clicks_financial_save_and_close(String userType) {
         yourFinancialCommitmentsPage.clickSaveAndClose();
     }
 
     @When("^(Borrower) clicks Financial Edit")
-    public void user_clicks_financial_edit(String usertType) {
+    public void user_clicks_financial_edit(String userType) {
         yourFinancialCommitmentsPage.clickEdit();
     }
 
     @When("^(Borrower) clicks financial Delete$")
-    public void user_clicks_financial_delete(String usertType) {
+    public void user_clicks_financial_delete(String userType) {
         yourFinancialCommitmentsPage.clickDelete();
     }
 
     @When("^(Borrower) clicks financial Done$")
-    public void user_clicks_financial_done(String usertType) {
+    public void user_clicks_financial_done(String userType) {
         yourFinancialCommitmentsPage.clickDone();
     }
 
     @When("^(Borrower) clicks financial Add$")
-    public void user_clicks_financial_add(String usertType) {
+    public void user_clicks_financial_add(String userType) {
         yourFinancialCommitmentsPage.clickAdd();
     }
 
     @And("^(Borrower) clicks financial \"NEXT\"$")
-    public void user_clicks_financial_next(String usertType) {
+    public void user_clicks_financial_next(String userType) {
         yourFinancialCommitmentsPage.clickNext();
     }
 
     @When("^(Borrower) clicks financial Wait I have...$")
-    public void user_clicks_financial_wait_i_have(String usertType) {
+    public void user_clicks_financial_wait_i_have(String userType) {
         yourFinancialCommitmentsPage.clickWaitIHave();
     }
 
     @And("^(Borrower) types Personal OustandingBalalnceAmount : (.*)$")
-    public void user_types_personal_oustanding_balance_amount(String usertType, String outstandingBalanceAmount) {
+    public void user_types_personal_oustanding_balance_amount(String userType, String outstandingBalanceAmount) {
         yourFinancialCommitmentsPage.typePersonalOutstandingBalanceAmount(outstandingBalanceAmount);
     }
 
     @And("^(Borrower) types Personal Financial Institution : (.*)$")
-    public void user_types_personal_financial_institution(String usertType, String financialInstitution) {
+    public void user_types_personal_financial_institution(String userType, String financialInstitution) {
         yourFinancialCommitmentsPage.typePersonalFinancialInstitution(financialInstitution);
     }
 
     @And("^(Borrower) types Personal Loan Purpose : (.*)$")
-    public void user_types_personal_loan_purpose(String usertType, String loanPurpose) {
+    public void user_types_personal_loan_purpose(String userType, String loanPurpose) {
         yourFinancialCommitmentsPage.typePersonalLoanPurpose(loanPurpose);
     }
 
     @And("^(Borrower) types Personal final repayment date : (.*)$")
-    public void user_types_personal_final_repayment_date(String usertType, String finalRepaymentDate) {
+    public void user_types_personal_final_repayment_date(String userType, String finalRepaymentDate) {
         yourFinancialCommitmentsPage.typePersonalFinalRepaymentDate(finalRepaymentDate);
     }
 
     @And("^(Borrower) selects Personal payment frequency : (Weekly|Fortnightly|Monthly|Yearly)$")
-    public void user_selects_personal_payment_frequency(String usertType, String paymentFrequency) {
+    public void user_selcts_personal_payment_frequency(String userType, String paymentFrequency) {
         yourFinancialCommitmentsPage.selectPersonalPaymentFrequency(paymentFrequency);
     }
 
     @And("^(Borrower) types Personal repayment amount : (.*)$")
-    public void user_types_personal_repayment_amount(String usertType, String repaymentAmount) {
+    public void user_types_personal_repayment_amount(String userType, String repaymentAmount) {
         yourFinancialCommitmentsPage.typePersonalRepaymentAmount(repaymentAmount);
     }
 
     @And("^(Borrower) types Credit Card repayment amount : (.*)$")
-    public void user_types_credit_card_repayment_amount(String usertType, String repaymentAmount) {
+    public void user_types_credit_card_repayment_amount(String userType, String repaymentAmount) {
         yourFinancialCommitmentsPage.typeCreditcRepaymentAmount(repaymentAmount);
     }
 
     @And("^(Borrower) types Credit Card provider : (.*)$")
-    public void user_types_credit_card_provider(String usertType, String provider) {
+    public void user_types_credit_card_provider(String userType, String provider) {
         yourFinancialCommitmentsPage.typeCreditcProvider(provider);
     }
 
     @And("^(Borrower) selects Credit Card type : (VISA|Mastercard|American Express|Store Card|Other)$")
-    public void user_selects_credit_card_type(String usertType, String type) {
+    public void user_selects_credit_card_type(String userType, String type) {
         yourFinancialCommitmentsPage.selectCreditcType(type);
     }
 
     @And("^(Borrower) types Credit Card limit : (.*)$")
-    public void user_types_credit_care_limit(String usertType, String limit) {
+    public void user_types_credit_care_limit(String userType, String limit) {
         yourFinancialCommitmentsPage.typeCreditcLimit(limit);
     }
 
     @And("^(Borrower) types Credit Card balance : (.*)$")
-    public void user_types_credit_card_balance(String usertType, String balance) {
+    public void user_types_credit_card_balance(String userType, String balance) {
         yourFinancialCommitmentsPage.typeCreditcBalance(balance);
     }
 
     @And("^(Borrower) types Maintenance payment : (.*)$")
-    public void user_types_maintenance_payment(String usertType, String payment) {
+    public void user_types_maintenance_payment(String userType, String payment) {
         yourFinancialCommitmentsPage.typeMaintenancepPayment(payment);
     }
 
     @And("^(Borrower) types Other repayment amount : (.*)$")
-    public void user_types_other_repayment_amount(String usertType, String repaymentAmount) {
+    public void user_types_other_repayment_amount(String userType, String repaymentAmount) {
         yourFinancialCommitmentsPage.typeOtherRepaymentAmount(repaymentAmount);
     }
 
     @And("^(Borrower) types Other value : (.*)$")
-    public void user_types_other_value(String usertType, String value) {
+    public void user_types_other_value(String userType, String value) {
         yourFinancialCommitmentsPage.typeOtherValue(value);
     }
 
     @And("^(Borrower) types Other description : (.*)$")
-    public void user_types_other_description(String usertType, String description) {
+    public void user_types_other_description(String userType, String description) {
         yourFinancialCommitmentsPage.typeOtherDescription(description);
     }
 
     @And("^(Borrower) types Car outstanding balance amount : (.*)$")
-    public void user_types_car_outstanding_balance_amount(String usertType, String outstandingBalanceAmount) {
+    public void user_types_car_outstanding_balance_amount(String userType, String outstandingBalanceAmount) {
         yourFinancialCommitmentsPage.typeCarOutstandingBalanceAmount(outstandingBalanceAmount);
     }
 
     @And("^(Borrower) types Car financial institution : (.*)$")
-    public void user_types_car_financial_institution(String usertType, String financialInstitution) {
+    public void user_types_car_financial_institution(String userType, String financialInstitution) {
         yourFinancialCommitmentsPage.typeCarFinancialInstitution(financialInstitution);
     }
 
     @And("^(Borrower) types Car final Repayment Date : (.*)$")
-    public void user_types_car_final_repayment_date(String usertType, String finalRepaymentDate) {
+    public void user_types_car_final_repayment_date(String userType, String finalRepaymentDate) {
         yourFinancialCommitmentsPage.typeCarFinalRepaymentDate(finalRepaymentDate);
     }
 
     @And("^(Borrower) selects Car Payment Frequency : (Weekly|Fortnightly|Monthly|Yearly)$")
-    public void user_selects_car_payment_frequency(String usertType, String paymentFrequency) {
+    public void user_selects_car_payment_frequency(String userType, String paymentFrequency) {
         yourFinancialCommitmentsPage.selectCarPaymentFrequency(paymentFrequency);
     }
 
     @And("^(Borrower) types Card repayment amount : (.*)$")
-    public void user_types_card_repayment_amount(String usertType, String repaymentAmount) {
+    public void user_types_card_repayment_amount(String userType, String repaymentAmount) {
         yourFinancialCommitmentsPage.typeCarRepaymentAmount(repaymentAmount);
     }
 
     @And("^(Borrower) types Student outstanding balance amount : (.*)$")
-    public void user_types_student_outstanding_balance_amount(String usertType, String outstandingBalanceAmount) {
+    public void user_types_student_outstanding_balance_amount(String userType, String outstandingBalanceAmount) {
         yourFinancialCommitmentsPage.typeStudentOutstandingBalanceAmount(outstandingBalanceAmount);
     }
 
     @And("^(Borrower) types Student financial institution : (.*)$")
-    public void user_types_student_financial_institution(String usertType, String financialInstitution) {
+    public void user_types_student_financial_institution(String userType, String financialInstitution) {
         yourFinancialCommitmentsPage.typeStudentFinancialInstitution(financialInstitution);
     }
 
     @And("^(Borrower) types Student final repayment date : (.*)$")
-    public void user_types_student_final_repayment_date(String usertType, String finalRepaymentDate) {
+    public void user_types_student_final_repayment_date(String userType, String finalRepaymentDate) {
         yourFinancialCommitmentsPage.typeStudentFinalRepaymentDate(finalRepaymentDate);
     }
 
     @And("^(Borrower) selects Student payment frequency : (Weekly|Fortnightly|Monthly|Yearly)$")
-    public void user_selects_student_payment_frequency(String usertType, String paymentFrequency) {
+    public void user_selects_studeent_payment_frequency(String userType, String paymentFrequency) {
         yourFinancialCommitmentsPage.selectStudentPaymentFrequency(paymentFrequency);
     }
 
     @And("^(Borrower) types Student repayment amount : (.*)$")
-    public void user_types_student_repayment_amount(String usertType, String repaymentAmount) {
+    public void user_types_student_repayment_amount(String userType, String repaymentAmount) {
         yourFinancialCommitmentsPage.typeStudentRepaymentAmount(repaymentAmount);
     }
 
 //    rent
     @And("^(Borrower) selects Rent Payment Frequency : (Weekly|Fortnightly|Monthly|Yearly)$")
-    public void user_selects_rent_payment_frequency(String usertType, String repaymentFrequency) {
+    public void user_selects_rent_payment_frequency(String userType, String repaymentFrequency) {
         //optional
         yourFinancialCommitmentsPage.selectRentPaymentFrequency(repaymentFrequency);
     }
 
     @And("^(Borrower) types Rent Repayment Amount : (.*)$")
-    public void user_types_rent_repayment_amount(String usertType, String repaymentAmount) {
+    public void user_types_rent_repayment_amount(String userType, String repaymentAmount) {
         yourFinancialCommitmentsPage.typeRentRepaymentAmount(repaymentAmount);
     }
 
     @And("^(Borrower) types Rent note : (.*)$")
-    public void user_types_rent_note(String usertType, String note) {
+    public void user_types_rent_note(String userType, String note) {
         //optional
         yourFinancialCommitmentsPage.typeRentNote(note);
     }
 
 //    utilities
     @And("^(Borrower) types Utilities payment frequency : (Weekly|Fortnightly|Monthly|Yearly)$")
-    public void user_types_utilities_payment_frequency(String usertType, String paymentFrequency) {
+    public void user_types_utilities_payment_frequency(String userType, String paymentFrequency) {
         //optional
         yourFinancialCommitmentsPage.selectUtilitiesPaymentFrequency(paymentFrequency);
     }
 
     @And("^(Borrower) types Utilities Repayment Amount : (.*)$")
-    public void user_types_utilities_repayment_amount(String usertType, String repaymentAmount) {
+    public void user_types_utilities_repayment_amount(String userType, String repaymentAmount) {
         yourFinancialCommitmentsPage.typeUtilitiesRepaymentAmount(repaymentAmount);
     }
 
     @And("^(Borrower) types Utilities note : (.*)$")
-    public void user_types_utilities_note(String usertType, String note) {
+    public void user_types_utilities_note(String userType, String note) {
         //optional
         yourFinancialCommitmentsPage.typeUtilitiesNote(note);
     }
 
 //    childcare
     @And("^(Borrower) selects Child Care Payment Frequency : (Weekly|Fortnightly|Monthly|Yearly)$")
-    public void user_types_child_care_payment_frequency(String usertType, String paymentFrequency) {
+    public void user_types_child_care_payment_frequency(String userType, String paymentFrequency) {
         //optional
         yourFinancialCommitmentsPage.selectChildCarePaymentFrequency(paymentFrequency);
     }
 
     @And("^(Borrower) types Child Care Repayment Amount : (.*)$")
-    public void user_types_child_care_repayment_amount(String usertType, String repaymentAmount) {
+    public void user_types_child_care_repayment_amount(String userType, String repaymentAmount) {
         yourFinancialCommitmentsPage.typeChildCareRepaymentAmount(repaymentAmount);
     }
 
     @And("^(Borrower) types Child Care note: (.*)$")
-    public void user_types_child_care_note(String usertType, String note) {
+    public void user_types_child_care_note(String userType, String note) {
         //optional
         yourFinancialCommitmentsPage.typeChildCareNote(note);
     }
 
 //    mortgage
     @And("^(Borrower) types Mortgage Outstanding Balance Amount : (.*)$")
-    public void user_types_mortgage_outstanding_balance_amount(String usertType, String outstandingBalanceAmount) {
+    public void user_types_mortgage_outstanding_balance_amount(String userType, String outstandingBalanceAmount) {
         yourFinancialCommitmentsPage.typeMortgageOutstandingBalanceAmount(outstandingBalanceAmount);
     }
 
     @And("^(Borrower) types Mortgage Financial Institution : (.*)$")
-    public void user_types_mortgage_financial_institution(String usertType, String financialInstitution) {
+    public void user_types_mortgage_financial_institution(String userType, String financialInstitution) {
         yourFinancialCommitmentsPage.typeMortgageFinancialInstitution(financialInstitution);
     }
 
     @And("^(Borrower) types Mortgage Final Repayment Date : (.*)$")
-    public void user_types_mortgage_final_repayment_date(String usertType, String finalRepaymentDate) {
+    public void user_types_mortgage_final_repayment_date(String userType, String finalRepaymentDate) {
         //optional
         yourFinancialCommitmentsPage.typeMortgageFinalRepaymentDate(finalRepaymentDate);
     }
 
     @And("^(Borrower) types Mortgage Repayment Amount: (.*)$")
-    public void user_types_mortgage_repayment_amount(String usertType, String repaymentAmount) {
+    public void user_types_mortgage_repayment_amount(String userType, String repaymentAmount) {
         yourFinancialCommitmentsPage.typeMortgageRepaymentAmount(repaymentAmount);
     }
 

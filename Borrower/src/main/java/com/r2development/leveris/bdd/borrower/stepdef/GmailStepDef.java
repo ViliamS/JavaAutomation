@@ -13,7 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 @Singleton
 public class GmailStepDef /*extends BorrowerStepDef*/ {
 
-    private static final Log log = LogFactory.getLog(GmailStepDef.class);
+    private static final Log log = LogFactory.getLog(GmailStepDef.class.getName());
     private WebDriver webDriver;
 
     @Inject

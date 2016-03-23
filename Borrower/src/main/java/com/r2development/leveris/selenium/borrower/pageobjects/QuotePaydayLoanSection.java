@@ -3,7 +3,7 @@ package com.r2development.leveris.selenium.borrower.pageobjects;
 import com.r2development.leveris.Borrower;
 import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 
-public class QuotePaydayLoanSection extends Borrower implements IQuotePaydayLoanSection {
+public class QuotePaydayLoanSection extends Borrower implements IQuotePaydayLoanSection{
 
 //    @Inject
     public QuotePaydayLoanSection(SharedDriver webDriver){

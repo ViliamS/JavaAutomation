@@ -21,7 +21,7 @@ public class RedesignPageObject {
             .typeCurrentAccountNumber("123456789")
             .typeCurrentAccountBalance("2000")
             .typeCurrentOverdraftLimit("2001")
-            .selectCurrentSavingSource("Gift")
+            .selectCurrentSavingsSource("Gift")
             .typeCurrentRegularMonthlySavings("2002")
 //            .clickSaveAndClose()
 

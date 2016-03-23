@@ -1,8 +1,5 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
-import com.r2development.leveris.selenium.borrower.pageobjects.IQuotePaydayLoanPage;
-import com.r2development.leveris.selenium.borrower.pageobjects.IQuoteQuickLoanPage;
-
 public interface IQuoteLandingSection {
 
     String

@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class QuoteQuickLoanPage extends Borrower implements IQuoteQuickLoanPage {
 
-    public IQuoteQuickLoanSection quickLoanSection;
+    private IQuoteQuickLoanSection quickLoanSection;
 
     private static final Log log = LogFactory.getLog( QuoteQuickLoanPage.class.getName() );
 

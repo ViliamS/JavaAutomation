@@ -16,19 +16,19 @@ import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
-import java.util.Map;
+import java.util.List;
 
 @Singleton
 public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312Workaround*/ {
 
-    private static final Log log = LogFactory.getLog(YourAccountsStepDef.class);
+    private static final Log log = LogFactory.getLog(YourAccountsStepDef.class.getName());
 
     private WebDriver webDriver;
 
     @Inject
     private IUser user;
 
-    IYourAccountsPage yourAccountsPage;
+    private IYourAccountsPage yourAccountsPage;
 
     @Inject
     public YourAccountsStepDef(SharedDriver webDriver/*, IUser user*/) {
@@ -37,7 +37,7 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
     }
 
     @Given("^(Borrower) fills in (Current account|Savings account|Account scraping)$")
-    public void borrower_fills_in_account(String userType, String accountType, Map<String, String> accountDataMap) {
+    public void borrower_fills_in_account(String userType, String accountType, List<String> accountDataMap) {
         AccountData accountData = new AccountData(accountDataMap);
 
         Assert.assertEquals(
@@ -49,39 +49,28 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
         yourAccountsPage.getTitle();
         borrower_clicks_an_account_type(userType, accountType);
 
-//      borrower_types_his_account_provider(userType, accountType, accountData.get("accountProvider"));
-        borrower_types_his_account_holder_name(userType, accountType, accountData.getAccountHolderName());
-
-//      if (!StringUtils.isEmpty(accountData.get("statementDate")))
-//          borrower_types_the_statement_date(userType, accountType, accountData.get("statementDate"));
         if (!StringUtils.isEmpty(accountData.getStatementDate()))
             borrower_types_the_statement_date(userType, accountType, accountData.getStatementDate());
 
-//      borrower_types_his_sort_code_1(userType, accountType, accountData.get("sortCode1"));
+        borrower_types_his_account_provider(userType, accountType, accountData.getAccountProvider());
+
+        borrower_types_his_account_holder_name(userType, accountType, accountData.getAccountHolderName());
+
         borrower_types_his_sort_code_1(userType, accountType, accountData.getSortCode1());
 
-//      borrower_types_his_sort_code_2(userType, accountType, accountData.get("sortCode2"));
         borrower_types_his_sort_code_2(userType, accountType, accountData.getSortCode2());
 
-//      borrower_types_his_sort_code_3(userType, accountType, accountData.get("sortCode3"));
         borrower_types_his_sort_code_3(userType, accountType, accountData.getSortCode3());
 
-//      borrower_types_his_account_number(userType, accountType, accountData.get("accountNumber"));
         borrower_types_his_account_number(userType, accountType, accountData.getAccountNumber());
 
-//      borrower_types_his_account_balance(userType, accountType, accountData.get("accountBalance"));
         borrower_types_his_account_balance(userType, accountType, accountData.getAccountBalance());
 
-//      if ( !StringUtils.isEmpty(accountData.get("overdraftLimit")))
-//          borrower_types_his_overdraft_limit(userType, accountType, accountData.get("overdraftLimit"));
         if ( !StringUtils.isEmpty(accountData.getOverdraftLimit()))
             borrower_types_his_overdraft_limit(userType, accountType, accountData.getOverdraftLimit());
 
-//      borrower_selects_his_source_of_saving(userType, accountType, accountData.get("sourceOfSaving"));
         borrower_selects_his_source_of_saving(userType, accountType, accountData.getSourceOfSaving());
 
-//      if ( !StringUtils.isEmpty(accountData.get("regularMonthlySaving")))
-//          borrower_types_his_regular_monthly_saving(userType, accountType, accountData.get("regularMonthlySaving"));
         if ( !StringUtils.isEmpty(accountData.getRegularMonthlySaving()))
             borrower_types_his_regular_monthly_saving(userType, accountType, accountData.getRegularMonthlySaving());
 
@@ -219,7 +208,7 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
                 yourAccountsPage.typeCurrentIban(iban);
                 break;
             case "Savings account":
-                yourAccountsPage.typeSavingIban(iban);
+                yourAccountsPage.typeSavingsIban(iban);
                 break;
         }
     }
@@ -243,7 +232,7 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
                 yourAccountsPage.typeCurrentOverdraftLimit(overdraftLimit);
                 break;
             case "Savings account":
-                yourAccountsPage.typeSavingOverdraftLimit(overdraftLimit);
+                yourAccountsPage.typeSavingsOverdraftLimit(overdraftLimit);
                 break;
         }
     }
@@ -252,10 +241,10 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
     public void borrower_selects_his_source_of_saving(String userType, String currentOrSavings, String sourceOfSavings) {
         switch (currentOrSavings) {
             case "Current account":
-                yourAccountsPage.selectCurrentSavingSource(sourceOfSavings);
+                yourAccountsPage.selectCurrentSavingsSource(sourceOfSavings);
                 break;
             case "Savings account":
-                yourAccountsPage.selectSavingSourceSavings(sourceOfSavings);
+                yourAccountsPage.selectSavingsSourceOfSavings(sourceOfSavings);
                 break;
         }
     }
@@ -267,7 +256,7 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
                 yourAccountsPage.typeCurrentRegularMonthlySavings(regularMonthlySaving);
                 break;
             case "Savings account":
-                yourAccountsPage.typeSavingRegularMonthlySavings(regularMonthlySaving);
+                yourAccountsPage.typeSavingsRegularMonthlySavings(regularMonthlySaving);
                 break;
         }
     }

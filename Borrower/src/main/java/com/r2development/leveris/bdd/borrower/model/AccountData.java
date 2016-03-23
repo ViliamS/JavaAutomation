@@ -37,6 +37,10 @@ public class AccountData extends DataModel {
         data.replace("statementDate", statementDate);
     }
 
+    public String getAccountProvider(){
+        return data.get("accountProvider");
+    }
+
     public String getAccountName() {
         return data.get("accountName");
     }
@@ -68,7 +72,6 @@ public class AccountData extends DataModel {
     public void setSortCode3(String sortCode3){
         data.replace("sortCode3", sortCode3);
     }
-
 
     public String getAccountNumber() {
         return data.get("accountNumber");
@@ -147,6 +150,4 @@ public class AccountData extends DataModel {
      | sourceOfSaving        | Gift                    |
      | regularMonthlySaving  | 200                     |
      */
-
-
 }

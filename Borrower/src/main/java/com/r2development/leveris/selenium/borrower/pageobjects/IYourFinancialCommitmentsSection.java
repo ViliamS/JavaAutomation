@@ -251,5 +251,4 @@ public interface IYourFinancialCommitmentsSection {
     //optional
     IYourFinancialCommitmentsSection typeMortgageFinalRepaymentDate(String finalRepaymentDate);
     IYourFinancialCommitmentsSection typeMortgageRepaymentAmount(String repaymentAmount);
-
 }

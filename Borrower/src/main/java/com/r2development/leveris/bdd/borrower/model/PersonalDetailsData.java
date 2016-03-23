@@ -17,13 +17,13 @@ public class PersonalDetailsData extends DataModel {
         return data.get("formType");
     }
 
+    public String getMaritalStatus() { return data.get("maritalStatus"); }
+
+    public String getNationality() { return data.get("nationality"); }
+
     public void setFormType(String formType){
         data.replace("formType", formType);
     }
-
-    public String getTitle() { return data.get("title"); }
-
-    public void setTitle(String title) { data.replace("title", title); }
 
     public String getFirstName() {
         return data.get("firstName");
@@ -40,14 +40,6 @@ public class PersonalDetailsData extends DataModel {
     public void setLastName(String lastName) {
         data.replace("lastName", lastName);
     }
-
-    public String getMiddleName() { return data.get("middleName"); }
-
-    public void setMiddleName(String middleName) { data.replace("middleName", middleName); }
-
-    public String getSuffix() { return data.get("suffix"); }
-
-    public void setSuffix(String suffix) { data.replace("suffix", suffix); }
 
     public String getGender() {
         return data.get("gender");
@@ -85,6 +77,8 @@ public class PersonalDetailsData extends DataModel {
         return data.get("county/state");
     }
 
+    public String getCountry() { return data.get("country"); }
+
     public void setCountyState(String countyState) {
         data.replace("county/state", countyState);
     }
@@ -104,4 +98,40 @@ public class PersonalDetailsData extends DataModel {
     public void setIsLivingSince3years(String isLivingSince3years) {
         data.replace("isLivingSince3years", isLivingSince3years);
     }
+
+    public String getTitle(){
+        return data.get("title");
+    }
+
+    public String getMiddleName(){
+        return data.get("middleName");
+    }
+
+    public String getSuffix(){
+        return data.get("suffix");
+    }
 }
+
+/**
+
+ public String get() {
+ return data.get("");
+ }
+
+ public void set(String ){
+ data.replace("", );
+ }
+
+ And Borrower fills in Personal Details
+ | formType            | Personal Details  |
+ | title               | Mr.               |
+ | firstName           | AutomationGUI     |
+ | middleName          | Amazing           |
+ | lastName            | Tester            |
+ | suffix              | the Greatest      |
+ | gender              | Male              |
+ | dateOfBirth         | 01/01/1987        |
+ | nationality         | French            |
+ | maritalStatus       | single            |
+
+ */

@@ -1,9 +1,5 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
-import com.r2development.leveris.selenium.borrower.pageobjects.IBorrowerHomePage;
-import com.r2development.leveris.selenium.borrower.pageobjects.INotificationMessagePage;
-import com.r2development.leveris.selenium.borrower.pageobjects.IWelcomePage;
-
 public interface IHeaderSection {
     String LOGO_LINK_XPATH = "//a[contains(@wicketpath, 'logo')]";
     String NOTIFICATION_MESSAGE_LINK_XPATH = "//a[@class='link' and @href='form/mi/notifications' and @title='Messages' and contains(., 'Messages')]";

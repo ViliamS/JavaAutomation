@@ -10,8 +10,8 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
 
     private static final Log log = LogFactory.getLog(YourAccountsPage.class.getName());
 
-    protected IYourAccountsSection yourAccountsSection;
-    protected IYourDependantsPage yourDependantsPage;
+    private IYourAccountsSection yourAccountsSection;
+    private IYourDependantsPage yourDependantsPage;
 
 //    @Inject
     public YourAccountsPage(SharedDriver webDriver) {
@@ -81,23 +81,7 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
 
     @Override
     public IYourDependantsPage clickDone() {
-        yourDependantsPage = yourAccountsSection.clickDone();
-/*
-        try {
-            yourDependantsPage.getTitle();
-        } catch ( Exception e ) {
-            boolean toGoOn = false;
-            while ( !toGoOn ) {
-                try {
-                    yourDependantsPage = yourAccountsSection.clickDone();
-                    yourDependantsPage.getTitle();
-                    toGoOn = true;
-                } catch ( TimeoutException e2) {
-                    log.debug("Problem of clicking on Your Account Done or getting the Dependant title.");
-                }
-            }
-        }*/
-        return yourDependantsPage;
+        return yourDependantsPage = yourAccountsSection.clickDone();
     }
 
     @Override
@@ -158,21 +142,9 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
         return yourAccountsSection.getAllAccounts();
     }
 
-//    @Override
-//    public IYourAccountsPage typeAccountProvider(String accountProvider){
-//        yourAccountsSection.typeAccountProvider(accountProvider);
-//        return this;
-//    }
-
     @Override
     public IYourAccountsPage typeCurrentStatementDate(String statementDate) {
         yourAccountsSection.typeCurrentStatementDate(statementDate);
-        return this;
-    }
-
-    @Override
-    public IYourAccountsPage typeCurrentAccountProvider(String accountProvider) {
-        yourAccountsSection.typeCurrentAccountProvider(accountProvider);
         return this;
     }
 
@@ -206,11 +178,11 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
         return this;
     }
 
-//    @Override
-//    public IYourAccountsPage typeCurrentAccountProvider(String accountProvider) {
-//        yourAccountsSection.typeCurrentAccountProvider(accountProvider);
-//        return this;
-//    }
+    @Override
+    public IYourAccountsPage typeCurrentAccountProvider(String accountProvider) {
+        yourAccountsSection.typeCurrentAccountProvider(accountProvider);
+        return this;
+    }
 
     @Override
     public IYourAccountsPage typeCurrentIban(String iban) {
@@ -231,8 +203,8 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
     }
 
     @Override
-    public IYourAccountsPage selectCurrentSavingSource(String savingSource) {
-        yourAccountsSection.selectCurrentSavingSource(savingSource);
+    public IYourAccountsPage selectCurrentSavingsSource(String savingsSource) {
+        yourAccountsSection.selectCurrentSavingsSource(savingsSource);
         return this;
     }
 
@@ -244,13 +216,7 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
 
     @Override
     public IYourAccountsPage typeSavingsStatementDate(String statementDate) {
-        yourAccountsSection.typeSavingStatementDate(statementDate);
-        return this;
-    }
-
-    @Override
-    public IYourAccountsPage typeSavingsAccountProvider(String accountProvider) {
-        yourAccountsSection.typeSavingsAccountProvider(accountProvider);
+        yourAccountsSection.typeSavingsStatementDate(statementDate);
         return this;
     }
 
@@ -284,39 +250,39 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
         return this;
     }
 
-//    @Override
-//    public IYourAccountsPage typeSavingAccountProvider(String accountProvider) {
-//        yourAccountsSection.typeSavingAccountProvider(accountProvider);
-//        return this;
-//    }
+    @Override
+    public IYourAccountsPage typeSavingsAccountProvider(String accountProvider) {
+        yourAccountsSection.typeSavingsAccountProvider(accountProvider);
+        return this;
+    }
 
     @Override
-    public IYourAccountsPage typeSavingIban(String iban) {
-        yourAccountsSection.typeSavingIban(iban);
+    public IYourAccountsPage typeSavingsIban(String iban) {
+        yourAccountsSection.typeSavingsIban(iban);
         return this;
     }
 
     @Override
     public IYourAccountsPage typeSavingAccountBalance(String accountBalance) {
-        yourAccountsSection.typeSavingAccountBalance(accountBalance);
+        yourAccountsSection.typeSavingsAccountBalance(accountBalance);
         return this;
     }
 
     @Override
-    public IYourAccountsPage typeSavingOverdraftLimit(String savingOverdrafLimit) {
-        yourAccountsSection.typeSavingOverdraftLimit(savingOverdrafLimit);
+    public IYourAccountsPage typeSavingsOverdraftLimit(String savingsOverdrafLimit) {
+        yourAccountsSection.typeSavingsOverdraftLimit(savingsOverdrafLimit);
         return this;
     }
 
     @Override
-    public IYourAccountsPage selectSavingSourceSavings(String sourceSaving) {
-        yourAccountsSection.selectSavingSourceSavings(sourceSaving);
+    public IYourAccountsPage selectSavingsSourceOfSavings(String sourceOfSavings) {
+        yourAccountsSection.selectSavingsSourceOfSavings(sourceOfSavings);
         return this;
     }
 
     @Override
-    public IYourAccountsPage typeSavingRegularMonthlySavings(String savingRegularMonthlySavings) {
-        yourAccountsSection.typeSavingRegularMonthlySavings(savingRegularMonthlySavings);
+    public IYourAccountsPage typeSavingsRegularMonthlySavings(String savingsRegularMonthlySavings) {
+        yourAccountsSection.typeSavingsRegularMonthlySavings(savingsRegularMonthlySavings);
         return this;
     }
 
@@ -325,5 +291,4 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
         yourAccountsSection.closeScraping();
         return this;
     }
-
 }

@@ -9,6 +9,7 @@ import com.r2development.leveris.selenium.borrower.pageobjects.IPersonalDetailsP
 import com.r2development.leveris.selenium.borrower.pageobjects.PersonalDetailsPage;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
@@ -19,14 +20,14 @@ import java.util.List;
 @Singleton
 public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ /*implements CLV312Workaround*/ {
 
-    private static final Log log = LogFactory.getLog(PersonalDetailsStepDef.class);
+    private static final Log log = LogFactory.getLog(PersonalDetailsStepDef.class.getName());
 
     private final WebDriver webDriver;
 
     @Inject
     IUser user;
-    IBorrowerHomePage borrowerHomePage;
-    IPersonalDetailsPage borrowerPersonalDetailsPage;
+    private IBorrowerHomePage borrowerHomePage;
+    private IPersonalDetailsPage borrowerPersonalDetailsPage;
 
     @Inject
     PersonalDetailsStepDef(SharedDriver webDriver/*, IUser user*/) {
@@ -48,19 +49,43 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ /*implements CLV
                 personalDetailsData.getFormType()
         );
 
-        borrower_coapplicant_user_sees_his_name_in_the_title(borrowerOrCoapplicant);
+        if (!StringUtils.isEmpty(personalDetailsData.getTitle()))
+            borrower_types_his_title(borrowerOrCoapplicant, personalDetailsData.getTitle());
         borrower_coapplicant_user_types_his_firstname(borrowerOrCoapplicant, personalDetailsData.getFirstName());
         borrower_coapplicant_user_types_his_lastname(borrowerOrCoapplicant, personalDetailsData.getLastName());
+
+        if (!StringUtils.isEmpty(personalDetailsData.getMiddleName()))
+            borrower_types_his_middle_name(borrowerOrCoapplicant, personalDetailsData.getMiddleName());
+
+        if (!StringUtils.isEmpty(personalDetailsData.getSuffix()))
+            borrower_types_his_suffix(borrowerOrCoapplicant, personalDetailsData.getSuffix());
+
         borrower_coapplicant_user_checks_his_gender(borrowerOrCoapplicant, personalDetailsData.getGender());
         borrower_coapplicant_user_types_his_date_of_birth(borrowerOrCoapplicant, personalDetailsData.getDateOfBirth());
-        borrower_coapplicant_user_selects_his_marital_status(borrowerOrCoapplicant, personalDetailsData.get("maritalStatus"));
-        borrower_coapplicant_user_selects_his_nationality(borrowerOrCoapplicant, personalDetailsData.get("nationality"));
-        borrower_coapplicant_user_types_his_residency_address_line_1(borrowerOrCoapplicant, personalDetailsData.getAddressLine1());
-        borrower_coapplicant_user_types_his_residency_towncity(borrowerOrCoapplicant, personalDetailsData.getTownCity());
-        borrower_coapplicant_user_selects_his_residency_country(borrowerOrCoapplicant, personalDetailsData.get("country"));
-        borrower_coapplicant_user_selects_his_residency_countystate(borrowerOrCoapplicant, personalDetailsData.getCountyState());
+        borrower_coapplicant_user_selects_his_marital_status(borrowerOrCoapplicant, personalDetailsData.getMaritalStatus());
+        borrower_coapplicant_user_selects_his_nationality(borrowerOrCoapplicant, personalDetailsData.getNationality());
+
+//        borrower_coapplicant_user_types_his_residency_address_line_1(borrowerOrCoapplicant, personalDetailsData.getAddressLine1());
+//        borrower_coapplicant_user_types_his_residency_towncity(borrowerOrCoapplicant, personalDetailsData.getTownCity());
+//        borrower_coapplicant_user_selects_his_residency_country(borrowerOrCoapplicant, personalDetailsData.getCountry());
+//        borrower_coapplicant_user_selects_his_residency_countystate(borrowerOrCoapplicant, personalDetailsData.getCountyState());
 //        borrower_coapplicant_user_selects_his_residency_accommodation(borrowerOrCoapplicant, personalDetailsData.getAccommodation());
 //        borrower_coapplicant_user_checks_if_he_is_living_since_3_years(borrowerOrCoapplicant, (personalDetailsData.isLivingSince3years() ? "is" : "is not" ));
+    }
+
+    @Given("^(Borrower) types his middle name : (.*)$")
+    public void borrower_types_his_middle_name(String userType, String middleName){
+        borrowerPersonalDetailsPage.setMiddleName(middleName);
+    }
+
+    @Given("^(Borrower) types his suffix : (.*)$")
+    public void borrower_types_his_suffix(String userType, String suffix){
+        borrowerPersonalDetailsPage.setSuffix(suffix);
+    }
+
+    @Given("^(Borrower) types his title : (.*)$")
+    public void borrower_types_his_title(String userType, String title){
+        borrowerPersonalDetailsPage.setTitle(title);
     }
 
     @Given("^(Borrower) sees his name in the Personal Details title$")
@@ -205,89 +230,6 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ /*implements CLV
         }
     }
 
-    @Given("^(Borrower) types his residency address in line 1 : (.*)$")
-    public void borrower_coapplicant_user_types_his_residency_address_line_1(String borrowerOrCoapplicant, String residencyAddressLine1) {
-        switch(borrowerOrCoapplicant) {
-            case "Borrower":
-                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setResidencyAddressLine1(residencyAddressLine1);
-                break;
-//            case "coapplicant":
-//                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setResidencyAddressLine1(residencyAddressLine1);
-//                break;
-            default:
-                log.info("Huston, we have a problem !, Do we have a new user type ?");
-        }
-    }
-
-    @Given("^(Borrower) types his residency address in line 2 : (.*)$")
-    public void borrower_coapplicant_user_types_his_residency_address_line_2(String borrowerOrCoapplicant, String residencyAddressLine2) {
-        switch(borrowerOrCoapplicant) {
-            case "Borrower":
-                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setResidencyAddressLine2(residencyAddressLine2);
-                break;
-//            case "coapplicant":
-//                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setResidencyAddressLine2(residencyAddressLine2);
-//                break;
-            default:
-                log.info("Huston, we have a problem !, Do we have a new user type ?");
-        }
-    }
-
-    @Given("^(Borrower) types his residency town/city : (.*)$")
-    public void borrower_coapplicant_user_types_his_residency_towncity(String borrowerOrCoapplicant, String residencyTownCity) {
-        switch(borrowerOrCoapplicant) {
-            case "Borrower":
-                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setResidencyTownCity(residencyTownCity);
-                break;
-//            case "coapplicant":
-//                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setResidencyTownCity(residencyTownCity);
-//                break;
-            default:
-                log.info("Huston, we have a problem !, Do we have a new user type ?");
-        }
-    }
-
-    @Given("^(Borrower) selects his residency county/state : (.*)$")
-    public void borrower_coapplicant_user_selects_his_residency_countystate(String borrowerOrCoapplicant, String residencyCountyState) {
-        switch(borrowerOrCoapplicant) {
-            case "Borrower":
-                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.selectResidencyCountyState(residencyCountyState);
-                break;
-//            case "coapplicant":
-//                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.selectResidencyCountyState(residencyCountyState);
-//                break;
-            default:
-                log.info("Huston, we have a problem !, Do we have a new user type ?");
-        }
-    }
-
-    @Given("^(Borrower) types his postcode/zip : (.*)$")
-    public void borrower_coapplicant_user_types_his_postcode_zip(String borrowerOrCoapplicant, String residencyPostcodeZip) {
-        switch(borrowerOrCoapplicant) {
-            case "Borrower":
-                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setResidencyPostcodeZip(residencyPostcodeZip);
-                break;
-//            case "coapplicant":
-//                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setResidencyPostcodeZip(residencyPostcodeZip);
-//                break;
-            default:
-                log.info("Huston, we have a problem !, Do we have a new user type ?");
-        }
-    }
-
-    @Given("^(Borrower) selects his residency country : (.*)")
-    public void borrower_coapplicant_user_selects_his_residency_country(String borrowerOrCoapplicant, String residencyCountry) {
-        switch(borrowerOrCoapplicant) {
-            case "Borrower":
-                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.selectResidencyCountry(residencyCountry);
-                break;
-//            case "coapplicant":
-//                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.selectResidencyCountry(residencyCountry);
-//                break;
-            default:
-                log.info("Huston, we have a problem !, Do we have a new user type ?");
-        }
-    }
 
     @Given("^(Borrower) selects his residency accommodation : (Rented on contract|Rented from family/friends|Property owner|Others)$")
     public void borrower_coapplicant_user_selects_his_residency_accommodation(String borrowerOrCoapplicant, String residencyAccommodation) {
@@ -461,5 +403,4 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ /*implements CLV
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
         }
     }
-
 }

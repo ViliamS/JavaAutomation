@@ -8,26 +8,25 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.WebDriver;
 
 @Singleton
 public class MainFormsProcessesStepDef /*extends BorrowerStepDef*/ implements CLV312Workaround {
 
-    private static final Log log = LogFactory.getLog(MainFormsProcessesStepDef.class);
-    private final WebDriver webDriver;
+    private static final Log log = LogFactory.getLog(MainFormsProcessesStepDef.class.getName());
+    private final SharedDriver webDriver;
 
     @Inject
     IUser user;
-    IBorrowerHomePage borrowerHomePage;
-    IPersonalDetailsPage borrowerPersonalDetailsPage;
-    IEmploymentIncomesPage borrowerEmploymentIncomesPage;
-    IPersonalDetailsPage coapplicantPersonalDetailsPage;
-    IEmploymentIncomesPage coapplicantEmploymentIncomesPage;
-    IYourAccountsPage yourAccountsPage;
-    IFormsMenu currentPage;
-    IDocumentUploadPage documentUploadPage;
-    IYourFinancialCommitmentsPage yourFinancialCommitmentsPage;
-    IYourDependantsPage yourDependantsPage;
+    private IBorrowerHomePage borrowerHomePage;
+    private IPersonalDetailsPage borrowerPersonalDetailsPage;
+    private IEmploymentIncomesPage borrowerEmploymentIncomesPage;
+    private IPersonalDetailsPage coapplicantPersonalDetailsPage;
+    private IEmploymentIncomesPage coapplicantEmploymentIncomesPage;
+    private IYourAccountsPage yourAccountsPage;
+    private IFormsMenu currentPage;
+    private IDocumentUploadPage documentUploadPage;
+    private IYourFinancialCommitmentsPage yourFinancialCommitmentsPage;
+    private IYourDependantsPage yourDependantsPage;
 
     @Inject
     public MainFormsProcessesStepDef(SharedDriver webDriver) {
@@ -39,7 +38,7 @@ public class MainFormsProcessesStepDef /*extends BorrowerStepDef*/ implements CL
     // "proxy page"
     @And("^Borrower processes \"Forms\"$")
     public void user_processes_Forms() {
-        borrowerHomePage.clickInfoUpload();
+        borrowerPersonalDetailsPage = borrowerHomePage.clickInfoUpload();
         currentPage = (IFormsMenu) borrowerPersonalDetailsPage;
     }
 
@@ -55,7 +54,7 @@ public class MainFormsProcessesStepDef /*extends BorrowerStepDef*/ implements CL
 
     @When("^Borrower clicks \"Borrower Personal Details\"$")
     public void user_clicks_Borrower_Personal_Details() {
-        workaroundCLV312("borrower");
+//        workaroundCLV312("borrower");
         currentPage.clickSingleBorrowerPersonalDetails();
         currentPage = (IFormsMenu) borrowerPersonalDetailsPage;
     }
@@ -110,5 +109,4 @@ public class MainFormsProcessesStepDef /*extends BorrowerStepDef*/ implements CL
         currentPage.clickHome();
         currentPage = (IFormsMenu) borrowerHomePage;
     }
-
 }

@@ -1,7 +1,5 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
-import com.r2development.leveris.selenium.borrower.pageobjects.IWelcomePage;
-
 public interface IWelcomeGetQuoteSection {
     String CLOSE_XPATH = "//a[contains(., 'X')]";
 //    No mortgage will ever be perfect, but we're very very close.

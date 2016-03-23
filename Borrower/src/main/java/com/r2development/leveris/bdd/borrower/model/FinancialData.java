@@ -74,9 +74,17 @@ public class FinancialData extends DataModel {
     }
 }
 
+/**
+ public String get() {
+ return data.get("");
+ }
+
+ public void set(String ){
+ data.replace("", );
+ }
+ */
 
 /**
- *
  * Then Borrower selects Personal Loan as his financial commitment
  | formType              | Personal Loan |
  | outstandingAmount     | 1500          |
@@ -144,5 +152,4 @@ public class FinancialData extends DataModel {
  | financialInstitution  | Bank of Debt |
  | finalRepaymentDate    | 01/03/2020   |
  | repaymentAmount       | 50000        |
- *
  */

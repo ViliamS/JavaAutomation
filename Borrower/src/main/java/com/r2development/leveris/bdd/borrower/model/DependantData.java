@@ -18,5 +18,9 @@ public class DependantData extends DataModel {
     public String getDateOfBirth(){
         return data.get("dateOfBirth");
     }
-
 }
+
+/**
+ And Borrower fills in "Dependant form"
+ | dateOfBirth | 01/01/2000 |
+ */

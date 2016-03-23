@@ -29,7 +29,6 @@ public interface IYourDependantsSection {
 
     String FINANCIAL_COMMITMENTS_NAVIGATION_CHECK_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_lnkAddPersonalLoan_dialog']";
 
-
     String getTitle();
     String getDescription();
     String getDescription2();
@@ -49,5 +48,4 @@ public interface IYourDependantsSection {
     String getDependantAge(int index);
     IYourDependantsSection editDependant(int index);
     IYourDependantsSection deleteDependant(int index);
-
 }

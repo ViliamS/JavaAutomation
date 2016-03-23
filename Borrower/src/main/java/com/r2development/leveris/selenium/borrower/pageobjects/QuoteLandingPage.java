@@ -9,12 +9,7 @@ public class QuoteLandingPage extends Borrower implements IQuoteLandingPage {
 
     private static final Log log = LogFactory.getLog(QuoteLandingPage.class.getName());
 
-    IQuoteLandingSection quoteLandingSection;
-
-//    public QuoteLandingPage() {
-//        super(WebDriverService.getWebDriverInstance());
-//        quoteLandingSection = new QuoteLandingSection(webDriver);
-//    }
+    private IQuoteLandingSection quoteLandingSection;
 
 //    @Inject
     public QuoteLandingPage(SharedDriver webDriver ) {
@@ -25,8 +20,6 @@ public class QuoteLandingPage extends Borrower implements IQuoteLandingPage {
     @Override
     public IQuoteLandingPage goToBorrowerQuoteLandingPage(){
         get(System.getProperty("borrower"));
-//        get("google.fr");
-//        quoteLandingSection = new QuoteLandingSection( webDriver );
         return this;
     }
 

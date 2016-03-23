@@ -3,8 +3,11 @@ package com.r2development.leveris.selenium.borrower.pageobjects;
 public interface IPersonalDetailsSection {
     String TITLE_XPATH = "//h2[contains(. , '${replace}$') and contains(., 'Personal Details')]";
 
+    String TITLE_INPUT_XPATH = "//input[@wicketpath='main_c_form_form_root_c_w_pnlCoLoanTitle_c_w_txtTitle_tb']";
     String FIRSTNAME_XPATH = "//label[contains(., 'First name')]/following-sibling::input";
+    String MIDDLENAME_INPUT_XPATH = "//input[@wicketpath='main_c_form_form_root_c_w_pnlCoLoanNamesSuff_c_w_txtMiddleName_tb']";
     String LASTNAME_XPATH = "//label[contains(., 'Last name')]/following-sibling::input";
+    String SUFFIX_INPUT_XPATH = "//input[@wicketpath='main_c_form_form_root_c_w_pnlCoLoanNamesSuff_c_w_txtSuffix_tb']";
 
     String GENDER_LABEL_XPATH = "//div[contains(., 'Gender')]";
     String GENDER_MALE_XPATH = "//label[contains(@wicketpath, 'Gender') and contains(@wicketpath, 'Male')]/following-sibling::span/a";
@@ -23,13 +26,13 @@ public interface IPersonalDetailsSection {
     String REQUIRED_VISA_NO_XPATH = "//div[contains(@wicketpath, 'RequiredVisaNo')]/span/a";
 
 //    String RESIDENCY_TITLE_XPATH = "";
-
     String RESIDENCY_ADDRESS_LINE_1_XPATH = "//label[contains(., 'Address line 1')]/following-sibling::input[contains(@id, 'pnlAddress')]";
     String RESIDENCY_ADDRESS_LINE_2_XPATH = "//label[contains(., 'Address line 2')]/following-sibling::input[contains(@wicketpath, 'txtAddressLine2')]";
     String RESIDENCY_TOWN_CITY_XPATH = "//label[contains(., 'Town/city')]/following-sibling::input[contains(@wicketpath, 'txtTownCity')]";
     String RESIDENCY_COUNTY_STATE_XPATH = "//label[contains(., 'County/state')]/following-sibling::input[contains(@wicketpath, 'cmbCountyState')]";
     String RESIDENCY_POSTCODE_ZIP_XPATH = "//label[contains(., 'Postcode/ZIP(optional)')]/following-sibling::input[contains(@wicketpath, 'txtPostcode')]";
     String RESIDENCY_COUNTRY_LABEL_XPATH = "//label[contains(@wicketpath, 'cmbCountry')]";
+
     String RESIDENCY_COUNTRY_XPATH = "//label[contains(@wicketpath, 'cmbCountry')]/following-sibling::input";
 //    String RESIDENCY_COUNTRY_XPATH = "//label[contains(@wicketpath, 'cmbCountry')]/following-sibling::input[not(contains(@wicketpath,'PreviousResidency'))]";
 //    String RESIDENCY_COUNTRY_XPATH = "//input[@wicketpath='main_c_form_form_root_c_w_cmbCountry_v']";
@@ -55,8 +58,11 @@ public interface IPersonalDetailsSection {
     String getTitle();
     boolean isTitle(String FirstName);
 
+    IPersonalDetailsSection setTitle(String title);
     IPersonalDetailsSection setFirstname(String FirstName);
+    IPersonalDetailsSection setMiddleName(String middleName);
     IPersonalDetailsSection setLastname(String LastName);
+    IPersonalDetailsSection setSuffix(String siffix);
 
     boolean isGenderLabel();
     IPersonalDetailsSection checkGenderMale();

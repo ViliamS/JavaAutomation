@@ -86,6 +86,5 @@ public class YourDependantsStepDef {
     @And("^(Borrower) clicks Dependants \"Done\"$")
     public void user_clicks_dependants_done(String userType) {
         yourDependantsPage.clickDone();
-
     }
 }

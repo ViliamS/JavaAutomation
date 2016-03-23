@@ -5,13 +5,21 @@ import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.joda.time.DateTime;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriverService;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -35,6 +43,17 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
  */
 //@Singleton
 public class SharedDriver extends EventFiringWebDriver {
+
+    private static final Log log = LogFactory.getLog(SharedDriver.class.getName());
+
+    public static final String PHANTOMJS = "phantomjs";
+    public static final String CHROME = "chrome";
+    public static final String FIREFOX = "firefox";
+    public static final String GUI = "gui";
+    public static final String API = "api";
+
+    public static DesiredCapabilities dCaps = new DesiredCapabilities();
+    private StringBuffer verificationErrors = new StringBuffer();
 
 //    private static WebDriver REAL_DRIVER = new ChromeDriver();
     private static final WebDriver REAL_DRIVER = execute(System.getProperty("browser"));
@@ -82,10 +101,10 @@ public class SharedDriver extends EventFiringWebDriver {
 
         WebDriver toReturn = null;
         if ( StringUtils.isEmpty(browser) )
-            browser = "chrome";
+            browser = CHROME;
 
         switch (browser) {
-            case "chrome":
+            case CHROME:
 
 //                ChromeOptions options = new ChromeOptions();
 //                options.addArguments("ui-prioritize-in-gpu-process");
@@ -116,8 +135,15 @@ public class SharedDriver extends EventFiringWebDriver {
 
                 toReturn = new ChromeDriver();
                 break;
-            case "firefox":
+            case FIREFOX:
                 toReturn = new FirefoxDriver();
+                break;
+            case PHANTOMJS:
+                toReturn = new PhantomJSDriver(dCaps);
+                toReturn.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+                toReturn.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+                toReturn.manage().timeouts().setScriptTimeout(15, TimeUnit.SECONDS);
+                toReturn.manage().window().setSize(new Dimension(1024, 768));
                 break;
             default:
                 toReturn = new ChromeDriver();
@@ -135,16 +161,17 @@ public class SharedDriver extends EventFiringWebDriver {
             System.setProperty("domain.borrower", "dv2app.opoqodev.com");
         if ( StringUtils.isEmpty(System.getProperty("borrower")))
             System.setProperty("borrower", "http://dv2app.opoqodev.com/stable-borrower");
+        if ( StringUtils.isEmpty(System.getProperty("autoregistration")) )
+            System.setProperty("autoregistration", "http://dv2app.opoqodev.com/stable-borrower/home?useCase=automaticregistration");
         if ( System.getProperty("browser") == null)
-            System.setProperty("browser", "chrome");
+            System.setProperty("browser", CHROME);
         if ( StringUtils.isEmpty(System.getProperty("timestamp")))
             System.setProperty("timestamp", DateTime.now().toString("yyyyMMddHHmmssSSS"));
-
         if ( StringUtils.isEmpty(System.getProperty("modeRun")) )
-            System.setProperty("modeRun", "gui");
+            System.setProperty("modeRun", GUI);
 
 //        WebDriver webDriver = null;
-        if ( !StringUtils.isEmpty(System.getProperty("modeRun")) && System.getProperty("modeRun").equals("gui")) {
+        if ( !StringUtils.isEmpty(System.getProperty("modeRun")) && System.getProperty("modeRun").equals(GUI)) {
 //            switch (System.getProperty("browser")) {
 //                case "chrome":
 //                    webDriver = new ChromeDriver();
@@ -155,7 +182,41 @@ public class SharedDriver extends EventFiringWebDriver {
 //            }
 //            deleteAllCookies();
         }
-        else if ( System.getProperty("modeRun").equals("api") ) {
+        else if ( System.getProperty("modeRun").equalsIgnoreCase(PHANTOMJS) && System.getProperty("browser").equals(PHANTOMJS) ) {
+//            String [] cli_args = new String[] { "--web-security=false", "--ignore-ssl-errors=true", "--remote-debugger-port=9000" };
+//            String [] cli_args = new String[] { "--web-security=false", "--ignore-ssl-errors=true" };
+//            dCaps = DesiredCapabilities.phantomjs();
+//            dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, cli_args);
+//            dCaps.setJavascriptEnabled(true);
+//            dCaps.setCapability("takesScreenshot", false);
+
+//            dCaps = DesiredCapabilities.phantomjs();
+//            dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.81 Safari/537.36");
+//            dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "loadImages", true);
+//            dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "javascriptEnabled", true);
+//            dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "resourceTimeout", 60000);
+//            dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, new String[] {"--webdriver-loglevel=ERROR"});//NONE,ERROR
+
+            dCaps = new DesiredCapabilities();
+            dCaps.setJavascriptEnabled(true);
+            dCaps.setCapability("takesScreenshot", false);
+
+            // Change "User-Agent" via page-object capabilities
+//            dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent", "My User Agent - Chrome");
+
+            // Disable "web-security", enable all possible "ssl-protocols" and "ignore-ssl-errors" for PhantomJSDriver
+            dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, new String[] {
+                    "--web-security=false",
+                    "--ssl-protocol=any",
+                    "--ignore-ssl-errors=true",
+                    "--webdriver-loglevel=DEBUG"
+            });
+
+
+
+
+        }
+        else if ( System.getProperty("modeRun").equals(API) ) {
 //            httpClient = HttpClientBuilder.create().setRedirectStrategy(new LaxRedirectStrategy()).build();
 //            CookieStore cookieStore = new BasicCookieStore();
 //            HttpClientContext localContextBody = HttpClientContext.create();
@@ -173,6 +234,11 @@ public class SharedDriver extends EventFiringWebDriver {
 
     @After
     public void embedScreenshot(Scenario scenario) {
+
+        String verificationErrorString = verificationErrors.toString();
+        if(!StringUtils.isEmpty(verificationErrorString))
+            System.err.println(verificationErrorString);
+
         try {
             byte[] screenshot = getScreenshotAs(OutputType.BYTES);
             scenario.embed(screenshot, "image/png");
