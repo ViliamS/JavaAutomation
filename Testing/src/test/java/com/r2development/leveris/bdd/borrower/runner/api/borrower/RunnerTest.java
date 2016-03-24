@@ -14,7 +14,7 @@ import org.junit.runner.RunWith;
                 "json:target/Runner-Cucumber-Json/Runner.json"
         },
         strict = true,
-        features = "classpath:bdd/features/",
+        features = "classpath:bdd/features",
         tags = "@Payday"
 )
 public class RunnerTest {
