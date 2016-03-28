@@ -56,6 +56,10 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
 
     @Given("^Open Leveris Automatic Registration Page")
     public void open_leveris_automatic_registration_page() throws IOException {
+
+//        httpClient = ApiSupportHttpClientStepDef.getInstanceHttpClient();
+//        localContext = ApiSupportHttpClientStepDef.getNewInstanceHttpClientContext(System.getProperty("borrower"), "/stable-borrower");
+
         String automaticRegistrationResponse = requestHttpGet(
                 httpClient,
 //                "http://dv2app.opoqodev.com/stable-borrower/home?useCase=automaticregistration",

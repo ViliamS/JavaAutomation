@@ -38,7 +38,11 @@ public class ApiAutomaticRegistrationStepDef extends ApiOpoqoBorrowerStepDef {
 
     @Given("^Borrower types his applicant : (.*)$")
     public void user_types_his_applicant(String applicantId) {
-        automationRegistrationParameters.put("root:c:w:pnlMain:c:w:txtId:tb", "test.automation.b_api_" + DateTime.now().toString("yyyyMMddHHmmssSSS") + "@finfactory.com");
+        String datetimestamp = DateTime.now().toString("yyyyMMddHHmmssSSS");
+        automationRegistrationParameters.put("root:c:w:pnlMain:c:w:txtId:tb", "test.automation.b_api_" + datetimestamp + "@finfactory.com");
+        log.info("===============>");
+        log.info("Email Login ===>  test.automation.b_api_" + datetimestamp + "@finfactory.com");
+        log.info("===============>");
     }
 
     @Given("^Borrower (unchecks|checks) \"Quote Complete\"$")

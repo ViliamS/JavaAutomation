@@ -43,7 +43,6 @@ public class ApiSupportHttpClientStepDef {
         Assert.assertNotNull("Maven didn't load the System property Borrower", System.getProperty("borrower"));
 
         localContext = HttpUtils.initContext(System.getProperty("domain.borrower"), "/stable-borrower");
-//        localContext = getNewInstanceHttpClientContext();
     }
 
     @After
@@ -58,7 +57,6 @@ public class ApiSupportHttpClientStepDef {
             log.fatal(e.getCause());
         }
         finally {
-//            HttpClientUtils.closeQuietly(httpClient);
             httpClient = null;
             localContext = null;
         }
@@ -79,5 +77,4 @@ public class ApiSupportHttpClientStepDef {
     public static HttpContext getNewInstanceHttpClientContext(String domain, String context) {
         return ( localContext = HttpUtils.initContext(domain, context) );
     }
-
 }

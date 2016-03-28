@@ -114,7 +114,10 @@ Feature: Api Single Borrower
     And finally, Borrower clicks "Submit Application"
 
 #    Underwriter
-    Given Borrower processes SSO Auth Step 1
+    Given user processes SSO Underwriter Auth Step
+    And user processes final SSO Underwriter Auth Step
+
+    Given Underwriter processes SSO Auth Step 1
     And Borrower processes SSO Auth Step 2
     And Borrower processes final SSO Auth Step
 

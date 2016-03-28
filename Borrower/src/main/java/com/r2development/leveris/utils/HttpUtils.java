@@ -219,12 +219,23 @@ public class HttpUtils {
             } else if (toReturn.contains("A JavaScript error occurred while processing custom server")) {
                 errorMessage = prettyFormat(StringEscapeUtils.unescapeXml(response2Jsoup.select("component[id~=feedback]").html()), 2);
                 assertFalse(errorMessage, true);
-            } else if (toReturn.contains("Hide message")) {
-                errorMessage = prettyFormat(StringEscapeUtils.unescapeXml(response2Jsoup.select("component[id~=feedback]").html()), 2);
-                if ( errorMessage.contains("<body></body>")) {
-                    // TODO extract component central then extract <div class="feedback-form feedback-box-top-jump" id="feedbackBox1cd9" wicketpath="main_c_form_feedbackBox1">
+            } else if (toReturn.contains("Hide message") || toReturn.contains("is not valid.")) {
+                String[] componentId = { "main", "form", "dialog" };
+                for ( int i=0; i<componentId.length; i++) {
+                    try {
+                        response2Jsoup = Jsoup.parse(Jsoup.parse(toReturn).select("component[id~="+componentId[i]+"]").select("component[encoding~=wicket]").first().text());
+                        log.info("is " + componentId[i]);
+                        break;
+                    }
+                    catch (NullPointerException npe) {
+                        log.info("isnot " + componentId[i]);
+                    }
                 }
-                assertFalse(errorMessage, true);
+                Elements feedbackElements = response2Jsoup.select("div[wicketpath~=main_c_form_feedbackBox");
+                if ( feedbackElements.size() == 1 ) {
+                    errorMessage = prettyFormat(StringEscapeUtils.unescapeXml(feedbackElements.text()), 2);
+                    assertFalse(errorMessage, true);
+                }
             }
 
             // TODO to handle <!-- Page Class com.cleverlance.abakus.ib.borrower.web.ui.error.PageExpiredErrorPage -->
