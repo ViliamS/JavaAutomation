@@ -49,31 +49,86 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
         yourAccountsPage.getTitle();
         borrower_clicks_an_account_type(userType, accountType);
 
-        if (!StringUtils.isEmpty(accountData.getStatementDate()))
-            borrower_types_the_statement_date(userType, accountType, accountData.getStatementDate());
+        switch(accountType){
 
-        borrower_types_his_account_provider(userType, accountType, accountData.getAccountProvider());
+            case "Current account":
 
-        borrower_types_his_account_holder_name(userType, accountType, accountData.getAccountHolderName());
+                if(!StringUtils.isEmpty(accountData.getStatementDate()))
+                    borrower_types_the_statement_date(userType, accountType, accountData.getStatementDate());
 
-        borrower_types_his_sort_code_1(userType, accountType, accountData.getSortCode1());
+                borrower_types_his_account_provider(userType, accountType, accountData.getAccountProvider());
 
-        borrower_types_his_sort_code_2(userType, accountType, accountData.getSortCode2());
+                if(!StringUtils.isEmpty(accountData.getAccountHolderName()))
+                    borrower_types_his_account_holder_name(userType, accountType, accountData.getAccountHolderName());
 
-        borrower_types_his_sort_code_3(userType, accountType, accountData.getSortCode3());
+                borrower_types_his_sort_code_1(userType, accountType, accountData.getSortCode1());
 
-        borrower_types_his_account_number(userType, accountType, accountData.getAccountNumber());
+                borrower_types_his_sort_code_2(userType, accountType, accountData.getSortCode2());
 
-        borrower_types_his_account_balance(userType, accountType, accountData.getAccountBalance());
+                borrower_types_his_sort_code_3(userType, accountType, accountData.getSortCode3());
 
-        if ( !StringUtils.isEmpty(accountData.getOverdraftLimit()))
-            borrower_types_his_overdraft_limit(userType, accountType, accountData.getOverdraftLimit());
+                borrower_types_his_account_number(userType, accountType, accountData.getAccountNumber());
 
-        borrower_selects_his_source_of_saving(userType, accountType, accountData.getSourceOfSaving());
+                borrower_types_his_account_balance(userType, accountType, accountData.getAccountBalance());
 
-        if ( !StringUtils.isEmpty(accountData.getRegularMonthlySaving()))
-            borrower_types_his_regular_monthly_saving(userType, accountType, accountData.getRegularMonthlySaving());
+                if ( !StringUtils.isEmpty(accountData.getOverdraftLimit()))
+                    borrower_types_his_overdraft_limit(userType, accountType, accountData.getOverdraftLimit());
+                /**
+                 And Borrower fills in Current account
+                 | formType              | Current account         |
+                 | statementDate         | 21/03/2016              |
+                 | accountProvider       | CSOB                    |
+                 | accountHolderName     | deWilliamS              |
+                 | sortCode1             | 12                      |
+                 | sortCode2             | 34                      |
+                 | sortCode3             | 56                      |
+                 | accountNumber         | 1234567                 |
+                 | accountBalance        | 2001                    |
+                 | overdraftLimit        | 2002                    |
+                 */
+                break;
 
+            case "Savings account":
+
+                if (!StringUtils.isEmpty(accountData.getStatementDate()))
+                    borrower_types_the_statement_date(userType, accountType, accountData.getStatementDate());
+
+                borrower_types_his_account_provider(userType, accountType, accountData.getAccountProvider());
+
+                if(!StringUtils.isEmpty(accountData.getAccountHolderName()))
+                    borrower_types_his_account_holder_name(userType, accountType, accountData.getAccountHolderName());
+
+                borrower_types_his_sort_code_1(userType, accountType, accountData.getSortCode1());
+
+                borrower_types_his_sort_code_2(userType, accountType, accountData.getSortCode2());
+
+                borrower_types_his_sort_code_3(userType, accountType, accountData.getSortCode3());
+
+                borrower_types_his_account_number(userType, accountType, accountData.getAccountNumber());
+
+                borrower_types_his_account_balance(userType, accountType, accountData.getAccountBalance());
+
+                borrower_selects_his_source_of_saving(userType, accountType, accountData.getSourceOfSaving());
+
+                if ( !StringUtils.isEmpty(accountData.getRegularMonthlySaving()))
+                    borrower_types_his_regular_monthly_saving(userType, accountType, accountData.getRegularMonthlySaving());
+
+                /**
+                 And Borrower fills in Savings account
+                 | formType              | Savings account         |
+                 | statementDate         | 21/03/2016              |
+                 | accountProvider       | AccProvider             |
+                 | accountHolderName     | deWilliamS              |
+                 | sortCode1             | 12                      |
+                 | sortCode2             | 34                      |
+                 | sortCode3             | 56                      |
+                 | accountNumber         | 09876543                |
+                 | accountBalance        | 2001                    |
+                 | sourceOfSaving        | Gift                    |
+                 | regularMonthlySaving  | 200                     |
+                 */
+                break;
+        }
         borrower_clicks_add_this_account(userType);
     }
 

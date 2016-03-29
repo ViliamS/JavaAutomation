@@ -124,8 +124,6 @@ Feature: Payday Loan
       | accountNumber         | 1234567                 |
       | accountBalance        | 2001                    |
       | overdraftLimit        | 2002                    |
-      | sourceOfSaving        | Gift                    |
-      | regularMonthlySaving  | 200                     |
 
     And Borrower fills in Savings account
       | formType              | Savings account         |
@@ -137,7 +135,6 @@ Feature: Payday Loan
       | sortCode3             | 56                      |
       | accountNumber         | 09876543                |
       | accountBalance        | 2001                    |
-      | overdraftLimit        | 2002                    |
       | sourceOfSaving        | Gift                    |
       | regularMonthlySaving  | 200                     |
 
