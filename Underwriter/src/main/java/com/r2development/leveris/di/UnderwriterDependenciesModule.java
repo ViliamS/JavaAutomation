@@ -76,6 +76,9 @@ public class UnderwriterDependenciesModule extends AbstractModule {
     UnderwriterDependenciesModule(IUser user) {
         this.user = user;
     }
+//    UnderwriterDependenciesModule(SharedDriver sharedDriver) {
+//        this.webDriver = sharedDriver;
+//    }
 
     @Override
     protected void configure() {

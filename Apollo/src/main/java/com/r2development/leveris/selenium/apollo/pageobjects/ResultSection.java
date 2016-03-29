@@ -18,7 +18,7 @@ public class ResultSection extends Apollo implements IResultSection {
 
     @FindBy( xpath = INFO_RESULT_XPATH )
     protected WebElement weItemsResult;
-    private String currentItemResultText;
+//    private String currentItemResultText;
 
     @FindBy( xpath = TABLE_XPATH )
     protected WebElement weTableResult;
@@ -56,7 +56,7 @@ public class ResultSection extends Apollo implements IResultSection {
         this.headerTableData = getHeaderTableData();
         this.orderBy = getOrderBy();
         this.bodyTableData = getBodyTableData();
-        this.currentItemResultText = getInfoData();
+//        this.currentItemResultText = getInfoData();
 
         return this;
     }

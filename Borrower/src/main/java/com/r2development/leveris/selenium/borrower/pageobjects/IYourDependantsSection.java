@@ -4,7 +4,7 @@ public interface IYourDependantsSection {
 
     String YOUR_DEPENDANTS_PANEL_XPATH = "//div[@wicketpath='main_c_form_dialogWrapper_dialog']";
 
-//    String YOUR_DEPENDANTS_TITLE_XPATH = "//h2[contains(., 'Your deoendants')]";
+//    String YOUR_DEPENDANTS_TITLE_XPATH = "//h2[contains(., 'Your dependants')]";
     String YOUR_DEPENDANTS_TITLE_XPATH = "//div[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_lblNoDepTitle_l' and contains(., 'Your dependants')]";
     String YOUR_DEPENDANTS_TITLE2_XPATH = "//div[@wicketpath='main_c_form_form_root_c_w_pnlDepList_c_w_lblDependantListTitle_l']";
     String YOUR_DEPENDANTS_DESCRIPTION_INTRO_XPATH = "//div[@]wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_lblNoEmpText_l']";

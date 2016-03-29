@@ -214,14 +214,13 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
 
         Document empListDoc2 = null;
         String[] componentId = { "main", "form", "dialog" };
-        for ( int i=0; i<componentId.length; i++) {
+        for (String aComponentId : componentId) {
             try {
-                empListDoc2 = Jsoup.parse(empListDoc.select("component[id~="+componentId[i]+"]").select("component[encoding~=wicket]").first().text());
-                log.info("is " + componentId[i]);
+                empListDoc2 = Jsoup.parse(empListDoc.select("component[id~=" + aComponentId + "]").select("component[encoding~=wicket]").first().text());
+                log.info("is " + aComponentId);
                 break;
-            }
-            catch (NullPointerException npe) {
-                log.info("isnot " + componentId[i]);
+            } catch (NullPointerException npe) {
+                log.info("isnot " + aComponentId);
             }
         }
 
@@ -233,9 +232,9 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
             case "Self Employed":
                 fixCategory = "SelfEmployed";
                 break;
-            case "Civil Servant":
-                fixCategory = "CivilServant";
-                break;
+//            case "Civil Servant":
+//                fixCategory = "CivilServant";
+//                break;
             case "Unemployed/Homemaker":
                 fixCategory = "Unemployment";
                 break;
@@ -249,9 +248,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
 
         Elements divEmploymentTypeAddElements = empListDoc2.select("div[data-path~=pnlNoEmplyments").select("div[data-path~=lnkAdd" + finalFixCategory + "]");
         Elements divEmploymentTypeAddElements2 = null;
-        Map<String, String> wicketInterfaceMap = new LinkedHashMap<>();
         String linkAdd = null;
-        String currentKey = "linkAdd";
         if ( divEmploymentTypeAddElements.size() != 0 ) {
             for (Element current : divEmploymentTypeAddElements) {
 //                String currentKey = current.attr("data-path").split(" ")[1];
@@ -1113,6 +1110,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
     }
 
     private void borrower_coapplicant_user_selects_category_country(Map<String, String> employmentIncomesParameters, String category, String country) {
+        // TODO get all countries
         switch (category) {
             case "Self Employed":
 //                employmentIncomesPage.selectSelfEmployment_Country(country);
@@ -1223,14 +1221,13 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
         Document currentFormDoc = Jsoup.parse(httpResponse.getHttpResponse());
         Document currentFormDoc2 = null;
         String[] componentId = { "main", "form", "dialog" };
-        for ( int i=0; i<componentId.length; i++) {
+        for (String aComponentId : componentId) {
             try {
-                currentFormDoc2 = Jsoup.parse(currentFormDoc.select("component[id~="+componentId[i]+"]").select("component[encoding~=wicket]").first().text());
-                log.info("is " + componentId[i]);
+                currentFormDoc2 = Jsoup.parse(currentFormDoc.select("component[id~=" + aComponentId + "]").select("component[encoding~=wicket]").first().text());
+                log.info("is " + aComponentId);
                 break;
-            }
-            catch (NullPointerException npe) {
-                log.info("isnot " + componentId[i]);
+            } catch (NullPointerException npe) {
+                log.info("isnot " + aComponentId);
             }
         }
 
@@ -1257,26 +1254,26 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
         httpResponse.setHttpResponse(employmentAddResponse);
 
         // (Paye|Self Employed|Civil Servant|Unemployed/Homemaker|Other)
-        String finalCategory = StringUtils.EMPTY;
+//        String finalCategory = StringUtils.EMPTY;
         String linkClose = StringUtils.EMPTY;
         switch (category) {
             case "Paye":
-                finalCategory = "Paye";
+//                finalCategory = "Paye";
                 linkClose = ":1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:pnlPaye:c:w:lnkAddPaye:close::IBehaviorListener:0:";
                 break;
             case "Self Employed":
-                finalCategory = "SelfEmployed";
+//                finalCategory = "SelfEmployed";
                 linkClose = ":1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:pnlSelfEmployed:c:w:lnkAddSelfEmployed:close::IBehaviorListener:0:";
                 break;
 //            case "Civil Servant":
 //                finalCategory = "CivilServant";
 //                break;
             case "Unemployed/Homemaker":
-                finalCategory = "Unemployment";
+//                finalCategory = "Unemployment";
                 linkClose = ":1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:pnlUnemployed:c:w:lnkAddUnemployment:close::IBehaviorListener:0:";
                 break;
             case "Other":
-                finalCategory = "Homemaker";
+//                finalCategory = "Homemaker";
                 linkClose = ":1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:pnlOther:c:w:lnkAddHomemaker:close::IBehaviorListener:0:";
                 break;
         }
@@ -1285,7 +1282,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
             linkClose = "1:main:c:form:form:root:c:w:pnlEmpList:c:w:btnAddEmp:close::IBehaviorListener:0:";
 
 //        if ( currentWorkflow.equals("btnEmployment")) {
-        String lnkCloseResponse = requestHttpPost(
+        requestHttpPost(
                 httpClient,
                 System.getProperty("borrower") + "/form.2?wicket:interface=" + linkClose,
                 new LinkedHashMap<String, String>() {
@@ -1347,7 +1344,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
     public void borrower_coapplicant_user_clicks_add_employment(String userType) throws IOException {
 
         Document precedentResponseDoc = Jsoup.parse(httpResponse.getHttpResponse());
-        TextNode textNodePrecedentResponse = null;
+        TextNode textNodePrecedentResponse;
         try {
             textNodePrecedentResponse = precedentResponseDoc.select("component[id~=form]").select("component[encoding~=wicket]").first().textNodes().get(0);
         } catch ( NullPointerException npe ) {
@@ -1388,14 +1385,13 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
         Document currentFormDoc = Jsoup.parse(httpResponse.getHttpResponse());
         Document currentFormDoc2 = null;
         String[] componentId = { "main", "form", "dialog" };
-        for ( int i=0; i<componentId.length; i++) {
+        for (String aComponentId : componentId) {
             try {
-                currentFormDoc2 = Jsoup.parse(currentFormDoc.select("component[id~="+componentId[i]+"]").select("component[encoding~=wicket]").first().text());
-                log.info("is " + componentId[i]);
+                currentFormDoc2 = Jsoup.parse(currentFormDoc.select("component[id~=" + aComponentId + "]").select("component[encoding~=wicket]").first().text());
+                log.info("is " + aComponentId);
                 break;
-            }
-            catch (NullPointerException npe) {
-                log.info("isnot " + componentId[i]);
+            } catch (NullPointerException npe) {
+                log.info("isnot " + aComponentId);
             }
         }
 

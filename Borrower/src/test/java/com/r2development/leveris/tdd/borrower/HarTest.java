@@ -1,8 +1,5 @@
 package com.r2development.leveris.tdd.borrower;
 
-/**
- * Created by anthonymottot on 16/03/2016.
- */
 public class HarTest {
 //
 //    private static HarProxyServer proxyServer;

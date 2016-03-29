@@ -5,9 +5,6 @@ import com.r2development.leveris.selenium.borrower.pageobjects.IYourDependantsPa
 import com.r2development.leveris.selenium.borrower.pageobjects.sectionobjects.IForm;
 import org.openqa.selenium.WebDriver;
 
-/**
- * Created by anthonymottot on 18/03/2016.
- */
 public class AccountsList implements IAccountsList/*, IHeaderForm*/ {
 
     private final WebDriver webDriver;
@@ -28,7 +25,6 @@ public class AccountsList implements IAccountsList/*, IHeaderForm*/ {
 
     @Override
     public IForm selectAccountType(String accountFormType) {
-        System.out.println("selectAccountType");
         IForm toReturn = null;
         switch (accountFormType) {
             case "Current account":

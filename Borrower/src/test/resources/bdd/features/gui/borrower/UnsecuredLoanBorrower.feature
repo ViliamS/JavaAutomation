@@ -30,7 +30,7 @@ Feature: Payday Loan
 
 #    PERSONAL DETAILS
 #    When Borrower clicks "Borrower Personal Details"
-    And borrower fills in "Personal Details"
+    And Borrower fills in Personal Details
       | firstName           | AutomationSBUI |
       | lastName            | Tester         |
       | gender              | Male           |
@@ -45,7 +45,7 @@ Feature: Payday Loan
 
 #    EMPLOYMENT & INCOME
 #    When Borrower clicks "Borrower Employment Income"
-    And borrower fills in "Employment Income"
+    And Borrower fills in Employment and Income type Paye
       | categoryIncome      | Paye        |
       | occupation          | Artist      |
       | employerName        | Hot Peppers |

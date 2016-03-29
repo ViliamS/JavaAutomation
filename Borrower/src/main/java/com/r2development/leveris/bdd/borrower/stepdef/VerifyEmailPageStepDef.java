@@ -15,7 +15,7 @@ import org.apache.commons.logging.LogFactory;
 public class VerifyEmailPageStepDef /*extends BorrowerStepDef*/ {
 
     private static final Log log = LogFactory.getLog(VerifyEmailPageStepDef.class.getName());
-    private SharedDriver webdriver;
+    private SharedDriver webDriver;
 
     IVerifyEmailPage verifyEmailPage;
     IWelcomePage welcomePage;
@@ -27,14 +27,14 @@ public class VerifyEmailPageStepDef /*extends BorrowerStepDef*/ {
     @Inject
     VerifyEmailPageStepDef(SharedDriver webDriver) {
 //        super(webDriver);
-        this.webdriver = webDriver;
+        this.webDriver = webDriver;
 
     }
 
     @Then("^Borrower goes to Login page$")
     public void user_goes_to_Login_page() {
 //        verifyEmailPage = new VerifyEmailPage(WebDriverService.getWebDriverInstance());
-        verifyEmailPage = new VerifyEmailPage(webdriver);
+        verifyEmailPage = new VerifyEmailPage(webDriver);
         verifyEmailPage.isLoaded(user.getEmail());
         welcomePage = verifyEmailPage.redirectToWelcomePage();
         welcomePage.isLoaded();

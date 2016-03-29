@@ -5,9 +5,6 @@ import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-/**
- * todo Page Object Specific Implementation
- */
 public class QuoteConfigurationPage extends Borrower implements IQuoteConfigurationPage {
 
     private IQuoteConfigurationSection quotationConfigurationSection;

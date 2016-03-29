@@ -20,9 +20,6 @@ import org.junit.Assert;
 
 import java.io.IOException;
 
-/**
- * Created by anthonymottot on 29/02/2016.
- */
 public class LoginPaymentTest {
 
     public static void main(String... arg) throws IOException {

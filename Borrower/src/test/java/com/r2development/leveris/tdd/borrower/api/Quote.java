@@ -71,7 +71,7 @@ public class Quote {
 //        stepToken:2
 //        root:c:w:pnlUnsecuredLoanQuotation:c:w:btnContinue:submit:1
 
-        String quote1Response = requestHttpPost(
+        requestHttpPost(
                 httpClient,
                 "http://dv2app.opoqodev.com/stable-borrower/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlUnsecuredLoanQuotation:c:w:btnContinue:submit::IBehaviorListener:0:-1",
                 new LinkedHashMap<String, String>() {
@@ -96,7 +96,7 @@ public class Quote {
 //        stepToken:6
 //        root:c:w:pnlUnsecuredLoanCalculator:c:w:btnApply:submit:1
 
-        String applyResponse = requestHttpPost(
+        requestHttpPost(
                 httpClient,
                 "http://dv2app.opoqodev.com/stable-borrower/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnApplyOnline:submit::IBehaviorListener:0:-1",
                 new LinkedHashMap<String, String>() {
@@ -109,7 +109,6 @@ public class Quote {
                 localContext,
                 false
         );
-
 
         Map<String, String> registrationParameters = new LinkedHashMap<>();
         String firstName = "Anthony";
@@ -131,7 +130,7 @@ public class Quote {
         user.setPhoneNumber(phoneNumber);
         user.setPwd(pwd);
 
-        String registrationResponse = requestHttpPost(
+        requestHttpPost(
                 httpClient,
                 "http://dv2app.opoqodev.com/stable-borrower/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlMain:c:w:btnRegister:submit::IBehaviorListener:0:",
                 new LinkedHashMap<String, String>() {
@@ -153,7 +152,7 @@ public class Quote {
         Class.forName("oracle.jdbc.OracleDriver");
         Orasql.executeSqlUpdateQuery("jdbc:oracle:thin:@DV2000.LEVERIS", "stable_mchuser", "heslo", "update mch_user set isemailaddressvalid = 'true', isphonenumbervalid = 'true', isregistrationcomplete = 'true' where userloginid = '" + user.getEmail() + "'");
 
-        String loginLinkResponse = requestHttpGet(
+        requestHttpGet(
                 httpClient,
                 "http://dv2app.opoqodev.com/stable-borrower/form.1?wicket:interface=:1:initialMenuWrapper:initialMenu:root:item:1:link::IBehaviorListener:0:",
                 new LinkedHashMap<String, String>() {
@@ -165,14 +164,13 @@ public class Quote {
                 false
         );
 
-
         Map<String, String> loginParameters = new LinkedHashMap<>();
         loginParameters.put("root:c:w:pnlMain:c:w:txtEmailAddress:tb", user.getEmail());
         loginParameters.put("root:c:w:pnlMain:c:w:pwdPassword:tb", user.getPwd());
         loginParameters.put("stepToken", "1");
         loginParameters.put("root:c:w:pnlMain:c:w:btnLogin:submit", "1");
 
-        String loginResponse = requestHttpPost(
+        requestHttpPost(
                 httpClient,
                 "http://dv2app.opoqodev.com/stable-borrower/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlMain:c:w:btnLogin:submit::IBehaviorListener:0:-1",
                 new LinkedHashMap<String, String>() {
@@ -185,6 +183,5 @@ public class Quote {
                 localContext,
                 false
         );
-
     }
 }

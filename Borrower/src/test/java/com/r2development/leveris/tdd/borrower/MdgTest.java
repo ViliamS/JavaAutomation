@@ -16,9 +16,6 @@ import static com.r2development.leveris.utils.HttpUtils.createHttpClient;
 import static com.r2development.leveris.utils.HttpUtils.requestHttpPost;
 import static org.junit.Assert.assertNotNull;
 
-/**
- * Created by anthonymottot on 08/03/2016.
- */
 public class MdgTest {
 
     public static void main(String... args) throws IOException {

@@ -4,7 +4,7 @@ import com.google.inject.ImplementedBy;
 import cucumber.api.Scenario;
 import org.openqa.selenium.WebDriver;
 
-@ImplementedBy(WebDriverService.class)
+@Deprecated @ImplementedBy(WebDriverService.class)
 public interface IWebDriverService {
 
     void setup();

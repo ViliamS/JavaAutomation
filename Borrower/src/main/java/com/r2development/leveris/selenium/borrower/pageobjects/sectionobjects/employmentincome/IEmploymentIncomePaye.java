@@ -1,8 +1,5 @@
 package com.r2development.leveris.selenium.borrower.pageobjects.sectionobjects.employmentincome;
 
-/**
- * Created by anthonymottot on 17/03/2016.
- */
 public interface IEmploymentIncomePaye {
 
     String INPUT_OCCUPATION_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlDetail_c_w_pnlEmployed_c_w_cmbJobTitle_v']";
@@ -21,7 +18,6 @@ public interface IEmploymentIncomePaye {
     String EMPLOYMENT_INCOME_PAYE_FORM_CURRENTLY_XPATH = INPUT_CURRENTLY_XPATH;
     String EMPLOYMENT_INCOME_PAYE_FORM_NET_INCOME_MONTHLY_XPATH = INPUT_NET_INCOME_MONTHLY_XPATH;
 
-
     IEmploymentIncomePaye selectPaye_Occupation(String occupation);
     IEmploymentIncomePaye typePaye_EmploymentName(String employmentName);
     IEmploymentIncomePaye selectPaye_EmploymentType(String employmentType);
@@ -29,5 +25,4 @@ public interface IEmploymentIncomePaye {
     IEmploymentIncomePaye typePaye_EndDate(String endDate);
     IEmploymentIncomePaye checkPaye_Currently(String currently);
     IEmploymentIncomePaye typePaye_NetIncomeMonthly(String netIncomeMonthly);
-
 }

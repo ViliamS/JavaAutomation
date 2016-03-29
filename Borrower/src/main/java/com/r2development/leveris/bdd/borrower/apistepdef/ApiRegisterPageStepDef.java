@@ -214,7 +214,7 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
                 }
         );
 
-        String registrationResponse = requestHttpPost(
+        requestHttpPost(
                 httpClient,
                 "http://dv2app.opoqodev.com/stable-borrower/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlMain:c:w:btnRegister:submit::IBehaviorListener:0:",
                 new LinkedHashMap<String, String>() {

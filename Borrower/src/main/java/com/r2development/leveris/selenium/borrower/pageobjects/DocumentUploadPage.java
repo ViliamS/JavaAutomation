@@ -18,20 +18,10 @@ public class DocumentUploadPage extends HeaderAndBottomAndFormsMenuSection imple
     protected IUser user;
 
 //    @Inject
-//    public DocumentUploadPage(WebDriver webDriver) {
-//        super(webDriver);
-//        headerSection = new HeaderSection(webDriver);
-//        documentUploadSection = new DocumentUploadSection(webDriver);
-//        formsMenu = new FormsMenu(webDriver);
-//        bottomSection = new BottomSection(webDriver);
-//    }
-
-//    @Inject
-    public DocumentUploadPage(SharedDriver webDriver/*, IUser user*/) {
+    public DocumentUploadPage(SharedDriver webDriver) {
         super(webDriver);
-//        this.user = user;
         headerSection = new HeaderSection(webDriver);
-        documentUploadSection = new DocumentUploadSection(webDriver/*, user*/);
+        documentUploadSection = new DocumentUploadSection(webDriver);
         formsMenu = new FormsMenu(webDriver);
         bottomSection = new BottomSection(webDriver);
     }

@@ -4,12 +4,7 @@ import com.r2development.leveris.Borrower;
 import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 
-/**
- * todo LandingPageStepDef Specific Implementation
- */
 public class QuoteConfigurationSection extends Borrower implements IQuoteConfigurationSection {
 
     private static final Log log = LogFactory.getLog(QuoteConfigurationSection.class.getName());

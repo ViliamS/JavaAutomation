@@ -2,9 +2,9 @@
   Feature: Api Underwriter for Single Borrower
 
     Background:
-      Given user processes SSO Auth Step 1
-      And user processes SSO Auth Step 2
-      And user processes final SSO Auth Step
+#      Given user processes SSO Auth Step 1
+#      And user processes SSO Auth Step 2
+#      And user processes final SSO Auth Step
 
     Scenario: Simplest Single Borrower
 

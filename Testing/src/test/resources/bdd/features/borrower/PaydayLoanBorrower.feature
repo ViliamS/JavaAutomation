@@ -8,7 +8,7 @@ Feature: Payday Loan
   Scenario: Payday Load
 
     Given Borrower processes the automatic registration
-      | applicantId | test.automation.test@test.finfactory.com |
+      | applicantId | test.automation@finfactory.com |
     When Borrower logs in via Automatic Registration
 #    When Payday Loan User clicks on Continue button
 #    Then Borrower clicks on Apply Online
@@ -33,16 +33,16 @@ Feature: Payday Loan
       | LoanPurpose        | PAYDAY    |
       | NetMonthlyIncome   | 21,000.00 |
       | MonthlyExpenses    | 1,000.00  |
-      | NumberOfDependents | 1         |
+      | NumberOfDependants | 1         |
       | AmountToBorrow     | 500       |
-    When Payday Loan User clicks on Continue button
+    When Payday Loan Borrower clicks on Continue button
     Then Borrower clicks on Apply Online
 
     And Borrower processes "Forms"
 
 #    PERSONAL DETAILS
 #    When user clicks "Borrower Personal Details"
-    And Borrower fills in "Personal Details"
+    And Borrower fills in Personal Details
       | firstName           | AutomationSBUI |
       | lastName            | Tester         |
       | gender              | Male           |
@@ -150,7 +150,7 @@ Feature: Payday Loan
     And Borrower clicks Accounts "Done"
 
 #    YOUR DEPENDENT
-    And Borrower hasn't dependents
+    And Borrower hasn't dependants
 #    And user has dependents
 #    And user fills in "Dependant form"
 #    | date Of Birth | 01/01/2000 |

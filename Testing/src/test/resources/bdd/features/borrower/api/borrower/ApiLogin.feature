@@ -7,7 +7,7 @@ Feature: Borrower Wicket Login
 
   Scenario: Pass registration and Login page
     Given Borrower processes the automatic registration
-      | applicantId | test.automation.test@test.finfactory.com |
+      | applicantId | test.automation.api@finfactory.com |
     When Borrower logs in via Automatic Registration
 #    Then Borrower logs out
 #    Then Borrower can see Dashboard

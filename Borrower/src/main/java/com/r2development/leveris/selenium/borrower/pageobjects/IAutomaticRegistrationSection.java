@@ -26,7 +26,5 @@ public interface IAutomaticRegistrationSection {
 
     void typeCoapplicantId(String coapplicantId);
 
-    // TODO ... to check in which page we move to.
     IAutomaticRegistrationSection clickCreateNewUserAndLogin(String userName);
-
 }

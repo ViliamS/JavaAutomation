@@ -4,8 +4,6 @@ import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.LinkedHashMap;
@@ -17,7 +15,7 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
 
     protected IYourDependantsSection yourDependantsSection;
 
-    //    @Inject
+//    @Inject
     public YourAccountsSection(SharedDriver webDriver) {
         super(webDriver);
         headerSection = new HeaderSection(webDriver);

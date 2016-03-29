@@ -8,7 +8,7 @@ import java.util.LinkedHashSet;
 public class CalQuoteCombination {
 
     @Test
-    public void CalQuoteCombination() {
+    public void calQuoteCombination() {
 
         Collection<String> howManyBorrowers = new LinkedHashSet<>();
         howManyBorrowers.add("a single borrower");

@@ -1,8 +1,5 @@
 package com.r2development.leveris.selenium.borrower.pageobjects.sectionobjects.employmentincome;
 
-/**
- * Created by anthonymottot on 17/03/2016.
- */
 public interface IEmploymentIncomeOther {
 
     String EMPLOYMENT_INCOME_OTHER_FORM_NET_INCOME_MONTHLY_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlDetail_c_w_pnlNetIcomeOther_c_w_crbNetIcomeOther_tb']";
@@ -12,5 +9,4 @@ public interface IEmploymentIncomeOther {
     IEmploymentIncomeOther typeOther_NetIncomeMonthly(String netIncomeMonthly);
     IEmploymentIncomeOther typeOther_AdditionalIncomeSource(String additionalIncomeSource);
     IEmploymentIncomeOther typeOther_EarningTime(String earningTIme);
-
 }

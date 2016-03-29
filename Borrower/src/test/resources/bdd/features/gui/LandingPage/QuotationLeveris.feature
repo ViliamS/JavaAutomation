@@ -6,7 +6,7 @@ Business Need: To provide fill of whole page Section by one Sentence and using
 
   Scenario: Go through Quotation landing page to the Quick Loan and providing Borrower Basic Parameters then moving Quotation Configuration page for checking the result
 
-      When Borrower walk-through the Quotation process filling all mandatory data
+      When Borrower fills in Payday Loan form
         | LoanPurpose        | PERSONAL   |
         | NetMonthlyIncome   | 66,000.00  |
         | MonthlyExpenses    | 10,000.00  |

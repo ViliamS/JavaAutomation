@@ -13,13 +13,6 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-//import org.openqa.selenium.phantomjs.PhantomJSDriver;
-
-//import org.openqa.selenium.phantomjs.PhantomJSDriver;
-
-/**
- * Created by anthonymottot on 17/03/2016.
- */
 public class PhantomJsTest {
     private WebDriver driver;
     private String baseUrl;
@@ -50,9 +43,9 @@ public class PhantomJsTest {
         System.out.println("Total Links present is "+links.size());
 
 //Printing the links in the page, we get through the href attribute.
-        for(int i = 0; i<links.size();i++){
+        for (WebElement link : links) {
 
-            System.out.println("Links are listed "+links.get(i).getAttribute("href"));
+            System.out.println("Links are listed " + link.getAttribute("href"));
         }
     }
 

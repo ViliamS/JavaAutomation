@@ -5,19 +5,15 @@ import com.r2development.leveris.selenium.borrower.pageobjects.sectionobjects.IC
 import com.r2development.leveris.selenium.borrower.pageobjects.sectionobjects.IForm;
 import com.r2development.leveris.selenium.borrower.pageobjects.sectionobjects.IHeaderForm;
 import com.r2development.leveris.selenium.borrower.pageobjects.sectionobjects.employmentincome.IEmploymentIncomeUnemployed;
-import org.openqa.selenium.WebDriver;
 
 import java.util.Map;
 
-/**
- * Created by anthonymottot on 18/03/2016.
- */
 public class ExpenseFinancialPersonalLoan implements IEmploymentIncomeUnemployed, IHeaderForm, IForm, ICancelSaveClose {
 
-    private final WebDriver webDriver;
+//    private final WebDriver webDriver;
 
     public ExpenseFinancialPersonalLoan(SharedDriver webDriver) {
-        this.webDriver = webDriver;
+//        this.webDriver = webDriver;
     }
 
     @Override
@@ -52,11 +48,9 @@ public class ExpenseFinancialPersonalLoan implements IEmploymentIncomeUnemployed
 
     @Override
     public void clickCancel() {
-
     }
 
     @Override
     public void clickSaveAndClose() {
-
     }
 }

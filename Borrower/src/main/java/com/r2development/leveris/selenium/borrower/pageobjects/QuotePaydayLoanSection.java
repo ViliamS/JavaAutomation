@@ -12,17 +12,20 @@ public class QuotePaydayLoanSection extends Borrower implements IQuotePaydayLoan
 
     @Override
     public boolean isHeaderYesIWouldLikeGreatAndQuickLoanPresent() {
-        return true;//isVisible(HEADER_TITLE_YES_I_LIKE_LOAN);
+//        isVisible(HEADER_TITLE_YES_I_LIKE_LOAN);
+        return true;
     }
 
     @Override
     public boolean isSubHeaderUnsecuredLoanPresent() {
-        return true;//isVisible(UNSECURED_LOAN_TITLE);
+//        isVisible(UNSECURED_LOAN_TITLE);
+        return true;
     }
 
     @Override
     public boolean isSubTitleBasicInfoAboutYouShouldGiveUsPresent() {
-        return true;//isVisible(BASIC_INFO_TITLE);
+//        isVisible(BASIC_INFO_TITLE);
+        return true;
     }
 
     @Override

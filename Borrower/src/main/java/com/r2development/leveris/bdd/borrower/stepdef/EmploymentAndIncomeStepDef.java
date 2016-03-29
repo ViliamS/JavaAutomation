@@ -11,7 +11,6 @@ import cucumber.api.java.en.When;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
@@ -22,18 +21,18 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
 
     private static final Log log = LogFactory.getLog(EmploymentAndIncomeStepDef.class.getName());
 
-    private final WebDriver webDriver;
+//    private final WebDriver webDriver;
     @Inject
     IUser user;
     private IBorrowerHomePage borrowerHomePage;
     private IPersonalDetailsPage borrowerPersonalDetailsPage;
 //    IEmploymentIncomesPage coapplicantEmploymentIncomesPage;
     private IEmploymentIncomesPage borrowerEmploymentIncomesPage;
-    private IYourAccountsPage yourAccountsPage;
+//    private IYourAccountsPage yourAccountsPage;
 
     @Inject
     EmploymentAndIncomeStepDef(SharedDriver webDriver/*, IUser user*/) {
-        this.webDriver = webDriver;
+//        this.webDriver = webDriver;
 //        this.user = user;
 //        super(webDriver);
         borrowerEmploymentIncomesPage = new EmploymentIncomesPage(webDriver);
@@ -754,7 +753,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
         switch (borrowerOrCoapplicant) {
             case "Borrower":
 //                yourAccountsPage = borrowerEmploymentIncomesPage.clickEmploymentIncomeDone();
-                yourAccountsPage = borrowerEmploymentIncomesPage.clickDone();
+                IYourAccountsPage yourAccountsPage = borrowerEmploymentIncomesPage.clickDone();
                 yourAccountsPage.getTitle();
                 break;
 //            case "coapplicant":

@@ -598,14 +598,12 @@ public class EmploymentIncomesPage extends HeaderAndBottomAndFormsMenuSection im
 //        return this;
 //    }
 //
-//    // TODO checking if the box is rendered
 //    @Override
 //    public IEmploymentIncomesPage clickEmploymentIncomeAddEmployment() {
 //        employmentIncomeSection.clickEmploymentIncomeAddEmployment();
 //        return this;
 //    }
 //
-//    // TODO checking if the box is rendered
 //    @Override
 //    public IEmploymentIncomesPage clickEmploymentIncomeAddThisEmployment() {
 //        employmentIncomeSection.clickEmploymentIncomeAddThisEmployment();

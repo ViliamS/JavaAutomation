@@ -280,7 +280,6 @@ public class DocumentUploadSection extends Borrower implements IDocumentUploadSe
         return toReturn;
     }
 
-    // TODO to redesign : internal automation framework bug
     private Table<String, String, Integer> getDocumentTable() {
         Table<String, String, Integer> toReturn = HashBasedTable.create();
         for( int i=0; i < weReportsList.size(); i++) {

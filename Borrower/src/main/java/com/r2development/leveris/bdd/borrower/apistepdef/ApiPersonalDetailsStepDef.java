@@ -10,8 +10,6 @@ import cucumber.api.java.en.When;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -161,46 +159,50 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
 
     @Given("^(Borrower) checks his gender : (Male|Female)$")
     public void borrower_coapplicant_user_checks_his_gender(String borrowerOrCoapplicant, String gender) throws IOException {
-        String parameterValue = ( gender.equals("Male") ? "radMale" : "radFemale" );
 
-        switch( gender ) {
-            case "Male":
+        String parameterValue = null;
+        if ( gender != null) {
+            parameterValue = (gender.equals("Male") ? "radMale" : "radFemale");
 
-                requestHttpPost(
-                        httpClient,
-                        System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form::IFormChangeListener:2:-1",
-                        new LinkedHashMap<String, String>() {
-                            {
-                                put("Accept", "text/xml");
-                                put("Content-Type", "application/x-www-form-urlencoded");
-                            }
-                        },
-                        new LinkedHashMap<String, String>() {
-                            {
-                                put(
-                                    "data",
-                                    "{" +
-                                        "\"widgets\":" +
-                                        "[" +
-                                            "{" +
-                                                "\"widget\": \"pnlMaidenName\"," +
-                                                "\"data\": {" +
-                                                    "\"enable\": false" +
+            switch (gender) {
+                case "Male":
+
+                    requestHttpPost(
+                            httpClient,
+                            System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form::IFormChangeListener:2:-1",
+                            new LinkedHashMap<String, String>() {
+                                {
+                                    put("Accept", "text/xml");
+                                    put("Content-Type", "application/x-www-form-urlencoded");
+                                }
+                            },
+                            new LinkedHashMap<String, String>() {
+                                {
+                                    put(
+                                        "data",
+                                        "{" +
+                                            "\"widgets\":" +
+                                            "[" +
+                                                "{" +
+                                                    "\"widget\": \"pnlMaidenName\"," +
+                                                    "\"data\": {" +
+                                                        "\"enable\": false" +
+                                                    "}" +
                                                 "}" +
-                                            "}" +
-                                        "]" +
-                                    "}"
-                                );
-                            }
-                        },
-                        localContext,
-                        CONSUME_QUIETLY
-                );
-                break;
-            case "Female":
-                break;
-            default:
-                log.info("Huston, we have a problem !, Do we have a new gender type ?");
+                                            "]" +
+                                        "}"
+                                    );
+                                }
+                            },
+                            localContext,
+                            CONSUME_QUIETLY
+                    );
+                    break;
+                case "Female":
+                    break;
+                default:
+                    log.info("Huston, we have a problem !, Do we have a new gender type ?");
+            }
         }
 
         switch(borrowerOrCoapplicant) {
@@ -266,7 +268,8 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
 
     @Given("^(Borrower) selects his nationality : (.*)$")
     public void borrower_coapplicant_user_selects_his_nationality(String borrowerOrCoapplicant, String nationality) {
-        String parameterValue = (StringUtils.isEmpty(nationality) ? "IE" : nationality );
+        // TODO: use Nationality enum
+//        String parameterValue = (StringUtils.isEmpty(nationality) ? "IE" : nationality );
         switch(borrowerOrCoapplicant) {
             case "Borrower":
 //                borrowerPersonalDetailsParameters.put("root:c:w:cmbNationality:combobox", parameterValue);
@@ -744,7 +747,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
         finalPersonalDetailsParameters.put("root:c:w:btnNext:submit", "1");
 
 
-        Document jsoupFormResponse = Jsoup.parse(httpResponse.getHttpResponse());
+//        Document jsoupFormResponse = Jsoup.parse(httpResponse.getHttpResponse());
 
         String personalDetailsSaveDataResponse = requestHttpPost(
                 httpClient,

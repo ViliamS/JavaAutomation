@@ -51,7 +51,7 @@ public interface IYourAccountsPage {
     IYourAccountsPage typeSavingsAccountProvider(String accountProvider);
     IYourAccountsPage typeSavingsIban(String iban);
     IYourAccountsPage typeSavingAccountBalance(String accountBalance);
-    IYourAccountsPage typeSavingsOverdraftLimit(String savingOverdrafLimit);
+    IYourAccountsPage typeSavingsOverdraftLimit(String savingOverdraftLimit);
     IYourAccountsPage selectSavingsSourceOfSavings(String sourceSaving);
     IYourAccountsPage typeSavingsRegularMonthlySavings(String savingRegularMonthlySavings);
 

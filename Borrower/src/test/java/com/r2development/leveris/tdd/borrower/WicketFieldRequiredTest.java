@@ -35,16 +35,15 @@ public class WicketFieldRequiredTest {
         Document componentDoc = null;
         String[] componentId = { "main", "form", "dialog", "feedback" };
         String currentComponentId = StringUtils.EMPTY;
-        for ( int i=0; i<componentId.length; i++) {
+        for (String aComponentId : componentId) {
             try {
 //                componentDoc = Jsoup.parse(jsoup.select("component[id~="+componentId[i]+"]").select("component[encoding~=wicket]").first().text());
-                componentDoc = Jsoup.parse(jsoup.select("component[id~="+componentId[i]+"]").first().text());
-                System.out.println("is " + componentId[i]);
-                currentComponentId = componentId[i];
+                componentDoc = Jsoup.parse(jsoup.select("component[id~=" + aComponentId + "]").first().text());
+                System.out.println("is " + aComponentId);
+                currentComponentId = aComponentId;
                 break;
-            }
-            catch (NullPointerException npe) {
-                System.out.println("isnot " + componentId[i]);
+            } catch (NullPointerException npe) {
+                System.out.println("isnot " + aComponentId);
             }
         }
 
@@ -52,7 +51,7 @@ public class WicketFieldRequiredTest {
 
         if (FileUtils.readFileToString(file).contains("<ajax-response>")) {
 
-            Elements evaluateElts = jsoup.select("evaluate");
+//            Elements evaluateElts = jsoup.select("evaluate");
 
 //            Elements headerElts = jsoup.select("header-contribution");
 //            Document headerDoc = Jsoup.parse(jsoup.select("header-contribution").first().text());

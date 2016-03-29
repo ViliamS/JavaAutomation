@@ -3,12 +3,9 @@ package com.r2development.leveris.tdd.borrower;
 import com.r2development.leveris.selenium.borrower.pageobjects.IYourAccountsPage;
 import com.r2development.leveris.selenium.borrower.pageobjects.YourAccountsPage;
 
-/**
- * Created by anthonymottot on 18/03/2016.
- */
 public class RedesignPageObject {
 
-    public final static void main(String... arg) {
+    public static void main(String... arg) {
 
         IYourAccountsPage yourAccountsPage = new YourAccountsPage(null);
         yourAccountsPage

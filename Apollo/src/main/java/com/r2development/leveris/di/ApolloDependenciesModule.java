@@ -2,6 +2,7 @@ package com.r2development.leveris.di;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.openqa.selenium.WebDriver;
@@ -10,12 +11,13 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class ApolloDependenciesModule extends AbstractModule {
 
+    @Inject
     private IUser user;
     private WebDriver webDriver;
 
     @Inject
-    ApolloDependenciesModule(IUser user) {
-        this.user = user;
+    ApolloDependenciesModule(SharedDriver sharedDriver) {
+        this.webDriver = sharedDriver;
     }
 
 //    private static HarProxyServer proxyServer;

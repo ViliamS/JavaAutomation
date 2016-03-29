@@ -6,7 +6,6 @@ import com.google.inject.Singleton;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpEntity;
@@ -75,7 +74,7 @@ public class ApiSsoStepDef extends ApiOpoqoInvestorStepDef {
         String applicationCode = jsonObjectGenerateServiceTicket.get("applicationCode").getAsString();
         log.info("applicationCode <=> applicationid: " + applicationCode);
 
-        String channeluuid = RandomStringUtils.random(8, true, true) + "-" + RandomStringUtils.random(4, true, true) + "-" + RandomStringUtils.random(4, true, false) + "-" + RandomStringUtils.random(4, true, false) + "-" + RandomStringUtils.random(12, true, true);
+//        String channeluuid = RandomStringUtils.random(8, true, true) + "-" + RandomStringUtils.random(4, true, true) + "-" + RandomStringUtils.random(4, true, false) + "-" + RandomStringUtils.random(4, true, false) + "-" + RandomStringUtils.random(12, true, true);
 //        System.out.println("channeluuid: " + xrsf_token);
 
 

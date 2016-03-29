@@ -2,7 +2,6 @@ package com.r2development.leveris.tdd.apollo.sso;
 
 import com.r2development.leveris.utils.HttpUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.protocol.HttpClientContext;
@@ -11,9 +10,6 @@ import org.junit.Assert;
 
 import java.io.IOException;
 
-/**
- * Created by anthonymottot on 29/02/2016.
- */
 public class LoginClientTest {
 
     public static void main(String... arg) throws IOException {
@@ -111,9 +107,7 @@ public class LoginClientTest {
 
         HttpGet httpApolloClientContext = new HttpGet("https://dv2apl.opoqodev.com/client");
         httpApolloClientContext.setHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
-        HttpResponse responsePing = httpClient.execute(httpApolloClientContext, localContext);
-
-
-
+//        HttpResponse responsePing = httpClient.execute(httpApolloClientContext, localContext);
+        httpClient.execute(httpApolloClientContext, localContext);
     }
 }

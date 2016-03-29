@@ -4,19 +4,15 @@ import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import com.r2development.leveris.selenium.borrower.pageobjects.sectionobjects.ICancelSaveClose;
 import com.r2development.leveris.selenium.borrower.pageobjects.sectionobjects.IForm;
 import com.r2development.leveris.selenium.borrower.pageobjects.sectionobjects.IHeaderForm;
-import org.openqa.selenium.WebDriver;
 
 import java.util.Map;
 
-/**
- * Created by anthonymottot on 18/03/2016.
- */
 public class ScrappingAccount implements ISavingsAccount, IHeaderForm, IForm, ICancelSaveClose {
 
-    private final WebDriver webDriver;
+//    private final WebDriver webDriver;
 
     public ScrappingAccount(SharedDriver webDriver) {
-        this.webDriver = webDriver;
+//        this.webDriver = webDriver;
     }
 
     @Override
@@ -95,11 +91,9 @@ public class ScrappingAccount implements ISavingsAccount, IHeaderForm, IForm, IC
 
     @Override
     public void clickCancel() {
-
     }
 
     @Override
     public void clickSaveAndClose() {
-
     }
 }

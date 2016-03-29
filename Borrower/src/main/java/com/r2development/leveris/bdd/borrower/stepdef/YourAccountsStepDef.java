@@ -14,25 +14,23 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
 @Singleton
-public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312Workaround*/ {
+public class YourAccountsStepDef {
 
     private static final Log log = LogFactory.getLog(YourAccountsStepDef.class.getName());
 
-    private WebDriver webDriver;
+//    private WebDriver webDriver;
 
     @Inject
     private IUser user;
-
     private IYourAccountsPage yourAccountsPage;
 
     @Inject
-    public YourAccountsStepDef(SharedDriver webDriver/*, IUser user*/) {
-        this.webDriver = webDriver;
+    public YourAccountsStepDef(SharedDriver webDriver) {
+//        this.webDriver = webDriver;
         yourAccountsPage = new YourAccountsPage(webDriver);
     }
 
@@ -51,26 +49,16 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
 
         if (!StringUtils.isEmpty(accountData.getStatementDate()))
             borrower_types_the_statement_date(userType, accountType, accountData.getStatementDate());
-
         borrower_types_his_account_provider(userType, accountType, accountData.getAccountProvider());
-
         borrower_types_his_account_holder_name(userType, accountType, accountData.getAccountHolderName());
-
         borrower_types_his_sort_code_1(userType, accountType, accountData.getSortCode1());
-
         borrower_types_his_sort_code_2(userType, accountType, accountData.getSortCode2());
-
         borrower_types_his_sort_code_3(userType, accountType, accountData.getSortCode3());
-
         borrower_types_his_account_number(userType, accountType, accountData.getAccountNumber());
-
         borrower_types_his_account_balance(userType, accountType, accountData.getAccountBalance());
-
         if ( !StringUtils.isEmpty(accountData.getOverdraftLimit()))
             borrower_types_his_overdraft_limit(userType, accountType, accountData.getOverdraftLimit());
-
         borrower_selects_his_source_of_saving(userType, accountType, accountData.getSourceOfSaving());
-
         if ( !StringUtils.isEmpty(accountData.getRegularMonthlySaving()))
             borrower_types_his_regular_monthly_saving(userType, accountType, accountData.getRegularMonthlySaving());
 

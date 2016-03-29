@@ -13,6 +13,7 @@ import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hamcrest.core.Is;
+import org.openqa.selenium.WebDriver;
 
 import java.io.IOException;
 import java.util.List;
@@ -27,27 +28,24 @@ public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
 
     private static final Log log = LogFactory.getLog(RegisterPageStepDef.class.getName());
 
-    private SharedDriver webDriver;
+    private WebDriver webDriver;
     private IWelcomePage welcomePage;
     private IRegisterPage registerPage;
     private IVerifyEmailPage verifyEmailPage;
-    private ILoginPage loginPage;
+//    private ILoginPage loginPage;
 
     @Inject
     IUser user;
 
     @Inject
     RegisterPageStepDef(SharedDriver webDriver) {
-//        super(webDriver);
         this.webDriver = webDriver;
         registerPage = new RegisterPage(webDriver);
     }
 
     @Given("Borrower goes to Registration page$")
     public void user_goes_to_registration_page() {
-
-//        welcomePage = new WelcomePage(WebDriverService.getWebDriverInstance());
-        welcomePage = new WelcomePage(webDriver, true);
+        welcomePage = new WelcomePage((SharedDriver)webDriver, true);
         registerPage = welcomePage.clickRegister();
     }
 
@@ -58,7 +56,6 @@ public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
     }
 
     @Given("^this registration data, Borrower processes the registration \\(format2\\)$")
-//    public void this_registration_data_Borrower_processes_the_registration(Map<String, String> registrationDataMap) {
     public void this_registration_data_user_processes_the_registration(List<String> registrationDataMap) {
         fill_in_registration(new RegistrationData(registrationDataMap));
     }
@@ -85,12 +82,7 @@ public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
     @Given("^Borrower types his email (.*) in Register page$")
     public void user_types_his_email(String email) {
         String[] emailArray = email.split("@");
-//        DateTime now = DateTime.now();
-//        emailArray[0] = emailArray[0] + now.toString("yyyyMMddHHmmssSSS");
         emailArray[0] = emailArray[0] + "_" + System.getProperty("modeRun") + "_" + System.getProperty("timestamp");
-
-
-
         registerPage.setEmailAddress(String.join("@", emailArray));
         user.setEmail(String.join("@", emailArray));
         log.info(user.getEmail());
@@ -98,21 +90,16 @@ public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
 
     @Given("^Borrower types his phone number (.*) in Register page$")
     public void user_types_his_phone_number(String phoneNumber) {
-//        DateTime now = DateTime.now();
 //        registerPage.setPhoneNumber("+420" + System.getProperty("timestamp"));
-        registerPage.setPhoneNumber("+420123456789");
+        registerPage.setPhoneNumber(phoneNumber);
 //        user.setPhoneNumber("+420" + System.getProperty("timestamp"));
-        user.setPhoneNumber("+420123456789");
-        log.info(user.getPhoneNumber());
+        user.setPhoneNumber(phoneNumber);
+//        log.info(user.getPhoneNumber());
     }
 
     @Given("^system generates Borrower's phone number in Register page$")
     public void system_generate_borrower_phone_number_in_Register_page() {
-//        DateTime now = DateTime.now();
-//        String trickyPhoneNumber = now.toString("yyyyMMddHHmmss");
-//        registerPage.setPhoneNumber(trickyPhoneNumber);
         registerPage.setPhoneNumber(System.getProperty("timestamp"));
-//        user.setPhoneNumber(trickyPhoneNumber);
         user.setPhoneNumber(System.getProperty("timestamp"));
         log.info(user.getPhoneNumber());
     }
@@ -187,7 +174,8 @@ public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
 
     @When("^Borrower is already signed$")
     public void user_already_signed() {
-        loginPage = registerPage.clickAlreadyRegister();
+//        loginPage = registerPage.clickAlreadyRegister();
+        registerPage.clickAlreadyRegister();
     }
 
     @When("^Borrower closes the Register page$")

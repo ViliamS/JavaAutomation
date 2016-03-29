@@ -1,8 +1,5 @@
 package com.r2development.leveris.selenium.borrower.pageobjects.sectionobjects.account;
 
-/**
- * Created by anthonymottot on 17/03/2016.
- */
 public interface ISavingsAccount {
 
     String YOUR_ACCOUNTS_SAVING_ACCOUNT_STATEMENT_DATE_LABEL_XPATH = "//label[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlStatementDate_c_w_txtStatementDate_label']";

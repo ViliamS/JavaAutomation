@@ -6,7 +6,6 @@ import org.apache.http.client.protocol.HttpClientContext;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
@@ -75,8 +74,8 @@ public class BorrowerTest {
         );
 
         Document loginResponseDoc = Jsoup.parse(loginResponse);
-        TextNode textNodeLoginResponseDoc = loginResponseDoc.select("component[id~=main]").select("component[encoding~=wicket]").first().textNodes().get(0);
-        Document loginResponseDoc2 = Jsoup.parse(textNodeLoginResponseDoc.text());
+//        TextNode textNodeLoginResponseDoc = loginResponseDoc.select("component[id~=main]").select("component[encoding~=wicket]").first().textNodes().get(0);
+//        Document loginResponseDoc2 = Jsoup.parse(textNodeLoginResponseDoc.text());
 //        Elements panelTasksHidden = loginResponseDoc2.select("div[wicketpath=main_c_form_form_root_c_w_btnTasksHidden]");
         Elements textNodeJavascript = loginResponseDoc.select("evaluate[encoding~=wicket]");
 
@@ -113,7 +112,5 @@ public class BorrowerTest {
                 localContext,
                 false
         );
-
-
     }
 }

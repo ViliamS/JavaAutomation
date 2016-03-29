@@ -38,7 +38,7 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
     @Inject
     IUser user;
     private IBorrowerHomePage borrowerHomePage;
-    private IWelcomePage welcomePage;
+//    private IWelcomePage welcomePage;
     private IBuildQuotationPage buildQuotationPage;
 
     @Inject
@@ -130,7 +130,8 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
     @When("^Borrower creates a quote")
     public void user_create_a_quote() {
 //        welcomePage = new WelcomePage(WebDriverService.getWebDriverInstance());
-        welcomePage = new WelcomePage(webDriver);
+//        welcomePage = new WelcomePage(webDriver);
+        new WelcomePage(webDriver);
 //        buildQuotationPage = welcomePage.clickQuote();
 //        buildQuotationPage.clickGetQuoteNow();
     }

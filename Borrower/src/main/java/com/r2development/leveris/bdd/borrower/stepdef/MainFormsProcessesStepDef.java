@@ -10,10 +10,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 @Singleton
-public class MainFormsProcessesStepDef /*extends BorrowerStepDef*/ implements CLV312Workaround {
+public class MainFormsProcessesStepDef {
 
     private static final Log log = LogFactory.getLog(MainFormsProcessesStepDef.class.getName());
-    private final SharedDriver webDriver;
+//    private final SharedDriver webDriver;
 
     @Inject
     IUser user;
@@ -30,8 +30,7 @@ public class MainFormsProcessesStepDef /*extends BorrowerStepDef*/ implements CL
 
     @Inject
     public MainFormsProcessesStepDef(SharedDriver webDriver) {
-//        super(webDriver);
-        this.webDriver = webDriver;
+//        this.webDriver = webDriver;
         borrowerHomePage = new BorrowerHomePage(webDriver);
     }
 
@@ -47,14 +46,8 @@ public class MainFormsProcessesStepDef /*extends BorrowerStepDef*/ implements CL
 //        formsPage.clickDashboard();
 //    }
 
-    @Override
-    public void workaroundCLV312(String borrowerOrCoapplicant) {
-        borrowerHomePage.clickInfoUpload();
-    }
-
     @When("^Borrower clicks \"Borrower Personal Details\"$")
     public void user_clicks_Borrower_Personal_Details() {
-//        workaroundCLV312("borrower");
         currentPage.clickSingleBorrowerPersonalDetails();
         currentPage = (IFormsMenu) borrowerPersonalDetailsPage;
     }

@@ -858,9 +858,9 @@ public class UnderwriterTest {
         Document containerLoanOfferDoc = Jsoup.parse(containerLoanOffer.html());
         Elements loanOfferVersionElements = containerLoanOfferDoc.select("div[wicketpath=multiFlow_panels_2_p_c_form_form_root_c_w_cmbLoanOfferVersion]");
         String loanOfferVersionAttributeValue = loanOfferVersionElements.select("option[selected]").attr("value");
-        String loanOfferVersionOptionValue = loanOfferVersionElements.select("option[selected]").first().textNodes().get(0).text();
+//        String loanOfferVersionOptionValue = loanOfferVersionElements.select("option[selected]").first().textNodes().get(0).text();
 
-        String responseSaveOffer = requestHttpPost(
+        requestHttpPost(
                 httpClient,
 //                "https://st1app.loftkeys.com/underwriter/form.2?wicket:interface=:4:singleFlow:p:c:form:form:root:c:w:pnlApplicationList:c:w:rptApplication:c:rows:1:item:pnlApplication:c:w:btnStart:submit::IBehaviorListener:0:",
                 "https://st1app.loftkeys.com/underwriter/form.2?wicket:interface=:5:multiFlow:panels:2:p:c:form:form:root:c:w:btnSaveOffer:submit::IBehaviorListener:0:",
@@ -922,7 +922,7 @@ public class UnderwriterTest {
                 false
         );
 
-        String completeStage1Response = requestHttpPost(
+        requestHttpPost(
                 httpClient,
 //                "https://st1app.loftkeys.com/underwriter/form.2?wicket:interface=:4:singleFlow:p:c:form:form:root:c:w:pnlApplicationList:c:w:rptApplication:c:rows:1:item:pnlApplication:c:w:btnStart:submit::IBehaviorListener:0:",
                 "https://st1app.loftkeys.com/underwriter/form.5?wicket:interface=:5:multiFlow:panels:0:p:c:form:embeddedFormWrapper:embeddedForm:1:form:root:c:w:pnlStage1:c:w:btnComplete:submit::IBehaviorListener:0:",
@@ -943,7 +943,7 @@ public class UnderwriterTest {
                 false
         );
 
-        String containerWorkflowRefresh = requestHttpGet(
+        requestHttpGet(
                 httpClient,
                 "https://st1app.loftkeys.com/underwriter/form.5?wicket:interface=:5:multiFlow:panels:0:p:c:form:form:root:c:w:btnRefresh:cancel::IBehaviorListener:0:",
                 new LinkedHashMap<String, String>() {

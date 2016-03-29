@@ -396,7 +396,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
     @And("^Borrower selects (first-time buyer\\(s\\)|mover\\(s\\)) as mortgage type$")
     public void user_selects_mortgage_type(String mortgageType) throws IOException {
 
-        String mortgageTypeValue = ( mortgageType.equals("first-time buyer(s)") ? "FTB" : "MOV" );
+//        String mortgageTypeValue = ( mortgageType.equals("first-time buyer(s)") ? "FTB" : "MOV" );
         String rgrMortgageType = ( mortgageType.equals("first-time buyer(s)") ? "radMortgageTypeFirstTime" : "radMortgageTypeMovers" );
         quoteData.setMortgageType(mortgageType);
 //        quoteParameters.put("root:c:w:pnlBuildYourQuotation:c:w:pnlMortgageType:c:w:cmbMortgageType:combobox", mortgageTypeValue);
@@ -804,7 +804,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                 maritalStatusValue = "radMaritalStatusDivorced";
                 break;
             case "widowed":
-                maritalStatusValue = "WID";
+//                maritalStatusValue = "WID";
                 maritalStatusValue = "radMaritalStatusWidowed";
                 break;
         }

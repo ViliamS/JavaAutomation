@@ -13,7 +13,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ /*implements CLV
 
     private static final Log log = LogFactory.getLog(PersonalDetailsStepDef.class.getName());
 
-    private final WebDriver webDriver;
+//    private final WebDriver webDriver;
 
     @Inject
     IUser user;
@@ -31,7 +30,7 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ /*implements CLV
 
     @Inject
     PersonalDetailsStepDef(SharedDriver webDriver/*, IUser user*/) {
-        this.webDriver = webDriver;
+//        this.webDriver = webDriver;
 //        this.user = user;
         borrowerPersonalDetailsPage = new PersonalDetailsPage(webDriver);
     }

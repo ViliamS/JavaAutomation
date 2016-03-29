@@ -24,18 +24,11 @@ public class WelcomePage extends Borrower implements IWelcomePage {
 //    @Inject
     public WelcomePage(SharedDriver webDriver) {
         super(webDriver);
-//        get(ABAKUS_ENVIRONMENT.get(ENVIRONMENT_RUN).get(APPLICATION_RUN));
-
-//        if ( System.getProperty("borrower") == null )
-//            System.setProperty("borrower", "https://st1app.loftkeys.com/borrower");
-//
-//        get(System.getProperty("borrower"));
         PageFactory.initElements(webDriver, this);
     }
 
     @Override
     public IWelcomePage goToWelcomePage() {
-//        get(ABAKUS_ENVIRONMENT.get(ENVIRONMENT_RUN).get(APPLICATION_RUN));
         get(System.getProperty("borrower"));
         return this;
     }
@@ -43,7 +36,6 @@ public class WelcomePage extends Borrower implements IWelcomePage {
     public WelcomePage(SharedDriver webDriver, boolean toSetUrl) {
         super(webDriver);
         if (toSetUrl)
-//            get(ABAKUS_ENVIRONMENT.get(ENVIRONMENT_RUN).get(APPLICATION_RUN));
             get(System.getProperty("borrower"));
     }
 

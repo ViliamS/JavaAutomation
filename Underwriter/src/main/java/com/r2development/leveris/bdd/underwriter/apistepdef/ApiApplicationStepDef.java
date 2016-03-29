@@ -24,9 +24,6 @@ import static com.r2development.leveris.utils.HttpUtils.CONSUME_QUIETLY;
 import static com.r2development.leveris.utils.HttpUtils.requestHttpPost;
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by anthonymottot on 03/02/2016.
- */
 @Singleton
 public class ApiApplicationStepDef extends ApiOpoqoUnderwriterStepDef {
 
@@ -54,13 +51,9 @@ public class ApiApplicationStepDef extends ApiOpoqoUnderwriterStepDef {
         // search : automation ...
         // applicationId : \d+
 
-        if ( criteria.get("assign") == null )
-            criteria.put("assign", "ALL");
-        if ( criteria.get("status") == null )
-            criteria.put("status", "AllActive" );
-
-        if ( criteria.get("search") == null )
-            criteria.put("search", "automation" );
+        criteria.putIfAbsent("assign", "ALL");
+        criteria.putIfAbsent("status", "AllActive");
+        criteria.putIfAbsent("search", "automation");
         if ( user != null ) {
 //            criteria.replace("search", user.getFirstName().split(" ")[0]);
             criteria = new LinkedHashMap<String, String>() {
@@ -130,7 +123,7 @@ public class ApiApplicationStepDef extends ApiOpoqoUnderwriterStepDef {
         List<Element> automationApplication = new LinkedList<>();
         for ( Element currentElement : applicationList) {
 //            Elements elementApplicationFirstName = currentElement.select("div[wicketpath~=^singleFlow_p_c_form_form_root_c_w_pnlApplicationList_c_w_rptApplication_c_rows_(\\d+)_item_pnlApplication_c_w_lblName$]:contains(AUTOMATIONDBUI20160204190248193)");
-            Elements elementApplicationFirstName = null;
+            Elements elementApplicationFirstName;
             if ( user != null )
                 elementApplicationFirstName = currentElement.select("div[wicketpath~=^singleFlow_p_c_form_form_root_c_w_pnlApplicationList_c_w_rptApplication_c_rows_(\\d+)_item_pnlApplication_c_w_lblName$]:contains(" + user.getFirstName() +")");
             else

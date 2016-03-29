@@ -91,14 +91,13 @@ public class ApiYourDependantsStepDef extends ApiOpoqoBorrowerStepDef {
         Document currentFormDoc = Jsoup.parse(httpResponse.getHttpResponse());
         Document currentFormDoc2 = null;
         String[] componentId = { "main", "form", "dialog" };
-        for ( int i=0; i<componentId.length; i++) {
+        for (String aComponentId : componentId) {
             try {
-                currentFormDoc2 = Jsoup.parse(currentFormDoc.select("component[id~="+componentId[i]+"]").select("component[encoding~=wicket]").first().text());
-                log.info("is " + componentId[i]);
+                currentFormDoc2 = Jsoup.parse(currentFormDoc.select("component[id~=" + aComponentId + "]").select("component[encoding~=wicket]").first().text());
+                log.info("is " + aComponentId);
                 break;
-            }
-            catch (NullPointerException npe) {
-                log.info("isnot " + componentId[i]);
+            } catch (NullPointerException npe) {
+                log.info("isnot " + aComponentId);
             }
         }
 
@@ -127,7 +126,7 @@ public class ApiYourDependantsStepDef extends ApiOpoqoBorrowerStepDef {
         if ( isThereDependantList)
             linkClose = ":1:main:c:form:form:root:c:w:pnlDepList:c:w:btnAddDep:close::IBehaviorListener:0:";
 
-        String lnkCloseResponse = requestHttpGet(
+        requestHttpGet(
                 httpClient,
                 System.getProperty("borrower") + "/form.2?wicket:interface=" + linkClose,
                 new LinkedHashMap<String, String>() {
@@ -191,22 +190,21 @@ public class ApiYourDependantsStepDef extends ApiOpoqoBorrowerStepDef {
 
         Document empListDoc2 = null;
         String[] componentId = { "main", "form", "dialog" };
-        for ( int i=0; i<componentId.length; i++) {
+        for (String aComponentId : componentId) {
             try {
-                empListDoc2 = Jsoup.parse(empListDoc.select("component[id~="+componentId[i]+"]").select("component[encoding~=wicket]").first().text());
-                log.info("is " + componentId[i]);
+                empListDoc2 = Jsoup.parse(empListDoc.select("component[id~=" + aComponentId + "]").select("component[encoding~=wicket]").first().text());
+                log.info("is " + aComponentId);
                 break;
-            }
-            catch (NullPointerException npe) {
-                log.info("isnot " + componentId[i]);
+            } catch (NullPointerException npe) {
+                log.info("isnot " + aComponentId);
             }
         }
 
         Elements divEmploymentTypeAddElements = empListDoc2.select("div[data-path~=pnlNoEmplyments").select("div[data-path~=btnAddDependant]");
         Elements divEmploymentTypeAddElements2 = null;
-        Map<String, String> wicketInterfaceMap = new LinkedHashMap<>();
+//        Map<String, String> wicketInterfaceMap = new LinkedHashMap<>();
         String linkAdd = null;
-        String currentKey = "linkAdd";
+//        String currentKey = "linkAdd";
         if ( divEmploymentTypeAddElements.size() != 0 ) {
             for (Element current : divEmploymentTypeAddElements) {
 //                String currentKey = current.attr("data-path").split(" ")[1];
@@ -312,14 +310,13 @@ public class ApiYourDependantsStepDef extends ApiOpoqoBorrowerStepDef {
         Document currentFormDoc = Jsoup.parse(httpResponse.getHttpResponse());
         Document currentFormDoc2 = null;
         String[] componentId = { "main", "form", "dialog" };
-        for ( int i=0; i<componentId.length; i++) {
+        for (String aComponentId : componentId) {
             try {
-                currentFormDoc2 = Jsoup.parse(currentFormDoc.select("component[id~="+componentId[i]+"]").select("component[encoding~=wicket]").first().text());
-                log.info("is " + componentId[i]);
+                currentFormDoc2 = Jsoup.parse(currentFormDoc.select("component[id~=" + aComponentId + "]").select("component[encoding~=wicket]").first().text());
+                log.info("is " + aComponentId);
                 break;
-            }
-            catch (NullPointerException npe) {
-                log.info("isnot " + componentId[i]);
+            } catch (NullPointerException npe) {
+                log.info("isnot " + aComponentId);
             }
         }
 

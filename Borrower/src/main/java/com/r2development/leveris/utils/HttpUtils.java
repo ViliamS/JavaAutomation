@@ -133,7 +133,7 @@ public class HttpUtils {
         HttpClientUtils.closeQuietly(response);
 
         Document response2Jsoup = Jsoup.parse(toReturn);
-        String errorMessage = StringUtils.EMPTY;
+        String errorMessage;
 
         if (toReturn.contains("<!-- Page Class com.cleverlance.abakus.ib.borrower.web.ui.error.UnknownErrorPage -->")) {
             Elements divPageWrapper = response2Jsoup.select("div[class=page-wrapper]");
@@ -200,7 +200,7 @@ public class HttpUtils {
         HttpClientUtils.closeQuietly(response);
 
         Document response2Jsoup = Jsoup.parse(toReturn);
-        String errorMessage = StringUtils.EMPTY;
+        String errorMessage;
         if ( !url.equals("http://dv2app.opoqodev.com/stable-borrower/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:btnHiddenSubmit:submit::IBehaviorListener:0:") && !url.equals("http://dv2app.opoqodev.com/stable-borrower/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnHidenRefresh:submit::IBehaviorListener:0:") ) {
             if (toReturn.contains("<!-- Page Class com.cleverlance.abakus.ib.borrower.web.ui.error.UnknownErrorPage -->")) {
                 Elements divPageWrapper = response2Jsoup.select("div[class=page-wrapper]");
@@ -221,14 +221,13 @@ public class HttpUtils {
                 assertFalse(errorMessage, true);
             } else if (toReturn.contains("Hide message") || toReturn.contains("is not valid.")) {
                 String[] componentId = { "main", "form", "dialog" };
-                for ( int i=0; i<componentId.length; i++) {
+                for (String aComponentId : componentId) {
                     try {
-                        response2Jsoup = Jsoup.parse(Jsoup.parse(toReturn).select("component[id~="+componentId[i]+"]").select("component[encoding~=wicket]").first().text());
-                        log.info("is " + componentId[i]);
+                        response2Jsoup = Jsoup.parse(Jsoup.parse(toReturn).select("component[id~=" + aComponentId + "]").select("component[encoding~=wicket]").first().text());
+                        log.info("is " + aComponentId);
                         break;
-                    }
-                    catch (NullPointerException npe) {
-                        log.info("isnot " + componentId[i]);
+                    } catch (NullPointerException npe) {
+                        log.info("isnot " + aComponentId);
                     }
                 }
                 Elements feedbackElements = response2Jsoup.select("div[wicketpath~=main_c_form_feedbackBox");

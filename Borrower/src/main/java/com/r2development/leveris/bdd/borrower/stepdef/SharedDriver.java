@@ -55,7 +55,6 @@ public class SharedDriver extends EventFiringWebDriver {
     public static DesiredCapabilities dCaps = new DesiredCapabilities();
     private StringBuffer verificationErrors = new StringBuffer();
 
-//    private static WebDriver REAL_DRIVER = new ChromeDriver();
     private static final WebDriver REAL_DRIVER = execute(System.getProperty("browser"));
     private static final Thread CLOSE_THREAD = new Thread() {
         @Override
@@ -99,7 +98,7 @@ public class SharedDriver extends EventFiringWebDriver {
 ////            capabilities.setCapability(CapabilityType.PROXY, seleniumProxy);
 //        }
 
-        WebDriver toReturn = null;
+        WebDriver toReturn;
         if ( StringUtils.isEmpty(browser) )
             browser = CHROME;
 
@@ -170,17 +169,8 @@ public class SharedDriver extends EventFiringWebDriver {
         if ( StringUtils.isEmpty(System.getProperty("modeRun")) )
             System.setProperty("modeRun", GUI);
 
-//        WebDriver webDriver = null;
         if ( !StringUtils.isEmpty(System.getProperty("modeRun")) && System.getProperty("modeRun").equals(GUI)) {
-//            switch (System.getProperty("browser")) {
-//                case "chrome":
-//                    webDriver = new ChromeDriver();
-//                    break;
-//                case "firefox":
-//                    webDriver = new FirefoxDriver();
-//                    break;
-//            }
-//            deleteAllCookies();
+
         }
         else if ( System.getProperty("modeRun").equalsIgnoreCase(PHANTOMJS) && System.getProperty("browser").equals(PHANTOMJS) ) {
 //            String [] cli_args = new String[] { "--web-security=false", "--ignore-ssl-errors=true", "--remote-debugger-port=9000" };

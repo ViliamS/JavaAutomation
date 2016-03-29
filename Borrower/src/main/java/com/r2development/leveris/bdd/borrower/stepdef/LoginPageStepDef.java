@@ -14,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hamcrest.core.Is;
+import org.openqa.selenium.WebDriver;
 
 import java.io.File;
 import java.util.List;
@@ -24,14 +25,14 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class LoginPageStepDef /*extends BorrowerStepDef*/ {
 
     private static final Log log = LogFactory.getLog(LoginPageStepDef.class.getName());
-    private final SharedDriver webDriver;
+    private final WebDriver webDriver;
 
     @Inject
     IUser user;
     private ILoginPage loginPage;
-    private IBorrowerHomePage borrowerHomePage;
+//    private IBorrowerHomePage borrowerHomePage;
     private IWelcomePage welcomePage;
-    private IBuildQuotationPage buildQuotationPage;
+//    private IBuildQuotationPage buildQuotationPage;
 
     @Inject
     LoginPageStepDef(SharedDriver webDriver/*, IUser user*/) {
@@ -77,7 +78,7 @@ public class LoginPageStepDef /*extends BorrowerStepDef*/ {
 
         LoginData loginData = new LoginData(login);
 
-        welcomePage = new WelcomePage(webDriver, true);
+        welcomePage = new WelcomePage((SharedDriver)webDriver, true);
         loginPage = welcomePage.clickSignIn();
         log.info("\n --------------------------------------------------------------------------------------------------- \n" +
                 " | \n ---> Email : " + loginData.get("email") + " <--- \n" +
@@ -96,14 +97,15 @@ public class LoginPageStepDef /*extends BorrowerStepDef*/ {
     public void home_borrower_page_is_loaded() {
         try {
 //            borrowerHomePage = new BorrowerHomePage(WebDriverService.getWebDriverInstance());
-            borrowerHomePage = new BorrowerHomePage(webDriver);
-            borrowerHomePage.clickGetQuoteOrGetStarted();
+//            borrowerHomePage = new BorrowerHomePage((SharedDriver)webDriver);
+            new BorrowerHomePage((SharedDriver)webDriver).clickGetQuoteOrGetStarted();
+//            borrowerHomePage.clickGetQuoteOrGetStarted();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
 //        buildQuotationPage = new BuildQuotationPage(WebDriverService.getWebDriverInstance());
-        buildQuotationPage = new BuildQuotationPage(webDriver);
+        IBuildQuotationPage buildQuotationPage = new BuildQuotationPage((SharedDriver)webDriver);
         buildQuotationPage.isLoaded();
     }
 

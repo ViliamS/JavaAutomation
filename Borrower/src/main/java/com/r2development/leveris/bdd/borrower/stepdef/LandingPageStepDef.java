@@ -15,11 +15,8 @@ import org.junit.Assert;
 
 import java.util.List;
 
-/**
- * todo LandingPageStepDef Specific Implementation
- */
 @Singleton
-public class LandingPageStepDef /*extends BorrowerStepDef*/ {
+public class LandingPageStepDef {
 
     private static final Log log = LogFactory.getLog(LandingPageStepDef.class.getName());
 
@@ -31,28 +28,14 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
     private LandingPageData loanData;
     private IAutomaticRegistrationPage automaticRegistrationPage;
 
-//    public LandingPageStepDef() {
-//        quoteLandingPage = new QuoteLandingPage(WebDriverService.getWebDriverInstance());
-//    }
-
-//    private WebDriver webDriver;
-
     @Inject
     public LandingPageStepDef(SharedDriver webDriver) {
-//        super(webDriver);
-//        this.webDriver = webDriver;
         quoteLandingPage = new QuoteLandingPage(webDriver);
         automaticRegistrationPage = new AutomaticRegistrationPage(webDriver);
     }
 
-//    @Given("^I am running Chrome WebDriver$")
-//    public void I_am_running_Chrome_WebDriver() {
-//        webDriver.navigate().to("http://www.google.fr");
-//    }
-
     @Given("^Open Leveris Quote Landing page$")
     public void open_leveris_quote_landing_page() {
-//        webDriver.navigate().to("http.google.fr");
         quoteLandingPage.goToBorrowerQuoteLandingPage();
     }
 
@@ -91,7 +74,6 @@ public class LandingPageStepDef /*extends BorrowerStepDef*/ {
 
 
     @And("^Borrower fills in (Payday Loan|Unsecured Loan) form$")
-//    public void user_fills_form (String loanType, Map<String, String> rawData){
     public void user_fills_in_form ( String formType, List<String> rawData) {
 
         this.loanData = new LandingPageData( rawData );

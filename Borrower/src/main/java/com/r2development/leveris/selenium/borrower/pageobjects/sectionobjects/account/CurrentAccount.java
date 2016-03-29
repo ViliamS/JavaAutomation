@@ -4,19 +4,15 @@ import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import com.r2development.leveris.selenium.borrower.pageobjects.sectionobjects.ICancelSaveClose;
 import com.r2development.leveris.selenium.borrower.pageobjects.sectionobjects.IForm;
 import com.r2development.leveris.selenium.borrower.pageobjects.sectionobjects.IHeaderForm;
-import org.openqa.selenium.WebDriver;
 
 import java.util.Map;
 
-/**
- * Created by anthonymottot on 17/03/2016.
- */
 public class CurrentAccount implements ICurrentAccount, IHeaderForm, IForm, ICancelSaveClose {
 
-    private final WebDriver webDriver;
+//    private final WebDriver webDriver;
 
     public CurrentAccount(SharedDriver webDriver) {
-        this.webDriver = webDriver;
+//        this.webDriver = webDriver;
     }
 
     @Override
@@ -95,11 +91,9 @@ public class CurrentAccount implements ICurrentAccount, IHeaderForm, IForm, ICan
 
     @Override
     public void clickCancel() {
-
     }
 
     @Override
     public void clickSaveAndClose() {
-
     }
 }

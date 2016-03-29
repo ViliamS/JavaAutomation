@@ -1,8 +1,5 @@
 package com.r2development.leveris.selenium.borrower.pageobjects.sectionobjects.employmentincome;
 
-/**
- * Created by anthonymottot on 17/03/2016.
- */
 public interface IEmploymentIncomeSelfEmployed {
 
     String EMPLOYMENT_INCOME_SELF_EMPLOYMENT_FORM_OCCUPATION_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlDetail_c_w_pnlSelfEmployed_c_w_cmbSelfOccupation_v']";
@@ -32,5 +29,4 @@ public interface IEmploymentIncomeSelfEmployed {
     IEmploymentIncomeSelfEmployed selectSelfEmployment_CountyState(String countyState);
     IEmploymentIncomeSelfEmployed selectSelfEmployment_Country(String country);
     IEmploymentIncomeSelfEmployed typeSelfEmployment_BusinessNature(String businessNature);
-
 }

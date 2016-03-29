@@ -14,7 +14,6 @@ import org.apache.commons.logging.LogFactory;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
@@ -104,11 +103,11 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
     @When("^(Borrower) clicks \"ADD ACCOUNT\"$")
     public void borrower_clicks_add_account(String userType) throws IOException {
 
-        Document yourAccountDoc = Jsoup.parse(httpResponse.getHttpResponse());
-        TextNode textNodeYourAccount = yourAccountDoc.select("component[id~=form]").select("component[encoding~=wicket]").first().textNodes().get(0);
-        Document yourAccountDoc2 = Jsoup.parse(textNodeYourAccount.text());
+//        Document yourAccountDoc = Jsoup.parse(httpResponse.getHttpResponse());
+//        TextNode textNodeYourAccount = yourAccountDoc.select("component[id~=form]").select("component[encoding~=wicket]").first().textNodes().get(0);
+//        Document yourAccountDoc2 = Jsoup.parse(textNodeYourAccount.text());
 
-        Elements countElementAccount = yourAccountDoc2.select("div[wicketpath~=^main_c_form_form_root_c_w_pnlEmpList_c_w_rptEmployment_c_rows_\\d+_item_pnlItems$]");
+//        Elements countElementAccount = yourAccountDoc2.select("div[wicketpath~=^main_c_form_form_root_c_w_pnlEmpList_c_w_rptEmployment_c_rows_\\d+_item_pnlItems$]");
 //        countAccount = countElementAccount.size();
 
         String menuAccountResponse = requestHttpPost(
@@ -136,23 +135,25 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
         Document currentFormDoc = Jsoup.parse(httpResponse.getHttpResponse());
         Document currentFormDoc2 = null;
         String[] componentId = { "main", "form", "dialog" };
-        for ( int i=0; i<componentId.length; i++) {
+        for (String aComponentId : componentId) {
             try {
-                currentFormDoc2 = Jsoup.parse(currentFormDoc.select("component[id~="+componentId[i]+"]").select("component[encoding~=wicket]").first().text());
-                log.info("is " + componentId[i]);
+                currentFormDoc2 = Jsoup.parse(currentFormDoc.select("component[id~=" + aComponentId + "]").select("component[encoding~=wicket]").first().text());
+                log.info("is " + aComponentId);
                 break;
-            }
-            catch (NullPointerException npe) {
-                log.info("isnot " + componentId[i]);
+            } catch (NullPointerException npe) {
+                log.info("isnot " + aComponentId);
             }
         }
 
         String stepToken = currentFormDoc2.select("input[name=stepToken]").attr("value");
-        int stepTokenInt = Integer.parseInt(stepToken);
+//        int stepTokenInt = Integer.parseInt(stepToken);
 
-        accountParameters.put("root:c:w:txtId:tb", "");
-        accountParameters.put("stepToken", stepToken);
-        accountParameters.put("root:c:w:pnlAddSource:c:w:btnAddThisSource:submit", "1");
+//        accountParameters.put("root:c:w:txtId:tb", "");
+        finalAccountParameters.put("root:c:w:txtId:tb", "");
+//        accountParameters.put("stepToken", stepToken);
+        finalAccountParameters.put("stepToken", stepToken);
+//        accountParameters.put("root:c:w:pnlAddSource:c:w:btnAddThisSource:submit", "1");
+        finalAccountParameters.put("root:c:w:pnlAddSource:c:w:btnAddThisSource:submit", "1");
 
         requestHttpPost(
                 httpClient,
@@ -163,12 +164,13 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                         put("Content-Type", "application/x-www-form-urlencoded");
                     }
                 },
-                accountParameters,
+//                accountParameters,
+                finalAccountParameters,
                 localContext,
                 CONSUME_QUIETLY
         );
 
-        String finalCategory = StringUtils.EMPTY;
+//        String finalCategory = StringUtils.EMPTY;
         String linkClose = StringUtils.EMPTY;
         switch(accountType) { // BUG Internal CLV Framework ?!
             case "Current account":
@@ -188,7 +190,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
             linkClose = ":1:main:c:form:form:root:c:w:pnlEmpList:c:w:btnAdd:close::IBehaviorListener:0:-1";
         }
 
-        String lnkCloseResponse = requestHttpPost(
+        requestHttpPost(
                 httpClient,
                 System.getProperty("borrower") + "/form.2?wicket:interface=" + linkClose,
                 new LinkedHashMap<String, String>() {
@@ -274,14 +276,13 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
         Document currentFormDoc = Jsoup.parse(httpResponse.getHttpResponse());
         Document currentFormDoc2 = null;
         String[] componentId = { "main", "form", "dialog" };
-        for ( int i=0; i<componentId.length; i++) {
+        for (String aComponentId : componentId) {
             try {
-                currentFormDoc2 = Jsoup.parse(currentFormDoc.select("component[id~="+componentId[i]+"]").select("component[encoding~=wicket]").first().text());
-                log.info("is " + componentId[i]);
+                currentFormDoc2 = Jsoup.parse(currentFormDoc.select("component[id~=" + aComponentId + "]").select("component[encoding~=wicket]").first().text());
+                log.info("is " + aComponentId);
                 break;
-            }
-            catch (NullPointerException npe) {
-                log.info("isnot " + componentId[i]);
+            } catch (NullPointerException npe) {
+                log.info("isnot " + aComponentId);
             }
         }
 
@@ -323,14 +324,13 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
         Document accountDoc = Jsoup.parse(httpResponse.getHttpResponse());
         Document accountDoc2 = null;
         String[] componentId = { "main", "form", "dialog" };
-        for ( int i=0; i<componentId.length; i++) {
+        for (String aComponentId : componentId) {
             try {
-                accountDoc2 = Jsoup.parse(accountDoc.select("component[id~="+componentId[i]+"]").select("component[encoding~=wicket]").first().text());
-                log.info("is " + componentId[i]);
+                accountDoc2 = Jsoup.parse(accountDoc.select("component[id~=" + aComponentId + "]").select("component[encoding~=wicket]").first().text());
+                log.info("is " + aComponentId);
                 break;
-            }
-            catch (NullPointerException npe) {
-                log.info("isnot " + componentId[i]);
+            } catch (NullPointerException npe) {
+                log.info("isnot " + aComponentId);
             }
         }
 
@@ -356,7 +356,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
         if ( isThereAccountList ) {
             Elements divAccountTypeAddElements = accountDoc2.select("div[data-path=pnlEmpList btnAdd]");
             for (Element current : divAccountTypeAddElements) {
-                String currentKey = current.attr("data-path").split(" ")[1];
+//                String currentKey = current.attr("data-path").split(" ")[1];
                 String currentOnClick = current.select("a[wicketpath=main_c_form_form_root_c_w_pnlEmpList_c_w_btnAdd_dialog]").attr("onclick");
                 Pattern pWicketInterface = Pattern.compile("\\?wicket:interface=(.*)&");
                 Matcher mWicketInterface = pWicketInterface.matcher(currentOnClick);
@@ -410,7 +410,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
         httpResponse.setHttpResponse(employmentLinkAddResponse);
 
 
-        String linkSubmitResponse = null;
+        String linkSubmitResponse;
         switch ( fixCategory ) {
             case "Current":
 
@@ -685,14 +685,14 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
 
     @When("^Borrower closes \"scraping\" form$")
     public void borrower_closes_scraping_form() throws IOException {
-        Document yourAccountDoc = Jsoup.parse(httpResponse.getHttpResponse());
-        TextNode textNodeYourAccount = null;
-        try {
-            textNodeYourAccount = yourAccountDoc.select("component[id~=form]").select("component[encoding~=wicket]").first().textNodes().get(0);
-        } catch ( Exception e ) {
-            textNodeYourAccount = yourAccountDoc.select("component[id~=dialog]").select("component[encoding~=wicket]").first().textNodes().get(0);
-        }
-        Document yourAccountDoc2 = Jsoup.parse(textNodeYourAccount.text());
+//        Document yourAccountDoc = Jsoup.parse(httpResponse.getHttpResponse());
+//        TextNode textNodeYourAccount;
+//        try {
+//            textNodeYourAccount = yourAccountDoc.select("component[id~=form]").select("component[encoding~=wicket]").first().textNodes().get(0);
+//        } catch ( Exception e ) {
+//            textNodeYourAccount = yourAccountDoc.select("component[id~=dialog]").select("component[encoding~=wicket]").first().textNodes().get(0);
+//        }
+//        Document yourAccountDoc2 = Jsoup.parse(textNodeYourAccount.text());
 
 //        yourAccountsPage.closeScraping();
         requestHttpGet(

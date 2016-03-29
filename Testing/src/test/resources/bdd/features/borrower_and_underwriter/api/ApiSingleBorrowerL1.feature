@@ -8,7 +8,7 @@ Feature: Api Single Borrower
 
     Given this registration data, Borrower processes the registration (format2)
       | firstName         | AutomationSBApi                           |
-      | email             | test.automation.sbapi@test.finfactory.com |
+      | email             | test.automation.api@finfactory.com |
       | phoneNumber       | +4201234567890                            |
       | password          | Password1122+                             |
       | termsBusiness     | accepts                                   |
@@ -28,13 +28,13 @@ Feature: Api Single Borrower
       | borrowerIncomeAmount     | 125000              |
       | monthlyCreditCommitments | 1000                |
 
-    And Borrower goes solo
+#    And Borrower goes solo
 
     And Borrower processes "Forms"
 
 #    PERSONAL DETAILS
 #    When Borrower clicks "Borrower Personal Details"
-    And Borrower fills in "Personal Details"
+    And Borrower fills in Personal Details
       | firstName           | AutomationSBApi |
       | lastName            | Tester          |
       | gender              | Male            |
@@ -50,7 +50,7 @@ Feature: Api Single Borrower
 
 #    EMPLOYMENT & INCOME
 #    When Borrower clicks "Borrower Employment Income"
-    And borrower fills in "Employment Income"
+    And Borrower fills in Employment and Income type Paye
       | categoryIncome      | Paye        |
       | occupation          | ARTIST      |
       | employerName        | Hot Peppers |
@@ -64,7 +64,7 @@ Feature: Api Single Borrower
 #    When Borrower clicks "Account"
     Then Borrower clicks "ADD ACCOUNT"
 #    And Borrower clicks "ADD ACCOUNT MANUALLY"
-    And Borrower fills in "Account"
+    And Borrower fills in Current account
       | fundsSource     | Current Account         |
       | accountProvider | Central Bank of Ireland |
       | IBAN            | IE92BOFI90001710027952  |
@@ -117,20 +117,20 @@ Feature: Api Single Borrower
     Given user processes SSO Underwriter Auth Step
     And user processes final SSO Underwriter Auth Step
 
-    Given Underwriter processes SSO Auth Step 1
-    And Borrower processes SSO Auth Step 2
-    And Borrower processes final SSO Auth Step
-
-    When Borrower looks for these information
-      | assign | ALL |
-      | status | AllActive |
-      | search | AUTOMATIONSBAPI20160205171043551 |
-#        | applicationId | 4344                      |
-    Then Borrower opens the application of the customer AUTOMATIONSBAPI20160205171043551
-    And Borrower validates all documents
-    And Borrower saves offer
-    And Borrower completes and signs the offer
-    And Borrower refreshes workflow panel
-    And Borrower completes stage 1
-    And Borrower refreshes workflow panel
-    And Borrower completes stage 2
+#    Given Underwriter processes SSO Auth Step 1
+#    And Borrower processes SSO Auth Step 2
+#    And Borrower processes final SSO Auth Step
+#
+#    When Borrower looks for these information
+#      | assign | ALL |
+#      | status | AllActive |
+#      | search | AUTOMATIONSBAPI20160205171043551 |
+##        | applicationId | 4344                      |
+#    Then Borrower opens the application of the customer AUTOMATIONSBAPI20160205171043551
+#    And Borrower validates all documents
+#    And Borrower saves offer
+#    And Borrower completes and signs the offer
+#    And Borrower refreshes workflow panel
+#    And Borrower completes stage 1
+#    And Borrower refreshes workflow panel
+#    And Borrower completes stage 2

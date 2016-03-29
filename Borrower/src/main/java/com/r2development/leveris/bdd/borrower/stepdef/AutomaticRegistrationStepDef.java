@@ -9,7 +9,6 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 import java.util.Map;
@@ -20,13 +19,13 @@ public class AutomaticRegistrationStepDef /*extends BorrowerStepDef*/ {
     private static final Log log = LogFactory.getLog(AutomaticRegistrationStepDef.class.getName());
 
     IAutomaticRegistrationPage automaticRegistrationPage;
-    private final WebDriver webDriver;
+//    private final WebDriver webDriver;
 
     @Inject
     AutomaticRegistrationStepDef(SharedDriver webDriver) {
 //        super(webDriver);
         automaticRegistrationPage = new AutomaticRegistrationPage(webDriver);
-        this.webDriver = webDriver;
+//        this.webDriver = webDriver;
     }
 
     @Given("^Borrower processes the automatic registration$")

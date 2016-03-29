@@ -43,12 +43,12 @@ Feature: Single Borrower
       | borrowerIncomeAmount     | 125000              |
       | monthlyCreditCommitments | 1000                |
 
-    And Borrower goes solo
+#    And Borrower goes solo
     And Borrower processes "Forms"
 
 #    PERSONAL DETAILS
 #    When Borrower clicks "Borrower Personal Details"
-    And Borrower fills in "Personal Details"
+    And Borrower fills in Personal Details
       | firstName           | AutomationSBUI |
       | lastName            | Tester         |
       | gender              | Male           |
@@ -63,7 +63,7 @@ Feature: Single Borrower
 
 #    EMPLOYMENT & INCOME
 #    When Borrower clicks "Borrower Employment Income"
-    And borrower fills in "Employment Income"
+    And Borrower fills in Employment and Income type Paye
       | categoryIncome      | Paye        |
       | occupation          | Artist      |
       | employerName        | Hot Peppers |

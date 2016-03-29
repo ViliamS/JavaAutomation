@@ -1,11 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects.sectionobjects.expensefinancial;
 
-/**
- * Created by anthonymottot on 18/03/2016.
- */
 public interface IExpenseFinancialPersonalLoan {
-
-    //    Personal Loan Details
     String FINANCIAL_PERSONAL_OUTSTANDING_BALANCE_AMOUNT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlOutstandingAmount_c_w_crbOutstandingLoanAmount_tb']";
     String FINANCIAL_PERSONAL_FINANCIAL_INSTITUTION_XPATH = "/input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlPersonalLoan_c_w_txtFinancialInstitution_tb']";
     String FINANCIAL_PERSONAL_LOAN_PURPOSE_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_pnlPersonalLoan_c_w_txtLoanPurpose_tb']";
@@ -20,5 +15,4 @@ public interface IExpenseFinancialPersonalLoan {
     IExpenseFinancialPersonalLoan typePersonalFinalRepaymentDate(String finalRepaymentDate);
     IExpenseFinancialPersonalLoan selectPersonalPaymentFrequency(String paymentFrequency);
     IExpenseFinancialPersonalLoan typePersonalRepaymentAmount(String repaymentAmount);
-
 }

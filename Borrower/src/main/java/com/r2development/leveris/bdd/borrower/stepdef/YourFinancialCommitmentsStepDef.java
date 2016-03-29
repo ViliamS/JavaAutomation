@@ -27,7 +27,7 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
     private IBorrowerHomePage borrowerHomePage;
     private IPersonalDetailsPage borrowerPersonalDetailsPage;
     private IYourFinancialCommitmentsPage yourFinancialCommitmentsPage;
-    private IFormsMenu formsMenu;
+//    private IFormsMenu formsMenu;
 
     @Inject
     public YourFinancialCommitmentsStepDef(SharedDriver webDriver) {
@@ -44,7 +44,7 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
 
         switch (financialData.getFormType()) {
             case "Personal Loan":
-//                user_types_personal_oustanding_balance_amount(userType, financialData.getOutstandingAmount());
+//                user_types_personal_outstanding_balance_amount(userType, financialData.getOutstandingAmount());
                 yourFinancialCommitmentsPage.typePersonalOutstandingBalanceAmount(financialData.getOutstandingAmount());
 //                user_types_personal_financial_institution(userType, financialData.getFinancialInstitution());
                 yourFinancialCommitmentsPage.typePersonalFinancialInstitution(financialData.getFinancialInstitution());
@@ -155,6 +155,7 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
     public void user_has_financial_commitments(String hasCommitments) throws InterruptedException {
         if (hasCommitments == null) {
 //            yourFinancialCommitmentsPage.clickSingleYes();
+            // TODO handle the case or refactor
         }
         else {
 //            yourFinancialCommitmentsPage.clickSingleNo();
@@ -213,8 +214,8 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
         yourFinancialCommitmentsPage.clickWaitIHave();
     }
 
-    @And("^(Borrower) types Personal OustandingBalalnceAmount : (.*)$")
-    public void user_types_personal_oustanding_balance_amount(String userType, String outstandingBalanceAmount) {
+    @And("^(Borrower) types Personal OutstandingBalalnceAmount : (.*)$")
+    public void user_types_personal_outstanding_balance_amount(String userType, String outstandingBalanceAmount) {
         yourFinancialCommitmentsPage.typePersonalOutstandingBalanceAmount(outstandingBalanceAmount);
     }
 
@@ -234,7 +235,7 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
     }
 
     @And("^(Borrower) selects Personal payment frequency : (Weekly|Fortnightly|Monthly|Yearly)$")
-    public void user_selcts_personal_payment_frequency(String userType, String paymentFrequency) {
+    public void user_selects_personal_payment_frequency(String userType, String paymentFrequency) {
         yourFinancialCommitmentsPage.selectPersonalPaymentFrequency(paymentFrequency);
     }
 
@@ -329,7 +330,7 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
     }
 
     @And("^(Borrower) selects Student payment frequency : (Weekly|Fortnightly|Monthly|Yearly)$")
-    public void user_selects_studeent_payment_frequency(String userType, String paymentFrequency) {
+    public void user_selects_student_payment_frequency(String userType, String paymentFrequency) {
         yourFinancialCommitmentsPage.selectStudentPaymentFrequency(paymentFrequency);
     }
 
@@ -416,7 +417,7 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
 
     @And("^Borrower clicks on Financial commitments link$")
     public void borrower_clicks_on_financial_commitments_link(){
-        formsMenu = new FormsMenu((SharedDriver)webDriver);
+        IFormsMenu formsMenu = new FormsMenu((SharedDriver)webDriver);
         formsMenu.clickFinancialCommitments();
     }
 }

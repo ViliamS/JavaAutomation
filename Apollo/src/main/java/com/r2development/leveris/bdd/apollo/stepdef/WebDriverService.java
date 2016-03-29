@@ -8,7 +8,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
-@Singleton
+@Deprecated @Singleton
 public class WebDriverService {
 
     private WebDriver webDriver;

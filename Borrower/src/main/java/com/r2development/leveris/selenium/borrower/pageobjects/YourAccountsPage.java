@@ -11,7 +11,7 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
     private static final Log log = LogFactory.getLog(YourAccountsPage.class.getName());
 
     private IYourAccountsSection yourAccountsSection;
-    private IYourDependantsPage yourDependantsPage;
+//    private IYourDependantsPage yourDependantsPage;
 
 //    @Inject
     public YourAccountsPage(SharedDriver webDriver) {
@@ -81,7 +81,7 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
 
     @Override
     public IYourDependantsPage clickDone() {
-        return yourDependantsPage = yourAccountsSection.clickDone();
+        return yourAccountsSection.clickDone();
     }
 
     @Override
@@ -269,8 +269,8 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
     }
 
     @Override
-    public IYourAccountsPage typeSavingsOverdraftLimit(String savingsOverdrafLimit) {
-        yourAccountsSection.typeSavingsOverdraftLimit(savingsOverdrafLimit);
+    public IYourAccountsPage typeSavingsOverdraftLimit(String savingsOverdraftLimit) {
+        yourAccountsSection.typeSavingsOverdraftLimit(savingsOverdraftLimit);
         return this;
     }
 

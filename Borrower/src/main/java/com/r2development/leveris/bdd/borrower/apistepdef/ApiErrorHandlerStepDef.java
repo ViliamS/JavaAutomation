@@ -8,9 +8,6 @@ import org.junit.Assert;
 
 import java.util.Map;
 
-/**
- * Created by anthonymottot on 22/03/2016.
- */
 public class ApiErrorHandlerStepDef {
 
 //    Borrower should see these validation errors

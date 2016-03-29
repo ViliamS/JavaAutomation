@@ -52,7 +52,7 @@ public class YourDependantsSection extends Borrower implements IYourDependantsSe
     @FindBy(xpath = YOUR_DEPENDANTS_ADD_THIS_DEPENDANT_XPATH)
     protected WebElement weYourDependantsAddThisDependant;
     @FindBy(xpath = YOUR_DEPENDANTS_SAVE_AND_CLOSE_XPATH)
-    protected WebElement weYourDependantssaveAndClose;
+    protected WebElement weYourDependantsSaveAndClose;
     @FindBy(xpath = YOUR_DEPENDANTS_ADD_DEPENDANT_XPATH)
     protected WebElement weYourDependantsAddDependant;
     @FindBy(xpath = YOUR_DEPENDANTS_EDIT_THIS_DEPENDANT_XPATH)
@@ -147,6 +147,7 @@ public class YourDependantsSection extends Borrower implements IYourDependantsSe
 
     @Override
     public IYourDependantsSection clickAddThisDependant() {
+        // TODO to speak with Vili
         return clickAddThisDependant();
     }
 

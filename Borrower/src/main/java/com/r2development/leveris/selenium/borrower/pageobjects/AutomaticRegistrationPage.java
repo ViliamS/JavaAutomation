@@ -94,7 +94,6 @@ public class AutomaticRegistrationPage extends Borrower implements IHeaderSectio
 
     @Override
     public void moveToYourAccount() {
-
     }
 
     @Override
@@ -104,7 +103,6 @@ public class AutomaticRegistrationPage extends Borrower implements IHeaderSectio
 
     @Override
     public void closeChat() {
-
     }
 
     @Override

@@ -10,7 +10,6 @@ import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 
 //@Singleton
 public class DocumentUploadStepDef /*extends BorrowerStepDef*/ implements CLV312Workaround {
@@ -37,13 +36,13 @@ public class DocumentUploadStepDef /*extends BorrowerStepDef*/ implements CLV312
     private IDocumentUploadPage documentUploadPage;
     private IBorrowerHomePage borrowerHomePage;
     private IPersonalDetailsPage borrowerPersonalDetailsPage;
-    private final WebDriver webDriver;
+//    private final WebDriver webDriver;
 
     @Inject
     DocumentUploadStepDef(SharedDriver webDriver/*, IUser user*/) {
 //        super(webDriver);
 //        documentUploadPage = new DocumentUploadPage(WebDriverService.getWebDriverInstance(), user);
-        this.webDriver = webDriver;
+//        this.webDriver = webDriver;
 //        this.user = user;
 //        documentUploadPage = new DocumentUploadPage(webDriver, user);
         documentUploadPage = new DocumentUploadPage(webDriver);

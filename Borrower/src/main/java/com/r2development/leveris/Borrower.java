@@ -340,6 +340,7 @@ public class Borrower /*implements IBorrower*/ {
         try {
             loadingCheck();
             isVisible(xpath, true, 0);
+            //noinspection RedundantCast
             JavascriptExecutor executor = (JavascriptExecutor) webDriver;
             executor.executeScript("arguments[0].click();", findBy(xpath));
 //            if ( xpath.equals(IEmploymentIncomeSection.EMPLOYMENT_INCOMES_ADD_EMPLOYMENT_XPATH))
@@ -359,6 +360,7 @@ public class Borrower /*implements IBorrower*/ {
             try {
                 loadingCheck();
                 isVisible(xpath, true, 0);
+                //noinspection RedundantCast
                 JavascriptExecutor executor = (JavascriptExecutor) webDriver;
                 executor.executeScript("arguments[0].click();", findBy(xpath));
                 log.info(("\n clickElementViaJavascript ---> xpath: " + xpath + "\n"));
@@ -378,6 +380,7 @@ public class Borrower /*implements IBorrower*/ {
             try {
                 loadingCheck();
                 isVisible(xpath, true, 0);
+                //noinspection RedundantCast
                 JavascriptExecutor executor = (JavascriptExecutor) webDriver;
                 executor.executeScript("arguments[0].click();", findBy(xpath));
                 log.info(("\n clickElementViaJavascript ---> xpath: " + xpath + " \n and ---> expectedXpath: " + expectedXpath) + "\n");
@@ -853,6 +856,7 @@ public class Borrower /*implements IBorrower*/ {
 
     @Deprecated //todo because it doesn't work .... need to investigate
     protected void scroll(int vertical, @SuppressWarnings("SameParameterValue") int horizontal) {
+        //noinspection RedundantCast
         JavascriptExecutor jse = (JavascriptExecutor) webDriver;
         jse.executeScript("scroll(" + vertical + "," + horizontal + ")");
     }
@@ -871,6 +875,7 @@ public class Borrower /*implements IBorrower*/ {
     }
 
     protected void moveTo2(@SuppressWarnings("SameParameterValue") String xpath) {
+        //noinspection RedundantCast
         ((JavascriptExecutor)webDriver).executeScript("arguments[0].scrollIntoView();", webDriver.findElement(By.xpath(xpath)));
     }
 

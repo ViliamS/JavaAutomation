@@ -4,7 +4,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.r2development.leveris.bdd.investor.apistepdef.WebSocketClient;
 import com.r2development.leveris.utils.HttpUtils;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -22,16 +21,6 @@ import org.junit.Assert;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-/*
-import java.net.URI;
-import com.kaazing.gateway.client.html5.WebSocket;
-import com.kaazing.gateway.client.html5.WebSocketAdapter;
-import com.kaazing.gateway.client.html5.WebSocketEvent;
-*/
-
-/**
- * Created by anthonymottot on 29/02/2016.
- */
 public class LoginInvestorTest {
 
     public WebSocketClient wsc;
@@ -193,7 +182,7 @@ public class LoginInvestorTest {
 //        t.Start(xrsf_token);
 //        Thread.sleep(1000);
 //
-        String channeluuid = RandomStringUtils.random(8, true, true) + "-" + RandomStringUtils.random(4, true, true) + "-" + RandomStringUtils.random(4, true, false) + "-" + RandomStringUtils.random(4, true, false) + "-" + RandomStringUtils.random(12, true, true);
+//        String channeluuid = RandomStringUtils.random(8, true, true) + "-" + RandomStringUtils.random(4, true, true) + "-" + RandomStringUtils.random(4, true, false) + "-" + RandomStringUtils.random(4, true, false) + "-" + RandomStringUtils.random(12, true, true);
 //        System.out.println("channeluuid: " + xrsf_token);
 
 
@@ -270,7 +259,7 @@ public class LoginInvestorTest {
         HttpResponse responseLogOut = httpClient.execute(httpPostLogOut, localContext);
         HttpEntity httpEntityLogOut = responseLogOut.getEntity();
         System.out.println("==== httpEntityLogOut ====");
-        String parse2jsonLogOut = EntityUtils.toString(httpEntityLogOut);
+//        String parse2jsonLogOut = EntityUtils.toString(httpEntityLogOut);
         System.out.println(httpEntityLogOut);
 
     }

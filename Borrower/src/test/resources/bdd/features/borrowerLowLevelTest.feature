@@ -17,7 +17,7 @@ Feature: Verification Quote Creation Process
     Given Borrower creates an account
     When Borrower logs in as his account is activated
     Then Borrower processes "Get a Quote"
-    And Borrower processes "Invite a co-applicant"
+#    And Borrower processes "Invite a co-applicant"
     And Borrower processes "Forms"
 
 #    PERSONAL DETAILS
@@ -49,31 +49,31 @@ Feature: Verification Quote Creation Process
     And Borrower types his previous residency country : France
     And Borrower saves his personal details data
     When Borrower clicks "Coapplicant Personal Details"
-    Then Coapplicant sees his name in the Personal Details title
-    And Coapplicant types his firstname : Anthony Mottot co-applicant
-    And Coapplicant types his lastname : Mottot
-    And Coapplicant checks his gender : Male
-    And Coapplicant types his date of birth : 20/10/1978
-    And Coapplicant selects his marital status : married/civil partner(s)
-    And Coapplicant selects his nationality : French
-    And Coapplicant types the number of resident years : 3
-#    And Coapplicant checks if he is requiring a visa
-    And Coapplicant types his residency address in line 1 : Prague, Czech Republic
-    And Coapplicant types his residency address in line 2 : Hlavní město Praha
-    And Coapplicant types his residency town/city : Prague
-#    And Coapplicant selects his residency County/State : ???
-    And Coapplicant types his postcode/zip : 14000
-    And Coapplicant selects his residency country : Czech Republic
-    And Coapplicant selects his residency accommodation : Rented on contract
-    And Coapplicant types his residency rent : 200
-    And Coapplicant checks if he is not living since 3 years
-    And Coapplicant types his previous residency address in line 1 : Dijon, France
-    And Coapplicant types his previous residency address in line 2 : Burgundy
-    And Coapplicant types his previous residency town/city : Dijon
-#    And Coapplicant selects his previous residency county/state :
-    And Coapplicant types his previous residency postcode/zip : 21000
-    And Coapplicant types his previous residency country : France
-    And Coapplicant saves his personal details data
+#    Then Coapplicant sees his name in the Personal Details title
+#    And Coapplicant types his firstname : Anthony Mottot co-applicant
+#    And Coapplicant types his lastname : Mottot
+#    And Coapplicant checks his gender : Male
+#    And Coapplicant types his date of birth : 20/10/1978
+#    And Coapplicant selects his marital status : married/civil partner(s)
+#    And Coapplicant selects his nationality : French
+#    And Coapplicant types the number of resident years : 3
+##    And Coapplicant checks if he is requiring a visa
+#    And Coapplicant types his residency address in line 1 : Prague, Czech Republic
+#    And Coapplicant types his residency address in line 2 : Hlavní město Praha
+#    And Coapplicant types his residency town/city : Prague
+##    And Coapplicant selects his residency County/State : ???
+#    And Coapplicant types his postcode/zip : 14000
+#    And Coapplicant selects his residency country : Czech Republic
+#    And Coapplicant selects his residency accommodation : Rented on contract
+#    And Coapplicant types his residency rent : 200
+#    And Coapplicant checks if he is not living since 3 years
+#    And Coapplicant types his previous residency address in line 1 : Dijon, France
+#    And Coapplicant types his previous residency address in line 2 : Burgundy
+#    And Coapplicant types his previous residency town/city : Dijon
+##    And Coapplicant selects his previous residency county/state :
+#    And Coapplicant types his previous residency postcode/zip : 21000
+#    And Coapplicant types his previous residency country : France
+#    And Coapplicant saves his personal details data
 
 #    EMPLOYMENT & INCOME
 
@@ -88,14 +88,14 @@ Feature: Verification Quote Creation Process
     And Borrower types the Paye end date : 01/01/2014
     # to check if displayed or not !! disappear when end date is filled ?
 #    And Borrower checks the Paye currently
-    And Borrower types the Paye gross salary : 200
-    And Borrower types the Paye regular overtime : 200
-    And Borrower types the Paye regular guaranteed bonus : 100
-    And Borrower types the Paye guaranteed commission : 100
+#    And Borrower types the Paye gross salary : 200
+#    And Borrower types the Paye regular overtime : 200
+#    And Borrower types the Paye regular guaranteed bonus : 100
+#    And Borrower types the Paye guaranteed commission : 100
     And Borrower clicks "Add This Employment"
 
     When Borrower clicks "ADD EMPLOYMENT"
-    Then Borrower clicks the employment & income category : SelfEmployed
+#    Then Borrower clicks the employment & income category : SelfEmployed
     And Borrower selects the Self Employed occupation : Accountant
     And Borrower types the Self Employed business name : Business name Self Employed
     And Borrower types the Self Employed address line 1 : Prague
@@ -107,24 +107,24 @@ Feature: Verification Quote Creation Process
     And Borrower types the Self Employed start date : 01/01/2013
     And Borrower types the Self Employed end date : 01/01/2014
     And Borrower checks the Self Employed currently
-    And Borrower types the Self Employed net profit last year : 200
-    And Borrower types the Self Employed net profit previous year : 200
-    And Borrower types the Self Employed accountant name / practice : accountant name test
+#    And Borrower types the Self Employed net profit last year : 200
+#    And Borrower types the Self Employed net profit previous year : 200
+#    And Borrower types the Self Employed accountant name / practice : accountant name test
     And Borrower clicks "Add This Employment"
 
     When Borrower clicks "ADD EMPLOYMENT"
 #    Then Borrower sees his name in the Employment & Income title
-    And Borrower clicks the employment & income category : CivilServant
+#    And Borrower clicks the employment & income category : CivilServant
     And Borrower selects the Civil Servant occupation : Accountant
     And Borrower types the Civil Servant employer's name : Test
     And Borrower selects the Civil Servant employment type : Permanent
     And Borrower types the Civil Servant start date : 01/01/2013
     And Borrower types the Civil Servant end date : 01/01/2014
     And Borrower checks the Civil Servant currently
-    And Borrower types the Civil Servant gross salary : 200
-    And Borrower types the Civil Servant regular overtime : 200
-    And Borrower types the Civil Servant regular guaranteed bonus : 100
-    And Borrower types the Civil Servant guaranteed commission : 100
+#    And Borrower types the Civil Servant gross salary : 200
+#    And Borrower types the Civil Servant regular overtime : 200
+#    And Borrower types the Civil Servant regular guaranteed bonus : 100
+#    And Borrower types the Civil Servant guaranteed commission : 100
     And Borrower clicks "Add This Employment"
 
     When Borrower clicks "ADD EMPLOYMENT"
@@ -137,100 +137,100 @@ Feature: Verification Quote Creation Process
     When Borrower clicks "ADD EMPLOYMENT"
     Then Borrower clicks the employment & income category : Other
     And Borrower types the Other source of additional income : Testing
-    And Borrower types the Other gross income : 200
+#    And Borrower types the Other gross income : 200
     And Borrower types the Other time earning this income : 200
     And Borrower clicks "Add This Employment"
     And Borrower clicks "Done"
 
     When Borrower clicks "Coapplicant Employment Income"
-    Then Coapplicant sees his name in the Employment & Income title
-    And Coapplicant clicks the employment & income category : Paye
+#    Then Coapplicant sees his name in the Employment & Income title
+#    And Coapplicant clicks the employment & income category : Paye
     # problem of xpath or select method
-    And Coapplicant selects the Paye occupation : Accountant
-    And Coapplicant types the Paye employer's name : Test
-    And Coapplicant selects the Paye employment type : Contract
-    And Coapplicant types the Paye start date : 01/01/2013
-    And Coapplicant types the Paye end date : 01/01/2014
+#    And Coapplicant selects the Paye occupation : Accountant
+#    And Coapplicant types the Paye employer's name : Test
+#    And Coapplicant selects the Paye employment type : Contract
+#    And Coapplicant types the Paye start date : 01/01/2013
+#    And Coapplicant types the Paye end date : 01/01/2014
     # to check if displayed or not !! disappear when end date is field ?
 #    And Coapplicant checks the Paye currently
-    And Coapplicant types the Paye gross salary : 200
-    And Coapplicant types the Paye regular overtime : 200
-    And Coapplicant types the Paye regular guaranteed bonus : 100
-    And Coapplicant types the Paye guaranteed commission : 100
-    And Coapplicant clicks "Add This Employment"
+#    And Coapplicant types the Paye gross salary : 200
+#    And Coapplicant types the Paye regular overtime : 200
+#    And Coapplicant types the Paye regular guaranteed bonus : 100
+#    And Coapplicant types the Paye guaranteed commission : 100
+#    And Coapplicant clicks "Add This Employment"
 
-    When Coapplicant clicks "ADD EMPLOYMENT"
-    Then Coapplicant clicks the employment & income category : SelfEmployed
-    And Coapplicant selects the Self Employed occupation : Accountant
-    And Coapplicant types the Self Employed business name : Business name Self Employed
-    And Coapplicant types the Self Employed address line 1 : Prague
-    And Coapplicant types the Self Employed address line 2 : address line 2
-    And Coapplicant types the Self Employed town/city : Prague
-    And Coapplicant types the Self Employed county/state : Dublin
-    And Coapplicant selects the Self Employed country : Czech Republic
-    And Coapplicant types the Self Employed nature of business : it's my nature
-    And Coapplicant types the Self Employed start date : 01/01/2013
-    And Coapplicant types the Self Employed end date : 01/01/2014
-    And Coapplicant checks the Self Employed currently
-    And Coapplicant types the Self Employed net profit last year : 200
-    And Coapplicant types the Self Employed net profit previous year : 200
-    And Coapplicant types the Self Employed accountant name / practice : accountant name test
-    And Coapplicant clicks "Add This Employment"
+#    When Coapplicant clicks "ADD EMPLOYMENT"
+#    Then Coapplicant clicks the employment & income category : SelfEmployed
+#    And Coapplicant selects the Self Employed occupation : Accountant
+#    And Coapplicant types the Self Employed business name : Business name Self Employed
+#    And Coapplicant types the Self Employed address line 1 : Prague
+#    And Coapplicant types the Self Employed address line 2 : address line 2
+#    And Coapplicant types the Self Employed town/city : Prague
+#    And Coapplicant types the Self Employed county/state : Dublin
+#    And Coapplicant selects the Self Employed country : Czech Republic
+#    And Coapplicant types the Self Employed nature of business : it's my nature
+#    And Coapplicant types the Self Employed start date : 01/01/2013
+#    And Coapplicant types the Self Employed end date : 01/01/2014
+#    And Coapplicant checks the Self Employed currently
+#    And Coapplicant types the Self Employed net profit last year : 200
+#    And Coapplicant types the Self Employed net profit previous year : 200
+#    And Coapplicant types the Self Employed accountant name / practice : accountant name test
+#    And Coapplicant clicks "Add This Employment"
 
-    When Coapplicant clicks "ADD EMPLOYMENT"
+#    When Coapplicant clicks "ADD EMPLOYMENT"
 #    Then Coapplicant sees his name in the Employment & Income title
-    And Coapplicant clicks the employment & income category : Paye
-    And Coapplicant selects the Civil Servant occupation : Accountant
-    And Coapplicant types the Civil Servant employer's name : Test
-    And Coapplicant selects the Civil Servant employment type : Permanent
-    And Coapplicant types the Civil Servant start date : 01/01/2013
-    And Coapplicant types the Civil Servant end date : 01/01/2014
-    And Coapplicant checks the Civil Servant currently
-    And Coapplicant types the Civil Servant gross salary : 200
-    And Coapplicant types the Civil Servant regular overtime : 200
-    And Coapplicant types the Civil Servant regular guaranteed bonus : 100
-    And Coapplicant types the Civil Servant guaranteed commission : 100
-    And Coapplicant clicks "Add This Employment"
+#    And Coapplicant clicks the employment & income category : Paye
+#    And Coapplicant selects the Civil Servant occupation : Accountant
+#    And Coapplicant types the Civil Servant employer's name : Test
+#    And Coapplicant selects the Civil Servant employment type : Permanent
+#    And Coapplicant types the Civil Servant start date : 01/01/2013
+#    And Coapplicant types the Civil Servant end date : 01/01/2014
+#    And Coapplicant checks the Civil Servant currently
+#    And Coapplicant types the Civil Servant gross salary : 200
+#    And Coapplicant types the Civil Servant regular overtime : 200
+#    And Coapplicant types the Civil Servant regular guaranteed bonus : 100
+#    And Coapplicant types the Civil Servant guaranteed commission : 100
+#    And Coapplicant clicks "Add This Employment"
 
-    When Coapplicant clicks "ADD EMPLOYMENT"
-    Then Coapplicant clicks the employment & income category : Unemployed/Homemaker
-    And Coapplicant types the Unemployed/Homemaker start date : 01/01/2015
-    And Coapplicant types the Unemployed/Homemaker end date : 01/10/2015
-    And Coapplicant checks the Unemployed/Homemaker currently
-    And Coapplicant clicks "Add This Employment"
+#    When Coapplicant clicks "ADD EMPLOYMENT"
+#    Then Coapplicant clicks the employment & income category : Unemployed/Homemaker
+#    And Coapplicant types the Unemployed/Homemaker start date : 01/01/2015
+#    And Coapplicant types the Unemployed/Homemaker end date : 01/10/2015
+#    And Coapplicant checks the Unemployed/Homemaker currently
+#    And Coapplicant clicks "Add This Employment"
 
-    When Coapplicant clicks "ADD EMPLOYMENT"
-    Then Coapplicant clicks the employment & income category : Other
-    And Coapplicant types the Other source of additional income : Testing
-    And Coapplicant types the Other gross income : 200
-    And Coapplicant types the Other time earning this income : 200
-    And Coapplicant clicks "Add This Employment"
-    And Coapplicant clicks "Done"
+#    When Coapplicant clicks "ADD EMPLOYMENT"
+#    Then Coapplicant clicks the employment & income category : Other
+#    And Coapplicant types the Other source of additional income : Testing
+#    And Coapplicant types the Other gross income : 200
+#    And Coapplicant types the Other time earning this income : 200
+#    And Coapplicant clicks "Add This Employment"
+#    And Coapplicant clicks "Done"
 
 #    YOUR ACCOUNTS
 
 #    When Borrower clicks "Account"
     Then Borrower clicks "ADD ACCOUNT"
-    And Borrower selects Other account
+#    And Borrower selects Other account
     And Borrower clicks "ADD ACCOUNT MANUALLY"
-    And Borrower selects Current Account as source of funds
-    And this account is applied to both
+#    And Borrower selects Current Account as source of funds
+#    And this account is applied to both
     And Borrower types his Current account provider: test
-    And Borrower types his Current IBAN: IE92BOFI90001710027952
+#    And Borrower types his Current IBAN: IE92BOFI90001710027952
     And Borrower types his Current account balance: 200
     And Borrower types his Current overdraft limit: 200
     And Borrower clicks "ADD THIS ACCOUNT"
 
     Then Borrower clicks "ADD ACCOUNT"
-    And Borrower selects Other account
+#    And Borrower selects Other account
     And Borrower clicks "ADD ACCOUNT MANUALLY"
-    And Borrower selects Savings Account as source of funds
-    And this account is applied to both
+#    And Borrower selects Savings Account as source of funds
+#    And this account is applied to both
     And Borrower types his Savings account provider: test
-    And Borrower types his Savings IBAN: CZ4855000000001021018730
+#    And Borrower types his Savings IBAN: CZ4855000000001021018730
     And Borrower types his Savings account balance: 200
-    And Borrower selects Gift as Source of savings
-    And Borrower types his Savings regular monthly: 200
+#    And Borrower selects Gift as Source of savings
+#    And Borrower types his Savings regular monthly: 200
     And Borrower clicks "ADD THIS ACCOUNT"
 #    And Borrower verifies account data
     And Borrower clicks Accounts "NEXT"
@@ -239,15 +239,15 @@ Feature: Verification Quote Creation Process
 
     When Borrower clicks "Dependants"
     Then Borrower has dependants
-    And this dependant is applied to both
-    And Borrower types the dependant date of birth: 20/10/1975
+#    And this dependant is applied to both
+#    And Borrower types the dependant date of birth: 20/10/1975
     And Borrower clicks "ADD THIS DEPENDANT"
     And Borrower clicks "ADD DEPENDANT"
-    And this dependant is applied to borrower
-    And Borrower types the dependant date of birth: 20/10/1975
+#    And this dependant is applied to borrower
+#    And Borrower types the dependant date of birth: 20/10/1975
     And Borrower clicks "ADD THIS DEPENDANT"
     And Borrower clicks "ADD DEPENDANT"
-    And this dependant is applied to coapplicant
+#    And this dependant is applied to coapplicant
     And Borrower types the Dependant date of birth: 20/10/1975
     And Borrower clicks "ADD THIS DEPENDANT"
     And Borrower clicks Dependants "NEXT"
@@ -278,17 +278,17 @@ Feature: Verification Quote Creation Process
     And Borrower clicks "ADD ASSET"
     And Borrower selects Land/Site as Financial Asset Type
     And this financial assets is applied to both
-    And Borrower types Land/Site nature: test
-    And Borrower types Land/Site location: test
-    And Borrower types Land/Site size: 20
-    And Borrower selects Land/Site units: Hectares
-    And Borrower types Land/Site estimation: 300000
+#    And Borrower types Land/Site nature: test
+#    And Borrower types Land/Site location: test
+#    And Borrower types Land/Site size: 20
+#    And Borrower selects Land/Site units: Hectares
+#    And Borrower types Land/Site estimation: 300000
     And Borrower clicks "ADD THIS ASSET"
     And Borrower clicks "ADD ASSET"
     And Borrower selects Life Policy as Financial Asset Type
     And this financial assets is applied to both
-    And Borrower types Life Policy company: test
-    And Borrower types Life Policy value: 200
+#    And Borrower types Life Policy company: test
+#    And Borrower types Life Policy value: 200
     And Borrower clicks "ADD THIS ASSET"
     And Borrower clicks "ADD ASSET"
     And Borrower selects Other as Financial Asset Type
@@ -327,55 +327,55 @@ Feature: Verification Quote Creation Process
 
     When Borrower clicks "Financial Commitments"
     Then Borrower has financial commitments
-    And Borrower selects Personal Loan as financial commitment type
-    And this commitment is applied to both
-    And Borrower types Personal Loan balance: 200
-    And Borrower types Personal Loan institution: test
-    And Borrower selects Weekly as Personal Loan repayment frequency
-    And Borrower types Personal Loan purpose: test
-    And Borrower types Personal Loan final repayment date: 29/10/2016
-    And Borrower types Personal Loan repayment amount: 200
-    And Borrower clicks "ADD THIS LIABILITY"
-    And Borrower clicks "ADD LIABILITY"
-    And Borrower selects Credit Card as financial commitment type
-    And this commitment is applied to both
-    And Borrower types Credit Card repayment amount: 200
-    And Borrower types Credit Card provider: provider
-    And Borrower selects VISA as Credit Card type
-    And Borrower types Credit Card limit: 100
-    And Borrower types Credit Card balance: 200
-    And Borrower clicks "ADD THIS LIABILITY"
-    And Borrower clicks "ADD LIABILITY"
-    And Borrower selects Maintenance Payment as financial commitment type
-    And this commitment is applied to both
-    And Borrower types Maintenance Monthly payment: 200
-    And Borrower clicks "ADD THIS LIABILITY"
-    And Borrower clicks "ADD LIABILITY"
-    And Borrower selects Other as financial commitment type
-    And this commitment is applied to both
-    And Borrower types Other Commitment repayment amount: 200
-    And Borrower types Other Commitment value: 200
-    And Borrower types Other Commitment description: description
-    And Borrower clicks "ADD THIS LIABILITY"
-    And Borrower clicks "ADD LIABILITY"
-    And Borrower selects Car Loan as financial commitment type
-    And this commitment is applied to both
-    And Borrower types Car Loan balance: 200
-    And Borrower types Car Loan institution: Institution
-    And Borrower selects Fortnightly as Car Loan repayment frequency
-    And Borrower types Car Loan final repayment date: 28/10/2016
-    And Borrower types Car Loan repayment amount: 200
-    And Borrower clicks "ADD THIS LIABILITY"
-    And Borrower clicks "ADD LIABILITY"
-    And Borrower selects Student Loan as financial commitment type
-    And this commitment is applied to both
-    And Borrower types Student Loan balance: 200
-    And Borrower types Student Loan institution: institution
-    And Borrower selects Weekly as Student Loan repayment frequency
-    And Borrower types Student Loan final repayment date: 28/10/2017
-    And Borrower types Student Loan repayment amount: 200
-    And Borrower clicks "ADD THIS LIABILITY"
-    And Borrower clicks Financial Commitment "NEXT"
+#    And Borrower selects Personal Loan as financial commitment type
+#    And this commitment is applied to both
+#    And Borrower types Personal Loan balance: 200
+#    And Borrower types Personal Loan institution: test
+#    And Borrower selects Weekly as Personal Loan repayment frequency
+#    And Borrower types Personal Loan purpose: test
+#    And Borrower types Personal Loan final repayment date: 29/10/2016
+#    And Borrower types Personal Loan repayment amount: 200
+#    And Borrower clicks "ADD THIS LIABILITY"
+#    And Borrower clicks "ADD LIABILITY"
+#    And Borrower selects Credit Card as financial commitment type
+#    And this commitment is applied to both
+#    And Borrower types Credit Card repayment amount: 200
+#    And Borrower types Credit Card provider: provider
+#    And Borrower selects VISA as Credit Card type
+#    And Borrower types Credit Card limit: 100
+#    And Borrower types Credit Card balance: 200
+#    And Borrower clicks "ADD THIS LIABILITY"
+#    And Borrower clicks "ADD LIABILITY"
+#    And Borrower selects Maintenance Payment as financial commitment type
+#    And this commitment is applied to both
+#    And Borrower types Maintenance Monthly payment: 200
+#    And Borrower clicks "ADD THIS LIABILITY"
+#    And Borrower clicks "ADD LIABILITY"
+#    And Borrower selects Other as financial commitment type
+#    And this commitment is applied to both
+#    And Borrower types Other Commitment repayment amount: 200
+#    And Borrower types Other Commitment value: 200
+#    And Borrower types Other Commitment description: description
+#    And Borrower clicks "ADD THIS LIABILITY"
+#    And Borrower clicks "ADD LIABILITY"
+#    And Borrower selects Car Loan as financial commitment type
+#    And this commitment is applied to both
+#    And Borrower types Car Loan balance: 200
+#    And Borrower types Car Loan institution: Institution
+#    And Borrower selects Fortnightly as Car Loan repayment frequency
+#    And Borrower types Car Loan final repayment date: 28/10/2016
+#    And Borrower types Car Loan repayment amount: 200
+#    And Borrower clicks "ADD THIS LIABILITY"
+#    And Borrower clicks "ADD LIABILITY"
+#    And Borrower selects Student Loan as financial commitment type
+#    And this commitment is applied to both
+#    And Borrower types Student Loan balance: 200
+#    And Borrower types Student Loan institution: institution
+#    And Borrower selects Weekly as Student Loan repayment frequency
+#    And Borrower types Student Loan final repayment date: 28/10/2017
+#    And Borrower types Student Loan repayment amount: 200
+#    And Borrower clicks "ADD THIS LIABILITY"
+#    And Borrower clicks Financial Commitment "NEXT"
 
 #    Properties
 

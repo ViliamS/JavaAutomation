@@ -28,7 +28,7 @@ public class YourDependantsStepDef {
     private IYourDependantsPage yourDependantsPage;
 
     @Inject
-    public YourDependantsStepDef(SharedDriver webDriver/*, IUser user*/) {
+    public YourDependantsStepDef(SharedDriver webDriver) {
         yourDependantsPage = new YourDependantsPage(webDriver);
     }
 

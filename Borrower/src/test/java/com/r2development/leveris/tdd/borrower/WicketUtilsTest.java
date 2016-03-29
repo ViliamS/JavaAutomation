@@ -31,21 +31,19 @@ public class WicketUtilsTest {
 
             Document jsoup = Jsoup.parse(FileUtils.readFileToString(file));
 
-            Elements evaluateElts = jsoup.select("evaluate");
-
-            Elements headerElts = jsoup.select("header-contribution");
-            Document headerDoc = Jsoup.parse(jsoup.select("header-contribution").first().text());
+//            Elements evaluateElts = jsoup.select("evaluate");
+//            Elements headerElts = jsoup.select("header-contribution");
+//            Document headerDoc = Jsoup.parse(jsoup.select("header-contribution").first().text());
 
             Document componentDoc = null;
             String[] componentId = { "main", "form", "dialog" };
-            for ( int i=0; i<componentId.length; i++) {
+            for (String aComponentId : componentId) {
                 try {
-                    componentDoc = Jsoup.parse(jsoup.select("component[id~="+componentId[i]+"]").select("component[encoding~=wicket]").first().text());
-                    System.out.println("is " + componentId[i]);
+                    componentDoc = Jsoup.parse(jsoup.select("component[id~=" + aComponentId + "]").select("component[encoding~=wicket]").first().text());
+                    System.out.println("is " + aComponentId);
                     break;
-                }
-                catch (NullPointerException npe) {
-                    System.out.println("isnot " + componentId[i]);
+                } catch (NullPointerException npe) {
+                    System.out.println("isnot " + aComponentId);
                 }
             }
 

@@ -8,7 +8,7 @@ Feature: Single Borrower
 
     Given this registration data, Borrower processes the registration (format2)
       | firstName         | Tonda                                      |
-      | email             | test.automation.b@test.finfactory.com |
+      | email             | test.automation.gui@finfactory.com |
       | phoneNumber       | +4201234567890                             |
       | password          | Password1122+                              |
       | termsBusiness     | accepts                                    |
@@ -41,12 +41,12 @@ Feature: Single Borrower
       | borrowerIncomeAmount     | 125000              |
       | monthlyCreditCommitments | 1000                |
 
-    And Borrower goes solo
+#    And Borrower goes solo
     And Borrower processes "Forms"
 
 #    PERSONAL DETAILS
 #    When Borrower clicks "Borrower Personal Details"
-    And Borrower fills in "Personal Details"
+    And Borrower fills in Personal Details
       | firstName           | Tonda          |
       | lastName            | Tester         |
       | gender              | Male           |
@@ -60,7 +60,7 @@ Feature: Single Borrower
 
 #    EMPLOYMENT & INCOME
 #    When Borrower clicks "Borrower Employment Income"
-    And Borrower fills in "Employment Income"
+    And Borrower fills in Employment and Income type Paye
       | categoryIncome      | Paye        |
       | occupation          | Artist      |
       | employerName        | Hot Peppers |
@@ -74,7 +74,7 @@ Feature: Single Borrower
 #    When Borrower clicks "Account"
     Then Borrower clicks "ADD ACCOUNT"
 #    And Borrower clicks "ADD ACCOUNT MANUALLY"
-    And Borrower fills in "Account"
+    And Borrower fills in Current account
       | fundsSource     | Current Account         |
       | accountProvider | Central Bank of Ireland |
       | IBAN            | IE92BOFI90001710027952  |
