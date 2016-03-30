@@ -47,11 +47,12 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
                 accountData.getFormType());
 
         yourAccountsPage.getTitle();
-        borrower_clicks_an_account_type(userType, accountType);
 
         switch(accountType){
 
             case "Current account":
+
+                borrower_clicks_an_account_type(userType, accountType);
 
                 if(!StringUtils.isEmpty(accountData.getStatementDate()))
                     borrower_types_the_statement_date(userType, accountType, accountData.getStatementDate());
@@ -89,6 +90,8 @@ public class YourAccountsStepDef /*extends BorrowerStepDef*/ /*implements CLV312
                 break;
 
             case "Savings account":
+
+                borrower_clicks_an_account_type(userType, accountType);
 
                 if (!StringUtils.isEmpty(accountData.getStatementDate()))
                     borrower_types_the_statement_date(userType, accountType, accountData.getStatementDate());

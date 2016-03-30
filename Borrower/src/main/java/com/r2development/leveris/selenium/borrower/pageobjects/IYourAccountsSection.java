@@ -10,10 +10,9 @@ public interface IYourAccountsSection {
 
     String ACCOUNT_PROVIDER_INPUT_XPATH = "//input[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_pnlAccountProvider_c_w_txtAccountProvider_tb']";
 
-    String YOUR_ACCOUNTS_CURRENT_ACCOUNT_XPATH = "//div[@data-path='pnlNoEmplyments lnkCurrent']/a";
-    //div[@data-path='pnlNoEmplyments lnkCurrent']
-    String YOUR_ACCOUNTS_SAVING_ACCOUNT_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_lnkSavings_dialog']";
-    String YOUR_ACCOUNTS_ACCOUNT_SCRAPING_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_lnkAuto_dialog']";
+    String YOUR_ACCOUNTS_CURRENT_ACCOUNT_XPATH = "//div[@data-path='pnlNoAccount lnkCurrent']/a";
+    String YOUR_ACCOUNTS_SAVING_ACCOUNT_XPATH = "//div[@data-path='pnlNoAccount lnkSavings']/a";
+    String YOUR_ACCOUNTS_ACCOUNT_SCRAPING_XPATH = "//div[@data-path='pnlNoAccount lnkAuto']/a";
 
     String YOUR_ACCOUNTS_ACCOUNT_MAIN_DIALOG_XPATH = "//div[contains(@style,'display: block')]/div[@wicketpath='main_c_form_dialogWrapper']/div[@wicketpath='main_c_form_dialogWrapper_dialog']";
 

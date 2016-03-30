@@ -3,53 +3,42 @@ package com.r2development.leveris.selenium.borrower.pageobjects;
 public interface IYourFinancialCommitmentsSection {
 
     String FINANCIAL_TITLE_XPATH = "//div[@wicketpath='main_c_title']";
-    String FINANCIAL_DIALOG_TITLE_XPATH = "//div[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_lblNoLiabTitle_l']";
-    String FINANCIAL_DIALOG_DESCRIPTION_XPATH = "//div[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_lblNoEmpText_l']";
-    String FINANCIAL_DIALOG_DESCRIPTION2_XPATH = "//div[@wicketpath='main_c_form_form_root_c_w_pnlNoEmplyments_c_w_lblNoEmpText_l']";
+    String FINANCIAL_DIALOG_TITLE_XPATH = "//h2[@wicketpath='main_c_title']";
+    String FINANCIAL_DIALOG_DESCRIPTION_XPATH = "//div[contains(@wicketpath,'pnlNoLiability') and contains(@wicketpath,'lblNoLiabText')]";
+    String FINANCIAL_DIALOG_DESCRIPTION2_XPATH = "//div[contains(@wicketpath,'pnlLiabList') and contains(@wicketpath,'lblLiabListText')]";
 
     String DIALOG = "[contains(@wicketpath,'dialogWrapper')]";
     String LABEL = "[contains(@wicketpath,'label')]";
 
-    String FINANCIAL_PERSONAL_LOAN_XPATH = "//a[contains(@wicketpath,'pnlNoEmplyments') and contains(@wicketpath,'lnkAddPersonalLoan')]";
+    String FINANCIAL_PERSONAL_LOAN_XPATH = "//a[contains(@wicketpath,'pnlNoLiability') and contains(@wicketpath,'lnkAddPersonalLoan')]";
     String FINANCIAL_DIALOG_PERSONAL_LOAN_XPATH = FINANCIAL_PERSONAL_LOAN_XPATH + DIALOG;
-
-    String FINANCIAL_CREDIT_CARD_XPATH = "//a[contains(@wicketpath,'pnlNoEmplyments') and contains(@wicketpath,'lnkAddCreditCard')]";
+    String FINANCIAL_CREDIT_CARD_XPATH = "//a[contains(@wicketpath,'pnlNoLiability') and contains(@wicketpath,'lnkAddCreditCard')]";
     String FINANCIAL_DIALOG_CREDIT_CARD_XPATH = FINANCIAL_CREDIT_CARD_XPATH + DIALOG;
-
-    String FINANCIAL_MAINTENANCE_PAYMENT_XPATH = "//a[contains(@wicketpath,'pnlNoEmplyments') and contains(@wicketpath,'lnkAddMaintenancePayment')]";
+    String FINANCIAL_MAINTENANCE_PAYMENT_XPATH = "//a[contains(@wicketpath,'pnlNoLiability') and contains(@wicketpath,'lnkAddMaintenancePayment')]";
     String FINANCIAL_DIALOG_MAINTENANCE_PAYMENT_XPATH = FINANCIAL_MAINTENANCE_PAYMENT_XPATH + DIALOG;
-
-    String FINANCIAL_OTHER_XPATH = "//a[contains(@wicketpath,'pnlNoEmplyments') and contains(@wicketpath,'lnkAddOther')]";
+    String FINANCIAL_OTHER_XPATH = "//a[contains(@wicketpath,'pnlNoLiability') and contains(@wicketpath,'lnkAddOther')]";
     String FINANCIAL_DIALOG_OTHER_XPATH = FINANCIAL_OTHER_XPATH + DIALOG;
-
-    String FINANCIAL_CAR_LOAN_XPATH = "//a[contains(@wicketpath,'pnlNoEmplyments') and contains(@wicketpath,'lnkAddCarLoan')]";
+    String FINANCIAL_CAR_LOAN_XPATH = "//a[contains(@wicketpath,'pnlNoLiability') and contains(@wicketpath,'lnkAddCarLoan')]";
     String FINANCIAL_DIALOG_CAR_LOAN_XPATH = FINANCIAL_CAR_LOAN_XPATH + DIALOG;
-
-    String FINANCIAL_STUDENT_LOAN_XPATH = "//a[contains(@wicketpath,'pnlNoEmplyments') and contains(@wicketpath,'lnkAddStudentLoan')]";
+    String FINANCIAL_STUDENT_LOAN_XPATH = "//a[contains(@wicketpath,'pnlNoLiability') and contains(@wicketpath,'lnkAddStudentLoan')]";
     String FINANCIAL_DIALOG_STUDENT_LOAN_XPATH = FINANCIAL_STUDENT_LOAN_XPATH + DIALOG;
-
-    String FINANCIAL_RENT_XPATH = "//a[contains(@wicketpath,'pnlNoEmplyments') and contains(@wicketpath,'lnkRent')]";
+    String FINANCIAL_RENT_XPATH = "//a[contains(@wicketpath,'pnlNoLiability') and contains(@wicketpath,'lnkRent')]";
     String FINANCIAL_DIALOG_RENT_XPATH = FINANCIAL_RENT_XPATH + DIALOG;
-
-    String FINANCIAL_UTILITIES_XPATH = "//a[contains(@wicketpath,'pnlNoEmplyments') and contains(@wicketpath,'lnkUtilities')]";
+    String FINANCIAL_UTILITIES_XPATH = "//a[contains(@wicketpath,'pnlNoLiability') and contains(@wicketpath,'lnkUtilities')]";
     String FINANCIAL_DIALOG_UTILITIES_XPATH = FINANCIAL_UTILITIES_XPATH + DIALOG;
-
-    String FINANCIAL_CHILDCARE_XPATH = "//a[contains(@wicketpath,'pnlNoEmplyments') and contains(@wicketpath,'lnkChildcare')]";
+    String FINANCIAL_CHILDCARE_XPATH = "//a[contains(@wicketpath,'pnlNoLiability') and contains(@wicketpath,'lnkChildcare')]";
     String FINANCIAL_DIALOG_CHILD_CARE_XPATH = FINANCIAL_CHILDCARE_XPATH + DIALOG;
-
-    String FINANCIAL_MORTGAGE_XPATH = "//a[contains(@wicketpath,'pnlNoEmplyments') and contains(@wicketpath,'lnkMortgage')]";
+    String FINANCIAL_MORTGAGE_XPATH = "//a[contains(@wicketpath,'pnlNoLiability') and contains(@wicketpath,'lnkMortgage')]";
     String FINANCIAL_DIALOG_MORTGAGE_XPATH = FINANCIAL_MORTGAGE_XPATH + DIALOG;
-
     String FINANCIAL_CONTAINER_XPATH = "//div[@wicketpath='main_c_form_dialogWrapper']";
-
-    String FINANCIAL_COMMITMENT_NONE_XPATH = "//a[contains(., 'I have no expenses/financial commitments')]";
-    String FINANCIAL_CANCEL_XPATH = "//a[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_btnCacnel_cancel']";
-    String FINANCIAL_SAVE_AND_CLOSE_XPATH = "//a[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddNew_c_w_btnAddLiability_submit']";
-    String FINANCIAL_EDIT_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlEmpList_c_w_rptEmployment_c_rows_1_item_pnlItems_c_w_btnEdit_dialog']";
-    String FINANCIAL_DELETE_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlEmpList_c_w_rptEmployment_c_rows_1_item_pnlItems_c_w_btnDelete_dialog']";
-    String FINANCIAL_DONE_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlEmpList_c_w_btnImDone_submit']";
-    String FINANCIAL_ADD_XPATH = "//a[@wicketpath='main_c_form_form_root_c_w_pnlEmpList_c_w_btnAddLiab_dialog']";
-    String FINANCIAL_COMMITMENTS_NEXT_XPATH = "//a[contains(., 'Next section')]";
+    String FINANCIAL_COMMITMENT_NONE_XPATH = "//a[contains(@wicketpath,'pnlNoLiability') and contains(@wicketpath,'lnkHaveNoCommitments_submit')]//span[text()='I have no expenses/financial commitments']";
+    String FINANCIAL_SAVE_AND_CLOSE_XPATH= "//a[contains(@wicketpath,'pnlAddNew') and contains(@wicketpath,'btnAddLiability_submit')]" + DIALOG;
+    String FINANCIAL_CANCEL_XPATH  = "//a[contains(@wicketpath,'pnlAddNew') and contains(@wicketpath,'btnCacnel_cancel')]" + DIALOG;
+    String FINANCIAL_EDIT_XPATH = "//a[contains(@wicketpath,'pnlLiabList') and contains(@wicketpath,'rptLiability') and contains(@wicketpath,'rows_1_item_pnlItems') and contains(@wicketpath,'btnEdit_dialog')]";
+    String FINANCIAL_DELETE_XPATH = "//a[contains(@wicketpath,'pnlLiabList') and contains(@wicketpath,'rptLiability') and contains(@wicketpath,'rows_1_item_pnlItems') and contains(@wicketpath,'btnDelete_dialog')]";
+    String FINANCIAL_DONE_XPATH = "//a[contains(@wicketpath,'pnlLiabList') and contains(@wicketpath,'btnImDone_submit')]";
+    String FINANCIAL_ADD_XPATH = "//a[contains(@wicketpath,'pnlLiabList') and contains(@wicketpath,'btnAddLiab_dialog')]";
+    String FINANCIAL_COMMITMENTS_NEXT_XPATH = "//a[contains(@wicketpath,'pnlNoCommitments') and contains(@wicketpath,'btnNextSection_submit')]";
     String FINANCIAL_WAIT_I_HAVE = "";
 
 // Shared
