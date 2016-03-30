@@ -4,7 +4,9 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.LandingPageData;
 import com.r2development.leveris.di.HttpResponse;
+import com.r2development.leveris.di.IAHttpContext;
 import com.r2development.leveris.di.IHttpResponse;
+import com.r2development.leveris.utils.HttpUtils;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -21,13 +23,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.r2development.leveris.utils.HttpUtils.CONSUME_QUIETLY;
-import static com.r2development.leveris.utils.HttpUtils.requestHttpGet;
-import static com.r2development.leveris.utils.HttpUtils.requestHttpPost;
+import static com.r2development.leveris.utils.HttpUtils.*;
 
-/**
- * todo LandingPageStepDef Specific Implementation
- */
 @Singleton
 public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
 
@@ -35,6 +32,10 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
 
     @Inject
     IHttpResponse httpResponse;
+    @Inject
+    IAHttpContext localContext;
+//    @Inject
+//    IAutHttpLocalContext httpLocalContext;
 
 //    IQuoteLandingPage quoteLandingPage;
 //    IQuotePaydayLoanPage quotePaydayLoanPage;
@@ -57,8 +58,11 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
     @Given("^Open Leveris Automatic Registration Page")
     public void open_leveris_automatic_registration_page() throws IOException {
 
-//        httpClient = ApiSupportHttpClientStepDef.getInstanceHttpClient();
-//        localContext = ApiSupportHttpClientStepDef.getNewInstanceHttpClientContext(System.getProperty("borrower"), "/stable-borrower");
+//        httpClient = HttpUtils.createHttpClient();
+//        localContext = HttpUtils.initContext(System.getProperty("domain.borrower"), "/stable-borrower");
+//        localContext = this.newHttpClientContext(System.getProperty("domain.borrower"), "/stable-borrower");
+        httpClient = HttpUtils.createHttpClient();
+        localContext.setHttpContext(HttpUtils.initContext(System.getProperty("domain.borrower"), "/stable-borrower"));
 
         String automaticRegistrationResponse = requestHttpGet(
                 httpClient,
@@ -69,7 +73,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 false
         );
 
@@ -91,7 +95,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 false
         );
 
@@ -116,7 +120,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
                                 put("stepToken", "1");
                             }
                         },
-                        localContext,
+                        localContext.getHttpContext(),
                         false
                 );
 
@@ -155,7 +159,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
                     put("root:c:w:btnTasksHidden:submit", "1");
                 }
             },
-            localContext,
+            localContext.getHttpContext(),
             CONSUME_QUIETLY
         );
 //        wicket:interface=:1:main:c:form:form:root:c:w:btnTasksHidden:submit::IBehaviorListener:0:
@@ -290,7 +294,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
                             }
                         },
                         paydayParameters,
-                        localContext,
+                        localContext.getHttpContext(),
                         false
                 );
                 httpResponse.setHttpResponse(form1Response);
@@ -401,7 +405,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
                     }
                 },
                 applyParameters,
-                localContext,
+                localContext.getHttpContext(),
                 false
         );
         httpResponse.setHttpResponse(applyResponse);

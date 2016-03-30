@@ -3,6 +3,7 @@ package com.r2development.leveris.bdd.borrower.apistepdef;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.FinancialData;
+import com.r2development.leveris.di.IAHttpContext;
 import com.r2development.leveris.di.IHttpResponse;
 import com.r2development.leveris.di.IUser;
 import cucumber.api.java.en.And;
@@ -32,6 +33,8 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
 
     private static final Log log = LogFactory.getLog(ApiYourFinancialCommitmentsStepDef.class.getName());
 
+    @Inject
+    IAHttpContext localContext;
     @Inject
     IHttpResponse httpResponse;
     @Inject
@@ -182,7 +185,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                             put("root:c:w:pnlNoEmplyments:c:w:lnkHaveNoCommitments:submit", "1");
                         }
                     },
-                    localContext,
+                    localContext.getHttpContext(),
                     CONSUME_QUIETLY
             );
 
@@ -201,7 +204,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                             put("root:c:w:pnlNoCommitments:c:w:btnNextSection:submit", "1");
                         }
                     },
-                    localContext,
+                    localContext.getHttpContext(),
                     CONSUME_QUIETLY
             );
             httpResponse.setHttpResponse(noCommitmentsResponse);
@@ -331,7 +334,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                     }
                 },
                 linkAddParameters,
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
         httpResponse.setHttpResponse(employmentLinkAddResponse);
@@ -357,7 +360,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                                     put("root:c:w:pnlNoEmplyments:c:w:pnlPaye:c:w:lnkAddPaye:submit", "1");
                                 }
                             },
-                            localContext,
+                            localContext.getHttpContext(),
                             CONSUME_QUIETLY
                     );
                     httpResponse.setHttpResponse(addResponse);
@@ -395,7 +398,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                                     "]}");
                             }
                         },
-                        localContext,
+                        localContext.getHttpContext(),
                         CONSUME_QUIETLY
                 );
                 break;
@@ -418,7 +421,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                                     put("root:c:w:pnlNoEmplyments:c:w:lnkAddCreditCard:submit", "1");
                                 }
                             },
-                            localContext,
+                            localContext.getHttpContext(),
                             CONSUME_QUIETLY
                     );
                     httpResponse.setHttpResponse(addResponse);
@@ -451,7 +454,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                                     "]}");
                             }
                         },
-                        localContext,
+                        localContext.getHttpContext(),
                         CONSUME_QUIETLY
 
                 );
@@ -475,7 +478,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                                     put("root:c:w:pnlNoEmplyments:c:w:lnkAddMaintenancePayment:submit", "1");
                                 }
                             },
-                            localContext,
+                            localContext.getHttpContext(),
                             CONSUME_QUIETLY
                     );
                     httpResponse.setHttpResponse(addResponse);
@@ -516,7 +519,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                                 );
                             }
                         },
-                        localContext,
+                        localContext.getHttpContext(),
                         CONSUME_QUIETLY
                 );
                 break;
@@ -539,7 +542,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                                     put("root:c:w:pnlNoEmplyments:c:w:lnkAddOther:submit", "1");
                                 }
                             },
-                            localContext,
+                            localContext.getHttpContext(),
                             CONSUME_QUIETLY
                     );
                     httpResponse.setHttpResponse(addResponse);
@@ -581,7 +584,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                                 );
                             }
                         },
-                        localContext,
+                        localContext.getHttpContext(),
                         CONSUME_QUIETLY
                 );
                 break;
@@ -603,7 +606,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                                     put("root:c:w:pnlNoEmplyments:c:w:lnkAddCarLoan:submit", "1");
                                 }
                             },
-                            localContext,
+                            localContext.getHttpContext(),
                             CONSUME_QUIETLY
                     );
                     httpResponse.setHttpResponse(addResponse);
@@ -644,7 +647,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                                 );
                             }
                         },
-                        localContext,
+                        localContext.getHttpContext(),
                         CONSUME_QUIETLY
                 );
 
@@ -667,7 +670,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                                     put("root:c:w:pnlNoEmplyments:c:w:lnkAddStudentLoan:submit", "1");
                                 }
                             },
-                            localContext,
+                            localContext.getHttpContext(),
                             CONSUME_QUIETLY
                     );
                     httpResponse.setHttpResponse(addResponse);
@@ -709,7 +712,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                                 );
                             }
                         },
-                        localContext,
+                        localContext.getHttpContext(),
                         CONSUME_QUIETLY
                 );
 
@@ -732,7 +735,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                                     put("root:c:w:pnlNoEmplyments:c:w:pnl-737:c:w:lnkRent:submit", "1");
                                 }
                             },
-                            localContext,
+                            localContext.getHttpContext(),
                             CONSUME_QUIETLY
                     );
                     httpResponse.setHttpResponse(addResponse);
@@ -774,7 +777,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                                 );
                             }
                         },
-                        localContext,
+                        localContext.getHttpContext(),
                         CONSUME_QUIETLY
                 );
                 break;
@@ -796,7 +799,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                                     put("root:c:w:pnlNoEmplyments:c:w:pnl-737:c:w:lnkUtilities:submit", "1");
                                 }
                             },
-                            localContext,
+                            localContext.getHttpContext(),
                             CONSUME_QUIETLY
                     );
                     httpResponse.setHttpResponse(addResponse);
@@ -838,7 +841,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                                 );
                             }
                         },
-                        localContext,
+                        localContext.getHttpContext(),
                         CONSUME_QUIETLY
                 );
                 break;
@@ -860,7 +863,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                                     put("root:c:w:pnlNoEmplyments:c:w:pnl-737:c:w:lnkChildcare:submit", "1");
                                 }
                             },
-                            localContext,
+                            localContext.getHttpContext(),
                             CONSUME_QUIETLY
                     );
                     httpResponse.setHttpResponse(addResponse);
@@ -902,7 +905,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                                 );
                             }
                         },
-                        localContext,
+                        localContext.getHttpContext(),
                         CONSUME_QUIETLY
                 );
                 break;
@@ -924,7 +927,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                                     put("root:c:w:pnlNoEmplyments:c:w:pnl-737:c:w:lnkMortgage:submit", "1");
                                 }
                             },
-                            localContext,
+                            localContext.getHttpContext(),
                             CONSUME_QUIETLY
                     );
                     httpResponse.setHttpResponse(addResponse);
@@ -966,7 +969,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                                 );
                             }
                         },
-                        localContext,
+                        localContext.getHttpContext(),
                         CONSUME_QUIETLY
                 );
                 break;
@@ -1076,7 +1079,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                     }
                 },
                 finalFinancialParameters,
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
 //        httpResponse.setHttpResponse(employmentAddResponse);
@@ -1095,7 +1098,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                     }
                 },
                 new LinkedHashMap<String, String>() {},
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
 
@@ -1115,7 +1118,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                             put("root:c:w:btnHiddenSubmit:submit", "1");
                         }
                     },
-                    localContext,
+                    localContext.getHttpContext(),
                     CONSUME_QUIETLY
             );
             httpResponse.setHttpResponse(addEmplCompleted);
@@ -1136,7 +1139,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                             put("root:c:w:btnHiddenSubmit:submit", "1");
                         }
                     },
-                    localContext,
+                    localContext.getHttpContext(),
                     CONSUME_QUIETLY
             );
             httpResponse.setHttpResponse(addEmplCompleted);
@@ -1187,7 +1190,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                         put("root:c:w:pnlEmpList:c:w:btnImDone:submit", "1");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
         httpResponse.setHttpResponse(yourAccountPageResponse);

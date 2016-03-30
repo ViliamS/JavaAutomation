@@ -52,7 +52,12 @@ public class ApiOpoqoBorrowerStepDef /*implements IBorrower*/ {
 //        this.httpResponse = httpResponse;
 
         httpClient = ApiSupportHttpClientStepDef.getInstanceHttpClient();
-        localContext = ApiSupportHttpClientStepDef.getInstanceHttpClientContext();
+//        localContext = ApiSupportHttpClientStepDef.getInstanceHttpClientContext();
+//        localContext = ApiSupportHttpClientStepDef.getNewInstanceHttpClientContext();
+//        localContext = ApiSupportHttpClientStepDef.getNewInstanceHttpClientContext(System.getProperty("domain.borrower"), "/stable-borrower");
+
+//        httpClient = HttpUtils.createHttpClient();
+//        localContext = HttpUtils.initContext(System.getProperty("domain.borrower"), "/stable-borrower");
 
         registerParameters = new LinkedHashMap<>();
         loginParameters = new LinkedHashMap<>();

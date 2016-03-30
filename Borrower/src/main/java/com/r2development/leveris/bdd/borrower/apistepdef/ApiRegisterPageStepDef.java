@@ -3,6 +3,7 @@ package com.r2development.leveris.bdd.borrower.apistepdef;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.RegistrationData;
+import com.r2development.leveris.di.IAHttpContext;
 import com.r2development.leveris.di.IUser;
 import com.r2development.leveris.di.User;
 import com.r2development.leveris.qa.utils.ACMExcel;
@@ -33,6 +34,8 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
 //    private Map<String, String> registerParameters;
 
     @Inject
+    IAHttpContext localContext;
+    @Inject
     IUser user;
 
 //    @Inject
@@ -43,15 +46,15 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
 //        registerParameters = new LinkedHashMap<>();
 //    }
 
-    public ApiRegisterPageStepDef() {
-        super();
-    }
+//    public ApiRegisterPageStepDef() {
+//        super();
+//    }
 
-    @Inject
-    public ApiRegisterPageStepDef(IUser user) {
+//    @Inject
+    public ApiRegisterPageStepDef(/*IUser user*/) {
 //        this.httpClient = httpClient;
 //        this.localContext = localContext;
-        this.user = user;
+//        this.user = user;
 //        registerParameters = new LinkedHashMap<>();
     }
 
@@ -66,7 +69,7 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
 
@@ -78,7 +81,7 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
 
@@ -224,7 +227,7 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
                     }
                 },
                 registerParameters,
-                localContext,
+                localContext.getHttpContext(),
                 false
         );
     }

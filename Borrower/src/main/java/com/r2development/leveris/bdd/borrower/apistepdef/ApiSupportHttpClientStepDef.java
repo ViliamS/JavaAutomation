@@ -1,6 +1,5 @@
 package com.r2development.leveris.bdd.borrower.apistepdef;
 
-import com.google.inject.Singleton;
 import com.r2development.leveris.utils.HttpUtils;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
@@ -13,7 +12,7 @@ import org.apache.http.protocol.HttpContext;
 import org.joda.time.DateTime;
 import org.junit.Assert;
 
-@Singleton
+//@Singleton
 public class ApiSupportHttpClientStepDef {
 
     private static final Log log = LogFactory.getLog(ApiSupportHttpClientStepDef.class);
@@ -36,12 +35,12 @@ public class ApiSupportHttpClientStepDef {
         if ( StringUtils.isEmpty(System.getProperty("timestamp")))
             System.setProperty("timestamp", DateTime.now().toString("yyyyMMddHHmmssSSS"));
 
-        httpClient = HttpUtils.createHttpClient();
 
         Assert.assertNotNull("Maven didn't load the System property Environment", System.getProperty("environment"));
         Assert.assertNotNull("Maven didn't load the System property Domain", System.getProperty("domain.borrower"));
         Assert.assertNotNull("Maven didn't load the System property Borrower", System.getProperty("borrower"));
 
+        httpClient = HttpUtils.createHttpClient();
         localContext = HttpUtils.initContext(System.getProperty("domain.borrower"), "/stable-borrower");
     }
 

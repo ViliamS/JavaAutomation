@@ -1,8 +1,8 @@
 package com.r2development.leveris.bdd.borrower.apistepdef;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.EmploymentIncomeData;
+import com.r2development.leveris.di.IAHttpContext;
 import com.r2development.leveris.di.IHttpResponse;
 import com.r2development.leveris.di.IUser;
 import cucumber.api.java.en.Given;
@@ -32,7 +32,7 @@ import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
-@Singleton
+//@Singleton
 public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiEmploymentAndIncomeStepDef.class);
@@ -40,12 +40,15 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
     @Inject
     IUser user;
     @Inject
+    IAHttpContext localContext;
+    @Inject
     IHttpResponse httpResponse;
 
     private boolean isThereEmpList = false;
 
     @Inject
     public ApiEmploymentAndIncomeStepDef(IHttpResponse httpResponse) {
+        this.isThereEmpList = false;
         this.httpResponse = httpResponse;
     }
 
@@ -117,7 +120,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                                     );
                                 }
                             },
-                            localContext,
+                            localContext.getHttpContext(),
                             CONSUME_QUIETLY
                     );
                 }
@@ -161,7 +164,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                                     put("data", "{\"widgets\":[{\"widget\":\"pnlDetail pnlUnemployed txtUnemployedEndDate\",\"data\":{\"enable\":false}}]}");
                                 }
                             },
-                            localContext,
+                            localContext.getHttpContext(),
                             CONSUME_QUIETLY
                     );
                 }
@@ -191,7 +194,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                                     put("data", "{\"widgets\":[{\"widget\":\"pnlDetail pnlOtherDates txtOtherEndDate\",\"data\":{\"enable\":false}}]}");
                                 }
                             },
-                            localContext,
+                            localContext.getHttpContext(),
                             CONSUME_QUIETLY
                     );
                 }
@@ -297,7 +300,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                     }
                 },
                 linkAddParameters,
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
         httpResponse.setHttpResponse(employmentLinkAddResponse);
@@ -323,7 +326,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                                     put("root:c:w:pnlNoEmplyments:c:w:pnlPaye:c:w:lnkAddPaye:submit", "1");
                                 }
                             },
-                            localContext,
+                            localContext.getHttpContext(),
                             CONSUME_QUIETLY
                     );
                     httpResponse.setHttpResponse(addResponse);
@@ -344,7 +347,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                                 put("data", "{\"widgets\":[{\"widget\":\"pnlDetail pnlSelfEmployed pnlCounty pnlIrelandCounty cmbIrelandCounty\",\"data\":{\"enable\":true}},{\"widget\":\"pnlDetail pnlSelfEmployed pnlCounty pnlIrelandCounty\",\"data\":{\"enable\":true}},{\"widget\":\"pnlDetail pnlSelfEmployed pnlCounty pnlIrelandCounty\",\"data\":{\"visible\":true},\"delta\":40,\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlSelfEmployed pnlCounty pnlIrelandCounty\",\"data\":{\"visible\":true},\"delta\":0,\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed txtEmployerName\",\"data\":{\"visible\":true},\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed cmbEmplType\",\"data\":{\"visible\":true},\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed txtEmplStartDate\",\"data\":{\"visible\":true},\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed pnlEmplCurrently chkEmplCurrently\",\"data\":{\"visible\":true},\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed pnlEmplPayeServant crbEmplGrossSalary\",\"data\":{\"visible\":true},\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed pnlEmplPayeServant crbEmplGrossBonus\",\"data\":{\"visible\":true},\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed pnlEmplPayeServant crbEmplGrossOvertime\",\"data\":{\"visible\":true},\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed\",\"data\":{\"visible\":true},\"delta\":520,\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed pnlNetIncomeEmpl\",\"data\":{\"visible\":true},\"delta\":80,\"visibleEvent\":\"show\"},{\"widget\":\"pnlDetail pnlEmployed pnlEmplPayeServant\",\"data\":{\"visible\":false},\"delta\":-150,\"visibleEvent\":\"hide\"},{\"widget\":\"pnlDetail pnlEmployed pnlEmplPayeServant\",\"data\":{\"enable\":false}},{\"widget\":\"pnlDetail pnlSelfEmployed\",\"data\":{\"enable\":false}},{\"widget\":\"pnlDetail pnlNetIcomeSelf\",\"data\":{\"visible\":false},\"delta\":-70,\"visibleEvent\":\"hide\"},{\"widget\":\"pnlDetail pnlNetIcomeSelf\",\"data\":{\"enable\":false}},{\"widget\":\"pnlDetail pnlOther\",\"data\":{\"enable\":false}},{\"widget\":\"pnlDetail pnlOtherIncome\",\"data\":{\"enable\":false}},{\"widget\":\"pnlDetail pnlNetIcomeOther\",\"data\":{\"visible\":false},\"delta\":-70,\"visibleEvent\":\"hide\"},{\"widget\":\"pnlDetail pnlNetIcomeOther\",\"data\":{\"enable\":false}},{\"widget\":\"pnlDetail pnlOtherDates\",\"data\":{\"enable\":false}},{\"widget\":\"pnlDetail pnlUnemployed\",\"data\":{\"enable\":false}},{\"widget\":\"pnlDetail pnlSelfEmployed txtBusinessEndDate\",\"data\":{\"enable\":true}},{\"widget\":\"pnlDetail pnlUnemployed txtUnemployedEndDate\",\"data\":{\"enable\":true}},{\"widget\":\"pnlDetail pnlOtherDates txtOtherEndDate\",\"data\":{\"enable\":true}}]}");
                             }
                         },
-                        localContext,
+                        localContext.getHttpContext(),
                         CONSUME_QUIETLY
                 );
                 break;
@@ -367,7 +370,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                                     put("root:c:w:pnlNoEmplyments:c:w:pnlSelfEmployed:c:w:lnkAddSelfEmployed:submit", "1");
                                 }
                             },
-                            localContext,
+                            localContext.getHttpContext(),
                             CONSUME_QUIETLY
                     );
                     httpResponse.setHttpResponse(addResponse);
@@ -390,7 +393,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
 //                                );
                             }
                         },
-                        localContext,
+                        localContext.getHttpContext(),
                         CONSUME_QUIETLY
 
                 );
@@ -497,7 +500,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                                     put("root:c:w:pnlNoEmplyments:c:w:pnlUnemployed:c:w:lnkAddUnemployment:submit", "1");
                                 }
                             },
-                            localContext,
+                            localContext.getHttpContext(),
                             CONSUME_QUIETLY
                     );
                     httpResponse.setHttpResponse(addResponse);
@@ -519,7 +522,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                                 );
                             }
                         },
-                        localContext,
+                        localContext.getHttpContext(),
                         CONSUME_QUIETLY
 
                 );
@@ -543,7 +546,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                                     put("root:c:w:pnlNoEmplyments:c:w:pnlOther:c:w:lnkAddHomemaker:submit", "1");
                                 }
                             },
-                            localContext,
+                            localContext.getHttpContext(),
                             CONSUME_QUIETLY
                     );
                     httpResponse.setHttpResponse(addResponse);
@@ -565,7 +568,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                                 );
                             }
                         },
-                        localContext,
+                        localContext.getHttpContext(),
                         CONSUME_QUIETLY
 
                 );
@@ -587,7 +590,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                                 );
                             }
                         },
-                        localContext,
+                        localContext.getHttpContext(),
                         CONSUME_QUIETLY
 
                 );
@@ -688,7 +691,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                                 );
                             }
                         },
-                        localContext,
+                        localContext.getHttpContext(),
                         CONSUME_QUIETLY
                 );
                 break;
@@ -1248,7 +1251,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                     }
                 },
                 finalEmploymentIncomeParameters,
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
         httpResponse.setHttpResponse(employmentAddResponse);
@@ -1278,8 +1281,28 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                 break;
         }
 
-        if ( isThereEmpList )
+        if ( isThereEmpList ) {
+
             linkClose = "1:main:c:form:form:root:c:w:pnlEmpList:c:w:btnAddEmp:close::IBehaviorListener:0:";
+
+//            boolean toSkip = false;
+//            Document currentFormDocToCheckClose = Jsoup.parse(httpResponse.getHttpResponse());
+//            Document currentFormDocToCheckClose2 = null;
+//            try {
+//                currentFormDocToCheckClose2 = Jsoup.parse(currentFormDocToCheckClose.select("component[id~=close]").select("component[encoding~=wicket]").first().text());
+//            } catch (NullPointerException npe) {
+////                linkClose = "1:main:c:form:form:root:c:w:pnlEmpList:c:w:btnAddEmp:close::IBehaviorListener:0:";
+//                toSkip = true;
+////                Assert.assertFalse("oups, huston we have a pb about closing form !", true);
+//            }
+//
+//            if ( !toSkip ) {
+//                String potentialLinkClose = currentFormDocToCheckClose2.select("a").attr("wicketpath").replace("_", ":");
+//                linkClose = "1:" + potentialLinkClose + "::IBehaviorListener:0:";
+//            }
+////            else
+////                linkClose = "1:main:c:form:form:root:c:w:pnlEmpList:c:w:btnAddEmp:close::IBehaviorListener:0:";
+        }
 
 //        if ( currentWorkflow.equals("btnEmployment")) {
         requestHttpPost(
@@ -1292,7 +1315,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                     }
                 },
                 new LinkedHashMap<String, String>() {},
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
 
@@ -1312,7 +1335,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                             put("root:c:w:btnHiddenSubmit:submit", "1");
                         }
                     },
-                    localContext,
+                    localContext.getHttpContext(),
                     CONSUME_QUIETLY
             );
             httpResponse.setHttpResponse(addEmplCompleted);
@@ -1333,7 +1356,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                             put("root:c:w:btnHiddenSubmit:submit", "1");
                         }
                     },
-                    localContext,
+                    localContext.getHttpContext(),
                     CONSUME_QUIETLY
             );
             httpResponse.setHttpResponse(addEmplCompleted);
@@ -1370,7 +1393,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                             put("stepToken", stepTokenValue);
                         }
                     },
-                    localContext,
+                    localContext.getHttpContext(),
                     CONSUME_QUIETLY
                 );
                 httpResponse.setHttpResponse(addEmpResponse);
@@ -1412,7 +1435,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                         put("root:c:w:pnlEmpList:c:w:btnImDone:submit", "1");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
         httpResponse.setHttpResponse(yourAccountPageResponse);

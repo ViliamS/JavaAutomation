@@ -37,4 +37,8 @@ public class DataModel extends LinkedHashMap {
     public Map<String, String> getData() {
         return data;
     }
+
+    public int getSize() {
+        return data.size();
+    }
 }

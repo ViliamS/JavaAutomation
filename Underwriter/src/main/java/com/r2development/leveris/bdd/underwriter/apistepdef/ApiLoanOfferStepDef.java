@@ -22,6 +22,9 @@ public class ApiLoanOfferStepDef extends ApiOpoqoUnderwriterStepDef {
 
     private static final Log log = LogFactory.getLog(ApiLoanOfferStepDef.class.getName());
 
+//    @Inject
+//    IAHttpContext localContext;
+
     @When("^user saves offer$")
     public void user_saves_offer() throws IOException {
         Document containerLoanOfferDoc = Jsoup.parse(jsoupContainer.get("loanOffer").html());

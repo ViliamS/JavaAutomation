@@ -10,7 +10,7 @@ Feature: Personal Form Validation
 
 #----- begin With automatic
     Given Borrower processes the automatic registration
-      | applicantId | test.automation@test.finfactory.com |
+      | applicantId | test.automation@finfactory.com |
 #----- end with automatic
 
 #----- begin without automatic
@@ -60,6 +60,8 @@ Feature: Personal Form Validation
 #    When Borrower clicks "Borrower Personal Details"
     When Borrower fills in Personal Details
       | formType            | Personal Details  |
+    And Borrower saves his personal details data
     Then Borrower sees these errors messages
-      | | |
-      | | |
+      | Last name     | Field is required. |
+      | Gender        | Field is required. |
+      | Date of birth | Field is required. |

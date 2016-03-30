@@ -109,7 +109,7 @@ public class AutomaticRegistrationSection extends Borrower implements IAutomatic
         isVisible(LINK_CREATE_NEW_USER_XPATH, true);
 
         if(!StringUtils.isEmpty(userName))
-            type(OPOQO_APPLICANTS_ID_INPUT_XPATH, userNameTimeStamping(userName, true)); //typing with timestamp
+            type(OPOQO_APPLICANTS_ID_INPUT_XPATH, userNameTimeStamping(userName, "gui")); //typing with timestamp
 
         clickElement(LINK_CREATE_NEW_USER_XPATH);
         loadingCheck();

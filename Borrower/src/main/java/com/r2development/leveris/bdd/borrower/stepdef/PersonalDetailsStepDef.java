@@ -48,21 +48,25 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ /*implements CLV
                 personalDetailsData.getFormType()
         );
 
-        if (!StringUtils.isEmpty(personalDetailsData.getTitle()))
-            borrower_types_his_title(borrowerOrCoapplicant, personalDetailsData.getTitle());
-        borrower_coapplicant_user_types_his_firstname(borrowerOrCoapplicant, personalDetailsData.getFirstName());
-        borrower_coapplicant_user_types_his_lastname(borrowerOrCoapplicant, personalDetailsData.getLastName());
+        if ( personalDetailsData.getSize() != 1 && personalDetailsData.getFormType() != null) {
 
-        if (!StringUtils.isEmpty(personalDetailsData.getMiddleName()))
-            borrower_types_his_middle_name(borrowerOrCoapplicant, personalDetailsData.getMiddleName());
+            if (!StringUtils.isEmpty(personalDetailsData.getTitle()))
+                borrower_types_his_title(borrowerOrCoapplicant, personalDetailsData.getTitle());
+            borrower_coapplicant_user_types_his_firstname(borrowerOrCoapplicant, personalDetailsData.getFirstName());
+            borrower_coapplicant_user_types_his_lastname(borrowerOrCoapplicant, personalDetailsData.getLastName());
 
-        if (!StringUtils.isEmpty(personalDetailsData.getSuffix()))
-            borrower_types_his_suffix(borrowerOrCoapplicant, personalDetailsData.getSuffix());
+            if (!StringUtils.isEmpty(personalDetailsData.getMiddleName()))
+                borrower_types_his_middle_name(borrowerOrCoapplicant, personalDetailsData.getMiddleName());
 
-        borrower_coapplicant_user_checks_his_gender(borrowerOrCoapplicant, personalDetailsData.getGender());
-        borrower_coapplicant_user_types_his_date_of_birth(borrowerOrCoapplicant, personalDetailsData.getDateOfBirth());
-        borrower_coapplicant_user_selects_his_marital_status(borrowerOrCoapplicant, personalDetailsData.getMaritalStatus());
-        borrower_coapplicant_user_selects_his_nationality(borrowerOrCoapplicant, personalDetailsData.getNationality());
+            if (!StringUtils.isEmpty(personalDetailsData.getSuffix()))
+                borrower_types_his_suffix(borrowerOrCoapplicant, personalDetailsData.getSuffix());
+
+            borrower_coapplicant_user_checks_his_gender(borrowerOrCoapplicant, personalDetailsData.getGender());
+            borrower_coapplicant_user_types_his_date_of_birth(borrowerOrCoapplicant, personalDetailsData.getDateOfBirth());
+            borrower_coapplicant_user_selects_his_marital_status(borrowerOrCoapplicant, personalDetailsData.getMaritalStatus());
+            borrower_coapplicant_user_selects_his_nationality(borrowerOrCoapplicant, personalDetailsData.getNationality());
+
+        }
 
 //        borrower_coapplicant_user_types_his_residency_address_line_1(borrowerOrCoapplicant, personalDetailsData.getAddressLine1());
 //        borrower_coapplicant_user_types_his_residency_towncity(borrowerOrCoapplicant, personalDetailsData.getTownCity());

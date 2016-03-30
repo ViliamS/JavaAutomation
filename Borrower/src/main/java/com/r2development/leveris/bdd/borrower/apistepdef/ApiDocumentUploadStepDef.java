@@ -2,6 +2,7 @@ package com.r2development.leveris.bdd.borrower.apistepdef;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.r2development.leveris.di.IAHttpContext;
 import com.r2development.leveris.di.IHttpResponse;
 import com.r2development.leveris.di.IUser;
 import cucumber.api.java.en.When;
@@ -55,14 +56,16 @@ public class ApiDocumentUploadStepDef extends ApiOpoqoBorrowerStepDef {
     private static final Log log = LogFactory.getLog(ApiDocumentUploadStepDef.class);
 
     @Inject
+    IAHttpContext localContext;
+    @Inject
     IHttpResponse httpResponse;
     @Inject
     IUser user;
 
-    @Inject
-    public ApiDocumentUploadStepDef(IHttpResponse httpResponse, IUser user) {
-        this.httpResponse = httpResponse;
-        this.user = user;
+//    @Inject
+    public ApiDocumentUploadStepDef(/*IHttpResponse httpResponse, IUser user*/) {
+//        this.httpResponse = httpResponse;
+//        this.user = user;
     }
 
 
@@ -105,7 +108,7 @@ public class ApiDocumentUploadStepDef extends ApiOpoqoBorrowerStepDef {
                         }
                     },
                     new LinkedHashMap<String, String>() {},
-                    localContext,
+                    localContext.getHttpContext(),
                     CONSUME_QUIETLY
             );
 
@@ -139,7 +142,7 @@ public class ApiDocumentUploadStepDef extends ApiOpoqoBorrowerStepDef {
 
             httpPostUploadDocItemDD.setEntity(entityUploadDocItemDD);
 
-            HttpResponse responseUploadDocItemDD = httpClient.execute(httpPostUploadDocItemDD, localContext);
+            HttpResponse responseUploadDocItemDD = httpClient.execute(httpPostUploadDocItemDD, localContext.getHttpContext());
             HttpEntity httpEntityUploadDocItemDD = responseUploadDocItemDD.getEntity();
 
             if (!CONSUME_QUIETLY ) {
@@ -170,7 +173,7 @@ public class ApiDocumentUploadStepDef extends ApiOpoqoBorrowerStepDef {
                         put("root:c:w:btnSubmitDialog:submit", "1");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
 

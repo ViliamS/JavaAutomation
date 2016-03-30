@@ -3,6 +3,7 @@ package com.r2development.leveris.bdd.borrower.apistepdef;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.PersonalDetailsData;
+import com.r2development.leveris.di.IAHttpContext;
 import com.r2development.leveris.di.IHttpResponse;
 import com.r2development.leveris.di.IUser;
 import cucumber.api.java.en.Given;
@@ -28,14 +29,16 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
     PersonalDetailsData personalDetailsData;
 
     @Inject
+    IAHttpContext localContext;
+    @Inject
     IHttpResponse httpResponse;
     @Inject
     IUser user;
 
     @Inject
-    public ApiPersonalDetailsStepDef(IHttpResponse httpResponse, IUser user) {
+    public ApiPersonalDetailsStepDef(IHttpResponse httpResponse/*, IUser user*/) {
         this.httpResponse = httpResponse;
-        this.user = user;
+//        this.user = user;
     }
 
     @When("^(Borrower) fills in (Personal Details)$")
@@ -194,7 +197,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
                                     );
                                 }
                             },
-                            localContext,
+                            localContext.getHttpContext(),
                             CONSUME_QUIETLY
                     );
                     break;
@@ -336,7 +339,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
                                     );
                                 }
                             },
-                            localContext,
+                            localContext.getHttpContext(),
                             CONSUME_QUIETLY
                     );
                 }
@@ -498,7 +501,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
                                     );
                                 }
                             },
-                            localContext,
+                            localContext.getHttpContext(),
                             CONSUME_QUIETLY
                     );
                 }
@@ -558,7 +561,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
                                 );
                             }
                         },
-                        localContext,
+                        localContext.getHttpContext(),
                         CONSUME_QUIETLY
                 );
                 break;
@@ -630,7 +633,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
                             );
                         }
                     },
-                    localContext,
+                    localContext.getHttpContext(),
                     CONSUME_QUIETLY
             );
         }
@@ -759,7 +762,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
                     }
                 },
                 finalPersonalDetailsParameters,
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
         httpResponse.setHttpResponse(personalDetailsSaveDataResponse);

@@ -3,6 +3,7 @@ package com.r2development.leveris.bdd.borrower.apistepdef;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.DependantData;
+import com.r2development.leveris.di.IAHttpContext;
 import com.r2development.leveris.di.IHttpResponse;
 import com.r2development.leveris.di.IUser;
 import com.r2development.leveris.utils.HttpUtils;
@@ -31,6 +32,8 @@ public class ApiYourDependantsStepDef extends ApiOpoqoBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiYourDependantsStepDef.class.getName());
 
+    @Inject
+    IAHttpContext localContext;
     @Inject
     private IUser user;
     @Inject
@@ -117,7 +120,7 @@ public class ApiYourDependantsStepDef extends ApiOpoqoBorrowerStepDef {
                     }
                 },
                 finalDependantParameters,
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
         httpResponse.setHttpResponse(employmentLinkAddResponse);
@@ -134,7 +137,7 @@ public class ApiYourDependantsStepDef extends ApiOpoqoBorrowerStepDef {
                         put("Accept", "text/xml");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
 
@@ -154,7 +157,7 @@ public class ApiYourDependantsStepDef extends ApiOpoqoBorrowerStepDef {
                             put("root:c:w:pnlNoEmplyments:c:w:btnHiddenSubmit:submit", "1");
                         }
                     },
-                    localContext,
+                    localContext.getHttpContext(),
                     CONSUME_QUIETLY
             );
             httpResponse.setHttpResponse(addDependantCompleted);
@@ -175,7 +178,7 @@ public class ApiYourDependantsStepDef extends ApiOpoqoBorrowerStepDef {
                             put("root:c:w:btnHidenRefresh:submit", "1");
                         }
                     },
-                    localContext,
+                    localContext.getHttpContext(),
                     CONSUME_QUIETLY
             );
             httpResponse.setHttpResponse(addDependantCompleted);
@@ -253,7 +256,7 @@ public class ApiYourDependantsStepDef extends ApiOpoqoBorrowerStepDef {
                     }
                 },
                 linkAddParameters,
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
         httpResponse.setHttpResponse(employmentLinkAddResponse);
@@ -276,7 +279,7 @@ public class ApiYourDependantsStepDef extends ApiOpoqoBorrowerStepDef {
                         put("root:c:w:pnlNoEmplyments:c:w:btnNextSection:submit", "1");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
         httpResponse.setHttpResponse(nextSectionResponse);
@@ -299,7 +302,7 @@ public class ApiYourDependantsStepDef extends ApiOpoqoBorrowerStepDef {
                         put("root:c:w:pnlNoEmplyments:c:w:btnNoneDependants:submit", "1");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
     }
@@ -337,7 +340,7 @@ public class ApiYourDependantsStepDef extends ApiOpoqoBorrowerStepDef {
                         put("root:c:w:pnlNoEmplyments:c:w:btnNoneDependants:submit", "1");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
         httpResponse.setHttpResponse(dependantDoneResponse);

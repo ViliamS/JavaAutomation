@@ -1,8 +1,8 @@
 package com.r2development.leveris.bdd.borrower.apistepdef;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.AccountData;
+import com.r2development.leveris.di.IAHttpContext;
 import com.r2development.leveris.di.IHttpResponse;
 import com.r2development.leveris.di.IUser;
 import cucumber.api.java.en.And;
@@ -25,11 +25,13 @@ import java.util.regex.Pattern;
 import static com.r2development.leveris.utils.HttpUtils.*;
 import static org.junit.Assert.assertEquals;
 
-@Singleton
+//@Singleton
 public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiYourAccountsStepDef.class.getName());
 
+    @Inject
+    IAHttpContext localContext;
     @Inject
     private IUser user;
     @Inject
@@ -39,9 +41,9 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
 //    private int stepTokenAddThisSource = 1;
     private int stepTokenHiddenSubmit = 1;
 
-    @Inject
-    public ApiYourAccountsStepDef(IHttpResponse httpResponse) {
-        this.httpResponse = httpResponse;
+//    @Inject
+    public ApiYourAccountsStepDef(/*IHttpResponse httpResponse*/) {
+//        this.httpResponse = httpResponse;
     }
 
     @Given("^(Borrower) fills in (Current account|Savings account|Account scraping)$")
@@ -120,7 +122,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                     }
                 },
                 new LinkedHashMap<String, String>(){},
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
         httpResponse.setHttpResponse(menuAccountResponse);
@@ -166,7 +168,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                 },
 //                accountParameters,
                 finalAccountParameters,
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
 
@@ -201,7 +203,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                 },
                 new LinkedHashMap<String, String>() {
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
 
@@ -222,7 +224,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                             put("root:c:w:btnHiddenRefresh:submit", "1");
                         }
                     },
-                    localContext,
+                    localContext.getHttpContext(),
                     CONSUME_QUIETLY
             );
             httpResponse.setHttpResponse(responseHiddenThisSource);
@@ -246,7 +248,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                             put("root:c:w:btnHiddenSubmit:submit", "1");
                         }
                     },
-                    localContext,
+                    localContext.getHttpContext(),
                     CONSUME_QUIETLY
             );
             httpResponse.setHttpResponse(responseRefreshThisSource);
@@ -265,7 +267,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                         put("Accept", "text/xml");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
     }
@@ -303,7 +305,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                         put("root:c:w:pnlEmpList:c:w:btnImDone:submit", "1");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
         httpResponse.setHttpResponse(yourAccountPageResponse);
@@ -404,7 +406,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                     }
                 },
                 linkAddParameters,
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
         httpResponse.setHttpResponse(employmentLinkAddResponse);
@@ -431,7 +433,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                                     put("root:c:w:pnlNoEmplyments:c:w:lnkCurrent:submit", "1");
                                 }
                             },
-                            localContext,
+                            localContext.getHttpContext(),
                             CONSUME_QUIETLY
                     );
                     httpResponse.setHttpResponse(linkSubmitResponse);
@@ -458,7 +460,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                                     put("root:c:w:pnlNoEmplyments:c:w:lnkCurrent:submit", "1");
                                 }
                             },
-                            localContext,
+                            localContext.getHttpContext(),
                             CONSUME_QUIETLY
                     );
                     httpResponse.setHttpResponse(linkSubmitResponse);
@@ -483,7 +485,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                                     put("root:c:w:pnlNoEmplyments:c:w:lnkCurrent:submit", "1");
                                 }
                             },
-                            localContext,
+                            localContext.getHttpContext(),
                             CONSUME_QUIETLY
                     );
                     httpResponse.setHttpResponse(linkSubmitResponse);
@@ -704,7 +706,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                         put("Accept", "text/xml");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
 

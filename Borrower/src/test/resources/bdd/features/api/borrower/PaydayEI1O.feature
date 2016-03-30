@@ -1,4 +1,4 @@
-@:-] @:-P @:-]] @Payday @1O
+@Payday @1O
 Feature: Payday Loan
 
   Background:

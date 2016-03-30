@@ -131,7 +131,9 @@ public class BorrowerDependenciesModule extends AbstractModule {
 //            bind(HttpContext.class).toInstance(localContext);
 //            bind(IHttpResponse.class).toInstance(httpResponse);
             bind(IHttpResponse.class).to(HttpResponse.class).asEagerSingleton();
-            bind(IErrorHandler.class).to(ErrorHandler.class).asEagerSingleton();
+            bind(IAHttpContext.class).to(AHttpContext.class).asEagerSingleton();
+//            bind(IErrorHandler.class).to(ErrorHandler.class).asEagerSingleton();
+//            bind(new TypeLiteral<Map<String, String>>(){}).toProvider(ErrorHandler.class).asEagerSingleton();
         }
 
         if ( user == null)

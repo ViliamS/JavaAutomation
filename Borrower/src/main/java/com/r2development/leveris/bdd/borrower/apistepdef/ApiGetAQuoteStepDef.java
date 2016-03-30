@@ -3,6 +3,7 @@ package com.r2development.leveris.bdd.borrower.apistepdef;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.QuoteData;
+import com.r2development.leveris.di.IAHttpContext;
 import com.r2development.leveris.di.IHttpResponse;
 import com.r2development.leveris.di.IUser;
 import cucumber.api.java.en.And;
@@ -13,6 +14,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.protocol.HttpContext;
 import org.hamcrest.core.Is;
 import org.jsoup.Jsoup;
@@ -39,6 +41,8 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
     protected QuoteData quoteData = new QuoteData();
 
     @Inject
+    IAHttpContext localContext;
+    @Inject
     IHttpResponse httpResponse;
     @Inject
     IUser user;
@@ -55,6 +59,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
         assertNotEquals("Should be different HttpClientContext object", localContext, initContext());
         HttpContext newLocalContext = newHttpClientContext();
         assertEquals("not same HttpClientContext object", newLocalContext, localContext);
+        localContext.setHttpContext((HttpClientContext) newLocalContext);
 
         String response = requestHttpGet(
                 httpClient,
@@ -64,7 +69,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
         httpResponse.setHttpResponse(response);
@@ -88,7 +93,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                         put("root:c:w:pnlMain:c:w:lnkQuote:submit", "1");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
         httpResponse.setHttpResponse(response);
@@ -132,7 +137,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
 
@@ -170,7 +175,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                         put("root:c:w:btnTasksHidden:submit", "1");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
 
@@ -188,7 +193,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
 //                        put("root:c:w:pnlBackground:c:w:btnGetQuoteNow:submit", "1");
 //                    }
 //                },
-//                localContext,
+//                localContext.getHttpContext(),
 //                CONSUME_QUIETLY
 //        );
 //        httpResponse.setHttpResponse(currentResponse);
@@ -237,7 +242,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                         put("root:c:w:pnlAffordability:c:w:btnconfigureYourLoan:submit", "1");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
     }
@@ -267,7 +272,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
 //                        }
 //                    },
                 new LinkedHashMap<String, String>() {},
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
     }
@@ -290,7 +295,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
 //                        put("root:c:w:pnlBackground:c:w:btnGetQuoteNow:submit","1");
 //                    }
 //                },
-//                localContext,
+//                localContext.getHttpContext(),
 //                CONSUME_QUIETLY
 //        );
 //
@@ -387,7 +392,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                         );
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
 
@@ -542,7 +547,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                     }
                 },
                 parametersPost,
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
 
@@ -659,7 +664,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                             );
                         }
                     },
-                    localContext,
+                    localContext.getHttpContext(),
                     CONSUME_QUIETLY
             );
         }
@@ -776,7 +781,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                             );
                         }
                     },
-                    localContext,
+                    localContext.getHttpContext(),
                     CONSUME_QUIETLY
             );
         }
@@ -856,7 +861,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                         );
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
     }
@@ -1014,7 +1019,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                         );
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
     }
@@ -1239,7 +1244,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                     }
                 },
                 parameterPost,
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
     }
@@ -1412,7 +1417,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                     }
                 },
                 parameterPost,
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
     }
@@ -1575,7 +1580,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                         }
                     },
                     parameterPost,
-                    localContext,
+                    localContext.getHttpContext(),
                     CONSUME_QUIETLY
             );
         }
@@ -1675,7 +1680,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                             );
                         }
                     },
-                    localContext,
+                    localContext.getHttpContext(),
                     CONSUME_QUIETLY
             );
         } else {
@@ -1731,7 +1736,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                         );
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
     }
@@ -1753,7 +1758,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                     }
                 },
                 quoteParameters,
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
         httpResponse.setHttpResponse(currentResponse);
@@ -1879,7 +1884,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                         put("Accept", "text/xml;charset=UTF-8");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
 
@@ -1900,7 +1905,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                         put("root:c:w:btnInvite:submit", "1");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
 
@@ -1912,7 +1917,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                         put("Accept", "text/xml;charset=UTF-8");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
     }
@@ -1934,7 +1939,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                         put("root:c:w:pnlCoapplicant:c:w:btnAction:submit", "1");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
     }
@@ -1961,7 +1966,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                         put("root:c:w:pnlCoapplicant:c:w:btnStayAlone:submit", "1");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
     }
@@ -1986,7 +1991,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                         put("root:c:w:pnl-YouAreReadyToSubmit:c:w:btn-ReviewAndSubmit:submit", "1");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
         // TODO to check application status
@@ -2013,7 +2018,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                         put("root:c:w:pnlContent:c:w:btnSubmitApplication:submit", "1");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
 
@@ -2042,7 +2047,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                         put("root:c:w:pnlContent:c:w:btnSubmitApplication:submit", "1");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
         */
@@ -2096,7 +2101,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                         );
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
 
@@ -2121,7 +2126,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                         put("root:c:w:btnSubmitApplication:submit", "1");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
     }

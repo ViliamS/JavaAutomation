@@ -3,6 +3,7 @@ package com.r2development.leveris.bdd.borrower.apistepdef;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.AutomaticRegistrationData;
+import com.r2development.leveris.di.IAHttpContext;
 import com.r2development.leveris.di.IHttpResponse;
 import com.r2development.leveris.di.IUser;
 import cucumber.api.java.en.Given;
@@ -27,7 +28,8 @@ public class ApiAutomaticRegistrationStepDef extends ApiOpoqoBorrowerStepDef {
 
     @Inject
     IUser user;
-
+    @Inject
+    IAHttpContext localContext;
     @Inject
     IHttpResponse httpResponse;
 
@@ -107,7 +109,7 @@ public class ApiAutomaticRegistrationStepDef extends ApiOpoqoBorrowerStepDef {
                     put("data", "{\"widgets\":[{\"widget\":\"pnlMain pnlInvite\",\"data\":{\"enable\":false}}]}");
                 }
             },
-            localContext,
+            localContext.getHttpContext(),
             false
         );
 
@@ -132,7 +134,7 @@ public class ApiAutomaticRegistrationStepDef extends ApiOpoqoBorrowerStepDef {
                     }
                 },
                 automationRegistrationParameters,
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
     }
@@ -156,7 +158,7 @@ public class ApiAutomaticRegistrationStepDef extends ApiOpoqoBorrowerStepDef {
                         put("root:c:w:pnlMain:c:w:btnLogin:submit", "1");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 false
         );
         httpResponse.setHttpResponse(loginResponse);

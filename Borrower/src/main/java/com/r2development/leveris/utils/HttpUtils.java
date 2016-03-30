@@ -215,7 +215,8 @@ public class HttpUtils {
                 assertFalse(errorMessage, true);
             } else if (toReturn.contains("Field is required.") && toReturn.contains("<li class=\"widget-label error\"")) {
                 errorMessage = prettyFormat(StringEscapeUtils.unescapeXml(response2Jsoup.select("component[id~=feedback]").html()), 2);
-                assertFalse(errorMessage, true);
+                if ( System.getProperty("errorHandler") != null && System.getProperty("errorHandler").equals("true") )
+                    assertFalse(errorMessage, true);
             } else if (toReturn.contains("A JavaScript error occurred while processing custom server")) {
                 errorMessage = prettyFormat(StringEscapeUtils.unescapeXml(response2Jsoup.select("component[id~=feedback]").html()), 2);
                 assertFalse(errorMessage, true);
@@ -238,6 +239,7 @@ public class HttpUtils {
             }
 
             // TODO to handle <!-- Page Class com.cleverlance.abakus.ib.borrower.web.ui.error.PageExpiredErrorPage -->
+            // TODO to handle <!-- Page Class com.cleverlance.abakus.ib.borrower.web.ui.error.UnknownErrorPage -->
         }
 
         /*

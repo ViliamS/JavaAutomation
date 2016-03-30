@@ -5,6 +5,7 @@ import com.google.gson.JsonParser;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.LoginData;
+import com.r2development.leveris.di.IAHttpContext;
 import com.r2development.leveris.di.IHttpResponse;
 import com.r2development.leveris.di.IUser;
 import com.r2development.leveris.qa.utils.Orasql;
@@ -19,6 +20,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HTTP;
@@ -46,6 +48,8 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
 //    private HttpClient httpClient;
 //    private HttpContext localContext;
 
+    @Inject
+    IAHttpContext localContext;
     @Inject
     private IHttpResponse httpResponse;
 
@@ -109,7 +113,7 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
                     }
                 },
                 loginParameters,
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
     }
@@ -125,7 +129,7 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
 
@@ -160,7 +164,7 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
                     }
                 },
                 loginParameters,
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
     }
@@ -197,6 +201,7 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
         Assert.assertNotEquals("Should be different HttpClientContext object", localContext, initContext());
         HttpContext newLocalContext = newHttpClientContext(System.getProperty("domain.borrower"), "/stable-borrower");
         Assert.assertEquals("not same HttpClientContext object", newLocalContext, localContext);
+        localContext.setHttpContext((HttpClientContext) newLocalContext);
 
 //        CookieStore cookieStore = new BasicCookieStore();
 //        HttpClientContext localContextBody = HttpClientContext.create();
@@ -217,7 +222,7 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
 
@@ -229,7 +234,7 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
 
@@ -245,7 +250,7 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
                     put("Upgrade-Insecure-Requests", "1");
                 }
             },
-            localContext,
+            localContext.getHttpContext(),
             CONSUME_QUIETLY
         );
 
@@ -260,7 +265,7 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
                         put("Cookie", "testcookie");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
 
@@ -282,7 +287,7 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
         StringEntity seValidateAuthProcessStep = new StringEntity("{\"scenarioCode\":\"USR_PWD\",\"authProcessStepValues\":[{\"authDetailType\":\"USERNAME\",\"value\":\"" + user.getEmail() + "\"},{\"authDetailType\":\"PWD\",\"value\":\"" + user.getPwd() + "\"}]}");
         seValidateAuthProcessStep.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
         httpPostValidateAuthProcessStep.setEntity(seValidateAuthProcessStep);
-        HttpResponse responseValidateAuthProcessStep = httpClient.execute(httpPostValidateAuthProcessStep, localContext);
+        HttpResponse responseValidateAuthProcessStep = httpClient.execute(httpPostValidateAuthProcessStep, localContext.getHttpContext());
         HttpEntity httpEntityValidateAuthProcessStep = responseValidateAuthProcessStep.getEntity();
         log.info("==== httpPostValidateAuthProcessStep ====");
         String parse2jsonValidateAuthProcessStep = EntityUtils.toString(httpEntityValidateAuthProcessStep);
@@ -302,7 +307,7 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
         StringEntity seGenerateServiceTicket = new StringEntity("{\"idAuthProcess\":\"" + idScenario + "\"}");
         seGenerateServiceTicket.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
         httpPostGenerateServiceTicket.setEntity(seGenerateServiceTicket);
-        HttpResponse responseGenerateServiceTicket = httpClient.execute(httpPostGenerateServiceTicket, localContext);
+        HttpResponse responseGenerateServiceTicket = httpClient.execute(httpPostGenerateServiceTicket, localContext.getHttpContext());
         HttpEntity httpEntityGenerateServiceTicket = responseGenerateServiceTicket.getEntity();
         log.info("==== httpEntityGenerateServiceTicket ====");
         String parse2jsonGenerateServiceTicket = EntityUtils.toString(httpEntityGenerateServiceTicket);
@@ -333,7 +338,7 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
         sePostIssueToken.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "text/plain"));
         httpPostIssueToken.setEntity(sePostIssueToken);
 
-        HttpResponse responseIssueToken = httpClient.execute(httpPostIssueToken, localContext);
+        HttpResponse responseIssueToken = httpClient.execute(httpPostIssueToken, localContext.getHttpContext());
         HttpEntity httpEntityIssueToken = responseIssueToken.getEntity();
         log.info("==== httpEntityIssueToken ====");
         String parse2jsonIssueToken = EntityUtils.toString(httpEntityIssueToken);
@@ -350,7 +355,7 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
         httpGetApiModuleWithBearer.setHeader("Accept", "*/*");
         httpGetApiModuleWithBearer.setHeader("authorization", "Bearer " + token);
         httpGetApiModuleWithBearer.setHeader("Cookie", "testcookie");
-        HttpResponse responseGetApiModuleWithBearer = httpClient.execute(httpGetApiModuleWithBearer, localContext);
+        HttpResponse responseGetApiModuleWithBearer = httpClient.execute(httpGetApiModuleWithBearer, localContext.getHttpContext());
         HttpEntity httpEntityGetApiModuleWithBearer = responseGetApiModuleWithBearer.getEntity();
         log.info("==== httpEntityGetApiModuleWithBearer ====");
         String parse2jsonGetApiModuleWithBearer = EntityUtils.toString(httpEntityGetApiModuleWithBearer);
@@ -358,7 +363,7 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
 
 
         HttpGet httpGetApiAuthentication = new HttpGet("http://dv2app.opoqodev.com/stable-borrower/home?useCase=authenticate&ticket="+ serviceTicketCode);
-        HttpResponse responseGetApiAuthentication = httpClient.execute(httpGetApiAuthentication, localContext);
+        HttpResponse responseGetApiAuthentication = httpClient.execute(httpGetApiAuthentication, localContext.getHttpContext());
         HttpEntity httpEntityGetApiAuthentication = responseGetApiAuthentication.getEntity();
         log.info("==== httpEntityGetApiAuthentication ====");
         String parse2jsonGetApiAuthenticationr = EntityUtils.toString(httpEntityGetApiAuthentication);

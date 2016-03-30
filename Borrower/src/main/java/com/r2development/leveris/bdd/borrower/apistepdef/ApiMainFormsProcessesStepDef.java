@@ -2,6 +2,7 @@ package com.r2development.leveris.bdd.borrower.apistepdef;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.r2development.leveris.di.IAHttpContext;
 import com.r2development.leveris.di.IHttpResponse;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
@@ -20,7 +21,9 @@ public class ApiMainFormsProcessesStepDef extends ApiOpoqoBorrowerStepDef {
     private static final Log log = LogFactory.getLog(ApiMainFormsProcessesStepDef.class);
 
 //    private HttpClient httpClient;
-//    private HttpContext localContext;
+    @Inject
+    IAHttpContext localContext;
+    @Inject
     private IHttpResponse httpResponse;
 
 //    @Inject
@@ -63,7 +66,7 @@ public class ApiMainFormsProcessesStepDef extends ApiOpoqoBorrowerStepDef {
                         put("Accept", "text/xml");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
         httpResponse.setHttpResponse(formResponse);
