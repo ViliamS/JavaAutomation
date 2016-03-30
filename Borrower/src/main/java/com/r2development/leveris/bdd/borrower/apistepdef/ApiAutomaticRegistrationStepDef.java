@@ -172,6 +172,7 @@ public class ApiAutomaticRegistrationStepDef extends ApiOpoqoBorrowerStepDef {
     private void fill_in_automatic_registration(AutomaticRegistrationData automaticRegistrationData) throws IOException {
 //        user_types_coapplicant_email(automaticRegistrationData.get("applicantId"));
         user_types_his_applicant(automaticRegistrationData.get("applicantId"));
+//        user_types_his_applicant("said.bouabdallah12345@finfactory.com");
         user.setPwd("Password1122+");
 
 //        if ( automaticRegistrationData.get("quoteComplete") != null && automaticRegistrationData.get("quoteComplete").equals("yes"))
