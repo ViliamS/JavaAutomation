@@ -159,16 +159,16 @@
                 <!--<artifactId>selenium-java</artifactId>-->
                 <!--<version>${org-seleniumhq-selenium.selenium-java.version}</version>-->
             <!--</dependency>-->
-            <dependency>
-                <groupId>org.seleniumhq.selenium</groupId>
-                <artifactId>selenium-server</artifactId>
-                <version>2.53.0</version>
-            </dependency>
             <!--<dependency>-->
                 <!--<groupId>org.seleniumhq.selenium</groupId>-->
-                <!--<artifactId>selenium-server-standalone</artifactId>-->
-                <!--<version>2.52.0</version>-->
+                <!--<artifactId>selenium-server</artifactId>-->
+                <!--<version>2.53.0</version>-->
             <!--</dependency>-->
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-server-standalone</artifactId>
+                <version>2.53.0</version>
+            </dependency>
 
             <!-- Cucumber -->
             <dependency>
