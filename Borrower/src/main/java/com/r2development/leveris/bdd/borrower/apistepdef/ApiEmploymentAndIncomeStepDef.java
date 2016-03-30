@@ -1282,26 +1282,7 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
         }
 
         if ( isThereEmpList ) {
-
             linkClose = "1:main:c:form:form:root:c:w:pnlEmpList:c:w:btnAddEmp:close::IBehaviorListener:0:";
-
-//            boolean toSkip = false;
-//            Document currentFormDocToCheckClose = Jsoup.parse(httpResponse.getHttpResponse());
-//            Document currentFormDocToCheckClose2 = null;
-//            try {
-//                currentFormDocToCheckClose2 = Jsoup.parse(currentFormDocToCheckClose.select("component[id~=close]").select("component[encoding~=wicket]").first().text());
-//            } catch (NullPointerException npe) {
-////                linkClose = "1:main:c:form:form:root:c:w:pnlEmpList:c:w:btnAddEmp:close::IBehaviorListener:0:";
-//                toSkip = true;
-////                Assert.assertFalse("oups, huston we have a pb about closing form !", true);
-//            }
-//
-//            if ( !toSkip ) {
-//                String potentialLinkClose = currentFormDocToCheckClose2.select("a").attr("wicketpath").replace("_", ":");
-//                linkClose = "1:" + potentialLinkClose + "::IBehaviorListener:0:";
-//            }
-////            else
-////                linkClose = "1:main:c:form:form:root:c:w:pnlEmpList:c:w:btnAddEmp:close::IBehaviorListener:0:";
         }
 
 //        if ( currentWorkflow.equals("btnEmployment")) {

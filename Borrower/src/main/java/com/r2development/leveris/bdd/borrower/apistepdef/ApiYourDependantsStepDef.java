@@ -1,7 +1,6 @@
 package com.r2development.leveris.bdd.borrower.apistepdef;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.DependantData;
 import com.r2development.leveris.di.IAHttpContext;
 import com.r2development.leveris.di.IHttpResponse;
@@ -27,7 +26,7 @@ import java.util.regex.Pattern;
 
 import static com.r2development.leveris.utils.HttpUtils.*;
 
-@Singleton
+//@Singleton
 public class ApiYourDependantsStepDef extends ApiOpoqoBorrowerStepDef {
 
     private static final Log log = LogFactory.getLog(ApiYourDependantsStepDef.class.getName());
@@ -44,6 +43,7 @@ public class ApiYourDependantsStepDef extends ApiOpoqoBorrowerStepDef {
     @Inject
     public ApiYourDependantsStepDef(IHttpResponse httpResponse) {
         this.httpResponse = httpResponse;
+        isThereDependantList = false;
     }
 
     @Given("^(Borrower) fills in \"Dependant form\"$")
@@ -197,6 +197,10 @@ public class ApiYourDependantsStepDef extends ApiOpoqoBorrowerStepDef {
             try {
                 empListDoc2 = Jsoup.parse(empListDoc.select("component[id~=" + aComponentId + "]").select("component[encoding~=wicket]").first().text());
                 log.info("is " + aComponentId);
+
+                if ( !aComponentId.equals("main"))
+                    isThereDependantList = true;
+
                 break;
             } catch (NullPointerException npe) {
                 log.info("isnot " + aComponentId);
