@@ -1,12 +1,12 @@
 package com.r2development.leveris.tdd.borrower;
 
-import com.r2development.leveris.enums.E_MARITAL_STATUS;
+import com.r2development.leveris.utils.enums.MARITAL_STATUS;
 
 public class EnumTest {
 
-    E_MARITAL_STATUS maritalStatus;
+    MARITAL_STATUS maritalStatus;
 
-    public EnumTest(E_MARITAL_STATUS maritalStatus) {
+    public EnumTest(MARITAL_STATUS maritalStatus) {
         this.maritalStatus = maritalStatus;
     }
 
@@ -32,15 +32,15 @@ public class EnumTest {
     }
 
     public static void main(String... args) {
-        EnumTest single = new EnumTest(E_MARITAL_STATUS.SINGLE);
+        EnumTest single = new EnumTest(MARITAL_STATUS.SINGLE);
         single.tellMe();
-        EnumTest separated = new EnumTest(E_MARITAL_STATUS.SEPARATED);
+        EnumTest separated = new EnumTest(MARITAL_STATUS.SEPARATED);
         separated.tellMe();
-        EnumTest married = new EnumTest(E_MARITAL_STATUS.MARRIED_CIVIL_PARTNER);
+        EnumTest married = new EnumTest(MARITAL_STATUS.MARRIED_CIVIL_PARTNER);
         married.tellMe();
-        EnumTest divorced = new EnumTest(E_MARITAL_STATUS.DIVORCED_DISSOLVED_CIVIL_PARTNERSHIP);
+        EnumTest divorced = new EnumTest(MARITAL_STATUS.DIVORCED_DISSOLVED_CIVIL_PARTNERSHIP);
         divorced.tellMe();
-        EnumTest widowed = new EnumTest(E_MARITAL_STATUS.WIDOWED);
+        EnumTest widowed = new EnumTest(MARITAL_STATUS.WIDOWED);
         widowed.tellMe();
     }
 }
