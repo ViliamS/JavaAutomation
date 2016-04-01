@@ -1,9 +1,9 @@
 package com.r2development.leveris.selenium.apollo.pageobjects;
 
 import com.r2development.leveris.Apollo;
+import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -15,7 +15,7 @@ public class EditContactSection extends Apollo implements IEditContactSection {
 
     private static final Log log = LogFactory.getLog(EditContactSection.class);
 
-    private WebDriver webDriver;
+    private SharedDriver webDriver;
 
     @FindBy( xpath = ADDRESS1_XPATH)
     protected WebElement weAddress1;
@@ -45,13 +45,13 @@ public class EditContactSection extends Apollo implements IEditContactSection {
     Map<String, String> oldContactData = new HashMap<>();
     Map<String, String> newContactData = new HashMap<>();
 
-    public EditContactSection(WebDriver webDriver, Map<String, String> oldContactData) {
+    public EditContactSection(SharedDriver webDriver, Map<String, String> oldContactData) {
         super(webDriver);
         this.webDriver = webDriver;
         this.oldContactData = oldContactData;
     }
 
-    public static IEditContactSection getEditContactSectionInstance(WebDriver webDriver, Map<String, String> oldContactData) {
+    public static IEditContactSection getEditContactSectionInstance(SharedDriver webDriver, Map<String, String> oldContactData) {
         IEditContactSection editContactSection = new EditContactSection(webDriver, oldContactData);
         PageFactory.initElements(webDriver, editContactSection);
         return editContactSection;

@@ -124,29 +124,29 @@ public class AccountData extends DataModel {
     */
 
     /**
-     | accountType           | Current Account         |
-     | accountProvider       | deWilliamS              |
-     | statementDate         | 01/01/2000              |
+     And Borrower fills in Current account
+     | formType              | Current account         |
+     | statementDate         | 21/03/2016              |
+     | accountProvider       | CSOB                    |
+     | accountHolderName     | deWilliamS              |
      | sortCode1             | 12                      |
      | sortCode2             | 34                      |
      | sortCode3             | 56                      |
-     | accountNumber         | 1234567890              |
+     | accountNumber         | 1234567                 |
      | accountBalance        | 2001                    |
      | overdraftLimit        | 2002                    |
-     | sourceOfSaving        | Gift                    |
-     | regularMonthlySaving  | 200                     |
 
      And Borrower fills in Savings account
      | accountType           | Savings account         |
      | accountProvider       | deWilliamS              |
      # BUG OPO-280 - if added as second account the field disappears
      | statementDate         | 01/01/2000              |
+     | accountName           | test Current Account    |
      | sortCode1             | 12                      |
      | sortCode2             | 34                      |
      | sortCode3             | 56                      |
-     | accountNumber         | 0987654321              |
+     | accountNumber         | 09876543                |
      | accountBalance        | 2001                    |
-     | overdraftLimit        | 2002                    |
      | sourceOfSaving        | Gift                    |
      | regularMonthlySaving  | 200                     |
      */

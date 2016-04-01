@@ -1,9 +1,9 @@
 package com.r2development.leveris.selenium.apollo.pageobjects;
 
 import com.r2development.leveris.Apollo;
+import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.Map;
@@ -15,14 +15,14 @@ public class SearchPage extends Apollo implements ISearchPage, IResultSection, I
     private ISearchSection searchSection; // = new SearchFullTextSection();
     private IResultSection resultSection;
 
-    public static ISearchPage getSearchSectionInstance(WebDriver webDriver) {
+    public static ISearchPage getSearchSectionInstance(SharedDriver webDriver) {
 //        ISearchPage searchPage = new SearchPage(webDriver).waitForPageToLoad();
         ISearchPage searchPage = new SearchPage(webDriver);
         PageFactory.initElements(webDriver, searchPage);
         return searchPage;
     }
 
-    public static ISearchPage getSearchSectionInstance(WebDriver webDriver, ISearchSection iSearchSection) {
+    public static ISearchPage getSearchSectionInstance(SharedDriver webDriver, ISearchSection iSearchSection) {
 //        ISearchPage searchPage = new SearchPage(webDriver).waitForPageToLoad();
         ISearchPage searchPage = new SearchPage(webDriver);
         searchPage.setSearchSection(iSearchSection);
@@ -30,7 +30,7 @@ public class SearchPage extends Apollo implements ISearchPage, IResultSection, I
         return searchPage;
     }
 
-    SearchPage(WebDriver webDriver) {
+    SearchPage(SharedDriver webDriver) {
         super(webDriver);
         this.webDriver = webDriver;
         headerSection = HeaderSection.getHeaderSectionInstance(webDriver);
@@ -38,7 +38,7 @@ public class SearchPage extends Apollo implements ISearchPage, IResultSection, I
         resultSection = ResultSection.getResultSectionInstance(webDriver);
     }
 
-    SearchPage(WebDriver webDriver, ISearchSection iSearchSection) {
+    SearchPage(SharedDriver webDriver, ISearchSection iSearchSection) {
         super(webDriver);
         this.webDriver = webDriver;
         headerSection = HeaderSection.getHeaderSectionInstance(webDriver);
@@ -46,7 +46,7 @@ public class SearchPage extends Apollo implements ISearchPage, IResultSection, I
         resultSection = ResultSection.getResultSectionInstance(webDriver);
     }
 
-    SearchPage(WebDriver webDriver, IHeaderSection iheaderSection, ISearchSection iSearchSection, IResultSection iResultSection) {
+    SearchPage(SharedDriver webDriver, IHeaderSection iheaderSection, ISearchSection iSearchSection, IResultSection iResultSection) {
         super(webDriver);
         this.webDriver = webDriver;
         headerSection = iheaderSection;

@@ -1,6 +1,7 @@
 package com.r2development.leveris.selenium.apollo.pageobjects;
 
 import com.r2development.leveris.Apollo;
+import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +16,7 @@ public class ContactSection extends Apollo implements IContactSection {
 
     private static final Log log = LogFactory.getLog(ContactSection.class);
 
-    private WebDriver webDriver;
+    private SharedDriver webDriver;
 
     // TODO use guice injection
     private Map<String, String> contactDataFromSearch;
@@ -40,12 +41,12 @@ public class ContactSection extends Apollo implements IContactSection {
     protected WebElement weEditContact;
 
 
-    ContactSection(WebDriver webDriver) {
+    ContactSection(SharedDriver webDriver) {
         super(webDriver);
         this.webDriver = webDriver;
     }
 
-    ContactSection(WebDriver webDriver, Map<String, String> contactData, Map<String, String> contractData2) {
+    ContactSection(SharedDriver webDriver, Map<String, String> contactData, Map<String, String> contractData2) {
         super(webDriver);
         this.webDriver = webDriver;
         contactDataFromSearch = contactData;
@@ -53,13 +54,13 @@ public class ContactSection extends Apollo implements IContactSection {
 //        replace();
     }
 
-    public static IContactSection getContactSectionInstance(WebDriver webDriver) {
+    public static IContactSection getContactSectionInstance(SharedDriver webDriver) {
         IContactSection contactSection = new ContactSection(webDriver);
         PageFactory.initElements(webDriver, contactSection);
         return contactSection;
     }
 
-    public static IContactSection getContactSectionInstance(WebDriver webDriver, Map<String, String> contactData, Map<String, String> contactData2) {
+    public static IContactSection getContactSectionInstance(SharedDriver webDriver, Map<String, String> contactData, Map<String, String> contactData2) {
         IContactSection contactSection = new ContactSection(webDriver, contactData, contactData2);
         PageFactory.initElements(webDriver, contactSection);
         return contactSection;

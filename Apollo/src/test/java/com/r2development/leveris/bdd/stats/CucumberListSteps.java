@@ -20,7 +20,8 @@ public class CucumberListSteps {
 //        string extractArgsRegex = @"([^,]+\(.+?\))|([^,]+)";
 
         CucumberListSteps cucumberListSteps = new CucumberListSteps();
-        Map<String, Set<String>> stats = cucumberListSteps.statsModule("/Users/anthonymottot/Automation/Git/qa_automation/Aut-Abakus/Apollo/src/main/java/com/r2development/abakus/bdd/apollo/stepdef");
+        //todo to remove the hardcoded path but before that verify that this code is actual etc. if its needed still.
+        Map<String, Set<String>> stats = cucumberListSteps.statsModule("/Users/anthonymottot/Automation/Git/leveris_automation_prod/Apollo/src/main/java/com/r2development/leveris/bdd/apollo/stepdef");
 
         int totalStepDef = 0;
         for (Map.Entry<String, Set<String>> detail : stats.entrySet()) {

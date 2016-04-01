@@ -1,6 +1,7 @@
 package com.r2development.leveris.selenium.apollo.pageobjects;
 
 import com.r2development.leveris.Apollo;
+import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -20,8 +21,8 @@ public class SearchFullTextSection extends Apollo implements ISearchFullTextSect
     @FindBy( xpath = SUBMIT_BUTTON_XPATH )
     private WebElement webSubmit;
 
-    //    public static ISearchFullTextSection getSearchSectionInstance(WebDriver webDriver) {
-    public static ISearchSection getSearchSectionInstance(WebDriver webDriver) {
+    //    public static ISearchFullTextSection getSearchSectionInstance(SharedDriver webDriver) {
+    public static ISearchSection getSearchSectionInstance(SharedDriver webDriver) {
 //        SearchFullTextSection searchFullTextSection = new SearchFullTextSection(webDriver).waitForSearchSectionToLoad();
         ISearchFullTextSection searchFullTextSection = new SearchFullTextSection(webDriver);
         PageFactory.initElements(webDriver, searchFullTextSection);
@@ -29,7 +30,7 @@ public class SearchFullTextSection extends Apollo implements ISearchFullTextSect
         return (ISearchSection) searchFullTextSection;
     }
 
-    public SearchFullTextSection(WebDriver webDriver) {
+    public SearchFullTextSection(SharedDriver webDriver) {
         super(webDriver);
         this.webDriver = webDriver;
     }
