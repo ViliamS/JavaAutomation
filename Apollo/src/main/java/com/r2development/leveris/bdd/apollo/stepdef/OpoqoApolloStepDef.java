@@ -2,10 +2,7 @@ package com.r2development.leveris.bdd.apollo.stepdef;
 
 import com.google.inject.Inject;
 import com.r2development.leveris.di.IUser;
-import com.r2development.leveris.selenium.apollo.pageobjects.AdministrationLoginPage;
-import com.r2development.leveris.selenium.apollo.pageobjects.IAdministrationHomePage;
-import com.r2development.leveris.selenium.apollo.pageobjects.IAdministrationLoginPage;
-import com.r2development.leveris.selenium.apollo.pageobjects.IAdministrationUsersPage;
+import com.r2development.leveris.selenium.apollo.pageobjects.*;
 import cucumber.api.java.en.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -13,20 +10,16 @@ import org.junit.Assert;
 
 public class OpoqoApolloStepDef {
 
-    private static final Log log = LogFactory.getLog(OpoqoApolloStepDef.class.getName());
-
-    @Inject
-    IUser user;
-
-    @Inject
     private SharedDriver webDriver;
-
     private IAdministrationLoginPage administrationLoginPage;
     private IAdministrationHomePage administrationHomePage;
     private IAdministrationUsersPage administrationUserPage;
-
+    @Inject
     OpoqoApolloStepDef(SharedDriver webDriver){
         this.webDriver = webDriver;
+        administrationLoginPage = new AdministrationLoginPage(webDriver);
+        administrationHomePage = new AdministrationHomePage(webDriver);
+        administrationUserPage = new AdministrationUsersPage(webDriver);
     }
 
     @When("^Go to Apollo Administration Login page$")
@@ -78,11 +71,11 @@ public class OpoqoApolloStepDef {
         String searchResult = found + amount + items;
         if(administrationUserPage.isResultExpected(searchResult)) {
 
-            log.info("\n Test PASSED \n there was expected result ---> 'Found " + amount + " items.'");
+//            log.info("\n Test PASSED \n there was expected result ---> 'Found " + amount + " items.'");
 
         } else {
 
-            log.info("\n Test FAILED \n there was not expected result ---> '" + administrationUserPage.getFoundXItemsText() + "' ! Expected was ---> 'Found " + amount + " items.'");
+//            log.info("\n Test FAILED \n there was not expected result ---> '" + administrationUserPage.getFoundXItemsText() + "' ! Expected was ---> 'Found " + amount + " items.'");
 
         }
     }

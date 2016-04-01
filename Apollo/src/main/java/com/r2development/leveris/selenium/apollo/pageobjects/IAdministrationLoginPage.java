@@ -6,7 +6,7 @@ public interface IAdministrationLoginPage {
 
     String USERNAME_INPUT = equalsTo(input, name, "username");//"//input[@name='username']";
     String PASSWORD_INPUT = equalsTo(input, name, "password") ;//"//input[@name='password']";
-    String LOGIN_BUTTON = equalsTo(button, type, "submit") + equalsTo(singleSlash, span, text, "Login");//"//button[@type='submit']/span[text()='Login']";
+    String LOGIN_BUTTON = equalsTo(button, type, "submit") + equalsTo(singleSlash, span, text, "Login") + "/../../button";//"//button[@type='submit']/span[text()='Login']";
 
     IAdministrationLoginPage setUsername(String username);
     IAdministrationLoginPage setPassword(String password);

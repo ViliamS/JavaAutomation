@@ -1,10 +1,10 @@
 @ApolloUserAdministration
 Feature: Apollo User Administration
 
-  Background:
+  Scenario:
+
     Given Go to Apollo Administration Login page
 
-  Scenario:
     When Set username Admin with password changemenow! and click login
 
     And Admin clicks on the Users banner menu link

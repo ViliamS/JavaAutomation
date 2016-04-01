@@ -161,10 +161,7 @@
 
         </plugins>
     </build>
-
     <dependencies>
-
-        <!-- Module Dependencies -->
         <dependency>
             <groupId>com.r2development.leveris.qa.utils</groupId>
             <artifactId>Environment</artifactId>
@@ -186,21 +183,25 @@
             <version>${com-r2development-leveris-qa.data-validator.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.r2development.leveris.qa</groupId>
-            <artifactId>Borrower</artifactId>
-            <version>${com-r2development-leveris-qa.borrower.version}</version>
+            <groupId>com.github.detro.ghostdriver</groupId>
+            <artifactId>phantomjsdriver</artifactId>
+            <version>RELEASE</version>
         </dependency>
-
         <!-- Testing -->
         <!--<dependency>-->
-            <!--<groupId>org.seleniumhq.selenium</groupId>-->
-            <!--<artifactId>selenium-java</artifactId>-->
-            <!--<version>${org-seleniumhq-selenium.selenium-java.version}</version>-->
+        <!--<groupId>org.seleniumhq.selenium</groupId>-->
+        <!--<artifactId>selenium-java</artifactId>-->
+        <!--<version>${org-seleniumhq-selenium.selenium-java.version}</version>-->
         <!--</dependency>-->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-server</artifactId>
             <version>2.53.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>19.0</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -245,15 +246,50 @@
             <version>${com-google-inject.guice.version}</version>
         </dependency>
 
-        <!-- Oracle Ojdbc -->
-        <!--<dependency>-->
-            <!--<groupId>com.oracle</groupId>-->
-            <!--<artifactId>ojdbc7</artifactId>-->
-            <!--<version>${com-oracle.ojdbc7.version}</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>${org-jsoup.jsoup.version}</version>
+        </dependency>
 
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.commons-io.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>${org-apache-commons.commons-collections4.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc7</artifactId>
+            <version>${com-oracle.ojdbc7.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-websocket</artifactId>
+            <version>8.0.32</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-logging-juli</artifactId>
+            <version>8.0.32</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-support</artifactId>
+            <version>2.53.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.r2development.leveris.qa</groupId>
+            <artifactId>Borrower</artifactId>
+        </dependency>
     </dependencies>
-
     <profiles>
         <profile>
             <id>Login</id>
