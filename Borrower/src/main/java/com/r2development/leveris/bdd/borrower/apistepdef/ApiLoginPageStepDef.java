@@ -198,9 +198,9 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
 //        user.setEmail("test.automation.api123456789@finfactory.com");
 //        user.setPwd("Password1122+");
 
-        Assert.assertNotEquals("Should be different HttpClientContext object", localContext, initContext());
+        Assert.assertNotEquals("Should be different HttpClientContext object", localContext.getHttpContext(), initContext());
         HttpContext newLocalContext = newHttpClientContext(System.getProperty("domain.borrower"), "/stable-borrower");
-        Assert.assertEquals("not same HttpClientContext object", newLocalContext, localContext);
+        Assert.assertEquals("not same HttpClientContext object", newLocalContext, localContext.getHttpContext());
         localContext.setHttpContext((HttpClientContext) newLocalContext);
 
 //        CookieStore cookieStore = new BasicCookieStore();

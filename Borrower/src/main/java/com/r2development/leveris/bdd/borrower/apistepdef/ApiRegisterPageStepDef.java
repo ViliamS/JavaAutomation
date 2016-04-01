@@ -1,24 +1,39 @@
 package com.r2development.leveris.bdd.borrower.apistepdef;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.RegistrationData;
 import com.r2development.leveris.di.IAHttpContext;
+import com.r2development.leveris.di.IHttpResponse;
 import com.r2development.leveris.di.IUser;
 import com.r2development.leveris.di.User;
 import com.r2development.leveris.qa.utils.ACMExcel;
 import com.r2development.leveris.utils.ExcelUtils;
+import com.r2development.leveris.utils.HttpUtils;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.client.CookieStore;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.protocol.HttpClientContext;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.hamcrest.core.Is;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.junit.Assert;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.r2development.leveris.utils.HttpUtils.*;
 import static org.junit.Assert.*;
@@ -35,6 +50,8 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
 
     @Inject
     IAHttpContext localContext;
+    @Inject
+    IHttpResponse httpResponse;
     @Inject
     IUser user;
 
@@ -58,8 +75,11 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
 //        registerParameters = new LinkedHashMap<>();
     }
 
-    @Given("user goes to Registration page$")
+    @Given("Borrower goes to Registration page$")
     public void user_goes_to_registration_page() throws IOException {
+
+        httpClient = HttpUtils.createHttpClient();
+        localContext.setHttpContext(HttpUtils.initContext(System.getProperty("domain.borrower"), "/stable-borrower"));
 
         requestHttpGet(
                 httpClient,
@@ -106,13 +126,13 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
 
     }
 
-    @Given("^this registration data, user processes the registration \\(format1\\)$")
+    @Given("^this registration data, Borrower processes the registration \\(format1\\)$")
     public void this_registration_data_user_processes_the_registration(List<RegistrationData> registrationDataList, String... test) throws IOException {
         assertEquals("System is expecting only one RegistrationData occurrence", registrationDataList.size(), 1);
         fill_in_registration(registrationDataList.get(0));
     }
 
-    @Given("^this registration data, user processes the registration \\(format2\\)$")
+    @Given("^this registration data, Borrower processes the registration \\(format2\\)$")
 //    public void this_registration_data_user_processes_the_registration(Map<String, String> registrationDataMap) throws IOException {
     public void this_registration_data_user_processes_the_registration(List<String> registrationDataMap) throws IOException {
         fill_in_registration(new RegistrationData(registrationDataMap));
@@ -162,10 +182,16 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
     public void user_types_his_phone_number(String phoneNumber) {
 //        DateTime now = DateTime.now();
 //        user.setPhoneNumber("+420" + System.getProperty("timestamp"));
+
+        /*
         String phoneNumberEpoch = String.valueOf(System.currentTimeMillis()/1000);
         user.setPhoneNumber("+420" + phoneNumberEpoch);
 //        registerParameters.put("root:c:w:pnlMain:c:w:txtPhoneNumber:tb", "+420" + System.getProperty("timestamp"));
         registerParameters.put("root:c:w:pnlMain:c:w:txtPhoneNumber:tb", "+420" + phoneNumberEpoch);
+        */
+
+        user.setPhoneNumber("+420778098091");
+        registerParameters.put("root:c:w:pnlMain:c:w:txtPhoneNumber:tb", "+420778098091");
         log.info(user.getPhoneNumber());
     }
 
@@ -211,7 +237,7 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
         registerParameters.putAll(
                 new LinkedHashMap<String, String>() {
                     {
-                        put("stepToken", "4");
+                        put("stepToken", "1"); // Extract StepToken !!!
                         put("root:c:w:pnlMain:c:w:btnRegister:submit", "1");
                     }
                 }
@@ -271,6 +297,246 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
             user_accepts_the_data_protection_policy("accepts");
         }
         user_registers();
+    }
+
+    @Then("^Borrower activates his account")
+    public void borrower_activates_his_account() throws IOException {
+        HttpClient httpClient = createHttpClient();
+
+        CookieStore cookieStore = new BasicCookieStore();
+        HttpClientContext localContext = HttpClientContext.create();
+        localContext.setCookieStore(cookieStore);
+
+        String queryEmailResponse = requestHttpPost(
+                httpClient,
+                "https://dv2mdg.opoqodev.com/queryemail",
+                new LinkedHashMap<String, String>() {
+                    {
+                        put("Content-Type", "application/json");
+                        put("Accept", "application/json");
+                    }
+                },
+                "{\"to\": \"" + user.getEmail() + "\"}",
+                localContext,
+                false
+        );
+
+        JsonParser jsonParserQueryEmailResponse = new JsonParser();
+        JsonObject jsonObjectQueryEmailResponse = (JsonObject) jsonParserQueryEmailResponse.parse(queryEmailResponse.substring(1, queryEmailResponse.length()-1));
+
+        String emailId = jsonObjectQueryEmailResponse.get("_id").getAsString();
+        assertNotNull("emailId should n't be null", emailId);
+        System.out.println("emailId: " + emailId);
+
+
+        String queryEmailDetailResponse = requestHttpPost(
+                httpClient,
+                "https://dv2mdg.opoqodev.com/queryemail/detail",
+                new LinkedHashMap<String, String>() {
+                    {
+                        put("Content-Type", "application/json");
+                        put("Accept", "application/json");
+                    }
+                },
+                "{\"ids\":[\"" + emailId + "\"]}",
+                localContext,
+                false
+        );
+
+
+        JsonParser jsonParserQueryEmailDetailsResponse = new JsonParser();
+        JsonObject jsonObjectQueryEmailDetailsResponse = (JsonObject) jsonParserQueryEmailDetailsResponse.parse(queryEmailDetailResponse.substring(1, queryEmailDetailResponse.length()-1));
+//        JsonObject jsonObjectQueryEmailResponse = (JsonObject) jsonParserQueryEmailResponse.parse(queryEmailResponse);
+
+        String oid = jsonObjectQueryEmailDetailsResponse.get("body").getAsJsonObject().get("$oid").getAsString();
+        String TheExternalId = jsonObjectQueryEmailDetailsResponse.get("externalId").getAsString();
+        assertNotNull("emailId should n't be null", oid);
+        System.out.println("emailId: " + oid);
+        System.out.println("externalId: " + TheExternalId);
+
+
+        String queryDataQueryResponse = requestHttpGet(
+                httpClient,
+                "https://dv2mdg.opoqodev.com/email/body/" + oid,
+                new LinkedHashMap<String, String>() {
+                    {
+                        put("Accept", "application/html");
+                    }
+                },
+                localContext,
+                false
+        );
+
+        Document email = Jsoup.parse(queryDataQueryResponse);
+        String urlVerifyRegistration = email.select("a[href~=useCase=verifyregistration]").attr("href");
+
+        System.out.println(urlVerifyRegistration);
+
+        this.localContext.setHttpContext(HttpUtils.initContext(System.getProperty("domain.borrower"), "/stable-borrower"));
+        String borrowerUIResponse = requestHttpGet(
+                httpClient,
+                urlVerifyRegistration,
+                new LinkedHashMap<String, String>() {
+                    {
+                        put("Accept", "application/html");
+                    }
+                },
+                this.localContext.getHttpContext(),
+                false
+        );
+        httpResponse.setHttpResponse(borrowerUIResponse);
+
+        String querySmsResponse = requestHttpPost(
+                httpClient,
+                "https://dv2mdg.opoqodev.com/querysms",
+                new LinkedHashMap<String, String>() {
+                    {
+                        put("Content-Type", "application/json");
+                        put("Accept", "application/json");
+                    }
+                },
+                "{\"to\": \"+420778098091\"}", // TODO, input parameters generated by Automation Framework with Epoch value
+                localContext,
+                false
+        );
+
+        JsonParser jsonParserQuerySmsResponse = new JsonParser();
+        JsonObject jsonObjectQuerySmsResponse = (JsonObject) jsonParserQuerySmsResponse.parse("{\"listSms\":" + querySmsResponse + "}");
+//        JsonObject jsonObjectQueryEmailResponse = (JsonObject) jsonParserQueryEmailResponse.parse(queryEmailResponse);
+
+        JsonArray smsId = jsonObjectQuerySmsResponse.get("listSms").getAsJsonArray();
+        assertNotNull("smsId should n't be null", smsId);
+        System.out.println("smsId: " + smsId);
+
+        String activationCode = null;
+
+        if ( smsId.size() == 1) {
+            JsonObject jsonSmsId = smsId.get(0).getAsJsonObject();
+            String theSmsId = jsonSmsId.get("_id").getAsString();
+
+            String querySmsDetailResponse = requestHttpPost(
+                    httpClient,
+                    "https://dv2mdg.opoqodev.com/querysms/detail",
+                    new LinkedHashMap<String, String>() {
+                        {
+                            put("Content-Type", "application/json");
+                            put("Accept", "application/json");
+                        }
+                    },
+                    "{\"ids\":[\"" + theSmsId + "\"]}",
+                    localContext,
+                    false
+            );
+
+            JsonParser jsonParserQuerySmsDetailResponse = new JsonParser();
+            JsonObject jsonObjectQuerySmsDetailResponse = (JsonObject) jsonParserQuerySmsDetailResponse.parse(querySmsDetailResponse.substring(1, querySmsDetailResponse.length()-1));
+
+            String externalId = jsonObjectQuerySmsDetailResponse.get("externalId").getAsString();
+
+            Assert.assertEquals(true, externalId.equals(TheExternalId));
+
+            String bodySms = jsonObjectQuerySmsDetailResponse.get("response").getAsJsonObject().get("body").getAsString();
+//                String toSmsId = jsonObjectQuerySmsDetailResponse.get("_id").getAsString();
+
+            assertNotNull("bodySms should n't be null", bodySms);
+//                assertNotNull("bodySms should n't be null", toSmsId);
+//                System.out.println("sms body: " + new String(Base64.getDecoder().decode(bodySms.getBytes())));
+            System.out.println("to: " + bodySms);
+
+            Pattern pBodySms = Pattern.compile("Please enter code (.*) in your browser window within 30 minutes of getting this message. Thanks!");
+            Matcher mBodySms = pBodySms.matcher(bodySms);
+
+            activationCode = null;
+            while (mBodySms.find()) {
+                activationCode = mBodySms.group(2);
+            }
+
+            System.out.println("activationCode: " + activationCode);
+        }
+        else {
+            for ( JsonElement currentSmsId : smsId) {
+                JsonObject jsonSmsId = currentSmsId.getAsJsonObject();
+                String theSmsId = jsonSmsId.get("_id").getAsString();
+
+                String querySmsDetailResponse = requestHttpPost(
+                        httpClient,
+                        "https://dv2mdg.opoqodev.com/querysms/detail",
+                        new LinkedHashMap<String, String>() {
+                            {
+                                put("Content-Type", "application/json");
+                                put("Accept", "application/json");
+                            }
+                        },
+                        "{\"ids\":[\"" + theSmsId + "\"]}",
+                        localContext,
+                        false
+                );
+
+                JsonParser jsonParserQuerySmsDetailResponse = new JsonParser();
+                JsonObject jsonObjectQuerySmsDetailResponse = (JsonObject) jsonParserQuerySmsDetailResponse.parse(querySmsDetailResponse.substring(1, querySmsDetailResponse.length()-1));
+
+                String externalId = jsonObjectQuerySmsDetailResponse.get("externalId").getAsString();
+
+                if ( !externalId.equals(TheExternalId))
+                    continue;
+
+                String bodySms = jsonObjectQuerySmsDetailResponse.get("response").getAsJsonObject().get("body").getAsString();
+//                String toSmsId = jsonObjectQuerySmsDetailResponse.get("_id").getAsString();
+
+                assertNotNull("bodySms should n't be null", bodySms);
+//                assertNotNull("bodySms should n't be null", toSmsId);
+//                System.out.println("sms body: " + new String(Base64.getDecoder().decode(bodySms.getBytes())));
+                System.out.println("to: " + bodySms);
+
+                Pattern pBodySms = Pattern.compile("Please enter code (.*) in your browser window within 30 minutes of getting this message. Thanks!");
+                Matcher mBodySms = pBodySms.matcher(bodySms);
+
+                activationCode = null;
+                while (mBodySms.find()) {
+                    activationCode = mBodySms.group(2);
+                }
+
+                System.out.println("activationCode: " + activationCode);
+                break;
+
+            }
+        }
+
+        Document jsoup = Jsoup.parse(httpResponse.getHttpResponse());
+        String stepToken = jsoup.select("input[name=token]").attr("value");
+        String onclick = jsoup.select("div[id=btnConfirmRegistrationd] a").attr("onclick");
+
+        Pattern pLinkWithSession = Pattern.compile(";(jsessionid=.*?wicket:interface=.*)&amp;");
+        Matcher mLinkWithSession = pLinkWithSession.matcher(onclick);
+
+        String linkWithSession = null;
+        while (mLinkWithSession.find()) {
+            linkWithSession = mLinkWithSession.group(0);
+        }
+        final String finalLink = linkWithSession;
+        System.out.println("link: " + finalLink);
+
+        final String finalActivationCode = activationCode;
+        String smsCodeActivationResponse = requestHttpPost(
+                httpClient,
+                System.getProperty("borrower") + "form.2?" + finalLink,
+                new LinkedHashMap<String, String>() {
+                    {
+                        put("Content-Type", "application/json");
+                        put("Accept", "application/json");
+                    }
+                },
+                new LinkedHashMap<String, String>() {
+                    {
+                        put("root:c:w:pnlMain:c:w:pnlForVerify:c:w:txtVerificationCode:tb", finalActivationCode);
+                        put("stepToken", stepToken);
+                        put("root:c:w:pnlMain:c:w:btnConfirmRegistration:submit", "1");
+                    }
+                },
+                this.localContext.getHttpContext(),
+                false
+        );
+
     }
 
     @When("^Borrower is already signed$")

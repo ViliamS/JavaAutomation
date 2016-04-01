@@ -10,7 +10,7 @@ Feature: Payday Loan
 
 #----- begin With automatic
     Given Borrower processes the automatic registration
-      | applicantId | test.automation@test.finfactory.com |
+      | applicantId | test.automation@finfactory.com |
 #----- end with automatic
 
 #----- begin without automatic

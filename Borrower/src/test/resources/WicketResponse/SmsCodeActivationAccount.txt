@@ -1,0 +1,544 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html
+    xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" wicketpath="html" lang="en">
+    <head>
+        <script type="text/javascript">
+var scTimeVar = new Date().getTime();
+</script>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+        <title wicketpath="application.title">Opoqo Borrower</title>
+        <meta http-equiv="content-language" content="en" wicketpath="content.language"/>
+        <meta http-equiv='Pragma' content='no-cache'/>
+        <meta http-equiv='Cache-Control' content='no-cache, must-revalidate'/>
+        <meta http-equiv='Expires' content='0'/>
+        <meta name="viewport" content="width=1024"/>
+        <meta name="application-name" wicketpath="html___header__0___message__attr__1" content="Opoqo Borrower"/>
+        <meta name="author" wicketpath="html___header__0___message__attr__2" content="Cleverlance / The Clever Enterprise Solutions a.s."/>
+        <meta name="author-url" wicketpath="html___header__0___message__attr__3" content="http://www.cleverlance.com"/>
+        <link rel="shortcut icon" href="/stable-borrower/favicon.ico;jsessionid=E3BF1EEF936152B2DA7AB2F0CB485C83" wicketpath="favicon"/>
+        <link rel="icon" href="/stable-borrower/favicon.ico;jsessionid=E3BF1EEF936152B2DA7AB2F0CB485C83" sizes="32x32" wicketpath="favicon2"/>
+        <link rel="home" href="home;jsessionid=E3BF1EEF936152B2DA7AB2F0CB485C83" wicketpath="home"/>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700" rel="stylesheet" type="text/css">
+            <!-- chat window resources -->
+            <link rel="stylesheet" media="screen" href="https://dv2msg.opoqodev.com/assets/stylesheets/chat.css" wicketpath="chatLink1"/>
+            <link rel="stylesheet" media="screen" href="https://dv2msg.opoqodev.com/assets/stylesheets/fonts.css" wicketpath="chatLink2"/>
+            <script id="am_chat-script" src="https://dv2msg.opoqodev.com/assets/clientjs-opt.js" type="text/javascript" wicketpath="chatLink3"></script>
+            <script type="text/javascript">if (window.name=='' || window.name.indexOf('wicket') > -1) { window.name="wicket-wicket:default"; }</script>
+            <link rel="stylesheet" type="text/css" href="resources/com.cleverlance.smartclient.console.web.theme.DefaultTheme/res/default.css?w:lm=1459493184" />
+            <link rel="stylesheet" type="text/css" href="resources/com.cleverlance.abakus.ib.theme.abakus2.Abakus2DefaultTheme/res/default.css?w:lm=1459493184" />
+            <link rel="stylesheet" type="text/css" href="resources/com.cleverlance.smartclient.console.web.theme.DefaultTheme/res/default-form.css?w:lm=1459493184" />
+            <link rel="stylesheet" type="text/css" href="resources/com.cleverlance.abakus.ib.theme.abakus2.Abakus2DefaultTheme/res/default-form.css?w:lm=1459493184" />
+            <link rel="stylesheet" type="text/css" href="resources/com.cleverlance.smartclient.console.web.theme.DefaultTheme/res/layout.css?w:lm=1459493184" />
+            <link rel="stylesheet" type="text/css" href="resources/com.cleverlance.abakus.ib.theme.abakus2.Abakus2DefaultTheme/res/layout.css?w:lm=1459493184" />
+            <link rel="stylesheet" type="text/css" href="resources/com.cleverlance.abakus.ib.theme.borrower.AbakusThemeBorrower/res/layout.css?w:lm=1459493184" />
+            <link rel="stylesheet" type="text/css" href="resources/com.cleverlance.smartclient.console.web.theme.DefaultTheme/res/layout-shared.css?w:lm=1459493184" />
+            <link rel="stylesheet" type="text/css" href="resources/com.cleverlance.abakus.ib.theme.abakus2.Abakus2DefaultTheme/res/layout-shared.css?w:lm=1459493184" />
+            <link rel="stylesheet" type="text/css" href="resources/com.cleverlance.smartclient.console.web.theme.DefaultTheme/res/feedback.css?w:lm=1459493184" />
+            <link rel="stylesheet" type="text/css" href="resources/com.cleverlance.abakus.ib.theme.abakus2.Abakus2DefaultTheme/res/feedback.css?w:lm=1459493184" />
+            <link rel="stylesheet" type="text/css" href="resources/com.cleverlance.smartclient.console.web.theme.DefaultTheme/res/debug.css?w:lm=1459493184" />
+            <link rel="stylesheet" type="text/css" href="resources/com.cleverlance.abakus.ib.theme.abakus2.Abakus2DefaultTheme/res/debug.css?w:lm=1459493184" />
+            <link rel="stylesheet" type="text/css" href="resources/com.cleverlance.smartclient.console.web.theme.DefaultTheme/res/print.css?w:lm=1459493184" media="print" />
+            <link rel="stylesheet" type="text/css" href="resources/com.cleverlance.abakus.ib.theme.abakus2.Abakus2DefaultTheme/res/print.css?w:lm=1459493184" media="print" />
+            <link rel="stylesheet" type="text/css" href="resources/com.cleverlance.abakus.ib.theme.abakus2.Abakus2DefaultTheme/res/jqueryui/jquery-ui-1.8.css?w:lm=1459493184" />
+            <link rel="stylesheet" type="text/css" href="resources/com.cleverlance.smartclient.console.web.theme.DefaultTheme/res/screen-form-shared.css?w:lm=1459493184" />
+            <link rel="stylesheet" type="text/css" href="resources/com.cleverlance.abakus.ib.theme.abakus2.Abakus2DefaultTheme/res/screen-form.css?w:lm=1459493184" />
+            <link rel="stylesheet" type="text/css" href="resources/com.cleverlance.abakus.ib.theme.abakus2.Abakus2DefaultTheme/res/scripted-widgets.css?w:lm=1459493184" />
+        </head>
+        <body xml:lang="en" id="body14" wicketpath="body" class="en abakus image">
+            <!-- Google Tag Manager -->
+            <noscript>
+                <iframe src="//www.googletagmanager.com/ns.html?id=GTM-WC9DH7" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+            </noscript>
+            <script>(function(w, d, s, l, i) {
+w[l] = w[l] || [];
+w[l].push({
+'gtm.start': new Date().getTime(), event: 'gtm.js'
+});
+var f = d.getElementsByTagName(s)[0],
+j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+j.async = true;
+j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+f.parentNode.insertBefore(j, f);
+})(window, document, 'script', 'dataLayer', 'GTM-WC9DH7');</script>
+            <!-- End Google Tag Manager -->
+            <div id="busyIndicatorBig" class="busy-indicator-big" style="display:none">
+                <div>Please wait ...</div>
+            </div>
+            <div class="busyIndicator working" style="display:none;" id="busyIndicator12" wicketpath="busyIndicator"></div>
+            <div class="dblclick-fix-layer" style="display:none"></div>
+            <!-- content start -->
+            <div class="main-menu initial-menu" id="initialMenuWrapper15" wicketpath="initialMenuWrapper">
+                <a class="logobody" wicketpath="initialMenuWrapper_logo" href="home;jsessionid=E3BF1EEF936152B2DA7AB2F0CB485C83"></a>
+                <span id="initialMenu16" wicketpath="initialMenuWrapper_initialMenu">
+                    <!-- MARKUP FOR com.cleverlance.abakus.ib.borrower.web.ui.menu.StaticMenuPanel BEGIN -->
+                    <ul class="root lvl0 closed" wicketpath="initialMenuWrapper_initialMenu_root">
+                        <!-- MARKUP FOR com.cleverlance.abakus.ib.borrower.web.ui.menu.MenuItemPanel BEGIN -->
+                        <li wicketpath="initialMenuWrapper_initialMenu_root_item_1" class="li0 lvl0 login enabled">
+                            <a class="link" href="#" id="link17" wicketpath="initialMenuWrapper_initialMenu_root_item_1_link" onclick="if (function(){return Wicket.$('link17') != null;}.bind(this)()) { Wicket.showIncrementally('busyIndicator12');}var wcall=wicketAjaxGet(';jsessionid=E3BF1EEF936152B2DA7AB2F0CB485C83?wicket:interface=:1:initialMenuWrapper:initialMenu:root:item:1:link::IBehaviorListener:0:',function() { ;Wicket.hideIncrementally('busyIndicator12');}.bind(this),function() { ;Wicket.hideIncrementally('busyIndicator12');}.bind(this), function() {if (!function() {return Wicket.$('link17') != null;}.bind(this)()) {Wicket.hideIncrementally('busyIndicator12');}return Wicket.$('link17') != null;}.bind(this));return !wcall;" title="Sign in">
+                                <span class="link-text" wicketpath="initialMenuWrapper_initialMenu_root_item_1_link_linkText">Sign in</span>
+                            </a>
+                        </li>
+                        <li wicketpath="initialMenuWrapper_initialMenu_root_item_2" class="li1 lvl0 register enabled">
+                            <a class="link" href="#" id="link18" wicketpath="initialMenuWrapper_initialMenu_root_item_2_link" onclick="if (function(){return Wicket.$('link18') != null;}.bind(this)()) { Wicket.showIncrementally('busyIndicator12');}var wcall=wicketAjaxGet(';jsessionid=E3BF1EEF936152B2DA7AB2F0CB485C83?wicket:interface=:1:initialMenuWrapper:initialMenu:root:item:2:link::IBehaviorListener:0:',function() { ;Wicket.hideIncrementally('busyIndicator12');}.bind(this),function() { ;Wicket.hideIncrementally('busyIndicator12');}.bind(this), function() {if (!function() {return Wicket.$('link18') != null;}.bind(this)()) {Wicket.hideIncrementally('busyIndicator12');}return Wicket.$('link18') != null;}.bind(this));return !wcall;" title="Register">
+                                <span class="link-text" wicketpath="initialMenuWrapper_initialMenu_root_item_2_link_linkText">Register</span>
+                            </a>
+                        </li>
+                        <li wicketpath="initialMenuWrapper_initialMenu_root_item_3" class="li2 lvl0 chat last enabled">
+                            <a class="link" href="#" id="link19" wicketpath="initialMenuWrapper_initialMenu_root_item_3_link" onclick="if (function(){return Wicket.$('link19') != null;}.bind(this)()) { Wicket.showIncrementally('busyIndicator12');}var wcall=wicketAjaxGet(';jsessionid=E3BF1EEF936152B2DA7AB2F0CB485C83?wicket:interface=:1:initialMenuWrapper:initialMenu:root:item:3:link::IBehaviorListener:0:',function() { ;Wicket.hideIncrementally('busyIndicator12');}.bind(this),function() { ;Wicket.hideIncrementally('busyIndicator12');}.bind(this), function() {if (!function() {return Wicket.$('link19') != null;}.bind(this)()) {Wicket.hideIncrementally('busyIndicator12');}return Wicket.$('link19') != null;}.bind(this));return !wcall;" title="Chat Now">
+                                <span class="link-text" wicketpath="initialMenuWrapper_initialMenu_root_item_3_link_linkText">Chat Now</span>
+                            </a>
+                        </li>
+                        <!-- MARKUP FOR com.cleverlance.abakus.ib.borrower.web.ui.menu.MenuItemPanel END -->
+                    </ul>
+                    <!-- MARKUP FOR com.cleverlance.abakus.ib.borrower.web.ui.menu.StaticMenuPanel END -->
+                </span>
+            </div>
+            <div class="page-wrapper">
+                <div id="menuWrapper1a" style="display:none"></div>
+                <div class="layout-content" wicketpath="content">
+                    <div class="outer-component-step"></div>
+                    <div class="form-page">
+                        <div class="portlet-top" id="top1b" wicketpath="top"></div>
+                        <div class="panel-notification">
+                            <div class="notification-image"></div>
+                            <span></span>
+                        </div>
+                        <div class="table-wrap">
+                            <div id="left1c" style="display:none"></div>
+                            <div class="portlet-submenu" id="submenu1d" wicketpath="submenu"></div>
+                            <div class="portlet-main unprintable" id="main11" wicketpath="main">
+                                <!-- MARKUP FOR com.cleverlance.abakus.ib.borrower.web.ui.form.FormPage$ProcessorPanel BEGIN -->
+                                <div id="c1e" wicketpath="main_c">
+                                    <h2 id="title1f" style="display:none"></h2>
+                                    <div id="formHeader20" style="display:none"></div>
+                                    <div class="widget-outer-border">
+                                        <div id="form2" wicketpath="main_c_form" class="widget-screen-root widget-screen widget-screen-absolute sc-screen-center">
+                                            <!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.screen.ScreenFormProcessorPanel$LocalScreenFormPanel BEGIN -->
+                                            <div class="feedback-form feedback-box-top-jump" id="feedbackBox113" wicketpath="main_c_form_feedbackBox1" style="display:none;">
+                                                <div class="errorbox" style="display:none;" aria-live="assertive">
+                                                    <ul></ul>
+                                                </div>
+                                                <div id="feedback21" style="display:none"></div>
+                                            </div>
+                                            <div class="pre-widget-form">
+                                                <form class="widget-form form2" autocomplete="off" id="form10" wicketpath="main_c_form_form" method="post" action=";jsessionid=E3BF1EEF936152B2DA7AB2F0CB485C83?wicket:interface=:1:main:c:form:form::IFormSubmitListener::" style="width:440px;height:540px;">
+                                                    <div style="width:0px;height:0px;position:absolute;left:-100px;top:-100px;overflow:hidden">
+                                                        <input type="hidden" name="form10_hf_0" id="form10_hf_0" />
+                                                    </div>
+                                                    <div style="width:0px;height:0px;position:absolute;left:-100px;top:-100px;overflow:hidden">
+                                                        <input type="text" autocomplete="false" tabindex="-1" />
+                                                        <input type="submit" tabindex="-1" name="root:c:w:pnlMain:c:w:btnConfirmRegistration:submit" onclick=" var b=document.getElementById('submit22'); if (b!=null&amp;&amp;b.onclick!=null&amp;&amp;typeof(b.onclick) != 'undefined') {  var r = b.onclick.bind(b)(); if (r != false) b.click(); } else { b.click(); };  return false;"  />
+                                                    </div>
+                                                    <input type="hidden" name="scrollPos"/>
+                                                    <input type="hidden" value="" name="state" wicketpath="main_c_form_form_state"/>
+                                                    <div id="rootf" wicketpath="main_c_form_form_root" data-path="root" data-type="panel" data-top="0" style="width:440px;height:540px;top:0px;left:0px;" class="widget widget-panel widget-enabled widget-absolute" data-multi="true">
+                                                        <!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.PanelWidgetComponent BEGIN -->
+                                                        <div class="content control panel" wicketpath="main_c_form_form_root_c" aria-readonly="false">
+                                                            <div class="panel-inner">
+                                                                <div id="pnlMain4" wicketpath="main_c_form_form_root_c_w_pnlMain" data-path="pnlMain" data-type="panel" data-top="0" style="width:440px;height:540px;top:0px;left:0px;" class="widget widget-panel panel-white widget-enabled widget-absolute" data-multi="true">
+                                                                    <!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.PanelWidgetComponent BEGIN -->
+                                                                    <div id="label23" wicketpath="main_c_form_form_root_c_w_pnlMain_label" class="label-widget label-left"></div>
+                                                                    <div class="content control panel" id="c24" wicketpath="main_c_form_form_root_c_w_pnlMain_c" aria-readonly="false" aria-labelledby="label23" data-readonly="false" data-enabled="true" data-height="540">
+                                                                        <div class="panel-inner">
+                                                                            <div id="btnHiddenCancel3" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_btnHiddenCancel" data-path="pnlMain btnHiddenCancel" data-type="button" data-top="0" style="width:130px;height:20px;top:0px;left:310px;" class="widget widget-cancel widget-enabled invisible widget-absolute">
+                                                                                <!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.CancelWidgetComponent BEGIN -->
+                                                                                <a class="content control cancel sc-button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="cancel25" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_btnHiddenCancel_cancel" style="line-height: 16px !important;" aria-readonly="false" onclick="SC._cancel.apply(this,['scAjax.apply(this,[0,0,\';jsessionid=E3BF1EEF936152B2DA7AB2F0CB485C83?wicket:interface=:1:main:c:form:form:root:c:w:pnlMain:c:w:btnHiddenCancel:cancel::IBehaviorListener:0:&amp;stepToken=1&amp;${scrollPos}\',\'busyIndicator12\',0,0,1,0,0]);']);return false;" href="javascript:void(0);" data-readonly="false" data-enabled="true" data-height="20" tabindex="1002">Hidden cancel</a>
+                                                                                <!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.CancelWidgetComponent END -->
+                                                                            </div>
+                                                                            <div id="lbl_6996" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_lbl-699" data-path="pnlMain lbl-699" data-type="label" data-top="41" style="width:100px;height:120px;top:41px;left:171px;" class="widget widget-label clock2-icon widget-enabled widget-absolute">
+                                                                                <!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.LabelWidgetComponent BEGIN -->
+                                                                                <div class="content control sc-label" id="l26" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_lbl-699_l" data-height="120">
+                                                                                    <span></span>
+                                                                                </div>
+                                                                                <!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.LabelWidgetComponent END -->
+                                                                            </div>
+                                                                            <div id="lblTitle5" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_lblTitle" data-path="pnlMain lblTitle" data-type="label" data-top="180" style="width:400px;height:50px;top:180px;left:21px;" class="widget widget-label page-title widget-enabled widget-align-center widget-absolute">
+                                                                                <!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.LabelWidgetComponent BEGIN -->
+                                                                                <div class="content control sc-label" id="l27" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_lblTitle_l" data-height="50">
+                                                                                    <span>Complete secure login setup</span>
+                                                                                </div>
+                                                                                <!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.LabelWidgetComponent END -->
+                                                                            </div>
+                                                                            <div id="pnlForVerify7" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_pnlForVerify" data-path="pnlMain pnlForVerify" data-type="panel" data-top="241" style="width:440px;height:140px;top:241px;left:0px;" data-moveup="true" class="widget widget-panel widget-enabled widget-absolute" data-multi="true">
+                                                                                <!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.PanelWidgetComponent BEGIN -->
+                                                                                <div id="label28" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_pnlForVerify_label" class="label-widget label-left"></div>
+                                                                                <div class="content control panel" id="c29" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_pnlForVerify_c" aria-readonly="false" aria-labelledby="label28" data-readonly="false" data-enabled="true" data-height="140">
+                                                                                    <div class="panel-inner">
+                                                                                        <div id="lblRegistrationFinalizeNote8" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_pnlForVerify_c_w_lblRegistrationFinalizeNote" data-path="pnlMain pnlForVerify lblRegistrationFinalizeNote" data-type="label" data-top="10" style="width:360px;height:70px;top:10px;left:40px;" class="widget widget-label widget-enabled widget-align-center widget-absolute sc-auto-height">
+                                                                                            <!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.LabelWidgetComponent BEGIN -->
+                                                                                            <div class="content control sc-label" id="l2a" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_pnlForVerify_c_w_lblRegistrationFinalizeNote_l" data-height="70">
+                                                                                                <span>We've sent a verification code to
+
+                                                                                                    <b></b>.
+
+                                                                                                    <br>Please enter this to confirm your phone number.
+
+                                                                                                    </span>
+                                                                                                </div>
+                                                                                                <!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.LabelWidgetComponent END -->
+                                                                                            </div>
+                                                                                            <div id="pnlMessage9" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_pnlForVerify_c_w_pnlMessage" data-path="pnlMain pnlForVerify pnlMessage" data-type="panel" data-top="80" style="width:360px;height:0px;top:80px;left:40px;" data-moveup="true" class="widget widget-panel widget-enabled invisible widget-absolute" data-multi="true">
+                                                                                                <!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.PanelWidgetComponent BEGIN -->
+                                                                                                <div id="label2b" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_pnlForVerify_c_w_pnlMessage_label" class="label-widget label-left"></div>
+                                                                                                <div class="content control panel" id="c2c" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_pnlForVerify_c_w_pnlMessage_c" aria-readonly="false" aria-labelledby="label2b" data-readonly="false" data-enabled="true" data-height="40">
+                                                                                                    <div class="panel-inner">
+                                                                                                        <div id="lblResendMessagea" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_pnlForVerify_c_w_pnlMessage_c_w_lblResendMessage" data-path="pnlMain pnlForVerify pnlMessage lblResendMessage" data-type="label" data-top="0" style="width:360px;height:20px;top:0px;left:0px;" class="widget widget-label widget-enabled widget-align-center widget-absolute dynamic-tooltip">
+                                                                                                            <!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.LabelWidgetComponent BEGIN -->
+                                                                                                            <div class="content control sc-label" id="l2d" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_pnlForVerify_c_w_pnlMessage_c_w_lblResendMessage_l" data-height="20">
+                                                                                                                <span class="ellipsis">Resend SMS will be available in
+
+                                                                                                                    <b>30</b> seconds.
+
+                                                                                                                </span>
+                                                                                                            </div>
+                                                                                                            <!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.LabelWidgetComponent END -->
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div id="ce2e" style="display:none"></div>
+                                                                                                <!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.PanelWidgetComponent END -->
+                                                                                            </div>
+                                                                                            <div id="txtVerificationCodeb" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_pnlForVerify_c_w_txtVerificationCode" data-path="pnlMain pnlForVerify txtVerificationCode" data-type="textbox" data-top="100" style="width:360px;height:40px;top:100px;left:40px;" class="widget widget-textbox widget-enabled widget-required widget-absolute">
+                                                                                                <!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.TextBoxWidgetComponent BEGIN -->
+                                                                                                <label id="label2f" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_pnlForVerify_c_w_txtVerificationCode_label" for="tb30" class="label-widget label-upperleft">Verification code</label>
+                                                                                                <input type="text" class="content control field textbox" autocomplete="off" value="" name="root:c:w:pnlMain:c:w:pnlForVerify:c:w:txtVerificationCode:tb" id="tb30" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_pnlForVerify_c_w_txtVerificationCode_tb" aria-readonly="false" aria-labelledby="label2f" data-readonly="false" data-enabled="true" aria-required="true" data-height="40" tabindex="1003"/>
+                                                                                                <!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.TextBoxWidgetComponent END -->
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div id="ce31" style="display:none"></div>
+                                                                                    <!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.PanelWidgetComponent END -->
+                                                                                </div>
+                                                                                <div id="lblSeparatorc" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_lblSeparator" data-path="pnlMain lblSeparator" data-type="label" data-top="390" style="width:440px;height:20px;top:390px;left:0px;" class="widget widget-label separator widget-enabled widget-absolute dynamic-tooltip">
+                                                                                    <!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.LabelWidgetComponent BEGIN -->
+                                                                                    <div class="content control sc-label" id="l32" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_lblSeparator_l" data-height="20">
+                                                                                        <span class="ellipsis"></span>
+                                                                                    </div>
+                                                                                    <!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.LabelWidgetComponent END -->
+                                                                                    <span class="sep"></span>
+                                                                                </div>
+                                                                                <div id="btnConfirmRegistrationd" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_btnConfirmRegistration" data-path="pnlMain btnConfirmRegistration" data-type="button" data-top="430" style="width:200px;height:40px;top:430px;left:120px;" class="widget widget-submit button-main uppercase widget-enabled widget-align-center widget-absolute">
+                                                                                    <!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.SubmitWidgetComponent BEGIN -->
+                                                                                    <a class="content control submit sc-button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="submit22" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_btnConfirmRegistration_submit" href="javascript:void(0);" aria-readonly="false" style="line-height: 36px !important;" onclick="if($('#form10').valid()&amp;&amp;SC._validate('form2')){SC._submit.apply(this,['form10','form2','scAjax.apply(this,[2,0,\';jsessionid=E3BF1EEF936152B2DA7AB2F0CB485C83?wicket:interface=:1:main:c:form:form:root:c:w:pnlMain:c:w:btnConfirmRegistration:submit::IBehaviorListener:0:&amp;${scrollPos}\',\'busyIndicator12\',0,0,2,\'root:c:w:pnlMain:c:w:btnConfirmRegistration:submit\',\'form10\']);']);};return false;" data-readonly="false" data-enabled="true" data-height="40" tabindex="1006">Complete registration</a>
+                                                                                    <!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.SubmitWidgetComponent END -->
+                                                                                </div>
+                                                                                <div id="lnkRepeatSende" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_lnkRepeatSend" data-path="pnlMain lnkRepeatSend" data-type="link" data-top="500" style="width:381px;height:20px;top:500px;left:31px;" class="widget widget-cancel black widget-enabled widget-align-center widget-absolute dynamic-tooltip">
+                                                                                    <!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.CancelWidgetComponent BEGIN -->
+                                                                                    <a class="content control cancel sc-link" id="cancel33" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_lnkRepeatSend_cancel" aria-readonly="false" onclick="SC._cancel.apply(this,['scAjax.apply(this,[0,0,\';jsessionid=E3BF1EEF936152B2DA7AB2F0CB485C83?wicket:interface=:1:main:c:form:form:root:c:w:pnlMain:c:w:lnkRepeatSend:cancel::IBehaviorListener:0:&amp;stepToken=1&amp;${scrollPos}\',\'busyIndicator12\',0,0,1,0,0]);']);return false;" href="javascript:void(0);" data-readonly="false" data-enabled="true" data-height="20" tabindex="1006">
+                                                                                        <span class="main ellipsis">
+                                                                                            <span class="link">Didn&#039;t get a text? Click to send again</span>
+                                                                                        </span>
+                                                                                    </a>
+                                                                                    <!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.CancelWidgetComponent END -->
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div id="ce34" style="display:none"></div>
+                                                                        <!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.PanelWidgetComponent END -->
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="ce35" style="display:none"></div>
+                                                            <!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.PanelWidgetComponent END -->
+                                                        </div>
+                                                        <div class="loading-layer"></div>
+                                                        <div style="display:none;">
+                                                            <input value="1" type="hidden" name="stepToken"/>
+                                                        </div>
+                                                    </form>
+                                                    <div style="display:none;" class="dialog-wrapper" id="dialogWrapper1_0" wicketpath="main_c_form_dialogWrapper">
+                                                        <div id="dialog36" style="display:none"></div>
+                                                    </div>
+                                                    <div id="embeddedFormWrapper37" style="display:none"></div>
+                                                </div>
+                                                <!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.screen.ScreenFormProcessorPanel$LocalScreenFormPanel END -->
+                                            </div>
+                                        </div>
+                                        <div id="formFooter38" style="display:none"></div>
+                                    </div>
+                                    <!-- MARKUP FOR com.cleverlance.abakus.ib.borrower.web.ui.form.FormPage$ProcessorPanel END -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="footer39" style="display:none"></div>
+                <!-- content end -->
+                <div class="version" id="version3a" wicketpath="version">node/1.0-SNAPSHOT
+
+                    <br/>2016-04-01 08:46:24
+
+                    <br/>DV2000DA/STABLEBRW_PXMCHUSER
+
+                    <br/>BE DB: 2.0-r16
+
+                    <br/>offline-model/abakus-lavor_asm_ib
+
+                    <br/>ad78c7e6-a66b-4881-bb08-4a5844beab03
+
+                </div>
+                <noscript>
+                    <div class="layout-content-noscript">
+                        <div class="content-error">
+                            <div class="content-inner">
+                                <p>You need to have JavaScript enabled to use this page.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <style type="text/css">
+.layout-content {
+display: none;
+}
+</style>
+                </noscript>
+                <script type="text/javascript" id="ifr-test">if (top.length != self.length) top.location.href = self.location.href;</script>
+                <script type="text/javascript" id="basic-info">
+var applicationMode='development';
+var testMode=true;
+var locale='en';</script>
+                <script type="text/javascript" src="resources/com.cleverlance.smartclient.frontend.wicket.desktop.jslib.JsLib/res/jquery-1.9.1.js?w:lm=1459493184"></script>
+                <script type="text/javascript" src="resources/com.cleverlance.smartclient.frontend.wicket.jslib.JsLibCommon/res/jquery.browser.js?w:lm=1459493184"></script>
+                <script type="text/javascript" src="resources/com.cleverlance.smartclient.frontend.wicket.jslib.JsLibCommon/res/jquery.cookie.js?w:lm=1459493184"></script>
+                <script type="text/javascript" src="resources/com.cleverlance.smartclient.frontend.wicket.jslib.JsLibCommon/res/jquery.timers.js?w:lm=1459493184"></script>
+                <script type="text/javascript" src="resources/com.cleverlance.smartclient.frontend.wicket.jslib.JsLibCommon/res/jquery.ping.js?w:lm=1459493184"></script>
+                <script type="text/javascript" src="resources/com.cleverlance.smartclient.frontend.wicket.jslib.JsLibCommon/res/jquery.utils.js?w:lm=1459493184"></script>
+                <script type="text/javascript" src="resources/com.cleverlance.smartclient.frontend.wicket.desktop.jslib.JsLib/res/jquery.utils.js?w:lm=1459493184"></script>
+                <script type="text/javascript" src="resources/com.cleverlance.smartclient.frontend.wicket.desktop.jslib.JsLib/res/jquery.ba-resize.js?w:lm=1459493184"></script>
+                <script type="text/javascript" src="resources/com.cleverlance.smartclient.frontend.wicket.desktop.jslib.JsLib/res/json2.js?w:lm=1459493184"></script>
+                <script type="text/javascript" src="resources/com.cleverlance.smartclient.frontend.wicket.desktop.jslib.JsLib/res/jquery.metadata.js?w:lm=1459493184"></script>
+                <script type="text/javascript" src="resources/com.cleverlance.smartclient.frontend.wicket.desktop.jslib.JsLib/res/jquery-ui-1.8.24.js?w:lm=1459493184"></script>
+                <script type="text/javascript" src="resources/com.cleverlance.smartclient.frontend.wicket.desktop.jslib.JsLib/res/jquery.timepicker.js?w:lm=1459493184"></script>
+                <script type="text/javascript" src="resources/com.cleverlance.smartclient.frontend.wicket.desktop.jslib.JsLib/res/jquery.combobox.js?w:lm=1459493184"></script>
+                <script type="text/javascript" src="resources/com.cleverlance.smartclient.frontend.wicket.desktop.jslib.JsLib/res/jquery.menubutton.js?w:lm=1459493184"></script>
+                <script type="text/javascript" src="resources/com.cleverlance.smartclient.frontend.wicket.desktop.jslib.JsLib/res/jquery.tooltip.js?w:lm=1459493184"></script>
+                <script type="text/javascript" src="resources/com.cleverlance.smartclient.frontend.wicket.desktop.jslib.JsLib/res/jquery.timeout.js?w:lm=1459493184"></script>
+                <script type="text/javascript" src="resources/com.cleverlance.smartclient.frontend.wicket.desktop.jslib.JsLib/res/jquery.checkbox.js?w:lm=1459493184"></script>
+                <script type="text/javascript" src="resources/com.cleverlance.smartclient.frontend.wicket.desktop.jslib.JsLib/res/jquery.radiobutton.js?w:lm=1459493184"></script>
+                <script type="text/javascript" src="resources/com.cleverlance.smartclient.frontend.wicket.desktop.jslib.JsLib/res/jquery.slider.js?w:lm=1459493184"></script>
+                <script type="text/javascript" src="resources/com.cleverlance.smartclient.frontend.wicket.desktop.jslib.JsLib/res/jquery.upload.js?w:lm=1459493184"></script>
+                <script type="text/javascript" src="resources/com.cleverlance.smartclient.frontend.wicket.desktop.jslib.JsLib/res/jquery.format-1.0.js?w:lm=1459493184"></script>
+                <script type="text/javascript" src="resources/com.cleverlance.smartclient.frontend.wicket.DesktopWebPage/res/sc.utils.js?w:lm=1459493184"></script>
+                <script type="text/javascript" src="resources/org.apache.wicket.Application/sc.en.js?w:lm=1459493184"></script>
+                <script type="text/javascript" src="resources/org.apache.wicket.markup.html.WicketEventReference/wicket-event.js?w:lm=1459493184"></script>
+                <script type="text/javascript">Wicket.Event.add(window, "domready", function(event) { niceButtons();;});</script>
+                <script type="text/javascript" id="sc-ping-notif-timeout">
+jQuery.sessionPing.addListener(function(data, status, request, next) {
+    if (data && window.notifications && notifications.exists()) {
+        notifications.add('notification: ' + JSON.stringify(data).replaceAll('<', '&lt;').replaceAll('>', '&gt;'), 'info');
+        next();
+    }
+}, 1000);
+jQuery.sessionPing.addListener(function(data, status, request, next) {
+    if (data && data.type=='newmenurefresh') {
+        if (function(){return true;}.bind(this)()) { Wicket.showIncrementally('busyIndicator12');}var wcall=wicketAjaxGet(';jsessionid=E3BF1EEF936152B2DA7AB2F0CB485C83?wicket:interface=:1::IBehaviorListener:1:',function() { ;Wicket.hideIncrementally('busyIndicator12');}.bind(this),function() { ;Wicket.hideIncrementally('busyIndicator12');}.bind(this), function() {if (!function() {return true;}.bind(this)()) {Wicket.hideIncrementally('busyIndicator12');}return true;}.bind(this));
+    } else if (data && data.type=='notification-refresh') {
+        SC.log('jedeeem');$('.panel-notification').slideToggle();
+        $('.panel-notification span').html(data.message);
+        setTimeout(function(){$('.panel-notification').slideToggle();},5000);
+    } else { next(); }
+}, 1);
+notifications.init();
+jQuery.sessionPing.init('/stable-borrower/monitoring/ping;jsessionid=E3BF1EEF936152B2DA7AB2F0CB485C83', 9);
+
+                </script>
+                <script type="text/javascript">Wicket.Event.add(window, "domready", function(event) { SC.utils.init();;});</script>
+                <script type="text/javascript">Wicket.Event.add(window, "load", function(event) { SC.utils.historyTest('disabled');;});</script>
+                <script type="text/javascript">Wicket.Event.add(window, "load", function(event) {
+SC.utils.renderHistoryObject(1);;});</script>
+                <script type="text/javascript" src="resources/org.apache.wicket.ajax.WicketAjaxReference/wicket-ajax.js?w:lm=1459493184"></script>
+                <script type="text/javascript" id="sc-wicket-error-handling-fix">
+Wicket.Ajax.Request.prototype.originalFailure = Wicket.Ajax.Request.prototype.failure;
+Wicket.Ajax.Request.prototype.failure = function() {
+    this.originalFailure();
+    var status; try { status = this.transport.status; } catch(e) { status = 'unavailable'; }
+    if ((status >= 500 && status <= 505) || (status >= 400 && status <= 405)) {
+        scGoTo('/stable-borrower/error/' + status + '.html');
+    }
+}
+
+                </script>
+                <script type="text/javascript" src="resources/com.cleverlance.abakus.ib.common.scripts.AbakusJs/abakus.js?w:lm=1459493184"></script>
+                <script type="text/javascript">Wicket.Event.add(window, "load", function(event) { Abakus.initBorrower();;});</script>
+                <script type="text/javascript">Wicket.Event.add(window, "domready", function(event) {
+$('body').on('mouseenter', '.main-menu li', function(){
+    $(this).siblings().addClass( 'nav-fade' );
+}).on('mouseleave', '.main-menu li', function(){
+    $(this).siblings().removeClass( 'nav-fade' );
+});;});</script>
+                <script type="text/javascript">Wicket.Event.add(window, "domready", function(event) { $('.form-page').attr('class', 'form-page layout-single');;});</script>
+                <script type="text/javascript" id="ajax-mod-js">
+busyIndicatorInit(0);
+function wicketShow(id) { busyIndicatorShow(id); }
+function wicketHide(id) { busyIndicatorHide(id); }
+Wicket.showIncrementally = busyIndicatorShow;
+Wicket.hideIncrementally = busyIndicatorHide;</script>
+                <script type="text/javascript">Wicket.Event.add(window, "domready", function(event) {
+busyIndicatorFollowCursorInit('busyIndicator12', 15);;});</script>
+                <script type="text/javascript" src="resources/com.cleverlance.smartclient.frontend.wicket.form.screen.ScreenFormPanel/res/screen.utils.js?w:lm=1459493184"></script>
+                <script type="text/javascript" src="resources/com.cleverlance.smartclient.frontend.wicket.form.screen.ScreenFormPanel/res/screen.api.js?w:lm=1459493184"></script>
+                <script type="text/javascript" src="resources/com.cleverlance.smartclient.frontend.wicket.form.screen.ScreenFormPanel/res/jquery.scriptedWidget.js?w:lm=1459493184"></script>
+                <script type="text/javascript" src="resources/com.cleverlance.smartclient.frontend.wicket.desktop.jslib.JsLib/res/jquery.validate.js?w:lm=1459493184"></script>
+                <script type="text/javascript" src="resources/com.cleverlance.smartclient.frontend.wicket.desktop.jslib.JsLib/res/jquery.placeholder.js?w:lm=1459493184"></script>
+                <script type="text/javascript">Wicket.Event.add(window, "domready", function(event) { SC.utils.init2();;});</script>
+                <script type="text/javascript">Wicket.Event.add(window, "load", function(event) { SC.utils.confirmLeaving.set(false);;});</script>
+                <script type="text/javascript">Wicket.Event.add(window, "domready", function(event) {
+var event = window.event;
+SC._setFormName('form2', 'RegistrationFinalize');
+
+SC.busyIndicator="busyIndicator12";
+SC.bigBusyIndicator="busyIndicatorBig";$('#main11').addClass('unprintable')
+SC._setCallOperationUrl(";jsessionid=E3BF1EEF936152B2DA7AB2F0CB485C83?wicket:interface=:1:main:c:form::ICallOperationListener:0:","form2");
+SC._setLazyCallUrl(";jsessionid=E3BF1EEF936152B2DA7AB2F0CB485C83?wicket:interface=:1:main:c:form::ILazyCallListener:1:","form2");
+SC._setRefreshUrl(";jsessionid=E3BF1EEF936152B2DA7AB2F0CB485C83?wicket:interface=:1:main:c:form::IRefreshListener:3:","form2");
+SC._setFormChangeUrl(";jsessionid=E3BF1EEF936152B2DA7AB2F0CB485C83?wicket:interface=:1:main:c:form::IFormChangeListener:2:","form2");
+SC._setFeedback("feedbackBox113","form2");
+SC._setRequiredType("label", "form2");
+SC._requiredSuffix = $.parseHTML('
+
+                    <div><\/div>')[0].innerHTML.toLowerCase();
+SC._optionalSuffix = $.parseHTML('
+
+                        <div>
+                            <span class=\"label-suffix\">(optional)<\/span><\/div>')[0].innerHTML.toLowerCase();
+SC._setDefaultFormats({date: 'dd/MM/yyyy', time: 'hh:mm:ss a', datetime: 'dd/MM/yyyy hh:mm:ss a',integer: '#,##0', decimal: '#,##0.##', currency: '#,##0.00'});
+
+    var time = new Date();
+$('#form2[title], #form2 [title]').tooltip();
+SC.utils.timeLog(time, "tooltips have been initialized", null, 'tooltips init');
+
+    var time = new Date();
+var form = $('#form10');
+form.validate({"ignoreTitle":true,"keepBubleAfterFocusLostVisibleForTime":0,"ignoreFocusoutRequiredValidation":true,"globalFormError":true,"rules":{"root:c:w:pnlMain:c:w:pnlForVerify:c:w:txtVerificationCode:tb":{"required":true}},"live":false});
+form.bind('invalid-form', function() { SC.utils.resetWidgets(form); });
+
+SC.utils.timeLog(time, "client validations have been initialized", null, 'validations init');
+
+SC._setWidgets({'btnHiddenCancel3':{'p':'pnlMain4','mh':20,'fw':{'lblTitle5':{'d':160}},'pw':{} /* pnlMain btnHiddenCancel */ },
+'lbl_6996':{'p':'pnlMain4','mh':120,'fw':{'lblTitle5':{'d':19}},'pw':{} /* pnlMain lbl-699 */ },
+'lblTitle5':{'p':'pnlMain4','mh':50,'fw':{'pnlForVerify7':{'d':11}},'pw':{'lbl_6996':{'d':19},'btnHiddenCancel3':{'d':160}} /* pnlMain lblTitle */ },
+'lblRegistrationFinalizeNote8':{'p':'pnlForVerify7','mh':70,'fw':{'pnlMessage9':{'d':0}},'pw':{} /* pnlMain pnlForVerify lblRegistrationFinalizeNote */ },
+'lblResendMessagea':{'p':'pnlMessage9','mh':20,'fw':{},'pw':{} /* pnlMain pnlForVerify pnlMessage lblResendMessage */ },
+'pnlMessage9':{'p':'pnlForVerify7','children':['lblResendMessagea'],'bd':20,'fw':{'txtVerificationCodeb':{'d':20}},'pw':{'lblRegistrationFinalizeNote8':{'d':0}} /* pnlMain pnlForVerify pnlMessage */ },
+'txtVerificationCodeb':{'p':'pnlForVerify7','mh':40,'fw':{},'pw':{'pnlMessage9':{'d':20}} /* pnlMain pnlForVerify txtVerificationCode */ },
+'pnlForVerify7':{'p':'pnlMain4','children':['lblRegistrationFinalizeNote8','pnlMessage9','txtVerificationCodeb'],'bd':0,'fw':{'lblSeparatorc':{'d':9}},'pw':{'lblTitle5':{'d':11}} /* pnlMain pnlForVerify */ },
+'lblSeparatorc':{'p':'pnlMain4','mh':20,'fw':{'btnConfirmRegistrationd':{'d':20}},'pw':{'pnlForVerify7':{'d':9}} /* pnlMain lblSeparator */ },
+'btnConfirmRegistrationd':{'p':'pnlMain4','mh':40,'fw':{'lnkRepeatSende':{'d':30}},'pw':{'lblSeparatorc':{'d':20}} /* pnlMain btnConfirmRegistration */ },
+'lnkRepeatSende':{'p':'pnlMain4','mh':20,'fw':{},'pw':{'btnConfirmRegistrationd':{'d':30}} /* pnlMain lnkRepeatSend */ },
+'pnlMain4':{'p':'rootf','children':['btnHiddenCancel3','lbl_6996','lblTitle5','pnlForVerify7','lblSeparatorc','btnConfirmRegistrationd','lnkRepeatSende'],'bd':20,'fw':{},'pw':{} /* pnlMain */ },
+'rootf':{'p':'form10','root':true,'children':['pnlMain4'],'bd':0 /* root */ }
+}, "form2");
+// create-dynamic-tooltip-rootf
+
+    var time = new Date();
+SC._updateDynamicTooltip($('#rootf .dynamic-tooltip'));
+SC.utils.timeLog(time, "dynamic tooltips have been initialized", null, 'dynamic-tooltip init');
+
+// create-label-img-load-lblRegistrationFinalizeNote8
+
+    var time = new Date();$('#lblRegistrationFinalizeNote8 img:not([height])').one('load', function(e) {SC.getWidget('pnlMain pnlForVerify lblRegistrationFinalizeNote', 'form2')._refresh(); });
+SC.utils.timeLog(time, "bindings (img load, label autoheight) have been initialized", null, 'label-img-load init');
+
+SC._setData($.parseJSON('{"countShot":0,"resendSms":false}', true), "form2");
+SC._setValidation(function() {
+this.valid = true;
+return this.valid;
+}, 'form2');
+SC._setGrayLogic(function(event, scdata) {
+
+try{
+    var time = new Date();
+if (!SC.utils._eventFix(event, scdata)) {
+    return false;
+}
+SC.utils.timeLog(time, function(p) { return "" + event.type + ", " + (event.widget ? event.widget.getPath() : '-') + " (form: " + event.form + ")" }, null, 'form logic - start');
+
+
+//
+// gray logic script - begin
+//
+
+// dynamic script begin: RegistrationFinalize
+// dynamic script end: RegistrationFinalize
+var interval = 30;
+var totalSeconds = 0;
+
+
+function setStartParam() {
+  SC.getWidget('pnlMain btnConfirmRegistration').setEnabled(true);
+  SC.getWidget('pnlMain pnlForVerify txtVerificationCode').setEnabled(true);
+  SC.getWidget('pnlMain lnkRepeatSend').setEnabled(true);
+  SC.getWidget('pnlMain pnlForVerify pnlMessage').setVisible(false);
+  SC.getData().resendSms = false;
+  SC.getWidget('pnlMain pnlForVerify txtVerificationCode').focus();
+}
+
+if (event.type == 'ready') {
+
+  SC.getWidget('pnlMain pnlForVerify txtVerificationCode').focus();
+
+  if (SC.getData().countShot > 0 || SC.getData().resendSms === true ) {
+    var timer = function() {
+      if ( SC.getWidget('pnlMain btnConfirmRegistration').isEnabled() === true ) {
+        var timer2 = function() {
+          ++totalSeconds;
+          SC.getWidget('pnlMain pnlForVerify pnlMessage lblResendMessage').setValue("Resend SMS will be available in
+
+                                <b>"+ (interval-parseInt(totalSeconds, 10))+"<\/b> seconds.");
+          if (totalSeconds >= interval) {
+            setStartParam();
+            return false;
+          }
+
+          SC.setTimeout(timer2, 1000);
+        };
+
+        SC.getWidget('pnlMain btnConfirmRegistration').setEnabled(false);
+        SC.getWidget('pnlMain pnlForVerify txtVerificationCode').setEnabled(false);
+        SC.getWidget('pnlMain lnkRepeatSend').setEnabled(false);
+
+        SC.setTimeout(timer2, 1000);
+      }
+    };
+
+    timer();
+  }
+}
+
+//
+// gray logic script - end
+//
+
+SC.utils.timeLog(time, function(p) { return "" + event.type + ", " + (event.widget ? event.widget.getPath() : '-') + " (form: " + event.form + ")" }, null, 'form logic - end');
+
+}catch(err){SC.scriptCatchBody(0,'RegistrationFinalize',err);};
+}, 'form2');
+SC.init($('#form2'), false, true);
+SC.initTabRestrictions('form2');
+$('#form2 .form2 :input.content:not(:submit):not(.no-gray-logic)').bind('focusin change blur', function(jqevent) {
+var event={type:jqevent.type=='focusin'?'focus':jqevent.type,jqevent:jqevent};
+event.widget=SC.utils.grayLogicPrepare(jqevent,0,'form2');if (event.widget) {
+SC.fireEvent(null,'form2',typeof event!=='undefined'&&event!==null&&event.widget&&event.widget.getPath(),false,event);
+}});
+$('#form2 .form2 :text, #form2 .form2 :password, #form2 .form2 textarea').bind('keyup', function(jqevent) {
+var event={type:jqevent.type=='focusin'?'focus':jqevent.type,jqevent:jqevent};
+event.widget=SC.utils.grayLogicPrepare(jqevent,0,'form2');if (event.widget) {
+SC.fireEvent(null,'form2',typeof event!=='undefined'&&event!==null&&event.widget&&event.widget.getPath(),false,event);
+}});
+$('#form2 .form2 .clickable > .content').bind('click', function(jqevent) {
+var event={type:jqevent.type=='focusin'?'focus':jqevent.type,jqevent:jqevent};
+event.widget=SC.utils.grayLogicPrepare2(jqevent,0,'form2');if (event.widget) {
+SC.fireEvent(null,'form2',typeof event!=='undefined'&&event!==null&&event.widget&&event.widget.getPath(),false,event);
+}});
+SC.fireEvent('ready','form2',typeof event!=='undefined'&&event!==null&&event.widget&&event.widget.getPath(),false,null);
+SC.doLayout('form2');$('#form2 .loading-layer').hide();;});
+
+                                </script>
+                                <div class="chatwindow"></div>
+                                <script type="text/javascript">
+st = window.scTime = {};
+st.server = 588;
+st.client = new Date().getTime() - scTimeVar;
+</script>
+                            </body>
+                        </html>
+                        <!-- Page Class com.cleverlance.abakus.ib.borrower.web.ui.form.FormPage -->

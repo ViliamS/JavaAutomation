@@ -181,16 +181,16 @@
 
         <!-- Testing -->
         <!--  TODO upload or find the right version selenium-server-standalone -->
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>${org-seleniumhq-selenium.selenium-java.version}</version>
-        </dependency>
         <!--<dependency>-->
             <!--<groupId>org.seleniumhq.selenium</groupId>-->
-            <!--<artifactId>selenium-server-standalone</artifactId>-->
-            <!--<version>2.53.0</version>-->
+            <!--<artifactId>selenium-java</artifactId>-->
+            <!--<version>${org-seleniumhq-selenium.selenium-java.version}</version>-->
         <!--</dependency>-->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-server-standalone</artifactId>
+            <version>2.43.1</version>
+        </dependency>
         <!--<dependency>-->
             <!--<groupId>org.seleniumhq.selenium</groupId>-->
             <!--<artifactId>selenium-server</artifactId>-->

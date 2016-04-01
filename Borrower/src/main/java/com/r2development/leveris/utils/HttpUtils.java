@@ -48,6 +48,14 @@ public class HttpUtils {
         return HttpClientBuilder.create().setRedirectStrategy(new LaxRedirectStrategy()).build();
     }
 
+    public static HttpClientContext emptyContext() {
+        CookieStore cookieStore = new BasicCookieStore();
+        HttpClientContext localContext = HttpClientContext.create();
+        localContext.setCookieStore(cookieStore);
+
+        return localContext;
+    }
+
     public static HttpClientContext initContext() {
 
         CookieStore cookieStore = new BasicCookieStore();

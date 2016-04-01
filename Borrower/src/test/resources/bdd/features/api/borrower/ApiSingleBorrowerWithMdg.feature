@@ -16,7 +16,8 @@ Feature: Api Single Borrower
 
 #    Then Borrower goes to gmail
 #    And Borrower goes to CRM
-    Then Borrower logs in as his account is activated
+    Then Borrower activates his account
+#    Then Borrower logs in as his account is activated
 
     Then Borrower processes "Get a Quote" (format2)
       | borrowerNumber           | a single borrower   |
