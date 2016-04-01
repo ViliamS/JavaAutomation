@@ -203,6 +203,11 @@
             <version>2.53.0</version>
         </dependency>
         <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>19.0</version>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.junit.version}</version>
@@ -246,12 +251,15 @@
         </dependency>
 
         <dependency>
-            <groupId>net.lightbody.bmp</groupId>
-            <!-- To use the legacy, Jetty-based implementation,
-                 change the artifactId to browsermob-core -->
-            <artifactId>browsermob-core-littleproxy</artifactId>
-            <version>2.1.0-beta-4</version>
-            <scope>test</scope>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.commons-io.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>${org-apache-commons.commons-collections4.version}</version>
         </dependency>
 
         <!-- Oracle Ojdbc -->

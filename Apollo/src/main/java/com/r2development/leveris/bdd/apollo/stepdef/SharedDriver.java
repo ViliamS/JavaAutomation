@@ -51,7 +51,7 @@ public class SharedDriver extends EventFiringWebDriver {
     public static DesiredCapabilities dCaps = new DesiredCapabilities();
     private StringBuffer verificationErrors = new StringBuffer();
 
-    //    private static WebDriver REAL_DRIVER = new ChromeDriver();
+//        private static WebDriver REAL_DRIVER = new ChromeDriver();
     private static final WebDriver REAL_DRIVER = execute(System.getProperty("browser"));
     private static final Thread CLOSE_THREAD = new Thread() {
         @Override

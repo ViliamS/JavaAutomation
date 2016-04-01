@@ -2,6 +2,7 @@ package com.r2development.leveris.bdd.apollo.stepdef;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import com.r2development.leveris.di.IUser;
 import com.r2development.leveris.selenium.apollo.pageobjects.ILoginPage;
 import com.r2development.leveris.selenium.apollo.pageobjects.IRecordPage;
