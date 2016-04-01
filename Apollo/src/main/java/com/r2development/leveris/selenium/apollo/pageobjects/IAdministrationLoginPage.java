@@ -10,5 +10,6 @@ public interface IAdministrationLoginPage {
 
     IAdministrationLoginPage setUsername(String username);
     IAdministrationLoginPage setPassword(String password);
-    IAdministrationHomePage clickLogin();
+    IAdministrationTopBanner clickLogin();
+    IAdministrationLoginPage goToApolloAdministrationLoginPage();
 }

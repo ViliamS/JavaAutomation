@@ -18,7 +18,7 @@ public abstract class Apollo {
 
     private static final int DEFAULT_TIMEOUT = 30;
 
-    protected SharedDriver /*final*/ webDriver;
+    protected WebDriver /*final*/ webDriver;
 
     protected Apollo(SharedDriver webDriver) {
         this.webDriver = webDriver;

@@ -5,7 +5,6 @@ import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -191,7 +190,7 @@ public class SearchAdvancedSection extends Apollo implements ISearchSection, ISe
     @Override
     public ISearchPage clickSearch() {
         weSubmit.click();
-        ISearchPage searchPage = SearchPage.getSearchSectionInstance(webDriver, this);
+        ISearchPage searchPage = SearchPage.getSearchSectionInstance((SharedDriver)webDriver, this);
         PageFactory.initElements(webDriver, searchPage);
         return searchPage;
     }
@@ -214,7 +213,7 @@ public class SearchAdvancedSection extends Apollo implements ISearchSection, ISe
         getWebElement(FULLTEXT_SEARCH_LINK_XPATH).click();
 //        SearchFullTextSection searchFullTextSection = new SearchFullTextSection(webDriver).waitForSearchSectionToLoad();
 //        ISearchFullTextSection searchFullTextSection = new SearchFullTextSection(webDriver);
-        ISearchSection searchFullTextSection = new SearchFullTextSection(webDriver);
+        ISearchSection searchFullTextSection = new SearchFullTextSection((SharedDriver)webDriver);
         PageFactory.initElements(webDriver, searchFullTextSection);
 //        return searchFullTextSection;
         return searchFullTextSection;

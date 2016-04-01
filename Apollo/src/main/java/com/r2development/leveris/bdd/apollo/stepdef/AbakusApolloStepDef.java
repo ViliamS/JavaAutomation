@@ -1,11 +1,10 @@
 package com.r2development.leveris.bdd.apollo.stepdef;
 
 import com.google.inject.Inject;
-import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import com.r2development.leveris.di.IUser;
+import com.r2development.leveris.di.User;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.WebDriver;
 
 public class AbakusApolloStepDef {
 
@@ -14,15 +13,14 @@ public class AbakusApolloStepDef {
     @Inject
     public IUser user;
 //    @Inject
-    WebDriver webDriver;
+//    WebDriver webDriver;
 
-//    public AbakusApolloStepDef() {
-//    }
+    public AbakusApolloStepDef() {
+    }
 
     @Inject
-    public AbakusApolloStepDef(SharedDriver sharedDriver, IUser user) {
+    public AbakusApolloStepDef(User user) {
 //        super(webDriver);
         this.user = user;
-        this.webDriver = sharedDriver;
     }
 }

@@ -1,7 +1,6 @@
 package com.r2development.leveris.bdd.apollo.stepdef;
 
 import com.google.inject.Singleton;
-import com.r2development.leveris.bdd.apollo.apistepdef.OpoqoApolloStepDef;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;

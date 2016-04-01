@@ -4,7 +4,6 @@ import com.r2development.leveris.Apollo;
 import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -18,9 +17,8 @@ public class ContactSection extends Apollo implements IContactSection {
 
     private SharedDriver webDriver;
 
-    // TODO use guice injection
     private Map<String, String> contactDataFromSearch;
-//    private Map<String, String> contactDataFromEditContactPage;
+    private Map<String, String> contactDataFromEditContactPage;
 
     @FindBy( xpath = FULLNAME_XPATH)
     protected WebElement weFullName;
@@ -50,7 +48,7 @@ public class ContactSection extends Apollo implements IContactSection {
         super(webDriver);
         this.webDriver = webDriver;
         contactDataFromSearch = contactData;
-//        contactDataFromEditContactPage = contractData2;
+        contactDataFromEditContactPage = contractData2;
 //        replace();
     }
 
@@ -137,7 +135,7 @@ public class ContactSection extends Apollo implements IContactSection {
 
     @Override
     public boolean checkUpdatedContactData() {
-//        String[] updatedData = getWebElement(EXTRACT_CONTACT_DATA).getText().split(",");
+        String[] updatedData = getWebElement(EXTRACT_CONTACT_DATA).getText().split(",");
 
         // TODO to implement with guice injection
 

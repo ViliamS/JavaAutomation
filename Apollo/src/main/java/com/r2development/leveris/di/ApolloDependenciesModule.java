@@ -3,10 +3,6 @@ package com.r2development.leveris.di;
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
 import org.apache.commons.lang3.StringUtils;
-import org.joda.time.DateTime;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class ApolloDependenciesModule extends AbstractModule {
 

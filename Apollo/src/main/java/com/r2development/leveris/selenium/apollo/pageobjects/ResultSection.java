@@ -4,7 +4,6 @@ import com.r2development.leveris.Apollo;
 import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -19,7 +18,7 @@ public class ResultSection extends Apollo implements IResultSection {
 
     @FindBy( xpath = INFO_RESULT_XPATH )
     protected WebElement weItemsResult;
-//    private String currentItemResultText;
+    private String currentItemResultText;
 
     @FindBy( xpath = TABLE_XPATH )
     protected WebElement weTableResult;
@@ -57,7 +56,7 @@ public class ResultSection extends Apollo implements IResultSection {
         this.headerTableData = getHeaderTableData();
         this.orderBy = getOrderBy();
         this.bodyTableData = getBodyTableData();
-//        this.currentItemResultText = getInfoData();
+        this.currentItemResultText = getInfoData();
 
         return this;
     }
@@ -204,7 +203,7 @@ public class ResultSection extends Apollo implements IResultSection {
         Map<String, String> customerData = getRowTableData(row);
         lweRow.get(row).click();
 
-        return RecordPage.getRecordPageInstance(webDriver, customerData, null);
+        return RecordPage.getRecordPageInstance((SharedDriver) webDriver, customerData, null);
     }
 }
 

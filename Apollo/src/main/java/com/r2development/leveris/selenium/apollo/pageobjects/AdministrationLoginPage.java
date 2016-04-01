@@ -1,30 +1,29 @@
 package com.r2development.leveris.selenium.apollo.pageobjects;
 
-import com.google.inject.Inject;
 import com.r2development.leveris.Apollo;
 import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 
 public class AdministrationLoginPage extends Apollo implements IAdministrationLoginPage{
 
     private static final Log log = LogFactory.getLog(AdministrationLoginPage.class.getName());
 
-    SharedDriver webDriver;
-
-    @Inject
-    public static IAdministrationLoginPage getLoginPageInstance(SharedDriver webDriver) {
-        log.info("");
-        return new AdministrationLoginPage(webDriver);
-    }
+    WebDriver webDriver;
 
     public AdministrationLoginPage(SharedDriver webDriver){
         super(webDriver);
         this.webDriver = webDriver;
-        webDriver.get(System.getProperty("administration.url"));
     }
 
+    @Override
+    public IAdministrationLoginPage goToApolloAdministrationLoginPage(){
+        webDriver.get(System.getProperty("administration.url"));
+        return this;
+    }
+
+    @Override
     public IAdministrationLoginPage setUsername(String login){
         log.info("");
         isVisible(USERNAME_INPUT);
@@ -32,18 +31,19 @@ public class AdministrationLoginPage extends Apollo implements IAdministrationLo
         return this;
     }
 
+    @Override
     public IAdministrationLoginPage setPassword(String password){
         log.info("");
         isVisible(PASSWORD_INPUT);
-        type(PASSWORD_INPUT, password, Keys.ENTER);
+        type(PASSWORD_INPUT, password/*, Keys.ENTER*/);
         return this;
     }
 
-    public IAdministrationHomePage clickLogin(){
+    @Override
+    public IAdministrationTopBanner clickLogin(){
         log.info("");
-
-//        isVisible(LOGIN_BUTTON);
-//        clickElementLoop(LOGIN_BUTTON, IAdministrationHomePage.USERS_LINK);
-        return new AdministrationHomePage(webDriver);
+        isVisible(LOGIN_BUTTON);
+        clickElementLoop(LOGIN_BUTTON, IAdministrationHomePage.USERS_LINK);
+        return new AdministrationTopBanner((SharedDriver) webDriver);
     }
 }

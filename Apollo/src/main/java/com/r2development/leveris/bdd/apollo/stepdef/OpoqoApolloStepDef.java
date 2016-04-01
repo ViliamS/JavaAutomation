@@ -1,40 +1,42 @@
 package com.r2development.leveris.bdd.apollo.stepdef;
 
 import com.google.inject.Inject;
-import com.r2development.leveris.di.IUser;
+import com.google.inject.Singleton;
 import com.r2development.leveris.selenium.apollo.pageobjects.*;
-import cucumber.api.java.en.*;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.junit.Assert;
 
+@Singleton
 public class OpoqoApolloStepDef {
 
     private SharedDriver webDriver;
     private IAdministrationLoginPage administrationLoginPage;
     private IAdministrationHomePage administrationHomePage;
     private IAdministrationUsersPage administrationUserPage;
+    private IAdministrationTopBanner administrationTopBanner;
+
     @Inject
-    OpoqoApolloStepDef(SharedDriver webDriver){
+    public OpoqoApolloStepDef(SharedDriver webDriver){
         this.webDriver = webDriver;
         administrationLoginPage = new AdministrationLoginPage(webDriver);
-        administrationHomePage = new AdministrationHomePage(webDriver);
-        administrationUserPage = new AdministrationUsersPage(webDriver);
     }
 
     @When("^Go to Apollo Administration Login page$")
     public void go_to_user_administration(){
-        administrationLoginPage = AdministrationLoginPage.getLoginPageInstance(webDriver);
+        administrationLoginPage = new AdministrationLoginPage(webDriver)
+                .goToApolloAdministrationLoginPage();
     }
 
-    @And("^Set username (Admin) with password (changemenow!) and click login$")
+    @And("^Set username \"(admin)\" with password \"(changemenow!)\" and click login$")
     public void set_username_with_password_and_click_login(String username, String password){
         administrationLoginPage.setUsername(username);
         administrationLoginPage.setPassword(password);
-        administrationHomePage = administrationLoginPage.clickLogin();
+        administrationTopBanner = administrationLoginPage.clickLogin();
     }
 
-    @And("^Admin clicks on the (Users|Roles|Fund Manager|Administration) banner menu link$")
+    @And("^Admin clicks on the (Users|Top Banner Users|Roles|Fund Manager|Administration) link$")
     public void admin_clicks_on_the_banner_menu_link(String clickOn){
 
         switch (clickOn){
@@ -42,6 +44,9 @@ public class OpoqoApolloStepDef {
                 administrationUserPage = administrationHomePage.clickUsersLink();
                 break;
 
+            case "Top Banner Users":
+                administrationUserPage = administrationTopBanner.clickBannerLinkUsers();
+                break;
             default:
                 Assert.assertTrue("Not covered case tp navigate", false);
         }

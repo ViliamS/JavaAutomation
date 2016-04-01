@@ -71,7 +71,7 @@ public class LoginPage extends Apollo implements ILoginPage {
     public ISearchPage clickSubmit() {
         isVisible(SUBMIT_XPATH);
         weSubmit.click();
-        return SearchPage.getSearchSectionInstance(webDriver);
+        return SearchPage.getSearchSectionInstance((SharedDriver)webDriver);
     }
 }
 
