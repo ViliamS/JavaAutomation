@@ -372,7 +372,6 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
 
         System.out.println(urlVerifyRegistration);
 
-        this.localContext.setHttpContext(HttpUtils.initContext(System.getProperty("domain.borrower"), "/stable-borrower"));
         String borrowerUIResponse = requestHttpGet(
                 httpClient,
                 urlVerifyRegistration,
