@@ -13,9 +13,7 @@ import java.util.LinkedHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.r2development.leveris.utils.HttpUtils.CONSUME_QUIETLY;
-import static com.r2development.leveris.utils.HttpUtils.requestHttpGet;
-import static com.r2development.leveris.utils.HttpUtils.requestHttpPost;
+import static com.r2development.leveris.utils.HttpUtils.*;
 
 @Singleton
 public class ApiWorkflowStepDef extends ApiOpoqoUnderwriterStepDef {
@@ -70,7 +68,7 @@ public class ApiWorkflowStepDef extends ApiOpoqoUnderwriterStepDef {
             currentWicketCompleteReviewLink = mWicketCompleteReviewLink.group(1);
         }
 
-        requestHttpPost(
+        String completeStage1Response = requestHttpPost(
                 httpClient,
 //                "https://st1app.loftkeys.com/underwriter/form.2?wicket:interface=:4:singleFlow:p:c:form:form:root:c:w:pnlApplicationList:c:w:rptApplication:c:rows:1:item:pnlApplication:c:w:btnStart:submit::IBehaviorListener:0:",
 //                "https://st1app.loftkeys.com/underwriter/form.2?wicket:interface=:5:multiFlow:panels:0:p:c:form:embeddedFormWrapper:embeddedForm:1:form:root:c:w:pnlStage1:c:w:btnComplete:submit::IBehaviorListener:0:",

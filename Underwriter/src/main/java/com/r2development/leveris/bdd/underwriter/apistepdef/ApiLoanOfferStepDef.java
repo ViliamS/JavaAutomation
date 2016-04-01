@@ -121,6 +121,4 @@ public class ApiLoanOfferStepDef extends ApiOpoqoUnderwriterStepDef {
                 CONSUME_QUIETLY
         );
     }
-
-
 }

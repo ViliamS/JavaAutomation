@@ -5,14 +5,14 @@ import com.google.gson.JsonParser;
 import com.r2development.leveris.utils.HttpUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.protocol.HttpClientContext;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
@@ -22,15 +22,18 @@ import org.jsoup.nodes.Element;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 
-import java.io.*;
+import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.r2development.leveris.utils.HttpUtils.requestHttpGet;
 import static com.r2development.leveris.utils.HttpUtils.requestHttpPost;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class UnderwriterTest {
 
@@ -860,7 +863,7 @@ public class UnderwriterTest {
         String loanOfferVersionAttributeValue = loanOfferVersionElements.select("option[selected]").attr("value");
 //        String loanOfferVersionOptionValue = loanOfferVersionElements.select("option[selected]").first().textNodes().get(0).text();
 
-        requestHttpPost(
+        String responseSaveOffer = requestHttpPost(
                 httpClient,
 //                "https://st1app.loftkeys.com/underwriter/form.2?wicket:interface=:4:singleFlow:p:c:form:form:root:c:w:pnlApplicationList:c:w:rptApplication:c:rows:1:item:pnlApplication:c:w:btnStart:submit::IBehaviorListener:0:",
                 "https://st1app.loftkeys.com/underwriter/form.2?wicket:interface=:5:multiFlow:panels:2:p:c:form:form:root:c:w:btnSaveOffer:submit::IBehaviorListener:0:",
@@ -922,7 +925,7 @@ public class UnderwriterTest {
                 false
         );
 
-        requestHttpPost(
+        String completeStage1Response = requestHttpPost(
                 httpClient,
 //                "https://st1app.loftkeys.com/underwriter/form.2?wicket:interface=:4:singleFlow:p:c:form:form:root:c:w:pnlApplicationList:c:w:rptApplication:c:rows:1:item:pnlApplication:c:w:btnStart:submit::IBehaviorListener:0:",
                 "https://st1app.loftkeys.com/underwriter/form.5?wicket:interface=:5:multiFlow:panels:0:p:c:form:embeddedFormWrapper:embeddedForm:1:form:root:c:w:pnlStage1:c:w:btnComplete:submit::IBehaviorListener:0:",
@@ -943,7 +946,7 @@ public class UnderwriterTest {
                 false
         );
 
-        requestHttpGet(
+        String containerWorkflowRefresh = requestHttpGet(
                 httpClient,
                 "https://st1app.loftkeys.com/underwriter/form.5?wicket:interface=:5:multiFlow:panels:0:p:c:form:form:root:c:w:btnRefresh:cancel::IBehaviorListener:0:",
                 new LinkedHashMap<String, String>() {

@@ -23,9 +23,7 @@ import org.junit.Assert;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 
-import static com.r2development.leveris.utils.HttpUtils.CONSUME_QUIETLY;
-import static com.r2development.leveris.utils.HttpUtils.requestHttpGet;
-import static com.r2development.leveris.utils.HttpUtils.requestHttpPost;
+import static com.r2development.leveris.utils.HttpUtils.*;
 
 @Singleton
 public class ApiSsoStepDef extends ApiOpoqoUnderwriterStepDef {
@@ -73,11 +71,11 @@ public class ApiSsoStepDef extends ApiOpoqoUnderwriterStepDef {
     @Given("^user processes SSO (Underwriter) Auth Step$")
     public void user_processes_SSO_Auth(String application) throws IOException {
 
-        ApiSupportHttpClientStepDef.getNewInstanceHttpClientContext(System.getProperty("domain.apollo"), System.getProperty("apollo.context." + application.toLowerCase()));
+        ApiSupportHttpClientStepDef.getNewInstanceHttpClientContext(System.getProperty("domain.underwriter"), System.getProperty("/stable-underwriter"));
 
 //        String referer = "https://dv2apl.opoqodev.com/sso/?host=http://dv2apl.opoqodev.com/" + application.toLowerCase() + "/&application=" + application.toUpperCase();
-        String referer = System.getProperty("apollo.sso") + "/?host=http://" + System.getProperty("domain.apollo") + "/" + application.toLowerCase() + "/&application=" + application.toUpperCase();
-        String entity = "{\"authProcessId\":null,\"authProcessStepValues\":[{\"authDetailCode\":\"LDAPUSERNAME\",\"value\":\"u1@abakus.com\"},{\"authDetailCode\":\"LDAPPWD\",\"value\":\"Password1122\"}],\"operation\":\"LOGIN\",\"originalRequest\":{\"url\":\"http://" + System.getProperty("domain.apollo") + "/" + application.toLowerCase() + "/\",\"applicationCode\":\"" + application.toUpperCase() + "\"},\"scenarioCode\":\"LDAP_USR_PWD\"}";
+        String referer = System.getProperty("apollo.sso") + "/?host=http://" + System.getProperty("domain.underwriter") + "/stable-" + application.toLowerCase() + "/&application=" + application.toUpperCase();
+        String entity = "{\"authProcessId\":null,\"authProcessStepValues\":[{\"authDetailCode\":\"LDAPUSERNAME\",\"value\":\"admin\"},{\"authDetailCode\":\"LDAPPWD\",\"value\":\"changemenow!\"}],\"operation\":\"LOGIN\",\"originalRequest\":{\"url\":\"http://" + System.getProperty("domain.underwriter") + "/stable-" + application.toLowerCase() + "/\",\"applicationCode\":\"" + application.toUpperCase() + "\"},\"scenarioCode\":\"LDAP_USR_PWD\"}";
 
         HttpPost httpPostValidateAuthProcessStep = new HttpPost( System.getProperty("apollo.sso") + "/api/public/sso/validateAuthProcessStep");
         httpPostValidateAuthProcessStep.setHeader("Content-Type", "application/json; charset=UTF-8");
@@ -114,7 +112,7 @@ public class ApiSsoStepDef extends ApiOpoqoUnderwriterStepDef {
                     localContext,
                     CONSUME_QUIETLY
             );
-//        httpResponse.setHttpResponse(authenticateResponse);
+        httpResponse.setHttpResponse(authenticateResponse);
 
         Assert.assertNotNull("we shouldn't have a null string", authenticateResponse);
 
