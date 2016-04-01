@@ -30,7 +30,8 @@ public interface IYourAccountsSection {
     String YOUR_ACCOUNTS_NEXT_XPATH = "//a[contains(., 'Next')]";
     String YOUR_ACCOUNTS_DONE_XPATH = "//a[contains(., 'done')]";
     String YOUR_ACCOUNTS_CANCEL_XPATH = "//a[contains(., 'CANCEL')]";
-    String YOUR_ACCOUNTS_ADD_THIS_ACCOUNT_XPATH = "//a[contains(., 'Add this account')]";
+    String YOUR_ACCOUNTS_ADD_THIS_ACCOUNT_XPATH = "//a[contains(@wicketpath,'dialogWrapper') and contains(@wicketpath,'pnlAddSource') and contains(@wicketpath,'btnAddThisSource_submit')]";
+    //    String YOUR_ACCOUNTS_ADD_THIS_ACCOUNT_XPATH = "//a[@wicketpath='main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_btnAddThisSource_submit']";
     String YOUR_ACCOUNTS_ROW_ACCOUNT = "//div[@wicketpath='main_c_form_form_root_c_w_pnlEmpList_c_w_rptEmployment_c_rows_${replace}$_item_pnlItems_c']";
     String YOUR_ACCOUNTS_ROW_DELETE = "//div[@wicketpath='main_c_form_form_root_c_w_pnlEmpList_c_w_rptEmployment_c_rows_${replace}$_item_pnlItems_c_w_btnDelete_dialog']";
     String YOUR_ACCOUNTS_ROW_EDIT = "//div[@wicketpath='main_c_form_form_root_c_w_pnlEmpList_c_w_rptEmployment_c_rows_${replace)}_item_pnlItems_c_w_btnEdit_dialog']";

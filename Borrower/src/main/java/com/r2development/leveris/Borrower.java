@@ -681,6 +681,7 @@ public class Borrower /*implements IBorrower*/ {
                  " *                                                                                                    * " +
                  "\n *************************************************************************************************** \n");
         webDriver.get(url);
+        webDriver.manage().window().maximize();
     }
 
 //    private void horizontalVerticalScroll(Integer horizontal, Integer vertical){
