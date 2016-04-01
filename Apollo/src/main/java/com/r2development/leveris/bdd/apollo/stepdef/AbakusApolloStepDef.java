@@ -1,16 +1,18 @@
 package com.r2development.leveris.bdd.apollo.stepdef;
 
 import com.google.inject.Inject;
-import com.r2development.leveris.di.User;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import com.r2development.leveris.di.IUser;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openqa.selenium.WebDriver;
 
 public class AbakusApolloStepDef {
 
     private static final Log log = LogFactory.getLog(AbakusApolloStepDef.class);
 
     @Inject
-    public User user;
+    public IUser user;
 //    @Inject
     WebDriver webDriver;
 
