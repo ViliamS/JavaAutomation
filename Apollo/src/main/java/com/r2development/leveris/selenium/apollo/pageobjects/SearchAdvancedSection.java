@@ -1,6 +1,7 @@
 package com.r2development.leveris.selenium.apollo.pageobjects;
 
 import com.r2development.leveris.Apollo;
+import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.Keys;
@@ -47,8 +48,8 @@ public class SearchAdvancedSection extends Apollo implements ISearchSection, ISe
     @FindBy( xpath = SUBMIT_BUTTON_XPATH )
     private WebElement weSubmit;
 
-    public static ISearchSection getSearchSectionInstance(WebDriver webDriver) {
-//    public static ISearchAdvancedSection getSearchSectionInstance(WebDriver webDriver) {
+    public static ISearchSection getSearchSectionInstance(SharedDriver webDriver) {
+//    public static ISearchAdvancedSection getSearchSectionInstance(SharedDriver webDriver) {
 //        SearchAdvancedSection searchAdvancedSection = new SearchAdvancedSection(webDriver);
         ISearchAdvancedSection searchAdvancedSection = new SearchAdvancedSection(webDriver);
         PageFactory.initElements(webDriver, searchAdvancedSection);
@@ -56,7 +57,7 @@ public class SearchAdvancedSection extends Apollo implements ISearchSection, ISe
         return (ISearchSection) searchAdvancedSection;
     }
 
-    public SearchAdvancedSection(WebDriver webDriver) {
+    public SearchAdvancedSection(SharedDriver webDriver) {
         super(webDriver);
         this.webDriver = webDriver;
     }

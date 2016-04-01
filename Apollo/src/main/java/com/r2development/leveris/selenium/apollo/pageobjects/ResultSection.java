@@ -1,6 +1,7 @@
 package com.r2development.leveris.selenium.apollo.pageobjects;
 
 import com.r2development.leveris.Apollo;
+import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -26,13 +27,13 @@ public class ResultSection extends Apollo implements IResultSection {
     private Map<String, String> headerTableData;
     private Map<Integer, Map<String, String>> bodyTableData;
 
-    public static IResultSection getResultSectionInstance(WebDriver webDriver) {
+    public static IResultSection getResultSectionInstance(SharedDriver webDriver) {
         IResultSection resultSection = new ResultSection(webDriver);
         PageFactory.initElements(webDriver, resultSection);
         return resultSection;
     }
 
-    public ResultSection(WebDriver webDriver) {
+    public ResultSection(SharedDriver webDriver) {
         super(webDriver);
         this.webDriver = webDriver;
         weItemsResult = null;

@@ -14,7 +14,7 @@ public interface ISearchSection {
     boolean warningSearch();
     boolean warningNegativeSearch();
     ISearchPage clickSearch();
-    //static ISearchSection getSearchSectionInstance(WebDriver webDriver) { return null; }
+    //static ISearchSection getSearchSectionInstance(SharedDriver webDriver) { return null; }
 //    ISearchSection waitForSearchSectionToLoad();
     String getHelpBlockContent();
     ISearchSection changeSearchMode();

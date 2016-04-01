@@ -1,16 +1,16 @@
 package com.r2development.leveris.selenium.apollo.pageobjects;
 
 import com.r2development.leveris.Apollo;
+import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage extends Apollo implements ILoginPage {
 
-    private static final Log log = LogFactory.getLog(LoginPage.class);
+    private static final Log log = LogFactory.getLog(LoginPage.class.getName());
 
     @FindBy(xpath = USERNAME_XPATH)
     private WebElement weUsername;
@@ -23,20 +23,20 @@ public class LoginPage extends Apollo implements ILoginPage {
     @FindBy(xpath = SUBMIT_XPATH)
     private WebElement weSubmit;
 
-    public static ILoginPage getLoginPageInstance(WebDriver webDriver) {
+    public static ILoginPage getLoginPageInstance(SharedDriver webDriver) {
         ILoginPage loginPage = new LoginPage(webDriver);
         PageFactory.initElements(webDriver, loginPage);
         return loginPage;
     }
 
-    public LoginPage(WebDriver webDriver) {
+    public LoginPage(SharedDriver webDriver) {
         super(webDriver);
         this.webDriver = webDriver;
         webDriver.get(System.getProperty("apollo.client"));
     }
 
     /*
-    public LoginPage LoginPage(WebDriver webDriver) {
+    public LoginPage LoginPage(SharedDriver webDriver) {
         this.webDriver = webDriver;
         webDriver.get(APOLLO_ENVIRONMENT.get(ENVIRONMENT_RUN.name()).get(APPLICATION_RUN));
         return this;

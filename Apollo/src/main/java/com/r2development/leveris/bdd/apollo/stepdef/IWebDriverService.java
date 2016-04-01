@@ -4,10 +4,10 @@ import com.google.inject.ImplementedBy;
 import cucumber.api.Scenario;
 import org.openqa.selenium.WebDriver;
 
-@ImplementedBy(WebDriverService.class)
-public interface IWebDriverService {
-
-    void setup();
-    void teardown(Scenario scenario);
-    WebDriver getWebDriver();
-}
+//@ImplementedBy(SharedDriver.class)
+//public interface IWebDriverService {
+//
+//    void setup();
+//    void teardown(Scenario scenario);
+//    WebDriver getWebDriver();
+//}

@@ -3,6 +3,7 @@ package com.r2development.leveris.bdd.apollo.bddtest;
 import com.r2development.leveris.AUTOMATION_MODE;
 import com.r2development.leveris.BROWSER_TYPE;
 import com.r2development.leveris.bdd.apollo.stepdef.ClientData;
+import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver;
 import com.r2development.leveris.selenium.apollo.pageobjects.ILoginPage;
 import com.r2development.leveris.selenium.apollo.pageobjects.IRecordPage;
 import com.r2development.leveris.selenium.apollo.pageobjects.ISearchPage;
@@ -18,9 +19,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.Map;
 
@@ -28,9 +26,9 @@ import static org.junit.Assert.assertEquals;
 
 public class DemoApolloJavaNot8 {
 
-    private static final Log log = LogFactory.getLog(DemoApolloJavaNot8.class);
+    private static final Log log = LogFactory.getLog(DemoApolloJavaNot8.class.getName());
 
-    private WebDriver webDriver;
+    private SharedDriver webDriver = new SharedDriver();
 
     protected ILoginPage loginPage;
     protected ISearchPage searchPage;
@@ -40,23 +38,24 @@ public class DemoApolloJavaNot8 {
     @Before
     public void setup() {
 
-        switch (BROWSER_TYPE.getBrowser(System.getProperty("browser"))) {
-            case CHROME:
-                ChromeOptions options = new ChromeOptions();
-                options.addArguments("ui-prioritize-in-gpu-process");
-                options.addArguments("--start-maximized");
-                webDriver = new ChromeDriver(options);
-                webDriver.manage().window().maximize();
-                break;
-            case PHANTHOMJS:
-                break;
-            case FIREFOX:
-                break;
-            case IE:
-                break;
-            default:
-
-        }
+        SharedDriver webDriver = new SharedDriver();
+//        switch (BROWSER_TYPE.getBrowser(System.getProperty("browser"))) {
+//            case CHROME:
+//                ChromeOptions options = new ChromeOptions();
+//                options.addArguments("ui-prioritize-in-gpu-process");
+//                options.addArguments("--start-maximized");
+//                webDriver = new ChromeDriver(options);
+//                webDriver.manage().window().maximize();
+//                break;
+//            case PHANTHOMJS:
+//                break;
+//            case FIREFOX:
+//                break;
+//            case IE:
+//                break;
+//            default:
+//
+//        }
     }
 
     @After

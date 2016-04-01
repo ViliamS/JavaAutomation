@@ -10,9 +10,9 @@ import java.io.IOException;
 import java.util.List;
 
 @Singleton
-public class ApiLoginPageStepDef extends ApiOpoqoApolloStepDef {
+public class LoginPageStepDef {
 
-    private static final Log log = LogFactory.getLog(ApiLoginPageStepDef.class);
+    private static final Log log = LogFactory.getLog(LoginPageStepDef.class);
 
 //    private HttpClient httpClient;
 //    private HttpContext localContext;
@@ -20,7 +20,7 @@ public class ApiLoginPageStepDef extends ApiOpoqoApolloStepDef {
 //    private IUser user;
 
 //    @Inject
-//    public ApiLoginPageStepDef(HttpClient httpClient, HttpContext localContext, IUser user, IHttpResponse httpResponse) {
+//    public LoginPageStepDef(HttpClient httpClient, HttpContext localContext, IUser user, IHttpResponse httpResponse) {
 //        this.httpClient = httpClient;
 //        this.localContext = localContext;
 //        this.user = user;

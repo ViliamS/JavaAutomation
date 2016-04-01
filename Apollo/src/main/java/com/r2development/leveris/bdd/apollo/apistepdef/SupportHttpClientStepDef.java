@@ -14,9 +14,9 @@ import org.joda.time.DateTime;
 import org.junit.Assert;
 
 @Singleton
-public class ApiSupportHttpClientStepDef {
+public class SupportHttpClientStepDef {
 
-    private static final Log log = LogFactory.getLog(ApiSupportHttpClientStepDef.class);
+    private static final Log log = LogFactory.getLog(SupportHttpClientStepDef.class);
 
     private static HttpClient httpClient;
 //    private static HttpContext localContext;
