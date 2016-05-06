@@ -8,107 +8,279 @@ Feature: Api Single Borrower
 
     Given this registration data, Borrower processes the registration (format2)
       | firstName         | AutomationSBApi                             |
-      | email             | test.automation.api@test.finfactory.com     |
+      | email             | test.automation+api@finfactory.com          |
       | phoneNumber       | +420778098091                               |
       | password          | Password1122+                               |
       | termsBusiness     | accepts                                     |
       | protectionPolicy  | accepts                                     |
 
-#    Then Borrower goes to gmail
-#    And Borrower goes to CRM
     Then Borrower activates his account
-#    Then Borrower logs in as his account is activated
 
-    Then Borrower processes "Get a Quote" (format2)
-      | borrowerNumber           | a single borrower   |
-      | mortgageType             | first-time buyer(s) |
-      | borrowerAge              | 28                  |
-      | borrowerMaritalStatus    | single              |
-      | borrowerTotalDependants  | 0                   |
-      | borrowerIncomeType       | an employee         |
-      | borrowerIncomeAmount     | 125000              |
-      | monthlyCreditCommitments | 1000                |
-
-#    And Borrower goes solo
+    Then Borrower clicks "Quote" task
+    And Borrower clicks on continue to get Unsecured Loan
+    And Borrower fills in Unsecured Loan form
+      | formType           | Unsecured Loan |
+      | NetMonthlyIncome   | 21,000.00   |
+      | MonthlyExpenses    | 1,000.00    |
+      | NumberOfDependants | 1           |
+      | AmountToBorrow     | 1,000.00    |
+    When Unsecured Loan Borrower clicks on Continue button
+    Then Borrower clicks on Apply Online
 
     And Borrower processes "Forms"
 
-#    PERSONAL DETAILS
-#    When Borrower clicks "Borrower Personal Details"
+        #################################
+        #        Personal Details       #
+        #################################
+
     And Borrower fills in Personal Details
-      | firstName           | AutomationSBApi |
-      | lastName            | Tester          |
-      | gender              | Male            |
-      | dateOfBirth         | 01/01/1977      |
-      | address line 1      | 18 Woodquay     |
-      | town/city           | Galway          |
-      | county/state        | Galway          |
-      | accommodation       | Property owner  |
-      | isLivingSince3years | yes             |
-      | maritalStatus       | single          |
+      | formType            | Personal Details  |
+      | title               | Mr.               |
+      | firstName           | AutomationApi     |
+      | middleName          | Amazing           |
+      | lastName            | Tester            |
+      | suffix              | Greatest          |
+      | gender              | Male              |
+      | dateOfBirth         | 01/01/1977        |
+      | nationality         | French            |
+      | maritalStatus       | separated         |
     And Borrower saves his personal details data
 
-#    EMPLOYMENT & INCOME
-#    When Borrower clicks "Borrower Employment Income"
+        #################################
+        #       Your Residencies        #
+        #################################
+
+    And Borrower fills in Other/previous residency
+      | formType          | Other/previous residency   |
+      | addressLine1      | Hejtmanska                 |
+      | addressLine2      | Hlavni mesto Praha  |
+      | townCity          | Prague              |
+      | postcode/zip      | 198 00              |
+      | country           | Czech Republic      |
+      | startDate         | 11/01/2000          |
+      | endDate           | 26/03/2012          |
+
+    And Borrower fills in Current residency
+      | formType          | Current residency   |
+      | addressLine1      | Havirovska          |
+      | addressLine2      | Hlavni mesto Praha  |
+      | townCity          | Prague              |
+      | postcode/zip      | 199 00              |
+      | country           | Czech Republic      |
+      | startDate         | 27/03/2012          |
+      | residentialStatus | Tenant              |
+    And Borrower clicks Residency "Done"
+
+        #################################
+        #      Employment & Income      #
+        #################################
+
     And Borrower fills in Employment and Income type Paye
-      | categoryIncome      | Paye        |
-      | occupation          | ARTIST      |
-      | employerName        | Hot Peppers |
+      | formType            | Paye        |
+      | occupation          | Artist      |
+      | employerName        | Hot Peppers Paye |
       | employmentType      | Permanent   |
-      | startDate           | 05/11/2013  |
+      | startDate           | 05/11/2014  |
       | isCurrentEmployment | yes         |
-      | grossSalary         | 124000      |
+      | netMonthlyIncome    | 124000      |
+
+    And Borrower fills in Employment and Income type Self Employed
+      | formType            | Self Employed      |
+      | occupation          | Artist             |
+      | businessName        | testBusinessName   |
+      | addressLine1        | 18 Woodquay        |
+      | addressLine2        | Galway             |
+      | townCity            | Galway             |
+      | country             | Ireland            |
+      | countyState         | Galway             |
+      | businessNature      | testNatureBusiness |
+      | startDate           | 05/11/2012         |
+      | endDate             | 06/12/2013         |
+      | isCurrentEmployment | no                 |
+      | netMonthlyIncome    | 124000             |
+
+    And Borrower fills in Employment and Income type Unemployed/Homemaker
+      | formType            | Unemployed/Homemaker |
+      | startDate           | 13/11/2011           |
+      | endDate             | 13/12/2012           |
+      | isCurrentEmployment | no                   |
+
+    And Borrower fills in Employment and Income type Other
+      | formType               | Other                      |
+      | additionalIncomeSource | testAdditionalIncomeSource |
+      | startDate              | 01/01/2010                 |
+      | endDate                | 02/02/2011                 |
+      | netMonthlyIncome       | 2000                       |
+      | isCurrentEmployment    | no                         |
     And Borrower clicks "Done"
 
-#    YOUR ACCOUNTS
-#    When Borrower clicks "Account"
-    Then Borrower clicks "ADD ACCOUNT"
-#    And Borrower clicks "ADD ACCOUNT MANUALLY"
+        #################################
+        #         Your Accounts         #
+        #################################
+
     And Borrower fills in Current account
-      | fundsSource     | Current Account         |
-      | accountProvider | Central Bank of Ireland |
-      | IBAN            | IE92BOFI90001710027952  |
-      | accountBalance  | 20000                   |
-    And Borrower clicks Accounts "NEXT"
+      | formType          | Current account         |
+      | statementDate     | 01/01/2000              |
+      | accountProvider   | test account provider 1 |
+      | accountHolderName | AutomationAPI           |
+      | accountName       | test Current Account 1  |
+      | sortCode1         | 12                      |
+      | sortCode2         | 34                      |
+      | sortCode3         | 56                      |
+      | accountNumber     | 123456                  |
+      | accountBalance    | 2001                    |
+      | overdraftLimit    | 2002                    |
 
-#    YOUR DEPENDANT
-#    When Borrower clicks "Dependants"
-    Then Borrower hasn't dependants
+    And Borrower fills in Current account
+      | formType          | Current account         |
+      | statementDate     | 01/01/2001              |
+      | accountProvider   | test account provider 2 |
+      | accountHolderName | AutomationAPI           |
+      | sortCode1         | 12                      |
+      | sortCode2         | 34                      |
+      | sortCode3         | 56                      |
+      | accountNumber     | 123455                  |
+      | accountBalance    | 2001                    |
+      | overdraftLimit    | 2002                    |
 
-#    YOUR FINANCIAL ASSETS
-#    When Borrower clicks "Financial Assets"
-#    Then Borrower hasn't financial assets
+    And Borrower fills in Savings account
+      | formType             | Savings account         |
+      | statementDate        | 01/01/2000              |
+      | accountProvider      | test account provider 3 |
+      | accountHolderName    | AutomationAPI           |
+      | sortCode1            | 12                      |
+      | sortCode2            | 34                      |
+      | sortCode3            | 56                      |
+      | accountNumber        | 0987654                 |
+      | accountBalance       | 2001                    |
+      | sourceOfSaving       | Gift                    |
+      | regularMonthlySaving | 200                     |
 
-#    Properties
-#    When Borrower clicks "Properties"
-#    Then Borrower hasn't properties
-#    And Borrower hasn't a property in the past
+    And Borrower fills in Savings account
+      | formType              | Savings account         |
+      | statementDate         | 01/01/2000              |
+      | accountProvider       | test account provider 4 |
+      | accountHolderName     | AutomationAPI 4         |
+      | sortCode1             | 12                      |
+      | sortCode2             | 34                      |
+      | sortCode3             | 56                      |
+      | accountNumber         | 9987654                 |
+      | accountBalance        | 2001                    |
+      | sourceOfSaving        | Gift                    |
+      | regularMonthlySaving  | 200                     |
+    And Borrower clicks Accounts "Done"
 
-#    Financial Commitments
-#    When Borrower clicks "Financial Commitments"
-    Then Borrower hasn't financial commitments
+        #################################
+        #        Your Dependants        #
+        #################################
 
-#    FUNDING
-#    When Borrower clicks "Funding"
-#    Then Borrower clicks Funding "NEXT"
+#    And Borrower has dependants
+    And Borrower fills in "Dependant form"
+      | dateOfBirth | 01/01/2000 |
 
-#    DOCUMENT UPLOAD
-#    And Borrower uploads required document
-#    And Borrower clicks "Document Upload"
-#    And Borrower uploads the file file.txt as Proof of identity document
-#    And Borrower uploads the file file.txt as Proof of address document
-#    And Borrower uploads the file file.txt as P60 document
-#    And Borrower uploads the file file.txt as Current payslip document
-#    And Borrower uploads the file file.txt as Previous payslip document
-#    And Borrower uploads the file file.txt as Salary certificate document
-#    And Borrower uploads the file file.txt as Current account - IE92BOFI90001710027952 document
+    And Borrower fills in "Dependant form"
+      | dateOfBirth | 01/01/2000 |
+
+    And Borrower fills in "Dependant form"
+      | dateOfBirth | 01/01/2000 |
+    And Borrower clicks Dependants "Done"
+
+        #################################
+        #     Financial Commitments     #
+        #################################
+
+#    When Borrower has financial commitments
+    Then Borrower fills in Personal Loan
+      | formType              | Personal Loan |
+      | outstandingAmount     | 1500          |
+      | financialInstitution  | HellsBank     |
+      | purposeOfTheLoan      | Debt repay    |
+      | finalRepaymentDate    | 01/03/2018    |
+      | paymentFrequency      | Monthly       |
+      | repaymentAmount       | 2500          |
+
+    Then Borrower fills in Credit Card
+      | formType              | Credit Card |
+      | repaymentAmount       | 2500        |
+      | cardProvider          | Friend      |
+      | cardType              | VISA        |
+      | cardLimit             | 50000       |
+      | cardBalance           | 45000       |
+
+    Then Borrower fills in Maintenance Payment
+      | formType                  | Maintenance Payment |
+      | monthlyMaintenancePayment | 1000                |
+
+    Then Borrower fills in Other
+      | formType        | Other     |
+      | repaymentAmount | 2500      |
+      | value           | 5000      |
+      | description     | text1232  |
+
+    Then Borrower fills in Car Loan
+      | formType              | Car Loan   |
+      | outstandingAmount     | 2500       |
+      | financialInstitution  | Hell Bank  |
+      | finalRepaymentDate    | 31/03/2018 |
+      | paymentFrequency      | Weekly     |
+      | repaymentAmount       | 15000      |
+
+    Then Borrower fills in Student Loan
+      | formType              | Student Loan |
+      | outstandingAmount     | 5000         |
+      | financialInstitution  | Bank of Debt |
+      | finalRepaymentDate    | 01/03/2020   |
+      | paymentFrequency      | Fortnightly  |
+      | repaymentAmount       | 50000        |
+
+    Then Borrower fills in Rent
+      | formType          | Rent    |
+      | paymentFrequency  | Yearly  |
+      | repaymentAmount   | 15000   |
+      | note              | ABC123  |
+
+    Then Borrower fills in Utilities
+      | formType          | Utilities |
+      | paymentFrequency  | Weekly    |
+      | repaymentAmount   | 2500      |
+      | note              | wsad8546  |
+
+    Then Borrower fills in Childcare
+      | formType          | Childcare |
+      | paymentFrequency  | Weekly    |
+      | repaymentAmount   | 250       |
+      | note              | wsad8546  |
+
+    Then Borrower fills in Mortgage
+      | formType              | Mortgage     |
+      | outstandingAmount     | 5000         |
+      | financialInstitution  | Bank of Debt |
+      | finalRepaymentDate    | 01/03/2020   |
+      | repaymentAmount       | 50000        |
+    And Borrower clicks financial Done
+
+        #################################
+        #        Document Upload        #
+        #################################
+
     And Borrower uploads all documents
 
-#    FINAL STAGE 1
-#    And borrower finalizes the Borrower Phase
+        #################################
+        #         Final Stage 1         #
+        #################################
+
     And Borrower clicks "Review and Submit"
-    And Borrower clicks "Submit your application"
     And Borrower checks "Distance Marketing"
     And Borrower checks "Statutory"
     And Borrower checks "Declaration"
+    And Borrower checks "Fraud Credit check"
     And finally, Borrower clicks "Submit Application"
+
+
+        #######  ###    ##  ######
+        ##       ####   ##  ##   ##
+        ##       ## ##  ##  ##    ##
+        #####    ##  ## ##  ##    ##
+        ##       ##   ####  ##    ##
+        ##       ##    ###  ##   ##
+        #######  ##     ##  ######

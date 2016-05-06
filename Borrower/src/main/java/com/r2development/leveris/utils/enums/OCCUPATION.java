@@ -188,7 +188,7 @@ public enum OCCUPATION {
     WAITER_WAITRESS ( "WAITER" ),
     WARDEN ( "WARDEN" ),
     WELDER ( "WELDER" ),
-    YOUTHEMPL( "YOUTHEMPL" );
+    YOUTH_EMPL_TRAINING_SCH( "YOUTHEMPL" );
 //    Youth empl/training sch ( "YOUTHEMPL" );
 
     private String shortValue;
@@ -203,7 +203,7 @@ public enum OCCUPATION {
 
     public static String getShortValueByLongValue(String longValue) {
         for (OCCUPATION value : OCCUPATION.values()) {
-            if ( value.name().equalsIgnoreCase(longValue)) {
+            if ( value.name().equalsIgnoreCase(longValue.replace("/", "_").replace(" ", "_"))) {
                 return  value.getShortValue();
             }
         }

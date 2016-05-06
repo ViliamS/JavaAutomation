@@ -3,7 +3,7 @@ Feature: Verification RegistrationPage
   
 #  Background:
 #    Given user goes to Registration page
-    
+#
 #  Scenario: Pass registration page
 #    Given user types his first name Tonda in Register page
 #    And user types his email test.automation@test.finfactory.com in Register page

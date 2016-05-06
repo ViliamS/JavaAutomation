@@ -2,6 +2,7 @@ package com.r2development.leveris.bdd.underwriter.apistepdef;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.r2development.leveris.di.IAUnderwriterHttpContext;
 import com.r2development.leveris.di.User;
 import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;
@@ -31,10 +32,11 @@ public class ApiApplicationStepDef extends ApiOpoqoUnderwriterStepDef {
 
     @Inject
     User user;
-    private String underwriterHomeSearchResult;
+    @Inject
+    IAUnderwriterHttpContext localContext;
 
-    @When("^user looks for these information$")
-    public void user_looks_for_these_information(Map<String, String> criteria) throws IOException, InterruptedException {
+    @When("^(Operator Underwriter) looks for these information$")
+    public void user_looks_for_these_information(String operator, Map<String, String> criteria) throws IOException, InterruptedException {
 
 //        Map<String, String
 //        if ( user == null ) {
@@ -51,20 +53,21 @@ public class ApiApplicationStepDef extends ApiOpoqoUnderwriterStepDef {
         // search : automation ...
         // applicationId : \d+
 
-        if ( criteria.get("assign") == null )
-            criteria.put("assign", "ALL");
-        if ( criteria.get("status") == null )
-            criteria.put("status", "AllActive" );
+//        if ( criteria.get("assigned") == null )
+//            criteria.replace("assigned", "ALL");
+//        if ( criteria.get("status") == null )
+//            criteria.replace("status", "AllActive" );
+//
+//        if ( criteria.get("search") == null )
+//            criteria.replace("search", "automation" );
 
-        if ( criteria.get("search") == null )
-            criteria.put("search", "automation" );
         if ( user != null ) {
 //            criteria.replace("search", user.getFirstName().split(" ")[0]);
             criteria = new LinkedHashMap<String, String>() {
                 {
                     put("assign", "ALL");
                     put("status", "AllActive");
-                    put("search", user.getFirstName().split(" ")[0]);
+                    put("search", user.getFirstName());
                 }
             };
         }
@@ -77,11 +80,25 @@ public class ApiApplicationStepDef extends ApiOpoqoUnderwriterStepDef {
 //        else if ( Integer.parseInt(criteria.get("applicationId")) )
 //            criteria.put("applicationId", "");
 
-        Thread.sleep(1000);
+//        Thread.sleep(20000);
 
-        underwriterHomeSearchResult = requestHttpPost(
+        Document doc = Jsoup.parse(httpResponse.getHttpResponse());
+        String linkSearch = doc.select("a[id~=submit]").select("a[wicketpath=singleFlow_p_c_form_form_root_c_w_pnlSort_c_w_btnSearch_submit]").attr("onclick");
+        Pattern pLinkSearch = Pattern.compile("(;jsessionid=.*)&");
+//        Pattern pLinkSearch = Pattern.compile("\\?(wicket:inteface=.*IBehaviorListener:0:)&");
+        Matcher mLinkSearch = pLinkSearch.matcher(linkSearch);
+
+        String wicketInterfaceLinkSearch = null;
+        while(mLinkSearch.find()) {
+            wicketInterfaceLinkSearch = mLinkSearch.group(1);
+        }
+        final String finalWicketInterfaceLinkSearch = wicketInterfaceLinkSearch;
+
+        String underwriterSearchResult = requestHttpPost(
                 httpClient,
-                "http://dv2app.opoqodev.com/stable-underwriter/form.2?wicket:interface=:2:singleFlow:p:c:form:form:root:c:w:btnSearch:submit::IBehaviorListener:0:",
+//                "http://dv2app.opoqodev.com/stable-underwriter/form.2?wicket:interface=:2:singleFlow:p:c:form:form:root:c:w:pnlSort:c:w:btnSearch:submit::IBehaviorListener:0:",
+//                "http://dv2app.opoqodev.com/stable-underwriter/form.2?wicket:interface=:2:singleFlow:p:c:form:form:root:c:w:btnSearch:submit::IBehaviorListener:0:",
+                System.getProperty("underwriter") + "/form.2" + finalWicketInterfaceLinkSearch,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");
@@ -90,32 +107,25 @@ public class ApiApplicationStepDef extends ApiOpoqoUnderwriterStepDef {
                 new LinkedHashMap<String, String>() {
                     {
                         // put("root:c:w:cmbAssignedApplication:combobox", criteria.get("All"));
-                        put("root:c:w:cmbAssignedApplication:combobox", "ALL");
-                        // put("root:c:w:cmbStatusFilter:combobox", criteria.get("status"));
-                        put("root:c:w:cmbStatusFilter:combobox", "AllActive");
-                        // put("root:c:w:txtSearch:tb", "AUTOMATIONDBUI20160204190248193");
-//                            put("root:c:w:txtSearch:tb", criteria.get("search"));
-                        put("root:c:w:txtSearch:tb", firstName);
-                        // put("root:c:w:txtSearch:tb", criteria.get("search"));
-                        // put("root:c:w:txtSearch:tb","automation");
-//                         put("root:c:w:txtSearch:tb","");
-                        // put("root:c:w:pnl-adv-search:c:w:txt-application-id:tb", "4148");
-                        // put("root:c:w:pnl-adv-search:c:w:txt-application-id:tb", criteria.get("applicationId"));
+                        put("root:c:w:cmbAssignedApplication:combobox", "ALL"); // automation
+                        put("root:c:w:cmbCase:combobox", "CoLoanApplication");
+                        put("root:c:w:pnlStatusColoan:c:w:cmbStatusFilter:combobox", "AllActive");
+                        put("root:c:w:pnl-adv-search:c:w:txtSearch:tb", firstName);
                         put("root:c:w:pnl-adv-search:c:w:txt-application-id:tb", "");
-//                            put("stepToken", String.valueOf(fi));
                         put("stepToken", "1");
                         put("root:c:w:btnSearch:submit", "1");
                     }
                 },
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
+        httpResponse.setHttpResponse(underwriterSearchResult);
 
     }
 
-    @When("^user opens the application of the customer$")
-    public void user_opens_the_customer_application() throws IOException {
-        Document underwriterHomeSearchResultDoc = Jsoup.parse(underwriterHomeSearchResult);
+    @When("^(Operator Underwriter) opens the application of the customer$")
+    public void user_opens_the_customer_application(String operator) throws IOException {
+        Document underwriterHomeSearchResultDoc = Jsoup.parse(httpResponse.getHttpResponse());
         TextNode textNodeUnderwriterHomeSearchResult = underwriterHomeSearchResultDoc.select("component[id~=form]").select("component[encoding~=wicket]").first().textNodes().get(0);
 //        TextNode textNodeUnderwriterHomeSearchResult = underwriterHomeSearchResultDoc.select("div[id~=pnlApplication]").first().textNodes().get(0);
         Document underwriterHomeSearchResultDoc2 = Jsoup.parse(textNodeUnderwriterHomeSearchResult.text());
@@ -158,14 +168,14 @@ public class ApiApplicationStepDef extends ApiOpoqoUnderwriterStepDef {
         String applicationAutomation = requestHttpPost(
                 httpClient,
 //                "https://st1app.loftkeys.com/underwriter/form.2?wicket:interface=:4:singleFlow:p:c:form:form:root:c:w:pnlApplicationList:c:w:rptApplication:c:rows:1:item:pnlApplication:c:w:btnStart:submit::IBehaviorListener:0:",
-                "http://dv2app.opoqodev.com/stable-underwriter/form.2?" + wicketStartLink,
+                System.getProperty("underwriter") + "/form.2?" + wicketStartLink,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");
                     }
                 },
                 new LinkedHashMap<String, String>() {},
-                localContext,
+                localContext.getHttpContext(),
                 false
         );
         Document applicationResult = Jsoup.parse(applicationAutomation);
@@ -181,10 +191,10 @@ public class ApiApplicationStepDef extends ApiOpoqoUnderwriterStepDef {
         jsoupContainer.put("updateHistory", applicationResult.select("div[wicketpath=multiFlow_panels_8]"));
     }
 
-    @When("^user opens the application of the customer (AUTOMATION.*)$")
-    public void user_opens_the_customer_application(String name) throws IOException {
-        Document underwriterHomeSearchResultDoc = Jsoup.parse(underwriterHomeSearchResult);
-        TextNode textNodeUnderwriterHomeSearchResult = underwriterHomeSearchResultDoc.select("component[id~=form]").select("component[encoding~=wicket]").first().textNodes().get(0);
+    @When("^(Operator Underwriter) opens the application of the customer (AUTOMATION.*)$")
+    public void user_opens_the_customer_application(String operator, String name) throws IOException {
+        Document underwriterSearchResultDoc = Jsoup.parse(httpResponse.getHttpResponse());
+        TextNode textNodeUnderwriterHomeSearchResult = underwriterSearchResultDoc.select("component[id~=form]").select("component[encoding~=wicket]").first().textNodes().get(0);
 //        TextNode textNodeUnderwriterHomeSearchResult = underwriterHomeSearchResultDoc.select("div[id~=pnlApplication]").first().textNodes().get(0);
         Document underwriterHomeSearchResultDoc2 = Jsoup.parse(textNodeUnderwriterHomeSearchResult.text());
         Elements applicationList = underwriterHomeSearchResultDoc2.select("div[wicketpath~=^singleFlow_p_c_form_form_root_c_w_pnlApplicationList_c_w_rptApplication_c_rows_(\\d+)_item_pnlApplication$]");
@@ -204,6 +214,7 @@ public class ApiApplicationStepDef extends ApiOpoqoUnderwriterStepDef {
             if ( elementApplicationFirstName.size() == 1) {
                 System.out.println(elementApplicationFirstName.text());
                 automationApplication.add(currentElement);
+                break;
             }
 
             Elements elementApplicationId = currentElement.select("div[wicketpath~=^singleFlow_p_c_form_form_root_c_w_pnlApplicationList_c_w_rptApplication_c_rows_(\\d+)_item_pnlApplication_c_w_lbl-application-id$]:contains(4148)");
@@ -216,25 +227,26 @@ public class ApiApplicationStepDef extends ApiOpoqoUnderwriterStepDef {
 
         String startLink = automationApplication.get(0).select("a[wicketpath~=singleFlow_p_c_form_form_root_c_w_pnlApplicationList_c_w_rptApplication_c_rows_(\\d+)_item_pnlApplication_c_w_btnStart_submit]").attr("onclick");
 //        Pattern pStartLink = Pattern.compile(".*\\[([0-9]+),[0-9]+,\\\\'\\?(wicket:interface=[:a-zA-Z0-9]*)&.*");
-        Pattern pStartLink = Pattern.compile(".*\\[([0-9]+),[0-9]+,\\\\'\\?(wicket:interface=[:a-zA-Z0-9]*)&.*");
+//        Pattern pStartLink = Pattern.compile(".*\\[([0-9]+),[0-9]+,\\\\'\\?(wicket:interface=[:a-zA-Z0-9]*)&.*");
+        Pattern pStartLink = Pattern.compile("\\?(wicket:interface=.*)&");
         Matcher mStartLink = pStartLink.matcher(startLink);
         String wicketStartLink = null;
         while (mStartLink.find()) {
-            wicketStartLink = mStartLink.group(2);
+            wicketStartLink = mStartLink.group(1);
         }
 
         String applicationAutomation = requestHttpPost(
                 httpClient,
 //                "https://st1app.loftkeys.com/underwriter/form.2?wicket:interface=:4:singleFlow:p:c:form:form:root:c:w:pnlApplicationList:c:w:rptApplication:c:rows:1:item:pnlApplication:c:w:btnStart:submit::IBehaviorListener:0:",
-                "http://dv2app.opoqodev.com/stable-underwriter/form.2?" + wicketStartLink,
+                System.getProperty("underwriter") + "/form.2?" + wicketStartLink,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");
                     }
                 },
                 new LinkedHashMap<String, String>() {},
-                localContext,
-                false
+                localContext.getHttpContext(),
+                CONSUME_QUIETLY
         );
         Document applicationResult = Jsoup.parse(applicationAutomation);
 

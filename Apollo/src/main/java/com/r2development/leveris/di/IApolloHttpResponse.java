@@ -2,8 +2,8 @@ package com.r2development.leveris.di;
 
 import com.google.inject.ImplementedBy;
 
-@ImplementedBy(com.r2development.leveris.di.HttpResponse.class)
-public interface IHttpResponse {
+@ImplementedBy(ApolloHttpResponse.class)
+public interface IApolloHttpResponse {
     void setHttpResponse(String httpResponse);
     String getHttpResponse();
 }

@@ -2,7 +2,7 @@ package com.r2development.leveris.bdd.underwriter.apistepdef;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.r2development.leveris.di.HttpResponse;
+import com.r2development.leveris.di.UnderwriterHttpResponse;
 import com.r2development.leveris.di.User;
 import com.r2development.leveris.utils.JsoupContainer;
 import org.apache.commons.logging.Log;
@@ -32,9 +32,8 @@ public class ApiOpoqoUnderwriterStepDef {
 
     @Inject
     User user;
-
     @Inject
-    HttpResponse httpResponse;
+    UnderwriterHttpResponse httpResponse;
 
     public ApiOpoqoUnderwriterStepDef() {
         httpClient = ApiSupportHttpClientStepDef.getInstanceHttpClient();
@@ -43,7 +42,7 @@ public class ApiOpoqoUnderwriterStepDef {
     }
 
     @Inject
-    public ApiOpoqoUnderwriterStepDef(User user, HttpResponse httpResponse) {
+    public ApiOpoqoUnderwriterStepDef(User user, UnderwriterHttpResponse httpResponse) {
         this.user = user;
         this.httpResponse = httpResponse;
     }
@@ -55,6 +54,5 @@ public class ApiOpoqoUnderwriterStepDef {
     public HttpClientContext newHttpClientContext(String domain, @SuppressWarnings("SameParameterValue") String context) {
         return ( localContext = ApiSupportHttpClientStepDef.getNewInstanceHttpClientContext(domain, context));
     }
-
 
 }

@@ -23,9 +23,7 @@ import org.junit.Assert;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 
-import static com.r2development.leveris.utils.HttpUtils.CONSUME_QUIETLY;
-import static com.r2development.leveris.utils.HttpUtils.requestHttpGet;
-import static com.r2development.leveris.utils.HttpUtils.requestHttpPost;
+import static com.r2development.leveris.utils.HttpUtils.*;
 
 @Singleton
 public class ApiSsoStepDef extends ApiOpoqoApolloStepDef {
@@ -85,7 +83,7 @@ public class ApiSsoStepDef extends ApiOpoqoApolloStepDef {
         Elements elts = doc.select("title");
 
         Assert.assertEquals("We should have one \"title\" element", 1, elts.size());
-        Assert.assertEquals("Title Element should contains " + application, true, elts.get(0).text().contains(application));
+        Assert.assertEquals("Title XPathElement should contains " + application, true, elts.get(0).text().contains(application));
 
     }
 

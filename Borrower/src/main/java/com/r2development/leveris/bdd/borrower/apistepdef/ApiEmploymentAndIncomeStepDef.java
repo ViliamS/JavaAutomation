@@ -2,9 +2,11 @@ package com.r2development.leveris.bdd.borrower.apistepdef;
 
 import com.google.inject.Inject;
 import com.r2development.leveris.bdd.borrower.model.EmploymentIncomeData;
-import com.r2development.leveris.di.IAHttpContext;
-import com.r2development.leveris.di.IHttpResponse;
+import com.r2development.leveris.di.IABorrowerHttpContext;
+import com.r2development.leveris.di.IBorrowerHttpResponse;
 import com.r2development.leveris.di.IUser;
+import com.r2development.leveris.utils.enums.EMPLOYMENT;
+import com.r2development.leveris.utils.enums.OCCUPATION;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -40,14 +42,16 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
     @Inject
     IUser user;
     @Inject
-    IAHttpContext localContext;
+    IABorrowerHttpContext localContext;
     @Inject
-    IHttpResponse httpResponse;
+    IBorrowerHttpResponse httpResponse;
 
     private boolean isThereEmpList = false;
+    private String btnHiddenSubmitWicketInterface = StringUtils.EMPTY;
+    private String btnHiddenRefreshWicketInterface = StringUtils.EMPTY;
 
     @Inject
-    public ApiEmploymentAndIncomeStepDef(IHttpResponse httpResponse) {
+    public ApiEmploymentAndIncomeStepDef(IBorrowerHttpResponse httpResponse) {
         this.isThereEmpList = false;
         this.httpResponse = httpResponse;
     }
@@ -217,13 +221,34 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
 
         Document empListDoc2 = null;
         String[] componentId = { "main", "form", "dialog" };
+        String currentComponentId = StringUtils.EMPTY;
         for (String aComponentId : componentId) {
             try {
                 empListDoc2 = Jsoup.parse(empListDoc.select("component[id~=" + aComponentId + "]").select("component[encoding~=wicket]").first().text());
                 log.info("is " + aComponentId);
+                currentComponentId = aComponentId;
                 break;
             } catch (NullPointerException npe) {
                 log.info("isnot " + aComponentId);
+            }
+        }
+
+        if ( currentComponentId.equals("main") ) {
+            if ( !isThereEmpList ) {
+                String onclickBtnHiddenSubmit = empListDoc2.select("a[id~=submit]").select("a[wicketpath~=btnHiddenSubmit]").attr("onclick");
+                Pattern pBtnHiddenSubmit = Pattern.compile("\\?(wicket:interface=.*)&");
+                Matcher mBtnHiddenSubmit = pBtnHiddenSubmit.matcher(onclickBtnHiddenSubmit);
+                while (mBtnHiddenSubmit.find()) {
+                    btnHiddenSubmitWicketInterface = mBtnHiddenSubmit.group(1);
+                }
+            }
+            else {
+                String onclickBtnHiddenRefresh = empListDoc2.select("a[id~=submit]").select("a[wicketpath~=btnHiddenRefresh]").attr("onclick");
+                Pattern pBtnHiddenRefresh = Pattern.compile("\\?(wicket:interface=.*)&");
+                Matcher mBtnHiddenRefresh = pBtnHiddenRefresh.matcher(onclickBtnHiddenRefresh);
+                while(mBtnHiddenRefresh.find()) {
+                    btnHiddenRefreshWicketInterface = mBtnHiddenRefresh.group(1);
+                }
             }
         }
 
@@ -306,6 +331,8 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
         httpResponse.setHttpResponse(employmentLinkAddResponse);
 
 
+        String potentialWicketInterface = Jsoup.parse(Jsoup.parse(httpResponse.getHttpResponse()).select("component[id~=dialog]").select("component[encoding~=wicket]").text()).select("form[id~=form]").select("form[wicketpath~=main_c_form_dialogWrapper_dialog_form]").attr("action");
+
         switch ( fixCategory ) {
             case "Paye":
 
@@ -335,7 +362,8 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
 
                 requestHttpPost(
                         httpClient,
-                        System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog::IFormChangeListener:2:-1",
+//                        System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog::IFormChangeListener:2:-1",
+                        System.getProperty("borrower") + "/form.2" + potentialWicketInterface.replace(":form::IFormSubmitListener::", "::IFormChangeListener:2:-1"),
                         new LinkedHashMap<String, String>() {
                             {
                                 put("Accept", "text/xml");
@@ -379,7 +407,8 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
 
                 requestHttpPost(
                         httpClient,
-                        System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog::IFormChangeListener:2:-1",
+//                        System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog::IFormChangeListener:2:-1",
+                        System.getProperty("borrower") + "/form.2" + potentialWicketInterface.replace(":form::IFormSubmitListener::", "::IFormChangeListener:2:-1"),
                         new LinkedHashMap<String, String>() {
                             {
                                 put("Accept", "text/xml");
@@ -509,7 +538,8 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
 
                 requestHttpPost(
                         httpClient,
-                        System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog::IFormChangeListener:2:-1",
+//                        System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog::IFormChangeListener:2:-1",
+                        System.getProperty("borrower") + "/form.2" + potentialWicketInterface.replace(":form::IFormSubmitListener::", "::IFormChangeListener:2:-1"),
                         new LinkedHashMap<String, String>() {
                             {
                                 put("Accept", "text/xml");
@@ -555,7 +585,8 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
 
                 requestHttpPost(
                         httpClient,
-                        System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog::IFormChangeListener:2:-1",
+//                        System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog::IFormChangeListener:2:-1",
+                        System.getProperty("borrower") + "/form.2" + potentialWicketInterface.replace(":form::IFormSubmitListener::", "::IFormChangeListener:2:-1"),
                         new LinkedHashMap<String, String>() {
                             {
                                 put("Accept", "text/xml");
@@ -576,7 +607,8 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                 // TODO to handle if current work or not
                 requestHttpPost(
                         httpClient,
-                        System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog::IFormChangeListener:2:-1",
+//                        System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog::IFormChangeListener:2:-1",
+                        System.getProperty("borrower") + "/form.2" + potentialWicketInterface.replace(":form::IFormSubmitListener::", "::IFormChangeListener:2:-1"),
                         new LinkedHashMap<String, String>() {
                             {
                                 put("Accept", "text/xml");
@@ -615,13 +647,16 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
     private void borrower_coapplicant_user_selects_category_occupation(Map<String, String> employmentIncomesParameters, String category, String occupation) {
         switch (category) {
             case "Paye":
-                employmentIncomesParameters.put("root:c:w:pnlDetail:c:w:pnlEmployed:c:w:cmbJobTitle:combobox", occupation.toUpperCase());
+//                employmentIncomesParameters.put("root:c:w:pnlDetail:c:w:pnlEmployed:c:w:cmbJobTitle:combobox", occupation.toUpperCase());
+                employmentIncomesParameters.put("root:c:w:pnlDetail:c:w:pnlEmployed:c:w:cmbJobTitle:combobox", OCCUPATION.getShortValueByLongValue(occupation));
                 break;
             case "Self Employed":
-                employmentIncomesParameters.put("root:c:w:pnlDetail:c:w:pnlSelfEmployed:c:w:cmbSelfOccupation:combobox", occupation.toUpperCase());
+//                employmentIncomesParameters.put("root:c:w:pnlDetail:c:w:pnlSelfEmployed:c:w:cmbSelfOccupation:combobox", occupation.toUpperCase());
+                employmentIncomesParameters.put("root:c:w:pnlDetail:c:w:pnlSelfEmployed:c:w:cmbSelfOccupation:combobox", OCCUPATION.getShortValueByLongValue(occupation));
                 break;
             case "Civil Servant":
-                employmentIncomesParameters.put("root:c:w:pnlDetail:c:w:pnlEmployed:c:w:cmbJobTitle:combobox", occupation.toUpperCase());
+//                employmentIncomesParameters.put("root:c:w:pnlDetail:c:w:pnlEmployed:c:w:cmbJobTitle:combobox", occupation.toUpperCase());
+                employmentIncomesParameters.put("root:c:w:pnlDetail:c:w:pnlEmployed:c:w:cmbJobTitle:combobox", OCCUPATION.getShortValueByLongValue(occupation));
                 break;
             default:
                 assertThat("We handle only borrower or coapplicant", category, anyOf( not(equalTo("Paye")), not(equalTo("Self Employed")), not(equalTo("Civil Servant")) ));
@@ -667,16 +702,19 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
 
     private void borrower_coapplicant_user_selects_category_employer_type(Map<String, String> employmentIncomesParameters, String category, String employmentType) throws IOException {
 
-        String finalEmploymentType = StringUtils.EMPTY;
+//        String finalEmploymentType = StringUtils.EMPTY;
+        String potentialWicketInterface = Jsoup.parse(Jsoup.parse(httpResponse.getHttpResponse()).select("component[id~=dialog]").select("component[encoding~=wicket]").text()).select("form[id~=form]").select("form[wicketpath~=main_c_form_dialogWrapper_dialog_form]").attr("action");
+
         switch ( employmentType ) {
             case "Contract":
-                finalEmploymentType = "CON";
+//                finalEmploymentType = "CON";
                 break;
             case "Permanent":
-                finalEmploymentType = "PER";
+//                finalEmploymentType = "PER";
                 requestHttpPost(
                         httpClient,
-                        System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog::IFormChangeListener:2:-1",
+//                        System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog::IFormChangeListener:2:-1",
+                        System.getProperty("borrower") + "/form.2" + potentialWicketInterface.replace(":form::IFormSubmitListener::", "::IFormChangeListener:2:-1"),
                         new LinkedHashMap<String, String>() {
                             {
                                 put("Accept", "text/xml");
@@ -696,17 +734,19 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
                 );
                 break;
             case "Temporary":
-                finalEmploymentType = "TEM";
+//                finalEmploymentType = "TEM";
                 break;
             default:
         }
 
         switch (category) {
             case "Paye":
-                employmentIncomesParameters.put("root:c:w:pnlDetail:c:w:pnlEmployed:c:w:cmbEmplType:combobox", finalEmploymentType);
+//                employmentIncomesParameters.put("root:c:w:pnlDetail:c:w:pnlEmployed:c:w:cmbEmplType:combobox", finalEmploymentType);
+                employmentIncomesParameters.put("root:c:w:pnlDetail:c:w:pnlEmployed:c:w:cmbEmplType:combobox", EMPLOYMENT.getShortValueByLongValue(employmentType));
                 break;
             case "Civil Servant":
-                employmentIncomesParameters.put("root:c:w:pnlDetail:c:w:pnlEmployed:c:w:cmbEmplType:combobox", finalEmploymentType);
+//                employmentIncomesParameters.put("root:c:w:pnlDetail:c:w:pnlEmployed:c:w:cmbEmplType:combobox", finalEmploymentType);
+                employmentIncomesParameters.put("root:c:w:pnlDetail:c:w:pnlEmployed:c:w:cmbEmplType:combobox", EMPLOYMENT.getShortValueByLongValue(employmentType));
                 break;
             default:
                 assertThat("We handle only borrower or coapplicant", category, anyOf( not(equalTo("Paye")), not(equalTo("Civil Servant")) ));
@@ -1235,6 +1275,13 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
         }
 
         String stepToken = currentFormDoc2.select("input[name=stepToken]").attr("value");
+        String btnEmploymentAdd = currentFormDoc2.select("a[id~=submit]").select("a[wicketpath=main_c_form_dialogWrapper_dialog_form_root_c_w_pnlDetail_c_w_btnEmploymentAdd_submit]").attr("onclick");
+        Pattern pBtnEmploymentAdd = Pattern.compile("\\?(wicket:interface=.*)&");
+        Matcher mBtnEmploymentAdd = pBtnEmploymentAdd.matcher(btnEmploymentAdd);
+        String btnEmploymentAddWicketInterface = StringUtils.EMPTY;
+        while(mBtnEmploymentAdd.find()) {
+            btnEmploymentAddWicketInterface = mBtnEmploymentAdd.group(1);
+        }
 
         finalEmploymentIncomeParameters.put("root:c:w:pnlDetail:c:w:txtHiddenId:tb", "");
         finalEmploymentIncomeParameters.put("stepToken", stepToken);
@@ -1243,7 +1290,8 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
         String employmentAddResponse = requestHttpPost(
                 httpClient,
 //                "https://st1app.loftkeys.com/borrower/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:pnlDetail:c:w:btnEmploymentAdd:submit::IBehaviorListener:0:",
-                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:pnlDetail:c:w:btnEmploymentAdd:submit::IBehaviorListener:0:",
+//                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:pnlDetail:c:w:btnEmploymentAdd:submit::IBehaviorListener:0:",
+                System.getProperty("borrower") + "/form.2?" + btnEmploymentAddWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");
@@ -1256,17 +1304,26 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
         );
         httpResponse.setHttpResponse(employmentAddResponse);
 
-        // (Paye|Self Employed|Civil Servant|Unemployed/Homemaker|Other)
-//        String finalCategory = StringUtils.EMPTY;
+        Document currentClose = Jsoup.parse(currentFormDoc.select("component[id~=close]").select("component[encoding~=wicket]").text());
+        Pattern pClose = Pattern.compile("\\?(wicket:interface=.*:)'");
+        Matcher mClose = null;
         String linkClose = StringUtils.EMPTY;
         switch (category) {
             case "Paye":
 //                finalCategory = "Paye";
                 linkClose = ":1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:pnlPaye:c:w:lnkAddPaye:close::IBehaviorListener:0:";
+                mClose = pClose.matcher(currentClose.select("a[id~=close]").select("a[wicketpath~=main_c_form_form_root_c_w_pnlNoEmplyments_c_w_pnlPaye_c_w_lnkAddPaye_close]").attr("onclick"));
+                while ( mClose.find() ) {
+                    linkClose = mClose.group(1);
+                }
                 break;
             case "Self Employed":
 //                finalCategory = "SelfEmployed";
                 linkClose = ":1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:pnlSelfEmployed:c:w:lnkAddSelfEmployed:close::IBehaviorListener:0:";
+                mClose = pClose.matcher(currentClose.select("a[id~=close]").select("a[wicketpath~=main_c_form_form_root_c_w_pnlNoEmplyments_c_w_pnlSelfEmployed_c_w_lnkAddSelfEmployed_close]").attr("onclick"));
+                while ( mClose.find() ) {
+                    linkClose = mClose.group(1);
+                }
                 break;
 //            case "Civil Servant":
 //                finalCategory = "CivilServant";
@@ -1274,21 +1331,31 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
             case "Unemployed/Homemaker":
 //                finalCategory = "Unemployment";
                 linkClose = ":1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:pnlUnemployed:c:w:lnkAddUnemployment:close::IBehaviorListener:0:";
+                mClose = pClose.matcher(currentClose.select("a[id~=close]").select("a[wicketpath~=main_c_form_form_root_c_w_pnlNoEmplyments_c_w_pnlUnemployed_c_w_lnkAddUnemployment_close]").attr("onclick"));
+                while ( mClose.find() ) {
+                    linkClose = mClose.group(1);
+                }
                 break;
             case "Other":
 //                finalCategory = "Homemaker";
                 linkClose = ":1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:pnlOther:c:w:lnkAddHomemaker:close::IBehaviorListener:0:";
+                mClose = pClose.matcher(currentClose.select("a[id~=close]").select("a[wicketpath~=main_c_form_form_root_c_w_pnlNoEmplyments_c_w_pnlOther_c_w_lnkAddHomemaker_close]").attr("onclick"));
+                while ( mClose.find() ) {
+                    linkClose = mClose.group(1);
+                }
                 break;
         }
 
         if ( isThereEmpList ) {
             linkClose = "1:main:c:form:form:root:c:w:pnlEmpList:c:w:btnAddEmp:close::IBehaviorListener:0:";
+            // TODO
         }
 
 //        if ( currentWorkflow.equals("btnEmployment")) {
         requestHttpPost(
                 httpClient,
-                System.getProperty("borrower") + "/form.2?wicket:interface=" + linkClose,
+//                System.getProperty("borrower") + "/form.2?wicket:interface=" + linkClose,
+                System.getProperty("borrower") + "/form.2?" + linkClose,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");
@@ -1303,7 +1370,8 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
         if ( !isThereEmpList ) {
             String addEmplCompleted = requestHttpPost(
                     httpClient,
-                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnHiddenSubmit:submit::IBehaviorListener:0:",
+//                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnHiddenSubmit:submit::IBehaviorListener:0:",
+                    System.getProperty("borrower") + "/form.2?" + btnHiddenSubmitWicketInterface,
                     new LinkedHashMap<String, String>() {
                         {
                             put("Accept", "text/xml");
@@ -1324,7 +1392,8 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
         else {
             String addEmplCompleted = requestHttpPost(
                     httpClient,
-                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnHidenRefresh:submit::IBehaviorListener:0:",
+//                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnHidenRefresh:submit::IBehaviorListener:0:",
+                    System.getProperty("borrower") + "/form.2?" + btnHiddenRefreshWicketInterface,
                     new LinkedHashMap<String, String>() {
                         {
                             put("Accept", "text/xml");
@@ -1400,10 +1469,18 @@ public class ApiEmploymentAndIncomeStepDef extends ApiOpoqoBorrowerStepDef {
         }
 
         String stepToken = currentFormDoc2.select("input[name=stepToken]").attr("value");
+        String btnImDone = currentFormDoc2.select("a[id~=submit]").select("a[wicketpath~=main_c_form_form_root_c_w_pnlEmpList_c_w_btnImDone_submit]").attr("onclick");
+        Pattern pBtnImDone = Pattern.compile("\\?(wicket:interface=.*)&");
+        Matcher mBtnImDone = pBtnImDone.matcher(btnImDone);
+        String imDoneWicketInterface = StringUtils.EMPTY;
+        while( mBtnImDone.find() ) {
+            imDoneWicketInterface =mBtnImDone.group(1);
+        }
 
         String yourAccountPageResponse = requestHttpPost(
                 httpClient,
-                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlEmpList:c:w:btnImDone:submit::IBehaviorListener:0:",
+//                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlEmpList:c:w:btnImDone:submit::IBehaviorListener:0:",
+                System.getProperty("borrower") + "/form.2?" + imDoneWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");

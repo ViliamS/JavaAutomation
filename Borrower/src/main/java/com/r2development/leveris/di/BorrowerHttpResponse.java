@@ -4,12 +4,12 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
-public class HttpResponse implements IHttpResponse{
+public class BorrowerHttpResponse implements IBorrowerHttpResponse{
 
     private String httpResponse;
 
     @Inject
-    public HttpResponse(String httpResponse) {
+    public BorrowerHttpResponse(String httpResponse) {
         this.httpResponse = httpResponse;
     }
 

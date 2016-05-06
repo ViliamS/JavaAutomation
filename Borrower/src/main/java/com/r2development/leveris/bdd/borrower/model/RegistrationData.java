@@ -21,6 +21,14 @@ public class RegistrationData extends DataModel {
         data.replace("firstName", firstName);
     }
 
+    public String getLastName() {
+        return data.get("lastName");
+    }
+
+    public void setLastName(String lastName) {
+        data.replace("lastName", lastName);
+    }
+
     public String getEmail() {
         return data.get("email");
     }
@@ -56,6 +64,8 @@ public class RegistrationData extends DataModel {
     public boolean isProtectionBusiness() {
         return data.get("protectionPolicy").equals("accepts");
     }
+
+    public String getDateOfBirth(){ return data.get("dateOfBirth"); }
 
     public void setProtectionBusiness(String protectionBusiness) {
         data.replace("protectionPolicy", protectionBusiness);

@@ -5,8 +5,8 @@ import com.google.gson.JsonParser;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.LoginData;
-import com.r2development.leveris.di.IAHttpContext;
-import com.r2development.leveris.di.IHttpResponse;
+import com.r2development.leveris.di.IABorrowerHttpContext;
+import com.r2development.leveris.di.IBorrowerHttpResponse;
 import com.r2development.leveris.di.IUser;
 import com.r2development.leveris.qa.utils.Orasql;
 import cucumber.api.java.en.And;
@@ -49,9 +49,9 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
 //    private HttpContext localContext;
 
     @Inject
-    IAHttpContext localContext;
+    IABorrowerHttpContext localContext;
     @Inject
-    private IHttpResponse httpResponse;
+    private IBorrowerHttpResponse httpResponse;
 
     @Inject
     private IUser user;
@@ -70,7 +70,7 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
     }
 
     @Inject
-    public ApiLoginPageStepDef(IUser user, IHttpResponse httpResponse) {
+    public ApiLoginPageStepDef(IUser user, IBorrowerHttpResponse httpResponse) {
 //        this.httpClient = httpClient;
 //        this.localContext = localContext;
         this.user = user;
@@ -200,8 +200,8 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
 
         Assert.assertNotEquals("Should be different HttpClientContext object", localContext.getHttpContext(), initContext());
         HttpContext newLocalContext = newHttpClientContext(System.getProperty("domain.borrower"), "/stable-borrower");
-        Assert.assertEquals("not same HttpClientContext object", newLocalContext, localContext.getHttpContext());
         localContext.setHttpContext((HttpClientContext) newLocalContext);
+        Assert.assertEquals("not same HttpClientContext object", newLocalContext, localContext.getHttpContext());
 
 //        CookieStore cookieStore = new BasicCookieStore();
 //        HttpClientContext localContextBody = HttpClientContext.create();
@@ -362,7 +362,7 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
         log.info(parse2jsonGetApiModuleWithBearer);
 
 
-        HttpGet httpGetApiAuthentication = new HttpGet("http://dv2app.opoqodev.com/stable-borrower/home?useCase=authenticate&ticket="+ serviceTicketCode);
+        HttpGet httpGetApiAuthentication = new HttpGet(System.getProperty("borrower") + "/home?useCase=authenticate&ticket="+ serviceTicketCode);
         HttpResponse responseGetApiAuthentication = httpClient.execute(httpGetApiAuthentication, localContext.getHttpContext());
         HttpEntity httpEntityGetApiAuthentication = responseGetApiAuthentication.getEntity();
         log.info("==== httpEntityGetApiAuthentication ====");

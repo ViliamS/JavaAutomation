@@ -2,21 +2,27 @@ package com.r2development.leveris.bdd.borrower.apistepdef;
 
 import com.google.inject.Inject;
 import com.r2development.leveris.bdd.borrower.model.AccountData;
-import com.r2development.leveris.di.IAHttpContext;
-import com.r2development.leveris.di.IHttpResponse;
+import com.r2development.leveris.di.IABorrowerHttpContext;
+import com.r2development.leveris.di.IBorrowerHttpResponse;
 import com.r2development.leveris.di.IUser;
+import com.r2development.leveris.utils.enums.SAVING;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.protocol.HttpClientContext;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.LaxRedirectStrategy;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -31,15 +37,17 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
     private static final Log log = LogFactory.getLog(ApiYourAccountsStepDef.class.getName());
 
     @Inject
-    IAHttpContext localContext;
+    IABorrowerHttpContext localContext;
     @Inject
     private IUser user;
     @Inject
-    IHttpResponse httpResponse;
+    IBorrowerHttpResponse httpResponse;
 
     private boolean isThereAccountList = false;
 //    private int stepTokenAddThisSource = 1;
-    private int stepTokenHiddenSubmit = 1;
+//    private int stepTokenHiddenSubmit = 1;
+    private String btnHiddenSubmitWicketInterface = StringUtils.EMPTY;
+    private String btnHiddenRefreshWicketInterface = StringUtils.EMPTY;
 
 //    @Inject
     public ApiYourAccountsStepDef(/*IHttpResponse httpResponse*/) {
@@ -74,9 +82,9 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                 borrower_types_his_account_balance(userType, formType, accountData.get("accountBalance"));
                 if (!StringUtils.isEmpty(accountData.get("overdraftLimit")))
                     borrower_types_his_overdraft_limit(userType, formType, accountData.get("overdraftLimit"));
-                borrower_selects_his_source_of_saving(userType, formType, accountData.get("sourceOfSaving"));
-                if (!StringUtils.isEmpty(accountData.get("regularMonthlySaving")))
-                    borrower_types_his_regular_monthly_saving(userType, formType, accountData.get("regularMonthlySaving"));
+//                borrower_selects_his_source_of_saving(userType, formType, accountData.get("sourceOfSaving"));
+//                if (!StringUtils.isEmpty(accountData.get("regularMonthlySaving")))
+//                    borrower_types_his_regular_monthly_saving(userType, formType, accountData.get("regularMonthlySaving"));
                 break;
             case "Savings account":
                 if (!StringUtils.isEmpty(accountData.get("statementDate")))
@@ -95,7 +103,239 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                 if (!StringUtils.isEmpty(accountData.get("regularMonthlySaving")))
                     borrower_types_his_regular_monthly_saving(userType, formType, accountData.get("regularMonthlySaving"));
                 break;
-            case "Account scrapping":
+            case "Account scraping":
+
+                requestHttpPost(
+                        httpClient,
+                        System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog::IFormChangeListener:2:-1",
+                        new LinkedHashMap<String, String>() {
+                            {
+                                put("Accept", "text/xml");
+                                put("Content-Type", "application/x-www-form-urlencoded");
+                            }
+                        },
+                        new LinkedHashMap<String, String>(){
+                            {
+                                put("data", "{\"widgets\":[{\"widget\":\"pnlBasicInfo pnlYodleeIframe\",\"data\":{\"enable\":false}}]}");
+                            }
+                        },
+                        localContext.getHttpContext(),
+                        CONSUME_QUIETLY
+                );
+
+                requestHttpPost(
+                        httpClient,
+                        System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog::IFormChangeListener:2:-1",
+                        new LinkedHashMap<String, String>() {
+                            {
+                                put("Accept", "text/xml");
+                                put("Content-Type", "application/x-www-form-urlencoded");
+                            }
+                        },
+                        new LinkedHashMap<String, String>(){
+                            {
+                                put("data", "{\"widgets\":[{\"widget\":\"pnlBasicInfo pnlYodleeIframe\",\"data\":{\"enable\":true}}]}");
+                            }
+                        },
+                        localContext.getHttpContext(),
+                        CONSUME_QUIETLY
+                );
+
+                requestHttpPost(
+                        httpClient,
+                        System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog::IFormChangeListener:2:-1",
+                        new LinkedHashMap<String, String>() {
+                            {
+                                put("Accept", "text/xml");
+                                put("Content-Type", "application/x-www-form-urlencoded");
+                            }
+                        },
+                        new LinkedHashMap<String, String>(){
+                            {
+                                put("data", "{\"widgets\":[{\"widget\":\"pnlBasicInfo pnlYodleeProcess\",\"data\":{\"visible\":true},\"delta\":40,\"visibleEvent\":\"show\"},{\"widget\":\"pnlBasicInfo btnCancel\",\"data\":{\"visible\":false},\"visibleEvent\":\"hide\"},{\"widget\":\"pnlBasicInfo btnCancel\",\"data\":{\"enable\":false}},{\"widget\":\"pnlBasicInfo chkConditions\",\"data\":{\"visible\":false},\"visibleEvent\":\"hide\"},{\"widget\":\"pnlBasicInfo lblConditions\",\"data\":{\"visible\":false},\"visibleEvent\":\"hide\"},{\"widget\":\"pnlBasicInfo pnlYodleeProcess lblYodleeProcess\",\"delta\":12}]}");
+                            }
+                        },
+                        localContext.getHttpContext(),
+                        CONSUME_QUIETLY
+                );
+
+
+                Pattern pYodlee = Pattern.compile("\\$\\.parseJSON\\(\\'\\{\\\"yodleeUrl\\\":\\\".*\\\",\\\"rsession\\\":\\\"([0-9a-z_:]+)\\\",\\\"finappId\\\":\\\"(\\d+)\\\",\\\"redirectReq\\\":\\\"true\\\",\\\"token\\\":\\\"([0-9a-z]+)\\\",\\\"extraParams\\\":\\\"(.*)\\\"\\}\\', true\\),");
+                Matcher mYodlee = pYodlee.matcher(httpResponse.getHttpResponse());
+                String rsession = null;
+                String finappId = null;
+                String token = null;
+                String extraParams = null;
+                while (mYodlee.find()) {
+                    rsession = mYodlee.group(1);
+                    finappId = mYodlee.group(2);
+                    token = mYodlee.group(3);
+                    extraParams = mYodlee.group(4);
+                }
+                final String finalRSession = rsession;
+                final String finalFinappId = finappId;
+                final String finalToken = token;
+                final String finalExtraParams = "isOLB=true&callback=" + URLEncoder.encode(extraParams, "UTF-8");
+
+//                https://node.developer.yodlee.com/finapp/10003600/?brand=10010352&id=10003600&appId=3A4CAE9B71A1CCD7FF41F51006E9ED00&channelId=-1&version=9.18&status=published&c=csit_key_0:ICzhZehpUKYKjfUe3m3Mu5WqoFk=&finappCDNURL=&resturl=https%3A%2F%2F172.17.25.88%2Fservices%2Fsrest%2Frestserver&l=&isOLB=true&callback=http%3A%2F%2Fdv2app.opoqodev.com%2Fstable-borrower%2Fother%2Fyodlee.html
+                HttpClient yodleeClient = HttpClientBuilder.create().setRedirectStrategy(new LaxRedirectStrategy()).build();
+                HttpClientContext yodleeContext = HttpClientContext.create();
+
+                requestHttpPost(
+                        yodleeClient,
+                        "https://node.developer.yodlee.com/authenticate/restserver/",
+                        new LinkedHashMap<String, String>() {
+                            {
+                                put("Accept", "text/xml");
+                                put("Content-Type", "application/x-www-form-urlencoded");
+                            }
+                        },
+                        new LinkedHashMap<String, String>(){
+                            {
+                                put("rsession", finalRSession);
+                                put("finappId", finalFinappId);
+                                put("redirectReq", "true");
+                                put("token", finalToken);
+                                put("extraParams", finalExtraParams);
+                            }
+                        },
+                        yodleeContext,
+                        CONSUME_QUIETLY
+                );
+
+
+                requestHttpPost(
+                        httpClient,
+                        System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog::IFormChangeListener:2:-1",
+                        new LinkedHashMap<String, String>() {
+                            {
+                                put("Accept", "text/xml");
+                                put("Content-Type", "application/x-www-form-urlencoded");
+                            }
+                        },
+                        new LinkedHashMap<String, String>(){
+                            {
+                                put("data", "{\"widgets\":[{\"widget\":\"pnlBasicInfo pnlYodleeProcess\",\"data\":{\"visible\":false},\"delta\":-42,\"visibleEvent\":\"hide\"}]}");
+                            }
+                        },
+                        localContext.getHttpContext(),
+                        CONSUME_QUIETLY
+                );
+
+
+
+                requestHttpPost(
+                        httpClient,
+                        System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:btnHiddenSubmit:submit::IBehaviorListener:0:",
+                        new LinkedHashMap<String, String>() {
+                            {
+                                put("Accept", "text/xml");
+                                put("Content-Type", "application/x-www-form-urlencoded");
+                            }
+                        },
+                        new LinkedHashMap<String, String>(){
+                            {
+                                put("root:c:w:pnlBasicInfo:c:w:chkConditions:checkbox", "on");
+                                put("root:c:w:pnlBasicInfo:c:w:pnlYodleeIframe:data", "");
+                                put("stepToken","1");
+                                put("root:c:w:btnHiddenSubmit:submit","1");
+                            }
+                        },
+                        localContext.getHttpContext(),
+                        CONSUME_QUIETLY
+                );
+
+                requestHttpPost(
+                        httpClient,
+                        System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog::IFormChangeListener:2:-1",
+                        new LinkedHashMap<String, String>() {
+                            {
+                                put("Accept", "text/xml");
+                                put("Content-Type", "application/x-www-form-urlencoded");
+                            }
+                        },
+                        new LinkedHashMap<String, String>(){
+                            {
+                                put("data", "{\"widgets\":[{\"widget\":\"pnlBasicInfo pnlYodleeProcess lblYodleeReceiving\",\"delta\":12}]}");
+                            }
+                        },
+                        localContext.getHttpContext(),
+                        CONSUME_QUIETLY
+                );
+
+                requestHttpPost(
+                        httpClient,
+                        System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog::ILazyCallListener:1:",
+                        new LinkedHashMap<String, String>() {
+                            {
+                                put("Accept", "text/xml");
+                                put("Content-Type", "application/x-www-form-urlencoded");
+                            }
+                        },
+                        new LinkedHashMap<String, String>(){
+                            {
+                                put("data", "{\"actionName\":\"instantNotificationHandleCall\",\"id\":\"\",\"triggerWidgetPath\":\"\"}");
+                                put("ignoreve", "false");
+                                put("ignorerve", "false");
+                                put("ready","false");
+                                put("callbackId","");
+
+                                /*
+                                data:{"actionName":"instantNotificationHandleCall","id":"4|IMLrNCYVO($XRT","triggerWidgetPath":""} y0\\PEI)lM[6^{sn5 2=!N}P0oWqV`zC8=
+                                ignoreve:false
+                                ignorerve:false
+                                ready:false
+                                callbackId:RpdPciz CpOnMaWopF NixTRygq
+                                */
+                            }
+                        },
+                        localContext.getHttpContext(),
+                        CONSUME_QUIETLY
+                );
+
+                requestHttpGet(
+                        httpClient,
+                        System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:pnlBasicInfo:c:w:hbxScraping:c:i:w:btnContinue:cancel::IBehaviorListener:0:&stepToken=2",
+                        new LinkedHashMap<String, String>() {
+                            {
+                                put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+                            }
+                        },
+                        localContext.getHttpContext(),
+                        CONSUME_QUIETLY
+                );
+
+                requestHttpGet(
+                        httpClient,
+                        System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNoAccount:c:w:lnkAuto:close::IBehaviorListener:0:",
+                        new LinkedHashMap<String, String>() {
+                            {
+                                put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+                            }
+                        },
+                        localContext.getHttpContext(),
+                        CONSUME_QUIETLY
+                );
+
+                requestHttpPost(
+                        httpClient,
+                        System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnHiddenSubmit:submit::IBehaviorListener:0:",
+                        new LinkedHashMap<String, String>() {
+                            {
+                                put("Accept", "text/xml");
+                                put("Content-Type", "application/x-www-form-urlencoded");
+                            }
+                        },
+                        new LinkedHashMap<String, String>(){
+                            {
+                                put("stepToken", "5");
+                                put("root:c:w:btnHiddenSubmit:submit", "1");
+                            }
+                        },
+                        localContext.getHttpContext(),
+                        CONSUME_QUIETLY
+                );
+
                 break;
             default:
         }
@@ -149,7 +389,13 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
         }
 
         String stepToken = currentFormDoc2.select("input[name=stepToken]").attr("value");
-//        int stepTokenInt = Integer.parseInt(stepToken);
+        String btnAddThisSource = currentFormDoc2.select("a[id~=submit]").select("a[wicketpath~=main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_btnAddThisSource_submit").attr("onclick");
+        Pattern pBtnAddThisSource = Pattern.compile("\\?(wicket:interface=.*)&");
+        Matcher mBtnAddThisSource = pBtnAddThisSource.matcher(btnAddThisSource);
+        String btnAddThisSourceWicketInterface = StringUtils.EMPTY;
+        while( mBtnAddThisSource.find() ) {
+            btnAddThisSourceWicketInterface = mBtnAddThisSource.group(1);
+        }
 
 //        accountParameters.put("root:c:w:txtId:tb", "");
         finalAccountParameters.put("root:c:w:txtId:tb", "");
@@ -160,7 +406,8 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
 
         requestHttpPost(
                 httpClient,
-                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:pnlAddSource:c:w:btnAddThisSource:submit::IBehaviorListener:0:-1",
+//                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:pnlAddSource:c:w:btnAddThisSource:submit::IBehaviorListener:0:-1",
+                System.getProperty("borrower") + "/form.2?" + btnAddThisSourceWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");
@@ -173,29 +420,46 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                 CONSUME_QUIETLY
         );
 
-//        String finalCategory = StringUtils.EMPTY;
+
+        Document currentClose = Jsoup.parse(currentFormDoc.select("component[id~=close]").select("component[encoding~=wicket]").text());
+        Pattern pClose = Pattern.compile("\\?(wicket:interface=.*:)'");
+        Matcher mClose = null;
         String linkClose = StringUtils.EMPTY;
         switch(accountType) { // BUG Internal CLV Framework ?!
             case "Current account":
                 linkClose = ":1:main:c:form:form:root:c:w:pnlNoAccount:c:w:lnkCurrent:close::IBehaviorListener:0:-1";
+                mClose = pClose.matcher(currentClose.select("a[id~=close]").select("a[wicketpath~=main_c_form_form_root_c_w_pnlNoAccount_c_w_lnkCurrent_close]").attr("onclick"));
+                while ( mClose.find() ) {
+                    linkClose = mClose.group(1);
+                }
                 break;
             case "Savings account":
                 linkClose = ":1:main:c:form:form:root:c:w:pnlNoAccount:c:w:lnkSavings:close::IBehaviorListener:0:-1";
+                mClose = pClose.matcher(currentClose.select("a[id~=close]").select("a[wicketpath~=main_c_form_form_root_c_w_pnlNoAccount_c_w_lnkSavings_close]").attr("onclick"));
+                while ( mClose.find() ) {
+                    linkClose = mClose.group(1);
+                }
                 break;
             case "Scrapping":
 //                :main:c:form:dialogWrapper:dialog:form:root:c:w:pnl-608:c:w:btnClose:cancel::IBehaviorListener:0:
                 linkClose = ":1:main:c:form:form:root:c:w:pnlNoAccount:c:w:lnkAuto:close::IBehaviorListener:0:-1";
+                mClose = pClose.matcher(currentClose.select("a[id~=close]").select("a[wicketpath~=main_c_form_form_root_c_w_pnlNoAccount_c_w_lnkAuto_close]").attr("onclick"));
+                while ( mClose.find() ) {
+                    linkClose = mClose.group(1);
+                }
                 break;
             default:
         }
 
         if ( isThereAccountList ) {
             linkClose = ":1:main:c:form:form:root:c:w:pnlAccountList:c:w:btnAdd:close::IBehaviorListener:0:-1";
+            // TODO
         }
 
         requestHttpPost(
                 httpClient,
-                System.getProperty("borrower") + "/form.2?wicket:interface=" + linkClose,
+//                System.getProperty("borrower") + "/form.2?wicket:interface=" + linkClose,
+                System.getProperty("borrower") + "/form.2?" + linkClose,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");
@@ -212,7 +476,8 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
 //            String finalStepToken =  String.valueOf(stepTokenHiddenSubmit+1);
             String responseHiddenThisSource = requestHttpPost(
                     httpClient,
-                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnHiddenRefresh:submit::IBehaviorListener:0:-1",
+//                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnHiddenRefresh:submit::IBehaviorListener:0:-1",
+                    System.getProperty("borrower") + "/form.2?" + btnHiddenRefreshWicketInterface,
                     new LinkedHashMap<String, String>() {
                         {
                             put("Accept", "text/xml");
@@ -236,7 +501,8 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
 //            String finalStepToken = String.valueOf(stepTokenHiddenSubmit);
             String responseRefreshThisSource = requestHttpPost(
                     httpClient,
-                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnHiddenSubmit:submit::IBehaviorListener:0:-1",
+//                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnHiddenSubmit:submit::IBehaviorListener:0:-1",
+                    System.getProperty("borrower") + "/form.2?" + btnHiddenSubmitWicketInterface,
                     new LinkedHashMap<String, String>() {
                         {
                             put("Accept", "text/xml");
@@ -291,10 +557,18 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
         }
 
         String stepToken = currentFormDoc2.select("input[name=stepToken]").attr("value");
+        String btnImDone = currentFormDoc2.select("a[id~=submit]").select("a[wicketpath=main_c_form_form_root_c_w_pnlAccountList_c_w_btnImDone_submit]").attr("onclick");
+        Pattern pBtnImDone = Pattern.compile("\\?(wicket:interface=.*)&");
+        Matcher mBtnImDone = pBtnImDone.matcher(btnImDone);
+        String imDoneWicketInterface =StringUtils.EMPTY;
+        while(mBtnImDone.find()) {
+            imDoneWicketInterface = mBtnImDone.group(1);
+        }
 
         String yourAccountPageResponse = requestHttpPost(
                 httpClient,
-                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlAccountList:c:w:btnImDone:submit::IBehaviorListener:0:",
+//                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlAccountList:c:w:btnImDone:submit::IBehaviorListener:0:",
+                System.getProperty("borrower") + "/form.2?" + imDoneWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");
@@ -328,16 +602,36 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
         Document accountDoc = Jsoup.parse(httpResponse.getHttpResponse());
         Document accountDoc2 = null;
         String[] componentId = { "main", "form", "dialog" };
+        String currentComponentId = StringUtils.EMPTY;
         for (String aComponentId : componentId) {
             try {
                 accountDoc2 = Jsoup.parse(accountDoc.select("component[id~=" + aComponentId + "]").select("component[encoding~=wicket]").first().text());
                 log.info("is " + aComponentId);
-
+                currentComponentId = aComponentId;
                 if ( !aComponentId.equals("main") )
                     isThereAccountList = true;
                 break;
             } catch (NullPointerException npe) {
                 log.info("isnot " + aComponentId);
+            }
+        }
+
+        if ( currentComponentId.equals("main") ) {
+            if ( !isThereAccountList ) {
+                String onclickBtnHiddenSubmit = accountDoc2.select("a[id~=submit]").select("a[wicketpath~=btnHiddenSubmit]").attr("onclick");
+                Pattern pBtnHiddenSubmit = Pattern.compile("\\?(wicket:interface=.*)&");
+                Matcher mBtnHiddenSubmit = pBtnHiddenSubmit.matcher(onclickBtnHiddenSubmit);
+                while (mBtnHiddenSubmit.find()) {
+                    btnHiddenSubmitWicketInterface = mBtnHiddenSubmit.group(1);
+                }
+            }
+            else {
+                String onclickBtnHiddenRefresh = accountDoc2.select("a[id~=submit]").select("a[wicketpath~=btnHiddenRefresh]").attr("onclick");
+                Pattern pBtnHiddenRefresh = Pattern.compile("\\?(wicket:interface=.*)&");
+                Matcher mBtnHiddenRefresh = pBtnHiddenRefresh.matcher(onclickBtnHiddenRefresh);
+                while(mBtnHiddenRefresh.find()) {
+                    btnHiddenRefreshWicketInterface = mBtnHiddenRefresh.group(1);
+                }
             }
         }
 
@@ -478,7 +772,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                 if ( isThereAccountList ) {
                     linkSubmitResponse = requestHttpPost(
                             httpClient,
-                            System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:pnlNoAccount:c:w:lnkSavings:submit::IBehaviorListener:0:",
+                            System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:pnlNoAccount:c:w:lnkAuto:submit::IBehaviorListener:0:",
                             new LinkedHashMap<String, String>() {
                                 {
                                     put("Accept", "text/xml");
@@ -488,7 +782,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                             new LinkedHashMap<String, String>() {
                                 {
                                     put("stepToken", "1");
-                                    put("root:c:w:pnlNoAccount:c:w:lnkCurrent:submit", "1");
+                                    put("root:c:w:pnlNoAccount:c:w:lnkAuto:submit", "1");
                                 }
                             },
                             localContext.getHttpContext(),
@@ -578,10 +872,10 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
     public void borrower_types_his_account_number(String userType, String currentOrSavings, String accountNumber) {
         switch (currentOrSavings) {
             case "Current account":
-                accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccNumb:c:w:txtAccnumber:tb", accountNumber);
+                accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccNumb:c:w:pnlAccNum:c:w:txtAccnumber:tb", accountNumber);
                 break;
             case "Savings account":
-                accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccNumb:c:w:txtAccnumber:tb", accountNumber);
+                accountParameters.put("root:c:w:pnlAddSource:c:w:pnlAccNumb:c:w:pnlAccNum:c:w:txtAccnumber:tb", accountNumber);
                 break;
         }
     }
@@ -646,7 +940,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
         <option value="IRS">Income from Regular Savings</option>
         <option value="OTH">Other</option>
 */
-
+/*
         String abbreviationSavingSource = StringUtils.EMPTY;
         switch (sourceOfSavings) {
             case "Gift":
@@ -668,13 +962,16 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
                 abbreviationSavingSource = "Other";
                 break;
         }
+*/
 
         switch (currentOrSavings) {
             case "Current account":
-                accountParameters.put("root:c:w:pnlAddSource:c:w:pnlSourceOfSavings:c:w:cmbSourceOfSavings:combobox", abbreviationSavingSource);
+//                accountParameters.put("root:c:w:pnlAddSource:c:w:pnlSourceOfSavings:c:w:cmbSourceOfSavings:combobox", abbreviationSavingSource);
+                accountParameters.put("root:c:w:pnlAddSource:c:w:pnlSourceOfSavings:c:w:cmbSourceOfSavings:combobox", SAVING.getShortValueByLongValue(sourceOfSavings));
                 break;
             case "Savings account":
-                accountParameters.put("root:c:w:pnlAddSource:c:w:pnlSourceOfSavings:c:w:cmbSourceOfSavings:combobox", abbreviationSavingSource);
+//                accountParameters.put("root:c:w:pnlAddSource:c:w:pnlSourceOfSavings:c:w:cmbSourceOfSavings:combobox", abbreviationSavingSource);
+                accountParameters.put("root:c:w:pnlAddSource:c:w:pnlSourceOfSavings:c:w:cmbSourceOfSavings:combobox", SAVING.getShortValueByLongValue(sourceOfSavings));
                 break;
         }
     }

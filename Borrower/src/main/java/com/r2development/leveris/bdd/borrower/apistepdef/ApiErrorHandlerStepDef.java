@@ -1,7 +1,7 @@
 package com.r2development.leveris.bdd.borrower.apistepdef;
 
 import com.google.inject.Inject;
-import com.r2development.leveris.di.IHttpResponse;
+import com.r2development.leveris.di.IBorrowerHttpResponse;
 import cucumber.api.java.en.Then;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 public class ApiErrorHandlerStepDef {
 
     @Inject
-    IHttpResponse httpResponse;
+    IBorrowerHttpResponse httpResponse;
 
     private Map<String, String> errorHandler;
 

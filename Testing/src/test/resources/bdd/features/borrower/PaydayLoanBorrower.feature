@@ -66,16 +66,35 @@ Feature: Payday Loan
       | dateOfBirth         | 01/01/1977        |
       | nationality         | French            |
       | maritalStatus       | single            |
-      | address line 1      | 18 Woodquay       |
-      | town/city           | Galway            |
-      | country             | Ireland           |
-      | county/state        | Galway            |
-      | accommodation       | Property owner     |
-      | isLivingSince3years | yes                |
+      | suffix              |                   |
+#      | address line 1      | 18 Woodquay       |
+#      | town/city           | Galway            |
+#      | country             | Ireland           |
+#      | county/state        | Galway            |
+#      | accommodation       | Property owner     |
+#      | isLivingSince3years | yes                |
     And Borrower saves his personal details data
 
-#    And Borrower fills in Current residency
-#      | formType | Current residency |
+#    RESIDENCY DETAILS
+    And Borrower fills in Current residency
+      | formType | Current residency |
+      | addressLine1 | Staré Město, Prague, Czech Republic |
+      | addressLine2 | Hlavní město Praha                  |
+      | townCity      | Prague                              |
+      | postcode/zip   | 11000                               |
+      | country        | Czech Republic                      |
+      | startDate      | 01/04/2016                          |
+      | residentialStatus | tenant                           |
+    And Borrower fills in Other/previous residency
+      | formType | Current residency |
+      | address line 1 | Staré Město, Prague, Czech Republic |
+      | address line 2 | Hlavní město Praha                  |
+      | town/city      | Prague                              |
+      | postcode/zip   | 11000                               |
+      | country        | Czech Republic                      |
+      | startDate      | 01/04/2016                          |
+      | endDate        | 04/04/2016                          |
+#      | residentialStatus | tenant                           |
 
 #    EMPLOYMENT & INCOME
     And Borrower fills in Employment and Income type Paye

@@ -14,7 +14,16 @@ public class EmploymentIncomeData extends DataModel {
     }
 
     public boolean isCurrentEmployment() {
-        return data.get("isCurrentEmployment") != null && data.get("isCurrentEmployment").equals("yes");
+
+        if(data.get("isCurrentEmployment").equalsIgnoreCase("no"))
+            return false;
+        else if(data.get("isCurrentEmployment").equalsIgnoreCase("yes"))
+            return true;
+        else if(data.get("isCurrentEmployment") == null)
+            return false;
+        else
+            return false;
+//        return data.get("isCurrentEmployment") != null && data.get("isCurrentEmployment").equals("yes");
     }
 
     public String getFormType() {

@@ -4,12 +4,12 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
-public class HttpResponse implements com.r2development.leveris.di.IHttpResponse {
+public class UnderwriterHttpResponse implements IUnderwriterHttpResponse {
 
     private String httpResponse;
 
     @Inject
-    public HttpResponse(String httpResponse) {
+    public UnderwriterHttpResponse(String httpResponse) {
         this.httpResponse = httpResponse;
     }
 

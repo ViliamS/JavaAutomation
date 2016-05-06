@@ -127,7 +127,8 @@ public class InvestorDependenciesModule extends AbstractModule {
 //            bind(HttpClient.class).toInstance(httpClient);
 //            bind(HttpContext.class).toInstance(localContext);
 //            bind(IHttpResponse.class).toInstance(httpResponse);
-            bind(IHttpResponse.class).to(HttpResponse.class);
+
+//            bind(IInvestorHttpResponse.class).to(InvestorHttpResponse.class);
         }
 
 //        if ( user == null)

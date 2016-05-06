@@ -2,10 +2,9 @@ package com.r2development.leveris.bdd.borrower.apistepdef;
 
 import com.google.inject.Inject;
 import com.r2development.leveris.bdd.borrower.model.DependantData;
-import com.r2development.leveris.di.IAHttpContext;
-import com.r2development.leveris.di.IHttpResponse;
+import com.r2development.leveris.di.IABorrowerHttpContext;
+import com.r2development.leveris.di.IBorrowerHttpResponse;
 import com.r2development.leveris.di.IUser;
-import com.r2development.leveris.utils.HttpUtils;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
@@ -32,16 +31,16 @@ public class ApiYourDependantsStepDef extends ApiOpoqoBorrowerStepDef {
     private static final Log log = LogFactory.getLog(ApiYourDependantsStepDef.class.getName());
 
     @Inject
-    IAHttpContext localContext;
+    IABorrowerHttpContext localContext;
     @Inject
     private IUser user;
     @Inject
-    IHttpResponse httpResponse;
+    IBorrowerHttpResponse httpResponse;
 
     private boolean isThereDependantList = false;
 
     @Inject
-    public ApiYourDependantsStepDef(IHttpResponse httpResponse) {
+    public ApiYourDependantsStepDef(IBorrowerHttpResponse httpResponse) {
         this.httpResponse = httpResponse;
         isThereDependantList = false;
     }
@@ -268,9 +267,19 @@ public class ApiYourDependantsStepDef extends ApiOpoqoBorrowerStepDef {
 
     @And("^(Borrower) clicks Dependants \"NEXT\"$")
     public void user_clicks_dependants_next(String userType) throws IOException {
-        String nextSectionResponse = HttpUtils.requestHttpPost(
+
+        String btnNextSection = Jsoup.parse(Jsoup.parse(httpResponse.getHttpResponse()).select("component[id~=form]").select("component[encoding~=wicket]").text()).select("a[id~=submit]").select("a[wicketpath=main_c_form_form_root_c_w_pnlNoEmplyments_c_w_btnNextSection_submit]").attr("onclick");
+        Pattern pBtnNextSection = Pattern.compile("\\?(wicket:interface=.*)&");
+        Matcher mBtnNextSection = pBtnNextSection.matcher(btnNextSection);
+        String btnNextSectionWicketInterface = StringUtils.EMPTY;
+        while(mBtnNextSection.find()) {
+            btnNextSectionWicketInterface = mBtnNextSection.group(1);
+        }
+
+        String nextSectionResponse = requestHttpPost(
                 httpClient,
-                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:btnNextSection:submit::IBehaviorListener:0:",
+//                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:btnNextSection:submit::IBehaviorListener:0:",
+                System.getProperty("borrower") + "/form.2?" + btnNextSectionWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");
@@ -291,9 +300,19 @@ public class ApiYourDependantsStepDef extends ApiOpoqoBorrowerStepDef {
 
     @And("^(Borrower) clicks \"I HAVE NONE\" Dependant$")
     public void borrower_clicks_i_have_none_dependant(String userType) throws IOException {
-        HttpUtils.requestHttpPost(
+
+        String btnNoneDependants = Jsoup.parse(Jsoup.parse(httpResponse.getHttpResponse()).select("component[id~=main]").select("component[encoding~=wicket]").text()).select("a[id~=submit]").select("a[wicketpath=main_c_form_form_root_c_w_pnlNoEmplyments_c_w_btnNoneDependants_submit]").attr("onclick");
+        Pattern pBtnNoneDependants = Pattern.compile("\\?(wicket:interface=.*)&");
+        Matcher mBtnNoneDependants = pBtnNoneDependants.matcher(btnNoneDependants);
+        String btnNoneDependantsWicketInterface = StringUtils.EMPTY;
+        while(mBtnNoneDependants.find()) {
+            btnNoneDependantsWicketInterface = mBtnNoneDependants.group(1);
+        }
+
+        String nonDependantsResponse = requestHttpPost(
                 httpClient,
-                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:btnNoneDependants:submit::IBehaviorListener:0:",
+//                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:btnNoneDependants:submit::IBehaviorListener:0:",
+                System.getProperty("borrower") + "/form.2?" + btnNoneDependantsWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");
@@ -309,6 +328,7 @@ public class ApiYourDependantsStepDef extends ApiOpoqoBorrowerStepDef {
                 localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
+        httpResponse.setHttpResponse(nonDependantsResponse);
     }
 
     @And("^(Borrower) clicks Dependants \"Done\"$")
@@ -329,7 +349,7 @@ public class ApiYourDependantsStepDef extends ApiOpoqoBorrowerStepDef {
 
         String stepToken = currentFormDoc2.select("input[name=stepToken]").attr("value");
 
-        String dependantDoneResponse = HttpUtils.requestHttpPost(
+        String dependantDoneResponse = requestHttpPost(
                 httpClient,
                 System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlDepList:c:w:btnImDone:submit::IBehaviorListener:0:",
                 new LinkedHashMap<String, String>() {

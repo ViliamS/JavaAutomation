@@ -49,7 +49,6 @@ Feature: Personal Form Validation
       | MonthlyExpenses    | 1,000.00    |
       | NumberOfDependants | 1           |
       | AmountToBorrow     | 1,000.00    |
-
     When Payday Loan Borrower clicks on Continue button
     Then Borrower clicks on Apply Online
 #------ end With automatic

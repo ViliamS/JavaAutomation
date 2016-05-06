@@ -1,18 +1,30 @@
 package com.r2development.leveris.di;
 
 import com.google.inject.AbstractModule;
-import com.google.inject.Inject;
+import cucumber.api.java.Before;
 import org.apache.commons.lang3.StringUtils;
-import org.joda.time.DateTime;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class UnderwriterDependenciesModule extends AbstractModule {
-
-//    final User user;
-    private IUser user;
+    protected static IUser user;
     private WebDriver webDriver;
+
+    //    protected HttpClient httpClient;
+//    protected HttpContext localContext;
+    protected static IUnderwriterHttpResponse httpResponse;
+
+//    public static HttpContext getNewLocalContext() {
+//        CookieStore cookieStore = new BasicCookieStore();
+//        HttpClientContext localContextBody = HttpClientContext.create();
+//        BasicClientCookie cookieScUnload = new BasicClientCookie("sc-unload", "obu");
+//        cookieScUnload.setDomain(System.getProperty("domain"));
+//        cookieScUnload.setPath("/stable-borrower");
+//        cookieStore.addCookie(cookieScUnload);
+//        localContextBody.setCookieStore(cookieStore);
+//        localContext = localContextBody;
+//
+//        return localContext;
+//    }
 
 //    private static HarProxyServer proxyServer;
 //    private static LegacyProxyServer legacyProxyServer;
@@ -72,46 +84,61 @@ public class UnderwriterDependenciesModule extends AbstractModule {
 //        }
 //    }
 
-    @Inject
-    UnderwriterDependenciesModule(IUser user) {
-        this.user = user;
-    }
-//    UnderwriterDependenciesModule(SharedDriver sharedDriver) {
-//        this.webDriver = sharedDriver;
-//    }
-
+    @Before
     @Override
     protected void configure() {
 
-        if ( StringUtils.isEmpty(System.getProperty("environment")))
-            System.setProperty("environment", "dev2");
-        if ( StringUtils.isEmpty(System.getProperty("domain.underwriter")))
-            System.setProperty("domain.underwriter", "http://dv2app.opoqodev.com/");
-        if ( StringUtils.isEmpty(System.getProperty("borrower")))
-            System.setProperty("underwriter", "http://dv2app.opoqodev.com/stable-underwriter");
-        if ( System.getProperty("browser") == null)
-            System.setProperty("browser", "chrome");
-        if ( StringUtils.isEmpty(System.getProperty("timestamp")))
-            System.setProperty("timestamp", DateTime.now().toString("yyyyMMddHHmmssSSS"));
+//        if ( StringUtils.isEmpty(System.getProperty("environment")))
+//            System.setProperty("environment", "dev2");
+//        if ( StringUtils.isEmpty(System.getProperty("domain.borrower")))
+//            System.setProperty("domain.borrower", "dv2app.opoqodev.com");
+//        if ( StringUtils.isEmpty(System.getProperty("borrower")))
+//            System.setProperty("borrower", "http://dv2app.opoqodev.com/stable-borrower");
+//        if ( System.getProperty("browser") == null)
+//            System.setProperty("browser", "chrome");
+//        if ( StringUtils.isEmpty(System.getProperty("timestamp")))
+//            System.setProperty("timestamp", DateTime.now().toString("yyyyMMddHHmmssSSS"));
+//
+//        if ( StringUtils.isEmpty(System.getProperty("modeRun")) )
+//            System.setProperty("modeRun", "gui");
 
         if ( !StringUtils.isEmpty(System.getProperty("modeRun")) && System.getProperty("modeRun").equals("gui")) {
             switch (System.getProperty("browser")) {
                 case "chrome":
-                    webDriver = new ChromeDriver();
-                    bind(WebDriver.class).toInstance(webDriver);
+//                    webDriver = new ChromeDriver();
+//                    bind(WebDriver.class).toInstance(webDriver);
                     break;
                 case "firefox":
-                    webDriver = new FirefoxDriver();
-                    bind(WebDriver.class).toInstance(webDriver);
+//                    webDriver = new FirefoxDriver();
+//                    bind(WebDriver.class).toInstance(webDriver);
                     break;
             }
         }
+        else if ( System.getProperty("modeRun").equals("api") ) {
+//            httpClient = HttpClientBuilder.create().setRedirectStrategy(new LaxRedirectStrategy()).build();
+//            CookieStore cookieStore = new BasicCookieStore();
+//            HttpClientContext localContextBody = HttpClientContext.create();
+//            BasicClientCookie cookieScUnload = new BasicClientCookie("sc-unload", "obu");
+//            cookieScUnload.setDomain(System.getProperty("domain"));
+//            cookieScUnload.setPath("/stable-borrower");
+//            cookieStore.addCookie(cookieScUnload);
+//            localContextBody.setCookieStore(cookieStore);
+//            localContext = localContextBody;
+//            httpResponse = new HttpResponse(StringUtils.EMPTY);
 
-//        binder.bind(User.class).toInstance(user);
+//            bind(HttpClient.class).toInstance(httpClient);
+//            bind(HttpContext.class).toInstance(localContext);
+//            bind(IHttpResponse.class).toInstance(httpResponse);
+            bind(IUnderwriterHttpResponse.class).to(UnderwriterHttpResponse.class).asEagerSingleton();
+            bind(IAUnderwriterHttpContext.class).to(AUnderwriterHttpContext.class).asEagerSingleton();
+//            bind(IErrorHandler.class).to(ErrorHandler.class).asEagerSingleton();
+//            bind(new TypeLiteral<Map<String, String>>(){}).toProvider(ErrorHandler.class).asEagerSingleton();
+        }
+
         if ( user == null)
             user = new User();
         bind(IUser.class).toInstance(user);
-
-//        bind(IHttpResponse.class).to(HttpResponse.class).asEagerSingleton();
+//        bind(IUser.class).to(User.class).asEagerSingleton();
     }
+
 }

@@ -76,7 +76,7 @@ public class BorrowerTest {
         Document loginResponseDoc = Jsoup.parse(loginResponse);
 //        TextNode textNodeLoginResponseDoc = loginResponseDoc.select("component[id~=main]").select("component[encoding~=wicket]").first().textNodes().get(0);
 //        Document loginResponseDoc2 = Jsoup.parse(textNodeLoginResponseDoc.text());
-//        Elements panelTasksHidden = loginResponseDoc2.select("div[wicketpath=main_c_form_form_root_c_w_btnTasksHidden]");
+//        ELEMENTS panelTasksHidden = loginResponseDoc2.select("div[wicketpath=main_c_form_form_root_c_w_btnTasksHidden]");
         Elements textNodeJavascript = loginResponseDoc.select("evaluate[encoding~=wicket]");
 
         String javascriptBuyerCert = "";

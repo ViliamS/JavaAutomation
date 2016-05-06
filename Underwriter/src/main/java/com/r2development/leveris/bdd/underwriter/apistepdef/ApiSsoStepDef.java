@@ -2,7 +2,10 @@ package com.r2development.leveris.bdd.underwriter.apistepdef;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.r2development.leveris.di.IAUnderwriterHttpContext;
+import com.r2development.leveris.utils.HttpUtils;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -29,6 +32,9 @@ import static com.r2development.leveris.utils.HttpUtils.*;
 public class ApiSsoStepDef extends ApiOpoqoUnderwriterStepDef {
 
     private static final Log log = LogFactory.getLog(ApiSsoStepDef.class.getName());
+
+    @Inject
+    IAUnderwriterHttpContext localContext;
 
     private String ssoTicket;
 
@@ -68,14 +74,77 @@ public class ApiSsoStepDef extends ApiOpoqoUnderwriterStepDef {
 //        System.out.println("TICKET: " + ssoTicket);
 //    }
 
-    @Given("^user processes SSO (Underwriter) Auth Step$")
-    public void user_processes_SSO_Auth(String application) throws IOException {
+    @Given("^(Operator Underwriter) logs in via SSO (Underwriter)")
+    public void user_underwriter_logs_in(String operator, String application) throws IOException {
 
-        ApiSupportHttpClientStepDef.getNewInstanceHttpClientContext(System.getProperty("domain.underwriter"), System.getProperty("/stable-underwriter"));
+        Elements elts = null;
+        String authenticateResponse = null;
+        int iteratorCounter = 1;
+
+        do {
+            //        ApiSupportHttpClientStepDef.getNewInstanceHttpClientContext(System.getProperty("domain.underwriter"), System.getProperty("/stable-underwriter"));
+            localContext.setHttpContext(HttpUtils.initContext(System.getProperty("domain.underwriter"), "/stable-underwriter"));
+
+            //        String referer = "https://dv2apl.opoqodev.com/sso/?host=http://dv2apl.opoqodev.com/" + application.toLowerCase() + "/&application=" + application.toUpperCase();
+            String referer = System.getProperty("apollo.sso") + "/?host=http://" + System.getProperty("domain.underwriter") + "/stable-" + application.toLowerCase() + "/&application=" + application.toUpperCase();
+            String entity = "{\"authProcessId\":null,\"authProcessStepValues\":[{\"authDetailCode\":\"LDAPUSERNAME\",\"value\":\"test.automation+underwriter@finfactory.com\"},{\"authDetailCode\":\"LDAPPWD\",\"value\":\"autPassword1122+\"}],\"operation\":\"LOGIN\",\"originalRequest\":{\"url\":\"http://" + System.getProperty("domain.underwriter") + "/stable-" + application.toLowerCase() + "/\",\"applicationCode\":\"" + application.toUpperCase() + "\"},\"scenarioCode\":\"LDAP_USR_PWD\"}";
+
+            HttpPost httpPostValidateAuthProcessStep = new HttpPost(System.getProperty("apollo.sso") + "/api/public/sso/validateAuthProcessStep");
+            httpPostValidateAuthProcessStep.setHeader("Content-Type", "application/json; charset=UTF-8");
+            httpPostValidateAuthProcessStep.setHeader("Referer", referer);
+            StringEntity se = new StringEntity(entity);
+            se.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+            httpPostValidateAuthProcessStep.setEntity(se);
+            HttpResponse responseValidateAuthProcessStep = httpClient.execute(httpPostValidateAuthProcessStep, localContext.getHttpContext());
+            HttpEntity httpEntityValidateAuthProcessStep = responseValidateAuthProcessStep.getEntity();
+            System.out.println("==== httpPostValidateAuthProcessStep ====");
+            String parse2json = EntityUtils.toString(httpEntityValidateAuthProcessStep);
+            System.out.println(parse2json);
+
+            JsonParser jsonParser = new JsonParser();
+            JsonObject jsonObject = (JsonObject) jsonParser.parse(parse2json);
+
+            ssoTicket = jsonObject.get("serviceTicket").getAsString();
+            System.out.println("TICKET: " + ssoTicket);
+
+            authenticateResponse = requestHttpGet(
+                    httpClient,
+                    System.getProperty("underwriter") + "/home?useCase=authenticate&ticket=" + ssoTicket,
+                    new LinkedHashMap<String, String>() {
+                        {
+                            put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+                        }
+                    },
+                    localContext.getHttpContext(),
+                    CONSUME_QUIETLY
+            );
+            httpResponse.setHttpResponse(authenticateResponse);
+
+            Assert.assertNotNull("we shouldn't have a null string", authenticateResponse);
+
+            Document doc = Jsoup.parse(authenticateResponse);
+            elts = doc.select("title");
+
+            Assert.assertEquals("We should have one \"title\" element", 1, elts.size());
+            Assert.assertEquals("Title Element should contains " + application, true, elts.get(0).text().contains(application));
+            Assert.assertEquals("We should have the comment \"<!-- Page Class com.cleverlance.abakus.ib.underwriter.web.ui.form.FormPage -->\"", true, authenticateResponse.contains("<!-- Page Class com.cleverlance.abakus.ib.underwriter.web.ui.form.FormPage -->"));
+
+            iteratorCounter++;
+            log.info("Iterator Counter: " + iteratorCounter);
+        }
+        while (authenticateResponse.contains("dynamic script end: LoginErrorView") && authenticateResponse.contains("dynamic script begin: LoginErrorView"));
+
+    }
+
+    @Given("^(Operator Underwriter) processes SSO (Underwriter) Auth Step$")
+    public void user_processes_SSO_Auth(String operator, String application) throws IOException {
+
+//        ApiSupportHttpClientStepDef.getNewInstanceHttpClientContext(System.getProperty("domain.underwriter"), System.getProperty("/stable-underwriter"));
+        localContext.setHttpContext(HttpUtils.initContext(System.getProperty("domain.underwriter"), "/stable-underwriter"));
 
 //        String referer = "https://dv2apl.opoqodev.com/sso/?host=http://dv2apl.opoqodev.com/" + application.toLowerCase() + "/&application=" + application.toUpperCase();
         String referer = System.getProperty("apollo.sso") + "/?host=http://" + System.getProperty("domain.underwriter") + "/stable-" + application.toLowerCase() + "/&application=" + application.toUpperCase();
-        String entity = "{\"authProcessId\":null,\"authProcessStepValues\":[{\"authDetailCode\":\"LDAPUSERNAME\",\"value\":\"admin\"},{\"authDetailCode\":\"LDAPPWD\",\"value\":\"changemenow!\"}],\"operation\":\"LOGIN\",\"originalRequest\":{\"url\":\"http://" + System.getProperty("domain.underwriter") + "/stable-" + application.toLowerCase() + "/\",\"applicationCode\":\"" + application.toUpperCase() + "\"},\"scenarioCode\":\"LDAP_USR_PWD\"}";
+        String entity = "{\"authProcessId\":null,\"authProcessStepValues\":[{\"authDetailCode\":\"LDAPUSERNAME\",\"value\":\"test.automation+underwriter@finfactory.com\"},{\"authDetailCode\":\"LDAPPWD\",\"value\":\"autPassword1122+\"}],\"operation\":\"LOGIN\",\"originalRequest\":{\"url\":\"http://" + System.getProperty("domain.underwriter") + "/stable-" + application.toLowerCase() + "/\",\"applicationCode\":\"" + application.toUpperCase() + "\"},\"scenarioCode\":\"LDAP_USR_PWD\"}";
 
         HttpPost httpPostValidateAuthProcessStep = new HttpPost( System.getProperty("apollo.sso") + "/api/public/sso/validateAuthProcessStep");
         httpPostValidateAuthProcessStep.setHeader("Content-Type", "application/json; charset=UTF-8");
@@ -83,7 +152,7 @@ public class ApiSsoStepDef extends ApiOpoqoUnderwriterStepDef {
         StringEntity se = new StringEntity(entity);
         se.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
         httpPostValidateAuthProcessStep.setEntity(se);
-        HttpResponse responseValidateAuthProcessStep = httpClient.execute(httpPostValidateAuthProcessStep, localContext);
+        HttpResponse responseValidateAuthProcessStep = httpClient.execute(httpPostValidateAuthProcessStep, localContext.getHttpContext());
         HttpEntity httpEntityValidateAuthProcessStep = responseValidateAuthProcessStep.getEntity();
         System.out.println("==== httpPostValidateAuthProcessStep ====");
         String parse2json = EntityUtils.toString(httpEntityValidateAuthProcessStep);
@@ -97,40 +166,41 @@ public class ApiSsoStepDef extends ApiOpoqoUnderwriterStepDef {
 
     }
 
-    @When("^user processes final SSO (Underwriter) Auth Step$")
-    public void user_processes_final_sso_auth_step(String application) throws IOException {
+    @When("^(Operator Underwriter) processes final SSO (Underwriter) Auth Step$")
+    public void  user_processes_final_sso_auth_step(String operator, String application) throws IOException {
 
-        String authenticateResponse = requestHttpGet(
+        Elements elts = null;
+        String authenticateResponse = null;
+        int iteratorCounter = 1;
+
+        do {
+
+            authenticateResponse = requestHttpGet(
                     httpClient,
-//                    "http://dv2app.opoqodev.com/stable-underwriter/home?useCase=authenticate&ticket=" + ssoTicket,
                     System.getProperty("underwriter") + "/home?useCase=authenticate&ticket=" + ssoTicket,
                     new LinkedHashMap<String, String>() {
                         {
                             put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
                         }
                     },
-                    localContext,
+                    localContext.getHttpContext(),
                     CONSUME_QUIETLY
             );
-        httpResponse.setHttpResponse(authenticateResponse);
+            httpResponse.setHttpResponse(authenticateResponse);
 
-        Assert.assertNotNull("we shouldn't have a null string", authenticateResponse);
+            Assert.assertNotNull("we shouldn't have a null string", authenticateResponse);
 
-        Document doc = Jsoup.parse(authenticateResponse);
-        Elements elts = doc.select("title");
+            Document doc = Jsoup.parse(authenticateResponse);
+            elts = doc.select("title");
 
-        Assert.assertEquals("We should have one \"title\" element", 1, elts.size());
-        Assert.assertEquals("Title Element should contains " + application, true, elts.get(0).text().contains(application));
-        Assert.assertEquals("We should have the comment \"<!-- Page Class com.cleverlance.abakus.ib.underwriter.web.ui.form.FormPage -->\"", true, authenticateResponse.contains("<!-- Page Class com.cleverlance.abakus.ib.underwriter.web.ui.form.FormPage -->"));
+            Assert.assertEquals("We should have one \"title\" element", 1, elts.size());
+            Assert.assertEquals("Title Element should contains " + application, true, elts.get(0).text().contains(application));
+            Assert.assertEquals("We should have the comment \"<!-- Page Class com.cleverlance.abakus.ib.underwriter.web.ui.form.FormPage -->\"", true, authenticateResponse.contains("<!-- Page Class com.cleverlance.abakus.ib.underwriter.web.ui.form.FormPage -->"));
 
-        /*
-        if ( authenticateResponse.contains("// dynamic script begin: LoginErrorView") ) {
-            do {
-                user_processes_sso_auth_step1();
-                user_processes_sso_auth_step2();
-            } while ( authenticateResponse.contains("// dynamic script begin: LoginErrorView") );
+            iteratorCounter++;
+            log.info("Iterator Counter: " + iteratorCounter);
         }
-        */
+        while ( authenticateResponse.contains("dynamic script end: LoginErrorView") && authenticateResponse.contains("dynamic script begin: LoginErrorView") );
     }
 
     @Then("^user logs out from (Underwriter)$")
@@ -148,7 +218,7 @@ public class ApiSsoStepDef extends ApiOpoqoUnderwriterStepDef {
                     }
                 },
                 new LinkedHashMap<String, String>() {},
-                localContext,
+                localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
 

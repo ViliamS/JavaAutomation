@@ -2,7 +2,7 @@ package com.r2development.leveris.bdd.borrower.apistepdef;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.r2development.leveris.di.IHttpResponse;
+import com.r2development.leveris.di.IBorrowerHttpResponse;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;
@@ -20,10 +20,10 @@ public class ApiYourFundingStepDef extends ApiOpoqoBorrowerStepDef {
     private static final Log log = LogFactory.getLog(ApiYourFundingStepDef.class);
 
     @Inject
-    IHttpResponse httpResponse;
+    IBorrowerHttpResponse httpResponse;
 
     @Inject
-    public ApiYourFundingStepDef(IHttpResponse httpResponse) {
+    public ApiYourFundingStepDef(IBorrowerHttpResponse httpResponse) {
         this.httpResponse = httpResponse;
     }
 

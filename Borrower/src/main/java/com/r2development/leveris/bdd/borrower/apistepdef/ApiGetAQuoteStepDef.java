@@ -3,8 +3,8 @@ package com.r2development.leveris.bdd.borrower.apistepdef;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.QuoteData;
-import com.r2development.leveris.di.IAHttpContext;
-import com.r2development.leveris.di.IHttpResponse;
+import com.r2development.leveris.di.IABorrowerHttpContext;
+import com.r2development.leveris.di.IBorrowerHttpResponse;
 import com.r2development.leveris.di.IUser;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -41,14 +41,16 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
     protected QuoteData quoteData = new QuoteData();
 
     @Inject
-    IAHttpContext localContext;
+    IABorrowerHttpContext localContext;
     @Inject
-    IHttpResponse httpResponse;
+    IBorrowerHttpResponse httpResponse;
     @Inject
     IUser user;
 
+    private String borrowerEndStage1;
+
     @Inject
-    public ApiGetAQuoteStepDef(IHttpResponse httpResponse, IUser user) {
+    public ApiGetAQuoteStepDef(IBorrowerHttpResponse httpResponse, IUser user) {
         this.httpResponse = httpResponse;
         this.user = user;
     }
@@ -1974,10 +1976,19 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
     @And("^Borrower clicks \"Review and Submit\"$")
     public void user_clicks_review_and_submit() throws IOException {
 
-        // TODO to check application status
-        requestHttpPost(
+        String onclickBtnReviewAndSubmit =Jsoup.parse(Jsoup.parse(httpResponse.getHttpResponse()).select("component[id~=main]").select("component[encoding~=wicket]").text()).select("a[id~=submit]").select("a[wicketpath~=main_c_form_form_root_c_w_pnl-YouAreReadyToSubmit_c_w_btn-ReviewAndSubmit_submit]").attr("onclick");
+        Pattern pBtnReviewAndSubmit = Pattern.compile("\\?(wicket:interface=.*)&");
+        Matcher mBtnReviewAndSubmit = pBtnReviewAndSubmit.matcher(onclickBtnReviewAndSubmit);
+        String btnReviewAndSubmitWicketInterface = StringUtils.EMPTY;
+        while(mBtnReviewAndSubmit.find()) {
+            btnReviewAndSubmitWicketInterface = mBtnReviewAndSubmit.group(1);
+        }
+
+//        if($('#formfd5').valid()&amp;&amp;SC._validate('formf9e')){SC._submit.apply(this,['formfd5','formf9e','scAjax.apply(this,[2,0,\'?wicket:interface=:3:main:c:form:form:root:c:w:pnl-YouAreReadyToSubmit:c:w:btn-ReviewAndSubmit:submit::IBehaviorListener:0:&amp;${scrollPos}\',\'busyIndicatorc8\',0,0,2,\'root:c:w:pnl-YouAreReadyToSubmit:c:w:btn-ReviewAndSubmit:submit\',\'formfd5\']^);']^);};return false;
+        String reviewAmdSubmitResponse = requestHttpPost(
                 httpClient,
-                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnl-YouAreReadyToSubmit:c:w:btn-ReviewAndSubmit:submit::IBehaviorListener:0:",
+//                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnl-YouAreReadyToSubmit:c:w:btn-ReviewAndSubmit:submit::IBehaviorListener:0:",
+                System.getProperty("borrower") + "/form.2?" + btnReviewAndSubmitWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");
@@ -1994,7 +2005,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                 localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
-        // TODO to check application status
+        httpResponse.setHttpResponse(reviewAmdSubmitResponse);
     }
 
     @And("^Borrower clicks \"Submit your application\"$")
@@ -2068,6 +2079,96 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
     }
 
     @And("^finally, Borrower clicks \"Submit Application\"$")
+    public void user_clicks_submit_application_final(Map<String, String> submitApplicationData) throws IOException {
+
+        Document docReviewSubmitApplication = Jsoup.parse(Jsoup.parse(httpResponse.getHttpResponse()).select("component[id~=main]").select("component[encoding~=wicket]").text());
+        String formSubmitListener = docReviewSubmitApplication.select("form[id~=form]").select("form[wicketpath~=main_c_form_form").attr("action").replace(":main:c:form:form::IFormSubmitListener::", ":main:c:form::IFormChangeListener:2:-1");
+
+        requestHttpPost(
+                httpClient,
+                System.getProperty("borrower") + "/form.2" + formSubmitListener,
+                new LinkedHashMap<String, String>() {
+                    {
+                        put("Accept", "text/xml");
+                        put("Content-Type", "application/x-www-form-urlencoded");
+                    }
+                },
+                new LinkedHashMap<String, String>() {
+                    {
+                        put(
+                            "data",
+                            "{" +
+                                "\"widgets\":" +
+                                "[" +
+                                    "{" +
+                                        "\"widget\": \"pnlSubmitButton btnSubmitApplication\"," +
+                                        "\"data\":" +
+                                        "{" +
+                                            "\"enable\":true" +
+                                            "\"visible\":true" +
+                                        "}" +
+                                        "\"visibleEvent\": \"show\"" +
+                                    "}" +
+                                "]" +
+                            "}"
+                        );
+                    }
+                },
+                localContext.getHttpContext(),
+                CONSUME_QUIETLY
+        );
+
+        String btnSubmitApplication = docReviewSubmitApplication.select("a[id~=submit").select("a[wicketpath~=main_c_form_form_root_c_w_pnlSubmitButton_c_w_btnSubmitApplication_submit]").attr("onclick");
+        Pattern pBtnSubmitApplication = Pattern.compile("\\?(wicket:interface=.*)&");
+        Matcher mBtnSubmitApplication = pBtnSubmitApplication.matcher(btnSubmitApplication);
+        String btnSubmitApplicationWicketInterface = StringUtils.EMPTY;
+        while(mBtnSubmitApplication.find()) {
+            btnSubmitApplicationWicketInterface = mBtnSubmitApplication.group(1);
+        }
+
+        String submitApplicationResponse = requestHttpPost(
+                httpClient,
+//                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlSubmitButton:c:w:btnSubmitApplication:submit::IBehaviorListener:0:-1",
+                System.getProperty("borrower") + "/form.2?" + btnSubmitApplicationWicketInterface,
+                new LinkedHashMap<String, String>() {
+                    {
+                        put("Accept", "text/xml");
+                        put("Content-Type", "application/x-www-form-urlencoded");
+                    }
+                },
+                new LinkedHashMap<String, String>() {
+                    {
+                        put("root:c:w:pnlComment:c:w:txaAddComment:textarea", "test");
+                        put("root:c:w:txtLoanAmount:tb", null);
+                        put("root:c:w:pnlBeforeSubmit:c:w:chkDistanceMarketing:checkbox", "on");
+                        put("root:c:w:pnlBeforeSubmit:c:w:chkStatutory:checkbox", "on");
+                        put("root:c:w:pnlBeforeSubmit:c:w:chkDeclarations:checkbox", "on");
+                        put("root:c:w:pnlBeforeSubmit:c:w:chkCraAml:checkbox", "on");
+                        put("stepToken", "1");
+                        put("root:c:w:btnSubmitApplication:submit", "1");
+                    }
+                },
+                localContext.getHttpContext(),
+                CONSUME_QUIETLY
+        );
+        httpResponse.setHttpResponse(submitApplicationResponse);
+
+        String borrowerHomeResponse = requestHttpGet(
+                httpClient,
+                System.getProperty("borrower") + "/home",
+                new LinkedHashMap<String, String>() {
+                    {
+                        put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+                    }
+                },
+                localContext.getHttpContext(),
+                false
+        );
+        httpResponse.setHttpResponse(borrowerHomeResponse);
+    }
+
+    /*
+    @And("^finally, Borrower clicks \"Submit Application\"$")
     public void user_clicks_submit_application_final() throws IOException {
 
         // TODO to check
@@ -2105,7 +2206,7 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                 CONSUME_QUIETLY
         );
 
-        requestHttpPost(
+        String submitApplicationResponse = requestHttpPost(
                 httpClient,
                 System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlSubmitButton:c:w:btnSubmitApplication:submit::IBehaviorListener:0:-1",
                 new LinkedHashMap<String, String>() {
@@ -2129,5 +2230,83 @@ public class ApiGetAQuoteStepDef extends ApiOpoqoBorrowerStepDef {
                 localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
+        httpResponse.setHttpResponse(submitApplicationResponse);
+
+        String borrowerHomeResponse = requestHttpGet(
+                httpClient,
+                System.getProperty("borrower") + "/home",
+                new LinkedHashMap<String, String>() {
+                    {
+                        put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp");
+                    }
+                },
+                localContext.getHttpContext(),
+                false
+        );
+        httpResponse.setHttpResponse(borrowerHomeResponse);
+    }
+    */
+
+    @And("^(Borrower) closes his (Unsecured) approved loan$")
+    public void borrower_user_closes_his_approved_loan(String user, String loanType) throws IOException {
+        Document docApprovedLoan = Jsoup.parse(httpResponse.getHttpResponse());
+        String btnApprovedLoan = docApprovedLoan.select("a[id~=cancel").select("a[wicketpath~=main_c_form_form_root_c_w_btnClose_cancel]").attr("onclick");
+        Pattern pBtnApprovedLoan = Pattern.compile("\\?(wicket:interface=.*&.*stepToken=.)&");
+        Matcher mBtnApprovedLoan = pBtnApprovedLoan.matcher(btnApprovedLoan);
+        String btnApprovedLoanWicketInterface = StringUtils.EMPTY;
+        while(mBtnApprovedLoan.find()) {
+            btnApprovedLoanWicketInterface = mBtnApprovedLoan.group(1);
+        }
+
+        String btnCloseApprovedLoan = requestHttpPost(
+                httpClient,
+//                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlSubmitButton:c:w:btnSubmitApplication:submit::IBehaviorListener:0:-1",
+                System.getProperty("borrower") + "/form.2?" + btnApprovedLoanWicketInterface,
+                new LinkedHashMap<String, String>() {
+                    {
+                        put("Accept", "text/xml");
+                        put("Content-Type", "application/x-www-form-urlencoded");
+                    }
+                },
+                new LinkedHashMap<String, String>() {},
+                localContext.getHttpContext(),
+                CONSUME_QUIETLY
+        );
+        httpResponse.setHttpResponse(btnCloseApprovedLoan);
+    }
+
+    @And("^(Borrower) tweaks his (Unsecured) approved loan$")
+    public void user_tweaks_his_approved_loan(String user, String loanType) throws IOException {
+        Document docApprovedLoan = Jsoup.parse(httpResponse.getHttpResponse());
+        String btnApprovedLoan = docApprovedLoan.select("a[id~=submit").select("a[wicketpath~=main_c_form_form_root_c_w_btnNext_submit]").attr("onclick");
+        Pattern pBtnApprovedLoan = Pattern.compile("\\?(wicket:interface=.*)&");
+        Matcher mBtnApprovedLoan = pBtnApprovedLoan.matcher(btnApprovedLoan);
+        String btnApprovedLoanWicketInterface = StringUtils.EMPTY;
+        while(mBtnApprovedLoan.find()) {
+            btnApprovedLoanWicketInterface = mBtnApprovedLoan.group(1);
+        }
+        final String stepToken = docApprovedLoan.select("input[name=stepToken]").attr("value");
+
+
+        String btnTweakApprovedLoan = requestHttpPost(
+                httpClient,
+//                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlSubmitButton:c:w:btnSubmitApplication:submit::IBehaviorListener:0:-1",
+                System.getProperty("borrower") + "/form.2?" + btnApprovedLoanWicketInterface,
+                new LinkedHashMap<String, String>() {
+                    {
+                        put("Accept", "text/xml");
+                        put("Content-Type", "application/x-www-form-urlencoded");
+                    }
+                },
+                new LinkedHashMap<String, String>() {
+                    {
+                        put("stepToken", stepToken);
+                        put("root:c:w:btnNext:submit", "1");
+                    }
+                },
+                localContext.getHttpContext(),
+                CONSUME_QUIETLY
+        );
+        httpResponse.setHttpResponse(btnTweakApprovedLoan);
     }
 }

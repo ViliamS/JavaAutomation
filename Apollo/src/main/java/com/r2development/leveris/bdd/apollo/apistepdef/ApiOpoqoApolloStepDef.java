@@ -2,7 +2,6 @@ package com.r2development.leveris.bdd.apollo.apistepdef;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.r2development.leveris.di.IHttpResponse;
 import com.r2development.leveris.di.IUser;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -43,8 +42,9 @@ public class ApiOpoqoApolloStepDef /*implements IBorrower*/ {
     @Inject
     IUser user;
 
-    @Inject
-    IHttpResponse httpResponse;
+//    TODO ApolloHttpResponse
+//    @Inject
+//    IHttpResponse httpResponse;
 
     public ApiOpoqoApolloStepDef() {
         httpClient = ApiSupportHttpClientStepDef.getInstanceHttpClient();
@@ -64,10 +64,16 @@ public class ApiOpoqoApolloStepDef /*implements IBorrower*/ {
 //        paydayParameters = new LinkedHashMap<>();
     }
 
+//    @Inject
+//    public ApiOpoqoApolloStepDef(IUser user, IHttpResponse httpResponse) {
+//        this.user = user;
+//        this.httpResponse = httpResponse;
+//    }
+
     @Inject
-    public ApiOpoqoApolloStepDef(IUser user, IHttpResponse httpResponse) {
+    public ApiOpoqoApolloStepDef(IUser user/*, IHttpResponse httpResponse*/) {
         this.user = user;
-        this.httpResponse = httpResponse;
+//        this.httpResponse = httpResponse;
     }
 
     public HttpContext newHttpClientContext() {

@@ -12,7 +12,7 @@ public class BorrowerDependenciesModule extends AbstractModule {
 
 //    protected HttpClient httpClient;
 //    protected HttpContext localContext;
-    protected static IHttpResponse httpResponse;
+    protected static IBorrowerHttpResponse httpResponse;
 
 //    public static HttpContext getNewLocalContext() {
 //        CookieStore cookieStore = new BasicCookieStore();
@@ -130,8 +130,8 @@ public class BorrowerDependenciesModule extends AbstractModule {
 //            bind(HttpClient.class).toInstance(httpClient);
 //            bind(HttpContext.class).toInstance(localContext);
 //            bind(IHttpResponse.class).toInstance(httpResponse);
-            bind(IHttpResponse.class).to(HttpResponse.class).asEagerSingleton();
-            bind(IAHttpContext.class).to(AHttpContext.class).asEagerSingleton();
+            bind(IBorrowerHttpResponse.class).to(BorrowerHttpResponse.class).asEagerSingleton();
+            bind(IABorrowerHttpContext.class).to(ABorrowerHttpContext.class).asEagerSingleton();
 //            bind(IErrorHandler.class).to(ErrorHandler.class).asEagerSingleton();
 //            bind(new TypeLiteral<Map<String, String>>(){}).toProvider(ErrorHandler.class).asEagerSingleton();
         }

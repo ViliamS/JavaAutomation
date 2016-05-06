@@ -2,9 +2,11 @@ package com.r2development.leveris.bdd.borrower.apistepdef;
 
 import com.google.inject.Inject;
 import com.r2development.leveris.bdd.borrower.model.FinancialData;
-import com.r2development.leveris.di.IAHttpContext;
-import com.r2development.leveris.di.IHttpResponse;
+import com.r2development.leveris.di.IABorrowerHttpContext;
+import com.r2development.leveris.di.IBorrowerHttpResponse;
 import com.r2development.leveris.di.IUser;
+import com.r2development.leveris.utils.enums.CARD;
+import com.r2development.leveris.utils.enums.PAYMENT_FREQUENCY;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
@@ -33,16 +35,16 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
     private static final Log log = LogFactory.getLog(ApiYourFinancialCommitmentsStepDef.class.getName());
 
     @Inject
-    IAHttpContext localContext;
+    IABorrowerHttpContext localContext;
     @Inject
-    IHttpResponse httpResponse;
+    IBorrowerHttpResponse httpResponse;
     @Inject
     IUser user;
 
     boolean isThereFinancialList = false;
 
     @Inject
-    public ApiYourFinancialCommitmentsStepDef(IHttpResponse httpResponse) {
+    public ApiYourFinancialCommitmentsStepDef(IBorrowerHttpResponse httpResponse) {
         this.httpResponse = httpResponse;
     }
 
@@ -169,9 +171,19 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
             // TODO handle the case or refactor
         }
         else {
-            requestHttpPost(
+
+            String btnNoneCommitments = Jsoup.parse(Jsoup.parse(httpResponse.getHttpResponse()).select("component[id~=main]").select("component[encoding~=wicket]").text()).select("a[id~=submit]").select("a[wicketpath=main_c_form_form_root_c_w_pnlNoLiability_c_w_lnkHaveNoCommitments_submit]").attr("onclick");
+            Pattern pBtnNoneCommitments = Pattern.compile("\\?(wicket:interface=.*)&");
+            Matcher mBtnNoneCommitments = pBtnNoneCommitments.matcher(btnNoneCommitments);
+            String btnNoneCommitmentsWicketInterface = StringUtils.EMPTY;
+            while(mBtnNoneCommitments.find()) {
+                btnNoneCommitmentsWicketInterface = mBtnNoneCommitments.group(1);
+            }
+
+            String noCommitmentsResponse = requestHttpPost(
                     httpClient,
-                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNoLiability:c:w:lnkHaveNoCommitments:submit::IBehaviorListener:0:",
+//                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNoLiability:c:w:lnkHaveNoCommitments:submit::IBehaviorListener:0:",
+                    System.getProperty("borrower") + "/form.2?" + btnNoneCommitmentsWicketInterface,
                     new LinkedHashMap<String, String>() {
                         {
                             put("Accept", "text/xml");
@@ -187,10 +199,20 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                     localContext.getHttpContext(),
                     CONSUME_QUIETLY
             );
+            httpResponse.setHttpResponse(noCommitmentsResponse);
 
-            String noCommitmentsResponse = requestHttpPost(
+            String btnNextSection = Jsoup.parse(Jsoup.parse(httpResponse.getHttpResponse()).select("component[id~=main]").select("component[encoding~=wicket]").text()).select("a[id~=submit]").select("a[wicketpath=main_c_form_form_root_c_w_pnlNoCommitments_c_w_btnNextSection_submit]").attr("onclick");
+            Pattern pBtnNextSection = Pattern.compile("\\?(wicket:interface=.*)&");
+            Matcher mBtnNextSection = pBtnNextSection.matcher(btnNextSection);
+            String btnNextSectionWicketInterface = StringUtils.EMPTY;
+            while(mBtnNextSection.find()) {
+                btnNextSectionWicketInterface = mBtnNextSection.group(1);
+            }
+
+            String nextSectionResponse = requestHttpPost(
                     httpClient,
-                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNoCommitments:c:w:btnNextSection:submit::IBehaviorListener:0:",
+//                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNoCommitments:c:w:btnNextSection:submit::IBehaviorListener:0:",
+                    System.getProperty("borrower") + "/form.2?" + btnNextSectionWicketInterface,
                     new LinkedHashMap<String, String>() {
                         {
                             put("Accept", "text/xml");
@@ -206,7 +228,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                     localContext.getHttpContext(),
                     CONSUME_QUIETLY
             );
-            httpResponse.setHttpResponse(noCommitmentsResponse);
+            httpResponse.setHttpResponse(nextSectionResponse);
         }
     }
 
@@ -1268,6 +1290,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
     @And("^(Borrower) selects Personal payment frequency : (Weekly|Fortnightly|Monthly|Yearly)$")
     public void user_selects_personal_payment_frequency(String usertType, String paymentFrequency) {
 //        yourFinancialCommitmentsPage.selectPersonalPaymentFrequency(paymentFrequency);
+        /*
         String finalPaymentFrequency = StringUtils.EMPTY;
         switch(paymentFrequency) {
             case "Weekly":
@@ -1283,7 +1306,8 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                 finalPaymentFrequency = "Y";
                 break;
         }
-        financialParameters.put("root:c:w:pnlAddNew:c:w:pnlPaymentFreq:c:w:cmbRepaymentFrequency:combobox", finalPaymentFrequency);
+        */
+        financialParameters.put("root:c:w:pnlAddNew:c:w:pnlPaymentFreq:c:w:cmbRepaymentFrequency:combobox", PAYMENT_FREQUENCY.getShortValueByLongValue(paymentFrequency));
     }
 
     @And("^(Borrower) types Personal repayment amount : (.*)$")
@@ -1329,8 +1353,9 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
     }
 
     @And("^(Borrower) selects Credit Card type : (VISA|Mastercard|American Express|Store Card|Other)$")
-    public void user_selects_credit_card_type(String usertType, String type) {
+    public void user_selects_credit_card_type(String usertType, String cardType) {
 //        yourFinancialCommitmentsPage.selectCreditcType(type);
+        /*
         String finalCreditCardType = StringUtils.EMPTY;
         switch (type) {
             case "VISA":
@@ -1349,7 +1374,8 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                 finalCreditCardType = "";
                 break;
         }
-        financialParameters.put("root:c:w:pnlAddNew:c:w:pnlCreditCard:c:w:cmbCardType:combobox", finalCreditCardType);
+        */
+        financialParameters.put("root:c:w:pnlAddNew:c:w:pnlCreditCard:c:w:cmbCardType:combobox", CARD.getShortValueByLongValue(cardType));
     }
 
     @And("^(Borrower) types Credit Card limit : (.*)$")
@@ -1467,6 +1493,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
     @And("^(Borrower) selects Car Payment Frequency : (Weekly|Fortnightly|Monthly|Yearly)$")
     public void user_selects_car_payment_frequency(String usertType, String paymentFrequency) {
 //        yourFinancialCommitmentsPage.selectCarPaymentFrequency(paymentFrequency);
+        /*
         String finalPaymentFrequency = StringUtils.EMPTY;
         switch (paymentFrequency) {
             case "Weekly":
@@ -1482,7 +1509,8 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                 finalPaymentFrequency = "Y";
                 break;
         }
-        financialParameters.put("root:c:w:pnlAddNew:c:w:pnlPaymentFreq:c:w:cmbRepaymentFrequency:combobox", finalPaymentFrequency);
+        */
+        financialParameters.put("root:c:w:pnlAddNew:c:w:pnlPaymentFreq:c:w:cmbRepaymentFrequency:combobox", PAYMENT_FREQUENCY.getShortValueByLongValue(paymentFrequency));
     }
 
     @And("^(Borrower) types Card repayment amount : (.*)$")
@@ -1536,6 +1564,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
     @And("^(Borrower) selects Student payment frequency : (Weekly|Fortnightly|Monthly|Yearly)$")
     public void user_selects_student_payment_frequency(String usertType, String paymentFrequency) {
 //        yourFinancialCommitmentsPage.selectStudentPaymentFrequency(paymentFrequency);
+        /*
         String finalPaymentFrequency = StringUtils.EMPTY;
         switch (paymentFrequency) {
             case "Weekly":
@@ -1551,7 +1580,8 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                 finalPaymentFrequency = "Y";
                 break;
         }
-        financialParameters.put("root:c:w:pnlAddNew:c:w:pnlPaymentFreq:c:w:cmbRepaymentFrequency:combobox", finalPaymentFrequency);
+        */
+        financialParameters.put("root:c:w:pnlAddNew:c:w:pnlPaymentFreq:c:w:cmbRepaymentFrequency:combobox", PAYMENT_FREQUENCY.getShortValueByLongValue(paymentFrequency));
     }
 
     @And("^(Borrower) types Student repayment amount : (.*)$")
@@ -1584,6 +1614,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
     public void user_selects_rent_payment_frequency(String usertType, String repaymentFrequency) {
         //optional
 //        yourFinancialCommitmentsPage.selectRentPaymentFrequency(repaymentFrequency);
+        /*
         String finalPaymentFrequency = StringUtils.EMPTY;
         switch (repaymentFrequency) {
             case "Weekly":
@@ -1599,7 +1630,8 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                 finalPaymentFrequency = "Y";
                 break;
         }
-        financialParameters.put("root:c:w:pnlAddNew:c:w:pnlPaymentFreq:c:w:cmbRepaymentFrequency:combobox", finalPaymentFrequency);
+        */
+        financialParameters.put("root:c:w:pnlAddNew:c:w:pnlPaymentFreq:c:w:cmbRepaymentFrequency:combobox", PAYMENT_FREQUENCY.getShortValueByLongValue(repaymentFrequency));
     }
 
     @And("^(Borrower) types Rent Repayment Amount : (.*)$")
@@ -1640,6 +1672,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
     public void user_types_utilities_payment_frequency(String usertType, String paymentFrequency) {
         //optional
 //        yourFinancialCommitmentsPage.selectUtilitiesPaymentFrequency(paymentFrequency);
+        /*
         String finalPaymentFrequency = StringUtils.EMPTY;
         switch (paymentFrequency) {
             case "Weekly":
@@ -1655,7 +1688,8 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                 finalPaymentFrequency = "Y";
                 break;
         }
-        financialParameters.put("root:c:w:pnlAddNew:c:w:pnlPaymentFreq:c:w:cmbRepaymentFrequency:combobox", finalPaymentFrequency);
+        */
+        financialParameters.put("root:c:w:pnlAddNew:c:w:pnlPaymentFreq:c:w:cmbRepaymentFrequency:combobox", PAYMENT_FREQUENCY.getShortValueByLongValue(paymentFrequency));
     }
 
     @And("^(Borrower) types Utilities Repayment Amount : (.*)$")
@@ -1696,6 +1730,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
     public void user_types_child_care_payment_frequency(String usertType, String paymentFrequency) {
         //optional
 //        yourFinancialCommitmentsPage.selectChildCarePaymentFrequency(paymentFrequency);
+        /*
         String finalPaymentFrequency = StringUtils.EMPTY;
         switch (paymentFrequency) {
             case "Weekly":
@@ -1711,7 +1746,8 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
                 finalPaymentFrequency = "Y";
                 break;
         }
-        financialParameters.put("root:c:w:pnlAddNew:c:w:pnlPaymentFreq:c:w:cmbRepaymentFrequency:combobox", finalPaymentFrequency);
+        */
+        financialParameters.put("root:c:w:pnlAddNew:c:w:pnlPaymentFreq:c:w:cmbRepaymentFrequency:combobox", PAYMENT_FREQUENCY.getShortValueByLongValue(paymentFrequency));
 
     }
 

@@ -3,20 +3,25 @@ package com.r2development.leveris.bdd.borrower.apistepdef;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.PersonalDetailsData;
-import com.r2development.leveris.di.IAHttpContext;
-import com.r2development.leveris.di.IHttpResponse;
+import com.r2development.leveris.di.IABorrowerHttpContext;
+import com.r2development.leveris.di.IBorrowerHttpResponse;
 import com.r2development.leveris.di.IUser;
+import com.r2development.leveris.utils.enums.MARITAL_STATUS;
+import com.r2development.leveris.utils.enums.NATIONALITY;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jsoup.Jsoup;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.r2development.leveris.utils.HttpUtils.CONSUME_QUIETLY;
 import static com.r2development.leveris.utils.HttpUtils.requestHttpPost;
@@ -29,14 +34,14 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
     PersonalDetailsData personalDetailsData;
 
     @Inject
-    IAHttpContext localContext;
+    IABorrowerHttpContext localContext;
     @Inject
-    IHttpResponse httpResponse;
+    IBorrowerHttpResponse httpResponse;
     @Inject
     IUser user;
 
     @Inject
-    public ApiPersonalDetailsStepDef(IHttpResponse httpResponse/*, IUser user*/) {
+    public ApiPersonalDetailsStepDef(IBorrowerHttpResponse httpResponse/*, IUser user*/) {
         this.httpResponse = httpResponse;
 //        this.user = user;
     }
@@ -113,9 +118,10 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
 //
 //                }
 //                borrowerPersonalDetailsParameters.put("root:c:w:txtFirstName:tb", firstName + now.toString("yyyyDDmmHH"));
-                borrowerPersonalDetailsParameters.put("root:c:w:pnlNames:c:w:txtFirstName:tb", firstName + System.getProperty("timestamp"));
+                String firstNameExtension = user.getEmail().substring("test.automation.api".length()-1, user.getEmail().indexOf("@"));
+                borrowerPersonalDetailsParameters.put("root:c:w:pnlNames:c:w:txtFirstName:tb", firstName + firstNameExtension);
 //                user.setFirstName(firstName + now.toString("yyyyDDmmHH"));
-                user.setFirstName(firstName + System.getProperty("timestamp"));
+                user.setFirstName(firstName + firstNameExtension);
                 break;
 //            case "coapplicant":
 //                if ( firstName.isEmpty()) {
@@ -163,6 +169,8 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
     @Given("^(Borrower) checks his gender : (Male|Female)$")
     public void borrower_coapplicant_user_checks_his_gender(String borrowerOrCoapplicant, String gender) throws IOException {
 
+        String iFormSubmitListener = Jsoup.parse(Jsoup.parse(httpResponse.getHttpResponse()).select("component[id~=main]").select("component[encoding~=wicket]").text()).select("form[wicketpath=main_c_form_form]").attr("action");
+
         String parameterValue = null;
         if ( gender != null) {
             parameterValue = (gender.equals("Male") ? "radMale" : "radFemale");
@@ -172,7 +180,8 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
 
                     requestHttpPost(
                             httpClient,
-                            System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form::IFormChangeListener:2:-1",
+//                            System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form::IFormChangeListener:2:-1",
+                            System.getProperty("borrower") + "/form.2" + iFormSubmitListener.replace("c:form:form::", "c:form::").replace("IFormSubmitListener::", "IFormChangeListener:2:-1"),
                             new LinkedHashMap<String, String>() {
                                 {
                                     put("Accept", "text/xml");
@@ -237,29 +246,29 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
     @Given("^(Borrower) selects his marital status : (single|separated|married/civil partner\\(s\\)|divorced/dissolved civil partnership|widowed)$")
     public void borrower_coapplicant_user_selects_his_marital_status(String borrowerOrCoapplicant, String maritalStatus) {
 
-        String parameterValue = StringUtils.EMPTY;
-
-        switch ( (maritalStatus == null ? "" : maritalStatus )) {
-            case "single":
-                parameterValue = "SIN";
-                break;
-            case "separated":
-                break;
-            case "married/civil partner(s)":
-                break;
-            case "divorced/dissolved civil partnership":
-                break;
-            case "widowed":
-                break;
-            case StringUtils.EMPTY:
-                parameterValue = "SIN";
-            default:
-                log.info("Huston, we have a problem ! Do we have a new marital status ?");
-        }
+//        String parameterValue = StringUtils.EMPTY;
+//
+//        switch ( (maritalStatus == null ? "" : maritalStatus )) {
+//            case "single":
+//                parameterValue = "SIN";
+//                break;
+//            case "separated":
+//                break;
+//            case "married/civil partner(s)":
+//                break;
+//            case "divorced/dissolved civil partnership":
+//                break;
+//            case "widowed":
+//                break;
+//            case StringUtils.EMPTY:
+//                parameterValue = "SIN";
+//            default:
+//                log.info("Huston, we have a problem ! Do we have a new marital status ?");
+//        }
 
         switch (borrowerOrCoapplicant) {
             case "Borrower":
-                borrowerPersonalDetailsParameters.put("root:c:w:cmbMaritalStatus:combobox", parameterValue);
+                borrowerPersonalDetailsParameters.put("root:c:w:cmbMaritalStatus:combobox", MARITAL_STATUS.getShortValueByLongValue(maritalStatus));
                 break;
 //            case "coapplicant":
 //                coapplicantPersonalDetailsParameters.put("root:c:w:cmbMaritalStatus:combobox", parameterValue);
@@ -276,7 +285,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
 //                borrowerPersonalDetailsParameters.put("root:c:w:cmbNationality:combobox", parameterValue);
-                borrowerPersonalDetailsParameters.put("root:c:w:cmbNationality:combobox", "IE");
+                borrowerPersonalDetailsParameters.put("root:c:w:cmbNationality:combobox", NATIONALITY.getShortValueByLongValue(nationality));
                 break;
 //            case "coapplicant":
 //                coapplicantPersonalDetailsParameters.put("root:c:w:cmbNationality:combobox", parameterValue);
@@ -301,13 +310,16 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
     @Deprecated @Given("^(Borrower) checks if he (is not|is) requiring a visa$")
     public void borrower_coapplicant_user_checks_if_requiring_visa(String borrowerOrCoapplicant, String sRequiringVisa) throws IOException {
 //        boolean bRequiredVisa = ( StringUtils.isEmpty(sRequiringVisa) ? false : ( sRequiringVisa.equals("is") ? true : false));
+
+        String iFormSubmitListener = Jsoup.parse(Jsoup.parse(httpResponse.getHttpResponse()).select("component[id~=main]").select("component[encoding~=wicket]").text()).select("form[wicketpath=main_c_form_form]").attr("action");
+
         boolean bRequiredVisa = (!StringUtils.isEmpty(sRequiringVisa) && sRequiringVisa.equals("is"));
         switch(borrowerOrCoapplicant) {
             case "Borrower":
                 if ( !bRequiredVisa ) {
                     requestHttpPost(
                             httpClient,
-                            System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form::IFormChangeListener:2:-1",
+                            System.getProperty("borrower") + "/form.2" + iFormSubmitListener.replace("c:form:form::", "c:form::").replace("IFormSubmitListener::", "IFormChangeListener:2:-1"),
                             new LinkedHashMap<String, String>() {
                                 {
                                     put("Accept", "text/xml");
@@ -481,12 +493,15 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
 
     @Deprecated@Given("^(Borrower) selects his residency country : (.*)")
     public void borrower_coapplicant_user_selects_his_residency_country(String borrowerOrCoapplicant, String residencyCountry) throws IOException {
+
+        String iFormSubmitListener = Jsoup.parse(Jsoup.parse(httpResponse.getHttpResponse()).select("component[id~=main]").select("component[encoding~=wicket]").text()).select("form[wicketpath=main_c_form_form]").attr("action");
+
         switch(borrowerOrCoapplicant) {
             case "Borrower":
                 if ( StringUtils.isNotEmpty(personalDetailsData.get("country")) && personalDetailsData.get("country").equals("Ireland") ) {
                     requestHttpPost(
                             httpClient,
-                            System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form::IFormChangeListener:2:-1",
+                            System.getProperty("borrower") + "/form.2" + iFormSubmitListener.replace("c:form:form::", "c:form::").replace("IFormSubmitListener::", "IFormChangeListener:2:-1"),
                             new LinkedHashMap<String, String>() {
                                 {
                                     put("Accept", "text/xml");
@@ -521,6 +536,8 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
     @Deprecated @Given("^(Borrower) selects his residency accommodation : (Rented on contract|Rented from family/friends|Property owner|Others)$")
     public void borrower_coapplicant_user_selects_his_residency_accommodation(String borrowerOrCoapplicant, String residencyAccommodation) throws IOException {
 
+        String iFormSubmitListener = Jsoup.parse(Jsoup.parse(httpResponse.getHttpResponse()).select("component[id~=main]").select("component[encoding~=wicket]").text()).select("form[wicketpath=main_c_form_form]").attr("action");
+
         switch (residencyAccommodation) {
             case "Rented on contract" :
                 break;
@@ -529,7 +546,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
             case "Property owner":
                 requestHttpPost(
                         httpClient,
-                        System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form::IFormChangeListener:2:-1",
+                        System.getProperty("borrower") + "/form.2" + iFormSubmitListener.replace("c:form:form::", "c:form::").replace("IFormSubmitListener::", "IFormChangeListener:2:-1"),
                         new LinkedHashMap<String, String>() {
                             {
                                 put("Accept", "text/xml");
@@ -616,9 +633,12 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
         }
 
         if ( bLivedLast3Years ) {
+
+            String iFormSubmitListener = Jsoup.parse(Jsoup.parse(httpResponse.getHttpResponse()).select("component[id~=main]").select("component[encoding~=wicket]").text()).select("form[wicketpath=main_c_form_form]").attr("action");
+
             requestHttpPost(
                     httpClient,
-                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form::IFormChangeListener:2:-1",
+                    System.getProperty("borrower") + "/form.2" + iFormSubmitListener.replace("c:form:form::", "c:form::").replace("IFormSubmitListener::", "IFormChangeListener:2:-1"),
                     new LinkedHashMap<String, String>() {
                         {
                             put("Accept", "text/xml");
@@ -749,12 +769,19 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
         finalPersonalDetailsParameters.put("stepToken", "1");
         finalPersonalDetailsParameters.put("root:c:w:btnNext:submit", "1");
 
+        String onclickBtnNext = Jsoup.parse(Jsoup.parse(httpResponse.getHttpResponse()).select("component[id~=main]").select("component[encoding~=wicket]").text()).select("a[id~=submit]").select("a[wicketpath~=main_c_form_form_root_c_w_btnNext_submit").attr("onclick");
+        Pattern pOnclickBtnNext = Pattern.compile("\\?(wicket:interface=.*)&");
+        Matcher mOnclickBtnNext = pOnclickBtnNext.matcher(onclickBtnNext);
 
-//        Document jsoupFormResponse = Jsoup.parse(httpResponse.getHttpResponse());
+        String btnNextWicketInterface = null;
+        while(mOnclickBtnNext.find()) {
+            btnNextWicketInterface = mOnclickBtnNext.group(1);
+        }
 
         String personalDetailsSaveDataResponse = requestHttpPost(
                 httpClient,
-                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnNext:submit::IBehaviorListener:0:",
+//                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnNext:submit::IBehaviorListener:0:",
+                System.getProperty("borrower") + "/form.2?" + btnNextWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");

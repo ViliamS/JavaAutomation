@@ -2,7 +2,7 @@ package com.r2development.leveris.bdd.borrower.stepdef;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.r2development.leveris.di.IHttpResponse;
+import com.r2development.leveris.di.IBorrowerHttpResponse;
 import cucumber.api.java.en.Then;
 import org.apache.commons.collections4.CollectionUtils;
 import org.junit.Assert;
@@ -19,7 +19,7 @@ import java.util.Map;
 public class ErrorHandlerStepDef {
 
     @Inject
-    IHttpResponse httpResponse;
+    IBorrowerHttpResponse httpResponse;
 
     WebDriver webDriver;
 

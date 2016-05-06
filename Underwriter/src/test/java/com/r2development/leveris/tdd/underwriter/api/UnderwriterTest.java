@@ -762,7 +762,7 @@ public class UnderwriterTest {
             TextNode textNodeDocumentView = documentViewDoc.select("component[id~=form]").select("component[encoding~=wicket]").first().textNodes().get(0);
             Document documentViewDoc2 = Jsoup.parse(textNodeDocumentView.text());
 
-            String stepToken = documentViewDoc2.select("input[name=stepToken").attr("value");
+            String stepToken = documentViewDoc2.select("input[name=stepToken]").attr("value");
             multipartEntityBuilder.addTextBody("stepToken", stepToken);
             String txtDocumentId = documentViewDoc2.select("div[id~=txtDocumentId]").attr("value");
             String txtDocumentId2 = documentViewDoc2.select("input[name=root:c:w:txtDocumentId:tb]").attr("value");

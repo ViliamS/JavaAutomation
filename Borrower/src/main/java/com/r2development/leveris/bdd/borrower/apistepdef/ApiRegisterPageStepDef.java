@@ -1,19 +1,19 @@
 package com.r2development.leveris.bdd.borrower.apistepdef;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.RegistrationData;
-import com.r2development.leveris.di.IAHttpContext;
-import com.r2development.leveris.di.IHttpResponse;
+import com.r2development.leveris.di.IABorrowerHttpContext;
+import com.r2development.leveris.di.IBorrowerHttpResponse;
 import com.r2development.leveris.di.IUser;
 import com.r2development.leveris.di.User;
 import com.r2development.leveris.qa.utils.ACMExcel;
 import com.r2development.leveris.utils.ExcelUtils;
 import com.r2development.leveris.utils.HttpUtils;
+import com.r2development.leveris.utils.mdg.MdgCallBack;
+import com.r2development.leveris.utils.mdg.MdgCallBackImpl;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -26,7 +26,6 @@ import org.apache.http.impl.client.BasicCookieStore;
 import org.hamcrest.core.Is;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.junit.Assert;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
@@ -49,9 +48,9 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
 //    private Map<String, String> registerParameters;
 
     @Inject
-    IAHttpContext localContext;
+    IABorrowerHttpContext localContext;
     @Inject
-    IHttpResponse httpResponse;
+    IBorrowerHttpResponse httpResponse;
     @Inject
     IUser user;
 
@@ -212,7 +211,7 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
     @Given("^Borrower types his password (.*) in Register page$")
     public void user_types_his_password(String pwd) {
         user.setPwd(pwd);
-        registerParameters.put("root:c:w:pnlMain:c:w:txtPassword:tb", pwd);
+        registerParameters.put("root:c:w:pnlMain:c:w:pwdPassword:tb", pwd);
     }
 
     @Given("^Borrower wants to (show|hide) his password in Registration page$")
@@ -234,6 +233,11 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
     @When("^Borrower registers$")
     public void user_registers() throws IOException {
 
+//        requestHttpPost(
+//                httpClient,
+//                System.getProperty("borrower") + "/form.2?wicket:interface=:"
+//        );
+
         registerParameters.putAll(
                 new LinkedHashMap<String, String>() {
                     {
@@ -245,7 +249,7 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
 
         requestHttpPost(
                 httpClient,
-                "http://dv2app.opoqodev.com/stable-borrower/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlMain:c:w:btnRegister:submit::IBehaviorListener:0:",
+                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlMain:c:w:btnRegister:submit::IBehaviorListener:0:",
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -299,10 +303,21 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
         user_registers();
     }
 
-    @Then("^Borrower activates his account")
-    public void borrower_activates_his_account() throws IOException {
-        HttpClient httpClient = createHttpClient();
+    public String email(MdgCallBack mdgCallback) throws IOException {
+        return mdgCallback.methodToEmailCallBack();
+    }
 
+    public String sms(MdgCallBack mdgCallBack) throws IOException {
+        return mdgCallBack.methodToSmsCallBack();
+    }
+
+    @Then("^Borrower activates his account")
+    public void borrower_activates_his_account() throws IOException, InterruptedException {
+
+        MdgCallBack mdgCallBack = new MdgCallBackImpl(user.getEmail(), user.getPhoneNumber());
+        log.info("ExternalId: " + this.email(mdgCallBack));
+
+        HttpClient httpClient = createHttpClient();
         CookieStore cookieStore = new BasicCookieStore();
         HttpClientContext localContext = HttpClientContext.create();
         localContext.setCookieStore(cookieStore);
@@ -385,6 +400,10 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
         );
         httpResponse.setHttpResponse(borrowerUIResponse);
 
+        String smsCode = this.sms(mdgCallBack);
+        log.info("Sms Code: " + smsCode);
+
+        /*
         String querySmsResponse = requestHttpPost(
                 httpClient,
                 "https://dv2mdg.opoqodev.com/querysms",
@@ -442,7 +461,7 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
 //                System.out.println("sms body: " + new String(Base64.getDecoder().decode(bodySms.getBytes())));
             System.out.println("to: " + bodySms);
 
-            Pattern pBodySms = Pattern.compile("Please enter code (.*) in your browser window within 30 minutes of getting this message. Thanks!");
+            Pattern pBodySms = Pattern.compile("Please enter code (\\d+) in your browser window within 5 minutes of getting this message");
             Matcher mBodySms = pBodySms.matcher(bodySms);
 
             activationCode = null;
@@ -453,6 +472,7 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
             System.out.println("activationCode: " + activationCode);
         }
         else {
+            Thread.sleep(30000);
             for ( JsonElement currentSmsId : smsId) {
                 JsonObject jsonSmsId = currentSmsId.getAsJsonObject();
                 String theSmsId = jsonSmsId.get("_id").getAsString();
@@ -487,12 +507,12 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
 //                System.out.println("sms body: " + new String(Base64.getDecoder().decode(bodySms.getBytes())));
                 System.out.println("to: " + bodySms);
 
-                Pattern pBodySms = Pattern.compile("Please enter code (.*) in your browser window within 30 minutes of getting this message. Thanks!");
+                Pattern pBodySms = Pattern.compile("Please enter code (\\d+) in your browser window within 5 minutes of getting this message");
                 Matcher mBodySms = pBodySms.matcher(bodySms);
 
                 activationCode = null;
                 while (mBodySms.find()) {
-                    activationCode = mBodySms.group(2);
+                    activationCode = mBodySms.group(1);
                 }
 
                 System.out.println("activationCode: " + activationCode);
@@ -500,29 +520,30 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
 
             }
         }
+        */
 
         Document jsoup = Jsoup.parse(httpResponse.getHttpResponse());
-        String stepToken = jsoup.select("input[name=token]").attr("value");
-        String onclick = jsoup.select("div[id=btnConfirmRegistrationd] a").attr("onclick");
+        String stepToken = jsoup.select("input[name=stepToken]").attr("value");
+        String onclick = jsoup.select("div[id~=btnConfirmRegistration] a").attr("onclick");
 
-        Pattern pLinkWithSession = Pattern.compile(";(jsessionid=.*?wicket:interface=.*)&amp;");
+        Pattern pLinkWithSession = Pattern.compile("\\?(wicket:interface=.*btnConfirmRegistration.*)&");
         Matcher mLinkWithSession = pLinkWithSession.matcher(onclick);
-
         String linkWithSession = null;
         while (mLinkWithSession.find()) {
-            linkWithSession = mLinkWithSession.group(0);
+            linkWithSession = mLinkWithSession.group(1);
         }
         final String finalLink = linkWithSession;
         System.out.println("link: " + finalLink);
 
-        final String finalActivationCode = activationCode;
+        final String finalActivationCode = smsCode;
         String smsCodeActivationResponse = requestHttpPost(
                 httpClient,
-                System.getProperty("borrower") + "form.2?" + finalLink,
+                System.getProperty("borrower") + "/form.2?" + finalLink,
+//                System.getProperty("borrower") + "/form.2?wicket:interface=:3:main:c:form:form:root:c:w:pnlMain:c:w:btnConfirmRegistration:submit::IBehaviorListener:0:",
                 new LinkedHashMap<String, String>() {
                     {
-                        put("Content-Type", "application/json");
                         put("Accept", "application/json");
+                        put("Content-Type", "application/x-www-form-urlencoded");
                     }
                 },
                 new LinkedHashMap<String, String>() {
@@ -535,6 +556,7 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
                 this.localContext.getHttpContext(),
                 false
         );
+        httpResponse.setHttpResponse(smsCodeActivationResponse);
 
     }
 

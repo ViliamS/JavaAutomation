@@ -53,6 +53,11 @@ public class BorrowerHomePage extends HeaderAndBottomAndFormsMenuSection impleme
         getApprovalSection.clickGetAQuote();
     }
 
+    public boolean startTaskButtonIsPresent(){
+        loadingCheck();
+        return isVisible(GET_A_QUOTE_START_TASK_BUTTON_XPATH, true);
+    }
+
     @Override
     public void clickStartTaskButton(){
         loadingCheck();

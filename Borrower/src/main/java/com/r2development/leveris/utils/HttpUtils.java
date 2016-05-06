@@ -193,6 +193,7 @@ public class HttpUtils {
 
         HttpResponse response = httpClient.execute(httpPost, localContext);
 
+        System.out.println("StatusCode=" + response.getStatusLine().getStatusCode());
         assertTrue(response.getStatusLine().getStatusCode() == 200 || response.getStatusLine().getStatusCode() == 302);
 
         HttpEntity httpEntity = response.getEntity();
@@ -209,7 +210,7 @@ public class HttpUtils {
 
         Document response2Jsoup = Jsoup.parse(toReturn);
         String errorMessage;
-        if ( !url.equals("http://dv2app.opoqodev.com/stable-borrower/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:btnHiddenSubmit:submit::IBehaviorListener:0:") && !url.equals("http://dv2app.opoqodev.com/stable-borrower/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnHidenRefresh:submit::IBehaviorListener:0:") ) {
+        if ( !url.equals(System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:btnHiddenSubmit:submit::IBehaviorListener:0:") && !url.equals(System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnHidenRefresh:submit::IBehaviorListener:0:") && !url.equals(System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog::ILazyCallListener:1:") ) {
             if (toReturn.contains("<!-- Page Class com.cleverlance.abakus.ib.borrower.web.ui.error.UnknownErrorPage -->")) {
                 Elements divPageWrapper = response2Jsoup.select("div[class=page-wrapper]");
                 errorMessage = prettyFormat(divPageWrapper.html(), 2);
@@ -218,7 +219,7 @@ public class HttpUtils {
                     errorMessage = prettyFormat(divPageWrapper.select("div[class=content-error").html(), 2);
 
                 assertFalse(errorMessage, true);
-            } else if (toReturn.contains("component.error")) {
+            } else if (toReturn.contains("component.error") && !url.contains(":1:main:c:form:dialogWrapper:dialog::ILazyCallListener:1:-1")) {
                 errorMessage = prettyFormat(StringEscapeUtils.unescapeXml(response2Jsoup.select("component").html()), 2);
                 assertFalse(errorMessage, true);
             } else if (toReturn.contains("Field is required.") && toReturn.contains("<li class=\"widget-label error\"")) {

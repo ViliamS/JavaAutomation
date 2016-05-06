@@ -264,7 +264,7 @@ public enum COUNTRY {
 
     public static String getShortValueByLongValue(String longValue) {
         for (COUNTRY value : COUNTRY.values()) {
-            if ( value.name().equalsIgnoreCase(longValue)) {
+            if ( value.name().equalsIgnoreCase(longValue.replace(" ", "_"))) {
                 return  value.getShortValue();
             }
         }

@@ -2,7 +2,7 @@ package com.r2development.leveris.bdd.borrower.apistepdef;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.r2development.leveris.di.IHttpResponse;
+import com.r2development.leveris.di.IBorrowerHttpResponse;
 import com.r2development.leveris.di.IUser;
 import cucumber.api.java.en.Given;
 import org.apache.commons.logging.Log;
@@ -17,12 +17,12 @@ public class ApiGmailStepDef extends ApiOpoqoBorrowerStepDef {
     private static final Log log = LogFactory.getLog(ApiGmailStepDef.class);
 
     @Inject
-    IHttpResponse httpResponse;
+    IBorrowerHttpResponse httpResponse;
     @Inject
     IUser user;
 
     @Inject
-    public ApiGmailStepDef(IHttpResponse httpResponse, IUser user) {
+    public ApiGmailStepDef(IBorrowerHttpResponse httpResponse, IUser user) {
         this.httpResponse = httpResponse;
         this.user = user;
     }

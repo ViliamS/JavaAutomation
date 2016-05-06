@@ -2,15 +2,18 @@ package com.r2development.leveris.bdd.borrower.apistepdef;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.r2development.leveris.di.IAHttpContext;
-import com.r2development.leveris.di.IHttpResponse;
+import com.r2development.leveris.di.IABorrowerHttpContext;
+import com.r2development.leveris.di.IBorrowerHttpResponse;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jsoup.Jsoup;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.r2development.leveris.utils.HttpUtils.CONSUME_QUIETLY;
 import static com.r2development.leveris.utils.HttpUtils.requestHttpGet;
@@ -22,9 +25,9 @@ public class ApiMainFormsProcessesStepDef extends ApiOpoqoBorrowerStepDef {
 
 //    private HttpClient httpClient;
     @Inject
-    IAHttpContext localContext;
+    IABorrowerHttpContext localContext;
     @Inject
-    private IHttpResponse httpResponse;
+    private IBorrowerHttpResponse httpResponse;
 
 //    @Inject
 //    public ApiMainFormsProcessesStepDef(HttpClient httpClient, HttpContext localContext) {
@@ -33,7 +36,7 @@ public class ApiMainFormsProcessesStepDef extends ApiOpoqoBorrowerStepDef {
 //    }
 
     @Inject
-    public ApiMainFormsProcessesStepDef(IHttpResponse httpResponse) {
+    public ApiMainFormsProcessesStepDef(IBorrowerHttpResponse httpResponse) {
         this.httpResponse = httpResponse;
     }
 
@@ -41,26 +44,20 @@ public class ApiMainFormsProcessesStepDef extends ApiOpoqoBorrowerStepDef {
     @And("^Borrower processes \"Forms\"$")
     public void user_processes_Forms() throws IOException {
 
-//        requestHttpGet(
-//                httpClient,
-//                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnAppFormsHidden:cancel::IBehaviorListener:0:&stepToken=1",
-//                new LinkedHashMap<String, String>() {
-//                    {
-//                        put("Accept", "text/xml");
-//                    }
-//                },
-//                localContext,
-//                CONSUME_QUIETLY
-//        );
+        String onclickBtnAppFormsHidden = Jsoup.parse(Jsoup.parse(httpResponse.getHttpResponse()).select("component[id~=main]").select("component[encoding~=wicket]").text()).select("a[id~=cancel]").select("a[wicketpath~=main_c_form_form_root_c_w_btnAppFormsHidden_cancel").attr("onclick");
+        Pattern pOnclickBtnAppFormsHidden = Pattern.compile("\\?(wicket:interface=.*&stepToken=.)&");
+        Matcher mOnclickBtnAppFormsHidden = pOnclickBtnAppFormsHidden.matcher(onclickBtnAppFormsHidden);
 
-        log.info("Going to Forms page");
+        String btnAppFormsHiddenWicketInterface = null;
+        while(mOnclickBtnAppFormsHidden.find()) {
+            btnAppFormsHiddenWicketInterface = mOnclickBtnAppFormsHidden.group(1);
+        }
 
-//        Document loginResponse = Jsoup.parse(httpResponse.getHttpResponse());
-//        Document loginResponse2 = Jsoup.parse(loginResponse.select("component[id~=main]").select("component[encoding~=wicket]").first().textNodes().get(0).text());
 
         String formResponse = requestHttpGet(
                 httpClient,
-                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnAppFormsHidden:cancel::IBehaviorListener:0:&stepToken=1",
+//                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnAppFormsHidden:cancel::IBehaviorListener:0:&stepToken=1",
+                System.getProperty("borrower") + "/form.2?" + btnAppFormsHiddenWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");

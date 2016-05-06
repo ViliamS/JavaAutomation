@@ -2,11 +2,12 @@ package com.r2development.leveris.bdd.borrower.apistepdef;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.r2development.leveris.di.IAHttpContext;
-import com.r2development.leveris.di.IHttpResponse;
+import com.r2development.leveris.di.IABorrowerHttpContext;
+import com.r2development.leveris.di.IBorrowerHttpResponse;
 import com.r2development.leveris.di.IUser;
 import cucumber.api.java.en.When;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -21,6 +22,7 @@ import org.hamcrest.core.Is;
 import org.joda.time.DateTime;
 import org.joda.time.Instant;
 import org.joda.time.Interval;
+import org.jsoup.Jsoup;
 
 import java.io.File;
 import java.io.IOException;
@@ -56,9 +58,9 @@ public class ApiDocumentUploadStepDef extends ApiOpoqoBorrowerStepDef {
     private static final Log log = LogFactory.getLog(ApiDocumentUploadStepDef.class);
 
     @Inject
-    IAHttpContext localContext;
+    IABorrowerHttpContext localContext;
     @Inject
-    IHttpResponse httpResponse;
+    IBorrowerHttpResponse httpResponse;
     @Inject
     IUser user;
 
@@ -97,10 +99,20 @@ public class ApiDocumentUploadStepDef extends ApiOpoqoBorrowerStepDef {
         }
 
         for ( int i=1; i <= items; i++) {
-            requestHttpPost(
+
+            String onclickValue = Jsoup.parse(Jsoup.parse(httpResponse.getHttpResponse()).select("component[id~=main]").select("component[encoding~=wicket]").text()).select("a[id~=dialog]").select("a[wicketpath~=main_c_form_form_root_c_w_pnlNew_c_w_rptDocs_c_rows_" + i + "_item_pnlDocs_c_w_lnkAddMore_dialog]").attr("onclick");
+            Pattern pWicketInterface = Pattern.compile("\\?(wicket:interface=.*)&");
+            Matcher mWicketInterface = pWicketInterface.matcher(onclickValue);
+            String theWicketInterface = StringUtils.EMPTY;
+            while(mWicketInterface.find()) {
+                theWicketInterface = mWicketInterface.group(1);
+            }
+
+            String currentDocumentAdd = requestHttpPost(
                     httpClient,
 //                    "https://st1app.loftkeys.com/borrower/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNew:c:w:rptDocs:c:rows:" + i + ":item:pnlDocs:c:w:lnkAddMore:dialog::IBehaviorListener:0:",
-                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNew:c:w:rptDocs:c:rows:" + i + ":item:pnlDocs:c:w:lnkAddMore:dialog::IBehaviorListener:0:",
+//                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNew:c:w:rptDocs:c:rows:" + i + ":item:pnlDocs:c:w:lnkAddMore:dialog::IBehaviorListener:0:",
+                    System.getProperty("borrower") + "/form.2?" + theWicketInterface,
                     new LinkedHashMap<String, String>() {
                         {
                             put("Accept", "text/xml");
@@ -111,10 +123,21 @@ public class ApiDocumentUploadStepDef extends ApiOpoqoBorrowerStepDef {
                     localContext.getHttpContext(),
                     CONSUME_QUIETLY
             );
+//            httpResponse.setHttpResponse(currentDocumentAdd);
+
+            // component dialog, encoding wicket -> a submit, wicketpath main_c_form_dialogWrapper_dialog_form_root_c_w_pnlMain_c_w_btnHiddenSubmit_submit -> onclick
+            String onclickValue2 = Jsoup.parse(Jsoup.parse(currentDocumentAdd).select("component[id~=dialog]").select("component[encoding~=wicket]").text()).select("a[id~=submit]").select("a[wicketpath~=main_c_form_dialogWrapper_dialog_form_root_c_w_pnlMain_c_w_btnHiddenSubmit_submit]").attr("onclick");
+            Pattern pWicketInterface2 = Pattern.compile("\\?(wicket:interface=.*)&");
+            Matcher mWicketInterface2 = pWicketInterface2.matcher(onclickValue2);
+            String theWicketInterface2 = StringUtils.EMPTY;
+            while(mWicketInterface2.find()) {
+                theWicketInterface2 = mWicketInterface2.group(1);
+            }
 
             Instant begin_timestamp = DateTime.now().toInstant();
 //            HttpPost httpPostUploadDocItemDD = new HttpPost("https://st1app.loftkeys.com/borrower/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:pnlMain:c:w:btnHiddenSubmit:submit::IBehaviorListener:0:");
-            HttpPost httpPostUploadDocItemDD = new HttpPost(System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:pnlMain:c:w:btnHiddenSubmit:submit::IBehaviorListener:0:");
+//            HttpPost httpPostUploadDocItemDD = new HttpPost(System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:pnlMain:c:w:btnHiddenSubmit:submit::IBehaviorListener:0:");
+            HttpPost httpPostUploadDocItemDD = new HttpPost(System.getProperty("borrower") + "/form.2?" + theWicketInterface2);
             httpPostUploadDocItemDD.setHeader("Accept-Encoding", "gzip, deflate");
             httpPostUploadDocItemDD.setHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
             String boundary = RandomStringUtils.randomAlphanumeric(15);
@@ -156,11 +179,19 @@ public class ApiDocumentUploadStepDef extends ApiOpoqoBorrowerStepDef {
 
         }
 
+        String onclickValue3 = Jsoup.parse(Jsoup.parse(httpResponse.getHttpResponse()).select("component[id~=main]").select("component[encoding~=wicket]").text()).select("a[id~=submit]").select("a[wicketpath~=main_c_form_form_root_c_w_btnSubmitDialog_submit]").attr("onclick");
+        Pattern pWicketInterface3 = Pattern.compile("\\?(wicket:interface=.*)&");
+        Matcher mWicketInterface3 = pWicketInterface3.matcher(onclickValue3);
+        String theWicketInterface3 = StringUtils.EMPTY;
+        while(mWicketInterface3.find()) {
+            theWicketInterface3 = mWicketInterface3.group(1);
+        }
 
-        requestHttpPost(
+        String endUploadedDocumentResponse = requestHttpPost(
                 httpClient,
 //                "https://st1app.loftkeys.com/borrower/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnSubmitDialog:submit::IBehaviorListener:0:",
-                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnSubmitDialog:submit::IBehaviorListener:0:",
+//                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnSubmitDialog:submit::IBehaviorListener:0:",
+                System.getProperty("borrower") + "/form.2?" + theWicketInterface3,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");
@@ -176,7 +207,7 @@ public class ApiDocumentUploadStepDef extends ApiOpoqoBorrowerStepDef {
                 localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
-
+        httpResponse.setHttpResponse(endUploadedDocumentResponse);
 
     }
 

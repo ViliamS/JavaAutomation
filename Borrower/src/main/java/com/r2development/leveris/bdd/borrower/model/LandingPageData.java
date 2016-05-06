@@ -39,3 +39,37 @@ public class LandingPageData extends DataModel {
 
     public String getMonthlyInstallmentAmount() { return data.get("MonthlyRepayment"); }
 }
+
+/**
+ * Example setting Feature file
+ *
+ And Borrower fills in Unsecured Loan form
+ | formType           | Unsecured Loan     |
+ | loanPurpose        | Personal purposes  |
+ | NetMonthlyIncome   | 210,000.00         |
+ | MonthlyExpenses    | 2,000.00           |
+ | NumberOfDependants | 0                  |
+ | AmountToBorrow     | 15,000.00          |
+ *
+ * or example no. 2
+ *
+ And Borrower fills in Payday Loan form
+ | formType           | Payday Loan |
+ | NetMonthlyIncome   | 21,000.00   |
+ | MonthlyExpenses    | 1,000.00    |
+ | NumberOfDependants | 1           |
+ | AmountToBorrow     | 1,000.00    |
+ *
+ * or non mandatory filling of loanPurpose for Payday loan as it
+ * is already pre-selected in application, but it is valid to use
+ *
+ And Borrower fills in Payday Loan form
+ | formType           | Payday Loan |
+ | loanPurpose        | Payday Loan |
+ | NetMonthlyIncome   | 21,000.00   |
+ | MonthlyExpenses    | 1,000.00    |
+ | NumberOfDependants | 1           |
+ | AmountToBorrow     | 1,000.00    |
+ *
+ * That's all.
+ */

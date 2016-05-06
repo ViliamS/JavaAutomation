@@ -3,8 +3,8 @@ package com.r2development.leveris.bdd.borrower.apistepdef;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.AutomaticRegistrationData;
-import com.r2development.leveris.di.IAHttpContext;
-import com.r2development.leveris.di.IHttpResponse;
+import com.r2development.leveris.di.IABorrowerHttpContext;
+import com.r2development.leveris.di.IBorrowerHttpResponse;
 import com.r2development.leveris.di.IUser;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
@@ -29,9 +29,9 @@ public class ApiAutomaticRegistrationStepDef extends ApiOpoqoBorrowerStepDef {
     @Inject
     IUser user;
     @Inject
-    IAHttpContext localContext;
+    IABorrowerHttpContext localContext;
     @Inject
-    IHttpResponse httpResponse;
+    IBorrowerHttpResponse httpResponse;
 
     @Given("^Borrower goes to Automatic Registration page$")
     public void user_goes_to_automatic_registration_page() {
@@ -41,9 +41,16 @@ public class ApiAutomaticRegistrationStepDef extends ApiOpoqoBorrowerStepDef {
     @Given("^Borrower types his applicant : (.*)$")
     public void user_types_his_applicant(String applicantId) {
         String datetimestamp = DateTime.now().toString("yyyyMMddHHmmssSSS");
-        automationRegistrationParameters.put("root:c:w:pnlMain:c:w:txtId:tb", "test.automation.b_api_" + datetimestamp + "@finfactory.com");
+        automationRegistrationParameters.put("root:c:w:pnlMain:c:w:txtId:tb", applicantId.split("@")[0] + datetimestamp + "@finfactory.com");
+//        automationRegistrationParameters.put("root:c:w:pnlMain:c:w:txtId:tb", "test.automation.b_api_" + datetimestamp + "@finfactory.com");
+//        automationRegistrationParameters.put("root:c:w:pnlMain:c:w:txtId:tb", "anthony.mottot+" + datetimestamp + "@finfactory.com");
+//        automationRegistrationParameters.put("root:c:w:pnlMain:c:w:txtId:tb", "anthony.mottot" + 12345 + "@finfactory.com");
+//        user.setEmail("anthony.mottot+" + datetimestamp + "@finfactory.com");
+//        user.setEmail("anthony.mottot+" + 12345 + "@finfactory.com");
+        user.setEmail(applicantId.split("@")[0] + datetimestamp + "@finfactory.com");
         log.info("===============>");
-        log.info("Email Login ===>  test.automation.b_api_" + datetimestamp + "@finfactory.com");
+        log.info("Email Login ===>  " + applicantId.split("@")[0] + datetimestamp + "@finfactory.com");
+        System.out.println("automatic registration parameters: " + applicantId.split("@")[0] + datetimestamp + "@finfactory.com");
         log.info("===============>");
     }
 
@@ -77,7 +84,7 @@ public class ApiAutomaticRegistrationStepDef extends ApiOpoqoBorrowerStepDef {
         }
     }
 
-    @Given("^Borrower types coapplicant's email: (.*)$")
+    @Deprecated @Given("^Borrower types coapplicant's email: (.*)$")
     public void user_types_coapplicant_email(String coapplicantId) {
 //        DateTime now = DateTime.now();
 //        automationRegistrationParameters.put("root:c:w:pnlMain:c:w:pnlQuote:c:w:txtCoapp:tb", "anthony.mottot.coapplicant.test0001" + now.toString("yyyyMMddHHmmssSSS") + "@abakus.com");
@@ -97,7 +104,7 @@ public class ApiAutomaticRegistrationStepDef extends ApiOpoqoBorrowerStepDef {
 
         requestHttpPost(
             httpClient,
-            "http://dv2app.opoqodev.com/stable-borrower/form.2?wicket:interface=:1:main:c:form::IFormChangeListener:2:1",
+            System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form::IFormChangeListener:2:1",
             new LinkedHashMap<String, String>() {
                 {
                     put("Accept", "text/xml");
@@ -123,7 +130,7 @@ public class ApiAutomaticRegistrationStepDef extends ApiOpoqoBorrowerStepDef {
 
 //        localContext = ApiSupportHttpClientStepDef.getInstanceHttpClientContext();
 
-        requestHttpPost(
+        String automaticRegistrationResponse = requestHttpPost(
                 httpClient,
 //                System.getProperty("borrower") + "/form.2?wicket:interface=:3:main:c:form:form:root:c:w:pnlMain:c:w:btn-register:submit::IBehaviorListener:0:",
                 System.getProperty("borrower") + "/form.2" + linkWithSession, //?wicket:interface=:3:main:c:form:form:root:c:w:pnlMain:c:w:btn-register:submit::IBehaviorListener:0:",
@@ -137,6 +144,9 @@ public class ApiAutomaticRegistrationStepDef extends ApiOpoqoBorrowerStepDef {
                 localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
+        httpResponse.setHttpResponse(automaticRegistrationResponse);
+
+        System.out.println("automatic registration parameters: " + automationRegistrationParameters);
     }
 
     @Given("^Borrower logs in via Automatic Registration$")

@@ -5,12 +5,12 @@ import com.google.inject.Singleton;
 import org.apache.http.client.protocol.HttpClientContext;
 
 @Singleton
-public class AHttpContext implements IAHttpContext{
+public class AUnderwriterHttpContext implements IAUnderwriterHttpContext{
 
     private HttpClientContext localContext;
 
     @Inject
-    public AHttpContext(HttpClientContext localContext) {
+    public AUnderwriterHttpContext(HttpClientContext localContext) {
         this.localContext = localContext;
     }
 

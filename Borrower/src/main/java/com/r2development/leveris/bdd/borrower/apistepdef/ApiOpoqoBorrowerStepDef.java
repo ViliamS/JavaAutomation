@@ -38,7 +38,9 @@ public class ApiOpoqoBorrowerStepDef /*implements IBorrower*/ {
     protected Map<String, String> accountParameters;
     protected Map<String, String> dependantParameters;
     protected Map<String, String> financialParameters;
+    protected Map<String, String> residencyParameters;
     protected Map<String, String> paydayParameters;
+    protected Map<String, String> unsecuredParameters;
 
 //    @Inject
 //    IUser user;
@@ -71,8 +73,10 @@ public class ApiOpoqoBorrowerStepDef /*implements IBorrower*/ {
 
         accountParameters = new LinkedHashMap<>();
         paydayParameters = new LinkedHashMap<>();
+        unsecuredParameters = new LinkedHashMap<>();
         dependantParameters = new LinkedHashMap<>();
         financialParameters = new LinkedHashMap<>();
+        residencyParameters = new LinkedHashMap<>();
 
         automationRegistrationParameters = new LinkedHashMap<>();
     }
