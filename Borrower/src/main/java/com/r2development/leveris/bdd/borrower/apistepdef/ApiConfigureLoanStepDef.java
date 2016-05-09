@@ -387,12 +387,11 @@ public class ApiConfigureLoanStepDef extends ApiOpoqoBorrowerStepDef {
         dCaps.setCapability("takesScreenshot", false);
 //        dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,  "/usr/bin/phantomjs");
 
-        log.info("JENKINS: " + System.getProperty("JENKINS_HOME"));
-
         if ( System.getProperty("webdriver.phantomjs.driver") != null && System.getProperty("webdriver.phantomjs.driver").equals("JENKINS") ) {
 //        dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,  "/usr/bin/phantomjs");
 //            System.setProperty("webdriver.phantomjs.driver", System.getProperty("JENKINS_HOME"));
-            dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,  System.getProperty("JENKINS_HOME"));
+            dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,  System.getProperty("webdriver.phantomjs.driver"));
+            log.info("JENKINS: " + System.getProperty("webdriver.phantomjs.driver"));
         }
         PhantomJsDriverManager.getInstance().setup();
         WebDriver webDriver = new PhantomJSDriver(dCaps);
