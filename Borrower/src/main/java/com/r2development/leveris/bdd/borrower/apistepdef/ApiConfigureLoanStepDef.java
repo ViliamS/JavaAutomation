@@ -7,6 +7,7 @@ import com.r2development.leveris.di.IABorrowerHttpContext;
 import com.r2development.leveris.di.IBorrowerHttpResponse;
 import com.r2development.leveris.di.IUser;
 import cucumber.api.java.en.And;
+import io.github.bonigarcia.wdm.PhantomJsDriverManager;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -19,6 +20,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -377,8 +379,6 @@ public class ApiConfigureLoanStepDef extends ApiOpoqoBorrowerStepDef {
 //                CONSUME_QUIETLY
 //        );
 
-
-
         StringBuffer verificationErrors = new StringBuffer();
         DesiredCapabilities dCaps;
 
@@ -387,6 +387,14 @@ public class ApiConfigureLoanStepDef extends ApiOpoqoBorrowerStepDef {
         dCaps.setCapability("takesScreenshot", false);
 //        dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,  "/usr/bin/phantomjs");
 
+        log.info("JENKINS: " + System.getProperty("JENKINS_HOME"));
+
+        if ( System.getProperty("webdriver.phantomjs.driver") != null && System.getProperty("webdriver.phantomjs.driver").equals("JENKINS") ) {
+//        dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,  "/usr/bin/phantomjs");
+//            System.setProperty("webdriver.phantomjs.driver", System.getProperty("JENKINS_HOME"));
+            dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,  System.getProperty("JENKINS_HOME"));
+        }
+        PhantomJsDriverManager.getInstance().setup();
         WebDriver webDriver = new PhantomJSDriver(dCaps);
         webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         WebDriverWait webDriverWait = new WebDriverWait(webDriver, 60);
