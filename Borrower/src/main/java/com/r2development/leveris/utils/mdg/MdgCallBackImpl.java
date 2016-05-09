@@ -15,7 +15,7 @@ import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
-import org.testng.Assert;
+import org.junit.Assert;
 
 import java.io.IOException;
 import java.util.Base64;

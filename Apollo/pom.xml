@@ -37,7 +37,6 @@
         <repository>
             <id>nexus.qa.loftkeys.com</id>
             <name>QA loftkeys</name>
-
             <url>https://nexus.loftkeys.com/content/repositories/qa</url>
         </repository>
     </repositories>
@@ -197,10 +196,15 @@
             <!--<artifactId>selenium-java</artifactId>-->
             <!--<version>${org-seleniumhq-selenium.selenium-java.version}</version>-->
         <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.seleniumhq.selenium</groupId>-->
+            <!--<artifactId>selenium-server</artifactId>-->
+            <!--<version>2.53.0</version>-->
+        <!--</dependency>-->
         <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-server</artifactId>
-            <version>2.53.0</version>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>${io-github-bonigarcia.webdrivermanager.version}</version>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>

@@ -58,7 +58,7 @@
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyyMMddHHmmssSSS</maven.build.timestamp.format>
 
-        <org-seleniumhq-selenium.selenium-java.version>2.52.0</org-seleniumhq-selenium.selenium-java.version>
+        <io-github-bonigarcia.webdrivermanager.version>1.4.2</io-github-bonigarcia.webdrivermanager.version>
         <info-cukes.cucumber-guice.version>1.2.4</info-cukes.cucumber-guice.version>
         <info-cukes.cucumber-junit.version>1.2.4</info-cukes.cucumber-junit.version>
         <info-cukes.cucumber-java.version>1.2.4</info-cukes.cucumber-java.version>
@@ -76,6 +76,7 @@
         <org-jsoup.jsoup.version>1.8.3</org-jsoup.jsoup.version>
         <commons-collections.commons-collections.version>3.2.2</commons-collections.commons-collections.version>
         <org-apache-commons.commons-collections4.version>4.1</org-apache-commons.commons-collections4.version>
+        <org-slf4j.slf4j-log4j12.version>1.7.21</org-slf4j.slf4j-log4j12.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <jenkins.workspace/>
@@ -155,20 +156,10 @@
 
             <!-- GUI Testing -->
             <dependency>
-                <groupId>org.seleniumhq.selenium</groupId>
-                <artifactId>selenium-java</artifactId>
-                <version>${org-seleniumhq-selenium.selenium-java.version}</version>
+                <groupId>io.github.bonigarcia</groupId>
+                <artifactId>webdrivermanager</artifactId>
+                <version>${io-github-bonigarcia.webdrivermanager.version}</version>
             </dependency>
-            <!--<dependency>-->
-                <!--<groupId>org.seleniumhq.selenium</groupId>-->
-                <!--<artifactId>selenium-server</artifactId>-->
-                <!--<version>2.53.0</version>-->
-            <!--</dependency>-->
-            <!--<dependency>-->
-                <!--<groupId>org.seleniumhq.selenium</groupId>-->
-                <!--<artifactId>selenium-server-standalone</artifactId>-->
-                <!--<version>2.43.1</version>-->
-            <!--</dependency>-->
 
             <!-- Cucumber -->
             <dependency>
@@ -243,7 +234,7 @@
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-log4j12</artifactId>
-                <version>1.7.12</version>
+                <version>1.7.21</version>
             </dependency>
 
             <!-- String, Collection Utils -->

@@ -180,6 +180,11 @@
             <!--<version>${com-r2development-leveris-qa-utils.environment.version}</version>-->
         <!--</dependency>-->
         <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>${io-github-bonigarcia.webdrivermanager.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.r2development.leveris.qa.utils</groupId>
             <artifactId>AcmExcel</artifactId>
             <version>${com-r2development-leveris-qa-utils.acmexcel.version}</version>
@@ -217,9 +222,9 @@
 
         <!-- Testing -->
         <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>${org-seleniumhq-selenium.selenium-java.version}</version>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>${io-github-bonigarcia.webdrivermanager.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

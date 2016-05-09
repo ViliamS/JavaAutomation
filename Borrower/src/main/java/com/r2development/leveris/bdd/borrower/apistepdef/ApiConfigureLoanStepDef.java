@@ -14,13 +14,13 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
@@ -340,7 +340,7 @@ public class ApiConfigureLoanStepDef extends ApiOpoqoBorrowerStepDef {
             }
         }
         while ( !togoon && counter <= 3);
-        Assert.assertEquals(togoon, true, "Houston, we have a problem to get generated the document !");
+        Assert.assertEquals("Houston, we have a problem to get generated the document !", true, togoon);
         httpResponse.setHttpResponse(agreeLoanAgreementResponse);
     }
 
