@@ -1,8 +1,9 @@
 
 @login @logout
-Feature: Investor SSO Login Client
+Feature: Investor Api Login
 
-  Scenario:
-    Given user processes SSO Investor Auth Step
-    When user processes final SSO Investor Auth Step
-    Then user logs out from Investor
+  Scenario: Investor Api Login
+
+    When Investor processes SSO Investor Auth Step
+    Then Investor processes final SSO Investor Auth Step
+#      Then Investor logs out from Investor

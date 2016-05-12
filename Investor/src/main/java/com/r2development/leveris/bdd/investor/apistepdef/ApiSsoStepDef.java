@@ -27,7 +27,7 @@ public class ApiSsoStepDef extends ApiOpoqoInvestorStepDef {
 
     private String token;
 
-    @Given("^user processes SSO (Investor) Auth Step$")
+    @Given("^Investor processes SSO (Investor) Auth Step$")
     public void user_processes_SSO_Auth(String application) throws IOException {
 
         // Step 1 - SSO
@@ -105,7 +105,7 @@ public class ApiSsoStepDef extends ApiOpoqoInvestorStepDef {
 
     }
 
-    @When("^user processes final SSO (Investor) Auth Step$")
+    @When("^Investor processes final SSO (Investor) Auth Step$")
     public void user_processes_final_sso_auth_step(String application) throws IOException {
 
 //        HttpGet httpGetApiModuleWithBearer = new HttpGet("https://dv2pub.opoqodev.com/api/modules");
@@ -135,7 +135,7 @@ public class ApiSsoStepDef extends ApiOpoqoInvestorStepDef {
         Assert.assertEquals("We should have entry module \"investorManager\"", "investorManager", jsonObjectInvestorManager.get("entryModule").getAsString());
     }
 
-    @Then("^user logs out from (Investor)$")
+    @Then("^Investor logs out from (Investor)$")
     public void user_logs_out(String application) throws IOException {
 
 //        HttpPost httpPostLogOut = new HttpPost("https://dv2pub.opoqodev.com/proxy/router/api/private/login/logout");

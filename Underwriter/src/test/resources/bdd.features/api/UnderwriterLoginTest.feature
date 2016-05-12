@@ -4,6 +4,6 @@
 
     Scenario: Underwriter Api Login
 
-      Given user processes SSO Underwriter Auth Step
-      When user processes final SSO Underwriter Auth Step
-      Then user logs out from Underwriter
+      When Operator Underwriter logs in via SSO Underwriter
+      Then Operator Underwriter looks for these information
+#      Then Operator Underwriter logs out from Underwriter

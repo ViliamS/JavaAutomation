@@ -39,7 +39,7 @@ public class ApiSsoStepDef extends ApiOpoqoApolloStepDef {
 
 //        String referer = "https://dv2apl.opoqodev.com/sso/?host=http://dv2apl.opoqodev.com/" + application.toLowerCase() + "/&application=" + application.toUpperCase();
         String referer = System.getProperty("apollo.sso.url") + "/?host=http://" + System.getProperty("domain.apollo") + "/" + application.toLowerCase() + "/&application=" + application.toUpperCase();
-        String entity = "{\"authProcessId\":null,\"authProcessStepValues\":[{\"authDetailCode\":\"LDAPUSERNAME\",\"value\":\"test_automation@abakus.com\"},{\"authDetailCode\":\"LDAPPWD\",\"value\":\"autPassword1122\"}],\"operation\":\"LOGIN\",\"originalRequest\":{\"url\":\"http://" + System.getProperty("domain.apollo") + "/" + application.toLowerCase() + "/\",\"applicationCode\":\"" + application.toUpperCase() + "\"},\"scenarioCode\":\"LDAP_USR_PWD\"}";
+        String entity = "{\"authProcessId\":null,\"authProcessStepValues\":[{\"authDetailCode\":\"LDAPUSERNAME\",\"value\":\"admin\"},{\"authDetailCode\":\"LDAPPWD\",\"value\":\"changemenow!\"}],\"operation\":\"LOGIN\",\"originalRequest\":{\"url\":\"http://" + System.getProperty("domain.apollo") + "/" + application.toLowerCase() + "/\",\"applicationCode\":\"" + application.toUpperCase() + "\"},\"scenarioCode\":\"LDAP_USR_PWD\"}";
 
         HttpPost httpPostValidateAuthProcessStep = new HttpPost(System.getProperty("apollo.sso.url") + "/api/public/sso/validateAuthProcessStep");
         httpPostValidateAuthProcessStep.setHeader("Content-Type", "application/json; charset=UTF-8");
@@ -65,15 +65,16 @@ public class ApiSsoStepDef extends ApiOpoqoApolloStepDef {
     public void user_processes_final_sso_auth_step(String application) throws IOException {
 
         String authenticateResponse = requestHttpGet(
-                    httpClient,
-                    "https://" + System.getProperty("domain.apollo") + "/" + application.toLowerCase() + "/home?useCase=authenticate&ticket=" + ssoTicket,
-                    new LinkedHashMap<String, String>() {
-                        {
-                            put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
-                        }
-                    },
-                    localContext,
-                    CONSUME_QUIETLY
+                httpClient,
+//              "https://" + System.getProperty("domain.apollo") + "/" + application.toLowerCase() + "/home?useCase=authenticate&ticket=" + ssoTicket,
+                System.getProperty("apollo." + application.toLowerCase() + ".url") + "/" + application.toLowerCase() + "/home?useCase=authenticate&ticket=" + ssoTicket,
+                new LinkedHashMap<String, String>() {
+                    {
+                        put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+                    }
+                },
+                localContext,
+                CONSUME_QUIETLY
             );
 //        httpResponse.setHttpResponse(authenticateResponse);
 
