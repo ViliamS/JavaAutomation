@@ -769,7 +769,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
         finalPersonalDetailsParameters.put("stepToken", "1");
         finalPersonalDetailsParameters.put("root:c:w:pnlMain:c:w:btnNext:submit", "1");
 
-        String onclickBtnNext = Jsoup.parse(Jsoup.parse(httpResponse.getHttpResponse()).select("component[id~=main]").select("component[encoding~=wicket]").text()).select("a[id~=submit]").select("a[wicketpath~=main_c_form_form_root_c_w_pnlMain_c_w_btnNext_submit").attr("onclick");
+        String onclickBtnNext = Jsoup.parse(Jsoup.parse(httpResponse.getHttpResponse()).select("component[id~=main]").select("component[encoding~=wicket]").text()).select("a[id~=submit]").select("a[wicketpath~=main_c_form_form_root_c_w_pnlMain_c_w_btnNext_submit]").attr("onclick");
         Pattern pOnclickBtnNext = Pattern.compile("\\?(wicket:interface=.*)&");
         Matcher mOnclickBtnNext = pOnclickBtnNext.matcher(onclickBtnNext);
 
