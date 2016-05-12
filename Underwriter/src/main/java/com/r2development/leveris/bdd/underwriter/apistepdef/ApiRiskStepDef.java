@@ -34,7 +34,7 @@ public class ApiRiskStepDef extends ApiOpoqoUnderwriterStepDef {
         final String formChangeListener = jsoupContainer.get("risk").select("form[id~=form]").select("form[wicketpath=multiFlow_panels_7_p_c_form_form]").attr("action").replace(":p:c:form:form::IFormSubmitListener::", ":p:c:form::IFormChangeListener:2:-1");
         requestHttpPost(
                 httpClient,
-                System.getProperty("underwriter") + "/form.2" + formChangeListener,
+                System.getProperty("underwriter.url") + "/form.2" + formChangeListener,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Content-Type", "application/x-www-form-urlencoded");
@@ -75,7 +75,7 @@ public class ApiRiskStepDef extends ApiOpoqoUnderwriterStepDef {
 
         String submitKYCResponse = requestHttpPost(
                 httpClient,
-                System.getProperty("underwriter") + "/form.2?" + finalSubmitKYCWicketInterface,
+                System.getProperty("underwriter.url") + "/form.2?" + finalSubmitKYCWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Content-Type", "application/x-www-form-urlencoded");
@@ -120,7 +120,7 @@ public class ApiRiskStepDef extends ApiOpoqoUnderwriterStepDef {
 
         String btnSetFicoResponse = requestHttpPost(
                 httpClient,
-                System.getProperty("underwriter") + "/form.2?" + finalBtnSetFicoWicketInterface,
+                System.getProperty("underwriter.url") + "/form.2?" + finalBtnSetFicoWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Content+Type", "application/x-www-form-urlencoded");
@@ -143,7 +143,7 @@ public class ApiRiskStepDef extends ApiOpoqoUnderwriterStepDef {
 
         String btnFicoSaveResponse = requestHttpPost(
                 httpClient,
-                System.getProperty("underwriter") + "/form.2?" + finalBtnFicoSaveWicketInterface,
+                System.getProperty("underwriter.url") + "/form.2?" + finalBtnFicoSaveWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Content+Type", "application/x-www-form-urlencoded");
@@ -174,7 +174,7 @@ public class ApiRiskStepDef extends ApiOpoqoUnderwriterStepDef {
 
         String btnFicoCloseResponse = requestHttpGet(
                 httpClient,
-                System.getProperty("underwriter") + "/form.2?" + finalBtnFicoCloseWicketInterface,
+                System.getProperty("underwriter.url") + "/form.2?" + finalBtnFicoCloseWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -201,7 +201,7 @@ public class ApiRiskStepDef extends ApiOpoqoUnderwriterStepDef {
 
         String btnHiddenRefreshResponse = requestHttpPost(
                 httpClient,
-                System.getProperty("underwriter") + "/form.2?" + finalBtnHiddenRefreshWicketInterface,
+                System.getProperty("underwriter.url") + "/form.2?" + finalBtnHiddenRefreshWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Content+Type", "application/x-www-form-urlencoded");
@@ -234,7 +234,7 @@ public class ApiRiskStepDef extends ApiOpoqoUnderwriterStepDef {
 
         String btnSetAMLResponse = requestHttpPost(
                 httpClient,
-                System.getProperty("underwriter") + "/form.2?" + finalBtnSetAMLWicketInterface,
+                System.getProperty("underwriter.url") + "/form.2?" + finalBtnSetAMLWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Content+Type", "application/x-www-form-urlencoded");
@@ -257,7 +257,7 @@ public class ApiRiskStepDef extends ApiOpoqoUnderwriterStepDef {
 
         String btnAMLSaveResponse = requestHttpPost(
                 httpClient,
-                System.getProperty("underwriter") + "/form.2?" + finalBtnAMLSaveWicketInterface,
+                System.getProperty("underwriter.url") + "/form.2?" + finalBtnAMLSaveWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Content+Type", "application/x-www-form-urlencoded");
@@ -288,7 +288,7 @@ public class ApiRiskStepDef extends ApiOpoqoUnderwriterStepDef {
 
         String btnAMLCloseResponse = requestHttpGet(
                 httpClient,
-                System.getProperty("underwriter") + "/form.2?" + finalBtnAMLCloseWicketInterface,
+                System.getProperty("underwriter.url") + "/form.2?" + finalBtnAMLCloseWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -315,7 +315,7 @@ public class ApiRiskStepDef extends ApiOpoqoUnderwriterStepDef {
 
         btnHiddenRefreshResponse = requestHttpPost(
                 httpClient,
-                System.getProperty("underwriter") + "/form.2?" + finalBtnHiddenRefreshWicketInterface2,
+                System.getProperty("underwriter.url") + "/form.2?" + finalBtnHiddenRefreshWicketInterface2,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Content+Type", "application/x-www-form-urlencoded");
@@ -348,7 +348,7 @@ public class ApiRiskStepDef extends ApiOpoqoUnderwriterStepDef {
 
         String btnSetFraudResponse = requestHttpPost(
                 httpClient,
-                System.getProperty("underwriter") + "/form.2?" + finalBtnSetFraudWicketInterface,
+                System.getProperty("underwriter.url") + "/form.2?" + finalBtnSetFraudWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Content+Type", "application/x-www-form-urlencoded");
@@ -371,7 +371,7 @@ public class ApiRiskStepDef extends ApiOpoqoUnderwriterStepDef {
 
         String btnFraudSaveResponse = requestHttpPost(
                 httpClient,
-                System.getProperty("underwriter") + "/form.2?" + finalBtnFraudSaveWicketInterface,
+                System.getProperty("underwriter.url") + "/form.2?" + finalBtnFraudSaveWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Content+Type", "application/x-www-form-urlencoded");
@@ -402,7 +402,7 @@ public class ApiRiskStepDef extends ApiOpoqoUnderwriterStepDef {
 
         String btnFraudCloseResponse = requestHttpGet(
                 httpClient,
-                System.getProperty("underwriter") + "/form.2?" + finalBtnFraudCloseWicketInterface,
+                System.getProperty("underwriter.url") + "/form.2?" + finalBtnFraudCloseWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -429,7 +429,7 @@ public class ApiRiskStepDef extends ApiOpoqoUnderwriterStepDef {
 
         btnHiddenRefreshResponse = requestHttpPost(
                 httpClient,
-                System.getProperty("underwriter") + "/form.2?" + finalBtnHiddenRefreshWicketInterface3,
+                System.getProperty("underwriter.url") + "/form.2?" + finalBtnHiddenRefreshWicketInterface3,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Content+Type", "application/x-www-form-urlencoded");
@@ -462,7 +462,7 @@ public class ApiRiskStepDef extends ApiOpoqoUnderwriterStepDef {
 
         String btnSetRepCustomerResponse = requestHttpPost(
                 httpClient,
-                System.getProperty("underwriter") + "/form.2?" + finalBtnSetRepCustomerWicketInterface,
+                System.getProperty("underwriter.url") + "/form.2?" + finalBtnSetRepCustomerWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Content+Type", "application/x-www-form-urlencoded");
@@ -485,7 +485,7 @@ public class ApiRiskStepDef extends ApiOpoqoUnderwriterStepDef {
 
         String btnRepCustomerSaveResponse = requestHttpPost(
                 httpClient,
-                System.getProperty("underwriter") + "/form.2?" + finalBtnRepCustomerSaveWicketInterface,
+                System.getProperty("underwriter.url") + "/form.2?" + finalBtnRepCustomerSaveWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Content+Type", "application/x-www-form-urlencoded");
@@ -512,7 +512,7 @@ public class ApiRiskStepDef extends ApiOpoqoUnderwriterStepDef {
 
         String btnRepCustomerCloseResponse = requestHttpGet(
                 httpClient,
-                System.getProperty("underwriter") + "/form.2?" + finalBtnRepCustomerCloseWicketInterface,
+                System.getProperty("underwriter.url") + "/form.2?" + finalBtnRepCustomerCloseWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -539,7 +539,7 @@ public class ApiRiskStepDef extends ApiOpoqoUnderwriterStepDef {
 
         btnHiddenRefreshResponse = requestHttpPost(
                 httpClient,
-                System.getProperty("underwriter") + "/form.2?" + finalBtnHiddenRefreshWicketInterface4,
+                System.getProperty("underwriter.url") + "/form.2?" + finalBtnHiddenRefreshWicketInterface4,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Content+Type", "application/x-www-form-urlencoded");
@@ -587,7 +587,7 @@ public class ApiRiskStepDef extends ApiOpoqoUnderwriterStepDef {
 
                 String documentPanelResponse = requestHttpPost(
                         httpClient,
-                        System.getProperty("underwriter") + "/form.2" + finalDocumentPanelWicketInterfce,
+                        System.getProperty("underwriter.url") + "/form.2" + finalDocumentPanelWicketInterfce,
                         new LinkedHashMap<String, String>() {
                             {
                                 put("Accept", "text/xml");
@@ -628,7 +628,7 @@ public class ApiRiskStepDef extends ApiOpoqoUnderwriterStepDef {
 
                 String riskPanelResponse = requestHttpPost(
                         httpClient,
-                        System.getProperty("underwriter") + "/form.2" + finalRiskPanelWicketInterfce,
+                        System.getProperty("underwriter.url") + "/form.2" + finalRiskPanelWicketInterfce,
                         new LinkedHashMap<String, String>() {
                             {
                                 put("Accept", "text/xml");

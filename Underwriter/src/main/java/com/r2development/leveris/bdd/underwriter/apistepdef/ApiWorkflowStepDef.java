@@ -48,7 +48,7 @@ public class ApiWorkflowStepDef extends ApiOpoqoUnderwriterStepDef {
         String responseRefresh = requestHttpGet(
                 httpClient,
 //                "https://st1app.loftkeys.com/underwriter/form.5?wicket:interface=:5:multiFlow:panels:0:p:c:form:form:root:c:w:btnRefresh:cancel::IBehaviorListener:0:",
-                System.getProperty("underwriter") + "/form.2?wicket:interface=" + currentWicketRefreshLink,
+                System.getProperty("underwriter.url") + "/form.2?wicket:interface=" + currentWicketRefreshLink,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html");
@@ -71,7 +71,7 @@ public class ApiWorkflowStepDef extends ApiOpoqoUnderwriterStepDef {
 
         requestHttpPost(
                 httpClient,
-                System.getProperty("underwriter") + "/form.2" + enableSubmitWicketInterface + "-1",
+                System.getProperty("underwriter.url") + "/form.2" + enableSubmitWicketInterface + "-1",
                 new LinkedHashMap<String, String>() {
                     {
                         put("Content-Type", "application/x-www-form-urlencoded");
@@ -100,7 +100,7 @@ public class ApiWorkflowStepDef extends ApiOpoqoUnderwriterStepDef {
                 httpClient,
 //                "https://st1app.loftkeys.com/underwriter/form.2?wicket:interface=:4:singleFlow:p:c:form:form:root:c:w:pnlApplicationList:c:w:rptApplication:c:rows:1:item:pnlApplication:c:w:btnStart:submit::IBehaviorListener:0:",
 //                "https://st1app.loftkeys.com/underwriter/form.2?wicket:interface=:5:multiFlow:panels:0:p:c:form:embeddedFormWrapper:embeddedForm:1:form:root:c:w:pnlStage1:c:w:btnComplete:submit::IBehaviorListener:0:",
-                System.getProperty("underwriter") + "/form.2?wicket:interface=" + currentWicketCompleteReviewLink,
+                System.getProperty("underwriter.url") + "/form.2?wicket:interface=" + currentWicketCompleteReviewLink,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Content-Type", "application/x-www-form-urlencoded");
@@ -140,7 +140,7 @@ public class ApiWorkflowStepDef extends ApiOpoqoUnderwriterStepDef {
         String completeStage2Response = requestHttpPost(
                 httpClient,
 //                "https://st1app.loftkeys.com/underwriter/form.2?wicket:interface=:5:multiFlow:panels:0:p:c:form:embeddedFormWrapper:embeddedForm:2:form:root:c:w:pnlStage2:c:w:btnOfferCredit:submit::IBehaviorListener:0:",
-                System.getProperty("underwriter") + "/form.2?wicket:interface=" + currentWicketCompleteReviewLink,
+                System.getProperty("underwriter.url") + "/form.2?wicket:interface=" + currentWicketCompleteReviewLink,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Content-Type", "application/x-www-form-urlencoded");
@@ -173,7 +173,7 @@ public class ApiWorkflowStepDef extends ApiOpoqoUnderwriterStepDef {
         String issueFundsResponse = requestHttpPost(
                 httpClient,
     //                "https://st1app.loftkeys.com/underwriter/form.2?wicket:interface=:5:multiFlow:panels:0:p:c:form:embeddedFormWrapper:embeddedForm:2:form:root:c:w:pnlStage2:c:w:btnOfferCredit:submit::IBehaviorListener:0:",
-                System.getProperty("underwriter") + "/form.2?wicket:interface=" + currentWicketIssueFundsLink,
+                System.getProperty("underwriter.url") + "/form.2?wicket:interface=" + currentWicketIssueFundsLink,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Content-Type", "application/x-www-form-urlencoded");
@@ -196,7 +196,7 @@ public class ApiWorkflowStepDef extends ApiOpoqoUnderwriterStepDef {
         String finalizeIssueFundsResponse = requestHttpPost(
                 httpClient,
                 //                "https://st1app.loftkeys.com/underwriter/form.2?wicket:interface=:5:multiFlow:panels:0:p:c:form:embeddedFormWrapper:embeddedForm:2:form:root:c:w:pnlStage2:c:w:btnOfferCredit:submit::IBehaviorListener:0:",
-                System.getProperty("underwriter") + "/form.2?wicket:interface=" + currentWicketFinalizeIssueFundsLink,
+                System.getProperty("underwriter.url") + "/form.2?wicket:interface=" + currentWicketFinalizeIssueFundsLink,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Content-Type", "application/x-www-form-urlencoded");

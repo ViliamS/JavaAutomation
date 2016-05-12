@@ -53,6 +53,25 @@ public class PhantomJsTest {
     }
 
     @Test
+    public void getGoogleLinksOfAssertSelenium() throws Exception {
+        driver.get("http://www.google.com");
+//Getting all the links present in the page by a HTML tag.
+        List<WebElement> links = driver.findElements(By.tagName("a"));
+
+//Printing the size, will print the no of links present in the page.
+        System.out.println("Total Links present is "+links.size());
+
+//Printing the links in the page, we get through the href attribute.
+        for (WebElement link : links) {
+
+            System.out.println("Links are listed " + link.getAttribute("href"));
+        }
+
+        System.out.println("====================");
+        System.out.println(driver.getPageSource());
+    }
+
+    @Test
     public void adobe() {
         String urlAdobeDocument = "https://secure.na1.echosign.com/public/apiesign?pid=CBFCIBAA3AAABLblqZhByvgMB5YCZnhiW9vGosuFH3Ij0x0TcqC9xwvy47RcocATUWMw-3CvlUbA1hVpHVWs*";
 

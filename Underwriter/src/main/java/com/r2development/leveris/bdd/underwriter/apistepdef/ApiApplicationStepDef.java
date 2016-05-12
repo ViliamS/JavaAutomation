@@ -98,7 +98,7 @@ public class ApiApplicationStepDef extends ApiOpoqoUnderwriterStepDef {
                 httpClient,
 //                "http://dv2app.opoqodev.com/stable-underwriter/form.2?wicket:interface=:2:singleFlow:p:c:form:form:root:c:w:pnlSort:c:w:btnSearch:submit::IBehaviorListener:0:",
 //                "http://dv2app.opoqodev.com/stable-underwriter/form.2?wicket:interface=:2:singleFlow:p:c:form:form:root:c:w:btnSearch:submit::IBehaviorListener:0:",
-                System.getProperty("underwriter") + "/form.2" + finalWicketInterfaceLinkSearch,
+                System.getProperty("underwriter.url") + "/form.2" + finalWicketInterfaceLinkSearch,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");
@@ -168,7 +168,7 @@ public class ApiApplicationStepDef extends ApiOpoqoUnderwriterStepDef {
         String applicationAutomation = requestHttpPost(
                 httpClient,
 //                "https://st1app.loftkeys.com/underwriter/form.2?wicket:interface=:4:singleFlow:p:c:form:form:root:c:w:pnlApplicationList:c:w:rptApplication:c:rows:1:item:pnlApplication:c:w:btnStart:submit::IBehaviorListener:0:",
-                System.getProperty("underwriter") + "/form.2?" + wicketStartLink,
+                System.getProperty("underwriter.url") + "/form.2?" + wicketStartLink,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");
@@ -238,7 +238,7 @@ public class ApiApplicationStepDef extends ApiOpoqoUnderwriterStepDef {
         String applicationAutomation = requestHttpPost(
                 httpClient,
 //                "https://st1app.loftkeys.com/underwriter/form.2?wicket:interface=:4:singleFlow:p:c:form:form:root:c:w:pnlApplicationList:c:w:rptApplication:c:rows:1:item:pnlApplication:c:w:btnStart:submit::IBehaviorListener:0:",
-                System.getProperty("underwriter") + "/form.2?" + wicketStartLink,
+                System.getProperty("underwriter.url") + "/form.2?" + wicketStartLink,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");

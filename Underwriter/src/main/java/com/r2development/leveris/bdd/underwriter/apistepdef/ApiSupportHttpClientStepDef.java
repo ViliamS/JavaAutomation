@@ -30,20 +30,20 @@ public class ApiSupportHttpClientStepDef {
         if ( StringUtils.isEmpty(System.getProperty("domain.underwriter")))
             System.setProperty("domain.underwriter", "dv2app.opoqodev.com");
 
-        if ( StringUtils.isEmpty(System.getProperty("underwriter")))
-            System.setProperty("underwriter", "http://dv2app.opoqodev.com/stable-underwriter");
+        if ( StringUtils.isEmpty(System.getProperty("underwriter.url")))
+            System.setProperty("underwriter.url", "http://dv2app.opoqodev.com/stable-underwriter");
 
         if ( StringUtils.isEmpty(System.getProperty("timestamp")))
             System.setProperty("timestamp", DateTime.now().toString("yyyyMMddHHmmssSSS"));
 
-        if ( StringUtils.isEmpty(System.getProperty("apollo.sso")))
-            System.setProperty("apollo.sso", "https://dv2apl.opoqodev.com/sso/");
+        if ( StringUtils.isEmpty(System.getProperty("apollo.sso.url")))
+            System.setProperty("apollo.sso.url", "https://dv2apl.opoqodev.com/sso/");
 
         httpClient = HttpUtils.createHttpClient();
 
         Assert.assertNotNull("Maven didn't load the System property Environment", System.getProperty("environment"));
         Assert.assertNotNull("Maven didn't load the System property Domain", System.getProperty("domain.underwriter"));
-        Assert.assertNotNull("Maven didn't load the System property UnderWriter", System.getProperty("underwriter"));
+        Assert.assertNotNull("Maven didn't load the System property UnderWriter", System.getProperty("underwriter.url"));
 
         localContext = HttpUtils.initContext(System.getProperty("domain.underwriter"), "/stable-underwriter");
 //        localContext = getNewInstanceHttpClientContext();

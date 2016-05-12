@@ -83,13 +83,13 @@ public class ApiSsoStepDef extends ApiOpoqoUnderwriterStepDef {
 
         do {
             //        ApiSupportHttpClientStepDef.getNewInstanceHttpClientContext(System.getProperty("domain.underwriter"), System.getProperty("/stable-underwriter"));
-            localContext.setHttpContext(HttpUtils.initContext(System.getProperty("domain.underwriter"), "/stable-underwriter"));
+            localContext.setHttpContext(HttpUtils.initContext(System.getProperty("domain.underwriter"), System.getProperty("underwriter.ctx")));
 
             //        String referer = "https://dv2apl.opoqodev.com/sso/?host=http://dv2apl.opoqodev.com/" + application.toLowerCase() + "/&application=" + application.toUpperCase();
-            String referer = System.getProperty("apollo.sso") + "/?host=http://" + System.getProperty("domain.underwriter") + "/stable-" + application.toLowerCase() + "/&application=" + application.toUpperCase();
-            String entity = "{\"authProcessId\":null,\"authProcessStepValues\":[{\"authDetailCode\":\"LDAPUSERNAME\",\"value\":\"test.automation+underwriter@finfactory.com\"},{\"authDetailCode\":\"LDAPPWD\",\"value\":\"autPassword1122+\"}],\"operation\":\"LOGIN\",\"originalRequest\":{\"url\":\"http://" + System.getProperty("domain.underwriter") + "/stable-" + application.toLowerCase() + "/\",\"applicationCode\":\"" + application.toUpperCase() + "\"},\"scenarioCode\":\"LDAP_USR_PWD\"}";
+            String referer = System.getProperty("apollo.sso.url") + "/?host=http://" + System.getProperty("domain.underwriter") + System.getProperty("underwriter.ctx") + "/&application=" + application.toUpperCase();
+            String entity = "{\"authProcessId\":null,\"authProcessStepValues\":[{\"authDetailCode\":\"LDAPUSERNAME\",\"value\":\"test.automation+underwriter@finfactory.com\"},{\"authDetailCode\":\"LDAPPWD\",\"value\":\"autPassword1122+\"}],\"operation\":\"LOGIN\",\"originalRequest\":{\"url\":\"http://" + System.getProperty("domain.underwriter") + System.getProperty("underwriter.ctx") + "/\",\"applicationCode\":\"" + application.toUpperCase() + "\"},\"scenarioCode\":\"LDAP_USR_PWD\"}";
 
-            HttpPost httpPostValidateAuthProcessStep = new HttpPost(System.getProperty("apollo.sso") + "/api/public/sso/validateAuthProcessStep");
+            HttpPost httpPostValidateAuthProcessStep = new HttpPost(System.getProperty("apollo.sso.url") + "/api/public/sso/validateAuthProcessStep");
             httpPostValidateAuthProcessStep.setHeader("Content-Type", "application/json; charset=UTF-8");
             httpPostValidateAuthProcessStep.setHeader("Referer", referer);
             StringEntity se = new StringEntity(entity);
@@ -109,7 +109,7 @@ public class ApiSsoStepDef extends ApiOpoqoUnderwriterStepDef {
 
             authenticateResponse = requestHttpGet(
                     httpClient,
-                    System.getProperty("underwriter") + "/home?useCase=authenticate&ticket=" + ssoTicket,
+                    System.getProperty("underwriter.url") + "/home?useCase=authenticate&ticket=" + ssoTicket,
                     new LinkedHashMap<String, String>() {
                         {
                             put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -140,13 +140,13 @@ public class ApiSsoStepDef extends ApiOpoqoUnderwriterStepDef {
     public void user_processes_SSO_Auth(String operator, String application) throws IOException {
 
 //        ApiSupportHttpClientStepDef.getNewInstanceHttpClientContext(System.getProperty("domain.underwriter"), System.getProperty("/stable-underwriter"));
-        localContext.setHttpContext(HttpUtils.initContext(System.getProperty("domain.underwriter"), "/stable-underwriter"));
+        localContext.setHttpContext(HttpUtils.initContext(System.getProperty("domain.underwriter"), System.getProperty("")));
 
 //        String referer = "https://dv2apl.opoqodev.com/sso/?host=http://dv2apl.opoqodev.com/" + application.toLowerCase() + "/&application=" + application.toUpperCase();
-        String referer = System.getProperty("apollo.sso") + "/?host=http://" + System.getProperty("domain.underwriter") + "/stable-" + application.toLowerCase() + "/&application=" + application.toUpperCase();
-        String entity = "{\"authProcessId\":null,\"authProcessStepValues\":[{\"authDetailCode\":\"LDAPUSERNAME\",\"value\":\"test.automation+underwriter@finfactory.com\"},{\"authDetailCode\":\"LDAPPWD\",\"value\":\"autPassword1122+\"}],\"operation\":\"LOGIN\",\"originalRequest\":{\"url\":\"http://" + System.getProperty("domain.underwriter") + "/stable-" + application.toLowerCase() + "/\",\"applicationCode\":\"" + application.toUpperCase() + "\"},\"scenarioCode\":\"LDAP_USR_PWD\"}";
+        String referer = System.getProperty("apollo.sso.url") + "/?host=http://" + System.getProperty("domain.underwriter") + System.getProperty("underwriter.ctx") + "/&application=" + application.toUpperCase();
+        String entity = "{\"authProcessId\":null,\"authProcessStepValues\":[{\"authDetailCode\":\"LDAPUSERNAME\",\"value\":\"test.automation+underwriter@finfactory.com\"},{\"authDetailCode\":\"LDAPPWD\",\"value\":\"autPassword1122+\"}],\"operation\":\"LOGIN\",\"originalRequest\":{\"url\":\"http://" + System.getProperty("domain.underwriter") + System.getProperty("underwriter.ctx") + "/\",\"applicationCode\":\"" + application.toUpperCase() + "\"},\"scenarioCode\":\"LDAP_USR_PWD\"}";
 
-        HttpPost httpPostValidateAuthProcessStep = new HttpPost( System.getProperty("apollo.sso") + "/api/public/sso/validateAuthProcessStep");
+        HttpPost httpPostValidateAuthProcessStep = new HttpPost( System.getProperty("apollo.sso.url") + "/api/public/sso/validateAuthProcessStep");
         httpPostValidateAuthProcessStep.setHeader("Content-Type", "application/json; charset=UTF-8");
         httpPostValidateAuthProcessStep.setHeader("Referer", referer);
         StringEntity se = new StringEntity(entity);
@@ -177,7 +177,7 @@ public class ApiSsoStepDef extends ApiOpoqoUnderwriterStepDef {
 
             authenticateResponse = requestHttpGet(
                     httpClient,
-                    System.getProperty("underwriter") + "/home?useCase=authenticate&ticket=" + ssoTicket,
+                    System.getProperty("underwriter.url") + "/home?useCase=authenticate&ticket=" + ssoTicket,
                     new LinkedHashMap<String, String>() {
                         {
                             put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -227,6 +227,6 @@ public class ApiSsoStepDef extends ApiOpoqoUnderwriterStepDef {
         JsonParser jsonParser = new JsonParser();
         JsonObject jsonObject = (JsonObject) jsonParser.parse(logoutResponse);
 
-        Assert.assertEquals("We should have one \"casUrl\" element", System.getProperty("apollo.sso") + "/", jsonObject.get("casUrl").getAsString());
+        Assert.assertEquals("We should have one \"casUrl\" element", System.getProperty("apollo.sso.url") + "/", jsonObject.get("casUrl").getAsString());
     }
 }

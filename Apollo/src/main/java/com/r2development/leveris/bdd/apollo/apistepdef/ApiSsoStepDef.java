@@ -38,10 +38,10 @@ public class ApiSsoStepDef extends ApiOpoqoApolloStepDef {
         ApiSupportHttpClientStepDef.getNewInstanceHttpClientContext(System.getProperty("domain.apollo"), System.getProperty("apollo.context." + application.toLowerCase()));
 
 //        String referer = "https://dv2apl.opoqodev.com/sso/?host=http://dv2apl.opoqodev.com/" + application.toLowerCase() + "/&application=" + application.toUpperCase();
-        String referer = System.getProperty("apollo.sso") + "/?host=http://" + System.getProperty("domain.apollo") + "/" + application.toLowerCase() + "/&application=" + application.toUpperCase();
+        String referer = System.getProperty("apollo.sso.url") + "/?host=http://" + System.getProperty("domain.apollo") + "/" + application.toLowerCase() + "/&application=" + application.toUpperCase();
         String entity = "{\"authProcessId\":null,\"authProcessStepValues\":[{\"authDetailCode\":\"LDAPUSERNAME\",\"value\":\"test_automation@abakus.com\"},{\"authDetailCode\":\"LDAPPWD\",\"value\":\"autPassword1122\"}],\"operation\":\"LOGIN\",\"originalRequest\":{\"url\":\"http://" + System.getProperty("domain.apollo") + "/" + application.toLowerCase() + "/\",\"applicationCode\":\"" + application.toUpperCase() + "\"},\"scenarioCode\":\"LDAP_USR_PWD\"}";
 
-        HttpPost httpPostValidateAuthProcessStep = new HttpPost(System.getProperty("apollo.sso") + "/api/public/sso/validateAuthProcessStep");
+        HttpPost httpPostValidateAuthProcessStep = new HttpPost(System.getProperty("apollo.sso.url") + "/api/public/sso/validateAuthProcessStep");
         httpPostValidateAuthProcessStep.setHeader("Content-Type", "application/json; charset=UTF-8");
         httpPostValidateAuthProcessStep.setHeader("Referer", referer);
         StringEntity se = new StringEntity(entity);
@@ -110,7 +110,7 @@ public class ApiSsoStepDef extends ApiOpoqoApolloStepDef {
         JsonParser jsonParser = new JsonParser();
         JsonObject jsonObject = (JsonObject) jsonParser.parse(logoutResponse);
 
-        Assert.assertEquals("We should have one \"casUrl\" element", System.getProperty("apollo.sso") + "/", jsonObject.get("casUrl").getAsString());
+        Assert.assertEquals("We should have one \"casUrl\" element", System.getProperty("apollo.sso.url") + "/", jsonObject.get("casUrl").getAsString());
 
     }
 

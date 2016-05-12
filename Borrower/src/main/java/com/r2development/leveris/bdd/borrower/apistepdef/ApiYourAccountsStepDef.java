@@ -390,7 +390,7 @@ public class ApiYourAccountsStepDef extends ApiOpoqoBorrowerStepDef {
         }
 
         String stepToken = currentFormDoc2.select("input[name=stepToken]").attr("value");
-        String btnAddThisSource = currentFormDoc2.select("a[id~=submit]").select("a[wicketpath~=main_c_form_dialogWrapper_dialog_form_root_c_w_pnlAddSource_c_w_btnAddThisSource_submit").attr("onclick");
+        String btnAddThisSource = currentFormDoc2.select("div[id~=btnAddThisSource][data-path~=btnAddThisSource]").select("a[id~=submit]").select("a[wicketpath~=btnAddThisSource").attr("onclick");
         Pattern pBtnAddThisSource = Pattern.compile("\\?(wicket:interface=.*)&");
         Matcher mBtnAddThisSource = pBtnAddThisSource.matcher(btnAddThisSource);
         String btnAddThisSourceWicketInterface = StringUtils.EMPTY;

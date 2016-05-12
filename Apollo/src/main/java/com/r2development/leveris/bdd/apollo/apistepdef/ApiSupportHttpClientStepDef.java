@@ -43,8 +43,8 @@ public class ApiSupportHttpClientStepDef {
         if ( StringUtils.isEmpty(System.getProperty("apollo.context.payment")))
             System.setProperty("apollo.context.payment", "/payment");
 
-        if ( StringUtils.isEmpty(System.getProperty("apollo.sso")))
-            System.setProperty("apollo.sso", "https://dv2apl.opoqodev.com/sso/");
+        if ( StringUtils.isEmpty(System.getProperty("apollo.sso.url")))
+            System.setProperty("apollo.sso.url", "https://dv2apl.opoqodev.com/sso/");
 
         if ( StringUtils.isEmpty(System.getProperty("timestamp")))
             System.setProperty("timestamp", DateTime.now().toString("yyyyMMddHHmmssSSS"));

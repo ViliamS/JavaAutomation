@@ -144,6 +144,8 @@ public class ApiDocumentStepDef extends ApiOpoqoUnderwriterStepDef {
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:rgrRelatedTo:rg:rb:radApplicant1:checkbox", "on");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocumentType:combobox", "BANSTM");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocumentType:v", "Bank Statement");
+                    multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:pnlCoLoan:c:w:cmbDocumentType:combobox", "BANSTM");
+                    multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:pnlCoLoan:c:w:cmbDocumentType:v", "Bank Statement");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocSubtype:combobox", "");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocSubtype:v", "Choose...");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:pnlDescription:c:w:txtDescription:tb", "");
@@ -201,6 +203,8 @@ public class ApiDocumentStepDef extends ApiOpoqoUnderwriterStepDef {
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:rgrRelatedTo:rg:rb:radApplicant1:checkbox", "on");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocumentType:combobox", "PAYS1");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocumentType:v", "Current Payslip");
+                    multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:pnlCoLoan:c:w:cmbDocumentType:combobox", "PAYS1");
+                    multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:pnlCoLoan:c:w:cmbDocumentType:v", "Current Payslip");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocSubtype:combobox", "PAYSLP");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocSubtype:v", "Payslip");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:pnlDescription:c:w:txtDescription:tb", "");
@@ -343,6 +347,8 @@ public class ApiDocumentStepDef extends ApiOpoqoUnderwriterStepDef {
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:rgrRelatedTo:rg:rb:radApplicant1:checkbox", "on");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocumentType:combobox", "DOC_MAF");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocumentType:v", "Mortgage application form");
+                    multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:pnlCoLoan:c:w:cmbDocumentType:combobox", "DOC_MAF");
+                    multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:pnlCoLoan:c:w:cmbDocumentType:v", "Mortgage application form");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocSubtype:combobox", "");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocSubtype:v", "Choose...");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:pnlDescription:c:w:txtDescription:tb", "");
@@ -387,6 +393,8 @@ public class ApiDocumentStepDef extends ApiOpoqoUnderwriterStepDef {
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:rgrRelatedTo:rg:rb:chkApplicant1:checkbox", "on");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocumentType:combobox", "NOFAGR");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocumentType:v", "No Formal Agreement");
+                    multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:pnlCoLoan:c:w:cmbDocumentType:combobox", "NOFAGR");
+                            multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:pnlCoLoan:c:w:cmbDocumentType:v", "No Formal Agreement");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocSubtype:combobox", "");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocSubtype:v", "Choose...");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:pnlDescription:c:w:txtDescription:tb", "");
@@ -403,6 +411,8 @@ public class ApiDocumentStepDef extends ApiOpoqoUnderwriterStepDef {
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:rgrRelatedTo:rg:rb:radApplicant1:checkbox", "on");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocumentType:combobox", "P60");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocumentType:v", "P60");
+                    multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:pnlCoLoan:c:w:cmbDocumentType:combobox", "P60");
+                    multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:pnlCoLoan:c:w:cmbDocumentType:v", "P60");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocSubtype:combobox", "");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocSubtype:v", "Choose...");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:pnlDescription:c:w:txtDescription:tb", "");
@@ -427,6 +437,8 @@ public class ApiDocumentStepDef extends ApiOpoqoUnderwriterStepDef {
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:rgrRelatedTo:rg:rb:radApplicant1:checkbox", "on");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocumentType:combobox", "PROID");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocumentType:v", "Photo Identification");
+                    multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:pnlCoLoan:c:w:cmbDocumentType:combobox", "PROID");
+                    multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:pnlCoLoan:c:w:cmbDocumentType:v", "Photo Identification");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocSubtype:combobox", "PASS");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocSubtype:v", "Passport");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:pnlDescription:c:w:txtDescription:tb", "");
@@ -478,6 +490,8 @@ public class ApiDocumentStepDef extends ApiOpoqoUnderwriterStepDef {
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:rgrRelatedTo:rg:rb:radApplicant1:checkbox", "on");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocumentType:combobox", "PAYS2");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocumentType:v", "Previous Payslip");
+                    multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:pnlCoLoan:c:w:cmbDocumentType:combobox", "PAYS2");
+                    multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:pnlCoLoan:c:w:cmbDocumentType:v", "Previous Payslip");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocSubtype:combobox", "PAYSLP");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocSubtype:v", "Payslip");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:pnlDescription:c:w:txtDescription:tb", "");
@@ -520,6 +534,8 @@ public class ApiDocumentStepDef extends ApiOpoqoUnderwriterStepDef {
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:rgrRelatedTo:rg:rb:radApplicant1:checkbox", "on");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocumentType:combobox", "PROADR");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocumentType:v", "Proof of Address");
+                    multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:pnlCoLoan:c:w:cmbDocumentType:combobox", "PROADR");
+                    multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:pnlCoLoan:c:w:cmbDocumentType:v", "Proof of Address");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocSubtype:combobox", "UTIL");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocSubtype:v", "Utility Bill (Gas / Electrity / Phone / Television Provider)"); // BUG CLV ? not handling special characters
 //                    multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocSubtype:v", "");
@@ -547,6 +563,8 @@ public class ApiDocumentStepDef extends ApiOpoqoUnderwriterStepDef {
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:rgrRelatedTo:rg:rb:radApplicant1:checkbox", "on");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocumentType:combobox", "SALCERT");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocumentType:v", "Salary Certificate");
+                    multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:pnlCoLoan:c:w:cmbDocumentType:combobox", "SALCERT");
+                    multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:pnlCoLoan:c:w:cmbDocumentType:v", "Salary Certificate");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocSubtype:combobox", "");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:cmbDocSubtype:v", "Choose...");
                     multipartEntityBuilder.addTextBody("root:c:w:pnlBlack:c:w:pnlEdit:c:w:pnlDescription:c:w:txtDescription:tb", "");
@@ -607,7 +625,7 @@ public class ApiDocumentStepDef extends ApiOpoqoUnderwriterStepDef {
             String documentViewResponse = requestHttpPost(
                     httpClient,
 //                "http://dv2app.opoqodev.com/stable-underwriter/form.2?wicket:interface=:4:singleFlow:p:c:form:form:root:c:w:pnlApplicationList:c:w:rptApplication:c:rows:1:item:pnlApplication:c:w:btnStart:submit::IBehaviorListener:0:",
-                    System.getProperty("underwriter") + "/form.2?" + currentDocumentKey,
+                    System.getProperty("underwriter.url") + "/form.2?" + currentDocumentKey,
                     new LinkedHashMap<String, String>() {
                         {
                             put("Content-Type", "application/x-www-form-urlencoded");
@@ -642,7 +660,7 @@ public class ApiDocumentStepDef extends ApiOpoqoUnderwriterStepDef {
 //                "http://dv2app.opoqodev.com/stable-underwriter/form.2?wicket:interface=:4:singleFlow:p:c:form:form:root:c:w:pnlApplicationList:c:w:rptApplication:c:rows:1:item:pnlApplication:c:w:btnStart:submit::IBehaviorListener:0:",
 //                    "http://dv2app.opoqodev.com/stable-underwriter/form.2?wicket:interface=:5:multiFlow:panels:4:p:c:form::IFormChangeListener:2:-1",
 //                    "http://dv2app.opoqodev.com/stable-underwriter/form.2?wicket:interface=:3:multiFlow:panels:4:p:c:form::IFormChangeListener:2:-1",
-                    System.getProperty("underwriter") + "/form.2" + finalFormAction,
+                    System.getProperty("underwriter.url") + "/form.2" + finalFormAction,
                     new LinkedHashMap<String, String>() {
                         {
                             put("Content-Type", "application/x-www-form-urlencoded");
@@ -681,7 +699,7 @@ public class ApiDocumentStepDef extends ApiOpoqoUnderwriterStepDef {
 //            Instant begin_timestamp = DateTime.now().toInstant();
 ////            HttpPost httpPostUploadDocItemDD = new HttpPost("https://st1app.loftkeys.com/borrower/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:pnlMain:c:w:btnHiddenSubmit:submit::IBehaviorListener:0:");
 //            HttpPost httpPostUploadDocItem = new HttpPost("http://dv2app.opoqodev.com/stable-underwriter/form.2?wicket:interface=:3:multiFlow:panels:4:p:c:form:form:root:c:w:pnlBlack:c:w:pnlEdit:c:w:btnSave:submit::IBehaviorListener:0:");
-            HttpPost httpPostUploadDocItem = new HttpPost(System.getProperty("underwriter") + "/form.2?wicket:interface=" + wicketLink );
+            HttpPost httpPostUploadDocItem = new HttpPost(System.getProperty("underwriter.url") + "/form.2?wicket:interface=" + wicketLink );
             httpPostUploadDocItem.setHeader("Accept-Encoding", "gzip, deflate");
             httpPostUploadDocItem.setHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
             String boundary = RandomStringUtils.randomAlphanumeric(15);
@@ -724,7 +742,7 @@ public class ApiDocumentStepDef extends ApiOpoqoUnderwriterStepDef {
             String linkCloseResponse = requestHttpGet(
                     httpClient,
 //                    "http://dv2app.opoqodev.com/stable-underwriter/form.2?wicket:interface=:5:multiFlow:panels:4:p:c:form:form:root:c:w:pnlBlack:c:w:lnkClose:cancel::IBehaviorListener:0:&amp;stepToken=2&amp;",
-                    System.getProperty("underwriter") + "/form.2?" + currentWicketLinkClose,
+                    System.getProperty("underwriter.url") + "/form.2?" + currentWicketLinkClose,
                     new LinkedHashMap<String, String>() {
                         {
                             put("Accept", "text/html");
@@ -794,7 +812,7 @@ public class ApiDocumentStepDef extends ApiOpoqoUnderwriterStepDef {
 
                 String documentPanelResponse = requestHttpPost(
                         httpClient,
-                        System.getProperty("underwriter") + "/form.2" + finalDocumentPanelWicketInterfce,
+                        System.getProperty("underwriter.url") + "/form.2" + finalDocumentPanelWicketInterfce,
                         new LinkedHashMap<String, String>() {
                             {
                                 put("Accept", "text/xml");

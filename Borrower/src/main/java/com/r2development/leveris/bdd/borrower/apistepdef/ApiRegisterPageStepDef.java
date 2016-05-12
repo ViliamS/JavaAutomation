@@ -344,7 +344,8 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
 
         String queryEmailResponse = requestHttpPost(
                 httpClient,
-                "https://dv2mdg.opoqodev.com/queryemail",
+//                "https://dv2mdg.opoqodev.com/queryemail",
+                System.getProperty("mdg.url") + "/queryemail",
                 new LinkedHashMap<String, String>() {
                     {
                         put("Content-Type", "application/json");
@@ -366,7 +367,8 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
 
         String queryEmailDetailResponse = requestHttpPost(
                 httpClient,
-                "https://dv2mdg.opoqodev.com/queryemail/detail",
+//                "https://dv2mdg.opoqodev.com/queryemail/detail",
+                System.getProperty("mdg.url") + "/queryemail/detail",
                 new LinkedHashMap<String, String>() {
                     {
                         put("Content-Type", "application/json");
@@ -392,7 +394,8 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
 
         String queryDataQueryResponse = requestHttpGet(
                 httpClient,
-                "https://dv2mdg.opoqodev.com/email/body/" + oid,
+//                "https://dv2mdg.opoqodev.com/email/body/" + oid,
+                System.getProperty("mdg.url") + "/email/body/" + oid,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "application/html");

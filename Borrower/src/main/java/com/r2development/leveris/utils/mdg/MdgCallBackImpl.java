@@ -52,11 +52,15 @@ public class MdgCallBackImpl implements MdgCallBack {
         HttpClientContext localContext = HttpClientContext.create();
         localContext.setCookieStore(cookieStore);
 
-        HttpPost httpPostMDGApiEmailFilter = new HttpPost("https://dv2mdg.opoqodev.com/ui/api/email");
+//        HttpPost httpPostMDGApiEmailFilter = new HttpPost("https://dv2mdg.opoqodev.com/ui/api/email");
+        HttpPost httpPostMDGApiEmailFilter = new HttpPost(System.getProperty("mdg.url")+"/ui/api/email");
         httpPostMDGApiEmailFilter.setHeader("Content-Type", "application/json; charset=UTF-8");
-        httpPostMDGApiEmailFilter.setHeader("Referer", "https://dv2mdg.opoqodev.com/ui/email");
-        httpPostMDGApiEmailFilter.setHeader("Origin", "https://dv2mdg.opoqodev.com");
-        httpPostMDGApiEmailFilter.setHeader("Host", "dv2mdg.opoqodev.com");
+//        httpPostMDGApiEmailFilter.setHeader("Referer", "https://dv2mdg.opoqodev.com/ui/email");
+        httpPostMDGApiEmailFilter.setHeader("Referer", System.getProperty("mdg.url")+"/ui/email");
+//        httpPostMDGApiEmailFilter.setHeader("Origin", "https://dv2mdg.opoqodev.com");
+        httpPostMDGApiEmailFilter.setHeader("Origin", System.getProperty("mdg.url"));
+//        httpPostMDGApiEmailFilter.setHeader("Host", "dv2mdg.opoqodev.com");
+        httpPostMDGApiEmailFilter.setHeader("Host", System.getProperty("domain.mdg"));
         StringEntity seMDGApiEmailFilter = new StringEntity("{\"$type\":\"redone.FindFilter\",\"to\":[\"" + email + "\"]}");
         seMDGApiEmailFilter.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
         httpPostMDGApiEmailFilter.setEntity(seMDGApiEmailFilter);
@@ -102,11 +106,15 @@ public class MdgCallBackImpl implements MdgCallBack {
         JsonObject currentElementSmsAsJsonObject = null;
         while(!isSent && !isDelivered) {
 
-            HttpPost httpPostMDGApiSmsFilter = new HttpPost("https://dv2mdg.opoqodev.com/ui/api/sms");
+//            HttpPost httpPostMDGApiSmsFilter = new HttpPost("https://dv2mdg.opoqodev.com/ui/api/sms");
+            HttpPost httpPostMDGApiSmsFilter = new HttpPost(System.getProperty("mdg.url")+"/ui/api/sms");
             httpPostMDGApiSmsFilter.setHeader("Content-Type", "application/json; charset=UTF-8");
-            httpPostMDGApiSmsFilter.setHeader("Referer", "https://dv2mdg.opoqodev.com/ui/sms");
-            httpPostMDGApiSmsFilter.setHeader("Origin", "https://dv2mdg.opoqodev.com");
-            httpPostMDGApiSmsFilter.setHeader("Host", "dv2mdg.opoqodev.com");
+//            httpPostMDGApiSmsFilter.setHeader("Referer", "https://dv2mdg.opoqodev.com/ui/sms");
+            httpPostMDGApiSmsFilter.setHeader("Referer", System.getProperty("mdg.url")+"/ui/sms");
+//            httpPostMDGApiSmsFilter.setHeader("Origin", "https://dv2mdg.opoqodev.com");
+            httpPostMDGApiSmsFilter.setHeader("Origin", System.getProperty("mdg.url"));
+//            httpPostMDGApiSmsFilter.setHeader("Host", "dv2mdg.opoqodev.com");
+            httpPostMDGApiSmsFilter.setHeader("Host", System.getProperty("domain.mdg"));
             StringEntity seMDGApiSmsFilter = new StringEntity("{\"$type\":\"redone.FindFilter\",\"externalId\":[\"" + externalId + "\"]}");
             seMDGApiSmsFilter.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
             httpPostMDGApiSmsFilter.setEntity(seMDGApiSmsFilter);

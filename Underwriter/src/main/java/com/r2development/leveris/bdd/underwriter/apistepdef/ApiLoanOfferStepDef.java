@@ -51,7 +51,7 @@ public class ApiLoanOfferStepDef extends ApiOpoqoUnderwriterStepDef {
 //                "https://st1app.loftkeys.com/underwriter/form.2?wicket:interface=:4:singleFlow:p:c:form:form:root:c:w:pnlApplicationList:c:w:rptApplication:c:rows:1:item:pnlApplication:c:w:btnStart:submit::IBehaviorListener:0:",
 //                "https://st1app.loftkeys.com/underwriter/form.2?wicket:interface=:5:multiFlow:panels:2:p:c:form:form:root:c:w:btnSaveOffer:submit::IBehaviorListener:0:",
 //        :7:multiFlow:panels:2:p:c:form:form:root:c:w:btnSaveOffer:submit::IBehaviorListener:0:-1
-                System.getProperty("underwriter") + "/form.2?" + currentWicketSaveOfferLink,
+                System.getProperty("underwriter.url") + "/form.2?" + currentWicketSaveOfferLink,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Content-Type", "application/x-www-form-urlencoded");
@@ -111,7 +111,7 @@ public class ApiLoanOfferStepDef extends ApiOpoqoUnderwriterStepDef {
 //                "https://st1app.loftkeys.com/underwriter/form.2?wicket:interface=:4:singleFlow:p:c:form:form:root:c:w:pnlApplicationList:c:w:rptApplication:c:rows:1:item:pnlApplication:c:w:btnStart:submit::IBehaviorListener:0:",
 //                "https://st1app.loftkeys.com/underwriter/form.2?wicket:interface=:5:multiFlow:panels:2:p:c:form:form:root:c:w:pnlCommentAndSign:c:w:btnCompleteReview:submit::IBehaviorListener:0:",
 //        :7:multiFlow:panels:2:p:c:form:form:root:c:w:pnlCommentAndSign:c:w:btnCompleteReview:submit::IBehaviorListener:0:
-                System.getProperty("underwriter") + "/form.2?wicket:interface=" + currentWicketCompleteReviewLink,
+                System.getProperty("underwriter.url") + "/form.2?wicket:interface=" + currentWicketCompleteReviewLink,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Content-Type", "application/x-www-form-urlencoded");
@@ -173,7 +173,7 @@ public class ApiLoanOfferStepDef extends ApiOpoqoUnderwriterStepDef {
 
                 String loanOfferPanelResponse = requestHttpPost(
                         httpClient,
-                        System.getProperty("underwriter") + "/form.2" + finalLoanOfferPanelWicketInterface,
+                        System.getProperty("underwriter.url") + "/form.2" + finalLoanOfferPanelWicketInterface,
                         new LinkedHashMap<String, String>() {
                             {
                                 put("Accept", "text/xml");
@@ -210,7 +210,7 @@ public class ApiLoanOfferStepDef extends ApiOpoqoUnderwriterStepDef {
 
                 String documentPanelResponse = requestHttpPost(
                         httpClient,
-                        System.getProperty("underwriter") + "/form.2" + finalDocumentPanelWicketInterfce,
+                        System.getProperty("underwriter.url") + "/form.2" + finalDocumentPanelWicketInterfce,
                         new LinkedHashMap<String, String>() {
                             {
                                 put("Accept", "text/xml");
