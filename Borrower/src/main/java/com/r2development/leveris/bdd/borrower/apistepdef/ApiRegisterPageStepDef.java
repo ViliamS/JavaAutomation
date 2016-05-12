@@ -17,6 +17,7 @@ import com.r2development.leveris.utils.mdg.MdgCallBackImpl;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.client.CookieStore;
@@ -78,11 +79,11 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
     public void user_goes_to_registration_page() throws IOException {
 
         httpClient = HttpUtils.createHttpClient();
-        localContext.setHttpContext(HttpUtils.initContext(System.getProperty("domain.borrower"), "/stable-borrower"));
+        localContext.setHttpContext(HttpUtils.initContext(System.getProperty("domain.borrower"), System.getProperty("/borrower.ctx")));
 
-        requestHttpGet(
+        String homeResponse = requestHttpGet(
                 httpClient,
-                System.getProperty("borrower") + "/home",
+                System.getProperty("borrower.url") + "/home",
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -91,10 +92,19 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
                 localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
+        httpResponse.setHttpResponse(homeResponse);
 
-        requestHttpGet(
+        String linkRegister = Jsoup.parse(homeResponse).select("a[id~=link]").select("a[wicketpath=initialMenuWrapper_initialMenu_root_item_2_link]").attr("onclick");
+        Pattern pLinkRegister = Pattern.compile("wicketAjaxGet\\('(;jsessionid=.*\\?wicket:interface=.*)',");
+        Matcher mLinkRegister = pLinkRegister.matcher(linkRegister);
+        String linkRegisterWicketInterface = StringUtils.EMPTY;
+        while ( mLinkRegister.find() )
+            linkRegisterWicketInterface = mLinkRegister.group(1);
+
+        String lnkRegistrationResponse = requestHttpGet(
             httpClient,
-                System.getProperty("borrower") + "/form.2?wicket:interface=:1:initialMenuWrapper:initialMenu:root:item:2:link::IBehaviorListener:0:",
+//                System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:initialMenuWrapper:initialMenu:root:item:2:link::IBehaviorListener:0:",
+                System.getProperty("borrower.url") + "/form.2" + linkRegisterWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -103,11 +113,12 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
                 localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
+        httpResponse.setHttpResponse(lnkRegistrationResponse);
 
 //        requestHttpPost(
 //                httpClient,
-////                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlMain:c:w:lnkRegister:cancel::IBehaviorListener:0:",
-//                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlMain:c:w:lnkRegister:cancel::IBehaviorListener:0:",
+////                System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlMain:c:w:lnkRegister:cancel::IBehaviorListener:0:",
+//                System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlMain:c:w:lnkRegister:cancel::IBehaviorListener:0:",
 //                new LinkedHashMap<String, String>() {
 //                    {
 //                        put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -235,7 +246,7 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
 
 //        requestHttpPost(
 //                httpClient,
-//                System.getProperty("borrower") + "/form.2?wicket:interface=:"
+//                System.getProperty("borrower.url") + "/form.2?wicket:interface=:"
 //        );
 
         registerParameters.putAll(
@@ -247,9 +258,17 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
                 }
         );
 
-        requestHttpPost(
+        String btnRegister=Jsoup.parse(Jsoup.parse(httpResponse.getHttpResponse()).select("component[id~=main]").select("component[encoding~=wicket]").text()).select("a[wicketpath=main_c_form_form_root_c_w_pnlMain_c_w_btnRegister_submit]").attr("onclick");
+        Pattern pBtnRegister = Pattern.compile("\\?(wicket:interface=.*)&");
+        Matcher mBtnRegister= pBtnRegister.matcher(btnRegister);
+        String btnRegisterWicketInterface = StringUtils.EMPTY;
+        while ( mBtnRegister.find() )
+            btnRegisterWicketInterface = mBtnRegister.group(1);
+
+        String registerResponse = requestHttpPost(
                 httpClient,
-                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlMain:c:w:btnRegister:submit::IBehaviorListener:0:",
+//                System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlMain:c:w:btnRegister:submit::IBehaviorListener:0:",
+                System.getProperty("borrower.url") + "/form.2?" + btnRegisterWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -260,6 +279,7 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
                 localContext.getHttpContext(),
                 false
         );
+        httpResponse.setHttpResponse(registerResponse);
     }
 
     @When("^Borrower creates an account$")
@@ -538,8 +558,8 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
         final String finalActivationCode = smsCode;
         String smsCodeActivationResponse = requestHttpPost(
                 httpClient,
-                System.getProperty("borrower") + "/form.2?" + finalLink,
-//                System.getProperty("borrower") + "/form.2?wicket:interface=:3:main:c:form:form:root:c:w:pnlMain:c:w:btnConfirmRegistration:submit::IBehaviorListener:0:",
+                System.getProperty("borrower.url") + "/form.2?" + finalLink,
+//                System.getProperty("borrower.url") + "/form.2?wicket:interface=:3:main:c:form:form:root:c:w:pnlMain:c:w:btnConfirmRegistration:submit::IBehaviorListener:0:",
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "application/json");

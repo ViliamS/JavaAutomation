@@ -35,7 +35,7 @@ public class ApiYourFinancialAssetsStepDef extends ApiOpoqoBorrowerStepDef {
 
             requestHttpPost(
                     httpClient,
-                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:lnkHaveNoAssets:submit::IBehaviorListener:0:",
+                    System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:lnkHaveNoAssets:submit::IBehaviorListener:0:",
                     new LinkedHashMap<String, String>() {
                         {
                             put("Accept", "text/xml");
@@ -54,7 +54,7 @@ public class ApiYourFinancialAssetsStepDef extends ApiOpoqoBorrowerStepDef {
 
             requestHttpPost(
                     httpClient,
-                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:btnNextSection:submit::IBehaviorListener:0:",
+                    System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNoEmplyments:c:w:btnNextSection:submit::IBehaviorListener:0:",
                     new LinkedHashMap<String, String>() {
                         {
                             put("Accept", "text/xml");

@@ -46,6 +46,7 @@ public class ApiYourResidenciesStepDef extends ApiOpoqoBorrowerStepDef {
     private boolean isThereResidencyList = false;
     private String btnHiddenSubmitWicketInterface = StringUtils.EMPTY;
     private String btnHiddenRefreshWicketInterface = StringUtils.EMPTY;
+    private String btnCloseWicketInterface = StringUtils.EMPTY;
 
     @Inject
     ApiYourResidenciesStepDef(IBorrowerHttpResponse httpResponse) {
@@ -128,7 +129,7 @@ public class ApiYourResidenciesStepDef extends ApiOpoqoBorrowerStepDef {
             }
         }
 
-        if ( currentComponentId.equals("main") ) {
+//        if ( currentComponentId.equals("main") ) {
             if ( !isThereResidencyList ) {
                 String onclickBtnHiddenSubmit = residencyListDoc2.select("a[id~=submit]").select("a[wicketpath~=btnHiddenSubmit]").attr("onclick");
                 Pattern pBtnHiddenSubmit = Pattern.compile("\\?(wicket:interface=.*)&");
@@ -144,8 +145,15 @@ public class ApiYourResidenciesStepDef extends ApiOpoqoBorrowerStepDef {
                 while(mBtnHiddenRefresh.find()) {
                     btnHiddenRefreshWicketInterface = mBtnHiddenRefresh.group(1);
                 }
+
+                String onclickBtnClose = residencyListDoc2.select("a[wicketpath~=main_c_form_form_root_c_w_pnlResidencyList_c_w_btnAdd_close]").attr("onclick");
+                Pattern pBtnClose = Pattern.compile("\\?(wicket:interface=.*)&");
+                Matcher mBtnClose = pBtnClose.matcher(onclickBtnClose);
+                while(mBtnClose.find()) {
+                    btnCloseWicketInterface = mBtnClose.group(1);
+                }
             }
-        }
+//        }
 
         String fixCategory = StringUtils.EMPTY;
         switch (residencyType) {
@@ -200,12 +208,11 @@ public class ApiYourResidenciesStepDef extends ApiOpoqoBorrowerStepDef {
         Map<String, String> linkAddParameters = new LinkedHashMap<>();
         linkAddParameters.put("stepToken", stepToken);
 
-
-        String employmentLinkAddResponse = requestHttpPost(
+        String residencyLinkAddResponse = requestHttpPost(
                 httpClient,
-//                        System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNoLiability:c:w:lnkAddPaye:dialog::IBehaviorListener:0:",
-//                        System.getProperty("borrower") + "/form.2?wicket:interface=" + wicketInterfaceMap.get("lnkAdd" + finalFixCategory),
-                System.getProperty("borrower") + "/form.2?wicket:interface=" + finalLinkAdd,
+//                        System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNoLiability:c:w:lnkAddPaye:dialog::IBehaviorListener:0:",
+//                        System.getProperty("borrower.url") + "/form.2?wicket:interface=" + wicketInterfaceMap.get("lnkAdd" + finalFixCategory),
+                System.getProperty("borrower.url") + "/form.2?wicket:interface=" + finalLinkAdd,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");
@@ -216,16 +223,33 @@ public class ApiYourResidenciesStepDef extends ApiOpoqoBorrowerStepDef {
                 localContext.getHttpContext(),
                 CONSUME_QUIETLY
         );
-        httpResponse.setHttpResponse(employmentLinkAddResponse);
+        httpResponse.setHttpResponse(residencyLinkAddResponse);
+
+        String btnClose = Jsoup.parse(Jsoup.parse(residencyLinkAddResponse).select("component[id~=close]").select("component[encoding~=wicket]").text()).select("a[wicketpath=main_c_form_form_root_c_w_pnlResidencyList_c_w_btnAdd_close]").attr("onclick");
+        Pattern pBtnClose = Pattern.compile("\\?(wicket:interface=.*:0:)'");
+        Matcher mBtnClose = pBtnClose.matcher(btnClose);
+
+        while ( mBtnClose.find() )
+            btnCloseWicketInterface = mBtnClose.group(1);
 
         switch ( residencyType ) {
             case "Current residency":
 
                 if ( isThereResidencyList ) {
 
+                    String addCurrentResidency = Jsoup.parse(Jsoup.parse(residencyLinkAddResponse).select("component[id~=dialog]").select("component[encoding~=wicket]").text()).select("a[wicketpath=main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_lnkAddCurrentResidency_submit]").attr("onclick");
+                    Pattern pAddCurrentResidency = Pattern.compile("\\?(wicket:interface=.*)&");
+                    Matcher mAddCurrentResidency = pAddCurrentResidency.matcher(addCurrentResidency);
+
+                    String addCurrentResidencyWicketInterface = null;
+                    while ( mAddCurrentResidency.find() ) {
+                        addCurrentResidencyWicketInterface = mAddCurrentResidency.group(1);
+                    }
+
                     String addResponse = requestHttpPost(
                             httpClient,
-                            System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:pnlNoEmplyments:c:w:lnkAddCurrentResidency:submit::IBehaviorListener:0:",
+//                            System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:pnlNoEmplyments:c:w:lnkAddCurrentResidency:submit::IBehaviorListener:0:",
+                            System.getProperty("borrower.url") + "/form.2?" + addCurrentResidencyWicketInterface,
                             new LinkedHashMap<String, String>() {
                                 {
                                     put("Accept", "text/xml");
@@ -248,7 +272,7 @@ public class ApiYourResidenciesStepDef extends ApiOpoqoBorrowerStepDef {
                 /*
                 requestHttpPost(
                         httpClient,
-                        System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog::IFormChangeListener:2:-1",
+                        System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog::IFormChangeListener:2:-1",
                         new LinkedHashMap<String, String>() {
                             {
                                 put("Accept", "text/xml");
@@ -286,9 +310,18 @@ public class ApiYourResidenciesStepDef extends ApiOpoqoBorrowerStepDef {
 
                 if ( isThereResidencyList ) {
 
+                    String addOtherResidency = Jsoup.parse(Jsoup.parse(residencyLinkAddResponse).select("component[id~=dialog]").select("component[encoding~=wicket]").text()).select("a[wicketpath=main_c_form_dialogWrapper_dialog_form_root_c_w_pnlNoEmplyments_c_w_lnkAddOtherResidency_submit]").attr("onclick");
+                    Pattern pAddOtherResidency = Pattern.compile("\\?(wicket:interface=.*)&");
+                    Matcher mAddOtherResidency = pAddOtherResidency.matcher(addOtherResidency);
+
+                    String addOtherResidencyWicketInterface = null;
+                    while ( mAddOtherResidency.find() ) {
+                        addOtherResidencyWicketInterface = mAddOtherResidency.group(1);
+                    }
+
                     String addResponse = requestHttpPost(
                             httpClient,
-                            System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:pnlNoEmplyments:c:w:lnkAddOtherResidency:submit::IBehaviorListener:0:",
+                            System.getProperty("borrower.url") + "/form.2?" + addOtherResidencyWicketInterface,
                             new LinkedHashMap<String, String>() {
                                 {
                                     put("Accept", "text/xml");
@@ -311,7 +344,7 @@ public class ApiYourResidenciesStepDef extends ApiOpoqoBorrowerStepDef {
                 /*
                 requestHttpPost(
                         httpClient,
-                        System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog::IFormChangeListener:2:-1",
+                        System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog::IFormChangeListener:2:-1",
                         new LinkedHashMap<String, String>() {
                             {
                                 put("Accept", "text/xml");
@@ -761,8 +794,8 @@ public class ApiYourResidenciesStepDef extends ApiOpoqoBorrowerStepDef {
         requestHttpPost(
                 httpClient,
 //                "https://st1app.loftkeys.com/borrower/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:pnlDetail:c:w:btnEmploymentAdd:submit::IBehaviorListener:0:",
-//                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:btnNext:submit::IBehaviorListener:0:",
-                System.getProperty("borrower") + "/form.2?" + btnNextWicketInterface,
+//                System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:btnNext:submit::IBehaviorListener:0:",
+                System.getProperty("borrower.url") + "/form.2?" + btnNextWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");
@@ -804,14 +837,15 @@ public class ApiYourResidenciesStepDef extends ApiOpoqoBorrowerStepDef {
         }
 
         if ( isThereResidencyList ) {
-            linkClose = ":1:main:c:form:form:root:c:w:pnlResidencyList:c:w:btnAdd:close::IBehaviorListener:0:";
+//            linkClose = ":1:main:c:form:form:root:c:w:pnlResidencyList:c:w:btnAdd:close::IBehaviorListener:0:";
+            linkClose = btnCloseWicketInterface;
             // TODO to extract this link
         }
 
         requestHttpPost(
                 httpClient,
-//                System.getProperty("borrower") + "/form.2?wicket:interface=" + linkClose,
-                System.getProperty("borrower") + "/form.2?" + linkClose,
+//                System.getProperty("borrower.url") + "/form.2?wicket:interface=" + linkClose,
+                System.getProperty("borrower.url") + "/form.2?" + linkClose,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");
@@ -835,8 +869,8 @@ public class ApiYourResidenciesStepDef extends ApiOpoqoBorrowerStepDef {
 
             String addEmplCompleted = requestHttpPost(
                     httpClient,
-//                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnHiddenSubmit:submit::IBehaviorListener:0:",
-                    System.getProperty("borrower") + "/form.2?" + btnHiddenSubmitWicketInterface,
+//                    System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnHiddenSubmit:submit::IBehaviorListener:0:",
+                    System.getProperty("borrower.url") + "/form.2?" + btnHiddenSubmitWicketInterface,
                     new LinkedHashMap<String, String>() {
                         {
                             put("Accept", "text/xml");
@@ -866,8 +900,8 @@ public class ApiYourResidenciesStepDef extends ApiOpoqoBorrowerStepDef {
 
             String addEmplCompleted = requestHttpPost(
                     httpClient,
-//                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnHiddenRefresh:submit::IBehaviorListener:0:",
-                    System.getProperty("borrower") + "/form.2?" + btnHiddenRefreshWicketInterface,
+//                    System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnHiddenRefresh:submit::IBehaviorListener:0:",
+                    System.getProperty("borrower.url") + "/form.2?" + btnHiddenRefreshWicketInterface,
                     new LinkedHashMap<String, String>() {
                         {
                             put("Accept", "text/xml");
@@ -914,8 +948,8 @@ public class ApiYourResidenciesStepDef extends ApiOpoqoBorrowerStepDef {
 
         String yourAccountPageResponse = requestHttpPost(
                 httpClient,
-//                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlResidencyList:c:w:btnImDone:submit::IBehaviorListener:0:",
-                System.getProperty("borrower") + "/form.2?" + imDoneWicketInterface,
+//                System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlResidencyList:c:w:btnImDone:submit::IBehaviorListener:0:",
+                System.getProperty("borrower.url") + "/form.2?" + imDoneWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");

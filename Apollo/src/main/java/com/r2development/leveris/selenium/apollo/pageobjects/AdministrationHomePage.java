@@ -9,7 +9,7 @@ public class AdministrationHomePage extends AdministrationTopBanner implements I
 
     private static final Log log = LogFactory.getLog(AdministrationHomePage.class.getName());
 
-    WebDriver webDriver;
+    private WebDriver webDriver;
 
     public AdministrationHomePage(SharedDriver webDriver){
         super(webDriver);

@@ -56,8 +56,8 @@ public class ApiMainFormsProcessesStepDef extends ApiOpoqoBorrowerStepDef {
 
         String formResponse = requestHttpGet(
                 httpClient,
-//                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnAppFormsHidden:cancel::IBehaviorListener:0:&stepToken=1",
-                System.getProperty("borrower") + "/form.2?" + btnAppFormsHiddenWicketInterface,
+//                System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnAppFormsHidden:cancel::IBehaviorListener:0:&stepToken=1",
+                System.getProperty("borrower.url") + "/form.2?" + btnAppFormsHiddenWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");

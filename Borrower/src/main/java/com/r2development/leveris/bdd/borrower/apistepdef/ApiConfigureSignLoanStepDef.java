@@ -33,7 +33,7 @@ public class ApiConfigureSignLoanStepDef extends ApiOpoqoBorrowerStepDef {
 
         String homeResponse = requestHttpGet(
                 httpClient,
-                System.getProperty("borrower") + "/home",
+                System.getProperty("borrower.url") + "/home",
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html");

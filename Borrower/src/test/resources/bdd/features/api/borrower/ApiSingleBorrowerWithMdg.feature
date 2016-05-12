@@ -231,7 +231,6 @@ Feature: Api Single Borrower
       | financialInstitution  | Bank of Debt |
       | finalRepaymentDate    | 01/03/2020   |
       | paymentFrequency      | Fortnightly  |
-      | repaymentAmount       | 50000        |
 
     Then Borrower fills in Rent
       | formType          | Rent    |
@@ -270,11 +269,11 @@ Feature: Api Single Borrower
         #################################
 
     And Borrower clicks "Review and Submit"
-    And Borrower checks "Distance Marketing"
-    And Borrower checks "Statutory"
-    And Borrower checks "Declaration"
-    And Borrower checks "Fraud Credit check"
     And finally, Borrower clicks "Submit Application"
+      | distanceMarketing | on |
+      | statutory         | on |
+      | declaration       | on |
+      | fraudCreditCheck  | on |
 
 
         #######  ###    ##  ######

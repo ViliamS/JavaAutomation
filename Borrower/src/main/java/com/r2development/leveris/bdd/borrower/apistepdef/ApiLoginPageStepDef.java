@@ -105,7 +105,7 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
 
         requestHttpPost(
                 httpClient,
-                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlMain:c:w:btnLogin:submit::IBehaviorListener:0:",
+                System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlMain:c:w:btnLogin:submit::IBehaviorListener:0:",
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -123,7 +123,7 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
 
         String loginPageResponse = requestHttpGet(
                 httpClient,
-                System.getProperty("borrower") + "/form.2?wicket:interface=:1:initialMenuWrapper:initialMenu:root:item:1:link::IBehaviorListener:0:",
+                System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:initialMenuWrapper:initialMenu:root:item:1:link::IBehaviorListener:0:",
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -156,7 +156,7 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
 
         requestHttpPost(
                 httpClient,
-                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlMain:c:w:btnLogin:submit::IBehaviorListener:0:",
+                System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlMain:c:w:btnLogin:submit::IBehaviorListener:0:",
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -216,7 +216,7 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
 
         requestHttpGet(
                 httpClient,
-                System.getProperty("borrower") + "/home",
+                System.getProperty("borrower.url") + "/home",
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -228,7 +228,7 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
 
         String loginPageResponse = requestHttpGet(
                 httpClient,
-                System.getProperty("borrower") + "/form.2?wicket:interface=:1:initialMenuWrapper:initialMenu:root:item:1:link::IBehaviorListener:0:",
+                System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:initialMenuWrapper:initialMenu:root:item:1:link::IBehaviorListener:0:",
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -362,7 +362,7 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
         log.info(parse2jsonGetApiModuleWithBearer);
 
 
-        HttpGet httpGetApiAuthentication = new HttpGet(System.getProperty("borrower") + "/home?useCase=authenticate&ticket="+ serviceTicketCode);
+        HttpGet httpGetApiAuthentication = new HttpGet(System.getProperty("borrower.url") + "/home?useCase=authenticate&ticket="+ serviceTicketCode);
         HttpResponse responseGetApiAuthentication = httpClient.execute(httpGetApiAuthentication, localContext.getHttpContext());
         HttpEntity httpEntityGetApiAuthentication = responseGetApiAuthentication.getEntity();
         log.info("==== httpEntityGetApiAuthentication ====");

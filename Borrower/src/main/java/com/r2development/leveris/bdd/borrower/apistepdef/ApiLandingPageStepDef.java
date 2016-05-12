@@ -71,7 +71,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
         String automaticRegistrationResponse = requestHttpGet(
                 httpClient,
 //                "http://dv2app.opoqodev.com/stable-borrower/home?useCase=automaticregistration",
-                System.getProperty("borrower") + "/home?useCase=automaticregistration",
+                System.getProperty("borrower.url") + "/home?useCase=automaticregistration",
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -93,7 +93,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
         requestHttpGet(
                 httpClient,
 //                "http://dv2app.opoqodev.com/stable-borrower/",
-                System.getProperty("borrower"),
+                System.getProperty("borrower.url"),
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -119,7 +119,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
 
                 requestHttpPost(
                         httpClient,
-                        System.getProperty("borrower") + "/form.1?wicket:interface=:1:main:c:form:form:root:c:w:pnlUnsecuredLoan:c:w:pnlUnsecuredLoan1:c:w:btnContinue1:submit::IBehaviorListener:0:",
+                        System.getProperty("borrower.url") + "/form.1?wicket:interface=:1:main:c:form:form:root:c:w:pnlUnsecuredLoan:c:w:pnlUnsecuredLoan1:c:w:btnContinue1:submit::IBehaviorListener:0:",
                         new LinkedHashMap<String, String>() {
                             {
                                 put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -149,7 +149,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
                 String unsecuredLoanResponse = requestHttpPost(
                         httpClient,
 //                        "http://dv2app.opoqodev.com/stable-borrower/form.1?wicket:interface=:1:main:c:form:form:root:c:w:pnlUnsecuredLoan:c:w:pnlUnsecuredLoan0:c:w:btnContinue0:submit::IBehaviorListener:0:",
-                        System.getProperty("borrower") + "/form.2?wicket:interface=" + finalUnsecuredLoanBtnContinue0WicketInterface,
+                        System.getProperty("borrower.url") + "/form.2?wicket:interface=" + finalUnsecuredLoanBtnContinue0WicketInterface,
                         new LinkedHashMap<String, String>() {
                             {
                                 put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -209,7 +209,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
 
         String tasksHiddenWicketInterfaceResponse = requestHttpPost(
             httpClient,
-                System.getProperty("borrower") + "/form.2?wicket:interface=" + finalTasksHiddenWicketInterface, //:1:main:c:form:form:root:c:w:btnTasksHidden:submit::IBehaviorListener:0:",
+                System.getProperty("borrower.url") + "/form.2?wicket:interface=" + finalTasksHiddenWicketInterface, //:1:main:c:form:form:root:c:w:btnTasksHidden:submit::IBehaviorListener:0:",
             new LinkedHashMap<String, String>() {
                 {
                     put("Accept", "text/xml");
@@ -371,7 +371,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
 
                 String form1Response = requestHttpPost(
                         httpClient,
-                        System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlUnsecuredLoanQuotation:c:w:btnContinue:submit::IBehaviorListener:0:",
+                        System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlUnsecuredLoanQuotation:c:w:btnContinue:submit::IBehaviorListener:0:",
                         new LinkedHashMap<String, String>() {
                             {
                                 put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -401,7 +401,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
                 String form2Response = requestHttpPost(
                         httpClient,
 //                        "http://dv2app.opoqodev.com/stable-borrower/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlUnsecuredLoanQuotation:c:w:btnContinue:submit::IBehaviorListener:0:",
-                        System.getProperty("borrower") + "/form.2?wicket:interface=" + finalUnsecuredLoanQuotationBtnContinueWicketInterfaceWicketInterface, //:1:main:c:form:form:root:c:w:pnlUnsecuredLoanQuotation:c:w:btnContinue:submit::IBehaviorListener:0:",
+                        System.getProperty("borrower.url") + "/form.2?wicket:interface=" + finalUnsecuredLoanQuotationBtnContinueWicketInterfaceWicketInterface, //:1:main:c:form:form:root:c:w:pnlUnsecuredLoanQuotation:c:w:btnContinue:submit::IBehaviorListener:0:",
                         new LinkedHashMap<String, String>() {
                             {
                                 put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -520,7 +520,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
 
         String applyResponse = requestHttpPost(
                 httpClient,
-                System.getProperty("borrower") + "/form.2?" + btnApplyOnlineWicketInterface,
+                System.getProperty("borrower.url") + "/form.2?" + btnApplyOnlineWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");

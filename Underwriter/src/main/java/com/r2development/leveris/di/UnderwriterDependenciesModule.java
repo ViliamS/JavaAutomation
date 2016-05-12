@@ -92,8 +92,8 @@ public class UnderwriterDependenciesModule extends AbstractModule {
 //            System.setProperty("environment", "dev2");
 //        if ( StringUtils.isEmpty(System.getProperty("domain.borrower")))
 //            System.setProperty("domain.borrower", "dv2app.opoqodev.com");
-//        if ( StringUtils.isEmpty(System.getProperty("borrower")))
-//            System.setProperty("borrower", "http://dv2app.opoqodev.com/stable-borrower");
+//        if ( StringUtils.isEmpty(System.getProperty("underwriter.url")))
+//            System.setProperty("borrower", "http://dv2app.opoqodev.com/stable-underwriter");
 //        if ( System.getProperty("browser") == null)
 //            System.setProperty("browser", "chrome");
 //        if ( StringUtils.isEmpty(System.getProperty("timestamp")))

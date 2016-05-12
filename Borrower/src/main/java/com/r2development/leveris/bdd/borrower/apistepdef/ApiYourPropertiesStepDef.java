@@ -30,7 +30,7 @@ public class ApiYourPropertiesStepDef extends ApiOpoqoBorrowerStepDef {
 
             requestHttpPost(
                     httpClient,
-                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form::IFormChangeListener:2:-1",
+                    System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form::IFormChangeListener:2:-1",
                     new LinkedHashMap<String, String>() {
                         {
                             put("Accept", "text/xml");
@@ -93,7 +93,7 @@ public class ApiYourPropertiesStepDef extends ApiOpoqoBorrowerStepDef {
         else {
             requestHttpPost(
                     httpClient,
-                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlMain:c:w:pnlPropertyPast:c:w:btnPropertyPastNoIDont:submit::IBehaviorListener:0:",
+                    System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlMain:c:w:pnlPropertyPast:c:w:btnPropertyPastNoIDont:submit::IBehaviorListener:0:",
                     new LinkedHashMap<String, String>() {
                         {
                             put("Accept", "text/xml");
@@ -114,7 +114,7 @@ public class ApiYourPropertiesStepDef extends ApiOpoqoBorrowerStepDef {
 
             requestHttpPost(
                     httpClient,
-                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNoProperties:c:w:btnNextSection:submit::IBehaviorListener:0:",
+                    System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNoProperties:c:w:btnNextSection:submit::IBehaviorListener:0:",
                     new LinkedHashMap<String, String>() {
                         {
                             put("Accept", "text/xml");

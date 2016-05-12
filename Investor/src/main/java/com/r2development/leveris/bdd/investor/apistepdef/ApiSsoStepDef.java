@@ -32,11 +32,11 @@ public class ApiSsoStepDef extends ApiOpoqoInvestorStepDef {
 
         // Step 1 - SSO
 //        HttpPost httpPostValidateAuthProcessStep = new HttpPost("https://dv2pub.opoqodev.com/proxy/router/api/public/auth/validateAuthProcessStep");
-        HttpPost httpPostValidateAuthProcessStep = new HttpPost( System.getProperty("investor") + "/proxy/router/api/public/auth/validateAuthProcessStep");
+        HttpPost httpPostValidateAuthProcessStep = new HttpPost( System.getProperty("investor.url") + "/proxy/router/api/public/auth/validateAuthProcessStep");
         httpPostValidateAuthProcessStep.setHeader("Content-Type", "application/json; charset=UTF-8");
 //        httpPostValidateAuthProcessStep.setHeader("Referer", "https://dv2pub.opoqodev.com/");
-        httpPostValidateAuthProcessStep.setHeader("Referer", System.getProperty("investor") + "/");
-        StringEntity seValidateAuthProcessStep = new StringEntity("{\"scenarioCode\":\"USR_PWD\",\"authProcessStepValues\":[{\"authDetailType\":\"USERNAME\",\"value\":\"anthony.mottot@finfactory.com\"},{\"authDetailType\":\"PWD\",\"value\":\"autPassword1122+\"}]}");
+        httpPostValidateAuthProcessStep.setHeader("Referer", System.getProperty("investor.url") + "/");
+        StringEntity seValidateAuthProcessStep = new StringEntity("{\"scenarioCode\":\"USR_PWD\",\"authProcessStepValues\":[{\"authDetailType\":\"USERNAME\",\"value\":\"investor@dv.2\"},{\"authDetailType\":\"PWD\",\"value\":\"Password1122\"}]}");
         seValidateAuthProcessStep.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
         httpPostValidateAuthProcessStep.setEntity(seValidateAuthProcessStep);
         HttpResponse responseValidateAuthProcessStep = httpClient.execute(httpPostValidateAuthProcessStep, localContext);
@@ -53,10 +53,10 @@ public class ApiSsoStepDef extends ApiOpoqoInvestorStepDef {
 
         // Step 2 - SSO
 //        HttpPost httpPostGenerateServiceTicket = new HttpPost("https://dv2pub.opoqodev.com/proxy/router/api/public/ticket/generateServiceTicket");
-        HttpPost httpPostGenerateServiceTicket = new HttpPost( System.getProperty("investor") + "/proxy/router/api/public/ticket/generateServiceTicket");
+        HttpPost httpPostGenerateServiceTicket = new HttpPost( System.getProperty("investor.url") + "/proxy/router/api/public/ticket/generateServiceTicket");
         httpPostGenerateServiceTicket.setHeader("Content-Type", "application/json; charset=UTF-8");
 //        httpPostGenerateServiceTicket.setHeader("Referer", "https://dv2pub.opoqodev.com/" );
-        httpPostGenerateServiceTicket.setHeader("Referer", System.getProperty("investor") + "/" );
+        httpPostGenerateServiceTicket.setHeader("Referer", System.getProperty("investor.url") + "/" );
         StringEntity seGenerateServiceTicket = new StringEntity("{\"idAuthProcess\":\"" + idScenario + "\"}");
         seGenerateServiceTicket.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
         httpPostGenerateServiceTicket.setEntity(seGenerateServiceTicket);
@@ -79,13 +79,13 @@ public class ApiSsoStepDef extends ApiOpoqoInvestorStepDef {
 
 
 //        HttpPost httpPostIssueToken = new HttpPost("https://dv2pub.opoqodev.com/api/issueToken");
-        HttpPost httpPostIssueToken = new HttpPost( System.getProperty("investor") + "/api/issueToken");
+        HttpPost httpPostIssueToken = new HttpPost( System.getProperty("investor.url") + "/api/issueToken");
         httpPostIssueToken.setHeader("accept", "application/json");
         httpPostIssueToken.setHeader("applicationid", applicationCode);
         httpPostIssueToken.setHeader("channeluuid", "8114a4af-1b81-4698-8298-183edc1023c8");
 //        httpPostIssueToken.setHeader("channeluuid", xrsf_token);
 //        httpPostIssueToken.setHeader("Referer", "https://dv2pub.opoqodev.com");
-        httpPostIssueToken.setHeader("Referer", System.getProperty("investor") + "/");
+        httpPostIssueToken.setHeader("Referer", System.getProperty("investor.url") + "/");
 
         StringEntity sePostIssueToken = new StringEntity(serviceTicketCode);
         sePostIssueToken.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "text/plain"));
@@ -109,7 +109,7 @@ public class ApiSsoStepDef extends ApiOpoqoInvestorStepDef {
     public void user_processes_final_sso_auth_step(String application) throws IOException {
 
 //        HttpGet httpGetApiModuleWithBearer = new HttpGet("https://dv2pub.opoqodev.com/api/modules");
-        HttpGet httpGetApiModuleWithBearer = new HttpGet(System.getProperty("investor") + "/api/modules");
+        HttpGet httpGetApiModuleWithBearer = new HttpGet(System.getProperty("investor.url") + "/api/modules");
         httpGetApiModuleWithBearer.setHeader("Accept", "*/*");
         httpGetApiModuleWithBearer.setHeader("authorization", "Bearer " + token);
         HttpResponse responseGetApiModuleWithBearer = httpClient.execute(httpGetApiModuleWithBearer, localContext);
@@ -119,7 +119,7 @@ public class ApiSsoStepDef extends ApiOpoqoInvestorStepDef {
         log.info(parse2jsonGetApiModuleWithBearer);
 
 //        HttpGet httpGetInvestorManager = new HttpGet("https://dv2pub.opoqodev.com/api/module/investor_manager.js");
-        HttpGet httpGetInvestorManager = new HttpGet(System.getProperty("investor") + "/api/module/investor_manager.js");
+        HttpGet httpGetInvestorManager = new HttpGet(System.getProperty("investor.url") + "/api/module/investor_manager.js");
         httpGetInvestorManager.setHeader("Accept", "*/*");
         HttpResponse responseInvestorManager = httpClient.execute(httpGetInvestorManager, localContext);
         HttpEntity httpEntityInvestorManager = responseInvestorManager.getEntity();
@@ -139,13 +139,13 @@ public class ApiSsoStepDef extends ApiOpoqoInvestorStepDef {
     public void user_logs_out(String application) throws IOException {
 
 //        HttpPost httpPostLogOut = new HttpPost("https://dv2pub.opoqodev.com/proxy/router/api/private/login/logout");
-        HttpPost httpPostLogOut = new HttpPost(System.getProperty("investor") + "/proxy/router/api/private/login/logout");
+        HttpPost httpPostLogOut = new HttpPost(System.getProperty("investor.url") + "/proxy/router/api/private/login/logout");
         httpPostLogOut.setHeader("accept", "application/json");
         httpPostLogOut.setHeader("content-type", "application/json");
         httpPostLogOut.setHeader("authorization", "Bearer " + token);
         httpPostLogOut.setHeader("device", "1405344663");
 //        httpPostLogOut.setHeader("Referer", "https://dv2pub.opoqodev.com/");
-        httpPostLogOut.setHeader("Referer", System.getProperty("investor") + "/");
+        httpPostLogOut.setHeader("Referer", System.getProperty("investor.url") + "/");
         HttpResponse responseLogOut = httpClient.execute(httpPostLogOut, localContext);
         HttpEntity httpEntityLogOut = responseLogOut.getEntity();
         log.info("==== httpEntityLogOut ====");

@@ -108,7 +108,7 @@ public class SharedDriver extends EventFiringWebDriver {
             System.setProperty("environment", "dev2");
         if ( StringUtils.isEmpty(System.getProperty("domain.borrower")))
             System.setProperty("domain.borrower", "dv2app.opoqodev.com");
-        if ( StringUtils.isEmpty(System.getProperty("borrower")))
+        if ( StringUtils.isEmpty(System.getProperty("borrower.url")))
             System.setProperty("borrower", "http://dv2app.opoqodev.com/stable-borrower");
         if ( StringUtils.isEmpty(System.getProperty("autoregistration")) )
             System.setProperty("autoregistration", "http://dv2app.opoqodev.com/stable-borrower/home?useCase=automaticregistration");

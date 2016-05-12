@@ -111,8 +111,8 @@ public class ApiDocumentUploadStepDef extends ApiOpoqoBorrowerStepDef {
             String currentDocumentAdd = requestHttpPost(
                     httpClient,
 //                    "https://st1app.loftkeys.com/borrower/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNew:c:w:rptDocs:c:rows:" + i + ":item:pnlDocs:c:w:lnkAddMore:dialog::IBehaviorListener:0:",
-//                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNew:c:w:rptDocs:c:rows:" + i + ":item:pnlDocs:c:w:lnkAddMore:dialog::IBehaviorListener:0:",
-                    System.getProperty("borrower") + "/form.2?" + theWicketInterface,
+//                    System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:pnlNew:c:w:rptDocs:c:rows:" + i + ":item:pnlDocs:c:w:lnkAddMore:dialog::IBehaviorListener:0:",
+                    System.getProperty("borrower.url") + "/form.2?" + theWicketInterface,
                     new LinkedHashMap<String, String>() {
                         {
                             put("Accept", "text/xml");
@@ -136,8 +136,8 @@ public class ApiDocumentUploadStepDef extends ApiOpoqoBorrowerStepDef {
 
             Instant begin_timestamp = DateTime.now().toInstant();
 //            HttpPost httpPostUploadDocItemDD = new HttpPost("https://st1app.loftkeys.com/borrower/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:pnlMain:c:w:btnHiddenSubmit:submit::IBehaviorListener:0:");
-//            HttpPost httpPostUploadDocItemDD = new HttpPost(System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:pnlMain:c:w:btnHiddenSubmit:submit::IBehaviorListener:0:");
-            HttpPost httpPostUploadDocItemDD = new HttpPost(System.getProperty("borrower") + "/form.2?" + theWicketInterface2);
+//            HttpPost httpPostUploadDocItemDD = new HttpPost(System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:dialogWrapper:dialog:form:root:c:w:pnlMain:c:w:btnHiddenSubmit:submit::IBehaviorListener:0:");
+            HttpPost httpPostUploadDocItemDD = new HttpPost(System.getProperty("borrower.url") + "/form.2?" + theWicketInterface2);
             httpPostUploadDocItemDD.setHeader("Accept-Encoding", "gzip, deflate");
             httpPostUploadDocItemDD.setHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
             String boundary = RandomStringUtils.randomAlphanumeric(15);
@@ -190,8 +190,8 @@ public class ApiDocumentUploadStepDef extends ApiOpoqoBorrowerStepDef {
         String endUploadedDocumentResponse = requestHttpPost(
                 httpClient,
 //                "https://st1app.loftkeys.com/borrower/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnSubmitDialog:submit::IBehaviorListener:0:",
-//                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnSubmitDialog:submit::IBehaviorListener:0:",
-                System.getProperty("borrower") + "/form.2?" + theWicketInterface3,
+//                System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnSubmitDialog:submit::IBehaviorListener:0:",
+                System.getProperty("borrower.url") + "/form.2?" + theWicketInterface3,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");

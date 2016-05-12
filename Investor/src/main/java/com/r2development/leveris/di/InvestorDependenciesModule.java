@@ -88,10 +88,10 @@ public class InvestorDependenciesModule extends AbstractModule {
 
 //        if ( StringUtils.isEmpty(System.getProperty("environment")))
 //            System.setProperty("environment", "dev2");
-//        if ( StringUtils.isEmpty(System.getProperty("domain.borrower")))
-//            System.setProperty("domain.borrower", "dv2app.opoqodev.com");
-//        if ( StringUtils.isEmpty(System.getProperty("borrower")))
-//            System.setProperty("borrower", "http://dv2app.opoqodev.com/stable-borrower");
+//        if ( StringUtils.isEmpty(System.getProperty("domain.investor")))
+//            System.setProperty("domain.investor", "dv2app.opoqodev.com");
+//        if ( StringUtils.isEmpty(System.getProperty("investor.url")))
+//            System.setProperty("investor.url", "http://dv2app.opoqodev.com/stable-investor");
 //        if ( System.getProperty("browser") == null)
 //            System.setProperty("browser", "chrome");
 //        if ( StringUtils.isEmpty(System.getProperty("timestamp")))

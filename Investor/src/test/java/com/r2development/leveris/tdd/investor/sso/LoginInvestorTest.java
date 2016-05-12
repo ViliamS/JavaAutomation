@@ -53,7 +53,7 @@ public class LoginInvestorTest {
         if ( StringUtils.isEmpty(System.getProperty("domain.investor")))
             System.setProperty("domain.investor", "dv2pub.opoqodev.com");
 
-        if ( StringUtils.isEmpty(System.getProperty("investor")))
+        if ( StringUtils.isEmpty(System.getProperty("investor.url")))
             System.setProperty("investor", "https://dv2pub.opoqodev.com/");
 
         if ( StringUtils.isEmpty(System.getProperty("investor.context")))
@@ -66,7 +66,7 @@ public class LoginInvestorTest {
 
         Assert.assertNotNull("Maven didn't load the System property Environment", System.getProperty("environment"));
         Assert.assertNotNull("Maven didn't load the System property Domain", System.getProperty("domain.investor"));
-        Assert.assertNotNull("Maven didn't load the System property Investor", System.getProperty("investor"));
+        Assert.assertNotNull("Maven didn't load the System property Investor", System.getProperty("investor.url"));
 
         HttpClientContext localContext = HttpUtils.initContext(System.getProperty("domain.investor"), System.getProperty("investor.context"));
 

@@ -103,8 +103,8 @@ public class ApiConfigureLoanStepDef extends ApiOpoqoBorrowerStepDef {
 
         String taskHiddenResponse = requestHttpPost(
                 httpClient,
-//                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnTasksHidden:submit::IBehaviorListener:0:",
-                System.getProperty("borrower") + "/form.2?" + btnTaskHiddenWicketInterface,
+//                System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnTasksHidden:submit::IBehaviorListener:0:",
+                System.getProperty("borrower.url") + "/form.2?" + btnTaskHiddenWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -157,8 +157,8 @@ public class ApiConfigureLoanStepDef extends ApiOpoqoBorrowerStepDef {
 
         String submitLoanDetailsResponse = requestHttpPost(
                 httpClient,
-//                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnTasksHidden:submit::IBehaviorListener:0:",
-                System.getProperty("borrower") + "/form.2?" + btnSubmitLoanDetailsWicketInterface,
+//                System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnTasksHidden:submit::IBehaviorListener:0:",
+                System.getProperty("borrower.url") + "/form.2?" + btnSubmitLoanDetailsWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -190,8 +190,8 @@ public class ApiConfigureLoanStepDef extends ApiOpoqoBorrowerStepDef {
 
         String submitPaymentMethodResponse = requestHttpPost(
                 httpClient,
-//                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnTasksHidden:submit::IBehaviorListener:0:",
-                System.getProperty("borrower") + "/form.2?" + btnSubmitPaymentMethodWicketInterface,
+//                System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnTasksHidden:submit::IBehaviorListener:0:",
+                System.getProperty("borrower.url") + "/form.2?" + btnSubmitPaymentMethodWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -219,8 +219,8 @@ public class ApiConfigureLoanStepDef extends ApiOpoqoBorrowerStepDef {
 
         String Back2DashboardResponse = requestHttpPost(
                 httpClient,
-//                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnTasksHidden:submit::IBehaviorListener:0:",
-                System.getProperty("borrower") + "/form.2?" + btnBack2DashboardWicketInterface,
+//                System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnTasksHidden:submit::IBehaviorListener:0:",
+                System.getProperty("borrower.url") + "/form.2?" + btnBack2DashboardWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -251,8 +251,8 @@ public class ApiConfigureLoanStepDef extends ApiOpoqoBorrowerStepDef {
 
         String submitTargetAccountSetupResponse = requestHttpPost(
                 httpClient,
-//                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnTasksHidden:submit::IBehaviorListener:0:",
-                System.getProperty("borrower") + "/form.2?" + btnSubmitTargetAccountSetupWicketInterface,
+//                System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnTasksHidden:submit::IBehaviorListener:0:",
+                System.getProperty("borrower.url") + "/form.2?" + btnSubmitTargetAccountSetupWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -284,8 +284,8 @@ public class ApiConfigureLoanStepDef extends ApiOpoqoBorrowerStepDef {
 
         String Back2DashboardResponse = requestHttpPost(
                 httpClient,
-//                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnTasksHidden:submit::IBehaviorListener:0:",
-                System.getProperty("borrower") + "/form.2?" + btnBack2DashboardWicketInterface,
+//                System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnTasksHidden:submit::IBehaviorListener:0:",
+                System.getProperty("borrower.url") + "/form.2?" + btnBack2DashboardWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -320,8 +320,8 @@ public class ApiConfigureLoanStepDef extends ApiOpoqoBorrowerStepDef {
             try {
                 agreeLoanAgreementResponse = requestHttpPost(
                         httpClient,
-                        //                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnTasksHidden:submit::IBehaviorListener:0:",
-                        System.getProperty("borrower") + "/form.2?" + btnAgreeLoanAgreementWicketInterface,
+                        //                System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnTasksHidden:submit::IBehaviorListener:0:",
+                        System.getProperty("borrower.url") + "/form.2?" + btnAgreeLoanAgreementWicketInterface,
                         new LinkedHashMap<String, String>() {
                             {
                                 put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -398,6 +398,7 @@ public class ApiConfigureLoanStepDef extends ApiOpoqoBorrowerStepDef {
         webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         WebDriverWait webDriverWait = new WebDriverWait(webDriver, 60);
 
+        log.info("AdobeSign: " + urlAdobeDocument);
         webDriver.get(urlAdobeDocument);
         webDriverWait
                 .ignoring(StaleElementReferenceException.class)
@@ -473,8 +474,8 @@ public class ApiConfigureLoanStepDef extends ApiOpoqoBorrowerStepDef {
 
         String back2DashboardResponse = requestHttpPost(
                 httpClient,
-//                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnTasksHidden:submit::IBehaviorListener:0:",
-                System.getProperty("borrower") + "/form.2?" + btnBack2DashboardWicketInterface,
+//                System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnTasksHidden:submit::IBehaviorListener:0:",
+                System.getProperty("borrower.url") + "/form.2?" + btnBack2DashboardWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -509,8 +510,8 @@ public class ApiConfigureLoanStepDef extends ApiOpoqoBorrowerStepDef {
 
         String getMoneyResponse = requestHttpPost(
                 httpClient,
-//                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnTasksHidden:submit::IBehaviorListener:0:",
-                System.getProperty("borrower") + "/form.2?" + btnGetMoneyWicketInterface,
+//                System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnTasksHidden:submit::IBehaviorListener:0:",
+                System.getProperty("borrower.url") + "/form.2?" + btnGetMoneyWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");

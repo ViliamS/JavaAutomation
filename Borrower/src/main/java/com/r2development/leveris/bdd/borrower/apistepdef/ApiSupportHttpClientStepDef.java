@@ -12,6 +12,11 @@ import org.apache.http.protocol.HttpContext;
 import org.joda.time.DateTime;
 import org.junit.Assert;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.Enumeration;
+import java.util.Properties;
+
 //@Singleton
 public class ApiSupportHttpClientStepDef {
 
@@ -23,13 +28,30 @@ public class ApiSupportHttpClientStepDef {
     @Before
     public void setup() throws Exception {
 
+        Properties prop = new Properties();
+        if ( !StringUtils.isEmpty(System.getProperty("environment"))) {
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(System.getProperty("environment")+".properties");
+            if ( inputStream != null ) {
+                prop.load(inputStream);
+            } else {
+                throw new FileNotFoundException("property file '" + System.getProperty("environment") + ".properties' not found in the classpath");
+            }
+
+            Enumeration<?> e = prop.propertyNames();
+            while (e.hasMoreElements()) {
+                String key = (String) e.nextElement();
+                String value = prop.getProperty(key);
+                System.setProperty(key, value);
+            }
+        }
+
         if ( StringUtils.isEmpty(System.getProperty("environment")))
             System.setProperty("environment", "dev2");
 
         if ( StringUtils.isEmpty(System.getProperty("domain.borrower")))
             System.setProperty("domain.borrower", "dv2app.opoqodev.com");
 
-        if ( StringUtils.isEmpty(System.getProperty("borrower")))
+        if ( StringUtils.isEmpty(System.getProperty("borrower.url")))
             System.setProperty("borrower", "http://dv2app.opoqodev.com/stable-borrower");
 
         if ( StringUtils.isEmpty(System.getProperty("timestamp")))
@@ -38,10 +60,10 @@ public class ApiSupportHttpClientStepDef {
 
         Assert.assertNotNull("Maven didn't load the System property Environment", System.getProperty("environment"));
         Assert.assertNotNull("Maven didn't load the System property Domain", System.getProperty("domain.borrower"));
-        Assert.assertNotNull("Maven didn't load the System property Borrower", System.getProperty("borrower"));
+        Assert.assertNotNull("Maven didn't load the System property Borrower", System.getProperty("borrower.url"));
 
         httpClient = HttpUtils.createHttpClient();
-        localContext = HttpUtils.initContext(System.getProperty("domain.borrower"), "/stable-borrower");
+        localContext = HttpUtils.initContext(System.getProperty("domain.borrower"), System.getProperty("borrower.ctx"));
     }
 
     @After

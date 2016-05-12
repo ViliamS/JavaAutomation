@@ -10,7 +10,7 @@ public class AdministrationLoginPage extends Apollo implements IAdministrationLo
 
     private static final Log log = LogFactory.getLog(AdministrationLoginPage.class.getName());
 
-    WebDriver webDriver;
+    private WebDriver webDriver;
 
     public AdministrationLoginPage(SharedDriver webDriver){
         super(webDriver);

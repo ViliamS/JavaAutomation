@@ -53,7 +53,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
 //        if ( borrowerOrCoapplicant.equals("coapplicant") ) {
 //            requestHttpPost(
 //                    httpClient,
-//                    System.getProperty("borrower") + "/form.2?wicket:interface=:1:left:c:form:form:root:c:w:pnlBorrower2:c:w:rptBorrower2UncommonForms:c:rows:1:item:pnlBorrower2UncommonForms:c:w:btnBorrower2UncommonForms:submit::IBehaviorListener:0:",
+//                    System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:left:c:form:form:root:c:w:pnlBorrower2:c:w:rptBorrower2UncommonForms:c:rows:1:item:pnlBorrower2UncommonForms:c:w:btnBorrower2UncommonForms:submit::IBehaviorListener:0:",
 //                    new LinkedHashMap<String, String>() {
 //                        {
 //                            put("Accept", "text/xml");
@@ -101,7 +101,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
 
     @Given("^(Borrower) types his title : (.*)$")
     public void borrower_coapplicant_user_types_his_title(String borrowerOrCoapplicant, String title) {
-        borrowerPersonalDetailsParameters.put("root:c:w:pnlCoLoanTitle:c:w:txtTitle:tb", title);
+        borrowerPersonalDetailsParameters.put("root:c:w:pnlMain:c:w:pnlCoLoanTitle:c:w:txtTitle:tb", title);
     }
 
     @Given("^(Borrower) types his firstname : (.*)$")
@@ -180,8 +180,8 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
 
                     requestHttpPost(
                             httpClient,
-//                            System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form::IFormChangeListener:2:-1",
-                            System.getProperty("borrower") + "/form.2" + iFormSubmitListener.replace("c:form:form::", "c:form::").replace("IFormSubmitListener::", "IFormChangeListener:2:-1"),
+//                            System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form::IFormChangeListener:2:-1",
+                            System.getProperty("borrower.url") + "/form.2" + iFormSubmitListener.replace("c:form:form::", "c:form::").replace("IFormSubmitListener::", "IFormChangeListener:2:-1"),
                             new LinkedHashMap<String, String>() {
                                 {
                                     put("Accept", "text/xml");
@@ -319,7 +319,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
                 if ( !bRequiredVisa ) {
                     requestHttpPost(
                             httpClient,
-                            System.getProperty("borrower") + "/form.2" + iFormSubmitListener.replace("c:form:form::", "c:form::").replace("IFormSubmitListener::", "IFormChangeListener:2:-1"),
+                            System.getProperty("borrower.url") + "/form.2" + iFormSubmitListener.replace("c:form:form::", "c:form::").replace("IFormSubmitListener::", "IFormChangeListener:2:-1"),
                             new LinkedHashMap<String, String>() {
                                 {
                                     put("Accept", "text/xml");
@@ -360,7 +360,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
 //                if ( !bRequiredVisa ) {
 //                    requestHttpPost(
 //                            httpClient,
-//                            System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form::IFormChangeListener:2:-1",
+//                            System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form::IFormChangeListener:2:-1",
 //                            new LinkedHashMap<String, String>() {
 //                                {
 //                                    put("Accept", "text/xml");
@@ -467,7 +467,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
                 if ( StringUtils.isNotEmpty(personalDetailsData.getCountyState()) )
-                    borrowerPersonalDetailsParameters.put("root:c:w:pnlMortgageApplicationResidency:c:w:pnlCounty:c:w:pnlIrelandCounty:c:w:cmbCountyState:combobox", "G");
+                    borrowerPersonalDetailsParameters.put("root:c:w:pnlCounty:c:w:pnlIrelandCounty:c:w:cmbCountyState:combobox", "G");
                 break;
 //            case "coapplicant":
 //                coapplicantPersonalDetailsParameters.put("root:c:w:cmbCountyState:combobox", "G");
@@ -501,7 +501,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
                 if ( StringUtils.isNotEmpty(personalDetailsData.get("country")) && personalDetailsData.get("country").equals("Ireland") ) {
                     requestHttpPost(
                             httpClient,
-                            System.getProperty("borrower") + "/form.2" + iFormSubmitListener.replace("c:form:form::", "c:form::").replace("IFormSubmitListener::", "IFormChangeListener:2:-1"),
+                            System.getProperty("borrower.url") + "/form.2" + iFormSubmitListener.replace("c:form:form::", "c:form::").replace("IFormSubmitListener::", "IFormChangeListener:2:-1"),
                             new LinkedHashMap<String, String>() {
                                 {
                                     put("Accept", "text/xml");
@@ -546,7 +546,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
             case "Property owner":
                 requestHttpPost(
                         httpClient,
-                        System.getProperty("borrower") + "/form.2" + iFormSubmitListener.replace("c:form:form::", "c:form::").replace("IFormSubmitListener::", "IFormChangeListener:2:-1"),
+                        System.getProperty("borrower.url") + "/form.2" + iFormSubmitListener.replace("c:form:form::", "c:form::").replace("IFormSubmitListener::", "IFormChangeListener:2:-1"),
                         new LinkedHashMap<String, String>() {
                             {
                                 put("Accept", "text/xml");
@@ -638,7 +638,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
 
             requestHttpPost(
                     httpClient,
-                    System.getProperty("borrower") + "/form.2" + iFormSubmitListener.replace("c:form:form::", "c:form::").replace("IFormSubmitListener::", "IFormChangeListener:2:-1"),
+                    System.getProperty("borrower.url") + "/form.2" + iFormSubmitListener.replace("c:form:form::", "c:form::").replace("IFormSubmitListener::", "IFormChangeListener:2:-1"),
                     new LinkedHashMap<String, String>() {
                         {
                             put("Accept", "text/xml");
@@ -780,8 +780,8 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
 
         String personalDetailsSaveDataResponse = requestHttpPost(
                 httpClient,
-//                System.getProperty("borrower") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnNext:submit::IBehaviorListener:0:",
-                System.getProperty("borrower") + "/form.2?" + btnNextWicketInterface,
+//                System.getProperty("borrower.url") + "/form.2?wicket:interface=:1:main:c:form:form:root:c:w:btnNext:submit::IBehaviorListener:0:",
+                System.getProperty("borrower.url") + "/form.2?" + btnNextWicketInterface,
                 new LinkedHashMap<String, String>() {
                     {
                         put("Accept", "text/xml");
