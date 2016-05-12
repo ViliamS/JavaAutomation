@@ -199,15 +199,36 @@
         </dependency>
 
         <!-- Testing -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${org-seleniumhq-selenium.selenium-java.version}</version>
+        </dependency>
         <!--<dependency>-->
             <!--<groupId>org.seleniumhq.selenium</groupId>-->
-            <!--<artifactId>selenium-java</artifactId>-->
-            <!--<version>${org-seleniumhq-selenium.selenium-java.version}</version>-->
+            <!--<artifactId>selenium-server</artifactId>-->
+            <!--<version>2.53.0</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.seleniumhq.selenium</groupId>-->
+            <!--<artifactId>selenium-server-standalone</artifactId>-->
+            <!--<version>2.43.1</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>io.github.bonigarcia</groupId>-->
+            <!--<artifactId>webdrivermanager</artifactId>-->
+            <!--<version>${io-github-bonigarcia.webdrivermanager.version}</version>-->
+            <!--<exclusions>-->
+                <!--<exclusion>-->
+                    <!--<groupId>org.seleniumhq.selenium</groupId>-->
+                    <!--<artifactId>selenium-java</artifactId>-->
+                <!--</exclusion>-->
+            <!--</exclusions>-->
         <!--</dependency>-->
         <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>${io-github-bonigarcia.webdrivermanager.version}</version>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-server-standalone</artifactId>
+            <version>2.43.1</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

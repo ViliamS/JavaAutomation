@@ -119,7 +119,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
 //                }
 //                borrowerPersonalDetailsParameters.put("root:c:w:txtFirstName:tb", firstName + now.toString("yyyyDDmmHH"));
                 String firstNameExtension = user.getEmail().substring("test.automation.api".length()-1, user.getEmail().indexOf("@"));
-                borrowerPersonalDetailsParameters.put("root:c:w:pnlNames:c:w:txtFirstName:tb", firstName + firstNameExtension);
+                borrowerPersonalDetailsParameters.put("root:c:w:pnlMain:c:w:pnlNames:c:w:txtFirstName:tb", firstName + firstNameExtension);
 //                user.setFirstName(firstName + now.toString("yyyyDDmmHH"));
                 user.setFirstName(firstName + firstNameExtension);
                 break;
@@ -145,7 +145,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
 //                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setLastname(lastname);
-                borrowerPersonalDetailsParameters.put("root:c:w:pnlNames:c:w:txtLastName:tb", lastname);
+                borrowerPersonalDetailsParameters.put("root:c:w:pnlMain:c:w:pnlNames:c:w:txtLastName:tb", lastname);
                 break;
 //            case "coapplicant":
 //                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setLastname(lastname);
@@ -158,12 +158,12 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
 
     @Given("^(Borrower) types his middle name : (.*)$")
     public void borrower_coapplicant_user_types_his_middle_name(String borrowerOrCoapplicant, String middleName) {
-        borrowerPersonalDetailsParameters.put("root:c:w:pnlCoLoanNamesSuff:c:w:txtMiddleName:tb", middleName);
+        borrowerPersonalDetailsParameters.put("root:c:w:pnlMain:c:w:pnlCoLoanNamesSuff:c:w:txtMiddleName:tb", middleName);
     }
 
     @Given("^(Borrower) types his suffix : (.*)$")
     public void borrower_coapplicant_user_types_his_suffix(String borrowerOrCoapplicant, String suffix) {
-        borrowerPersonalDetailsParameters.put("root:c:w:pnlCoLoanNamesSuff:c:w:txtSuffix:tb", suffix);
+        borrowerPersonalDetailsParameters.put("root:c:w:pnlMain:c:w:pnlCoLoanNamesSuff:c:w:txtSuffix:tb", suffix);
     }
 
     @Given("^(Borrower) checks his gender : (Male|Female)$")
@@ -219,7 +219,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
 
         switch(borrowerOrCoapplicant) {
             case "Borrower":
-                borrowerPersonalDetailsParameters.put("root:c:w:pnlGender:c:w:rgrGender:rg", parameterValue);
+                borrowerPersonalDetailsParameters.put("root:c:w:pnlMain:c:w:pnlGender:c:w:rgrGender:rg", parameterValue);
                 break;
 //            case "coapplicant":
 //                coapplicantPersonalDetailsParameters.put("root:c:w:rgrGender:rg", parameterValue);
@@ -233,7 +233,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
     public void borrower_coapplicant_user_types_his_date_of_birth(String borrowerOrCoapplicant, String dateOfBirth) {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
-                borrowerPersonalDetailsParameters.put("root:c:w:txtDateOfBirth:tb", dateOfBirth);
+                borrowerPersonalDetailsParameters.put("root:c:w:pnlMain:c:w:txtDateOfBirth:tb", dateOfBirth);
                 break;
 //            case "coapplicant":
 //                coapplicantPersonalDetailsParameters.put("root:c:w:txtDateOfBirth:tb", dateOfBirth);
@@ -268,7 +268,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
 
         switch (borrowerOrCoapplicant) {
             case "Borrower":
-                borrowerPersonalDetailsParameters.put("root:c:w:cmbMaritalStatus:combobox", MARITAL_STATUS.getShortValueByLongValue(maritalStatus));
+                borrowerPersonalDetailsParameters.put("root:c:w:pnlMain:c:w:cmbMaritalStatus:combobox", MARITAL_STATUS.getShortValueByLongValue(maritalStatus));
                 break;
 //            case "coapplicant":
 //                coapplicantPersonalDetailsParameters.put("root:c:w:cmbMaritalStatus:combobox", parameterValue);
@@ -285,7 +285,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
 //                borrowerPersonalDetailsParameters.put("root:c:w:cmbNationality:combobox", parameterValue);
-                borrowerPersonalDetailsParameters.put("root:c:w:cmbNationality:combobox", NATIONALITY.getShortValueByLongValue(nationality));
+                borrowerPersonalDetailsParameters.put("root:c:w:pnlMain:c:w:cmbNationality:combobox", NATIONALITY.getShortValueByLongValue(nationality));
                 break;
 //            case "coapplicant":
 //                coapplicantPersonalDetailsParameters.put("root:c:w:cmbNationality:combobox", parameterValue);
@@ -467,7 +467,7 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
                 if ( StringUtils.isNotEmpty(personalDetailsData.getCountyState()) )
-                    borrowerPersonalDetailsParameters.put("root:c:w:pnlCounty:c:w:pnlIrelandCounty:c:w:cmbCountyState:combobox", "G");
+                    borrowerPersonalDetailsParameters.put("root:c:w:pnlMortgageApplicationResidency:c:w:pnlCounty:c:w:pnlIrelandCounty:c:w:cmbCountyState:combobox", "G");
                 break;
 //            case "coapplicant":
 //                coapplicantPersonalDetailsParameters.put("root:c:w:cmbCountyState:combobox", "G");
@@ -767,9 +767,9 @@ public class ApiPersonalDetailsStepDef extends ApiOpoqoBorrowerStepDef {
 //        finalParameters.put("root:c:w:pnlAddressField:data", "{\"countryCode\":\"IE\",\"route\":\"Woodquay\",\"streetNumber\":\"18-19\",\"postalCode\":\"\",\"region\":\"Galway\",\"houseNumber\":\"\",\"inputText\":\"18-19 Woodquay\",\"county\":\"Galway\"}");
         finalPersonalDetailsParameters.put("root:c:w:pnlAddressField:data", "{\"inputText\":\"18-19 Woodquay\"}");
         finalPersonalDetailsParameters.put("stepToken", "1");
-        finalPersonalDetailsParameters.put("root:c:w:btnNext:submit", "1");
+        finalPersonalDetailsParameters.put("root:c:w:pnlMain:c:w:btnNext:submit", "1");
 
-        String onclickBtnNext = Jsoup.parse(Jsoup.parse(httpResponse.getHttpResponse()).select("component[id~=main]").select("component[encoding~=wicket]").text()).select("a[id~=submit]").select("a[wicketpath~=main_c_form_form_root_c_w_btnNext_submit").attr("onclick");
+        String onclickBtnNext = Jsoup.parse(Jsoup.parse(httpResponse.getHttpResponse()).select("component[id~=main]").select("component[encoding~=wicket]").text()).select("a[id~=submit]").select("a[wicketpath~=main_c_form_form_root_c_w_pnlMain_c_w_btnNext_submit").attr("onclick");
         Pattern pOnclickBtnNext = Pattern.compile("\\?(wicket:interface=.*)&");
         Matcher mOnclickBtnNext = pOnclickBtnNext.matcher(onclickBtnNext);
 

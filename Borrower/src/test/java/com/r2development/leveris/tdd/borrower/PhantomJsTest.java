@@ -49,6 +49,23 @@ public class PhantomJsTest {
         }
     }
 
+    @Test
+    public void getTestRailLinkOfAssertSelenium() {
+
+        driver.get("https://www.loftkeys.com/testrail/");
+//Getting all the links present in the page by a HTML tag.
+        List<WebElement> links = driver.findElements(By.tagName("a"));
+
+//Printing the size, will print the no of links present in the page.
+        System.out.println("Total Links present is "+links.size());
+
+//Printing the links in the page, we get through the href attribute.
+        for (WebElement link : links) {
+
+            System.out.println("Links are listed " + link.getAttribute("href"));
+        }
+    }
+
     @After
     public void tearDown() throws Exception {
         driver.quit();

@@ -59,6 +59,7 @@
         <maven.build.timestamp.format>yyyyMMddHHmmssSSS</maven.build.timestamp.format>
 
         <io-github-bonigarcia.webdrivermanager.version>1.4.2</io-github-bonigarcia.webdrivermanager.version>
+        <org-seleniumhq-selenium.selenium-java.version>2.53.0</org-seleniumhq-selenium.selenium-java.version>
         <info-cukes.cucumber-guice.version>1.2.4</info-cukes.cucumber-guice.version>
         <info-cukes.cucumber-junit.version>1.2.4</info-cukes.cucumber-junit.version>
         <info-cukes.cucumber-java.version>1.2.4</info-cukes.cucumber-java.version>
@@ -155,12 +156,32 @@
             <!--===========-->
 
             <!-- GUI Testing -->
+            <!--<dependency>-->
+                <!--<groupId>io.github.bonigarcia</groupId>-->
+                <!--<artifactId>webdrivermanager</artifactId>-->
+                <!--<version>${io-github-bonigarcia.webdrivermanager.version}</version>-->
+                <!--<exclusions>-->
+                    <!--<exclusion>-->
+                        <!--<groupId>org.seleniumhq.selenium</groupId>-->
+                        <!--<artifactId>selenium-java</artifactId>-->
+                    <!--</exclusion>-->
+                <!--</exclusions>-->
+            <!--</dependency>-->
             <dependency>
-                <groupId>io.github.bonigarcia</groupId>
-                <artifactId>webdrivermanager</artifactId>
-                <version>${io-github-bonigarcia.webdrivermanager.version}</version>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-java</artifactId>
+                <version>${org-seleniumhq-selenium.selenium-java.version}</version>
             </dependency>
-
+            <!--<dependency>-->
+                <!--<groupId>org.seleniumhq.selenium</groupId>-->
+                <!--<artifactId>selenium-server</artifactId>-->
+                <!--<version>2.53.0</version>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>org.seleniumhq.selenium</groupId>-->
+                <!--<artifactId>selenium-server-standalone</artifactId>-->
+                <!--<version>2.43.1</version>-->
+            <!--</dependency>-->
             <!-- Cucumber -->
             <dependency>
                 <groupId>info.cukes</groupId>
