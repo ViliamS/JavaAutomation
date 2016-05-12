@@ -19,6 +19,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -387,12 +388,12 @@ public class ApiConfigureLoanStepDef extends ApiOpoqoBorrowerStepDef {
         dCaps.setCapability("takesScreenshot", false);
 //        dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,  "/usr/bin/phantomjs");
 
-//        if ( System.getProperty("webdriver.phantomjs.driver") != null && System.getProperty("webdriver.phantomjs.driver").equals("JENKINS") ) {
-////        dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,  "/usr/bin/phantomjs");
-////            System.setProperty("webdriver.phantomjs.driver", System.getProperty("JENKINS_HOME"));
-//            dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,  System.getProperty("webdriver.phantomjs.driver"));
-//            log.info("JENKINS: " + System.getProperty("webdriver.phantomjs.driver"));
-//        }
+        if ( System.getProperty("webdriver.phantomjs.driver") != null && System.getProperty("webdriver.phantomjs.driver").contains("phantomjs") ) {
+//        dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,  "/usr/bin/phantomjs");
+//            System.setProperty("webdriver.phantomjs.driver", System.getProperty("JENKINS_HOME"));
+            dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,  System.getProperty("webdriver.phantomjs.driver"));
+            log.info("JENKINS: " + System.getProperty("webdriver.phantomjs.driver"));
+        }
 //        PhantomJsDriverManager.getInstance().setup("2.0.0");
         WebDriver webDriver = new PhantomJSDriver(dCaps);
         webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
