@@ -1,21 +1,32 @@
-package com.r2development.leveris.bdd.apollo.stepdef;
+package com.r2development.leveris.bdd.underwriter.stepdef;
 
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.joda.time.DateTime;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.MarionetteDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Enumeration;
+import java.util.Properties;
+import java.util.concurrent.TimeUnit;
+
+import static java.lang.System.*;
 
 /**
  * <p>
@@ -40,19 +51,23 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 //@Singleton
 public class SharedDriver extends EventFiringWebDriver {
 
-    public static final String PHANTOMJS = "phantomjs",
-            chrome = "chrome",
-            firefox = "firefox",
-            gui = "gui",
-            api = "api";
-
     private static final Log log = LogFactory.getLog(SharedDriver.class.getName());
+
+    public static final String IEXPLORER = "iexplorer";
+    public static final String PHANTOMJS = "phantomjs";
+    public static final String CHROME = "chrome";
+    //    public static final String FIREFOX = "firefox";
+    public static final String OPERA = "opera";
+    public static final String EDGE = "edge";
+    public static final String MARIONETTE = "marionette";
+
+    public static final String GUI = "gui";
+    public static final String API = "api";
 
     public static DesiredCapabilities dCaps = new DesiredCapabilities();
     private StringBuffer verificationErrors = new StringBuffer();
 
-    //    private static WebDriver REAL_DRIVER = new ChromeDriver();
-    private static final WebDriver REAL_DRIVER = execute(System.getProperty("browser"));
+    private static final WebDriver REAL_DRIVER = SharedDriver.execute(getProperty("browser"));
     private static final Thread CLOSE_THREAD = new Thread() {
         @Override
         public void run() {
@@ -81,20 +96,144 @@ public class SharedDriver extends EventFiringWebDriver {
 //    }
 
     public static WebDriver execute(String browser) {
-        WebDriver toReturn = null;
+
+        setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+////        Proxy seleniumProxy = null;
+//        DesiredCapabilities capabilities = null;
+//        if ( System.getProperty("Proxy") != null && BooleanUtils.toBoolean(System.getProperty("Proxy"))) {
+//            proxyServer = new HarProxyServer();
+////            proxyServer.startProxyServer();
+////            proxyServer.setCapture();
+////
+////            seleniumProxy = proxyServer.getSeleniumProxy();
+//            capabilities = new DesiredCapabilities();
+////            capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+////            capabilities.setCapability(CapabilityType.PROXY, seleniumProxy);
+//        }
+        WebDriver toReturn;
         if ( StringUtils.isEmpty(browser) )
-            browser = chrome;
+            browser = CHROME;
 
         switch (browser) {
-            case chrome:
-                toReturn = new ChromeDriver();
+
+            case IEXPLORER:
+//                InternetExplorerDriverManager.getInstance().setup();
+                toReturn = new InternetExplorerDriver();
                 break;
-            case firefox:
-                toReturn = new FirefoxDriver();
+
+            case CHROME:
+
+                /**
+                 * https://github.com/bonigarcia/webdrivermanager
+                 */
+//                ChromeDriverManager.getInstance().setup();
+//
+//                ChromeOptions options = new ChromeOptions();
+//                options.addArguments("ui-prioritize-in-gpu-process");
+//                String userdata = "user-data-dir=/target/" + System.getProperty("timestamp") + RandomStringUtils.random(5, true, true);
+//                options.addArguments(userdata);
+//                options.addArguments("--start-maximized");
+//                options.addArguments("--window-position=200,50");
+//                options.addArguments("--window-size=1440,900");
+//                options.addArguments("--proxy-server=localhost:8080");
+//
+//                if ( System.getProperty("Proxy") != null && BooleanUtils.toBoolean(System.getProperty("Proxy"))) {
+//                    //noinspection ConstantConditions
+////                    capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+//                    webDriver = new ChromeDriver(capabilities);
+////                    proxyServer.newHar(new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date()));
+//                } else {
+//                    if ( webDriver != null)
+//                        webDriver = null;
+//
+//                    webDriver = new ChromeDriver(options);
+////                    webDriver = new ChromeDriver();
+//                    if ( webDriver.toString().contains("(null)") )
+//                        webDriver = new ChromeDriver(options);
+//
+////                    injector.createChildInjector("BorrowerDependenciesModule");
+////                    injector.injectMembers(webDriver);
+//                }
+//                toReturn = new ChromeDriver();
+
+                toReturn = new ChromeDriver();
+
+                break;
+            case OPERA:
+//                OperaDriverManager.getInstance().setup();
+                toReturn = new OperaDriver();
+
                 break;
             case PHANTOMJS:
-                toReturn = new PhantomJSDriver(dCaps);
+                dCaps = new DesiredCapabilities();
+                dCaps.setJavascriptEnabled(true);
+                dCaps.setCapability("takesScreenshot", false);
+
+                dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, new String[]{
+                        "--web-security=false",
+                        "--ssl-protocol=any",
+                        "--ignore-ssl-errors=true",
+                        "--webdriver-loglevel=DEBUG"
+                });
+
+//                DesiredCapabilities caps = new DesiredCapabilities();
+//                caps.setJavascriptEnabled(true);                //< not really needed: JS enabled by default
+//                caps.setBrowserName("chrome");
+//
+
+
+//                caps.setCapability("takesScreenshot", true);    //< yeah, GhostDriver haz screenshotz!
+                dCaps.setCapability(
+                        PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
+                        "/usr/bin/phantomjs"
+                );
+                dCaps.setCapability("webStorageEnabled", true);
+                dCaps.setCapability("applicationCacheEnabled", true);
+                dCaps.setCapability("browserConnectionEnabled", true);
+                dCaps.setCapability("acceptSslCerts", true);
+                dCaps.setCapability("webStorageEnabled", true);
+                dCaps.setCapability("takesScreenshot", true);
+                dCaps.setCapability("browserName", "chrome");
+//                dCaps.setCapability();
+//                dCaps.setCapability();
+//                dCaps.setCapability();
+
+
+
+                Capabilities capabilities = dCaps;
+
+                // Launch driver (will take care and ownership of the phantomjs process)
+                toReturn = new PhantomJSDriver(capabilities);
+//
+//                dCaps = new DesiredCapabilities();
+//                dCaps.setJavascriptEnabled(true);
+//                dCaps.setCapability("takesScreenshot", false);
+//                dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, new String[]{
+//                        "--web-security=false",
+//                        "--ssl-protocol=any",
+//                        "--ignore-ssl-errors=true",
+//                        "--webdriver-loglevel=DEBUG"
+//                });
+//
+//                PhantomJsDriverManager.getInstance().setup();
+//                toReturn = new PhantomJSDriver(dCaps);
+                toReturn.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+                toReturn.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+                toReturn.manage().timeouts().setScriptTimeout(60, TimeUnit.SECONDS);
+                toReturn.manage().window().setSize(new Dimension(1440, 900));
+                toReturn.manage().window().maximize();
                 break;
+
+            case MARIONETTE:
+//                MarionetteDriverManager.getInstance().setup();
+                toReturn = new MarionetteDriver();
+                break;
+
+            case EDGE:
+//                EdgeDriverManager.getInstance().setup();
+                toReturn = new EdgeDriver();
+                break;
+
             default:
                 toReturn = new ChromeDriver();
         }
@@ -102,56 +241,37 @@ public class SharedDriver extends EventFiringWebDriver {
     }
 
     @Before
-    public static void setup() {
+    public void setup() throws IOException {
+        Properties prop = new Properties();
 
-        if ( StringUtils.isEmpty(System.getProperty("environment")))
-            System.setProperty("environment", "dev2");
-        if ( StringUtils.isEmpty(System.getProperty("domain.underwriter")))
-            System.setProperty("domain.underwriter", "dv2app.opoqodev.com");
-        if ( StringUtils.isEmpty(System.getProperty("borrower")))
-            System.setProperty("underwriter", "http://dv2app.opoqodev.com/stable-underwriter");
-        if ( System.getProperty("browser") == null)
-            System.setProperty("browser", chrome);
-        if ( StringUtils.isEmpty(System.getProperty("timestamp")))
-            System.setProperty("timestamp", DateTime.now().toString("yyyyMMddHHmmssSSS"));
-        if ( StringUtils.isEmpty(System.getProperty("modeRun")) )
-            System.setProperty("modeRun", gui);
+        if ( StringUtils.isEmpty(getProperty("timestamp")))
+            setProperty("timestamp", DateTime.now().toString("yyyyMMddHHmmssSSS"));
 
-//        WebDriver webDriver = null;
-        if ( !StringUtils.isEmpty(System.getProperty("modeRun")) && System.getProperty("modeRun").equals(gui)) {
-//            switch (System.getProperty("browser")) {
-//                case "chrome":
-//                    webDriver = new ChromeDriver();
-//                    break;
-//                case "firefox":
-//                    webDriver = new FirefoxDriver();
-//                    break;
-//            }
-//            deleteAllCookies();
-        }
-        if ( System.getProperty("modeRun").equalsIgnoreCase(PHANTOMJS) && System.getProperty("browser").equalsIgnoreCase(PHANTOMJS) ){
+        if (!StringUtils.isEmpty(getProperty("environment"))) {
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(getProperty("environment") + ".properties");
+            if (inputStream != null) {
+                prop.load(inputStream);
+            } else {
+                throw new FileNotFoundException("property file '" + getProperty("environment") + ".properties' not found in the classpath");
+            }
 
-            String[] cli_args = new String[]{ "--ignore-ssl-errors=true", "--remote-debugger-port=9000" };
-            dCaps = DesiredCapabilities.phantomjs();
-            dCaps.setCapability( PhantomJSDriverService.PHANTOMJS_CLI_ARGS, cli_args );
-            dCaps.setJavascriptEnabled(true);
-            dCaps.setCapability("takesScreenshot", false);
-
-        }
-        if ( System.getProperty("modeRun").equals(api) ) {
-//            httpClient = HttpClientBuilder.create().setRedirectStrategy(new LaxRedirectStrategy()).build();
-//            CookieStore cookieStore = new BasicCookieStore();
-//            HttpClientContext localContextBody = HttpClientContext.create();
-//            BasicClientCookie cookieScUnload = new BasicClientCookie("sc-unload", "obu");
-//            cookieScUnload.setDomain(System.getProperty("domain"));
-//            cookieScUnload.setPath("/stable-borrower");
-//            cookieStore.addCookie(cookieScUnload);
-//            localContextBody.setCookieStore(cookieStore);
-//            localContext = localContextBody;
-//            httpResponse = new HttpResponse(StringUtils.EMPTY);
+            Enumeration<?> e = prop.propertyNames();
+            while (e.hasMoreElements()) {
+                String key = (String) e.nextElement();
+                String value = prop.getProperty(key);
+                setProperty(key, value);
+            }
         }
 
-//        return webDriver;
+        dCaps = new DesiredCapabilities();
+        dCaps.setJavascriptEnabled(true);
+        dCaps.setCapability("takesScreenshot", false);
+        dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, new String[]{
+                "--web-security=false",
+                "--ssl-protocol=any",
+                "--ignore-ssl-errors=true",
+                "--webdriver-loglevel=DEBUG"
+        });
     }
 
     @After
@@ -159,14 +279,17 @@ public class SharedDriver extends EventFiringWebDriver {
 
         String verificationErrorString = verificationErrors.toString();
         if(!StringUtils.isEmpty(verificationErrorString))
-            System.err.println(verificationErrorString);
+            err.println(verificationErrorString);
 
         try {
             byte[] screenshot = getScreenshotAs(OutputType.BYTES);
             scenario.embed(screenshot, "image/png");
         } catch (WebDriverException somePlatformsDontSupportScreenshots) {
-            System.err.println(somePlatformsDontSupportScreenshots.getMessage());
+            err.println(somePlatformsDontSupportScreenshots.getMessage());
+        }
+
+        if ( getProperty("Proxy") != null && BooleanUtils.toBoolean(getProperty("Proxy"))) {
+//                proxyServer.stopProxyServer();
         }
     }
-
 }

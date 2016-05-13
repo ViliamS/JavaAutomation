@@ -5,8 +5,6 @@ import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.LinkedHashMap;
@@ -16,54 +14,7 @@ public class YourDependantsSection extends Borrower implements IYourDependantsSe
 
     private static final Log log = LogFactory.getLog(YourDependantsSection.class.getName());
 
-    @FindBy(xpath = YOUR_DEPENDANTS_TITLE_XPATH)
-    protected WebElement weYourDependantTitle;
-    @FindBy(xpath = YOUR_DEPENDANTS_DESCRIPTION_INTRO_XPATH)
-    protected WebElement weYourDependantDescriptionIntro;
-    @FindBy(xpath = YOUR_DEPENDANTS_DESCRIPTION_INTRO2_XPATH)
-    protected WebElement weYourDependantDescriptionIntro2;
-
-//    @FindBy ( xpath = YOUR_DEPENDANT_SINGLE_NO_XPATH )
-//    protected WebElement weYourDependantSingleNo;
-//    @FindBy ( xpath = YOUR_DEPENDANT_SINGLE_YES_XPATH )
-//    protected WebElement weYourDependantSingleYes;
-//    @FindBy ( xpath = YOUR_DEPENDANT_COUPLE_NO_XPATH )
-//    protected WebElement weYourDependantCoupleNo;
-//    @FindBy ( xpath = YOUR_DEPENDANT_COUPLE_YES_XPATH )
-//    protected WebElement weYourDependantCoupleYes;
-
-    @FindBy(xpath = YOUR_DEPENDANTS_NONE_XPATH)
-    protected WebElement weYourDependantNone;
-
-    //div[contains(@id, 'DependentList')]
-    //div[contains(@id, 'lblAge')]//span
-    //a[contains(@wicketpath, 'lnkAge')]
-    //div[contains(@id, 'BorrowerName')]/span
-    //a[contains(@wicketpath, 'lnkDependentDelete')]
-
-//    @FindBy ( xpath = YOUR_DEPENDANTS_APPLIES_TO_BORROWER_XPATH )
-//    protected WebElement weYourDependantsAppliesToBorrower;
-//    @FindBy ( xpath = YOUR_DEPENDANTS_APPLIES_TO_COAPPLICANT_XPATH )
-//    protected WebElement weYourDependantsAppliesToCoapplicant;
-
-    @FindBy(xpath = YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH)
-    protected WebElement weYourDependantsDateOfBirthInput;
-
-    @FindBy(xpath = YOUR_DEPENDANTS_ADD_THIS_DEPENDANT_XPATH)
-    protected WebElement weYourDependantsAddThisDependant;
-    @FindBy(xpath = YOUR_DEPENDANTS_SAVE_AND_CLOSE_XPATH)
-    protected WebElement weYourDependantsSaveAndClose;
-    @FindBy(xpath = YOUR_DEPENDANTS_ADD_DEPENDANT_XPATH)
-    protected WebElement weYourDependantsAddDependant;
-    @FindBy(xpath = YOUR_DEPENDANTS_EDIT_THIS_DEPENDANT_XPATH)
-    protected WebElement weYourDependantsEditThisDependant;
-    @FindBy(xpath = YOUR_DEPENDANTS_CANCEL_DEPENDANT_XPATH)
-    protected WebElement weYourDependantsCancelDependant;
-    @FindBy(xpath = YOUR_DEPENDANTS_NEXT_DEPENDANT_XPATH)
-    protected WebElement weYourDependantsNextDependant;
-
-    //    @Inject
-    YourDependantsSection(SharedDriver webDriver) {
+    public YourDependantsSection(SharedDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);
     }
@@ -79,14 +30,14 @@ public class YourDependantsSection extends Borrower implements IYourDependantsSe
     public String getDescription() {
         loadingCheck();
         isVisible(YOUR_DEPENDANTS_DESCRIPTION_INTRO_XPATH, 0);
-        return weYourDependantDescriptionIntro.getText();
+        return getText(YOUR_DEPENDANTS_DESCRIPTION_INTRO_XPATH);
     }
 
     @Override
     public String getDescription2() {
         loadingCheck();
         isVisible(YOUR_DEPENDANTS_DESCRIPTION_INTRO2_XPATH, 0);
-        return weYourDependantDescriptionIntro2.getText();
+        return getText(YOUR_DEPENDANTS_DESCRIPTION_INTRO2_XPATH);
     }
 
     @Override
@@ -151,7 +102,7 @@ public class YourDependantsSection extends Borrower implements IYourDependantsSe
         return clickAddThisDependant();
     }
 
-    private Map<String, String> formExceptionDetails(){
+    private Map<String, String> formExceptionDetails() {
         Map<String, String> formExceptionDetails = new LinkedHashMap<>();
         formExceptionDetails.put(
                 "FormName",
@@ -193,7 +144,7 @@ public class YourDependantsSection extends Borrower implements IYourDependantsSe
         return this;
     }
 
-    private boolean isDependantFormLoaded(){
+    private boolean isDependantFormLoaded() {
         loadingCheck();
         isVisible(YOUR_DEPENDANTS_PANEL_XPATH, true, 0);
         isVisible(YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH, true, 0);
@@ -201,11 +152,11 @@ public class YourDependantsSection extends Borrower implements IYourDependantsSe
         return true;
     }
 
-    private boolean isFirstScreenDisplayed(){
-        if(!isVisible(YOUR_DEPENDANTS_ADD_DEPENDANTS_XPATH, 10)) {
+    private boolean isFirstScreenDisplayed() {
+        if (!isVisible(YOUR_DEPENDANTS_ADD_DEPENDANTS_XPATH, 10)) {
             try {
                 clickElementViaJavascript(YOUR_DEPENDANTS_ADD_DEPENDANT_XPATH, YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH);
-            } catch (Exception x){
+            } catch (Exception x) {
                 log.info("First screen was detected but clicking failed so trying to call second screen");
                 Assert.assertEquals(
                         "Clicking on the second screen failed as well so test is quiting" +
@@ -234,27 +185,27 @@ public class YourDependantsSection extends Borrower implements IYourDependantsSe
 //        log.info("Second screen was not loaded");
 //        return false;
 
-    return false;
+        return false;
     }
 
     @Override
     public IYourDependantsSection clickAddDependant() {
         loadingCheck();
 
-        if(!isVisible(YOUR_DEPENDANTS_ADD_DEPENDANTS_XPATH, 1) && isVisible(YOUR_DEPENDANTS_ADD_DEPENDANT_XPATH, 1)){
+        if (!isVisible(YOUR_DEPENDANTS_ADD_DEPENDANTS_XPATH, 1) && isVisible(YOUR_DEPENDANTS_ADD_DEPENDANT_XPATH, 1)) {
             try {
                 clickElement(YOUR_DEPENDANTS_ADD_DEPENDANT_XPATH, YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH);
                 return this;
-            } catch (Exception x){
+            } catch (Exception x) {
                 Assert.assertTrue("Baikonur we are on fire", false);
             }
         }
 
-        if(isVisible(YOUR_DEPENDANTS_ADD_DEPENDANTS_XPATH, 1) && !isVisible(YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH, 1)){
+        if (isVisible(YOUR_DEPENDANTS_ADD_DEPENDANTS_XPATH, 1) && !isVisible(YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH, 1)) {
             clickElement(YOUR_DEPENDANTS_ADD_DEPENDANTS_XPATH, YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH);
             return this;
 
-        } else if(isVisible(YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH, 1)){
+        } else if (isVisible(YOUR_DEPENDANTS_DATE_OF_BIRTH_INPUT_XPATH, 1)) {
             return this;
         }
 

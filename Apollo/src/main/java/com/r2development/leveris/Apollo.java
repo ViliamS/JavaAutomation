@@ -65,9 +65,21 @@ public abstract class Apollo {
         return webElement.findElements(By.xpath(xpath));
     }
 
+    protected String getText(String xpath) {
+        log.info("\n getText(String xpath) \n xpath ---> '" + xpath + "' <--- \n");
+        new WebDriverWait(webDriver, DEFAULT_TIMEOUT)
+                .ignoring(StaleElementReferenceException.class)
+                .until((WebDriver driver) -> {
+                    driver.findElement(By.xpath(xpath)).getText();
+                    return true;
+                });
+        log.info("\n getText ---> xpath: " + xpath + "\n");
+        return getWebElement(xpath).getText();
+    }
+
     protected String getText(WebElement webElement) {
-        log.info(("\n getText(WebElement webElement) \n webElement ---> '" + webElement.toString() + "' <--- \n"));
-        return webElement.findElement(By.xpath(".")).getText();
+        log.info(("\n getText(WebElement webElement) \n webElement ---> '" + webElement.toString() + "' <--- \n returned text ---> '" + webElement.getText() + "'"));
+        return webElement.getText();
     }
 
     protected String getText(WebElement webElement, String xpath) {

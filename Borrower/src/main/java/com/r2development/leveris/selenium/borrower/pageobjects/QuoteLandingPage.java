@@ -25,12 +25,12 @@ public class QuoteLandingPage extends Borrower implements IQuoteLandingPage {
 
     @Override
     public IQuotePaydayLoanPage clickContinuePaydayLoanTealButton(){
-        return quoteLandingSection.clickContinuePaydayLoanTealButton();
+        return quoteLandingSection.clickContinuePaydayLoan();
     }
 
     @Override
     public IQuoteQuickLoanPage clickContinueUnsecuredLoanRedButton(){
-        return quoteLandingSection.clickContinueUnsecuredLoanRedButton();
+        return quoteLandingSection.clickContinueUnsecuredLoan();
     }
 
     @Override

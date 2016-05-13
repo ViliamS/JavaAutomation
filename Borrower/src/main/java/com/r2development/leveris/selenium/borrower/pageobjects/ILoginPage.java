@@ -14,7 +14,7 @@ public interface ILoginPage {
     String LOGIN_BUTTON_XPATH = "//button[@type='submit']/span[text()='Log in']";
     String EXCEPTION_DIALOG = "//div[contains(@class,'alert-danger')]/span";
 
-    String ERROR_EMAIL_XPATH = "//input[@eicketpath='main_c_form_form_root_c_w_pnlMain_c_w_txtName_tb']/following-sibling:label";
+    String ERROR_EMAIL_XPATH = "//input[@wicketpath='main_c_form_form_root_c_w_pnlMain_c_w_txtName_tb']/following-sibling:label";
 
     String ERROR_BOX_ROOT_XPATH = "//div[contains(@id, 'feedbackBox') and contains(@class, 'feedback-form')]";
     String ERROR_FORMS_XPATH = "//label[contains(@class, 'message-inline-error') and @role='alert']";
@@ -22,22 +22,36 @@ public interface ILoginPage {
     String ERROR_PASSWORD_XPATH = "";
 
     IWelcomePage closeLogin();
+
     ILoginPage setEmailAddress(String emailAddress);
+
     String getEmailAddress();
+
     ILoginPage setPassword(String password);
+
     String getPassword();
+
     INewPasswordPage clickForgotPassword();
+
     IBorrowerHomePage clickLogin();
+
     ILoginPage clickShowPassword();
+
     ILoginPage clickHidePassword();
 
     boolean isLoaded();
 
     boolean isErrorBox();
+
     List<String> getErrorBoxMessage();
+
     Map<String, String> getErrorForms();
+
     boolean isErrorEmailAddress();
+
     String getErrorEmailAddressMessage();
+
     boolean isErrorPassword();
+
     String getErrorPasswordMessage();
 }

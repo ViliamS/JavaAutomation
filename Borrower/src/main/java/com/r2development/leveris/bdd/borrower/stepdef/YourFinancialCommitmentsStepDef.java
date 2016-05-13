@@ -44,106 +44,68 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
 
         switch (financialData.getFormType()) {
             case "Personal Loan":
-//                user_types_personal_outstanding_balance_amount(userType, financialData.getOutstandingAmount());
                 yourFinancialCommitmentsPage.typePersonalOutstandingBalanceAmount(financialData.getOutstandingAmount());
-//                user_types_personal_financial_institution(userType, financialData.getFinancialInstitution());
                 yourFinancialCommitmentsPage.typePersonalFinancialInstitution(financialData.getFinancialInstitution());
-//                user_types_personal_loan_purpose(userType, financialData.getPurposeOfTheLoan());
                 yourFinancialCommitmentsPage.typePersonalLoanPurpose(financialData.getPurposeOfTheLoan());
-//                user_types_personal_final_repayment_date(userType, financialData.getFinalRepaymentDate());
                 yourFinancialCommitmentsPage.typePersonalFinalRepaymentDate(financialData.getFinalRepaymentDate());
-//                user_selects_personal_payment_frequency(userType, financialData.getPaymentFrequency());
                 yourFinancialCommitmentsPage.selectPersonalPaymentFrequency(financialData.getPaymentFrequency());
-//                user_types_personal_repayment_amount(userType, financialData.getRepaymentAmount());
                 yourFinancialCommitmentsPage.typePersonalRepaymentAmount(financialData.getRepaymentAmount());
                 break;
             case "Credit Card":
-//                user_types_credit_card_repayment_amount(userType, financialData.getRepaymentAmount());
                 yourFinancialCommitmentsPage.typeCreditcRepaymentAmount(financialData.getRepaymentAmount());
-//                user_types_credit_card_provider(userType, financialData.getCardProvider())
                 yourFinancialCommitmentsPage.typeCreditcProvider(financialData.getCardProvider());
-//                user_selects_credit_card_type(userType, financialData.getCardType());
                 yourFinancialCommitmentsPage.selectCreditcType(financialData.getCardType());
-//                user_types_credit_care_limit(userType, financialData.getCardLimit())
                 yourFinancialCommitmentsPage.typeCreditcLimit(financialData.getCardLimit());
-//                user_types_credit_card_balance(userType, financialData.getCardBalance())
                 yourFinancialCommitmentsPage.typeCreditcBalance(financialData.getCardBalance());
                 break;
             case "Maintenance Payment":
-//                user_types_maintenance_payment(userType, financialData.getMonthlyMaintenancePayment());
                 yourFinancialCommitmentsPage.typeMaintenancepPayment(financialData.getMonthlyMaintenancePayment());
                 break;
             case "Other":
-//                user_types_other_value(userType, financialData.getRepaymentAmount())
                 yourFinancialCommitmentsPage.typeOtherRepaymentAmount(financialData.getRepaymentAmount());
-//                user_types_other_value(userType, financialData.getRepaymentAmount()
                 yourFinancialCommitmentsPage.typeOtherValue(financialData.getValue());
-//                user_types_other_description(userType, financialData.getDescription());
                 yourFinancialCommitmentsPage.typeOtherDescription(financialData.getDescription());
                 break;
             case "Car Loan":
-//                user_types_car_outstanding_balance_amount(userType, financialData.getOutstandingAmount());
                 yourFinancialCommitmentsPage.typeCarOutstandingBalanceAmount(financialData.getOutstandingAmount());
-//                user_types_car_financial_institution(userType, financialData.getFinancialInstitution());
                 yourFinancialCommitmentsPage.typeCarFinancialInstitution(financialData.getFinancialInstitution());
-//                user_types_car_final_repayment_date(userType, financialData.getFinalRepaymentDate());
                 yourFinancialCommitmentsPage.typeCarFinalRepaymentDate(financialData.getFinalRepaymentDate());
-//                user_selects_car_payment_frequency(userType, financialData.getPaymentFrequency());
                 yourFinancialCommitmentsPage.selectCarPaymentFrequency(financialData.getPaymentFrequency());
-//                user_types_card_repayment_amount(userType, financialData.getRepaymentAmount());
                 yourFinancialCommitmentsPage.typeCarRepaymentAmount(financialData.getRepaymentAmount());
                 break;
             case "Student Loan":
-//                user_types_student_outstanding_balance_amount(userType, financialData.getOutstandingAmount());
                 yourFinancialCommitmentsPage.typeStudentOutstandingBalanceAmount(financialData.getOutstandingAmount());
-//                user_types_student_financial_institution(userType, financialData.getFinancialInstitution());
                 yourFinancialCommitmentsPage.typeStudentFinancialInstitution(financialData.getFinancialInstitution());
-//                user_types_student_final_repayment_date(userType, financialData.getFinalRepaymentDate());
                 yourFinancialCommitmentsPage.typeStudentFinalRepaymentDate(financialData.getFinalRepaymentDate());
-//                user_selects_student_payment_frequency(userType, financialData.getPaymentFrequency());
                 yourFinancialCommitmentsPage.selectStudentPaymentFrequency(financialData.getPaymentFrequency());
-//                user_types_student_repayment_amount(userType, financialData.getRepaymentAmount());
                 yourFinancialCommitmentsPage.typeStudentRepaymentAmount(financialData.getRepaymentAmount());
                 break;
             case "Rent":
                 //optional
-//                user_selects_rent_payment_frequency(userType, financialData.getPaymentFrequency());
                 yourFinancialCommitmentsPage.selectRentPaymentFrequency(financialData.getPaymentFrequency());
-//                user_types_rent_repayment_amount(userType, financialData.getRepaymentAmount());
                 yourFinancialCommitmentsPage.typeRentRepaymentAmount(financialData.getRepaymentAmount());
                 //optional
-//                user_types_rent_note(userType, financialData.getNote());
                 yourFinancialCommitmentsPage.typeRentNote(financialData.getNote());
                 break;
             case "Utilities":
                 //optional
-//                user_types_utilities_payment_frequency(userType, financialData.getPaymentFrequency());
                 yourFinancialCommitmentsPage.selectUtilitiesPaymentFrequency(financialData.getPaymentFrequency());
-//                user_types_utilities_repayment_amount(userType, financialData.getRepaymentAmount());
                 yourFinancialCommitmentsPage.typeUtilitiesRepaymentAmount(financialData.getRepaymentAmount());
                 //optional
-//                user_types_utilities_note(userType, financialData.getNote());
                 yourFinancialCommitmentsPage.typeUtilitiesNote(financialData.getNote());
                 break;
             case "Childcare":
                 //optional
-//                user_types_child_care_payment_frequency(userType, financialData.getPaymentFrequency());
                 yourFinancialCommitmentsPage.selectChildCarePaymentFrequency(financialData.getPaymentFrequency());
-//                user_types_child_care_repayment_amount(userType, financialData.getRepaymentAmount());
                 yourFinancialCommitmentsPage.typeChildCareRepaymentAmount(financialData.getRepaymentAmount());
                 //optional
-//                user_types_child_care_note(userType, financialData.getNote());
                 yourFinancialCommitmentsPage.typeChildCareNote(financialData.getNote());
                 break;
             case "Mortgage":
-//                user_types_mortgage_outstanding_balance_amount(userType, financialData.getOutstandingAmount());
                 yourFinancialCommitmentsPage.typeMortgageOutstandingBalanceAmount(financialData.getOutstandingAmount());
-//                user_types_mortgage_financial_institution(userType, financialData.getFinancialInstitution());
                 yourFinancialCommitmentsPage.typeMortgageFinancialInstitution(financialData.getFinancialInstitution());
                 //optional
-//                user_types_mortgage_final_repayment_date(userType, financialData.getFinalRepaymentDate());
                 yourFinancialCommitmentsPage.typeMortgageFinalRepaymentDate(financialData.getFinalRepaymentDate());
-//                user_types_mortgage_repayment_amount(userType, financialData.getRepaymentAmount());
                 yourFinancialCommitmentsPage.typeMortgageRepaymentAmount(financialData.getRepaymentAmount());
                 break;
             default:
@@ -153,9 +115,9 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
 
     @When("^Borrower has(n't)? financial commitments$")
     public void user_has_financial_commitments(String hasCommitments) throws InterruptedException {
+
         if (hasCommitments == null) {
 //            yourFinancialCommitmentsPage.clickSingleYes();
-            // TODO handle the case or refactor
         }
         else {
 //            yourFinancialCommitmentsPage.clickSingleNo();
@@ -214,8 +176,8 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
         yourFinancialCommitmentsPage.clickWaitIHave();
     }
 
-    @And("^(Borrower) types Personal OutstandingBalalnceAmount : (.*)$")
-    public void user_types_personal_outstanding_balance_amount(String userType, String outstandingBalanceAmount) {
+    @And("^(Borrower) types Personal OustandingBalalnceAmount : (.*)$")
+    public void user_types_personal_oustanding_balance_amount(String userType, String outstandingBalanceAmount) {
         yourFinancialCommitmentsPage.typePersonalOutstandingBalanceAmount(outstandingBalanceAmount);
     }
 
@@ -235,7 +197,7 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
     }
 
     @And("^(Borrower) selects Personal payment frequency : (Weekly|Fortnightly|Monthly|Yearly)$")
-    public void user_selects_personal_payment_frequency(String userType, String paymentFrequency) {
+    public void user_selcts_personal_payment_frequency(String userType, String paymentFrequency) {
         yourFinancialCommitmentsPage.selectPersonalPaymentFrequency(paymentFrequency);
     }
 
@@ -330,7 +292,7 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
     }
 
     @And("^(Borrower) selects Student payment frequency : (Weekly|Fortnightly|Monthly|Yearly)$")
-    public void user_selects_student_payment_frequency(String userType, String paymentFrequency) {
+    public void user_selects_studeent_payment_frequency(String userType, String paymentFrequency) {
         yourFinancialCommitmentsPage.selectStudentPaymentFrequency(paymentFrequency);
     }
 
@@ -339,7 +301,7 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
         yourFinancialCommitmentsPage.typeStudentRepaymentAmount(repaymentAmount);
     }
 
-//    rent
+    //    rent
     @And("^(Borrower) selects Rent Payment Frequency : (Weekly|Fortnightly|Monthly|Yearly)$")
     public void user_selects_rent_payment_frequency(String userType, String repaymentFrequency) {
         //optional
@@ -357,7 +319,7 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
         yourFinancialCommitmentsPage.typeRentNote(note);
     }
 
-//    utilities
+    //    utilities
     @And("^(Borrower) types Utilities payment frequency : (Weekly|Fortnightly|Monthly|Yearly)$")
     public void user_types_utilities_payment_frequency(String userType, String paymentFrequency) {
         //optional
@@ -375,7 +337,7 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
         yourFinancialCommitmentsPage.typeUtilitiesNote(note);
     }
 
-//    childcare
+    //    childcare
     @And("^(Borrower) selects Child Care Payment Frequency : (Weekly|Fortnightly|Monthly|Yearly)$")
     public void user_types_child_care_payment_frequency(String userType, String paymentFrequency) {
         //optional
@@ -393,7 +355,7 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
         yourFinancialCommitmentsPage.typeChildCareNote(note);
     }
 
-//    mortgage
+    //    mortgage
     @And("^(Borrower) types Mortgage Outstanding Balance Amount : (.*)$")
     public void user_types_mortgage_outstanding_balance_amount(String userType, String outstandingBalanceAmount) {
         yourFinancialCommitmentsPage.typeMortgageOutstandingBalanceAmount(outstandingBalanceAmount);
@@ -417,7 +379,7 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
 
     @And("^Borrower clicks on Financial commitments link$")
     public void borrower_clicks_on_financial_commitments_link(){
-        IFormsMenu formsMenu = new FormsMenu((SharedDriver)webDriver);
+        IFormsMenu formsMenu = new FormsMenu((SharedDriver) webDriver);
         formsMenu.clickFinancialCommitments();
     }
 }

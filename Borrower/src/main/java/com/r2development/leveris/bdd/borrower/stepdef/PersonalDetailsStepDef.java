@@ -97,7 +97,7 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ /*implements CLV
         switch (borrowerOrCoapplicant) {
             case "Borrower":
 //                assertThat("user\'s firstname should be in the title !", borrowerPersonalDetailsPage.isTitle(user.getFirstName()), is(true));
-                borrowerPersonalDetailsPage.isTitle(user.getFirstName());
+//                borrowerPersonalDetailsPage.isTitle(user.getFirstName());
                 break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
@@ -110,13 +110,13 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ /*implements CLV
         switch(borrowerOrCoapplicant) {
             case "Borrower":
                 if (firstName.isEmpty()) {
-//                    borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setFirstname(user.getFirstName() + now.toString("yyyyDDmmHH"));
-                    borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setFirstname(user.getFirstName() + System.getProperty("timestamp"));
+//                    borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setFirstName(user.getFirstName() + now.toString("yyyyDDmmHH"));
+                    borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setFirstName(user.getFirstName() + System.getProperty("timestamp"));
                     user.setFirstName(firstName);
                 }
                 else {
-//                    borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setFirstname(firstName + now.toString("yyyyDDmmHH"));
-                    borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setFirstname(firstName + System.getProperty("timestamp"));
+//                    borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setFirstName(firstName + now.toString("yyyyDDmmHH"));
+                    borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setFirstName(firstName + System.getProperty("timestamp"));
                 }
 //                user.setFirstName(firstName + now.toString("yyyyDDmmHH"));
                 user.setFirstName(firstName + System.getProperty("timestamp"));
@@ -130,10 +130,10 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ /*implements CLV
     public void borrower_coapplicant_user_types_his_lastname(String borrowerOrCoapplicant, String lastname) {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
-                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setLastname(lastname);
+                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setLastName(lastname);
                 break;
 //            case "coapplicant":
-//                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setLastname(lastname);
+//                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setLastName(lastname);
 //                break;
             default:
                 log.info("Huston, we have a problem !, Do we have a new user type ?");
@@ -204,7 +204,7 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ /*implements CLV
     public void borrower_coapplicant_user_types_the_number_resident_years(String borrowerOrCoapplicant, String residentYear) {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
-                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setResidentYears(residentYear);
+//                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setResidentYears(residentYear);
                 break;
 //            case "coapplicant":
 //                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setResidentYears(residentYear);
@@ -223,7 +223,7 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ /*implements CLV
         boolean bRequiredVisa = sRequiringVisa.equals("is");
         switch(borrowerOrCoapplicant) {
             case "Borrower":
-                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.checkRequiredVisa(bRequiredVisa);
+//                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.checkRequiredVisa(bRequiredVisa);
                 break;
 //            case "coapplicant":
 //                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.checkRequiredVisa(bRequiredVisa);
@@ -238,7 +238,7 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ /*implements CLV
     public void borrower_coapplicant_user_selects_his_residency_accommodation(String borrowerOrCoapplicant, String residencyAccommodation) {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
-                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.selectResidencyAccommodation(residencyAccommodation);
+//                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.selectResidencyAccommodation(residencyAccommodation);
                 break;
 //            case "coapplicant":
 //                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.selectResidencyAccommodation(residencyAccommodation);
@@ -252,7 +252,7 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ /*implements CLV
     public void borrower_coapplicant_user_types_his_residency_rent(String borrowerOrCoapplicant, String residencyRent) {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
-                borrowerPersonalDetailsPage.setResidencyRent(residencyRent);
+//                borrowerPersonalDetailsPage.setResidencyRent(residencyRent);
                 break;
 //            case "coapplicant":
 //                coapplicantPersonalDetailsPage.setResidencyRent(residencyRent);
@@ -271,7 +271,7 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ /*implements CLV
         boolean bLivedLast3Years = sLivedLast3Years.equals("is");
         switch(borrowerOrCoapplicant) {
             case "Borrower":
-                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.checkLivedLast3Years(bLivedLast3Years);
+//                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.checkLivedLast3Years(bLivedLast3Years);
                 break;
 //            case "coapplicant":
 //                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.checkLivedLast3Years(bLivedLast3Years);
@@ -285,7 +285,7 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ /*implements CLV
     public void borrower_coapplicant_user_types_his_previous_residency_address_line1(String borrowerOrCoapplicant, String previousResidencyAddressLine1) {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
-                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setPreviousResidencyAddressLine1(previousResidencyAddressLine1);
+//                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setPreviousResidencyAddressLine1(previousResidencyAddressLine1);
                 break;
 //            case "coapplicant":
 //                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setPreviousResidencyAddressLine1(previousResidencyAddressLine1);
@@ -299,7 +299,7 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ /*implements CLV
     public void borrower_coapplicant_user_types_his_previous_residency_address_line2(String borrowerOrCoapplicant, String previousResidencyAddressLine2) {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
-                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setPreviousResidencyAddressLine2(previousResidencyAddressLine2);
+//                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setPreviousResidencyAddressLine2(previousResidencyAddressLine2);
                 break;
 //            case "coapplicant":
 //                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setPreviousResidencyAddressLine2(previousResidencyAddressLine2);
@@ -313,7 +313,7 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ /*implements CLV
     public void borrower_coapplicant_user_types_his_previous_residency_towncity(String borrowerOrCoapplicant, String previousResidencyTownCity) {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
-                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setPreviousResidencyTownCity(previousResidencyTownCity);
+//                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setPreviousResidencyTownCity(previousResidencyTownCity);
                 break;
 //            case "coapplicant":
 //                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setPreviousResidencyTownCity(previousResidencyTownCity);
@@ -327,7 +327,7 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ /*implements CLV
     public void borrower_coapplicant_user_selects_his_previous_residency_countystate(String borrowerOrCoapplicant, String residencyCountyState) {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
-                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.selectResidencyCountyState(residencyCountyState);
+//                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.selectResidencyCountyState(residencyCountyState);
                 break;
 //            case "coapplicant":
 //                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.selectResidencyCountyState(residencyCountyState);
@@ -341,7 +341,7 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ /*implements CLV
     public void borrower_coapplicant_user_types_his_previous_residency_postcodezip(String borrowerOrCoapplicant, String previousResidencyPostcodeZip) {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
-                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setPreviousResidencyPostcodeZip(previousResidencyPostcodeZip);
+//                borrowerPersonalDetailsPage = borrowerPersonalDetailsPage.setPreviousResidencyPostcodeZip(previousResidencyPostcodeZip);
                 break;
 //            case "coapplicant":
 //                coapplicantPersonalDetailsPage = coapplicantPersonalDetailsPage.setPreviousResidencyPostcodeZip(previousResidencyPostcodeZip);
@@ -355,7 +355,7 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ /*implements CLV
     public void borrower_coapplicant_user_selects_his_previous_residency_country(String borrowerOrCoapplicant, String previousResidencyCountry) {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
-                borrowerPersonalDetailsPage.selectPreviousResidencyCountry(previousResidencyCountry);
+//                borrowerPersonalDetailsPage.selectPreviousResidencyCountry(previousResidencyCountry);
                 break;
 //            case "coapplicant":
 //                coapplicantPersonalDetailsPage.selectPreviousResidencyCountry(previousResidencyCountry);
@@ -369,7 +369,7 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ /*implements CLV
     public void borrower_coapplicant_user_types_his_previous_residency_country(String borrowerOrCoapplicant, String previousResidencyCountry) {
         switch(borrowerOrCoapplicant) {
             case "Borrower":
-                borrowerPersonalDetailsPage.setPreviousResidencyCountry(previousResidencyCountry);
+//                borrowerPersonalDetailsPage.setPreviousResidencyCountry(previousResidencyCountry);
                 break;
 //            case "coapplicant":
 //                coapplicantPersonalDetailsPage.setPreviousResidencyCountry(previousResidencyCountry);

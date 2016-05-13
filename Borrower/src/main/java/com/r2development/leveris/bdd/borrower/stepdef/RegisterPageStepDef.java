@@ -5,16 +5,22 @@ import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.RegistrationData;
 import com.r2development.leveris.di.IUser;
 import com.r2development.leveris.selenium.borrower.pageobjects.*;
+import com.r2development.leveris.utils.ExcelUtils;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hamcrest.core.Is;
 import org.openqa.selenium.WebDriver;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @Singleton
 public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
@@ -127,17 +133,17 @@ public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
     @When("^Borrower creates an account$")
     public void user_creates_an_account() {
 
+//        if ( IBorrower.EXCEL_FILENAME != null ) {
+        // TODO .... handle this System Property
         if ( System.getProperty("excelFilename") != null ) {
-            /*
+            // TODO to validate
             Map<Integer, Map<String, String>> borrowersRegistrationContainer = null;
             assertThat("File should exist", ExcelUtils.checkExcelExists(), Is.is(true));
 
             try {
-                borrowersRegistrationContainer = ACMExcel.loadRegistrationDataToMap(ExcelUtils.getAbsolutePath());
-            } catch (IOException e) {
-                log.error("ACMExcel error on loading Registration Data to Map.");
+                borrowersRegistrationContainer = null;//ACMExcel.loadRegistrationDataToMap(ExcelUtils.getAbsolutePath()); todo - needs a fix...
             } catch (Exception e) {
-                e.printStackTrace();
+                log.error("ACMExcel error on loading Registration Data to Map.");
             }
 
 
@@ -151,7 +157,6 @@ public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
             user_types_his_first_name(borrowerRegistrationData.get("First Name"));
             user_types_his_email(borrowerRegistrationData.get("Email Address"));
             user_types_his_phone_number(borrowerRegistrationData.get("Phone Number"));
-            */
         }
         else {
             user_types_his_first_name("AutomationTest");

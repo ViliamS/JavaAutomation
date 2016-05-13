@@ -23,7 +23,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
 
 //    private final WebDriver webDriver;
     @Inject
-    IUser user;
+IUser user;
     private IBorrowerHomePage borrowerHomePage;
     private IPersonalDetailsPage borrowerPersonalDetailsPage;
 //    IEmploymentIncomesPage coapplicantEmploymentIncomesPage;
@@ -42,28 +42,21 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
     @Given("(Borrower) fills in Employment and Income type (Paye|Self Employed|Civil Servant|Unemployed/Homemaker|Other)$")
 //    public void user_fills_in_employment_income(String userType, Map<String, String> employmentIncomeDataMap) throws InterruptedException {
     public void user_fills_in_employment_income(String userType, String formType, List<String> employmentIncomeDataMap) throws InterruptedException {
-//        workaroundCLV312(userType);
         EmploymentIncomeData employmentIncomeData = new EmploymentIncomeData(employmentIncomeDataMap);
-
         assertEquals(
                 "We should have the same employment and income category in step def calling and in the table",
                 formType,
                 employmentIncomeData.getFormType()
         );
-
         borrower_coapplicant_user_clicks_an_employment_and_income_category(userType, formType);
-
         switch (formType) {
 
             case "Paye":
-
-
                 borrower_coapplicant_user_selects_category_occupation(userType, formType, employmentIncomeData.getOccupation());
                 borrower_coapplicant_user_types_category_employer_name(userType, formType, employmentIncomeData.getEmployerName());
                 borrower_coapplicant_user_selects_category_employer_type(userType, formType, employmentIncomeData.getEmploymentType());
                 borrower_coapplicant_user_types_category_start_date(userType, formType, employmentIncomeData.getStartDate());
                 borrower_coapplicant_user_checks_unchecks_category_currently(userType, (employmentIncomeData.isCurrentEmployment() ? "checks" : "unchecks"), formType);
-
                 if ( !employmentIncomeData.isCurrentEmployment() )
                     borrower_coapplicant_user_types_category_end_date(userType, formType, employmentIncomeData.getEndDate());
                 borrower_coapplicant_user_types_category_net_monthly_income(userType, formType, employmentIncomeData.getNetMonthlyIncome());
@@ -73,46 +66,25 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
                 borrower_coapplicant_user_selects_category_occupation(userType, formType, employmentIncomeData.getOccupation());
                 borrower_coapplicant_user_types_category_business_name(userType, formType, employmentIncomeData.getBusinessName());
                 borrower_coapplicant_user_types_category_address_line1(userType, formType, employmentIncomeData.getAddressLine1());
-
                 if ( !StringUtils.isEmpty(employmentIncomeData.getAddressLine2()))
                     borrower_coapplicant_user_types_category_address_line2(userType, formType, employmentIncomeData.getAddressLine2());
-
                 borrower_coapplicant_user_types_category_town_city(userType, formType, employmentIncomeData.getTownCity());
-
                 if ( !StringUtils.isEmpty(employmentIncomeData.getCountry()) ) {
                     borrower_coapplicant_user_selects_category_country(userType, formType, employmentIncomeData.getCountry());
-
-                    if ( !StringUtils.isEmpty(employmentIncomeData.getCountry()) && employmentIncomeData.getCountry().equals("Ireland") )
+                    if ( !StringUtils.isEmpty(employmentIncomeData.getCountry()) && (employmentIncomeData.getCountry().equals("Ireland") || employmentIncomeData.getCountry().equals("United Kingdom")))
                         borrower_coapplicant_user_types_category_county_state(userType, formType, employmentIncomeData.getCountyState());
                 }
-
                 borrower_coapplicant_user_types_category_nature_business(userType, formType, employmentIncomeData.getBusinessNature());
                 borrower_coapplicant_user_types_category_start_date(userType, formType, employmentIncomeData.getStartDate());
                 borrower_coapplicant_user_checks_unchecks_category_currently(userType, (employmentIncomeData.isCurrentEmployment() ? "checks" : "unchecks"), formType);
-
                 if ( !employmentIncomeData.isCurrentEmployment() )
                     borrower_coapplicant_user_types_category_end_date(userType, formType, employmentIncomeData.getEndDate());
-
                 borrower_coapplicant_user_types_category_net_monthly_income(userType, formType, employmentIncomeData.getNetMonthlyIncome());
                 break;
-
-//            case "Civil Servant":
-//                borrower_coapplicant_user_clicks_an_employment_and_income_category(userType, formType);
-//                borrower_coapplicant_user_selects_category_occupation(userType, formType, employmentIncomeData.getOccupation());
-//                borrower_coapplicant_user_types_category_employer_name(userType, formType, employmentIncomeData.getEmployerName());
-//                borrower_coapplicant_user_selects_category_employer_type(userType, formType, employmentIncomeData.getEmploymentType());
-//                borrower_coapplicant_user_types_category_start_date(userType, formType, employmentIncomeData.getStartDate());
-//                borrower_coapplicant_user_checks_unchecks_category_currently(userType, (employmentIncomeData.isCurrentEmployment() ? "checks" : "unchecks"), formType);
-//
-//                if ( !employmentIncomeData.isCurrentEmployment() )
-//                    borrower_coapplicant_user_types_category_end_date(userType, formType, employmentIncomeData.getEndDate());
-//                borrower_coapplicant_user_types_category_net_monthly_income(userType, formType, employmentIncomeData.getNetMonthlyIncome());
-//                break;
 
             case "Unemployed/Homemaker":
                 borrower_coapplicant_user_types_category_start_date(userType, formType, employmentIncomeData.getStartDate());
                 borrower_coapplicant_user_checks_unchecks_category_currently(userType, (employmentIncomeData.isCurrentEmployment() ? "checks" : "unchecks"), formType);
-
                 if ( !employmentIncomeData.isCurrentEmployment() )
                     borrower_coapplicant_user_types_category_end_date(userType, formType, employmentIncomeData.getEndDate());
                 break;
@@ -120,7 +92,10 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
             case "Other":
                 borrower_coapplicant_user_types_category_source_additional_income(userType, formType, employmentIncomeData.getAdditionalIncomeSource());
                 borrower_coapplicant_user_types_category_net_monthly_income(userType, formType, employmentIncomeData.getNetMonthlyIncome());
-                borrower_coapplicant_user_types_category_time_earning_income(userType, formType, employmentIncomeData.getTimeEarningIncome());
+                borrower_coapplicant_user_types_category_start_date(userType, formType, employmentIncomeData.getStartDate());
+                borrower_coapplicant_user_checks_unchecks_category_currently(userType, (employmentIncomeData.isCurrentEmployment() ? "checks" : "unchecks"), formType);
+                if ( !employmentIncomeData.isCurrentEmployment() )
+                    borrower_coapplicant_user_types_category_end_date(userType, formType, employmentIncomeData.getEndDate());
                 break;
 
             default:
@@ -133,7 +108,7 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
     public void borrower_coapplicant_user_sees_his_name_in_the_title(String borrowerOrCoapplicant) {
         switch (borrowerOrCoapplicant) {
             case "Borrower":
-                borrowerEmploymentIncomesPage.isTitle(user.getFirstName());
+//                borrowerEmploymentIncomesPage.isTitle(user.getFirstName());
                 break;
         }
     }
@@ -186,10 +161,10 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
 //                employmentIncomesPage.selectEISE_Occupation(occupation);
                 employmentIncomesPage.selectSelfEmployment_Occupation(occupation);
                 break;
-            case "Civil Servant":
-//                employmentIncomesPage.selectEICS_Occupation(occupation);
-                employmentIncomesPage.selectCivilServant_Occupation(occupation);
-                break;
+//            case "Civil Servant":
+////                employmentIncomesPage.selectEICS_Occupation(occupation);
+//                employmentIncomesPage.selectCivilServant_Occupation(occupation);
+//                break;
         }
     }
 
@@ -211,10 +186,10 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
 //                employmentIncomesPage.typeEIP_EmployerName(employerName);
                 employmentIncomesPage.typePaye_EmploymentName(employerName);
                 break;
-            case "Civil Servant":
+//            case "Civil Servant":
 //                employmentIncomesPage.typeEICS_EmployerName(employerName);
-                employmentIncomesPage.typeCivilServant_EmploymentName(employerName);
-                break;
+//                employmentIncomesPage.typeCivilServant_EmploymentName(employerName);
+//                break;
         }
     }
 
@@ -236,14 +211,14 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
 //                employmentIncomesPage.selectEIP_EmploymentType(employmentType);
                 employmentIncomesPage.selectPaye_EmploymentType(employmentType);
                 break;
-            case "Civil Servant":
-//                employmentIncomesPage.selectEICS_EmploymentType(employmentType);
-                employmentIncomesPage.selectCivilServant_EmploymentType(employmentType);
-                break;
+//            case "Civil Servant":
+////                employmentIncomesPage.selectEICS_EmploymentType(employmentType);
+//                employmentIncomesPage.selectCivilServant_EmploymentType(employmentType);
+//                break;
         }
     }
 
-    @Given("^(Borrower) types the (Paye|Self Employed|Civil Servant|Unemployed/Homemaker) start date : (.*)$")
+    @Given("^(Borrower) types the (Paye|Self Employed|Unemployed/Homemaker) start date : (.*)$")
     public void borrower_coapplicant_user_types_category_start_date(String borrowerOrCoapplicant, String category, String startDate) {
         switch (borrowerOrCoapplicant) {
             case "Borrower":
@@ -265,9 +240,9 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
 //                employmentIncomesPage.typeEISE_StartDate(startDate);
                 employmentIncomesPage.typeSelfEmployment_StartDate(startDate);
                 break;
-            case "Civil Servant":
+            case "Other":
 //                employmentIncomesPage.typeEICS_StartDate(startDate);
-                employmentIncomesPage.typeCivilServant_StartDate(startDate);
+                employmentIncomesPage.typeOther_StartDate(startDate);
                 break;
             case "Unemployed/Homemaker":
 //                employmentIncomesPage.typeEIUH_StartDate(startDate);
@@ -298,9 +273,9 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
 //                employmentIncomesPage.typeEISE_EndDate(endDate);
                 employmentIncomesPage.typeSelfEmployment_EndDate(endDate);
                 break;
-            case "Civil Servant":
+            case "Other":
 //                employmentIncomesPage.typeEICS_EndDate(endDate);
-                employmentIncomesPage.typeCivilServant_EndDate(endDate);
+                employmentIncomesPage.typeOther_EndDate(endDate);
                 break;
             case "Unemployed/Homemaker":
 //                employmentIncomesPage.typeEIUH_EndDate(endDate);
@@ -329,9 +304,9 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
             case "Self Employed":
                 employmentIncomesPage.checkSelfEmployment_Currently(action);
                 break;
-            case "Civil Servant":
-                employmentIncomesPage.checkCivilServant_Currently(action);
-                break;
+//            case "Civil Servant":
+//                employmentIncomesPage.checkCivilServant_Currently(action);
+//                break;
             case "Unemployed/Homemaker":
                 employmentIncomesPage.checkUnemployment_Currently(action);
                 break;
@@ -358,9 +333,9 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
             case "Self Employed":
                 employmentIncomesPage.typeSelfEmployment_NetIncomeMonthly(netMonthlyIncome);
                 break;
-            case "Civil Servant":
-                employmentIncomesPage.typeCivilServant_NetIncomeMonthly(netMonthlyIncome);
-                break;
+//            case "Civil Servant":
+//                employmentIncomesPage.typeCivilServant_NetIncomeMonthly(netMonthlyIncome);
+//                break;
             case "Other":
                 employmentIncomesPage.typeOther_NetIncomeMonthly(netMonthlyIncome);
                 break;
@@ -752,9 +727,9 @@ public class EmploymentAndIncomeStepDef /*extends BorrowerStepDef*/ /*implements
     public void borrower_coapplicant_user_clicks_done(String borrowerOrCoapplicant) {
         switch (borrowerOrCoapplicant) {
             case "Borrower":
-//                yourAccountsPage = borrowerEmploymentIncomesPage.clickEmploymentIncomeDone();
+
                 IYourAccountsPage yourAccountsPage = borrowerEmploymentIncomesPage.clickDone();
-                yourAccountsPage.getTitle();
+
                 break;
 //            case "coapplicant":
 //                coapplicantEmploymentIncomesPage.clickEmploymentIncomeDone();

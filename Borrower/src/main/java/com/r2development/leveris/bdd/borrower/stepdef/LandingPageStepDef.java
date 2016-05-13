@@ -13,6 +13,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 @Singleton
@@ -40,7 +41,7 @@ public class LandingPageStepDef {
     }
 
     @Given("^Open Leveris Automatic Registration Page$")
-    public void open_leveris_automatic_registration_page(){
+    public void open_leveris_automatic_registration_page() throws FileNotFoundException {
         automaticRegistrationPage.goToAutomaticRegistrationPage();
     }
 
@@ -64,12 +65,12 @@ public class LandingPageStepDef {
 
 /*    @Given("^Borrower clicks on red continue button$")
     public void user_click_on_red_continue_button() {
-        quoteQuickLoanPage = quoteLandingPage.clickContinueUnsecuredLoanRedButton();
+        quoteQuickLoanPage = quoteLandingPage.clickContinueUnsecuredLoan();
     }
 
     @Given("^Borrower clicks on teal continue button$")
     public void user_click_on_teal_continue_button() {
-        quotePaydayLoanPage = quoteLandingPage.clickContinuePaydayLoanTealButton();
+        quotePaydayLoanPage = quoteLandingPage.clickContinuePaydayLoan();
     }*/
 
 

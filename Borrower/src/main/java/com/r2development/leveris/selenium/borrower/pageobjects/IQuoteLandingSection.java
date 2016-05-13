@@ -1,57 +1,20 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
+import static com.r2development.leveris.utils.XpathBuilder.XPath.*;
+
 public interface IQuoteLandingSection {
 
     String
+            UNSECURED_LOAN_CONTINUE_BUTTON = getXPath_DivEqualsDataPath("pnlUnsecuredLoan pnlUnsecuredLoan0 btnContinue0") + getXPath_DirectAButtonContainsWicketpath("pnlUnsecuredLoan0_c_w_btnContinue0_submit") + getXPath_HasADescendantSpanEqualsText("Continue"),
 
-            UNSECURED_LOAN_XPATH =                  "//div[contains(@wicketpath,'UnsecuredLoan')]",
-            DIRECT_DIV_UNSEC =                      "/div[contains(@wicketpath,'UnsecuredLoan')]",
-            UNSECURED_LOAN_SMALL_CONTINUE =         "/div[contains(@wicketpath,'UnsecuredLoan')]//div[contains(@wicketpath,'btnContinue')]",
-            PAYDAY_LOAN_AREA =                      "/div[contains(@wicketpath,'UnsecuredLoan') and contains(@wicketpath,'PaydayLoan')]",
-            DIR_DESC_SPAN =                         "/span",
-            SPAN_TEXT_FROM =                        "/span[text()='from']",
-            SPAN_TEXT_PER_MONTH =                   "/span[text()='per month']",
-            SPAN_TEXT_UNSECURED_LOAN =              "/span[text()='Unsecured Loan']",
-            SPAN_TEXT_UP_TO =                       "/span[text()='Up to']",
-            SPAN_TEXT_PAYDAY_LOAN =                 "/span[text()='Payday loan']",
-            SPAN_TEXT_MORTGAGE =                    "//span[text()='Mortgage']",
-            SPAN_TEXT_DEBT_CONSOLIDATION =          "//span[text()='Debt consolidation']",
-            DIV_CONTAINS_BTN_CONTINUE =             "//div[contains(@wicketpath,'Continue')]",
-            UP_UP_PRECEDING_SIBLING_FIRST_DIV =     "/../../preceding-sibling::div[1]",
-            CONTAINS_WICKETPATH_MORTGAGE =          "[contains(@wicketpath,'Mortgage')]",
-            CONTAINS_WICKETPATH_LBLAMOUNT =         "[contains(@wicketpath,'lblAmount')]",
-            CONTAINS_WICKETPATH_DEBT_CONS =         "[contains(@wicketpath,'DebitConsolidation')]",
-            CONTAINS_WICKETPATH_UNSECURED_LOAN =    "[contains(@wicketpath,'UnsecuredLoan')]",
+            UNSECURED_LOAN_CONTINUE_BUTTON_TITLE = getXPath_DivEqualsDataPath("pnlUnsecuredLoan pnlUnsecuredLoan0 btnContinue0") + getXPath_DirectAButtonContainsWicketpath("pnlUnsecuredLoan0_c_w_btnContinue0_submit") + getXPath_DirectSpanEqualsText("Continue"),
 
-            A_CONTINUE = "[not(contains(@class,'green'))]/a[contains(@wicketpath,'Continue')]",
-            A_CONTINUE2 = "[contains(@class,'green')]/a[contains(@wicketpath,'Continue')]",
+            PAYDAY_LOAN_CONTINUE_BUTTON = getXPath_DivEqualsDataPath("pnlUnsecuredLoan pnlUnsecuredLoan1 btnContinue1") + getXPath_DirectAButtonContainsWicketpath("btnContinue1_submit") + getXPath_HasADescendantSpanEqualsText("Continue"),
 
-            HEADER_GREAT_AND_QUICK_LOAN_XPATH =     UNSECURED_LOAN_XPATH, // TODO: 09/02/16  - This Header is missing compared with specification
+            PAYDAY_LOAN_CONTINUE_BUTTON_TITLE = getXPath_DivEqualsDataPath("pnlUnsecuredLoan pnlUnsecuredLoan0 btnContinue0") + getXPath_DirectAButtonContainsWicketpath("pnlUnsecuredLoan0_c_w_btnContinue0_submit") + getXPath_DirectSpanEqualsText("Continue");
 
-         /*   DIV_FOLLOWING_XPATH =                   UNSECURED_LOAN_XPATH            + DIRECT_DIV_UNSEC,
-            UNSECURED_LOAN_TITLE_PER_MONTH_XPATH =  DIV_FOLLOWING_XPATH             + SPAN_TEXT_PER_MONTH,
-            UNSECURED_LOAN_TITLE_FROM_XPATH =       DIV_FOLLOWING_XPATH             + SPAN_TEXT_FROM,
-            UNSECURED_LOAN_TITLE_AMOUNT_XPATH =     UNSECURED_LOAN_TITLE_FROM_XPATH + UP_UP_PRECEDING_SIBLING_FIRST_DIV + CONTAINS_WICKETPATH_UNSECURED_LOAN + DIRECT_DIV_UNSEC + DIR_DESC_SPAN,
-            UNSECURED_LOAN_SUB_HEADER_XPATH =       DIV_FOLLOWING_XPATH             + SPAN_TEXT_UNSECURED_LOAN,
-            LOAN_UP_TO_LOAN_AMOUNT_XPATH =          DIV_FOLLOWING_XPATH             + SPAN_TEXT_UP_TO + UP_UP_PRECEDING_SIBLING_FIRST_DIV + CONTAINS_WICKETPATH_UNSECURED_LOAN + DIRECT_DIV_UNSEC + DIR_DESC_SPAN,
-            */
-            UNSECURED_LOAN_CONTINUE_BUTTON_XPATH =  UNSECURED_LOAN_XPATH            + UNSECURED_LOAN_SMALL_CONTINUE + A_CONTINUE,
-
-/*
-            PAYDAY_LOAN_PANEL_XPATH =               UNSECURED_LOAN_XPATH            + PAYDAY_LOAN_AREA,
-*/
-
-            PAYDAY_LOAN_CONTINUE_BUTTON_XPATH =     UNSECURED_LOAN_XPATH            + UNSECURED_LOAN_SMALL_CONTINUE + A_CONTINUE2;
-
-            /*PAYDAY_LOAN_HEADER_XPATH =              PAYDAY_LOAN_PANEL_XPATH         + SPAN_TEXT_PAYDAY_LOAN,
-            PAYDAY_LOAN_AMOUNT_XPATH =              PAYDAY_LOAN_PANEL_XPATH         + CONTAINS_WICKETPATH_LBLAMOUNT + DIR_DESC_SPAN,
-            MORTGAGE_PANEL_XPATH =                  UNSECURED_LOAN_XPATH            + CONTAINS_WICKETPATH_MORTGAGE,
-            MORTGAGE_HEADER_XPATH =                 MORTGAGE_PANEL_XPATH            + SPAN_TEXT_MORTGAGE,
-            DEBT_CONSOLIDATION_PANEL_XPATH =        UNSECURED_LOAN_XPATH            + CONTAINS_WICKETPATH_DEBT_CONS,
-            DEBT_CONSOLIDATION_HEADER_XPATH =       DEBT_CONSOLIDATION_PANEL_XPATH  + SPAN_TEXT_DEBT_CONSOLIDATION;*/
-
-    IQuotePaydayLoanPage clickContinuePaydayLoanTealButton();
-    IQuoteQuickLoanPage clickContinueUnsecuredLoanRedButton();
+    IQuotePaydayLoanPage clickContinuePaydayLoan();
+    IQuoteQuickLoanPage clickContinueUnsecuredLoan();
     boolean isHeaderGreatAndQuickLoanPresent();
     boolean isSubHeaderUnsecuredLoanPresent();
     boolean isLoanUpToLoanAmountPresent();

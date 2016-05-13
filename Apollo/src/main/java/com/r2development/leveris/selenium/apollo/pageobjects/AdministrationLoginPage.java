@@ -10,7 +10,7 @@ public class AdministrationLoginPage extends Apollo implements IAdministrationLo
 
     private static final Log log = LogFactory.getLog(AdministrationLoginPage.class.getName());
 
-    private WebDriver webDriver;
+    WebDriver webDriver;
 
     public AdministrationLoginPage(SharedDriver webDriver){
         super(webDriver);
@@ -21,6 +21,12 @@ public class AdministrationLoginPage extends Apollo implements IAdministrationLo
     public IAdministrationLoginPage goToApolloAdministrationLoginPage(){
         webDriver.get(System.getProperty("administration.url"));
         return this;
+    }
+
+    @Override
+    public boolean isUsernameInputPresent(){
+        log.info("");
+        return isVisible(USERNAME_INPUT, 15);
     }
 
     @Override

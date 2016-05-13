@@ -4,11 +4,7 @@ import com.r2development.leveris.Borrower;
 import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.junit.Assert;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -17,13 +13,8 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
 
     private static final Log log = LogFactory.getLog(YourFinancialCommitmentsSection.class.getName());
 
-    @FindBy ( xpath = FINANCIAL_COMMITMENT_NONE_XPATH )
-    protected WebElement weFinancialCommitmentNone;
-
-//    @Inject
     public YourFinancialCommitmentsSection(SharedDriver webDriver) {
         super(webDriver);
-        PageFactory.initElements(webDriver, this);
     }
 
     @Override
@@ -57,17 +48,7 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
         log.info("clickFinancialType logical crossroad ---> financialType = '" + financialType + "'");
 
         loadingCheck();
-        if(!isVisible(FINANCIAL_PERSONAL_LOAN_XPATH, 5))
-            try {
-                clickAdd();
-            } catch(Exception x){
-                if(isVisible(FINANCIAL_ADD_XPATH, 1) && !isVisible(FINANCIAL_PERSONAL_LOAN_XPATH, 1) && !isVisible(FINANCIAL_SAVE_AND_CLOSE_XPATH, 1))
-                    clickAdd();
-                else if(isVisible(FINANCIAL_PERSONAL_LOAN_XPATH, 1))
-                    clickFinancialType(financialType);
-                else if(isVisible(FINANCIAL_SAVE_AND_CLOSE_XPATH, 1))
-                    Assert.assertTrue("We already choose the Financial commitment so failing due to navigation error", false);
-            }
+        clickAdd(true);
 
         switch (financialType) {
             case "Personal Loan":
@@ -110,11 +91,10 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
         loadingCheck();
         try {
             isNotVisibleDialog(true);
-            clickElementLoop(FINANCIAL_PERSONAL_LOAN_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
-        }
-        catch ( TimeoutException e) {
+            clickElementLoop(FINANCIAL_PERSONAL_LOAN_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
+        } catch (TimeoutException e) {
             isVisibleDialog(true);
-            clickElementLoop(FINANCIAL_DIALOG_PERSONAL_LOAN_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
+            clickElementLoop(FINANCIAL_DIALOG_PERSONAL_LOAN_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
         }
         loadingCheck();
         return this;
@@ -143,11 +123,10 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
         loadingCheck();
         try {
             isNotVisibleDialog(true);
-            clickElementLoop(FINANCIAL_CREDIT_CARD_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
-        }
-        catch ( TimeoutException e) {
+            clickElementLoop(FINANCIAL_CREDIT_CARD_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
+        } catch (TimeoutException e) {
             isVisibleDialog(true);
-            clickElementLoop(FINANCIAL_DIALOG_CREDIT_CARD_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
+            clickElementLoop(FINANCIAL_DIALOG_CREDIT_CARD_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
         }
         loadingCheck();
         return this;
@@ -157,7 +136,7 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
     public IYourFinancialCommitmentsSection clickCreditCard() {
         loadingCheck();
         isNotVisibleDialog(false);
-        clickElementLoop(FINANCIAL_CREDIT_CARD_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
+        clickElementLoop(FINANCIAL_CREDIT_CARD_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
         loadingCheck();
         return this;
     }
@@ -166,7 +145,7 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
     public IYourFinancialCommitmentsSection clickDialogCreditCard() {
         loadingCheck();
         isVisibleDialog(true);
-        clickElementLoop(FINANCIAL_DIALOG_CREDIT_CARD_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
+        clickElementLoop(FINANCIAL_DIALOG_CREDIT_CARD_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
         loadingCheck();
         return this;
     }
@@ -176,11 +155,10 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
         loadingCheck();
         try {
             isNotVisibleDialog(true);
-            clickElementLoop(FINANCIAL_MAINTENANCE_PAYMENT_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
-        }
-        catch ( TimeoutException e) {
+            clickElementLoop(FINANCIAL_MAINTENANCE_PAYMENT_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
+        } catch (TimeoutException e) {
             isVisibleDialog(true);
-            clickElementLoop(FINANCIAL_DIALOG_MAINTENANCE_PAYMENT_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
+            clickElementLoop(FINANCIAL_DIALOG_MAINTENANCE_PAYMENT_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
         }
         loadingCheck();
         return this;
@@ -190,7 +168,7 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
     public IYourFinancialCommitmentsSection clickMaintenancePayment() {
         loadingCheck();
         isNotVisibleDialog(false);
-        clickElementLoop(FINANCIAL_MAINTENANCE_PAYMENT_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
+        clickElementLoop(FINANCIAL_MAINTENANCE_PAYMENT_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
         loadingCheck();
         return this;
     }
@@ -199,7 +177,7 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
     public IYourFinancialCommitmentsSection clickDialogMaintenancePayment() {
         loadingCheck();
         isVisibleDialog(true);
-        clickElementLoop(FINANCIAL_DIALOG_MAINTENANCE_PAYMENT_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
+        clickElementLoop(FINANCIAL_DIALOG_MAINTENANCE_PAYMENT_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
         loadingCheck();
         return this;
     }
@@ -209,11 +187,10 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
         loadingCheck();
         try {
             isNotVisibleDialog(true);
-            clickElementLoop(FINANCIAL_OTHER_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
-        }
-        catch ( TimeoutException e) {
+            clickElementLoop(FINANCIAL_OTHER_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
+        } catch (TimeoutException e) {
             isVisibleDialog(true);
-            clickElementLoop(FINANCIAL_DIALOG_OTHER_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
+            clickElementLoop(FINANCIAL_DIALOG_OTHER_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
         }
         loadingCheck();
         return this;
@@ -223,7 +200,7 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
     public IYourFinancialCommitmentsSection clickOther() {
         loadingCheck();
         isNotVisibleDialog(false);
-        clickElementLoop(FINANCIAL_OTHER_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
+        clickElementLoop(FINANCIAL_OTHER_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
         loadingCheck();
         return this;
     }
@@ -232,7 +209,7 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
     public IYourFinancialCommitmentsSection clickDialogOther() {
         loadingCheck();
         isVisibleDialog(true);
-        clickElementLoop(FINANCIAL_DIALOG_OTHER_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
+        clickElementLoop(FINANCIAL_DIALOG_OTHER_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
         loadingCheck();
         return this;
     }
@@ -242,11 +219,10 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
         loadingCheck();
         try {
             isNotVisibleDialog(true);
-            clickElementLoop(FINANCIAL_CAR_LOAN_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
-        }
-        catch ( TimeoutException e) {
+            clickElementLoop(FINANCIAL_CAR_LOAN_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
+        } catch (TimeoutException e) {
             isVisibleDialog(true);
-            clickElementLoop(FINANCIAL_DIALOG_CAR_LOAN_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
+            clickElementLoop(FINANCIAL_DIALOG_CAR_LOAN_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
         }
         loadingCheck();
         return this;
@@ -256,7 +232,7 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
     public IYourFinancialCommitmentsSection clickCar() {
         loadingCheck();
         isNotVisibleDialog(false);
-        clickElementLoop(FINANCIAL_CAR_LOAN_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
+        clickElementLoop(FINANCIAL_CAR_LOAN_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
         loadingCheck();
         return this;
     }
@@ -265,7 +241,7 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
     public IYourFinancialCommitmentsSection clickDialogCar() {
         loadingCheck();
         isVisibleDialog(true);
-        clickElementLoop(FINANCIAL_DIALOG_CAR_LOAN_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
+        clickElementLoop(FINANCIAL_DIALOG_CAR_LOAN_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
         loadingCheck();
         return this;
     }
@@ -275,11 +251,10 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
         loadingCheck();
         try {
             isNotVisibleDialog(true);
-            clickElementLoop(FINANCIAL_STUDENT_LOAN_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
-        }
-        catch ( TimeoutException e) {
+            clickElementLoop(FINANCIAL_STUDENT_LOAN_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
+        } catch (TimeoutException e) {
             isVisibleDialog(true);
-            clickElementLoop(FINANCIAL_DIALOG_STUDENT_LOAN_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
+            clickElementLoop(FINANCIAL_DIALOG_STUDENT_LOAN_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
         }
         loadingCheck();
         return this;
@@ -289,7 +264,7 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
     public IYourFinancialCommitmentsSection clickStudent() {
         loadingCheck();
         isNotVisibleDialog(false);
-        clickElementLoop(FINANCIAL_STUDENT_LOAN_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
+        clickElementLoop(FINANCIAL_STUDENT_LOAN_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
         loadingCheck();
         return this;
     }
@@ -298,7 +273,7 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
     public IYourFinancialCommitmentsSection clickDialogStudent() {
         loadingCheck();
         isVisibleDialog(true);
-        clickElementLoop(FINANCIAL_DIALOG_STUDENT_LOAN_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
+        clickElementLoop(FINANCIAL_DIALOG_STUDENT_LOAN_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
         loadingCheck();
         return this;
     }
@@ -308,11 +283,10 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
         loadingCheck();
         try {
             isNotVisibleDialog(true);
-            clickElementLoop(FINANCIAL_RENT_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
-        }
-        catch ( TimeoutException e) {
+            clickElementLoop(FINANCIAL_RENT_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
+        } catch (TimeoutException e) {
             isVisibleDialog(true);
-            clickElementLoop(FINANCIAL_DIALOG_RENT_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
+            clickElementLoop(FINANCIAL_DIALOG_RENT_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
         }
         loadingCheck();
         return this;
@@ -322,7 +296,7 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
     public IYourFinancialCommitmentsSection clickRent() {
         loadingCheck();
         isNotVisibleDialog(false);
-        clickElementLoop(FINANCIAL_RENT_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
+        clickElementLoop(FINANCIAL_RENT_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
         loadingCheck();
         return this;
     }
@@ -331,7 +305,7 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
     public IYourFinancialCommitmentsSection clickDialogRent() {
         loadingCheck();
         isVisibleDialog(true);
-        clickElementLoop(FINANCIAL_DIALOG_RENT_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
+        clickElementLoop(FINANCIAL_DIALOG_RENT_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
         loadingCheck();
         return this;
     }
@@ -341,11 +315,10 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
         loadingCheck();
         try {
             isNotVisibleDialog(true);
-            clickElementLoop(FINANCIAL_UTILITIES_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
-        }
-        catch ( TimeoutException e) {
+            clickElementLoop(FINANCIAL_UTILITIES_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
+        } catch (TimeoutException e) {
             isVisibleDialog(true);
-            clickElementLoop(FINANCIAL_DIALOG_UTILITIES_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
+            clickElementLoop(FINANCIAL_DIALOG_UTILITIES_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
         }
         loadingCheck();
         return this;
@@ -355,7 +328,7 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
     public IYourFinancialCommitmentsSection clickUtilities() {
         loadingCheck();
         isNotVisibleDialog(false);
-        clickElementLoop(FINANCIAL_UTILITIES_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
+        clickElementLoop(FINANCIAL_UTILITIES_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
         loadingCheck();
         return this;
     }
@@ -364,7 +337,7 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
     public IYourFinancialCommitmentsSection clickDialogUtilities() {
         loadingCheck();
         isVisibleDialog(true);
-        clickElementLoop(FINANCIAL_DIALOG_UTILITIES_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
+        clickElementLoop(FINANCIAL_DIALOG_UTILITIES_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
         loadingCheck();
         return this;
     }
@@ -374,11 +347,10 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
         loadingCheck();
         try {
             isNotVisibleDialog(true);
-            clickElementLoop(FINANCIAL_CHILDCARE_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
-        }
-        catch ( TimeoutException e) {
+            clickElementLoop(FINANCIAL_CHILDCARE_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
+        } catch (TimeoutException e) {
             isVisibleDialog(true);
-            clickElementLoop(FINANCIAL_DIALOG_CHILD_CARE_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
+            clickElementLoop(FINANCIAL_DIALOG_CHILD_CARE_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
         }
         loadingCheck();
         return this;
@@ -388,7 +360,7 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
     public IYourFinancialCommitmentsSection clickChildCare() {
         loadingCheck();
         isNotVisibleDialog(false);
-        clickElementLoop(FINANCIAL_CHILDCARE_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
+        clickElementLoop(FINANCIAL_CHILDCARE_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
         loadingCheck();
         return this;
     }
@@ -397,7 +369,7 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
     public IYourFinancialCommitmentsSection clickDialogChildCare() {
         loadingCheck();
         isVisibleDialog(true);
-        clickElementLoop(FINANCIAL_DIALOG_CHILD_CARE_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
+        clickElementLoop(FINANCIAL_DIALOG_CHILD_CARE_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
         loadingCheck();
         return this;
     }
@@ -407,11 +379,10 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
         loadingCheck();
         try {
             isNotVisibleDialog(true);
-            clickElementLoop(FINANCIAL_MORTGAGE_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
-        }
-        catch ( TimeoutException e) {
+            clickElementLoop(FINANCIAL_MORTGAGE_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
+        } catch (TimeoutException e) {
             isVisibleDialog(true);
-            clickElementLoop(FINANCIAL_DIALOG_MORTGAGE_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
+            clickElementLoop(FINANCIAL_DIALOG_MORTGAGE_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
         }
         loadingCheck();
         return this;
@@ -421,7 +392,7 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
     public IYourFinancialCommitmentsSection clickMortgage() {
         loadingCheck();
         isNotVisibleDialog(false);
-        clickElementLoop(FINANCIAL_MORTGAGE_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
+        clickElementLoop(FINANCIAL_MORTGAGE_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
         loadingCheck();
         return this;
     }
@@ -430,30 +401,28 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
     public IYourFinancialCommitmentsSection clickDialogMortgage() {
         loadingCheck();
         isVisibleDialog(true);
-        clickElementLoop(FINANCIAL_DIALOG_MORTGAGE_XPATH ,FINANCIAL_SAVE_AND_CLOSE_XPATH);
+        clickElementLoop(FINANCIAL_DIALOG_MORTGAGE_XPATH, FINANCIAL_SAVE_AND_CLOSE_XPATH);
         loadingCheck();
         return this;
     }
 
     @Override
-    public boolean isVisibleDialog(boolean throwException/*, int timeOut*/) {
+    public boolean isVisibleDialog(boolean throwException) {
         loadingCheck();
-        return isVisible(FINANCIAL_CONTAINER_XPATH, true);
-//        return this;
+        return isVisible(FINANCIAL_CONTAINER_XPATH, 0);
     }
 
     @Override
-    public boolean isNotVisibleDialog(boolean throwException/*, int timeOut*/) {
+    public boolean isNotVisibleDialog(boolean throwException) {
         loadingCheck();
-        return isNotVisible(FINANCIAL_CONTAINER_XPATH, 5);
-//        return this;
+        return isNotVisible(FINANCIAL_CONTAINER_XPATH, 0);
     }
 
     @Override
     public YourFinancialCommitmentsSection clickNone() {
         loadingCheck();
         isVisible(FINANCIAL_COMMITMENT_NONE_XPATH);
-        weFinancialCommitmentNone.click();
+        clickElement(FINANCIAL_COMMITMENT_NONE_XPATH);
         loadingCheck();
         return this;
     }
@@ -467,7 +436,7 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
         return this;
     }
 
-    private Map<String, String> formExceptionDetails(){
+    private Map<String, String> formExceptionDetails() {
         Map<String, String> formExceptionDetails = new LinkedHashMap<>();
         formExceptionDetails.put(
                 "FormName",
@@ -499,7 +468,6 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
     @Override
     public IYourFinancialCommitmentsSection clickSaveAndClose() {
         log.info("clickSaveAndClose by xpath ---> " + FINANCIAL_SAVE_AND_CLOSE_XPATH + "<---");
-
         loadingCheck();
         isVisible(FINANCIAL_SAVE_AND_CLOSE_XPATH, true);
         clickElement(FINANCIAL_SAVE_AND_CLOSE_XPATH);
@@ -550,15 +518,24 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
         return this;
     }
 
+    private IYourFinancialCommitmentsSection clickAdd(boolean add) {
+        log.info("");
+        loadingCheck();
+        if (isVisible(FINANCIAL_ADD_XPATH, 0)) {
+            isVisible(FINANCIAL_ADD_XPATH, true);
+            clickElementLoop(FINANCIAL_ADD_XPATH, FINANCIAL_DIALOG_PERSONAL_LOAN_XPATH);
+            loadingCheck();
+        }
+        return this;
+    }
+
+
     @Override
     public IYourFinancialCommitmentsSection clickNext() {
         loadingCheck();
         isVisible(FINANCIAL_COMMITMENTS_NEXT_XPATH, true);
         clickElement(FINANCIAL_COMMITMENTS_NEXT_XPATH);
         loadingCheck();
-//        weFinancialCommitmentNext.click();
-//        if(isVisible(INDICATOR_SMALL_ON, false, 5))
-//            isInvisible(INDICATOR_SMALL_OFF, 5);
         return this;
     }
 

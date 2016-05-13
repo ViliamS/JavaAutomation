@@ -7,7 +7,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 public class YourFinancialCommitmentsPage extends HeaderAndBottomAndFormsMenuSection implements IYourFinancialCommitmentsPage {
-    
+
     private static final Log log = LogFactory.getLog(YourFinancialCommitmentsPage.class.getName());
 
     @Inject

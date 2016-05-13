@@ -12,24 +12,46 @@ public class AdministrationTopBanner extends Apollo implements IAdministrationTo
 
     private WebDriver webDriver;
 
-    protected IAdministrationHomePage administrationHomePage;
-    protected IAdministrationUsersPage administrationUsersPage;
-
-
     public AdministrationTopBanner(SharedDriver webDriver){
         super( webDriver);
         this.webDriver = webDriver;
-        administrationHomePage = new AdministrationHomePage(webDriver);
     }
 
+    @Override
     public IAdministrationUsersPage clickBannerLinkUsers(){
+        log.info("");
         isVisible(IAdministrationTopBanner.USERS_LINK);
         clickElementLoop(IAdministrationTopBanner.USERS_LINK, IAdministrationUsersPage.SEARCH_INPUT);
-        return administrationUsersPage = new AdministrationUsersPage((SharedDriver) webDriver);
+        return new AdministrationUsersPage((SharedDriver) webDriver);
     }
 
-    public void clickBannerLinkRoles(){}
+    @Override
+    public IAdministrationTopBanner clickAdminFirstNameLastNameLink(){
+        log.info("");
+        isVisible(ADMIN_FIRSTNAME_LASTNAME_LINK, true);
+        clickElement(ADMIN_FIRSTNAME_LASTNAME_LINK);
+        isVisible(ADMIN_FN_LN_DROPDOWN_OPEN);
+        return this;
+    }
 
-    public void clickBannerLinkFundManager(){}
+    @Override
+    public IAdministrationLoginPage logouts(){
+        log.info("");
+        clickAdminFirstNameLastNameLink();
+        isVisible(ADMIN_FN_LN_DROPDOWN_OPEN, true);
+        isVisible(LOGOUT_LINK);
+        clickElement(LOGOUT_LINK);
+        return new AdministrationLoginPage((SharedDriver) webDriver);
+    }
+
+    public void clickBannerLinkRoles(){
+        log.info("");
+
+    }
+
+    public void clickBannerLinkFundManager(){
+        log.info("");
+
+    }
 
 }

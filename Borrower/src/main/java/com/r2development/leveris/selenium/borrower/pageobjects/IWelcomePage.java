@@ -7,11 +7,16 @@ public interface IWelcomePage {
     String REGISTER_XPATH = "//a[contains(., 'Register')]";
 
     String getVersion();
+
     IBuildQuotationPage clickQuote();
+
     ILoginPage clickLogin();
+
     IRegisterPage clickRegister();
+
     ILoginPage clickSignIn();
 
     IWelcomePage goToWelcomePage();
+
     boolean isLoaded();
 }

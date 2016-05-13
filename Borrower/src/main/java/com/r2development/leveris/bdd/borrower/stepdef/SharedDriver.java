@@ -8,17 +8,24 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.joda.time.DateTime;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.MarionetteDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Enumeration;
+import java.util.LinkedList;
+import java.util.Properties;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -46,9 +53,14 @@ public class SharedDriver extends EventFiringWebDriver {
 
     private static final Log log = LogFactory.getLog(SharedDriver.class.getName());
 
+    public static final String IEXPLORER = "iexplorer";
     public static final String PHANTOMJS = "phantomjs";
     public static final String CHROME = "chrome";
+    public static final String OPERA = "opera";
     public static final String FIREFOX = "firefox";
+    public static final String EDGE = "edge";
+    public static final String MARIONETTE = "marionette";
+
     public static final String GUI = "gui";
     public static final String API = "api";
 
@@ -71,121 +83,72 @@ public class SharedDriver extends EventFiringWebDriver {
         super(REAL_DRIVER);
     }
 
+    /**
+     * Return a set of window handles which can be used to iterate over all open windows of this
+     * WebDriver instance by passing them to webDriver.switchTo().window(windowName)
+     *
+     * @return A set of window handles which can be used to iterate over all open windows.
+     * Provides a Set of String names of currently opened windowsNames
+     */
+    public LinkedList<String> getWindowHandlesInList() {
+        log.info("getWindowHandles() \n" +
+                "returning Set<String> \n" +
+                "size of the Set is---> '" + super.getWindowHandles().size() + "'\n");
+        LinkedList<String> handlesList = new LinkedList<>();
+        int i = 0;
+        for (String oneHandle : super.getWindowHandles()) {
+            i++;
+            log.info("Handle number '" + i + "' has name ---> '" + oneHandle + "'");
+            handlesList.add(oneHandle);
+        }
+        return handlesList;
+    }
+
+    public Set<String> getWindowHandles() {
+        log.info("getWindowHandles() \n" +
+                "returning Set<String> \n" +
+                "size of the Set is---> '" + super.getWindowHandles().size() + "'\n");
+        return super.getWindowHandles();
+    }
+
+    public String getWindowHandle() {
+        log.info("getWindowHandle() \n" +
+                "returns ---> '" + super.getWindowHandle() + "'\n");
+        return super.getWindowHandle();
+    }
+
     @Override
     public void close() {
-        if (Thread.currentThread() != CLOSE_THREAD) {
-            throw new UnsupportedOperationException("You shouldn't close this WebDriver. It's shared and will close when the JVM exits.");
-        }
         super.close();
     }
 
-//    public void deleteAllCookies() {
-//        manage().deleteAllCookies();
-//    }
-
     public static WebDriver execute(String browser) {
 
-////        Proxy seleniumProxy = null;
-//        DesiredCapabilities capabilities = null;
-//        if ( System.getProperty("Proxy") != null && BooleanUtils.toBoolean(System.getProperty("Proxy"))) {
-//            proxyServer = new HarProxyServer();
-////            proxyServer.startProxyServer();
-////            proxyServer.setCapture();
-////
-////            seleniumProxy = proxyServer.getSeleniumProxy();
-//            capabilities = new DesiredCapabilities();
-////            capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-////            capabilities.setCapability(CapabilityType.PROXY, seleniumProxy);
-//        }
+//        System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
 
         WebDriver toReturn;
-        if ( StringUtils.isEmpty(browser) )
+        if (StringUtils.isEmpty(browser))
             browser = CHROME;
 
         switch (browser) {
+
+            case IEXPLORER:
+//                InternetExplorerDriverManager.getInstance().setup();
+                return toReturn = new InternetExplorerDriver();
+
             case CHROME:
 
-//                ChromeOptions options = new ChromeOptions();
-//                options.addArguments("ui-prioritize-in-gpu-process");
-//                userdata = "user-data-dir=/target/" + System.getProperty("timestamp") + RandomStringUtils.random(5, true, true);
-////                options.addArguments(userdata);
-////                options.addArguments("--start-maximized");
-////                options.addArguments("--window-position=200,50");
-////                options.addArguments("--window-size=1440,900");
-////                options.addArguments("--proxy-server=localhost:8080");
-//
-//                if ( System.getProperty("Proxy") != null && BooleanUtils.toBoolean(System.getProperty("Proxy"))) {
-//                    //noinspection ConstantConditions
-////                    capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-//                    webDriver = new ChromeDriver(capabilities);
-////                    proxyServer.newHar(new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date()));
-//                } else {
-//                    if ( webDriver != null)
-//                        webDriver = null;
-//
-//                    webDriver = new ChromeDriver(options);
-////                    webDriver = new ChromeDriver();
-//                    if ( webDriver.toString().contains("(null)") )
-//                        webDriver = new ChromeDriver(options);
-//
-////                    injector.createChildInjector("BorrowerDependenciesModule");
-////                    injector.injectMembers(webDriver);
-//                }
+                /**
+                 * https://github.com/bonigarcia/webdrivermanager
+                 */
+//                ChromeDriverManager.getInstance().setup();
 
-                toReturn = new ChromeDriver();
-                break;
+                return  new ChromeDriver();
+
             case FIREFOX:
-                toReturn = new FirefoxDriver();
-                break;
+                return new FirefoxDriver();
+
             case PHANTOMJS:
-                toReturn = new PhantomJSDriver(dCaps);
-                toReturn.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-                toReturn.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
-                toReturn.manage().timeouts().setScriptTimeout(15, TimeUnit.SECONDS);
-                toReturn.manage().window().setSize(new Dimension(1024, 768));
-                break;
-            default:
-                toReturn = new ChromeDriver();
-        }
-
-        return toReturn;
-    }
-
-    @Before
-    public static void setup() {
-
-        if ( StringUtils.isEmpty(System.getProperty("environment")))
-            System.setProperty("environment", "dev2");
-        if ( StringUtils.isEmpty(System.getProperty("domain.borrower")))
-            System.setProperty("domain.borrower", "dv2app.opoqodev.com");
-        if ( StringUtils.isEmpty(System.getProperty("borrower")))
-            System.setProperty("borrower", "http://dv2app.opoqodev.com/stable-borrower");
-        if ( StringUtils.isEmpty(System.getProperty("autoregistration")) )
-            System.setProperty("autoregistration", "http://dv2app.opoqodev.com/stable-borrower/home?useCase=automaticregistration");
-        if ( System.getProperty("browser") == null)
-            System.setProperty("browser", CHROME);
-        if ( StringUtils.isEmpty(System.getProperty("timestamp")))
-            System.setProperty("timestamp", DateTime.now().toString("yyyyMMddHHmmssSSS"));
-        if ( StringUtils.isEmpty(System.getProperty("modeRun")) )
-            System.setProperty("modeRun", GUI);
-
-        if ( !StringUtils.isEmpty(System.getProperty("modeRun")) && System.getProperty("modeRun").equals(GUI)) {
-
-        }
-        else if ( System.getProperty("modeRun").equalsIgnoreCase(PHANTOMJS) && System.getProperty("browser").equals(PHANTOMJS) ) {
-//            String [] cli_args = new String[] { "--web-security=false", "--ignore-ssl-errors=true", "--remote-debugger-port=9000" };
-//            String [] cli_args = new String[] { "--web-security=false", "--ignore-ssl-errors=true" };
-//            dCaps = DesiredCapabilities.phantomjs();
-//            dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, cli_args);
-//            dCaps.setJavascriptEnabled(true);
-//            dCaps.setCapability("takesScreenshot", false);
-
-//            dCaps = DesiredCapabilities.phantomjs();
-//            dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.81 Safari/537.36");
-//            dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "loadImages", true);
-//            dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "javascriptEnabled", true);
-//            dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "resourceTimeout", 60000);
-//            dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, new String[] {"--webdriver-loglevel=ERROR"});//NONE,ERROR
 
             dCaps = new DesiredCapabilities();
             dCaps.setJavascriptEnabled(true);
@@ -202,31 +165,83 @@ public class SharedDriver extends EventFiringWebDriver {
                     "--webdriver-loglevel=DEBUG"
             });
 
+                DesiredCapabilities caps = new DesiredCapabilities();
+                caps.setJavascriptEnabled(true);                //< not really needed: JS enabled by default
+                caps.setCapability("takesScreenshot", true);    //< yeah, GhostDriver haz screenshotz!
+                caps.setCapability(
+                        PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
+                        "/usr/bin/phantomjs"
+                );
+                Capabilities capabilities = dCaps;
+
+                // Launch driver (will take care and ownership of the phantomjs process)
+                  toReturn = new PhantomJSDriver(capabilities);
+//
+//                dCaps = new DesiredCapabilities();
+//                dCaps.setJavascriptEnabled(true);
+//                dCaps.setCapability("takesScreenshot", false);
+//                dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, new String[]{
+//                        "--web-security=false",
+//                        "--ssl-protocol=any",
+//                        "--ignore-ssl-errors=true",
+//                        "--webdriver-loglevel=DEBUG"
+//                });
+//
+//                PhantomJsDriverManager.getInstance().setup();
+//                toReturn = new PhantomJSDriver(dCaps);
+                toReturn.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+                toReturn.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+                toReturn.manage().timeouts().setScriptTimeout(60, TimeUnit.SECONDS);
+                toReturn.manage().window().setSize(new Dimension(1440, 900));
+                toReturn.manage().window().maximize();
+                return toReturn;
+
+            case MARIONETTE:
+//                MarionetteDriverManager.getInstance().setup();
+                return new MarionetteDriver();
+
+            case EDGE:
+//                EdgeDriverManager.getInstance().setup();
+                return new EdgeDriver();
 
 
-
+            default:
+                return new ChromeDriver();
         }
-        else if ( System.getProperty("modeRun").equals(API) ) {
-//            httpClient = HttpClientBuilder.create().setRedirectStrategy(new LaxRedirectStrategy()).build();
-//            CookieStore cookieStore = new BasicCookieStore();
-//            HttpClientContext localContextBody = HttpClientContext.create();
-//            BasicClientCookie cookieScUnload = new BasicClientCookie("sc-unload", "obu");
-//            cookieScUnload.setDomain(System.getProperty("domain"));
-//            cookieScUnload.setPath("/stable-borrower");
-//            cookieStore.addCookie(cookieScUnload);
-//            localContextBody.setCookieStore(cookieStore);
-//            localContext = localContextBody;
-//            httpResponse = new HttpResponse(StringUtils.EMPTY);
-        }
 
-//        return webDriver;
+
+    }
+
+    @Before
+    public void setup() throws IOException {
+
+        Properties prop = new Properties();
+
+        if ( StringUtils.isEmpty(System.getProperty("timestamp")))
+            System.setProperty("timestamp", DateTime.now().toString("yyyyMMddHHmmssSSS"));
+
+        if (!StringUtils.isEmpty(System.getProperty("environment"))) {
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(System.getProperty("environment") + ".properties");
+            if (inputStream != null) {
+                prop.load(inputStream);
+            } else {
+                throw new FileNotFoundException("property file '" + System.getProperty("environment") + ".properties' not found in the classpath");
+            }
+
+            Enumeration<?> e = prop.propertyNames();
+            while (e.hasMoreElements()) {
+                String key = (String) e.nextElement();
+                String value = prop.getProperty(key);
+                System.setProperty(key, value);
+            }
+        }
     }
 
     @After
     public void embedScreenshot(Scenario scenario) {
 
         String verificationErrorString = verificationErrors.toString();
-        if(!StringUtils.isEmpty(verificationErrorString))
+        if (!StringUtils.isEmpty(verificationErrorString))
             System.err.println(verificationErrorString);
 
         try {
@@ -236,9 +251,8 @@ public class SharedDriver extends EventFiringWebDriver {
             System.err.println(somePlatformsDontSupportScreenshots.getMessage());
         }
 
-        if ( System.getProperty("Proxy") != null && BooleanUtils.toBoolean(System.getProperty("Proxy"))) {
+        if (System.getProperty("Proxy") != null && BooleanUtils.toBoolean(System.getProperty("Proxy"))) {
 //                proxyServer.stopProxyServer();
         }
     }
-
 }

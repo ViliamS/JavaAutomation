@@ -1,6 +1,6 @@
 package com.r2development.leveris.selenium.apollo.pageobjects;
 
-import static com.r2development.leveris.utils.XPathBuilder.*;
+import static com.r2development.leveris.utils.XpathBuilder.Builder.*;
 
 public interface IAdministrationHomePage {
 

@@ -13,15 +13,15 @@ public class WelcomePage extends Borrower implements IWelcomePage {
     private static final Log log = LogFactory.getLog(WelcomePage.class.getName());
 
     @FindBy(xpath = QUOTE_XPATH)
-    protected  WebElement weQuote;
+    protected WebElement weQuote;
 
     @FindBy(xpath = LOGIN_XPATH)
-    protected  WebElement weLogin;
+    protected WebElement weLogin;
 
     @FindBy(xpath = REGISTER_XPATH)
-    protected  WebElement weRegister;
+    protected WebElement weRegister;
 
-//    @Inject
+    //    @Inject
     public WelcomePage(SharedDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);
@@ -63,7 +63,7 @@ public class WelcomePage extends Borrower implements IWelcomePage {
     }
 
     @Override
-    public ILoginPage clickLogin(){
+    public ILoginPage clickLogin() {
         isVisible(LOGIN_XPATH, true);
 //        weLogin.click();
         clickElement(LOGIN_XPATH);

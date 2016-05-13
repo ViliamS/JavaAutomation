@@ -12,16 +12,16 @@ public class WelcomeGetQuoteSection extends Borrower implements IWelcomeGetQuote
 
     private static final Log log = LogFactory.getLog(WelcomeGetQuoteSection.class);
 
-    @FindBy( xpath = MOTTO_XPATH )
+    @FindBy(xpath = MOTTO_XPATH)
     protected WebElement weMotto;
 
-    @FindBy( xpath = GET_QUOTE_NOW_BUTTON_XPATH )
+    @FindBy(xpath = GET_QUOTE_NOW_BUTTON_XPATH)
     protected WebElement weGetQuoteNow;
 
-    @FindBy( xpath = CLOSE_XPATH )
+    @FindBy(xpath = CLOSE_XPATH)
     protected WebElement weClose;
 
-//    @Inject
+    //    @Inject
     public WelcomeGetQuoteSection(SharedDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);
@@ -32,8 +32,7 @@ public class WelcomeGetQuoteSection extends Borrower implements IWelcomeGetQuote
         try {
             isVisible(GET_QUOTE_NOW_BUTTON_XPATH, true, 5);
             weGetQuoteNow.click();
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
 //            isVisible(GET_QUOTE_NOW_BUTTON_XPATH, true);
 //            getWebElement(GET_QUOTE_NOW_BUTTON_XPATH).click();
             clickElement(GET_QUOTE_NOW_BUTTON_XPATH);

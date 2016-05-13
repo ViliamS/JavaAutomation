@@ -12,19 +12,19 @@ public class VerifyEmailPage extends Borrower implements IVerifyEmailPage {
 
     private static final Log log = LogFactory.getLog(VerifyEmailPage.class.getName());
 
-    @FindBy( xpath = VERIFY_EMAIL_TITLE_XPATH)
+    @FindBy(xpath = VERIFY_EMAIL_TITLE_XPATH)
     protected WebElement weTitle;
 
-    @FindBy( xpath = VERIFY_EMAIL_DESCRIPTION_XPATH )
+    @FindBy(xpath = VERIFY_EMAIL_DESCRIPTION_XPATH)
     protected WebElement weDescription;
 
-    @FindBy( xpath = VERIFY_EMAIL_RESEND_XPATH )
+    @FindBy(xpath = VERIFY_EMAIL_RESEND_XPATH)
     protected WebElement weResend;
 
-    @FindBy( xpath = VERIFY_EMAIL_INPUT_XPATH)
+    @FindBy(xpath = VERIFY_EMAIL_INPUT_XPATH)
     protected WebElement weInputEmail;
 
-    @FindBy( xpath = VERIFY_EMAIL_RESEND2_XPATH)
+    @FindBy(xpath = VERIFY_EMAIL_RESEND2_XPATH)
     protected WebElement weResend2;
 
     public VerifyEmailPage(SharedDriver webDriver) {

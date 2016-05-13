@@ -12,19 +12,19 @@ public class SubMenuSection extends Borrower implements ISubMenuSection {
 
     private static final Log log = LogFactory.getLog(SubMenuSection.class);
 
-    @FindBy ( xpath = SUB_MENU_GET_APPROVAL_XPATH )
+    @FindBy(xpath = SUB_MENU_GET_APPROVAL_XPATH)
     protected WebElement weGetApproval;
 
-    @FindBy ( xpath = SUB_MENU_FIND_YOUR_DREAM_HONE_XPATH )
+    @FindBy(xpath = SUB_MENU_FIND_YOUR_DREAM_HONE_XPATH)
     protected WebElement weFindDreamHome;
 
-    @FindBy ( xpath = SUB_MENU_CONFIGURE_YOUR_LOAN_XPATH )
+    @FindBy(xpath = SUB_MENU_CONFIGURE_YOUR_LOAN_XPATH)
     protected WebElement weConfigureLoan;
 
-    @FindBy ( xpath = SUB_MENU_FINAL_LOAN_SETUP_XPATH )
+    @FindBy(xpath = SUB_MENU_FINAL_LOAN_SETUP_XPATH)
     protected WebElement weFinalLoanSetup;
 
-//    @Inject
+    //    @Inject
     public SubMenuSection(SharedDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);

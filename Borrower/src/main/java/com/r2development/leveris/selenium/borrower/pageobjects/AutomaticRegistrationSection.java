@@ -32,7 +32,7 @@ public class AutomaticRegistrationSection extends Borrower implements IAutomatic
     protected WebElement weApplicant;
 
     @FindBy( xpath = CHECKBOX_QUOTE_COMPLETE_XPATH )
-    protected  WebElement weQuoteComplete;
+    protected WebElement weQuoteComplete;
 
     @FindBy( xpath = CHECKBOX_INVITE_COAPPLICANT_XPATH )
     protected WebElement weInviteCoapplicant;

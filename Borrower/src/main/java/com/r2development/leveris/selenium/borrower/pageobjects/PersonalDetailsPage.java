@@ -10,7 +10,7 @@ public class PersonalDetailsPage extends HeaderAndBottomAndFormsMenuSection impl
 
     private IPersonalDetailsSection personalDetailsSection;
 
-//    @Inject
+    //    @Inject
     public PersonalDetailsPage(SharedDriver webDriver) {
         super(webDriver);
         headerSection = new HeaderSection(webDriver);
@@ -20,49 +20,33 @@ public class PersonalDetailsPage extends HeaderAndBottomAndFormsMenuSection impl
     }
 
     @Override
-    public String getTitle() {
-        return null;
-    }
-
-    @Override
-    public boolean isTitle(String firstName) {
-        personalDetailsSection.isTitle(firstName);
-        return true;
-    }
-
-    @Override
-    public IPersonalDetailsPage setTitle(String title){
+    public IPersonalDetailsPage setTitle(String title) {
         personalDetailsSection.setTitle(title);
         return this;
     }
 
     @Override
-    public IPersonalDetailsPage setMiddleName(String middleName){
+    public IPersonalDetailsPage setMiddleName(String middleName) {
         personalDetailsSection.setMiddleName(middleName);
         return this;
     }
 
     @Override
-    public IPersonalDetailsPage setSuffix(String suffix){
+    public IPersonalDetailsPage setSuffix(String suffix) {
         personalDetailsSection.setSuffix(suffix);
         return this;
     }
 
     @Override
-    public IPersonalDetailsPage setFirstname(String firstName) {
-        personalDetailsSection = personalDetailsSection.setFirstname(firstName);
+    public IPersonalDetailsPage setFirstName(String firstName) {
+        personalDetailsSection = personalDetailsSection.setFirstName(firstName);
         return this;
     }
 
     @Override
-    public IPersonalDetailsPage setLastname(String lastName) {
-        personalDetailsSection = personalDetailsSection.setLastname(lastName);
+    public IPersonalDetailsPage setLastName(String lastName) {
+        personalDetailsSection = personalDetailsSection.setLastName(lastName);
         return this;
-    }
-
-    @Override
-    public boolean isGenderLabel() {
-        return false;
     }
 
     @Override
@@ -98,148 +82,6 @@ public class PersonalDetailsPage extends HeaderAndBottomAndFormsMenuSection impl
     @Override
     public IPersonalDetailsPage selectNationality(String nationality) {
         personalDetailsSection = personalDetailsSection.selectNationality(nationality);
-        return this;
-    }
-
-    @Override
-    public IPersonalDetailsPage setResidentYears(String residentYears) {
-        personalDetailsSection = personalDetailsSection.setResidentYears(residentYears);
-        return this;
-    }
-
-    @Override
-    public boolean isRequiredVisa() {
-        return false;
-    }
-
-    @Override
-    public IPersonalDetailsPage checkRequiredVisaYes() {
-        personalDetailsSection = personalDetailsSection.checkRequiredVisaYes();
-        return this;
-    }
-
-    @Override
-    public IPersonalDetailsPage checkRequiredVisaNo() {
-        personalDetailsSection = personalDetailsSection.checkRequiredVisaNo();
-        return this;
-    }
-
-    @Override
-    public IPersonalDetailsPage checkRequiredVisa(boolean requiredVisa) {
-        personalDetailsSection = personalDetailsSection.checkRequiredVisa(requiredVisa);
-        return this;
-    }
-
-    @Override
-    public IPersonalDetailsPage setResidencyAddressLine1(String residencyAddressLine1) {
-        personalDetailsSection = personalDetailsSection.setResidencyAddressLine1(residencyAddressLine1);
-        return this;
-    }
-
-    @Override
-    public IPersonalDetailsPage setResidencyAddressLine2(String residencyAddressLine2) {
-        personalDetailsSection = personalDetailsSection.setResidencyAddressLine2(residencyAddressLine2);
-        return this;
-    }
-
-    @Override
-    public IPersonalDetailsPage setResidencyTownCity(String residencyTownCity) {
-        personalDetailsSection = personalDetailsSection.setResidencyTownCity(residencyTownCity);
-        return this;
-    }
-
-    @Override
-    public IPersonalDetailsPage selectResidencyCountyState(String residencyCountyState) {
-        personalDetailsSection = personalDetailsSection.selectResidencyCountyState(residencyCountyState);
-        return this;
-    }
-
-    @Override
-    public IPersonalDetailsPage setResidencyPostcodeZip(String residencyPostcodeZip) {
-        personalDetailsSection = personalDetailsSection.setResidencyPostcodeZip(residencyPostcodeZip);
-        return this;
-    }
-
-    @Override
-    public IPersonalDetailsPage selectResidencyCountry(String residencyCountry) {
-        personalDetailsSection = personalDetailsSection.selectResidencyCountry(residencyCountry);
-        return this;
-    }
-
-    @Override
-    public IPersonalDetailsPage selectResidencyAccommodation(String residencyAccommodation) {
-        personalDetailsSection = personalDetailsSection.selectResidencyAccommodation(residencyAccommodation);
-        return this;
-    }
-
-    @Override
-    public IPersonalDetailsPage setResidencyRent(String residencyRent) {
-        personalDetailsSection = personalDetailsSection.setResidencyRent(residencyRent);
-        return this;
-    }
-
-    @Override
-    public boolean isLivedLast3Years() {
-        return false;
-    }
-
-    @Override
-    public IPersonalDetailsPage checkLivedLast3YearsYes() {
-        personalDetailsSection = personalDetailsSection.checkLivedLast3YearsYes();
-        return this;
-    }
-
-    @Override
-    public IPersonalDetailsPage checkLivedLast3YearsNo() {
-        personalDetailsSection = personalDetailsSection.checkLivedLast3YearsNo();
-        return this;
-    }
-
-    @Override
-    public IPersonalDetailsPage checkLivedLast3Years(boolean livedLast3Years) {
-        personalDetailsSection = personalDetailsSection.checkLivedLast3Years(livedLast3Years);
-        return this;
-    }
-
-    @Override
-    public IPersonalDetailsPage setPreviousResidencyAddressLine1(String previousResidencyAddressLine1) {
-        personalDetailsSection = personalDetailsSection.setPreviousResidencyAddressLine1(previousResidencyAddressLine1);
-        return this;
-    }
-
-    @Override
-    public IPersonalDetailsPage setPreviousResidencyAddressLine2(String previousResidencyAddressLine2) {
-        personalDetailsSection = personalDetailsSection.setPreviousResidencyAddressLine2(previousResidencyAddressLine2);
-        return this;
-    }
-
-    @Override
-    public IPersonalDetailsPage setPreviousResidencyTownCity(String previousResidencyTownCity) {
-        personalDetailsSection = personalDetailsSection.setPreviousResidencyTownCity(previousResidencyTownCity);
-        return this;
-    }
-
-    @Override
-    public IPersonalDetailsPage selectPreviousResidencyCountyState(String previousResidencyCountyState) {
-        personalDetailsSection = personalDetailsSection.selectPreviousResidencyCountyState(previousResidencyCountyState);
-        return this;
-    }
-
-    @Override
-    public IPersonalDetailsPage setPreviousResidencyPostcodeZip(String previousResidencyPostcodeZip) {
-        personalDetailsSection = personalDetailsSection.setPreviousResidencyPostcodeZip(previousResidencyPostcodeZip);
-        return this;
-    }
-
-    @Override
-    public IPersonalDetailsPage selectPreviousResidencyCountry(String previousResidencyCountry) {
-        personalDetailsSection = personalDetailsSection.selectPreviousResidencyCountry(previousResidencyCountry);
-        return this;
-    }
-
-    @Override
-    public IPersonalDetailsPage setPreviousResidencyCountry(String previousResidencyCountry) {
-        personalDetailsSection = personalDetailsSection.setPreviousResidencyCountry(previousResidencyCountry);
         return this;
     }
 

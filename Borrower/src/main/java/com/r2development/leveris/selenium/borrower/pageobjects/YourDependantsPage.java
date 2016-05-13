@@ -10,7 +10,7 @@ public class YourDependantsPage extends HeaderAndBottomAndFormsMenuSection imple
 
     protected IYourDependantsSection yourDependantsSection;
 
-//    @Inject
+    //    @Inject
     public YourDependantsPage(SharedDriver webDriver) {
         super(webDriver);
         headerSection = new HeaderSection(webDriver);
@@ -78,7 +78,7 @@ public class YourDependantsPage extends HeaderAndBottomAndFormsMenuSection imple
 
     @Override
     public IYourDependantsPage clickAddDependant() {
-            yourDependantsSection.clickAddDependant();
+        yourDependantsSection.clickAddDependant();
 //            log.info("\n ---------------------------------------------------------------------- \n" +
 //                     " | Exception raised due to failed clicking to get to add dependant page | \n" +
 //                     " ----------------------------------------------------------------------- \n");

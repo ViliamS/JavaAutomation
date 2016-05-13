@@ -5,11 +5,13 @@ import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import java.io.FileNotFoundException;
+
 public class AutomaticRegistrationPage extends Borrower implements IHeaderSection, IAutomaticRegistrationPage {
 
     private static final Log log = LogFactory.getLog(AutomaticRegistrationPage.class);
 
-    protected  IHeaderSection headerSection;
+    protected IHeaderSection headerSection;
     protected IAutomaticRegistrationSection automaticRegistrationSection;
 
 //    @Inject
@@ -72,8 +74,8 @@ public class AutomaticRegistrationPage extends Borrower implements IHeaderSectio
     }
 
     @Override
-    public IAutomaticRegistrationPage goToAutomaticRegistrationPage(){
-        get(System.getProperty("autoregistration"));
+    public IAutomaticRegistrationPage goToAutomaticRegistrationPage() throws FileNotFoundException {
+        get(System.getProperty("autoregistration.url"));
         return this;
     }
 

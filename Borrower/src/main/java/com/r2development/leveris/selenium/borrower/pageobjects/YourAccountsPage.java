@@ -11,9 +11,7 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
     private static final Log log = LogFactory.getLog(YourAccountsPage.class.getName());
 
     private IYourAccountsSection yourAccountsSection;
-//    private IYourDependantsPage yourDependantsPage;
 
-//    @Inject
     public YourAccountsPage(SharedDriver webDriver) {
         super(webDriver);
         headerSection = new HeaderSection(webDriver);
@@ -71,6 +69,17 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
     public IYourAccountsPage clickAddThisAccount() {
         yourAccountsSection.clickAddThisAccount();
         return this;
+    }
+
+    @Override
+    public IYourAccountsPage iAgreeCheckbox(String action) {
+        yourAccountsSection.iAgreeCheckbox(action);
+        return this;
+    }
+
+    @Override
+    public IYourAccountsAccountScrapingWindow clickStartScraping() throws InterruptedException {
+        return yourAccountsSection.clickStartScraping();
     }
 
     @Override
@@ -140,6 +149,12 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
     @Override
     public Map<Integer, YourAccount> getAllAccounts() {
         return yourAccountsSection.getAllAccounts();
+    }
+
+    @Override
+    public IYourAccountsPage typeAccountName(String accountName){
+        yourAccountsSection.typeAccountName(accountName);
+        return this;
     }
 
     @Override
@@ -269,12 +284,6 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
     }
 
     @Override
-    public IYourAccountsPage typeSavingsOverdraftLimit(String savingsOverdraftLimit) {
-        yourAccountsSection.typeSavingsOverdraftLimit(savingsOverdraftLimit);
-        return this;
-    }
-
-    @Override
     public IYourAccountsPage selectSavingsSourceOfSavings(String sourceOfSavings) {
         yourAccountsSection.selectSavingsSourceOfSavings(sourceOfSavings);
         return this;
@@ -285,6 +294,8 @@ public class YourAccountsPage extends HeaderAndBottomAndFormsMenuSection impleme
         yourAccountsSection.typeSavingsRegularMonthlySavings(savingsRegularMonthlySavings);
         return this;
     }
+
+
 
     @Override
     public IYourAccountsPage closeScraping() {

@@ -3,7 +3,7 @@ package com.r2development.leveris.selenium.borrower.pageobjects;
 import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.LinkedHashMap;
@@ -13,11 +13,11 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
 
     private static final Log log = LogFactory.getLog(YourAccountsSection.class);
 
-    protected IYourDependantsSection yourDependantsSection;
+    WebDriver webDriver;
 
-//    @Inject
     public YourAccountsSection(SharedDriver webDriver) {
         super(webDriver);
+        this.webDriver = webDriver;
         headerSection = new HeaderSection(webDriver);
         bottomSection = new BottomSection(webDriver);
         PageFactory.initElements(webDriver, this);
@@ -46,24 +46,18 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
     @Override
     public IYourAccountsSection selectAccountType(String accountType) {
         loadingCheck();
-        if(!isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_XPATH, 0) && !isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_DIALOG_XPATH, 0) ){
-            if(isVisible(YOUR_ACCOUNTS_ADD_ACCOUNT_XPATH, 0) && !isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_NUMBER_INPUT_XPATH, 0)){
-                clickElement(YOUR_ACCOUNTS_ADD_ACCOUNT_XPATH);
-                loadingCheck();
-            }
-        }
-        switch(accountType){
-            case "Current account" :
+        switch (accountType) {
+            case "Current":
                 clickCurrentAccount();
                 break;
 
-            case "Savings account" :
+            case "Savings":
                 clickSavingsAccount();
                 break;
 
-            case "Account scraping" :
-                clickAccountScraping();
-                break;
+//            case "Account scraping":
+//                clickAccountScraping();
+//                break;
         }
         loadingCheck();
         return this;
@@ -72,10 +66,8 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
     @Override
     public IYourAccountsSection clickCurrentAccount() {
         loadingCheck();
-        if (isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_XPATH, 0))
-            clickElementViaJavascript(YOUR_ACCOUNTS_CURRENT_ACCOUNT_XPATH);
-        else if (isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_DIALOG_XPATH, 0))
-            clickElementViaJavascript(YOUR_ACCOUNTS_CURRENT_ACCOUNT_DIALOG_XPATH);
+        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_XPATH, true);
+        clickElement(YOUR_ACCOUNTS_CURRENT_ACCOUNT_XPATH, YOUR_ACCOUNTS_CURRENT_ACCOUNT_SORT_CODE_1_INPUT_XPATH);
         loadingCheck();
         return this;
     }
@@ -83,63 +75,58 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
     @Override
     public IYourAccountsSection clickSavingsAccount() {
         loadingCheck();
-        if (isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_XPATH, 0))
-            clickElementViaJavascript(YOUR_ACCOUNTS_SAVING_ACCOUNT_XPATH);
-        else if (isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_DIALOG_XPATH, 0))
-            clickElementViaJavascript(YOUR_ACCOUNTS_SAVING_ACCOUNT_DIALOG_XPATH);
+        isVisible(YOUR_ACCOUNTS_SAVING_ACCOUNT_XPATH, true);
+        clickElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_XPATH, YOUR_ACCOUNTS_SAVING_ACCOUNT_SORT_CODE_1_INPUT_XPATH);
         loadingCheck();
         return this;
     }
 
     @Override
-    public IYourAccountsSection clickAccountScraping() {
+    public IYourAccountsAccountScrapingWindow clickAccountScraping() {
         loadingCheck();
-        if (isVisible(YOUR_ACCOUNTS_ACCOUNT_SCRAPING_XPATH, 0))
-            clickElementViaJavascript(YOUR_ACCOUNTS_ACCOUNT_SCRAPING_XPATH);
-        else if (isVisible(YOUR_ACCOUNTS_ACCOUNT_SCRAPING_DIALOG_XPATH, 0))
-            clickElementViaJavascript(YOUR_ACCOUNTS_ACCOUNT_SCRAPING_DIALOG_XPATH);
+        isVisible(YOUR_ACCOUNTS_ACCOUNT_SCRAPING_XPATH, true);
+        clickElement(YOUR_ACCOUNTS_ACCOUNT_SCRAPING_XPATH, IYourAccountsAccountScrapingWindow.I_AGREE_CHECKBOX);
         loadingCheck();
-        return this;
+        return new YourAccountsAccountScrapingWindow((SharedDriver) webDriver);
     }
 
     @Override
     public IYourAccountsSection clickAddAccount() {
         loadingCheck();
-        isVisible(YOUR_ACCOUNTS_ADD_ACCOUNT_XPATH, 0);
-        clickElement(YOUR_ACCOUNTS_ADD_ACCOUNT_XPATH);
-        loadingCheck();
 
-        try {
-            isVisible(YOUR_ACCOUNTS_ACCOUNT_MAIN_DIALOG_XPATH, true, 15);
-        } catch ( TimeoutException ioe) {
-            boolean toGoOn = false;
-            while ( !toGoOn ) {
-                try {
-                    clickElement(YOUR_ACCOUNTS_ADD_ACCOUNT_XPATH);
-                    loadingCheck();
-                    isVisible(YOUR_ACCOUNTS_ACCOUNT_MAIN_DIALOG_XPATH, false, 0);
-                    toGoOn = true;
-                } catch (TimeoutException te) {
-                    log.debug("Issues of getting YourAccount page.");
-                }
+        log.info("IYourAccountsSection.YOUR_ACCOUNTS_SAVING_OR_CURRENT_OR_SCRAPING --> shouldn't be visible to proceed to add click");
+        if (!isVisible(YOUR_ACCOUNTS_SAVING_OR_CURRENT_OR_SCRAPING, 3)) {     /** If is visible Current Account or Savings Account or Account Scraping link then is none-sense to click on any Add button... */
+
+            log.info("IYourAccountsSection.ACCOUNTS_ADD_ACCOUNT_XPATH --> have to be visible to proceed clicking onto it");
+            if (isVisible(YOUR_ACCOUNTS_ADD_ACCOUNT_XPATH, 0)) {             /** If Add button is visible then we want only to click on it */
+
+                log.info("\n Clicking ----> IYourAccountsSection.clickAddAccount() -- > clickAndWait for ---> IYourAccountsSections.YOUR_ACCOUNTS_SAVING_OR_CURRENT_OR_SCRAPING");
+                clickElement(YOUR_ACCOUNTS_ADD_ACCOUNT_XPATH, YOUR_ACCOUNTS_SAVING_OR_CURRENT_OR_SCRAPING);
+                loadingCheck();
+
+            } else {
+                log.info("IYourAccountsSection.ACCOUNTS_ADD_ACCOUNT_XPATH --> was not visible add button click was skipped");
             }
+
+        } else {
+            log.info("IYourAccountsSection.YOUR_ACCOUNTS_SAVING_OR_CURRENT_OR_SCRAPING --> was visible add button click was skipped");
         }
         return this;
     }
 
-    private Map<String, String> formExceptionDetails(){
+    private Map<String, String> formExceptionDetails() {
         Map<String, String> formExceptionDetails = new LinkedHashMap<>();
         formExceptionDetails.put(
                 "FormName",
                 "\n Add this account button is still present! \n" +
-                " Extracting exception text from the form \n"
+                        " Extracting exception text from the form \n"
         );
 
         formExceptionDetails.put(
                 "GetExceptionResult1",
                 "\n --------------------------------------------------------------\n" +
-                " | Not being able to save the form @!wtf!@                         | \n" +
-                " | it is due to : '"
+                        " | Not being able to save the form @!wtf!@                         | \n" +
+                        " | it is due to : '"
         );
 
         formExceptionDetails.put(
@@ -162,16 +149,23 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
         clickElement(YOUR_ACCOUNTS_ADD_THIS_ACCOUNT_XPATH);
         loadingCheck();
         formSubmitPostSync(YOUR_ACCOUNTS_ADD_THIS_ACCOUNT_XPATH, formExceptionDetails());
-//        try{
-//            isNotVisible(YOUR_ACCOUNTS_ADD_THIS_ACCOUNT_XPATH, true, 5);
-//        } catch(Exception x){
-//            log.info("\n Add this account button is still present! \n Extracting exception text from the form \n");
-//            if(isVisible(YOUR_ACCOUNTS_ADD_THIS_ACCOUNT_XPATH) && isVisible(EXCEPTION_THERE_ARE_ERROR_ITEMS_XPATH)){
-//                log.info("\n -------------------------------\n | Not being able to save the form @!wtf!@ | \n | it is due to : '" + getExceptionText() + "' is displayed on page | \n ------------------------------- \n");
-//                Assert.assertTrue("Failed clickAddThisAccount", false);
-//            }
-//        }
         return this;
+    }
+
+    @Override
+    public IYourAccountsSection iAgreeCheckbox(String action) {
+        loadingCheck();
+        checkBox(IYourAccountsAccountScrapingWindow.I_AGREE_CHECKBOX, action);
+        loadingCheck();
+        return this;
+    }
+
+    @Override
+    public IYourAccountsAccountScrapingWindow clickStartScraping() {
+        loadingCheck();
+        isVisible(IYourAccountsAccountScrapingWindow.START_SCRAPING_BUTTON, true);
+        clickElement(IYourAccountsAccountScrapingWindow.START_SCRAPING_BUTTON);
+        return new YourAccountsAccountScrapingWindow((SharedDriver) webDriver);
     }
 
     @Override
@@ -186,10 +180,10 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
     @Override
     public IYourDependantsPage clickDone() {
         loadingCheck();
-        isVisible(YOUR_ACCOUNTS_DONE_XPATH, 0);
-        clickElementLoop(YOUR_ACCOUNTS_DONE_XPATH, IYourDependantsSection.YOUR_DEPENDANTS_TITLE_XPATH);
+        isVisible(YOUR_ACCOUNTS_DONE_XPATH, true);
+        clickElementLoop(YOUR_ACCOUNTS_DONE_XPATH, IYourDependantsSection.YOUR_DEPENDANTS_NONE_XPATH);
         loadingCheck();
-        return new YourDependantsPage(webDriver);
+        return new YourDependantsPage((SharedDriver) webDriver);
     }
 
     @Override
@@ -261,6 +255,15 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
     }
 
     @Override
+    public IYourAccountsSection typeAccountName(String accountName){
+        log.info("");
+        loadingCheck();
+        isVisible(YOUR_ACCOUNTS_ACCOUNT_NAME, true);
+        typeEndWithTab(YOUR_ACCOUNTS_ACCOUNT_NAME, accountName, true);
+        return this;
+    }
+
+    @Override
     public IYourAccountsSection typeCurrentStatementDate(String statementDate) {
         loadingCheck();
         isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_STATEMENT_DATE_INPUT_XPATH, 10);
@@ -326,10 +329,10 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
 
     @Override
     public IYourAccountsSection typeCurrentIban(String iban) {
-        loadingCheck();
-        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_IBAN_INPUT_XPATH, 0);
-        type(YOUR_ACCOUNTS_CURRENT_ACCOUNT_IBAN_INPUT_XPATH, iban);
-        loadingCheck();
+//        loadingCheck();
+//        isVisible(YOUR_ACCOUNTS_CURRENT_ACCOUNT_IBAN_INPUT_XPATH, 0);
+//        type(YOUR_ACCOUNTS_CURRENT_ACCOUNT_IBAN_INPUT_XPATH, iban);
+//        loadingCheck();
         return this;
     }
 
@@ -425,21 +428,14 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
 
     @Override
     public IYourAccountsSection typeSavingsIban(String iban) {
-        sendKeysElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_IBAN_INPUT_XPATH, iban, 60);
-        loadingCheck();
+//        sendKeysElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_IBAN_INPUT_XPATH, iban, 60);
+//        loadingCheck();
         return this;
     }
 
     @Override
     public IYourAccountsSection typeSavingsAccountBalance(String accountBalance) {
         sendKeysElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_BALANCE_INPUT_XPATH, accountBalance, 60);
-        loadingCheck();
-        return this;
-    }
-
-    @Override
-    public IYourAccountsSection typeSavingsOverdraftLimit(String savingOverdraftLimit) {
-        sendKeysElement(YOUR_ACCOUNTS_SAVING_ACCOUNT_OVERDRAFT_INPUT_XPATH, savingOverdraftLimit, 60);
         loadingCheck();
         return this;
     }

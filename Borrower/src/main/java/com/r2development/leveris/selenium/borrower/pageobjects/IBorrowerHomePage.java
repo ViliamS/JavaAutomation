@@ -34,6 +34,7 @@ public interface IBorrowerHomePage {
     void clickWhatElse();
     void clickLegalTerm();
 
+    boolean startTaskButtonIsPresent();
     void clickStartTaskButton();
 
     IBorrowerHomePage clickReviewAndSubmit();
