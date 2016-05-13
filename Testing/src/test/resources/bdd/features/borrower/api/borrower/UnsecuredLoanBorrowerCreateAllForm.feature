@@ -275,11 +275,11 @@ Feature: Create all data except Account Scrapping
         #################################
 
     And Borrower clicks "Review and Submit"
-    And Borrower checks "Distance Marketing"
-    And Borrower checks "Statutory"
-    And Borrower checks "Declaration"
-    And Borrower checks "Fraud Credit check"
     And finally, Borrower clicks "Submit Application"
+      | distanceMarketing | on |
+      | statutory         | on |
+      | declaration       | on |
+      | fraudCreditCheck  | on |
 
 
         #######  ###    ##  ######
