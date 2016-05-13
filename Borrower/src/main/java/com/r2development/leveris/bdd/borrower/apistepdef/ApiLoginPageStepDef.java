@@ -8,7 +8,6 @@ import com.r2development.leveris.bdd.borrower.model.LoginData;
 import com.r2development.leveris.di.IABorrowerHttpContext;
 import com.r2development.leveris.di.IBorrowerHttpResponse;
 import com.r2development.leveris.di.IUser;
-import com.r2development.leveris.qa.utils.Orasql;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -26,19 +25,16 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
-import org.hamcrest.core.Is;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.TextNode;
 import org.junit.Assert;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 import static com.r2development.leveris.utils.HttpUtils.*;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 @Singleton
 public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
@@ -185,9 +181,9 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
     public void home_borrower_page_is_loaded() {
     }
 
-    @And("^Borrower logs in as his account is activated via DB$")
+    @Deprecated @And("^Borrower logs in as his account is activated via DB$")
     public void user_logs_in_as_his_account_is_activate_via_database() throws Exception {
-        activateAccount("db", user.getEmail());
+//        activateAccount("db", user.getEmail());
     }
 
     @And("^Borrower logs in as his account is activated$")
@@ -382,9 +378,8 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
 //        Thread.sleep(1000); // ??? without that we have white page
     }
 
-    // TODO ACMESQL or use multi git jenkins plugin then to be able to load
+    /*
     private void activateAccount(String activationMode, String emailAsUserLoginId) throws Exception {
-
         switch (activationMode) {
             case "db":
                 //noinspection ConstantConditions
@@ -399,14 +394,12 @@ public class ApiLoginPageStepDef extends ApiOpoqoBorrowerStepDef {
 
                 break;
             case "mdg":
-
-
                 break;
 
             default:
                 log.error("Huston ! we have a problem. We don't know which activationMode we should use.");
         }
-
     }
+    */
 
 }

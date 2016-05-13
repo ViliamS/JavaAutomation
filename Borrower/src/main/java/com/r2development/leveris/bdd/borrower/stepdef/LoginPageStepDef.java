@@ -4,22 +4,16 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.LoginData;
 import com.r2development.leveris.di.IUser;
-import com.r2development.leveris.qa.utils.Orasql;
 import com.r2development.leveris.selenium.borrower.pageobjects.*;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hamcrest.core.Is;
 import org.openqa.selenium.WebDriver;
 
-import java.io.File;
 import java.util.List;
-
-import static org.hamcrest.MatcherAssert.assertThat;
 
 @Singleton
 public class LoginPageStepDef /*extends BorrowerStepDef*/ {
@@ -109,10 +103,10 @@ public class LoginPageStepDef /*extends BorrowerStepDef*/ {
         buildQuotationPage.isLoaded();
     }
 
-    @And("^Borrower logs in as his account is activated$")
+    @Deprecated @And("^Borrower logs in as his account is activated$")
     public void user_logs_in_as_his_account_is_activated() throws Exception {
         loginPage = welcomePage.clickSignIn();
-        activateAccount(user.getEmail());
+//        activateAccount(user.getEmail());
         log.info("\n --------------------------------------------------------------------------------------------------- \n" +
                 " | \n ---> Email : " + user.getEmail() + " <--- \n" +
                 " | \n --------------------------------------------------------------------------------------------------- \n");
@@ -126,14 +120,12 @@ public class LoginPageStepDef /*extends BorrowerStepDef*/ {
 
     @When("^Borrower logs in with these credentials$")
     public void user_logs_in_with_these_credentials(List<String> credentials) throws Exception {
-//        user = new User("null", credentials.get(0), credentials.get(1), "null");
         user.setEmail(credentials.get(0));
         user.setPwd(credentials.get(1));
         user_logs_in_as_his_account_is_activated();
     }
 
-
-    // TODO ACMESQL or multi git jenkins plugins
+    /*
     private void activateAccount(String emailAsUserLoginId) throws Exception {
         //noinspection ConstantConditions
         File file = new File(LoginPageStepDef.class.getClassLoader().getResource("tnsnames.ora").toURI());
@@ -143,11 +135,7 @@ public class LoginPageStepDef /*extends BorrowerStepDef*/ {
         if (StringUtils.isEmpty(System.getProperty("database")))
             System.setProperty("database", "jdbc:oracle:thin:@DV2000.LEVERIS");
 
-//        Orasql.displayResult(System.getProperty("database"), "stable_pxmchuser", "heslo", "select * from mch_user where userloginid = '" + user.getEmail() + "'");
-
         Orasql.executeSqlUpdateQuery(System.getProperty("database"), "stable_pxmchuser", "heslo", "update mch_user set isemailaddressvalid = 'true', isphonenumbervalid = 'true', isregistrationcomplete = 'true' where userloginid = '" + user.getEmail() + "'");
-
-//        Orasql.displayResult(System.getProperty("database"), "stable_pxmchuser", "heslo", "select * from mch_user where userloginid = '" + user.getEmail() + "'");
-
     }
+    */
 }

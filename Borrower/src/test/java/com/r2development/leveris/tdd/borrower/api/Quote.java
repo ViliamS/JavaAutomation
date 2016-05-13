@@ -1,7 +1,6 @@
 package com.r2development.leveris.tdd.borrower.api;
 
 import com.r2development.leveris.di.User;
-import com.r2development.leveris.qa.utils.Orasql;
 import com.r2development.leveris.utils.HttpUtils;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.protocol.HttpClientContext;
@@ -18,6 +17,7 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
 
 public class Quote {
 
+    @Deprecated
     public static void main(String... arg) throws Exception {
 
         HttpClient httpClient = HttpUtils.createHttpClient();
@@ -150,7 +150,7 @@ public class Quote {
         System.setProperty("oracle.net.tns_admin", file.getParentFile().getAbsolutePath());
 
         Class.forName("oracle.jdbc.OracleDriver");
-        Orasql.executeSqlUpdateQuery("jdbc:oracle:thin:@DV2000.LEVERIS", "stable_mchuser", "heslo", "update mch_user set isemailaddressvalid = 'true', isphonenumbervalid = 'true', isregistrationcomplete = 'true' where userloginid = '" + user.getEmail() + "'");
+//        Orasql.executeSqlUpdateQuery("jdbc:oracle:thin:@DV2000.LEVERIS", "stable_mchuser", "heslo", "update mch_user set isemailaddressvalid = 'true', isphonenumbervalid = 'true', isregistrationcomplete = 'true' where userloginid = '" + user.getEmail() + "'");
 
         requestHttpGet(
                 httpClient,

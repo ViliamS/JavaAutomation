@@ -5,22 +5,18 @@ import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.RegistrationData;
 import com.r2development.leveris.di.IUser;
 import com.r2development.leveris.di.User;
-import com.r2development.leveris.qa.utils.ACMExcel;
-import com.r2development.leveris.utils.ExcelUtils;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hamcrest.core.Is;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import static com.r2development.leveris.utils.HttpUtils.*;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 @Singleton
 public class ApiRegisterPageStepDef extends ApiOpoqoInvestorStepDef {
@@ -229,6 +225,7 @@ public class ApiRegisterPageStepDef extends ApiOpoqoInvestorStepDef {
     public void user_creates_an_account() throws IOException {
 
         if ( System.getProperty("excel.filename") != null ) {
+            /*
             Map<Integer, Map<String, String>> borrowersRegistrationContainer = null;
             assertThat("File should exist", ExcelUtils.checkExcelExists(), Is.is(true));
 
@@ -254,6 +251,7 @@ public class ApiRegisterPageStepDef extends ApiOpoqoInvestorStepDef {
             user_types_his_password(borrowerRegistrationData.get("Password"));
             user_accepts_the_terms_of_business(borrowerRegistrationData.get("AcceptBusiness"));
             user_accepts_the_data_protection_policy(borrowerRegistrationData.get("AcceptPolicy"));
+            */
         }
         else {
             user_types_his_first_name("Tony");

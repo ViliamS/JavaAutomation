@@ -4,10 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.bdd.borrower.model.QuoteData;
 import com.r2development.leveris.di.IUser;
-import com.r2development.leveris.qa.utils.ACMExcel;
-import com.r2development.leveris.qa.utils.datamodelvalidator.borrowerloanapp.ExcelSheetVerificator;
 import com.r2development.leveris.selenium.borrower.pageobjects.*;
-import com.r2development.leveris.utils.ExcelUtils;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -15,17 +12,14 @@ import cucumber.api.java.en.When;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.Is;
 import org.openqa.selenium.TimeoutException;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 @Singleton
 public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
@@ -181,10 +175,10 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
         // TODO extract data from excel
         Map<String, String> quotationData = null;
         if ( StringUtils.isNotEmpty(System.getProperty("excel_filename")) ) {
+            /*
             MatcherAssert.assertThat("File should exist", ExcelUtils.checkExcelExists(), Is.is(true));
 
             try {
-//                quotationData = ACMExcel.loadDataToMap(QUOTATION.getSheetname(), ExcelUtils.getAbsolutePath());
                 quotationData = ACMExcel.loadDataToMap(ExcelSheetVerificator.QUOTATION_sheetName.getSheetName(), ExcelUtils.getAbsolutePath());
             } catch (IOException e) {
                 log.error("ACMExcel's problem of loading Data to Map ...");
@@ -207,7 +201,7 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
             user_selects_partner_income_type(quotationData.get("Income Type Second Borrower"));
             user_types_partner_income_amount(quotationData.get("Income Amount Second Borrower"));
             user_types_monthly_credit_commitments(quotationData.get("Other Financial Commitments"));
-
+            */
         }
         else {
             user_selects_number_of_borrowers("two borrowers");

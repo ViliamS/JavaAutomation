@@ -1,23 +1,23 @@
 package com.r2development.leveris.tdd.borrower;
 
 //import io.github.bonigarcia.wdm.PhantomJsDriverManager;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class PhantomJsTest {
     private WebDriver driver;
+    private WebDriverWait driverWait;
     private String baseUrl;
     private StringBuffer verificationErrors = new StringBuffer();
     protected static DesiredCapabilities dCaps;
@@ -31,6 +31,8 @@ public class PhantomJsTest {
 //        dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,  "/usr/bin/phantomjs");
 
         driver = new PhantomJSDriver(dCaps);
+        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+        driverWait = new WebDriverWait(driver, 60);
 //        driver = new PhantomJSDriver();
         baseUrl = "http://assertselenium.com/";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -50,6 +52,53 @@ public class PhantomJsTest {
 
             System.out.println("Links are listed " + link.getAttribute("href"));
         }
+    }
+
+    @Test
+    public void getUnderwriterLinksOfAssertSelenium() throws Exception {
+
+        Cookie cookie = new Cookie.Builder("name", "value")
+                .domain(".mydomain.com")
+                .expiresOn(new Date(2015, 10, 28))
+                .isHttpOnly(true)
+                .isSecure(false)
+                .path("/mypath")
+                .build();
+
+        driver.manage().addCookie(cookie);
+
+        driver.get("https://dv2apl.opoqodev.com/sso/?host=http://dv2app.opoqodev.com/stable-underwriter/home%3FuseCase%3Dauthenticate&application=UNDERWRITER");
+////Getting all the links present in the page by a HTML tag.
+//        List<WebElement> links = driver.findElements(By.tagName("a"));
+//
+////Printing the size, will print the no of links present in the page.
+//        System.out.println("Total Links present is "+links.size());
+//
+////Printing the links in the page, we get through the href attribute.
+//        for (WebElement link : links) {
+//            System.out.println("Links are listed " + link.getAttribute("href"));
+//        }
+
+//        System.out.println("====================");
+//        System.out.println(driver.getPageSource());
+
+        driverWait
+                .ignoring(StaleElementReferenceException.class)
+                .until((WebDriver driver) -> {
+                    driver.findElement(By.xpath("//input[@name='username']"));
+                    return true;
+                });
+        driver.findElement(By.xpath("//input[@name='username']")).sendKeys("test.automation+underwriter@finfactory.com");
+
+
+        driverWait
+                .ignoring(StaleElementReferenceException.class)
+                .until((WebDriver driver) -> {
+                    driver.findElement(By.xpath("//input[@name='password']"));
+                    return true;
+                });
+        driver.findElement(By.xpath("//input[@name='password']")).sendKeys("test.automation+underwriter@finfactory.com");
+
     }
 
     @Test

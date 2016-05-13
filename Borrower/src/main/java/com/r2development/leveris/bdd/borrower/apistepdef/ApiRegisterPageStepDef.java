@@ -9,8 +9,6 @@ import com.r2development.leveris.di.IABorrowerHttpContext;
 import com.r2development.leveris.di.IBorrowerHttpResponse;
 import com.r2development.leveris.di.IUser;
 import com.r2development.leveris.di.User;
-import com.r2development.leveris.qa.utils.ACMExcel;
-import com.r2development.leveris.utils.ExcelUtils;
 import com.r2development.leveris.utils.HttpUtils;
 import com.r2development.leveris.utils.mdg.MdgCallBack;
 import com.r2development.leveris.utils.mdg.MdgCallBackImpl;
@@ -24,19 +22,18 @@ import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.impl.client.BasicCookieStore;
-import org.hamcrest.core.Is;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.r2development.leveris.utils.HttpUtils.*;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @Singleton
 public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
@@ -286,6 +283,7 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
     public void user_creates_an_account() throws IOException {
 
         if ( System.getProperty("excel.filename") != null ) {
+            /*
             Map<Integer, Map<String, String>> borrowersRegistrationContainer = null;
             assertThat("File should exist", ExcelUtils.checkExcelExists(), Is.is(true));
 
@@ -311,6 +309,7 @@ public class ApiRegisterPageStepDef extends ApiOpoqoBorrowerStepDef {
             user_types_his_password(borrowerRegistrationData.get("Password"));
             user_accepts_the_terms_of_business(borrowerRegistrationData.get("AcceptBusiness"));
             user_accepts_the_data_protection_policy(borrowerRegistrationData.get("AcceptPolicy"));
+            */
         }
         else {
             user_types_his_first_name("Tony");

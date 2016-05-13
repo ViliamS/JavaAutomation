@@ -1,19 +1,13 @@
 package com.r2development.leveris.tdd.borrower;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.hamcrest.core.Is;
-import org.joda.time.DateTime;
 import org.junit.Test;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
@@ -140,8 +134,9 @@ public class dataCucumber {
         }
     }
 
-    @Test
+    @Deprecated @Test
     public void readWriteExcel() throws IOException {
+        /*
 
         File file = null;
         try {
@@ -350,5 +345,7 @@ public class dataCucumber {
             if (fileIn != null)
                 fileIn.close();
         }
+
+        */
     }
 }

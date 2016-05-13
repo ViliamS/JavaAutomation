@@ -386,6 +386,8 @@ public class ApiConfigureLoanStepDef extends ApiOpoqoBorrowerStepDef {
         dCaps = new DesiredCapabilities();
         dCaps.setJavascriptEnabled(true);
         dCaps.setCapability("takesScreenshot", false);
+        dCaps.setCapability("loadImages", false);
+
 //        dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,  "/usr/bin/phantomjs");
 
         if ( System.getProperty("webdriver.phantomjs.driver") != null && System.getProperty("webdriver.phantomjs.driver").contains("phantomjs") ) {
