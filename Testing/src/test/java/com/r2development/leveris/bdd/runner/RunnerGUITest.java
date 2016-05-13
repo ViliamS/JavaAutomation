@@ -1,4 +1,4 @@
-package com.r2development.leveris.bdd.borrower.runner.api.borrower;
+package com.r2development.leveris.bdd.runner;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        glue = { "classpath:com.r2development.leveris.di", "classpath:com.r2development.leveris.bdd.borrower.apistepdef", "classpath:com.r2development.leveris.bdd.apollo.apistepdef", "classpath:com.r2development.leveris.bdd.underwriter.apistepdef", "classpath:com.r2development.leveris.bdd.investor.apistepdef" },
+        glue = { "classpath:com.r2development.leveris.di", "classpath:com.r2development.leveris.bdd.borrower.stepdef", "classpath:com.r2development.leveris.bdd.apollo.stepdef", "classpath:com.r2development.leveris.bdd.underwriter.stepdef", "classpath:com.r2development.leveris.bdd.investor.stepdef" },
         monochrome = true,
         format = {
                 "pretty",
@@ -17,5 +17,5 @@ import org.junit.runner.RunWith;
         features = "classpath:bdd/features",
         tags = "@Payday"
 )
-public class RunnerTest {
+public class RunnerGuiTest {
 }
