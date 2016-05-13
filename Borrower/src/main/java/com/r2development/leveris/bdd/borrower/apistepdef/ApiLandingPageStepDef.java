@@ -38,35 +38,15 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
     IBorrowerHttpResponse httpResponse;
     @Inject
     IABorrowerHttpContext localContext;
-//    @Inject
-//    IAutHttpLocalContext httpLocalContext;
 
-//    IQuoteLandingPage quoteLandingPage;
-//    IQuotePaydayLoanPage quotePaydayLoanPage;
-//    IQuoteQuickLoanPage quoteQuickLoanPage;
-//    IQuoteConfigurationPage quoteConfigurationPage;
-//    IRegisterPage registerPage;
     LandingPageData loanData;
-//    Map<String, String> paydayParameters = new LinkedHashMap<String, String>();
 
-//    private HttpClient httpClient;
-//    private HttpContext localContext;
-
-//    @Inject
-//    public ApiLandingPageStepDef(HttpClient httpClient, HttpContext localContext) {
-//        this.httpClient = httpClient;
-//        this.localContext = provideNewLocalContext();
-//
-//    }
 
     @Given("^Open Leveris Automatic Registration Page")
     public void open_leveris_automatic_registration_page() throws IOException {
 
-//        httpClient = HttpUtils.createHttpClient();
-//        localContext = HttpUtils.initContext(System.getProperty("domain.borrower"), "/stable-borrower");
-//        localContext = this.newHttpClientContext(System.getProperty("domain.borrower"), "/stable-borrower");
         httpClient = HttpUtils.createHttpClient();
-        localContext.setHttpContext(HttpUtils.initContext(System.getProperty("domain.borrower"), "/stable-borrower"));
+        localContext.setHttpContext(HttpUtils.initContext(System.getProperty("domain.borrower"), System.getProperty("borrower.ctx")));
 
         String automaticRegistrationResponse = requestHttpGet(
                 httpClient,
@@ -88,7 +68,6 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
 
     @Given("^Open Leveris Quote Landing page$")
     public void open_leveris_quote_landing_page() throws IOException {
-//        quoteLandingPage.goToBorrowerQuoteLandingPage();
 
         requestHttpGet(
                 httpClient,
@@ -112,10 +91,6 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
 
         switch (loanType) {
             case "Payday Loan":
-//                quotePaydayLoanPage = quoteLandingPage.clickContinuePaydayLoanTealButton();
-
-//                Document doc = Jsoup.parse(httpResponse.getHttpResponse());
-
 
                 requestHttpPost(
                         httpClient,
@@ -135,7 +110,6 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
                 );
                 break;
             case "Unsecured Loan":
-//                quoteQuickLoanPage = quoteLandingPage.clickContinueUnsecuredLoanRedButton();
 
                 Pattern pUnsecuredLoanBtnContinue0 = Pattern.compile("\\<a.*wicketpath.*pnlUnsecuredLoan.*pnlUnsecuredLoan0.*btnContinue0.*\\?wicket:interface=(.*)&.*Continue\\<\\/a\\>");
                 Matcher mUnsecuredLoanBtnContinue0 = pUnsecuredLoanBtnContinue0.matcher(doc.select("component[id~=main]").select("component[encoding~=wicket").text());
@@ -174,10 +148,6 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
     public void borrower_clicks_quote_task() throws IOException {
 
         Document doc = Jsoup.parse(httpResponse.getHttpResponse());
-
-//        Document componentDoc = Jsoup.parse(jsoup.select("component[id~=" + aComponentId + "]").first().text());
-//        Document componentDoc = Jsoup.parse(Jsoup.parse(httpResponse.getHttpResponse()).select("component[id~=main]").select("component[encoding~=wicket").text());
-
         Elements elts = doc.select("evaluate[encoding~=wicket]");
         Element theElement = null;
         for ( Element currentElt : elts) {
@@ -227,9 +197,6 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
             CONSUME_QUIETLY
         );
         httpResponse.setHttpResponse(tasksHiddenWicketInterfaceResponse);
-
-//        wicket:interface=:1:main:c:form:form:root:c:w:btnTasksHidden:submit::IBehaviorListener:0:
-//        root:c:w:btnTasksHidden:submit
     }
 
     @And("^Borrower fills in (Payday Loan|Unsecured Loan) form$")
@@ -452,11 +419,7 @@ public class ApiLandingPageStepDef extends ApiOpoqoBorrowerStepDef {
         user_types_value_into_monthly_expenses_field( loanType, loanData.getMonthlyExpenses() );
         user_types_value_into_number_of_dependants_field( loanType, loanData.getNumberOfDependants() );
         user_types_value_into_amount_to_borrow_field( loanType, loanData.getLoanAmount() );
-
         user_clicks_on_continue_button( loanType );
-
-//        user_types_value_into_loan_amount_field( loanData.getLoanAmount() );
-//        user_types_value_into_loan_amount_field( loanData.getMonthlyInstalmentAmount() );
 
         user_clicks_on_apply_online();
     }
