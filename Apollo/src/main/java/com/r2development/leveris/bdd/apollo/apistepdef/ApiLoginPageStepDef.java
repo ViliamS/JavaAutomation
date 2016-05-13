@@ -9,24 +9,14 @@ import org.apache.commons.logging.LogFactory;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ *
+ */
+
 @Singleton
 public class ApiLoginPageStepDef extends ApiOpoqoApolloStepDef {
 
     private static final Log log = LogFactory.getLog(ApiLoginPageStepDef.class);
-
-//    private HttpClient httpClient;
-//    private HttpContext localContext;
-//    private IHttpResponse httpResponse;
-//    private IUser user;
-
-//    @Inject
-//    public ApiLoginPageStepDef(HttpClient httpClient, HttpContext localContext, IUser user, IHttpResponse httpResponse) {
-//        this.httpClient = httpClient;
-//        this.localContext = localContext;
-//        this.user = user;
-//        this.httpResponse = httpResponse;
-//        loginParameters = new LinkedHashMap<>();
-//    }
 
     @Given("^Apollo User types his email login (.*) in Login page$")
     public void user_types_his_login(String email) {

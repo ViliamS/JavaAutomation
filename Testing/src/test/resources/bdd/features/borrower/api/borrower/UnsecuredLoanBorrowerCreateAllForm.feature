@@ -1,5 +1,5 @@
-@HP_Payday @:-] @:-P @:-]]
-Feature: Payday Loan
+@AllCreateForm
+Feature: Create all data except Account Scrapping
 
   Background:
     Given Open Leveris Automatic Registration Page
@@ -10,10 +10,9 @@ Feature: Payday Loan
         #                               #
         #################################
 
-  Scenario: Payday Loan
+  Scenario: Unsecured Loan
 
     Given Borrower processes the automatic registration
-#      | applicantId | test.automation.payday.loan@finfactory.com |
       | applicantId | test.automation.api@finfactory.com |
 
     Then Borrower clicks "Quote" task
