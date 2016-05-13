@@ -13,6 +13,7 @@
     <artifactId>Apollo</artifactId>
     <packaging>jar</packaging>
 
+    <!-- TODO to check if it is still necessary -->
     <properties>
         <environment>dev2</environment>
         <domain.apollo>dv2apl.opoqodev.com</domain.apollo>

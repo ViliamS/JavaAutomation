@@ -13,6 +13,7 @@
     <artifactId>Testing</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <!-- TODO to check if it is still necessary -->
     <properties>
         <environment>dev2</environment>
         <domain>dv2app.opoqodev.com</domain>
