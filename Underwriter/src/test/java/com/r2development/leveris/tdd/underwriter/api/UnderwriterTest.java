@@ -37,8 +37,8 @@ import static org.junit.Assert.assertEquals;
 
 public class UnderwriterTest {
 
+    @Deprecated
     public static void main(String... arg) throws IOException {
-
 
 //        @before cucumber
         HttpClient httpClient = HttpUtils.createHttpClient();

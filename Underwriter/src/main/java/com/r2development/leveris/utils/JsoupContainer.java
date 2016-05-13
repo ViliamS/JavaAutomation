@@ -6,6 +6,17 @@ import org.jsoup.select.Elements;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ *
+ * Collection of Wicket Response per panel
+ *      - Workflow
+ *      - Financial Tool
+ *      - Document
+ *      - Document 2
+ *      - Risk Tool
+ *      - Application
+ */
+
 public class JsoupContainer {
 
     Map<String, Elements> container;
