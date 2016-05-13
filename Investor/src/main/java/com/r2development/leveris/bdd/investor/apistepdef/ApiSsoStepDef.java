@@ -2,10 +2,13 @@ package com.r2development.leveris.bdd.investor.apistepdef;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.r2development.leveris.di.IAInvestorHttpContext;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpEntity;
@@ -25,10 +28,25 @@ public class ApiSsoStepDef extends ApiOpoqoInvestorStepDef {
 
     private static final Log log = LogFactory.getLog(ApiSsoStepDef.class.getName());
 
+    @Inject
+    IAInvestorHttpContext localContext;
+
     private String token;
 
     @Given("^Investor processes SSO (Investor) Auth Step$")
     public void user_processes_SSO_Auth(String application) throws IOException {
+
+        String username = StringUtils.EMPTY;
+        switch (System.getProperty("environment")) {
+            case "dev1" :
+                username = "investor@dv.1";
+                break;
+            case "dev2" :
+                username = "investor@dv.2";
+                break;
+            default:
+
+        }
 
         // Step 1 - SSO
 //        HttpPost httpPostValidateAuthProcessStep = new HttpPost("https://dv2pub.opoqodev.com/proxy/router/api/public/auth/validateAuthProcessStep");
@@ -36,10 +54,10 @@ public class ApiSsoStepDef extends ApiOpoqoInvestorStepDef {
         httpPostValidateAuthProcessStep.setHeader("Content-Type", "application/json; charset=UTF-8");
 //        httpPostValidateAuthProcessStep.setHeader("Referer", "https://dv2pub.opoqodev.com/");
         httpPostValidateAuthProcessStep.setHeader("Referer", System.getProperty("investor.url") + "/");
-        StringEntity seValidateAuthProcessStep = new StringEntity("{\"scenarioCode\":\"USR_PWD\",\"authProcessStepValues\":[{\"authDetailType\":\"USERNAME\",\"value\":\"investor@dv.2\"},{\"authDetailType\":\"PWD\",\"value\":\"Password1122\"}]}");
+        StringEntity seValidateAuthProcessStep = new StringEntity("{\"scenarioCode\":\"USR_PWD\",\"authProcessStepValues\":[{\"authDetailType\":\"USERNAME\",\"value\":\"" + username + "\"},{\"authDetailType\":\"PWD\",\"value\":\"Password1122\"}]}");
         seValidateAuthProcessStep.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
         httpPostValidateAuthProcessStep.setEntity(seValidateAuthProcessStep);
-        HttpResponse responseValidateAuthProcessStep = httpClient.execute(httpPostValidateAuthProcessStep, localContext);
+        HttpResponse responseValidateAuthProcessStep = httpClient.execute(httpPostValidateAuthProcessStep, localContext.getHttpContext());
         HttpEntity httpEntityValidateAuthProcessStep = responseValidateAuthProcessStep.getEntity();
         log.info("==== httpPostValidateAuthProcessStep ====");
         String parse2jsonValidateAuthProcessStep = EntityUtils.toString(httpEntityValidateAuthProcessStep);
@@ -60,7 +78,7 @@ public class ApiSsoStepDef extends ApiOpoqoInvestorStepDef {
         StringEntity seGenerateServiceTicket = new StringEntity("{\"idAuthProcess\":\"" + idScenario + "\"}");
         seGenerateServiceTicket.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
         httpPostGenerateServiceTicket.setEntity(seGenerateServiceTicket);
-        HttpResponse responseGenerateServiceTicket = httpClient.execute(httpPostGenerateServiceTicket, localContext);
+        HttpResponse responseGenerateServiceTicket = httpClient.execute(httpPostGenerateServiceTicket, localContext.getHttpContext());
         HttpEntity httpEntityGenerateServiceTicket = responseGenerateServiceTicket.getEntity();
         log.info("==== httpEntityGenerateServiceTicket ====");
         String parse2jsonGenerateServiceTicket = EntityUtils.toString(httpEntityGenerateServiceTicket);
@@ -91,7 +109,7 @@ public class ApiSsoStepDef extends ApiOpoqoInvestorStepDef {
         sePostIssueToken.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "text/plain"));
         httpPostIssueToken.setEntity(sePostIssueToken);
 
-        HttpResponse responseIssueToken = httpClient.execute(httpPostIssueToken, localContext);
+        HttpResponse responseIssueToken = httpClient.execute(httpPostIssueToken, localContext.getHttpContext());
         HttpEntity httpEntityIssueToken = responseIssueToken.getEntity();
         log.info("==== httpEntityIssueToken ====");
         String parse2jsonIssueToken = EntityUtils.toString(httpEntityIssueToken);
@@ -103,6 +121,8 @@ public class ApiSsoStepDef extends ApiOpoqoInvestorStepDef {
         token = jsonObjectIssueToken.get("token").getAsString();
         log.info("TICKET: " + token);
 
+//        ApiSupportHttpClientStepDef.getNewInstanceHttpClientContext(System.getProperty("domain.underwriter"), System.getProperty("/stable-underwriter"));
+
     }
 
     @When("^Investor processes final SSO (Investor) Auth Step$")
@@ -112,7 +132,7 @@ public class ApiSsoStepDef extends ApiOpoqoInvestorStepDef {
         HttpGet httpGetApiModuleWithBearer = new HttpGet(System.getProperty("investor.url") + "/api/modules");
         httpGetApiModuleWithBearer.setHeader("Accept", "*/*");
         httpGetApiModuleWithBearer.setHeader("authorization", "Bearer " + token);
-        HttpResponse responseGetApiModuleWithBearer = httpClient.execute(httpGetApiModuleWithBearer, localContext);
+        HttpResponse responseGetApiModuleWithBearer = httpClient.execute(httpGetApiModuleWithBearer, localContext.getHttpContext());
         HttpEntity httpEntityGetApiModuleWithBearer = responseGetApiModuleWithBearer.getEntity();
         log.info("==== httpEntityGetApiModuleWithBearer ====");
         String parse2jsonGetApiModuleWithBearer = EntityUtils.toString(httpEntityGetApiModuleWithBearer);
@@ -121,7 +141,7 @@ public class ApiSsoStepDef extends ApiOpoqoInvestorStepDef {
 //        HttpGet httpGetInvestorManager = new HttpGet("https://dv2pub.opoqodev.com/api/module/investor_manager.js");
         HttpGet httpGetInvestorManager = new HttpGet(System.getProperty("investor.url") + "/api/module/investor_manager.js");
         httpGetInvestorManager.setHeader("Accept", "*/*");
-        HttpResponse responseInvestorManager = httpClient.execute(httpGetInvestorManager, localContext);
+        HttpResponse responseInvestorManager = httpClient.execute(httpGetInvestorManager, localContext.getHttpContext());
         HttpEntity httpEntityInvestorManager = responseInvestorManager.getEntity();
         log.info("==== httpEntityInvestorManager ====");
         String parse2jsonInvestorManager = EntityUtils.toString(httpEntityInvestorManager);
@@ -146,7 +166,7 @@ public class ApiSsoStepDef extends ApiOpoqoInvestorStepDef {
         httpPostLogOut.setHeader("device", "1405344663");
 //        httpPostLogOut.setHeader("Referer", "https://dv2pub.opoqodev.com/");
         httpPostLogOut.setHeader("Referer", System.getProperty("investor.url") + "/");
-        HttpResponse responseLogOut = httpClient.execute(httpPostLogOut, localContext);
+        HttpResponse responseLogOut = httpClient.execute(httpPostLogOut, localContext.getHttpContext());
         HttpEntity httpEntityLogOut = responseLogOut.getEntity();
         log.info("==== httpEntityLogOut ====");
         String parse2jsonLogOut = EntityUtils.toString(httpEntityLogOut);
