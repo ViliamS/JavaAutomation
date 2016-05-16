@@ -181,7 +181,6 @@
         <!--</dependency>-->
 
         <!-- Testing -->
-        <!--  TODO upload or find the right version selenium-server-standalone -->
         <!-- for jenkins -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -303,10 +302,26 @@
             <!--<scope>test</scope>-->
         <!--</dependency>-->
 
+        <!--todo there is an issue due to bug when using a phantomjs driver -->
+        <!--todo https://bugs.chromium.org/p/chromedriver/issues/detail?id=1045-->
         <dependency>
             <groupId>com.github.detro</groupId>
             <artifactId>phantomjsdriver</artifactId>
             <version>1.2.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-java</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-remote-driver</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-server</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>

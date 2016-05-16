@@ -296,8 +296,11 @@ public class XPathBuilderTest {
         Assert.assertEquals("Failed not the same", xpath2, xpath);
 
         xpath = getXPath_DivEqualsDataPath("txaComment") + getXPath(PREFIX.SINGLE_SLASH, ELEMENTS.TEXTAREA, ACTIONS.CONTAINS, ATTRIBUTES.WICKETPATH, "txaComment_textarea");
+
         xpath = getXPath_DivEqualsDataPath("btnSave") + getXPath_HasADescendantSpanEqualsText("Save") + getXPath_DirectAButtonContainsWicketpath("btnSave_submit") + getXPath_HasADescendantSpanEqualsText("Save");
+
         xpath = getXPath_DivEqualsDataPath("btnCancel") + getXPath_HasADescendantSpanEqualsText("Cancel") + getXPath_DirectAButtonContainsWicketpath("btnCancel_cancel") + getXPath_HasADescendantSpanEqualsText("Cancel");
+
         xpath = getXPath_DivEqualsDataPath("btnAddItem") + getXPath_HasADescendantSpanEqualsText("Add item") + getXPath_DirectAButtonContainsWicketpath("btnAddItem_dialog") + getXPath_HasADescendantSpanEqualsText("Add item");
 
         int indexNumber = 2;
