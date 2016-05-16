@@ -1,6 +1,6 @@
 package com.r2development.leveris.selenium.apollo.pageobjects;
 
-import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver_Apollo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +11,7 @@ public class AdministrationUserDetailPage extends AdministrationTopBanner implem
 
     WebDriver webDriver;
 
-    public AdministrationUserDetailPage(SharedDriver webDriver){
+    public AdministrationUserDetailPage(SharedDriver_Apollo webDriver){
         super(webDriver);
         this.webDriver = webDriver;
     }
@@ -29,7 +29,7 @@ public class AdministrationUserDetailPage extends AdministrationTopBanner implem
         log.info("");
         isVisible(MANAGE_ROLES_BUTTON, true);
         clickElement(MANAGE_ROLES_BUTTON);
-        return new AdministrationAssignRolesPage((SharedDriver) webDriver);
+        return new AdministrationAssignRolesPage((SharedDriver_Apollo) webDriver);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class AdministrationUserDetailPage extends AdministrationTopBanner implem
         log.info("");
         isVisible(BACK_BUTTON, true);
         clickElement(BACK_BUTTON);
-        return new AdministrationUsersPage((SharedDriver) webDriver);
+        return new AdministrationUsersPage((SharedDriver_Apollo) webDriver);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class AdministrationUserDetailPage extends AdministrationTopBanner implem
         log.info("");
         isVisible(EDIT_DETAILS_BUTTON, true);
         clickElement(EDIT_DETAILS_BUTTON);
-        return new AdministrationUserDetailPageEditDetails((SharedDriver) webDriver);
+        return new AdministrationUserDetailPageEditDetails((SharedDriver_Apollo) webDriver);
     }
 
     @Override

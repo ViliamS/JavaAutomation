@@ -1,6 +1,6 @@
 package com.r2development.leveris.selenium.apollo.pageobjects;
 
-import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver_Apollo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
@@ -13,7 +13,7 @@ public class AdministrationAssignRolesPage extends AdministrationTopBanner imple
 
     WebDriver webDriver;
 
-    public AdministrationAssignRolesPage(SharedDriver webDriver){
+    public AdministrationAssignRolesPage(SharedDriver_Apollo webDriver){
         super(webDriver);
         this.webDriver = webDriver;
     }
@@ -50,7 +50,7 @@ public class AdministrationAssignRolesPage extends AdministrationTopBanner imple
         log.info("");
         isVisible(SAVE_CHANGES_BUTTON, true);
         clickElement(SAVE_CHANGES_BUTTON);
-        return new AdministrationUserDetailPage((SharedDriver) webDriver);
+        return new AdministrationUserDetailPage((SharedDriver_Apollo) webDriver);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class AdministrationAssignRolesPage extends AdministrationTopBanner imple
         log.info("");
         isVisible(CANCEL_BUTTON, true);
         clickElement(CANCEL_BUTTON);
-        return new AdministrationUserDetailPage((SharedDriver) webDriver);
+        return new AdministrationUserDetailPage((SharedDriver_Apollo) webDriver);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class AdministrationAssignRolesPage extends AdministrationTopBanner imple
         log.info("");
         isVisible(X_BUTTON, true);
         clickElement(X_BUTTON);
-        return new AdministrationUserDetailPage((SharedDriver) webDriver);
+        return new AdministrationUserDetailPage((SharedDriver_Apollo) webDriver);
     }
 
 

@@ -1,7 +1,7 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
 import com.r2development.leveris.Borrower;
-import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver_Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -12,7 +12,7 @@ public class EmploymentIncomeSection extends Borrower implements IEmploymentInco
 
     private static final Log log = LogFactory.getLog(EmploymentIncomeSection.class.getName());
 
-    public EmploymentIncomeSection(SharedDriver webDriver) {
+    public EmploymentIncomeSection(SharedDriver_Borrower webDriver) {
         super(webDriver);
         this.webDriver = webDriver;
     }

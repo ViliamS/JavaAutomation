@@ -27,7 +27,7 @@ public interface ISearchAdvancedSection {
     boolean warningSearch();
     boolean warningNegativeSearch();
     ISearchPage clickSearch();
-    //static ISearchSection getSearchSectionInstance(SharedDriver webDriver) { return null; }
+    //static ISearchSection getSearchSectionInstance(SharedDriver_Apollo webDriver) { return null; }
 //    ISearchSection waitForSearchSectionToLoad();
     String getHelpBlockContent();
     ISearchSection changeSearchMode();

@@ -1,6 +1,6 @@
 package com.r2development.leveris.selenium.underwriter.pageobjects.LoanApplication;
 
-import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver_Underwriter;
 import com.r2development.leveris.utils.Enums.UNDERWRITINGSTATUS;
 import com.r2development.leveris.utils.XpathBuilder.Enums.ACTION;
 import com.r2development.leveris.utils.XpathBuilder.Enums.ACTIONS;
@@ -22,7 +22,7 @@ public class DocumentsSection extends LoanApplicationPage implements IDocumentsS
 
     private WebDriver webDriver;
 
-    public DocumentsSection(SharedDriver webDriver){
+    public DocumentsSection(SharedDriver_Underwriter webDriver){
         super(webDriver);
         this.webDriver = webDriver;
     }
@@ -149,6 +149,6 @@ public class DocumentsSection extends LoanApplicationPage implements IDocumentsS
 
 
 
-        return new DocumentsDetail((SharedDriver) webDriver);
+        return new DocumentsDetail((SharedDriver_Underwriter) webDriver);
     }
 }

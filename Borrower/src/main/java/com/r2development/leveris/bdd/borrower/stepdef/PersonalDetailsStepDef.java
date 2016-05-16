@@ -29,7 +29,7 @@ public class PersonalDetailsStepDef /*extends BorrowerStepDef*/ /*implements CLV
     private IPersonalDetailsPage borrowerPersonalDetailsPage;
 
     @Inject
-    PersonalDetailsStepDef(SharedDriver webDriver/*, IUser user*/) {
+    PersonalDetailsStepDef(SharedDriver_Borrower webDriver/*, IUser user*/) {
 //        this.webDriver = webDriver;
 //        this.user = user;
         borrowerPersonalDetailsPage = new PersonalDetailsPage(webDriver);

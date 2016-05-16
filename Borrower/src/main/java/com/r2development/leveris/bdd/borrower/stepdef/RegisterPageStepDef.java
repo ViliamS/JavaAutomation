@@ -14,7 +14,6 @@ import org.apache.commons.logging.LogFactory;
 import org.hamcrest.core.Is;
 import org.openqa.selenium.WebDriver;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -37,14 +36,14 @@ public class RegisterPageStepDef /*extends BorrowerStepDef*/ {
     IUser user;
 
     @Inject
-    RegisterPageStepDef(SharedDriver webDriver) {
+    RegisterPageStepDef(SharedDriver_Borrower webDriver) {
         this.webDriver = webDriver;
         registerPage = new RegisterPage(webDriver);
     }
 
     @Given("Borrower goes to Registration page$")
     public void user_goes_to_registration_page() {
-        welcomePage = new WelcomePage((SharedDriver)webDriver, true);
+        welcomePage = new WelcomePage((SharedDriver_Borrower)webDriver, true);
         registerPage = welcomePage.clickRegister();
     }
 

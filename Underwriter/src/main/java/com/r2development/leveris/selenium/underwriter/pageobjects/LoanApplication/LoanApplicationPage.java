@@ -1,6 +1,6 @@
 package com.r2development.leveris.selenium.underwriter.pageobjects.LoanApplication;
 
-import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver_Underwriter;
 import com.r2development.leveris.selenium.underwriter.pageobjects.ISideMenu;
 import com.r2development.leveris.selenium.underwriter.pageobjects.LoanApplication.RiskToolDialogs.*;
 import com.r2development.leveris.selenium.underwriter.pageobjects.SideMenu;
@@ -30,7 +30,7 @@ public class LoanApplicationPage extends SideMenu implements ILoanApplicationPag
     protected IDocumentsDetail documentsDetail;
     protected IDocumentsDetailEditSection documentsDetailEditSection;
 
-    public LoanApplicationPage(SharedDriver webDriver) {
+    public LoanApplicationPage(SharedDriver_Underwriter webDriver) {
         super(webDriver);
         this.webDriver = webDriver;
 //        loanApplicationPage = new LoanApplicationPage(webDriver);
@@ -39,7 +39,7 @@ public class LoanApplicationPage extends SideMenu implements ILoanApplicationPag
     @Override
     public ILoanApplicationPage sectionHideUnhide(LOANAPPSECTIONS section, ACTION action){
         log.info("");
-        loanApplicationPage = new LoanApplicationPage((SharedDriver) webDriver);
+        loanApplicationPage = new LoanApplicationPage((SharedDriver_Underwriter) webDriver);
         switch (section){
             case WORKFLOW:
                 loanApplicationPage.workflowSectionHideUnhide(action);
@@ -113,7 +113,7 @@ public class LoanApplicationPage extends SideMenu implements ILoanApplicationPag
     @Override
     public ILoanOfferToolSection loanOfferToolSectionHideUnhide(ACTION action){
         log.info("");
-        return loanOfferToolSection = new LoanOfferToolSection((SharedDriver) webDriver).loanOfferToolSectionHideUnhide(action);
+        return loanOfferToolSection = new LoanOfferToolSection((SharedDriver_Underwriter) webDriver).loanOfferToolSectionHideUnhide(action);
     }
 
     @Override
@@ -257,7 +257,7 @@ public class LoanApplicationPage extends SideMenu implements ILoanApplicationPag
     @Override
     public IDocumentsSection documentsSectionHideUnhide(ACTION action){
         log.info("");
-        return documentsSection = new DocumentsSection((SharedDriver) webDriver).documentsSectionHideUnhide(action);
+        return documentsSection = new DocumentsSection((SharedDriver_Underwriter) webDriver).documentsSectionHideUnhide(action);
     }
 
     @Override
@@ -292,7 +292,7 @@ public class LoanApplicationPage extends SideMenu implements ILoanApplicationPag
     @Override
     public IDocuments2Section documents2SectionHideUnhide(ACTION action){
         log.info("");
-        return documents2Section = new Documents2Section((SharedDriver) webDriver).documents2SectionHideUnhide(action);
+        return documents2Section = new Documents2Section((SharedDriver_Underwriter) webDriver).documents2SectionHideUnhide(action);
     }
 
     /**
@@ -304,7 +304,7 @@ public class LoanApplicationPage extends SideMenu implements ILoanApplicationPag
     @Override
     public INotesSection notesSectionHideUnhide(ACTION action){
         log.info("");
-        return notesSection = new NotesSection((SharedDriver) webDriver).notesSectionHideUnhide(action);
+        return notesSection = new NotesSection((SharedDriver_Underwriter) webDriver).notesSectionHideUnhide(action);
     }
 
     /**
@@ -322,7 +322,7 @@ public class LoanApplicationPage extends SideMenu implements ILoanApplicationPag
     @Override
     public IRiskToolSection riskToolSectionHideUnhide(ACTION action){
         log.info("");
-        return riskToolSection = new RiskToolSection((SharedDriver) webDriver).riskToolSectionHideUnhide(action);
+        return riskToolSection = new RiskToolSection((SharedDriver_Underwriter) webDriver).riskToolSectionHideUnhide(action);
     }
 
     @Override
@@ -394,7 +394,7 @@ public class LoanApplicationPage extends SideMenu implements ILoanApplicationPag
     @Override
     public IWorkflowSection workflowSectionHideUnhide(ACTION action){
         log.info("");
-        return workflowSection = new WorkflowSection((SharedDriver) webDriver).workflowSectionHideUnhide(action);
+        return workflowSection = new WorkflowSection((SharedDriver_Underwriter) webDriver).workflowSectionHideUnhide(action);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.r2development.leveris;
 
-import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver_Apollo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -20,7 +20,7 @@ public abstract class Apollo {
 
     protected WebDriver /*final*/ webDriver;
 
-    protected Apollo(SharedDriver webDriver) {
+    protected Apollo(SharedDriver_Apollo webDriver) {
         this.webDriver = webDriver;
     }
 

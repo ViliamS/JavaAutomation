@@ -1,6 +1,6 @@
 package com.r2development.leveris.selenium.underwriter.pageobjects.LoanApplication;
 
-import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver_Underwriter;
 import com.r2development.leveris.utils.XpathBuilder.Enums.ACTION;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -12,7 +12,7 @@ public class FinanceToolSection extends LoanApplicationPage implements IFinanceT
 
     private WebDriver webDriver;
 
-    public FinanceToolSection(SharedDriver webDriver){
+    public FinanceToolSection(SharedDriver_Underwriter webDriver){
         super(webDriver);
         this.webDriver = webDriver;
     }

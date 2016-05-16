@@ -34,7 +34,7 @@ public class LoginPageStepDef /*extends BorrowerStepDef*/ {
 //    private IBuildQuotationPage buildQuotationPage;
 
     @Inject
-    LoginPageStepDef(SharedDriver webDriver/*, IUser user*/) {
+    LoginPageStepDef(SharedDriver_Borrower webDriver/*, IUser user*/) {
 //        super(webDriver);
 //        loginPage = new LoginPage(WebDriverService.getWebDriverInstance());
         this.webDriver = webDriver;
@@ -77,7 +77,7 @@ public class LoginPageStepDef /*extends BorrowerStepDef*/ {
 
         LoginData loginData = new LoginData(login);
 
-        welcomePage = new WelcomePage((SharedDriver)webDriver, true);
+        welcomePage = new WelcomePage((SharedDriver_Borrower)webDriver, true);
         loginPage = welcomePage.clickSignIn();
         log.info("\n --------------------------------------------------------------------------------------------------- \n" +
                 " | \n ---> Email : " + loginData.get("email") + " <--- \n" +
@@ -96,15 +96,15 @@ public class LoginPageStepDef /*extends BorrowerStepDef*/ {
     public void home_borrower_page_is_loaded() {
         try {
 //            borrowerHomePage = new BorrowerHomePage(WebDriverService.getWebDriverInstance());
-//            borrowerHomePage = new BorrowerHomePage((SharedDriver)webDriver);
-            new BorrowerHomePage((SharedDriver)webDriver).clickGetQuoteOrGetStarted();
+//            borrowerHomePage = new BorrowerHomePage((SharedDriver_Borrower)webDriver);
+            new BorrowerHomePage((SharedDriver_Borrower)webDriver).clickGetQuoteOrGetStarted();
 //            borrowerHomePage.clickGetQuoteOrGetStarted();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
 //        buildQuotationPage = new BuildQuotationPage(WebDriverService.getWebDriverInstance());
-        IBuildQuotationPage buildQuotationPage = new BuildQuotationPage((SharedDriver)webDriver);
+        IBuildQuotationPage buildQuotationPage = new BuildQuotationPage((SharedDriver_Borrower)webDriver);
         buildQuotationPage.isLoaded();
     }
 

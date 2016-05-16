@@ -1,6 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects.sectionobjects.account;
 
-import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver_Borrower;
 import com.r2development.leveris.selenium.borrower.pageobjects.IYourDependantsPage;
 import com.r2development.leveris.selenium.borrower.pageobjects.sectionobjects.IForm;
 import org.openqa.selenium.WebDriver;
@@ -9,7 +9,7 @@ public class AccountsList implements IAccountsList/*, IHeaderForm*/ {
 
     private final WebDriver webDriver;
 
-    public AccountsList(SharedDriver webDriver) {
+    public AccountsList(SharedDriver_Borrower webDriver) {
         this.webDriver = webDriver;
     }
 
@@ -44,13 +44,13 @@ public class AccountsList implements IAccountsList/*, IHeaderForm*/ {
     @Override
     public IForm clickCurrentAccount() {
         System.out.println("clickCurrentAccount");
-        return new CurrentAccount((SharedDriver) webDriver);
+        return new CurrentAccount((SharedDriver_Borrower) webDriver);
     }
 
     @Override
     public IForm clickSavingsAccount() {
         System.out.println("clickCurrentAccount");
-        return new SavingsAccount((SharedDriver) webDriver);
+        return new SavingsAccount((SharedDriver_Borrower) webDriver);
     }
 
     @Override

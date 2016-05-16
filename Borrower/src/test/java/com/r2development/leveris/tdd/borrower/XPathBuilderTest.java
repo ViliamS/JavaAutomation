@@ -2,17 +2,12 @@ package com.r2development.leveris.tdd.borrower;
 
 import com.google.common.collect.LinkedListMultimap;
 import com.r2development.leveris.utils.XpathBuilder.*;
-import com.r2development.leveris.utils.XpathBuilder.Enums.ACTIONS;
-import com.r2development.leveris.utils.XpathBuilder.Enums.ATTRIBUTES;
-import com.r2development.leveris.utils.XpathBuilder.Enums.ELEMENTS;
-import com.r2development.leveris.utils.XpathBuilder.Enums.PREFIX;
+import com.r2development.leveris.utils.XpathBuilder.Enums.*;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.LinkedList;
 
-import static com.r2development.leveris.utils.XpathBuilder.Builder.*;
-import static com.r2development.leveris.utils.XpathBuilder.Builder.contains;
 import static com.r2development.leveris.utils.XpathBuilder.XPath.*;
 
 public class XPathBuilderTest {
@@ -20,105 +15,25 @@ public class XPathBuilderTest {
     @Test
     public void test0() throws Exception {
 
-        XPath.getXPath(PREFIX.DOUBLE_SLASH, ELEMENTS.DIV, ACTIONS.CONTAINS, ATTRIBUTES.DATA_PATH, "value");
-
-        XPath xpath = new XPath(ELEMENTS.DIV, ACTIONS.CONTAINS, ATTRIBUTES.ID, "WILIAMSID");
-        System.out.println(xpath.getXPath());
-
-        xpath.addEntry(PREFIX.SINGLE_SLASH, ELEMENTS.A, ACTIONS.EQUALS, ATTRIBUTES.DATA_PATH, XPathValues.getXPathValues("DATAPATH-value"));
-        System.out.println(xpath.getXPath());
-
-        String target = getXPath(ELEMENTS.BUTTON, ACTIONS.AND_CONTAINS, ATTRIBUTES.CLASS, new XPathValues(new String[]{"btn-primary", "btn-secondary", "btn-third"}));
-        System.out.println(target);
-
-        target = target + xpath.addEntry(ELEMENTS.BUTTON, ACTIONS.EQUALS, ATTRIBUTES.TEXT, new XPathValues("submit")).getXPath();
-        System.out.println(target);
-
-        target = target + xpath.addEntry(ELEMENTS.BUTTON, ACTIONS.AND_CONTAINS, ATTRIBUTES.CLASS, new XPathValues(new String[]{"btn-primary", "btn-secondary"})).getXPath();
-        System.out.println(target);
-
-        target = target + xpath.addEntry(PREFIX.SINGLE_SLASH, ELEMENTS.BUTTON, ACTIONS.EQUALS, ATTRIBUTES.TEXT, XPathValues.getXPathValues("submit")).getXPath();
-        System.out.println(target);
-
-        target = target + xpath.addEntry(ELEMENTS.BUTTON, ACTIONS.OR_CONTAINS, ATTRIBUTES.WICKETPATH, new XPathValues(new String[]{"wicketPath-primary", "btn-wicketPath-secondary"})).getXPath();
-        System.out.println(target);
-
-        target = target + xpath.addEntry(PREFIX.SINGLE_SLASH, ELEMENTS.SPAN, ACTIONS.NOT_CONTAINS, ATTRIBUTES.TEXT, XPathValues.getXPathValues(new String[]{"notContainsME", "adndMe"})).getXPath();
-        System.out.println(target);
     }
 
     @Test
     public void test1() {
 
-        String xpath1 = orContains(Builder.div, Builder.dataPath, new LinkedList<String>() {{
-            add("pnlNoEmplyments lnkAddCurrentResidency");
-            add("pnlNoEmplyments lnkCurrentResidency");
-        }}) + followingElement(Builder.a);
-        System.out.println(xpath1);
-        String xPath = getXPath(ELEMENTS.DIV, ACTIONS.OR_CONTAINS, ATTRIBUTES.DATA_PATH, XPathValues.getXPathValues("pnlNoEmplyments lnkAddCurrentResidency", "pnlNoEmplyments lnkCurrentResidency")) + getXPath_DirectSibling(ELEMENTS.A);
-        System.out.println("$x(\"" + xPath + "\")");
-
-        Assert.assertEquals("Strings should be the same!", xpath1, xPath);
-
-        xpath1 = orContains(Builder.div, Builder.dataPath, new LinkedList<String>() {{
-            add("pnlNoEmplyments lnkAddOtherResidency");
-            add("pnlNoEmplyments lnkOtherResidency");
-        }}) + followingElement(Builder.a);
-        System.out.println(xpath1);
-        xPath = getXPath(ELEMENTS.DIV, ACTIONS.OR_CONTAINS, ATTRIBUTES.DATA_PATH, XPathValues.getXPathValues("pnlNoEmplyments lnkAddOtherResidency", "pnlNoEmplyments lnkOtherResidency")) + getXPath_DirectSibling(ELEMENTS.A);
-        System.out.println("$x(\"" + xPath + "\")");
-
-        Assert.assertEquals("Strings should be the same!", xpath1, xPath);
-
-        xpath1 = equalsTo(Builder.div, Builder.dataPath, "pnlResidencyList btnAdd") + "[" + equalsTo(Builder.span, Builder.text, "Add") + "]" + contains(Builder.singleSlash, Builder.a, Builder.wicketpath, "btnAdd_dialog");
-        System.out.println(xpath1);
-        xPath = getXPath_DivEqualsDataPath("pnlResidencyList btnAdd") + getXPath_HasADescendant(ELEMENTS.SPAN, ACTIONS.EQUALS, ATTRIBUTES.TEXT, "Add") + getXPath_DirectSibling(ELEMENTS.A, ACTIONS.CONTAINS, ATTRIBUTES.WICKETPATH, "btnAdd_dialog");
-        System.out.println("$x(\"" + xPath + "\")");
-
-        Assert.assertEquals("Strings should be the same!", xpath1, xPath);
-
-        xpath1 = equalsTo(Builder.div, Builder.dataPath, "pnlResidencyList btnImDone") + "[" + andContains(Builder.span, Builder.text, new LinkedList<String>() {{
-            add("I");
-            add("m done");
-        }}) + "]" + contains(Builder.singleSlash, Builder.a, Builder.wicketpath, "btnImDone_submit");
-        System.out.println(xpath1);
-        xPath = getXPath_DivEqualsDataPath("pnlResidencyList btnImDone") + getXPath_HasADescendant(ELEMENTS.SPAN, ACTIONS.AND_CONTAINS, ATTRIBUTES.TEXT, new XPathValues("I", "m done")) + getXPath_DirectSibling(ELEMENTS.A, ACTIONS.CONTAINS, ATTRIBUTES.WICKETPATH, "btnImDone_submit");
-        System.out.println("$x(\"" + xPath + "\")");
-
-        Assert.assertEquals("Strings should be the same!", xpath1, xPath);
     }
 
     @Test
     public void test2() {
-//
-//        String test = getXPath( new XPathActionsElements().getElementActionsMap(), new XPathAttributes(ATTRIBUTES.TEXT, "value").getXpathAttributesListMap());
-//        String test = getDivXPath( new LinkedHashSet<>() {
-//            {
-//                addEntry( new LinkedList<>() { { addEntry(ACTIONS.EQUALS); addEntry(ATTRIBUTES.DATA_PATH); addEntry("btnSave");} });
-//                addEntry( new LinkedList<>() { { getXpath(ELEMENTS.SPAN, ACTIONS.EQUALS, ATTRIBUTES.TEXT, "Save"); }} );
-//            }
-//        }) + getAxpath(ACTIONS.CONTAINS, ATTRIBUTES.WICKETPATH, "btnSave_Submit");
-//
-//        String Texrt = XPath.getXPath(new XPath(ELEMENTS.DIV, ACTION.CONTAINS, ATTRIBUTES.WICKETPATH, new XPathValues("", "a").getXpathValuesList()).addEntry(ELEMENTS.DIV, ACTIONS.EQUALS, ATTRIBUTES.TEXT));
 
     }
 
     @Test
     public void test3() {
-        System.out.println(getXPath(ACTIONS.EQUALS, ATTRIBUTES.ID, "ID") + getXPath(ACTIONS.NOT_CONTAINS, ATTRIBUTES.DATA_PATH, "dataPath"));
-        System.out.println(XPath.getXPath_DivEqualsDataPath("DIV_DATA-PATH_VALUE") + XPath.getXPath(XPath.getActionsAttributesValuesTable(ACTIONS.EQUALS, ATTRIBUTES.ID, "EQUALS_ID_SAME_ELEMENT")));
 
-        System.out.println(XPath.getXPath_DivEqualsDataPath("dataPath") + XPath.getXPath(PREFIX.SINGLE_SLASH, ELEMENTS.A, ACTIONS.CONTAINS, ATTRIBUTES.WICKETPATH, "containsWicketPath"));
     }
 
     @Test
     public void test4() {
-
-        XPath xpathClass = new XPath(PREFIX.SINGLE_SLASH, ELEMENTS.DIV, ACTIONS.CONTAINS, ATTRIBUTES.CLASS, "pnl");
-        System.out.println(xpathClass.getXPath());
-
-        xpathClass.addEntry(PREFIX.SINGLE_SLASH, ELEMENTS.DIV, ACTIONS.NOT_CONTAINS, ATTRIBUTES.CLASS, "collapsed");
-        System.out.println(xpathClass.getXPath());
 
     }
 
@@ -126,23 +41,8 @@ public class XPathBuilderTest {
     public void test5() {
 
         /** This selector shows limitation of current XPath class element adding [in this case is shown how during addEntry is not single_slash and element.div added into class recognized as same entries so each have its, own xpath.... /div[contains(@class,'pnl')]/div[not(contains(@class,'collapsed')] ] */
-        XPath xpathClass = new XPath(PREFIX.SINGLE_SLASH, ELEMENTS.DIV, ACTIONS.CONTAINS, ATTRIBUTES.CLASS, "pnl")
-                .addEntry(PREFIX.SINGLE_SLASH, ELEMENTS.DIV, ACTIONS.NOT_CONTAINS, ATTRIBUTES.CLASS, "collapsed");
-        System.out.println(xpathClass.getXPath());
 
-        /** In case you want to create Xpath "/div[contains(@class,'pnl')][not(contains(@class,'collapsed')]" as this example you have to use this declaration */
-        String xpath = getXPath(new XPath(PREFIX.SINGLE_SLASH, ELEMENTS.DIV, ACTIONS.EQUALS, ATTRIBUTES.CLASS, "pnl").getListMapElementActionsAttributesValues()) + getXPath(ACTIONS.NOT_CONTAINS, ATTRIBUTES.CLASS, "collapsed");
-        System.out.println("$x(\"" + xpath + "\")");
-
-        /** Or this declaration is as well supported this is best to use */
-        xpath = getXPath(new XPath(PREFIX.SINGLE_SLASH, ELEMENTS.DIV, ACTIONS.EQUALS, ATTRIBUTES.CLASS, "pnl").getListMapElementActionsAttributesValues()) + getXPath(ACTIONS.NOT_CONTAINS, ATTRIBUTES.CLASS, "collapsed");
-        System.out.println("$x(\"" + xpath + "\")");
-
-        /** Or this declaration is as well supported */
-        xpath = getXPath(new XPath(PREFIX.SINGLE_SLASH, ELEMENTS.DIV, ACTIONS.EQUALS, ATTRIBUTES.CLASS, "pnl").getListMapElementActionsAttributesValues()) + getXPath(ACTIONS.NOT_CONTAINS, ATTRIBUTES.CLASS, "collapsed");
-        System.out.println("$x(\"" + xpath + "\")");
-
-        xpath = getXPath_DivEqualsDataPath("pnlAddSource pnlAccNam txtAccountName") + getXPath_HasADescendantSpanEqualsText("(optional)") + getXPath_HasADescendantLabelEqualsText("Account name") + getXPath(PREFIX.SINGLE_SLASH, ELEMENTS.INPUT, ACTIONS.CONTAINS, ATTRIBUTES.WICKETPATH, "txtAccountName");
+        String xpath = getXPath_DivEqualsDataPath("pnlAddSource pnlAccNam txtAccountName") + getXPath_HasADescendantSpanEqualsText("(optional)") + getXPath_HasADescendantLabelEqualsText("Account name") + getXPath(PREFIX.SINGLE_SLASH, ELEMENTS.INPUT, ACTIONS.CONTAINS, ATTRIBUTES.WICKETPATH, "txtAccountName");
         System.out.println("$x(\"" + xpath + "\")"); 
 
         xpath = getXPath_DivEqualsDataPath("pnlAddSource pnlStatementDate txtStatementDate") + getXPath_HasADescendantSpanEqualsText("(optional)") + getXPath_HasADescendantLabelEqualsText("Statement date") + getXPath(PREFIX.SINGLE_SLASH, ELEMENTS.INPUT, ACTIONS.CONTAINS, ATTRIBUTES.WICKETPATH, "txtStatementDate");
@@ -263,10 +163,7 @@ public class XPathBuilderTest {
 
 
         xpath = getXPath(PREFIX.SINGLE_SLASH, ELEMENTS.DIV, ACTIONS.CONTAINS, ATTRIBUTES.DATA_PATH, "pnlApplicationList rptApplication") + getXPath(ACTIONS.CONTAINS, ATTRIBUTES.DATA_PATH, "pnlApplication btnStart") + getXPath(PREFIX.SINGLE_SLASH, ELEMENTS.A, ACTIONS.CONTAINS, ATTRIBUTES.WICKETPATH, "btnStart_submit");
-        System.out.println("$x(\"" + xpath + "\")"); 
-        xpath2 = contains(Builder.singleSlash, Builder.div, Builder.dataPath, "pnlApplicationList rptApplication") + contains(Builder.dataPath, "pnlApplication btnStart") + contains(Builder.singleSlash, Builder.a, Builder.wicketpath, "btnStart_submit");
-        System.out.println(xpath2);
-        Assert.assertEquals("Strings should be the same!", xpath, xpath2);
+        System.out.println("$x(\"" + xpath + "\")");
         xpath2 = "/div[contains(@data-path,'pnlApplicationList rptApplication')][contains(@data-path,'pnlApplication btnStart')]/a[contains(@wicketpath,'btnStart_submit')]";
         Assert.assertEquals("Strings should be the same!", xpath, xpath2);
 
@@ -806,5 +703,8 @@ public class XPathBuilderTest {
         xpath2 = "//div[@data-path='pnlAddSource pnlAccNam txtAccountName']/input[contains(@wicketpath,'pnlAccNam_c_w_txtAccountName')][//label[contains(text(),'Account name')]]";
         Assert.assertEquals("not equals", xpath, xpath2);
 
+        xpath = getXPath_DivEqualsDataPath("pnl-adv-search txtSearch") + getXPath_HasADescendantLabelEqualsText("SEARCH TEXT") + getXPath_ContainsWicketpath(input, "txtSearch");
+        
+        
     }
 }

@@ -2,7 +2,7 @@ package com.r2development.leveris.bdd.underwriter.stepdef;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver_Borrower;
 import com.r2development.leveris.di.IUser;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -24,7 +24,7 @@ public class SsoStepDef {
     private WebDriver webdriver;
 
     @Inject
-    SsoStepDef( SharedDriver webDriver) {
+    SsoStepDef( SharedDriver_Borrower webDriver) {
         this.webdriver = webDriver;
     }
 

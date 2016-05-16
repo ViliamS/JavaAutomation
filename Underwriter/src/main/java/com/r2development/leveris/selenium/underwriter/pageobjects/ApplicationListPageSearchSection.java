@@ -1,6 +1,6 @@
 package com.r2development.leveris.selenium.underwriter.pageobjects;
 
-import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver_Underwriter;
 import com.r2development.leveris.selenium.underwriter.pageobjects.LoanApplication.ILoanApplicationPage;
 import com.r2development.leveris.selenium.underwriter.pageobjects.LoanApplication.IWorkflowSection;
 import com.r2development.leveris.selenium.underwriter.pageobjects.LoanApplication.LoanApplicationPage;
@@ -17,7 +17,7 @@ public class ApplicationListPageSearchSection extends ApplicationListPage implem
 
     private WebDriver webDriver;
 
-    public ApplicationListPageSearchSection(SharedDriver webDriver) {
+    public ApplicationListPageSearchSection(SharedDriver_Underwriter webDriver) {
         super(webDriver);
         this.webDriver = webDriver;
     }
@@ -31,7 +31,7 @@ public class ApplicationListPageSearchSection extends ApplicationListPage implem
         isVisible(FINAL_XPATH_APPLICATION_START_BUTTON_XPATH);
         clickElement(FINAL_XPATH_APPLICATION_START_BUTTON_XPATH, IWorkflowSection.WORKFLOW_PANEL_TITLE);
         loadingCheck();
-        return new LoanApplicationPage((SharedDriver) webDriver);
+        return new LoanApplicationPage((SharedDriver_Underwriter) webDriver);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class ApplicationListPageSearchSection extends ApplicationListPage implem
         isVisible(FINAL_XPATH_APPLICATION_START_BUTTON_XPATH);
         clickElement(FINAL_XPATH_APPLICATION_START_BUTTON_XPATH, IWorkflowSection.WORKFLOW_PANEL_TITLE);
         loadingCheck();
-        return new LoanApplicationPage((SharedDriver) webDriver);
+        return new LoanApplicationPage((SharedDriver_Underwriter) webDriver);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class ApplicationListPageSearchSection extends ApplicationListPage implem
         isVisible(FINAL_XPATH_APPLICATION_START_BUTTON_XPATH);
         clickElement(FINAL_XPATH_APPLICATION_START_BUTTON_XPATH, IWorkflowSection.WORKFLOW_PANEL_TITLE);
         loadingCheck();
-        return new LoanApplicationPage((SharedDriver) webDriver);
+        return new LoanApplicationPage((SharedDriver_Underwriter) webDriver);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class ApplicationListPageSearchSection extends ApplicationListPage implem
         isVisible(FINAL_XPATH_APPLICATION_CONTINUE_BUTTON_XPATH);
         clickElement(FINAL_XPATH_APPLICATION_CONTINUE_BUTTON_XPATH, IWorkflowSection.WORKFLOW_PANEL_TITLE);
         loadingCheck();
-        return new LoanApplicationPage((SharedDriver) webDriver);
+        return new LoanApplicationPage((SharedDriver_Underwriter) webDriver);
     }
 
 }

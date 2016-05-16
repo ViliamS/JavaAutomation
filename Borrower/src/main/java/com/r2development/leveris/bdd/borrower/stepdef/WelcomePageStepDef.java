@@ -19,10 +19,10 @@ public class WelcomePageStepDef /*extends BorrowerStepDef*/ {
     private ILoginPage loginPage;
     private IBuildQuotationPage buildQuotationPage;
 
-    private final SharedDriver webDriver;
+    private final SharedDriver_Borrower webDriver;
 
     @Inject
-    WelcomePageStepDef(SharedDriver webDriver) {
+    WelcomePageStepDef(SharedDriver_Borrower webDriver) {
 //        super(webDriver);
         this.webDriver = webDriver;
     }

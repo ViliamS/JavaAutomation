@@ -51,7 +51,7 @@ public class UnderwriterStepDef {
     private IWorkflowSection workflowSection;
 
     @Inject
-    public UnderwriterStepDef(SharedDriver webDriver) {
+    public UnderwriterStepDef(SharedDriver_Underwriter webDriver) {
         this.webdriver = webDriver;
         this.loginPage = new LoginPage(webDriver);
         this.applicationListPage = new ApplicationListPage(webDriver);

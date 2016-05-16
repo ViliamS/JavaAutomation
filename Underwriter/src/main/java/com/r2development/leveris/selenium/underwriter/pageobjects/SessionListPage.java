@@ -1,6 +1,6 @@
 package com.r2development.leveris.selenium.underwriter.pageobjects;
 
-import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver_Underwriter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +11,7 @@ public class SessionListPage extends SideMenu implements ISessionListPage {
 
     private WebDriver webDriver;
 
-    public SessionListPage(SharedDriver webDriver) {
+    public SessionListPage(SharedDriver_Underwriter webDriver) {
         super(webDriver);
         this.webDriver = webDriver;
     }

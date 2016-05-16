@@ -1,7 +1,7 @@
 package com.r2development.leveris.selenium.underwriter.pageobjects.LoanApplication.RiskToolDialogs;
 
 import com.r2development.leveris.Underwriter;
-import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver_Underwriter;
 import com.r2development.leveris.selenium.underwriter.pageobjects.LoanApplication.IRiskToolSection;
 import com.r2development.leveris.selenium.underwriter.pageobjects.LoanApplication.RiskToolSection;
 import org.apache.commons.logging.Log;
@@ -14,7 +14,7 @@ public class SetFraudDialog extends Underwriter implements ISetFraudDialog {
 
     private WebDriver webDriver;
 
-    public SetFraudDialog(SharedDriver webDriver){
+    public SetFraudDialog(SharedDriver_Underwriter webDriver){
         super(webDriver);
         this.webDriver = webDriver;
     }
@@ -60,7 +60,7 @@ public class SetFraudDialog extends Underwriter implements ISetFraudDialog {
         loadingCheck();
         clickElement(CANCEL_BUTTON);
         loadingCheck();
-        return new RiskToolSection((SharedDriver) webDriver);
+        return new RiskToolSection((SharedDriver_Underwriter) webDriver);
     }
 
     @Override
@@ -71,6 +71,6 @@ public class SetFraudDialog extends Underwriter implements ISetFraudDialog {
         loadingCheck();
         clickElement(SAVE_BUTTON);
         loadingCheck();
-        return new RiskToolSection((SharedDriver) webDriver);
+        return new RiskToolSection((SharedDriver_Underwriter) webDriver);
     }
 }

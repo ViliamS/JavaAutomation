@@ -1,6 +1,6 @@
 package com.r2development.leveris.selenium.underwriter.pageobjects.LoanApplication;
 
-import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver_Underwriter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +11,7 @@ public class DocumentsDetail extends LoanApplicationPage implements IDocumentsDe
 
     private WebDriver webDriver;
 
-    public DocumentsDetail(SharedDriver webDriver){
+    public DocumentsDetail(SharedDriver_Underwriter webDriver){
         super(webDriver);
         this.webDriver = webDriver;
     }
@@ -22,7 +22,7 @@ public class DocumentsDetail extends LoanApplicationPage implements IDocumentsDe
         loadingCheck();
         clickElement(DOCUMENT_DETAIL_DELETE_LINK);
         loadingCheck();
-        return new DocumentsSection((SharedDriver) webDriver);
+        return new DocumentsSection((SharedDriver_Underwriter) webDriver);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class DocumentsDetail extends LoanApplicationPage implements IDocumentsDe
         isVisible(DOCUMENT_DETAIL_CLOSE_X_BUTTON, true);
         clickElement(DOCUMENT_DETAIL_CLOSE_X_BUTTON, IDocumentsSection.DOCUMENTS_UPLOAD_BUTTON);
         loadingCheck();
-        return new DocumentsSection((SharedDriver) webDriver);
+        return new DocumentsSection((SharedDriver_Underwriter) webDriver);
     }
 
     @Override
@@ -40,6 +40,6 @@ public class DocumentsDetail extends LoanApplicationPage implements IDocumentsDe
         loadingCheck();
         clickElement(DOCUMENT_DETAIL_EDIT_LINK, IDocumentsDetailEditSection.SAVE_BUTTON);
         loadingCheck();
-        return new DocumentsDetailEditSection((SharedDriver) webDriver);
+        return new DocumentsDetailEditSection((SharedDriver_Underwriter) webDriver);
     }
 }

@@ -2,7 +2,7 @@ package com.r2development.leveris.selenium.borrower.pageobjects;
 
 import com.google.inject.Inject;
 import com.r2development.leveris.Borrower;
-import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver_Borrower;
 import com.r2development.leveris.di.IUser;
 import com.r2development.leveris.di.User;
 import org.apache.commons.lang3.StringUtils;
@@ -44,7 +44,7 @@ public class AutomaticRegistrationSection extends Borrower implements IAutomatic
     protected WebElement CreateNewUser;
 
 //    @Inject
-    public AutomaticRegistrationSection(SharedDriver webDriver) {
+    public AutomaticRegistrationSection(SharedDriver_Borrower webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);
     }

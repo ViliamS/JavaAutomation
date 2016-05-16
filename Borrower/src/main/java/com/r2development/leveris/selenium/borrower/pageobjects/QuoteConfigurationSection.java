@@ -1,7 +1,7 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
 import com.r2development.leveris.Borrower;
-import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver_Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -10,7 +10,7 @@ public class QuoteConfigurationSection extends Borrower implements IQuoteConfigu
     private static final Log log = LogFactory.getLog(QuoteConfigurationSection.class.getName());
 
 //    @Inject
-    public QuoteConfigurationSection(SharedDriver webDriver){
+    public QuoteConfigurationSection(SharedDriver_Borrower webDriver){
         super(webDriver);
 /*        PageFactory.initElements(webDriver, this);
         isHeaderGreatAndQuickLoanPresent();
@@ -40,7 +40,7 @@ public class QuoteConfigurationSection extends Borrower implements IQuoteConfigu
         loadingCheck();
         isVisible(APPLY_ONLINE_TEAL_BUTTON_XPATH2, 1);
 
-        if(System.getProperty("browser").equalsIgnoreCase(SharedDriver.PHANTOMJS))
+        if(System.getProperty("browser").equalsIgnoreCase(SharedDriver_Borrower.PHANTOMJS))
             clickElement(APPLY_ONLINE_TEAL_BUTTON_XPATH2);
         else
             clickElementViaJavascript(APPLY_ONLINE_TEAL_BUTTON_XPATH2, false);

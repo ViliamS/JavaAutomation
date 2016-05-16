@@ -1,6 +1,6 @@
 package com.r2development.leveris.selenium.underwriter.pageobjects;
 
-import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver_Underwriter;
 import com.r2development.leveris.selenium.underwriter.pageobjects.LoanApplication.ILoanApplicationPage;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -14,7 +14,7 @@ public class ApplicationListPage extends SideMenu implements IApplicationListPag
 
     protected IApplicationListPageSearchSection applicationListPageSearchSection;
 
-    public ApplicationListPage(SharedDriver webDriver) {
+    public ApplicationListPage(SharedDriver_Underwriter webDriver) {
         super(webDriver);
         this.webDriver = webDriver;
     }
@@ -23,28 +23,28 @@ public class ApplicationListPage extends SideMenu implements IApplicationListPag
     public ILoanApplicationPage openLoanApplicationContainingName(String loanApplicationName){
         log.info("");
         loadingCheck();
-        return new ApplicationListPageSearchSection((SharedDriver) webDriver).openLoanApplicationContainingName(loanApplicationName);
+        return new ApplicationListPageSearchSection((SharedDriver_Underwriter) webDriver).openLoanApplicationContainingName(loanApplicationName);
     }
 
     @Override
     public ILoanApplicationPage openLoanApplication(String loanApplicationName){
         log.info("");
         loadingCheck();
-        return new ApplicationListPageSearchSection((SharedDriver) webDriver).openLoanApplication(loanApplicationName);
+        return new ApplicationListPageSearchSection((SharedDriver_Underwriter) webDriver).openLoanApplication(loanApplicationName);
     }
 
     @Override
     public ILoanApplicationPage startLoanApplication(String loanApplicationName){
         log.info("");
         loadingCheck();
-        return new ApplicationListPageSearchSection((SharedDriver) webDriver).startLoanApplication(loanApplicationName);
+        return new ApplicationListPageSearchSection((SharedDriver_Underwriter) webDriver).startLoanApplication(loanApplicationName);
     }
 
     @Override
     public ILoanApplicationPage continueLoanApplication(String loanApplicationName){
         log.info("");
         loadingCheck();
-        return new ApplicationListPageSearchSection((SharedDriver) webDriver).continueLoanApplication(loanApplicationName);
+        return new ApplicationListPageSearchSection((SharedDriver_Underwriter) webDriver).continueLoanApplication(loanApplicationName);
     }
 
     @Override
@@ -105,7 +105,7 @@ public class ApplicationListPage extends SideMenu implements IApplicationListPag
     public IApplicationListPage setSearchTextAdvancedFilter(String filter) {
         log.info("");
         loadingCheck();
-        isVisible(ADVANCED_SEARCH_TEXT_FILTER);
+        isVisible(ADVANCED_SEARCH_TEXT_FILTER, true);
         type(ADVANCED_SEARCH_TEXT_FILTER, filter);
         loadingCheck();
         return this;
@@ -146,7 +146,7 @@ public class ApplicationListPage extends SideMenu implements IApplicationListPag
         isVisible(PROCESS_LIST_LINK);
         clickElement(PROCESS_LIST_LINK);
         loadingCheck();
-        return new ApplicationProcessesList((SharedDriver) webDriver);
+        return new ApplicationProcessesList((SharedDriver_Underwriter) webDriver);
     }
 
     @Override
@@ -156,7 +156,7 @@ public class ApplicationListPage extends SideMenu implements IApplicationListPag
         isVisible(SESSION_LIST_LINK);
         clickElement(SESSION_LIST_LINK);
         loadingCheck();
-        return new SessionListPage((SharedDriver) webDriver);
+        return new SessionListPage((SharedDriver_Underwriter) webDriver);
     }
 
     @Override

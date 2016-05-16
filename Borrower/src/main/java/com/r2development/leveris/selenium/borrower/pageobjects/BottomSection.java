@@ -1,7 +1,7 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
 import com.r2development.leveris.Borrower;
-import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver_Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebElement;
@@ -28,7 +28,7 @@ public class BottomSection extends Borrower implements IBottomSection {
     protected WebElement weGovAndIncRegularity;
 
 //    @Inject
-    public BottomSection(SharedDriver webDriver) {
+    public BottomSection(SharedDriver_Borrower webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);
     }

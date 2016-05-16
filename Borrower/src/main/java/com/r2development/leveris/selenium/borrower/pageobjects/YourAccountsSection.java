@@ -1,6 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
-import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver_Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +15,7 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
 
     WebDriver webDriver;
 
-    public YourAccountsSection(SharedDriver webDriver) {
+    public YourAccountsSection(SharedDriver_Borrower webDriver) {
         super(webDriver);
         this.webDriver = webDriver;
         headerSection = new HeaderSection(webDriver);
@@ -87,7 +87,7 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
         isVisible(YOUR_ACCOUNTS_ACCOUNT_SCRAPING_XPATH, true);
         clickElement(YOUR_ACCOUNTS_ACCOUNT_SCRAPING_XPATH, IYourAccountsAccountScrapingWindow.I_AGREE_CHECKBOX);
         loadingCheck();
-        return new YourAccountsAccountScrapingWindow((SharedDriver) webDriver);
+        return new YourAccountsAccountScrapingWindow((SharedDriver_Borrower) webDriver);
     }
 
     @Override
@@ -165,7 +165,7 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
         loadingCheck();
         isVisible(IYourAccountsAccountScrapingWindow.START_SCRAPING_BUTTON, true);
         clickElement(IYourAccountsAccountScrapingWindow.START_SCRAPING_BUTTON);
-        return new YourAccountsAccountScrapingWindow((SharedDriver) webDriver);
+        return new YourAccountsAccountScrapingWindow((SharedDriver_Borrower) webDriver);
     }
 
     @Override
@@ -183,7 +183,7 @@ public class YourAccountsSection extends HeaderAndBottomAndFormsMenuSection impl
         isVisible(YOUR_ACCOUNTS_DONE_XPATH, true);
         clickElementLoop(YOUR_ACCOUNTS_DONE_XPATH, IYourDependantsSection.YOUR_DEPENDANTS_NONE_XPATH);
         loadingCheck();
-        return new YourDependantsPage((SharedDriver) webDriver);
+        return new YourDependantsPage((SharedDriver_Borrower) webDriver);
     }
 
     @Override

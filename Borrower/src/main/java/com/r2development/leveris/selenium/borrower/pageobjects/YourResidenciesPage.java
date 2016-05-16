@@ -1,6 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
-import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver_Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +13,7 @@ public class YourResidenciesPage extends HeaderAndBottomAndFormsMenuSection impl
 
     private IYourResidenciesSection yourResidenciesSection;
 
-    public YourResidenciesPage(SharedDriver webDriver) {
+    public YourResidenciesPage(SharedDriver_Borrower webDriver) {
         super(webDriver);
         this.webDriver = webDriver;
         this.yourResidenciesSection = new YourResidenciesSection(webDriver);
@@ -36,7 +36,7 @@ public class YourResidenciesPage extends HeaderAndBottomAndFormsMenuSection impl
         log.info("");
         isVisible(DONE_BUTTON, true);
         clickElement(DONE_BUTTON, IEmploymentIncomeSection.EMPLOYMENT_INCOMES_ADD_PAYE_XPATH);
-        return new EmploymentIncomesPage((SharedDriver) webDriver);
+        return new EmploymentIncomesPage((SharedDriver_Borrower) webDriver);
     }
 
     @Override

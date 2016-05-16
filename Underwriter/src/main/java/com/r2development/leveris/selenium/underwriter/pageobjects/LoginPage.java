@@ -1,7 +1,7 @@
 package com.r2development.leveris.selenium.underwriter.pageobjects;
 
 import com.r2development.leveris.Underwriter;
-import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver_Underwriter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -51,6 +51,6 @@ public class LoginPage extends Underwriter implements ILoginPage {
         log.info("");
         isVisible(LOGIN_BUTTON);
         clickElementLoop(LOGIN_BUTTON, IApplicationListPage.TITLE_APPLICATION_LIST);
-        return new SideMenu((SharedDriver) webDriver);
+        return new SideMenu((SharedDriver_Underwriter) webDriver);
     }
 }

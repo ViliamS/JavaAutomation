@@ -1,7 +1,7 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
 import com.r2development.leveris.Borrower;
-import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver_Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -9,14 +9,14 @@ public class QuoteLandingSection extends Borrower implements IQuoteLandingSectio
 
     private static final Log log = LogFactory.getLog(QuoteLandingSection.class.getName());
 
-    public QuoteLandingSection(SharedDriver webDriver) {
+    public QuoteLandingSection(SharedDriver_Borrower webDriver) {
         super(webDriver);
     }
 
     @Override
     public IQuotePaydayLoanPage clickContinuePaydayLoan() {
         log.info("");
-        if(System.getProperty("browser").equalsIgnoreCase(SharedDriver.PHANTOMJS))
+        if(System.getProperty("browser").equalsIgnoreCase(SharedDriver_Borrower.PHANTOMJS))
             clickElement(PAYDAY_LOAN_CONTINUE_BUTTON);
         else
             clickElementViaJavascript(PAYDAY_LOAN_CONTINUE_BUTTON, true);
@@ -27,7 +27,7 @@ public class QuoteLandingSection extends Borrower implements IQuoteLandingSectio
     @Override
     public IQuoteQuickLoanPage clickContinueUnsecuredLoan(){
         log.info("");
-        if(System.getProperty("browser").equalsIgnoreCase(SharedDriver.PHANTOMJS))
+        if(System.getProperty("browser").equalsIgnoreCase(SharedDriver_Borrower.PHANTOMJS))
             clickElement(UNSECURED_LOAN_CONTINUE_BUTTON);
         else
             clickElementViaJavascript(UNSECURED_LOAN_CONTINUE_BUTTON, true);

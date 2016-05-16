@@ -1,7 +1,7 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
 import com.google.inject.Inject;
-import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver_Borrower;
 import com.r2development.leveris.di.IUser;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -14,7 +14,7 @@ public class YourFinancialCommitmentsPage extends HeaderAndBottomAndFormsMenuSec
     private IUser user;
     private IYourFinancialCommitmentsSection yourFinancialCommitmentsSection;
 
-    public YourFinancialCommitmentsPage(SharedDriver webDriver) {
+    public YourFinancialCommitmentsPage(SharedDriver_Borrower webDriver) {
         super(webDriver);
         headerSection = new HeaderSection(webDriver);
         yourFinancialCommitmentsSection = new YourFinancialCommitmentsSection(webDriver);

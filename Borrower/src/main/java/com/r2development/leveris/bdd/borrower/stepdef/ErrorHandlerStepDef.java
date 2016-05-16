@@ -22,7 +22,7 @@ public class ErrorHandlerStepDef {
     private Map<String, String> errorHandler;
 
     @Inject
-    ErrorHandlerStepDef(SharedDriver webDriver) {
+    ErrorHandlerStepDef(SharedDriver_Borrower webDriver) {
         errorHandler = new LinkedHashMap<>();
         this.webDriver = webDriver;
     }

@@ -29,7 +29,7 @@ public class YourAccountsStepDef {
     private IYourAccountsAccountScrapingWindow yourAccountsAccountScrapingWindow;
 
     @Inject
-    public YourAccountsStepDef(SharedDriver webDriver) {
+    public YourAccountsStepDef(SharedDriver_Borrower webDriver) {
 //        this.webDriver = webDriver;
         yourAccountsPage = new YourAccountsPage(webDriver);
     }

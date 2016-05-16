@@ -1,7 +1,7 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
 import com.r2development.leveris.Borrower;
-import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver_Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebElement;
@@ -25,7 +25,7 @@ public class SubMenuSection extends Borrower implements ISubMenuSection {
     protected WebElement weFinalLoanSetup;
 
     //    @Inject
-    public SubMenuSection(SharedDriver webDriver) {
+    public SubMenuSection(SharedDriver_Borrower webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);
     }

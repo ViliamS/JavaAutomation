@@ -20,7 +20,7 @@ public class GmailStepDef /*extends BorrowerStepDef*/ {
     IUser user;
 
     @Inject
-    GmailStepDef(SharedDriver webDriver) {
+    GmailStepDef(SharedDriver_Borrower webDriver) {
 //        super(webDriver);
         this.webDriver = webDriver;
     }

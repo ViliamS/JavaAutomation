@@ -1,7 +1,7 @@
 package com.r2development.leveris.selenium.apollo.pageobjects;
 
 import com.r2development.leveris.Apollo;
-import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver_Apollo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebElement;
@@ -20,8 +20,8 @@ public class SearchFullTextSection extends Apollo implements ISearchFullTextSect
     @FindBy( xpath = SUBMIT_BUTTON_XPATH )
     private WebElement webSubmit;
 
-    //    public static ISearchFullTextSection getSearchSectionInstance(SharedDriver webDriver) {
-    public static ISearchSection getSearchSectionInstance(SharedDriver webDriver) {
+    //    public static ISearchFullTextSection getSearchSectionInstance(SharedDriver_Apollo webDriver) {
+    public static ISearchSection getSearchSectionInstance(SharedDriver_Apollo webDriver) {
 //        SearchFullTextSection searchFullTextSection = new SearchFullTextSection(webDriver).waitForSearchSectionToLoad();
         ISearchFullTextSection searchFullTextSection = new SearchFullTextSection(webDriver);
         PageFactory.initElements(webDriver, searchFullTextSection);
@@ -29,7 +29,7 @@ public class SearchFullTextSection extends Apollo implements ISearchFullTextSect
         return (ISearchSection) searchFullTextSection;
     }
 
-    public SearchFullTextSection(SharedDriver webDriver) {
+    public SearchFullTextSection(SharedDriver_Apollo webDriver) {
         super(webDriver);
         this.webDriver = webDriver;
     }
@@ -64,7 +64,7 @@ public class SearchFullTextSection extends Apollo implements ISearchFullTextSect
     @Override
     public ISearchPage clickSearch() {
         webSubmit.click();
-        ISearchPage searchPage = SearchPage.getSearchSectionInstance((SharedDriver)webDriver, this);
+        ISearchPage searchPage = SearchPage.getSearchSectionInstance((SharedDriver_Apollo)webDriver, this);
         PageFactory.initElements(webDriver, searchPage);
         return searchPage;
     }
@@ -89,7 +89,7 @@ public class SearchFullTextSection extends Apollo implements ISearchFullTextSect
         getWebElement(ADVANCED_SEARCH_LINK_XPATH).click();
 //        SearchAdvancedSection searchAdvancedSection = new SearchAdvancedSection(webDriver).waitForSearchSectionToLoad();
 //        ISearchAdvancedSection searchAdvancedSection = new SearchAdvancedSection(webDriver);
-        ISearchSection searchAdvancedSection = new SearchAdvancedSection((SharedDriver)webDriver);
+        ISearchSection searchAdvancedSection = new SearchAdvancedSection((SharedDriver_Apollo)webDriver);
         PageFactory.initElements(webDriver, searchAdvancedSection);
 //        return searchAdvancedSection;
         return searchAdvancedSection;

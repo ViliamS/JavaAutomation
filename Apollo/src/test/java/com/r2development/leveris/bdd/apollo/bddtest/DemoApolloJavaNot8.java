@@ -1,9 +1,8 @@
 package com.r2development.leveris.bdd.apollo.bddtest;
 
 import com.r2development.leveris.AUTOMATION_MODE;
-import com.r2development.leveris.BROWSER_TYPE;
 import com.r2development.leveris.bdd.apollo.stepdef.ClientData;
-import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver_Apollo;
 import com.r2development.leveris.selenium.apollo.pageobjects.ILoginPage;
 import com.r2development.leveris.selenium.apollo.pageobjects.IRecordPage;
 import com.r2development.leveris.selenium.apollo.pageobjects.ISearchPage;
@@ -28,7 +27,7 @@ public class DemoApolloJavaNot8 {
 
     private static final Log log = LogFactory.getLog(DemoApolloJavaNot8.class.getName());
 
-    private SharedDriver webDriver = new SharedDriver();
+    private SharedDriver_Apollo webDriver = new SharedDriver_Apollo();
 
     protected ILoginPage loginPage;
     protected ISearchPage searchPage;
@@ -38,7 +37,7 @@ public class DemoApolloJavaNot8 {
     @Before
     public void setup() {
 
-        SharedDriver webDriver = new SharedDriver();
+        SharedDriver_Apollo webDriver = new SharedDriver_Apollo();
 //        switch (BROWSER_TYPE.getBrowser(System.getProperty("browser"))) {
 //            case CHROME:
 //                ChromeOptions options = new ChromeOptions();

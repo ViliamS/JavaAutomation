@@ -1,6 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
-import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver_Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -11,7 +11,7 @@ public class EmploymentIncomesPage extends HeaderAndBottomAndFormsMenuSection im
     protected IEmploymentIncomeSection employmentIncomeSection;
 
 //    @Inject
-    public EmploymentIncomesPage(SharedDriver webDriver) {
+    public EmploymentIncomesPage(SharedDriver_Borrower webDriver) {
         super(webDriver);
         headerSection = new HeaderSection(webDriver);
         formsMenu = new FormsMenu(webDriver);

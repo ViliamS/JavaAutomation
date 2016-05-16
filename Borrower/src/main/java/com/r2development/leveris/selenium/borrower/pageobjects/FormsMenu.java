@@ -1,7 +1,7 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
 import com.r2development.leveris.Borrower;
-import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver_Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.TimeoutException;
@@ -64,7 +64,7 @@ public class FormsMenu extends Borrower implements IFormsMenu {
     protected WebElement weDocumentUpload;
 
 //    @Inject
-    public FormsMenu(SharedDriver webDriver) {
+    public FormsMenu(SharedDriver_Borrower webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);
     }

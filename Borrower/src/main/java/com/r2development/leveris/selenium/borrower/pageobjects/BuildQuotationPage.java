@@ -1,6 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
-import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver_Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -16,7 +16,7 @@ public class BuildQuotationPage extends HeaderAndBottomAndFormsMenuSection imple
     protected IBottomSection bottomSection;
 
 //    @Inject
-    public BuildQuotationPage(SharedDriver webDriver) {
+    public BuildQuotationPage(SharedDriver_Borrower webDriver) {
         super(webDriver);
         headerSection = new HeaderSection(webDriver);
         welcomeGetQuoteSection = new WelcomeGetQuoteSection(webDriver);

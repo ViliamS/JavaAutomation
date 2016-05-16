@@ -1,7 +1,7 @@
 package com.r2development.leveris.selenium.apollo.pageobjects;
 
 import com.r2development.leveris.Apollo;
-import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver_Apollo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebElement;
@@ -23,20 +23,20 @@ public class LoginPage extends Apollo implements ILoginPage {
     @FindBy(xpath = SUBMIT_XPATH)
     private WebElement weSubmit;
 
-    public static ILoginPage getLoginPageInstance(SharedDriver webDriver) {
+    public static ILoginPage getLoginPageInstance(SharedDriver_Apollo webDriver) {
         ILoginPage loginPage = new LoginPage(webDriver);
         PageFactory.initElements(webDriver, loginPage);
         return loginPage;
     }
 
-    public LoginPage(SharedDriver webDriver) {
+    public LoginPage(SharedDriver_Apollo webDriver) {
         super(webDriver);
         this.webDriver = webDriver;
         webDriver.get(System.getProperty("apollo.client"));
     }
 
     /*
-    public LoginPage LoginPage(SharedDriver webDriver) {
+    public LoginPage LoginPage(SharedDriver_Apollo webDriver) {
         this.webDriver = webDriver;
         webDriver.get(APOLLO_ENVIRONMENT.get(ENVIRONMENT_RUN.name()).get(APPLICATION_RUN));
         return this;
@@ -71,7 +71,7 @@ public class LoginPage extends Apollo implements ILoginPage {
     public ISearchPage clickSubmit() {
         isVisible(SUBMIT_XPATH);
         weSubmit.click();
-        return SearchPage.getSearchSectionInstance((SharedDriver)webDriver);
+        return SearchPage.getSearchSectionInstance((SharedDriver_Apollo)webDriver);
     }
 }
 

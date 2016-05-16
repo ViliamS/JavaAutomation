@@ -1,6 +1,6 @@
 package com.r2development.leveris.selenium.apollo.pageobjects;
 
-import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver_Apollo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
@@ -14,7 +14,7 @@ public class AdministrationUsersPage extends AdministrationTopBanner implements 
 
     WebDriver webDriver;
 
-    public AdministrationUsersPage(SharedDriver webDriver) {
+    public AdministrationUsersPage(SharedDriver_Apollo webDriver) {
         super(webDriver);
         this.webDriver = webDriver;
     }
@@ -160,6 +160,6 @@ public class AdministrationUsersPage extends AdministrationTopBanner implements 
         log.info("\n clickSaveChanges() \n");
         isVisible(SAVE_CHANGES_BUTTON, true);
         clickElement(SAVE_CHANGES_BUTTON);
-        return new AdministrationUserDetailPage((SharedDriver) webDriver);
+        return new AdministrationUserDetailPage((SharedDriver_Apollo) webDriver);
     }
 }

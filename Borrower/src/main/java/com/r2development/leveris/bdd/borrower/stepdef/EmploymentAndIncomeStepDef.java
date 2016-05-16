@@ -31,7 +31,7 @@ IUser user;
 //    private IYourAccountsPage yourAccountsPage;
 
     @Inject
-    EmploymentAndIncomeStepDef(SharedDriver webDriver/*, IUser user*/) {
+    EmploymentAndIncomeStepDef(SharedDriver_Borrower webDriver/*, IUser user*/) {
 //        this.webDriver = webDriver;
 //        this.user = user;
 //        super(webDriver);

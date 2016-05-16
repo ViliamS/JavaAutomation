@@ -1,7 +1,7 @@
 package com.r2development.leveris.selenium.apollo.pageobjects;
 
 import com.r2development.leveris.Apollo;
-import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver_Apollo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -12,7 +12,7 @@ public class AdministrationLoginPage extends Apollo implements IAdministrationLo
 
     WebDriver webDriver;
 
-    public AdministrationLoginPage(SharedDriver webDriver){
+    public AdministrationLoginPage(SharedDriver_Apollo webDriver){
         super(webDriver);
         this.webDriver = webDriver;
     }
@@ -50,6 +50,6 @@ public class AdministrationLoginPage extends Apollo implements IAdministrationLo
         log.info("");
         isVisible(LOGIN_BUTTON);
         clickElementLoop(LOGIN_BUTTON, IAdministrationHomePage.USERS_LINK);
-        return new AdministrationTopBanner((SharedDriver) webDriver);
+        return new AdministrationTopBanner((SharedDriver_Apollo) webDriver);
     }
 }

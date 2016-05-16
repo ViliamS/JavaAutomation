@@ -1,7 +1,7 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
 import com.r2development.leveris.Borrower;
-import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver_Borrower;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -25,7 +25,7 @@ public class BuildQuoteSection extends Borrower implements IBuildQuoteSection {
     protected WebElement weGetQuoteFailure;
 
 //    @Inject
-    public BuildQuoteSection(SharedDriver webDriver) {
+    public BuildQuoteSection(SharedDriver_Borrower webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);
     }

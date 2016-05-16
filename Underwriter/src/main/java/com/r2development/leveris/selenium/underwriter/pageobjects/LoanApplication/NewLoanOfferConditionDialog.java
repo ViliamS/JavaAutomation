@@ -1,7 +1,7 @@
 package com.r2development.leveris.selenium.underwriter.pageobjects.LoanApplication;
 
 import com.r2development.leveris.Underwriter;
-import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver_Underwriter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -12,7 +12,7 @@ public class NewLoanOfferConditionDialog extends Underwriter implements INewLoan
 
     private WebDriver webDriver;
 
-    public NewLoanOfferConditionDialog(SharedDriver webDriver) {
+    public NewLoanOfferConditionDialog(SharedDriver_Underwriter webDriver) {
         super(webDriver);
         this.webDriver = webDriver;
     }
@@ -24,7 +24,7 @@ public class NewLoanOfferConditionDialog extends Underwriter implements INewLoan
         isVisible(NEW_LOAN_OFFER_DIALOG_CLOSE_BUTTON_X, true);
         clickElement(NEW_LOAN_OFFER_DIALOG_CLOSE_BUTTON_X, ILoanOfferToolSection.LOAN_OFFER_TOOL_ADD_CONDITION_BUTTON);
         loadingCheck();
-        return new LoanOfferToolSection((SharedDriver) webDriver);
+        return new LoanOfferToolSection((SharedDriver_Underwriter) webDriver);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class NewLoanOfferConditionDialog extends Underwriter implements INewLoan
         isVisible(NEW_LOAN_OFFER_DIALOG_SAVE_BUTTON, true);
         clickElement(NEW_LOAN_OFFER_DIALOG_SAVE_BUTTON, ILoanOfferToolSection.LOAN_OFFER_TOOL_ADD_CONDITION_BUTTON);
         loadingCheck();
-        return new LoanOfferToolSection((SharedDriver) webDriver);
+        return new LoanOfferToolSection((SharedDriver_Underwriter) webDriver);
     }
 
 

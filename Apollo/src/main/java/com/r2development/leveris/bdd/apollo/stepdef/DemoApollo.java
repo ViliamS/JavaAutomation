@@ -23,7 +23,7 @@ public class DemoApollo {
 
     private static final Log log = LogFactory.getLog(DemoApollo.class);
 
-    private SharedDriver webDriver;
+    private SharedDriver_Apollo webDriver;
     protected IUser user;
 
     protected ILoginPage loginPage;
@@ -32,7 +32,7 @@ public class DemoApollo {
     protected ClientData clientData = new ClientData();
 
     @Inject
-    DemoApollo(SharedDriver webDriver, IUser user) {
+    DemoApollo(SharedDriver_Apollo webDriver, IUser user) {
         this.webDriver = webDriver;
         this.user = user;
     }

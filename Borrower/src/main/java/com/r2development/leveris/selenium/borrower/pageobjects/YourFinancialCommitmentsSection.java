@@ -1,7 +1,7 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
 import com.r2development.leveris.Borrower;
-import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver_Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.TimeoutException;
@@ -13,7 +13,7 @@ public class YourFinancialCommitmentsSection extends Borrower implements IYourFi
 
     private static final Log log = LogFactory.getLog(YourFinancialCommitmentsSection.class.getName());
 
-    public YourFinancialCommitmentsSection(SharedDriver webDriver) {
+    public YourFinancialCommitmentsSection(SharedDriver_Borrower webDriver) {
         super(webDriver);
     }
 

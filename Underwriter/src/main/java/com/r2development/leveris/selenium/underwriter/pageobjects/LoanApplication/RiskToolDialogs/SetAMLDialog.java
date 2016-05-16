@@ -1,7 +1,7 @@
 package com.r2development.leveris.selenium.underwriter.pageobjects.LoanApplication.RiskToolDialogs;
 
 import com.r2development.leveris.Underwriter;
-import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver_Underwriter;
 import com.r2development.leveris.selenium.underwriter.pageobjects.LoanApplication.IRiskToolSection;
 import com.r2development.leveris.selenium.underwriter.pageobjects.LoanApplication.RiskToolSection;
 import org.apache.commons.logging.Log;
@@ -14,7 +14,7 @@ public class SetAMLDialog extends Underwriter implements ISetAMLDialog{
 
     private WebDriver webDriver;
 
-    public SetAMLDialog(SharedDriver webDriver){
+    public SetAMLDialog(SharedDriver_Underwriter webDriver){
         super(webDriver);
         this.webDriver = webDriver;
     }
@@ -54,7 +54,7 @@ public class SetAMLDialog extends Underwriter implements ISetAMLDialog{
         isVisible(CANCEL_BUTTON, true);
         clickElement(CANCEL_BUTTON);
         loadingCheck();
-        return new RiskToolSection((SharedDriver) webDriver);
+        return new RiskToolSection((SharedDriver_Underwriter) webDriver);
     }
     @Override
     public IRiskToolSection clickSave(){
@@ -63,6 +63,6 @@ public class SetAMLDialog extends Underwriter implements ISetAMLDialog{
         isVisible(SAVE_BUTTON, true);
         clickElement(SAVE_BUTTON);
         loadingCheck();
-        return new RiskToolSection((SharedDriver) webDriver);
+        return new RiskToolSection((SharedDriver_Underwriter) webDriver);
     }
 }

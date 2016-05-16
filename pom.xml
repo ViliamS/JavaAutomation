@@ -72,6 +72,7 @@
         <junit.junit.version>4.12</junit.junit.version>
         <org-hamcrest.hamcrest-junit.version>2.0.0.0</org-hamcrest.hamcrest-junit.version>
         <commons-logging.commons-logging.version>1.2</commons-logging.commons-logging.version>
+        <com.github.detro.version>1.2.0</com.github.detro.version>
         <com-google-guava.guava.version>19.0</com-google-guava.guava.version>
         <org-apache-commons.commons-lang3.version>3.4</org-apache-commons.commons-lang3.version>
         <commons-io.commons-io.version>2.4</commons-io.commons-io.version>
@@ -308,7 +309,27 @@
                 <artifactId>tomcat-embed-logging-juli</artifactId>
                 <version>8.0.32</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.github.detro</groupId>
+                <artifactId>phantomjsdriver</artifactId>
+                <version>${com.github.detro.version}</version>
+                <exclusions>
+                    <!--There is an issue due to bug when using a phantomjs driver -->
+                    <!--https://bugs.chromium.org/p/chromedriver/issues/detail?id=1045-->
+                    <exclusion>
+                        <groupId>org.seleniumhq.selenium</groupId>
+                        <artifactId>selenium-java</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.seleniumhq.selenium</groupId>
+                        <artifactId>selenium-remote-driver</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.seleniumhq.selenium</groupId>
+                        <artifactId>selenium-server</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
             <!--<dependency>-->
                 <!--<groupId>net.lightbody.bmp</groupId>-->
                 <!--&lt;!&ndash; To use the legacy, Jetty-based implementation,-->

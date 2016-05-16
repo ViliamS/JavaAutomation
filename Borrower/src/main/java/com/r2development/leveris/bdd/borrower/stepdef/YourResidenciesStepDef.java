@@ -28,7 +28,7 @@ public class YourResidenciesStepDef {
 
 
     @Inject
-    YourResidenciesStepDef(SharedDriver webDriver) {
+    YourResidenciesStepDef(SharedDriver_Borrower webDriver) {
         this.yourResidencies = new YourResidenciesPage(webDriver);
     }
 

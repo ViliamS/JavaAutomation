@@ -1,7 +1,7 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
 import com.r2development.leveris.Borrower;
-import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver_Borrower;
 
 /**
  * todo Page Object Specific Implementation
@@ -9,7 +9,7 @@ import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
 public class QuoteQuickLoanSection extends Borrower implements IQuoteQuickLoanSection {
 
 //    @Inject
-    public QuoteQuickLoanSection(SharedDriver webDriver){
+    public QuoteQuickLoanSection(SharedDriver_Borrower webDriver){
         super( webDriver );
     }
 

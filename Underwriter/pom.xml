@@ -192,6 +192,29 @@
             <artifactId>selenium-java</artifactId>
             <version>${org-seleniumhq-selenium.selenium-java.version}</version>
         </dependency>
+
+        <!--Phantom JS Driver-->
+        <dependency>
+            <groupId>com.github.detro</groupId>
+            <artifactId>phantomjsdriver</artifactId>
+            <version>${com.github.detro.version}</version>
+            <exclusions>
+                <!--There is an issue due to bug when using a phantomjs driver -->
+                <!--https://bugs.chromium.org/p/chromedriver/issues/detail?id=1045-->
+                <exclusion>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-java</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-remote-driver</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-server</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
         <!--<dependency>-->
             <!--<groupId>org.seleniumhq.selenium</groupId>-->
             <!--<artifactId>selenium-server</artifactId>-->

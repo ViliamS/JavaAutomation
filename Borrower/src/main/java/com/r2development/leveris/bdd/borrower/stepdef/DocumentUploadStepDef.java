@@ -39,7 +39,7 @@ public class DocumentUploadStepDef /*extends BorrowerStepDef*/ implements CLV312
 //    private final WebDriver webDriver;
 
     @Inject
-    DocumentUploadStepDef(SharedDriver webDriver/*, IUser user*/) {
+    DocumentUploadStepDef(SharedDriver_Borrower webDriver/*, IUser user*/) {
 //        super(webDriver);
 //        documentUploadPage = new DocumentUploadPage(WebDriverService.getWebDriverInstance(), user);
 //        this.webDriver = webDriver;

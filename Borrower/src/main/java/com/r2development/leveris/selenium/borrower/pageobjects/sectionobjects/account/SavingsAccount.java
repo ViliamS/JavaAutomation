@@ -1,6 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects.sectionobjects.account;
 
-import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver_Borrower;
 import com.r2development.leveris.selenium.borrower.pageobjects.sectionobjects.ICancelSaveClose;
 import com.r2development.leveris.selenium.borrower.pageobjects.sectionobjects.IForm;
 import com.r2development.leveris.selenium.borrower.pageobjects.sectionobjects.IHeaderForm;
@@ -11,7 +11,7 @@ public class SavingsAccount implements ISavingsAccount, IHeaderForm, IForm, ICan
 
 //    private final WebDriver webDriver;
 
-    public SavingsAccount(SharedDriver webDriver) {
+    public SavingsAccount(SharedDriver_Borrower webDriver) {
 //        this.webDriver = webDriver;
     }
 

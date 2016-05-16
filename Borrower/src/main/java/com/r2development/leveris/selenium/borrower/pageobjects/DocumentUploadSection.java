@@ -5,7 +5,7 @@ import com.google.common.collect.Table;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.r2development.leveris.Borrower;
-import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver_Borrower;
 import com.r2development.leveris.di.IUser;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -63,7 +63,7 @@ public class DocumentUploadSection extends Borrower implements IDocumentUploadSe
 //    }
 
 //    @Inject
-    public DocumentUploadSection(SharedDriver webDriver/*, IUser user*/) {
+    public DocumentUploadSection(SharedDriver_Borrower webDriver/*, IUser user*/) {
         super(webDriver);
 //        this.user = user;
         PageFactory.initElements(webDriver, this);

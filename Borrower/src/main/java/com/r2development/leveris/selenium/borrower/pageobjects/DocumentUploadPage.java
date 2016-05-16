@@ -1,7 +1,7 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
 import com.google.inject.Inject;
-import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver_Borrower;
 import com.r2development.leveris.di.IUser;
 import com.r2development.leveris.di.User;
 import org.apache.commons.logging.Log;
@@ -18,7 +18,7 @@ public class DocumentUploadPage extends HeaderAndBottomAndFormsMenuSection imple
     protected IUser user;
 
 //    @Inject
-    public DocumentUploadPage(SharedDriver webDriver) {
+    public DocumentUploadPage(SharedDriver_Borrower webDriver) {
         super(webDriver);
         headerSection = new HeaderSection(webDriver);
         documentUploadSection = new DocumentUploadSection(webDriver);

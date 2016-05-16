@@ -1,7 +1,7 @@
 package com.r2development.leveris.selenium.apollo.pageobjects;
 
 import com.r2development.leveris.Apollo;
-import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver_Apollo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -12,7 +12,7 @@ public class AdministrationTopBanner extends Apollo implements IAdministrationTo
 
     private WebDriver webDriver;
 
-    public AdministrationTopBanner(SharedDriver webDriver){
+    public AdministrationTopBanner(SharedDriver_Apollo webDriver){
         super( webDriver);
         this.webDriver = webDriver;
     }
@@ -22,7 +22,7 @@ public class AdministrationTopBanner extends Apollo implements IAdministrationTo
         log.info("");
         isVisible(IAdministrationTopBanner.USERS_LINK);
         clickElementLoop(IAdministrationTopBanner.USERS_LINK, IAdministrationUsersPage.SEARCH_INPUT);
-        return new AdministrationUsersPage((SharedDriver) webDriver);
+        return new AdministrationUsersPage((SharedDriver_Apollo) webDriver);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class AdministrationTopBanner extends Apollo implements IAdministrationTo
         isVisible(ADMIN_FN_LN_DROPDOWN_OPEN, true);
         isVisible(LOGOUT_LINK);
         clickElement(LOGOUT_LINK);
-        return new AdministrationLoginPage((SharedDriver) webDriver);
+        return new AdministrationLoginPage((SharedDriver_Apollo) webDriver);
     }
 
     public void clickBannerLinkRoles(){

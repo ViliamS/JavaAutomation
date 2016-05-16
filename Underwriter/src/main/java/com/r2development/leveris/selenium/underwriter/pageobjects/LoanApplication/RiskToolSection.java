@@ -1,6 +1,6 @@
 package com.r2development.leveris.selenium.underwriter.pageobjects.LoanApplication;
 
-import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver_Underwriter;
 import com.r2development.leveris.selenium.underwriter.pageobjects.LoanApplication.RiskToolDialogs.*;
 import com.r2development.leveris.utils.XpathBuilder.Enums.ACTION;
 import org.apache.commons.logging.Log;
@@ -13,7 +13,7 @@ public class RiskToolSection extends LoanApplicationPage implements IRiskToolSec
 
     private WebDriver webDriver;
 
-    public RiskToolSection(SharedDriver webDriver){
+    public RiskToolSection(SharedDriver_Underwriter webDriver){
         super(webDriver);
         this.webDriver = webDriver;
     }
@@ -84,7 +84,7 @@ public class RiskToolSection extends LoanApplicationPage implements IRiskToolSec
         loadingCheck();
         clickToAppearDisappear(SET_FICO_BUTTON, ISetFICODialog.FICO_INPUT, "");
         loadingCheck();
-        return new SetFICODialog((SharedDriver) webDriver);
+        return new SetFICODialog((SharedDriver_Underwriter) webDriver);
     }
 
     @Override
@@ -95,7 +95,7 @@ public class RiskToolSection extends LoanApplicationPage implements IRiskToolSec
         loadingCheck();
         clickToAppearDisappear(SET_AML_BUTTON, ISetAMLDialog.SET_AML_DIALOG, "");
         loadingCheck();
-        return new SetAMLDialog((SharedDriver) webDriver);
+        return new SetAMLDialog((SharedDriver_Underwriter) webDriver);
     }
 
     @Override
@@ -106,7 +106,7 @@ public class RiskToolSection extends LoanApplicationPage implements IRiskToolSec
         loadingCheck();
         clickToAppearDisappear(SET_FRAUD_BUTTON, ISetFraudDialog.FRAUD_COMBOBOX_INPUT, "");
         loadingCheck();
-        return new SetFraudDialog((SharedDriver) webDriver);
+        return new SetFraudDialog((SharedDriver_Underwriter) webDriver);
     }
 
     @Override
@@ -117,7 +117,7 @@ public class RiskToolSection extends LoanApplicationPage implements IRiskToolSec
         loadingCheck();
         clickToAppearDisappear(SET_REP_CUSTOMER_BUTTON, IRepeatCustomerDialog.REEPEAT_CUSTOMER_DIALOG, "");
         loadingCheck();
-        return new RepeatCustomerDialog((SharedDriver) webDriver);
+        return new RepeatCustomerDialog((SharedDriver_Underwriter) webDriver);
     }
 
     @Override
@@ -128,7 +128,7 @@ public class RiskToolSection extends LoanApplicationPage implements IRiskToolSec
         loadingCheck();
         clickToAppearDisappear(SET_SCORE_OVERRIDE_BUTTON, ISetScoreOverrideDialog.SET_SCORE_OVERRIDE_TITLE, "");
         loadingCheck();
-        return new SetScoreOverrideDialog((SharedDriver) webDriver);
+        return new SetScoreOverrideDialog((SharedDriver_Underwriter) webDriver);
     }
 
     @Override
@@ -139,7 +139,7 @@ public class RiskToolSection extends LoanApplicationPage implements IRiskToolSec
         loadingCheck();
         clickToAppearDisappear(SET_NOTE_BUTTON, IAddNoteDialog.NOTE_INPUT, "");
         loadingCheck();
-        return new AddNoteDialog((SharedDriver) webDriver);
+        return new AddNoteDialog((SharedDriver_Underwriter) webDriver);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.r2development.leveris.selenium.underwriter.pageobjects.LoanApplication;
 
-import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver_Underwriter;
 import com.r2development.leveris.utils.Enums.DOCUMENTTYPE;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -14,7 +14,7 @@ public class DocumentsDetailEditSection extends DocumentsDetail implements IDocu
 
     private WebDriver webDriver;
 
-    public DocumentsDetailEditSection(SharedDriver webDriver) {
+    public DocumentsDetailEditSection(SharedDriver_Underwriter webDriver) {
         super(webDriver);
         this.webDriver = webDriver;
     }
@@ -98,7 +98,7 @@ public class DocumentsDetailEditSection extends DocumentsDetail implements IDocu
         isVisible(SAVE_BUTTON, true);
         clickElement(SAVE_BUTTON);
         loadingCheck();
-        return new DocumentsDetail((SharedDriver) webDriver);
+        return new DocumentsDetail((SharedDriver_Underwriter) webDriver);
     }
 
     @Override

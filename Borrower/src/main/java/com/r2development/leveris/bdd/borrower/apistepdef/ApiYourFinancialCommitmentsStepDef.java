@@ -2003,7 +2003,7 @@ public class ApiYourFinancialCommitmentsStepDef extends ApiOpoqoBorrowerStepDef 
 
     @And("^Borrower clicks on Financial commitments link$")
     public void borrower_clicks_on_financial_commitments_link(){
-//        formsMenu = new FormsMenu((SharedDriver)webDriver);
+//        formsMenu = new FormsMenu((SharedDriver_Borrower)webDriver);
 //        formsMenu.clickFinancialCommitments();
     }
 }

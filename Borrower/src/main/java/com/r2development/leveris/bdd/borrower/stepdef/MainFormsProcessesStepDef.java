@@ -13,7 +13,7 @@ import org.apache.commons.logging.LogFactory;
 public class MainFormsProcessesStepDef {
 
     private static final Log log = LogFactory.getLog(MainFormsProcessesStepDef.class.getName());
-//    private final SharedDriver webDriver;
+//    private final SharedDriver_Borrower webDriver;
 
     @Inject
     IUser user;
@@ -29,7 +29,7 @@ public class MainFormsProcessesStepDef {
     private IYourDependantsPage yourDependantsPage;
 
     @Inject
-    public MainFormsProcessesStepDef(SharedDriver webDriver) {
+    public MainFormsProcessesStepDef(SharedDriver_Borrower webDriver) {
 //        this.webDriver = webDriver;
         borrowerHomePage = new BorrowerHomePage(webDriver);
     }

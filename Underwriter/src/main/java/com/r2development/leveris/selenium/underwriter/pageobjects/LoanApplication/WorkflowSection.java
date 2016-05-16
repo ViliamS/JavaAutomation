@@ -1,6 +1,6 @@
 package com.r2development.leveris.selenium.underwriter.pageobjects.LoanApplication;
 
-import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver_Underwriter;
 import com.r2development.leveris.utils.XpathBuilder.Enums.ACTION;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -13,7 +13,7 @@ public class WorkflowSection extends LoanApplicationPage implements IWorkflowSec
 
     private WebDriver webDriver;
 
-    public WorkflowSection(SharedDriver webDriver) {
+    public WorkflowSection(SharedDriver_Underwriter webDriver) {
         super(webDriver);
         this.webDriver = webDriver;
     }

@@ -1,7 +1,7 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
 import com.r2development.leveris.Borrower;
-import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver_Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.Keys;
@@ -13,7 +13,7 @@ public class YourResidenciesSection extends Borrower implements IYourResidencies
 
     WebDriver webDriver;
 
-    public YourResidenciesSection(SharedDriver webDriver) {
+    public YourResidenciesSection(SharedDriver_Borrower webDriver) {
         super(webDriver);
         this.webDriver = webDriver;
     }

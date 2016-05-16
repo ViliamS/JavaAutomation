@@ -10,6 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import org.joda.time.DateTime;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.MarionetteDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -36,27 +37,27 @@ import static java.lang.System.*;
  * To prevent browser state from leaking between scenarios, cookies are automatically deleted before every scenario.
  * </p>
  * <p>
- * A new instance of SharedDriver is created for each Scenario and passed to yor Stepdef classes via Dependency Injection
+ * A new instance of SharedDriver_Borrower is created for each Scenario and passed to yor Stepdef classes via Dependency Injection
  * </p>
  * <p>
  * As a bonus, screenshots are embedded into the report for each scenario. (This only works
  * if you're also using the HTML formatter).
  * </p>
  * <p>
- * A new instance of the SharedDriver is created for each Scenario and then passed to the Step Definition classes'
+ * A new instance of the SharedDriver_Borrower is created for each Scenario and then passed to the Step Definition classes'
  * constructor. They all receive a reference to the same instance. However, the REAL_DRIVER is the same instance throughout
  * the life of the JVM.
  * </p>
  */
 //@Singleton
-public class SharedDriver extends EventFiringWebDriver {
+public class SharedDriver_Underwriter extends EventFiringWebDriver {
 
-    private static final Log log = LogFactory.getLog(SharedDriver.class.getName());
+    private static final Log log = LogFactory.getLog(SharedDriver_Underwriter.class.getName());
 
     public static final String IEXPLORER = "iexplorer";
     public static final String PHANTOMJS = "phantomjs";
     public static final String CHROME = "chrome";
-    //    public static final String FIREFOX = "firefox";
+    public static final String FIREFOX = "firefox";
     public static final String OPERA = "opera";
     public static final String EDGE = "edge";
     public static final String MARIONETTE = "marionette";
@@ -67,7 +68,7 @@ public class SharedDriver extends EventFiringWebDriver {
     public static DesiredCapabilities dCaps = new DesiredCapabilities();
     private StringBuffer verificationErrors = new StringBuffer();
 
-    private static final WebDriver REAL_DRIVER = SharedDriver.execute(getProperty("browser"));
+    private static final WebDriver REAL_DRIVER = SharedDriver_Underwriter.execute(getProperty("browser"));
     private static final Thread CLOSE_THREAD = new Thread() {
         @Override
         public void run() {
@@ -75,11 +76,27 @@ public class SharedDriver extends EventFiringWebDriver {
         }
     };
 
+    /** Part for detecting running OS */
+    private static String OS = System.getProperty("os.name").toLowerCase();
+
+    private static boolean isWindows() {
+        return (OS.contains("win"));
+    }
+
+    private static boolean isMac() {
+        return (OS.contains("mac"));
+    }
+
+    private static boolean isUnix() {
+        return (OS.contains("nux"));
+    }
+
+
     static {
         Runtime.getRuntime().addShutdownHook(CLOSE_THREAD);
     }
 
-    public SharedDriver() {
+    public SharedDriver_Underwriter() {
         super(REAL_DRIVER);
     }
 
@@ -242,36 +259,51 @@ public class SharedDriver extends EventFiringWebDriver {
 
     @Before
     public void setup() throws IOException {
+        log.info("setup()");
         Properties prop = new Properties();
 
-        if ( StringUtils.isEmpty(getProperty("timestamp")))
-            setProperty("timestamp", DateTime.now().toString("yyyyMMddHHmmssSSS"));
+        if (StringUtils.isEmpty(System.getProperty("timestamp")))
+            System.setProperty("timestamp", DateTime.now().toString("yyyyMMddHHmmssSSS"));
 
-        if (!StringUtils.isEmpty(getProperty("environment"))) {
-            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(getProperty("environment") + ".properties");
+        if (!StringUtils.isEmpty(System.getProperty("environment"))) {
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(System.getProperty("environment") + ".properties");
             if (inputStream != null) {
                 prop.load(inputStream);
             } else {
-                throw new FileNotFoundException("property file '" + getProperty("environment") + ".properties' not found in the classpath");
+                throw new FileNotFoundException("property file '" + System.getProperty("environment") + ".properties' not found in the classpath");
             }
 
             Enumeration<?> e = prop.propertyNames();
             while (e.hasMoreElements()) {
                 String key = (String) e.nextElement();
                 String value = prop.getProperty(key);
-                setProperty(key, value);
+                System.setProperty(key, value);
             }
         }
 
-        dCaps = new DesiredCapabilities();
-        dCaps.setJavascriptEnabled(true);
-        dCaps.setCapability("takesScreenshot", false);
-        dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, new String[]{
-                "--web-security=false",
-                "--ssl-protocol=any",
-                "--ignore-ssl-errors=true",
-                "--webdriver-loglevel=DEBUG"
-        });
+        /** This part is able to distinguish between mac and windows os and properly setup path to chrome / phantomjs / firefox etc.. libraries */
+        /** When not running through Jenkins here is possible to setup [override] the placement of you system exe files */
+        if (isMac()) {
+            log.info("isMac ---> '" + isMac() + "'");
+
+            System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+            System.setProperty("webdriver.phantomjs.driver", "/usr/bin/phantomjs");
+
+            dCaps.setCapability(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY, System.getProperty("webdriver.chrome.driver"));
+            dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, System.getProperty("webdriver.phantomjs.driver"));
+
+        } else if (isWindows()) {
+            log.info("isWindows ---> '" + isWindows() + "'");
+
+            System.setProperty("webdriver.chrome.driver", "C:/Path/To/chromedriver");
+            System.setProperty("webdriver.phantomjs.driver", "C:/Path/To/phantomhjs");
+
+            dCaps.setCapability(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY, System.getProperty("webdriver.chrome.driver"));
+            dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, System.getProperty("webdriver.phantomjs.driver"));
+        }
+        log.info("\n SET THE CHROME DRIVER EXE PROPERTY ---> \""+ System.getProperty("webdriver.chrome.driver") +"\" \n");
+        log.info("\n SET THE PHANTOMJS DRIVER EXE PROPERTY ---> \""+ System.getProperty("webdriver.phantomjs.driver") +"\" \n");
+
     }
 
     @After

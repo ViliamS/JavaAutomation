@@ -1,7 +1,7 @@
 package com.r2development.leveris.selenium.apollo.pageobjects;
 
 import com.r2development.leveris.Apollo;
-import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver_Apollo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.Keys;
@@ -47,8 +47,8 @@ public class SearchAdvancedSection extends Apollo implements ISearchSection, ISe
     @FindBy( xpath = SUBMIT_BUTTON_XPATH )
     private WebElement weSubmit;
 
-    public static ISearchSection getSearchSectionInstance(SharedDriver webDriver) {
-//    public static ISearchAdvancedSection getSearchSectionInstance(SharedDriver webDriver) {
+    public static ISearchSection getSearchSectionInstance(SharedDriver_Apollo webDriver) {
+//    public static ISearchAdvancedSection getSearchSectionInstance(SharedDriver_Apollo webDriver) {
 //        SearchAdvancedSection searchAdvancedSection = new SearchAdvancedSection(webDriver);
         ISearchAdvancedSection searchAdvancedSection = new SearchAdvancedSection(webDriver);
         PageFactory.initElements(webDriver, searchAdvancedSection);
@@ -56,7 +56,7 @@ public class SearchAdvancedSection extends Apollo implements ISearchSection, ISe
         return (ISearchSection) searchAdvancedSection;
     }
 
-    public SearchAdvancedSection(SharedDriver webDriver) {
+    public SearchAdvancedSection(SharedDriver_Apollo webDriver) {
         super(webDriver);
         this.webDriver = webDriver;
     }
@@ -190,7 +190,7 @@ public class SearchAdvancedSection extends Apollo implements ISearchSection, ISe
     @Override
     public ISearchPage clickSearch() {
         weSubmit.click();
-        ISearchPage searchPage = SearchPage.getSearchSectionInstance((SharedDriver)webDriver, this);
+        ISearchPage searchPage = SearchPage.getSearchSectionInstance((SharedDriver_Apollo)webDriver, this);
         PageFactory.initElements(webDriver, searchPage);
         return searchPage;
     }
@@ -213,7 +213,7 @@ public class SearchAdvancedSection extends Apollo implements ISearchSection, ISe
         getWebElement(FULLTEXT_SEARCH_LINK_XPATH).click();
 //        SearchFullTextSection searchFullTextSection = new SearchFullTextSection(webDriver).waitForSearchSectionToLoad();
 //        ISearchFullTextSection searchFullTextSection = new SearchFullTextSection(webDriver);
-        ISearchSection searchFullTextSection = new SearchFullTextSection((SharedDriver)webDriver);
+        ISearchSection searchFullTextSection = new SearchFullTextSection((SharedDriver_Apollo)webDriver);
         PageFactory.initElements(webDriver, searchFullTextSection);
 //        return searchFullTextSection;
         return searchFullTextSection;

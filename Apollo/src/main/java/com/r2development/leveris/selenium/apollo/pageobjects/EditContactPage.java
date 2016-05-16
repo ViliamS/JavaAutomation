@@ -2,10 +2,9 @@ package com.r2development.leveris.selenium.apollo.pageobjects;
 
 
 import com.r2development.leveris.Apollo;
-import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver_Apollo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.Map;
@@ -14,57 +13,57 @@ public class EditContactPage extends Apollo implements IEditContactPage, IHeader
 
     private static final Log log = LogFactory.getLog(EditContactPage.class);
 
-    private SharedDriver webDriver;
+    private SharedDriver_Apollo webDriver;
 
     protected IHeaderSection headerSection;
     protected IEditContactSection editContactSection;
 
-    EditContactPage(SharedDriver webDriver, Map<String, String> oldContactData) {
+    EditContactPage(SharedDriver_Apollo webDriver, Map<String, String> oldContactData) {
         super(webDriver);
         headerSection = HeaderSection.getHeaderSectionInstance(webDriver);
         editContactSection = EditContactSection.getEditContactSectionInstance(webDriver, oldContactData);
     }
 
-    EditContactPage(SharedDriver webDriver, IHeaderSection headerSection, IEditContactSection editContactSection) {
+    EditContactPage(SharedDriver_Apollo webDriver, IHeaderSection headerSection, IEditContactSection editContactSection) {
         super(webDriver);
         this.headerSection = headerSection;
         this.editContactSection = editContactSection;
     }
 
-    EditContactPage(SharedDriver webDriver, IHeaderSection headerSection, Map<String, String> oldContactData) {
+    EditContactPage(SharedDriver_Apollo webDriver, IHeaderSection headerSection, Map<String, String> oldContactData) {
         super(webDriver);
         this.headerSection = headerSection;
         this.editContactSection = EditContactSection.getEditContactSectionInstance(webDriver, oldContactData);
     }
 
-    EditContactPage(SharedDriver webDriver, IEditContactSection editContactSection) {
+    EditContactPage(SharedDriver_Apollo webDriver, IEditContactSection editContactSection) {
         super(webDriver);
         this.headerSection = HeaderSection.getHeaderSectionInstance(webDriver);
         this.editContactSection = editContactSection;
     }
 
-    public static IEditContactPage getEditContactPageInstance(SharedDriver webDriver, Map<String, String> oldContactData) {
+    public static IEditContactPage getEditContactPageInstance(SharedDriver_Apollo webDriver, Map<String, String> oldContactData) {
 //        IEditContactPage editContactPage = new IEditContactPage(webDriver, oldContactData).waitForPageToLoad();
         IEditContactPage editContactPage = new EditContactPage(webDriver, oldContactData);
         PageFactory.initElements(webDriver, editContactPage);
         return editContactPage;
     }
 
-    public static IEditContactPage getEditContactPageInstance(SharedDriver webDriver, IHeaderSection headerSection, IEditContactSection editContactSection) {
+    public static IEditContactPage getEditContactPageInstance(SharedDriver_Apollo webDriver, IHeaderSection headerSection, IEditContactSection editContactSection) {
 //        IEditContactPage editContactPage = new IEditContactPage(webDriver, oldContactData).waitForPageToLoad();
         IEditContactPage editContactPage = new EditContactPage(webDriver, headerSection, editContactSection);
         PageFactory.initElements(webDriver, editContactPage);
         return editContactPage;
     }
 
-    public static IEditContactPage getEditContactPageInstance(SharedDriver webDriver, IHeaderSection headerSection, Map<String, String> oldContactData) {
+    public static IEditContactPage getEditContactPageInstance(SharedDriver_Apollo webDriver, IHeaderSection headerSection, Map<String, String> oldContactData) {
 //        IEditContactPage editContactPage = new IEditContactPage(webDriver, oldContactData).waitForPageToLoad();
         IEditContactPage editContactPage = new EditContactPage(webDriver, headerSection, oldContactData);
         PageFactory.initElements(webDriver, editContactPage);
         return editContactPage;
     }
 
-    public static IEditContactPage getEditContactPageInstance(SharedDriver webDriver, IEditContactSection editContactSection) {
+    public static IEditContactPage getEditContactPageInstance(SharedDriver_Apollo webDriver, IEditContactSection editContactSection) {
 //        IEditContactPage editContactPage = new IEditContactPage(webDriver, oldContactData).waitForPageToLoad();
         IEditContactPage editContactPage = new EditContactPage(webDriver, editContactSection);
         PageFactory.initElements(webDriver, editContactPage);

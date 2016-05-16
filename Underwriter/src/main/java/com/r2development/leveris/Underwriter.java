@@ -1,6 +1,6 @@
 package com.r2development.leveris;
 
-import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver_Underwriter;
 import com.r2development.leveris.utils.XpathBuilder.Enums.*;
 import com.r2development.leveris.utils.XpathBuilder.XPathValues;
 import org.apache.commons.lang3.StringUtils;
@@ -54,7 +54,7 @@ public class Underwriter {
 
     protected void loadingCheck() {
         log.info("");
-        if (!System.getProperty("modeRun").equalsIgnoreCase(SharedDriver.PHANTOMJS)) {
+        if (!System.getProperty("modeRun").equalsIgnoreCase(SharedDriver_Underwriter.PHANTOMJS)) {
             for (int i = 0; i < 3; i++) {
                 if ((i > 1) && (isLoadingBlock()))
                     notLoading(i);

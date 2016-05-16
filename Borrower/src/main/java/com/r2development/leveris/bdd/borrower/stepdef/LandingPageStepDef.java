@@ -30,7 +30,7 @@ public class LandingPageStepDef {
     private IAutomaticRegistrationPage automaticRegistrationPage;
 
     @Inject
-    public LandingPageStepDef(SharedDriver webDriver) {
+    public LandingPageStepDef(SharedDriver_Borrower webDriver) {
         quoteLandingPage = new QuoteLandingPage(webDriver);
         automaticRegistrationPage = new AutomaticRegistrationPage(webDriver);
     }

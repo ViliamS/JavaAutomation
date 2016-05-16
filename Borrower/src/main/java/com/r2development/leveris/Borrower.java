@@ -1,6 +1,6 @@
 package com.r2development.leveris;
 
-import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver_Borrower;
 import com.r2development.leveris.utils.XpathBuilder.Enums.*;
 import com.r2development.leveris.utils.XpathBuilder.XPathValues;
 import org.apache.commons.lang3.StringUtils;
@@ -22,9 +22,9 @@ public class Borrower {
 
     private static final Log log = LogFactory.getLog(Borrower.class.getName());
 
-    protected SharedDriver /*final*/ webDriver;
+    protected SharedDriver_Borrower /*final*/ webDriver;
 
-    protected Borrower(SharedDriver webDriver) {
+    protected Borrower(SharedDriver_Borrower webDriver) {
         this.webDriver = webDriver;
     }
 
@@ -258,7 +258,7 @@ public class Borrower {
 
     protected void clickElement(String xpath) {
         log.info("\nclickElementLoop(\n xpath ---> '" + xpath + "')");
-        if (!System.getProperty("modeRun").equalsIgnoreCase(SharedDriver.PHANTOMJS)) {
+        if (!System.getProperty("modeRun").equalsIgnoreCase(SharedDriver_Borrower.PHANTOMJS)) {
             new WebDriverWait(webDriver, 10)
                     .ignoring(StaleElementReferenceException.class)
                     .until((WebDriver driver) -> {

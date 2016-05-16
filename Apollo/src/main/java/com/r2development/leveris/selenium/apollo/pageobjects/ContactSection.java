@@ -1,7 +1,7 @@
 package com.r2development.leveris.selenium.apollo.pageobjects;
 
 import com.r2development.leveris.Apollo;
-import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver_Apollo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebElement;
@@ -15,7 +15,7 @@ public class ContactSection extends Apollo implements IContactSection {
 
     private static final Log log = LogFactory.getLog(ContactSection.class);
 
-    private SharedDriver webDriver;
+    private SharedDriver_Apollo webDriver;
 
     private Map<String, String> contactDataFromSearch;
     private Map<String, String> contactDataFromEditContactPage;
@@ -39,12 +39,12 @@ public class ContactSection extends Apollo implements IContactSection {
     protected WebElement weEditContact;
 
 
-    ContactSection(SharedDriver webDriver) {
+    ContactSection(SharedDriver_Apollo webDriver) {
         super(webDriver);
         this.webDriver = webDriver;
     }
 
-    ContactSection(SharedDriver webDriver, Map<String, String> contactData, Map<String, String> contractData2) {
+    ContactSection(SharedDriver_Apollo webDriver, Map<String, String> contactData, Map<String, String> contractData2) {
         super(webDriver);
         this.webDriver = webDriver;
         contactDataFromSearch = contactData;
@@ -52,13 +52,13 @@ public class ContactSection extends Apollo implements IContactSection {
 //        replace();
     }
 
-    public static IContactSection getContactSectionInstance(SharedDriver webDriver) {
+    public static IContactSection getContactSectionInstance(SharedDriver_Apollo webDriver) {
         IContactSection contactSection = new ContactSection(webDriver);
         PageFactory.initElements(webDriver, contactSection);
         return contactSection;
     }
 
-    public static IContactSection getContactSectionInstance(SharedDriver webDriver, Map<String, String> contactData, Map<String, String> contactData2) {
+    public static IContactSection getContactSectionInstance(SharedDriver_Apollo webDriver, Map<String, String> contactData, Map<String, String> contactData2) {
         IContactSection contactSection = new ContactSection(webDriver, contactData, contactData2);
         PageFactory.initElements(webDriver, contactSection);
         return contactSection;

@@ -30,7 +30,7 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
 //    private IFormsMenu formsMenu;
 
     @Inject
-    public YourFinancialCommitmentsStepDef(SharedDriver webDriver) {
+    public YourFinancialCommitmentsStepDef(SharedDriver_Borrower webDriver) {
         yourFinancialCommitmentsPage = new YourFinancialCommitmentsPage(webDriver);
     }
 
@@ -379,7 +379,7 @@ public class YourFinancialCommitmentsStepDef /*extends BorrowerStepDef*/ /*imple
 
     @And("^Borrower clicks on Financial commitments link$")
     public void borrower_clicks_on_financial_commitments_link(){
-        IFormsMenu formsMenu = new FormsMenu((SharedDriver) webDriver);
+        IFormsMenu formsMenu = new FormsMenu((SharedDriver_Borrower) webDriver);
         formsMenu.clickFinancialCommitments();
     }
 }

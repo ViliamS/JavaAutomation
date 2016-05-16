@@ -1,10 +1,9 @@
 package com.r2development.leveris.selenium.apollo.pageobjects;
 
 import com.r2development.leveris.Apollo;
-import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver_Apollo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.Map;
@@ -17,35 +16,35 @@ public class RecordPage extends Apollo implements IRecordPage, IMortgageSection,
     private IContactSection contactSection;
     private IMortgageSection mortgageSection;
 
-    public static IRecordPage getRecordPageInstance(SharedDriver webDriver) {
+    public static IRecordPage getRecordPageInstance(SharedDriver_Apollo webDriver) {
 //        IRecordPage recordPage = new RecordPage(webDriver).waitForPageToLoad();
         IRecordPage recordPage = new RecordPage(webDriver);
         PageFactory.initElements(webDriver, recordPage);
         return recordPage;
     }
 
-    public static IRecordPage getRecordPageInstance(SharedDriver webDriver, Map<String, String> contactData, Map<String, String> contactData2) {
+    public static IRecordPage getRecordPageInstance(SharedDriver_Apollo webDriver, Map<String, String> contactData, Map<String, String> contactData2) {
 //        IRecordPage recordPage = new RecordPage(webDriver, contactData).waitForPageToLoad();
         IRecordPage recordPage = new RecordPage(webDriver, contactData, contactData2);
         PageFactory.initElements(webDriver, recordPage);
         return recordPage;
     }
 
-    public static IRecordPage getRecordPageInstance(SharedDriver webDriver, IContactSection iContactSection) {
+    public static IRecordPage getRecordPageInstance(SharedDriver_Apollo webDriver, IContactSection iContactSection) {
 //        IRecordPage recordPage = new RecordPage(webDriver).waitForPageToLoad();
         IRecordPage recordPage = new RecordPage(webDriver);
         PageFactory.initElements(webDriver, recordPage);
         return recordPage;
     }
 
-    public static IRecordPage getRecordPageInstance(SharedDriver webDriver, IMortgageSection iMortgageSection) {
+    public static IRecordPage getRecordPageInstance(SharedDriver_Apollo webDriver, IMortgageSection iMortgageSection) {
 //        IRecordPage recordPage = new RecordPage(webDriver).waitForPageToLoad();
         IRecordPage recordPage = new RecordPage(webDriver);
         PageFactory.initElements(webDriver, recordPage);
         return recordPage;
     }
 
-    public RecordPage(SharedDriver webDriver) {
+    public RecordPage(SharedDriver_Apollo webDriver) {
         super(webDriver);
         this.webDriver = webDriver;
         headerSection = HeaderSection.getHeaderSectionInstance(webDriver);
@@ -53,7 +52,7 @@ public class RecordPage extends Apollo implements IRecordPage, IMortgageSection,
         mortgageSection = MortgageSection.getMortgageSectionInstance(webDriver);
     }
 
-    public RecordPage(SharedDriver webDriver, Map<String, String> contactData, Map<String, String> contactData2) {
+    public RecordPage(SharedDriver_Apollo webDriver, Map<String, String> contactData, Map<String, String> contactData2) {
         super(webDriver);
         this.webDriver = webDriver;
         headerSection = HeaderSection.getHeaderSectionInstance(webDriver);
@@ -61,7 +60,7 @@ public class RecordPage extends Apollo implements IRecordPage, IMortgageSection,
         mortgageSection = MortgageSection.getMortgageSectionInstance(webDriver);
     }
 
-    public RecordPage(SharedDriver webDriver, IContactSection iContactSection) {
+    public RecordPage(SharedDriver_Apollo webDriver, IContactSection iContactSection) {
         super(webDriver);
         this.webDriver = webDriver;
         headerSection = HeaderSection.getHeaderSectionInstance(webDriver);
@@ -69,7 +68,7 @@ public class RecordPage extends Apollo implements IRecordPage, IMortgageSection,
         mortgageSection = MortgageSection.getMortgageSectionInstance(webDriver);
     }
 
-    RecordPage(SharedDriver webDriver, IHeaderSection iheaderSection, IContactSection iContactSection, IMortgageSection iMortgageSection) {
+    RecordPage(SharedDriver_Apollo webDriver, IHeaderSection iheaderSection, IContactSection iContactSection, IMortgageSection iMortgageSection) {
         super(webDriver);
         this.webDriver = webDriver;
         headerSection = iheaderSection;

@@ -1,7 +1,7 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
 import com.r2development.leveris.Borrower;
-import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver_Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -16,7 +16,7 @@ public class TopBannerMenu extends Borrower implements ITopBannerMenu {
     WebDriver webDriver;
 
     //    @Inject
-    public TopBannerMenu(SharedDriver webDriver) {
+    public TopBannerMenu(SharedDriver_Borrower webDriver) {
         super(webDriver);
         isVisible(TOP_BANNER_SIGN_IN_XPATH, true);
         isVisible(TOP_BANNER_REGISTER_XPATH, true);

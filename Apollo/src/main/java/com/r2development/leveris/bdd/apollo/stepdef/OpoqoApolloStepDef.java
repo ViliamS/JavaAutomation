@@ -19,7 +19,7 @@ import java.util.Map;
 @Singleton
 public class OpoqoApolloStepDef {
 
-    private SharedDriver webDriver;
+    private SharedDriver_Apollo webDriver;
     private IAdministrationLoginPage administrationLoginPage;
     private IAdministrationHomePage administrationHomePage;
     private IAdministrationUsersPage administrationUserPage;
@@ -33,7 +33,7 @@ public class OpoqoApolloStepDef {
     private String searchLoginID;
 
     @Inject
-    public OpoqoApolloStepDef(SharedDriver webDriver){
+    public OpoqoApolloStepDef(SharedDriver_Apollo webDriver){
         this.webDriver = webDriver;
         administrationLoginPage = new AdministrationLoginPage(webDriver);
         administrationHomePage = new AdministrationHomePage(webDriver);

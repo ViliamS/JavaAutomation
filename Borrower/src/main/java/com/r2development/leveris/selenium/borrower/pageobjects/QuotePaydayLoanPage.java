@@ -1,7 +1,7 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
 import com.r2development.leveris.Borrower;
-import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver_Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -12,7 +12,7 @@ public class QuotePaydayLoanPage extends Borrower implements IQuotePaydayLoanPag
     private static final Log log = LogFactory.getLog( QuoteQuickLoanPage.class.getName() );
 
 //    @Inject
-    public QuotePaydayLoanPage(SharedDriver webDriver ) {
+    public QuotePaydayLoanPage(SharedDriver_Borrower webDriver ) {
         super( webDriver );
         quotePaydayLoanSection = new QuotePaydayLoanSection(webDriver);
     }

@@ -1,7 +1,7 @@
 package com.r2development.leveris.selenium.borrower.pageobjects;
 
 import com.r2development.leveris.Borrower;
-import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver_Borrower;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
@@ -14,7 +14,7 @@ public class YourDependantsSection extends Borrower implements IYourDependantsSe
 
     private static final Log log = LogFactory.getLog(YourDependantsSection.class.getName());
 
-    public YourDependantsSection(SharedDriver webDriver) {
+    public YourDependantsSection(SharedDriver_Borrower webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);
     }

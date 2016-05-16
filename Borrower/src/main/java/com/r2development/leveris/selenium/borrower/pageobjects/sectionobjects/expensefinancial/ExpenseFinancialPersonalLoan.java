@@ -1,6 +1,6 @@
 package com.r2development.leveris.selenium.borrower.pageobjects.sectionobjects.expensefinancial;
 
-import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.borrower.stepdef.SharedDriver_Borrower;
 import com.r2development.leveris.selenium.borrower.pageobjects.sectionobjects.ICancelSaveClose;
 import com.r2development.leveris.selenium.borrower.pageobjects.sectionobjects.IForm;
 import com.r2development.leveris.selenium.borrower.pageobjects.sectionobjects.IHeaderForm;
@@ -12,7 +12,7 @@ public class ExpenseFinancialPersonalLoan implements IEmploymentIncomeUnemployed
 
 //    private final WebDriver webDriver;
 
-    public ExpenseFinancialPersonalLoan(SharedDriver webDriver) {
+    public ExpenseFinancialPersonalLoan(SharedDriver_Borrower webDriver) {
 //        this.webDriver = webDriver;
     }
 

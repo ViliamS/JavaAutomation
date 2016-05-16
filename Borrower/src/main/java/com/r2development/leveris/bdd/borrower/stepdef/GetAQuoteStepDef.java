@@ -30,7 +30,7 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
     private static final Log log = LogFactory.getLog(GetAQuoteStepDef.class.getName());
 
     private boolean toSkip = false;
-    private final SharedDriver webDriver;
+    private final SharedDriver_Borrower webDriver;
 
     @Inject
     IUser user;
@@ -39,7 +39,7 @@ public class GetAQuoteStepDef /*extends BorrowerStepDef*/ {
     private IBuildQuotationPage buildQuotationPage;
 
     @Inject
-    GetAQuoteStepDef(SharedDriver webDriver) {
+    GetAQuoteStepDef(SharedDriver_Borrower webDriver) {
 //        formsMenu = new FormsMenu(WebDriverService.getWebDriverInstance());
 //        super(webDriver);
         this.webDriver = webDriver;

@@ -1,7 +1,7 @@
 package com.r2development.leveris.selenium.underwriter.pageobjects;
 
 import com.r2development.leveris.Underwriter;
-import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver_Underwriter;
 import com.r2development.leveris.selenium.underwriter.pageobjects.LoanApplication.ILoanApplicationPage;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -19,7 +19,7 @@ public class SideMenu extends Underwriter implements ISideMenu {
     protected IApplicationProcessesList applicationProcessesList;
     protected ISessionListPage sessionListPage;
 
-    public SideMenu(SharedDriver webDriver){
+    public SideMenu(SharedDriver_Underwriter webDriver){
         super(webDriver);
         this.webDriver = webDriver;
     }

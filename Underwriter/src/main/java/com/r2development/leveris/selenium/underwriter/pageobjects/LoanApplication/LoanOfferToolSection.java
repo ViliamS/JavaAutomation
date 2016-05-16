@@ -1,6 +1,6 @@
 package com.r2development.leveris.selenium.underwriter.pageobjects.LoanApplication;
 
-import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.underwriter.stepdef.SharedDriver_Underwriter;
 import com.r2development.leveris.utils.XpathBuilder.Enums.ACTION;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -12,7 +12,7 @@ public class LoanOfferToolSection extends LoanApplicationPage implements ILoanOf
 
     private WebDriver webDriver;
 
-    public LoanOfferToolSection(SharedDriver webDriver) {
+    public LoanOfferToolSection(SharedDriver_Underwriter webDriver) {
         super(webDriver);
         this.webDriver = webDriver;
     }
@@ -117,7 +117,7 @@ public class LoanOfferToolSection extends LoanApplicationPage implements ILoanOf
         isVisible(LOAN_OFFER_TOOL_ADD_CONDITION_BUTTON, true);
         clickElement(LOAN_OFFER_TOOL_ADD_CONDITION_BUTTON, INewLoanOfferConditionDialog.NEW_LOAN_OFFER_DIALOG_ADD_COMMENT_TEXTAREA);
         loadingCheck();
-        return new NewLoanOfferConditionDialog((SharedDriver) webDriver);
+        return new NewLoanOfferConditionDialog((SharedDriver_Underwriter) webDriver);
     }
 
     @Override

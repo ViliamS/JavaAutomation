@@ -2,10 +2,9 @@ package com.r2development.leveris.selenium.apollo.pageobjects;
 
 
 import com.r2development.leveris.Apollo;
-import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver;
+import com.r2development.leveris.bdd.apollo.stepdef.SharedDriver_Apollo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -17,7 +16,7 @@ class HeaderSection extends Apollo implements IHeaderSection {
 
     private static final Log log = LogFactory.getLog(ContactSection.class);
 
-    private SharedDriver webDriver;
+    private SharedDriver_Apollo webDriver;
 
     @FindBy( xpath =  VERSION_XPATH )
     private WebElement weVersion;
@@ -28,13 +27,13 @@ class HeaderSection extends Apollo implements IHeaderSection {
     @FindBy( xpath = LOG_OUT_PATH )
     private WebElement weLogOut;
 
-    public static IHeaderSection getHeaderSectionInstance(SharedDriver webDriver) {
+    public static IHeaderSection getHeaderSectionInstance(SharedDriver_Apollo webDriver) {
         IHeaderSection headerSection = new HeaderSection(webDriver);
         PageFactory.initElements(webDriver, headerSection);
         return headerSection;
     }
 
-    HeaderSection(SharedDriver webDriver) {
+    HeaderSection(SharedDriver_Apollo webDriver) {
         super(webDriver);
         this.webDriver = webDriver;
     }
