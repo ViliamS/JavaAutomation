@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?><ajax-response><evaluate><![CDATA[scTimeVar = new Date().getTime();]]></evaluate><evaluate><![CDATA[
+window.hideAllHelp && hideAllHelp();
+// destroy-checkbox-root16
+jQuery.checkbox.destroy($('#root16'));
+window.SC && SC._stopAllCallbacks('form2');
+window.SC && SC.destroy($('#form2'));
+$('#dialogWrapper1_0').remove();
+window.SC && SC._clearCache('form2');
+$('#root16  > div > div').hide();]]></evaluate><header-contribution><![CDATA[<head xmlns:wicket="http://wicket.apache.org"><link rel="stylesheet" type="text/css" href="resources/com.cleverlance.smartclient.console.web.theme.DefaultTheme/res/screen-form-shared.css?w:lm=1457703747" />
+<link rel="stylesheet" type="text/css" href="resources/com.cleverlance.abakus.ib.theme.abakus2.Abakus2DefaultTheme/res/screen-form.css?w:lm=1457703747" />
+<link rel="stylesheet" type="text/css" href="resources/com.cleverlance.abakus.ib.theme.abakus2.Abakus2DefaultTheme/res/scripted-widgets.css?w:lm=1457703747" />
+<script type="text/javascript" src="resources/org.apache.wicket.markup.html.WicketEventReference/wicket-event.js?w:lm=1457703747"></script>
+<script type="text/javascript" src="resources/org.apache.wicket.ajax.WicketAjaxReference/wicket-ajax.js?w:lm=1457703747"></script>
+</head>]]></header-contribution><component id="form2"  encoding="wicket1" ><![CDATA[<div id="form2" wicketpath="main_c_form" class="widget-screen-root widget-screen widget-screen-absolute sc-screen-center"><!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.screen.ScreenFormProcessorPanel$LocalScreenFormPanel BEGIN -->
+
+<div class="feedback-form feedback-box-top-jump" id="feedbackBox11a" wicketpath="main_c_form_feedbackBox1" style="display:none;">
+<div class="errorbox" style="display:none;" aria-live="assertive">
+<ul></ul>
+</div>
+<div id="feedback59" style="display:none"></div>
+</div>
+<div class="pre-widget-form">
+<form class="widget-form form2" autocomplete="off" id="form17" wicketpath="main_c_form_form" method="post" action="?wicket:interface=:1:main:c:form:form::IFormSubmitListener::" style="width:600px;height:280px;"><div style="width:0px;height:0px;position:absolute;left:-100px;top:-100px;overflow:hidden"><input type="hidden" name="form17_hf_0" id="form17_hf_0" /></div><div style="width:0px;height:0px;position:absolute;left:-100px;top:-100px;overflow:hidden"><input type="text" autocomplete="false" tabindex="-1" /><input type="submit" tabindex="-1" name="root:c:w:pnlMain:c:w:btnLogin:submit" onclick=" var b=document.getElementById('submit5a'); if (b!=null&amp;&amp;b.onclick!=null&amp;&amp;typeof(b.onclick) != 'undefined') {  var r = b.onclick.bind(b)(); if (r != false) b.click(); } else { b.click(); };  return false;"  /></div>
+<input type="hidden" name="scrollPos"/>
+<input type="hidden" value="" name="state" wicketpath="main_c_form_form_state"/>
+
+<div id="root58" wicketpath="main_c_form_form_root" data-path="root" data-type="panel" data-top="0" style="width:600px;height:280px;top:0px;left:0px;" class="widget widget-panel widget-enabled widget-absolute" data-multi="true"><!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.PanelWidgetComponent BEGIN --><div class="content control panel" wicketpath="main_c_form_form_root_c" aria-readonly="false"><div class="panel-inner"><div id="pnlMain4c" wicketpath="main_c_form_form_root_c_w_pnlMain" data-path="pnlMain" data-type="panel" data-top="0" style="width:600px;height:280px;top:0px;left:0px;" class="widget widget-panel panel-white widget-enabled widget-absolute" data-multi="true"><!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.PanelWidgetComponent BEGIN --><div id="label5b" wicketpath="main_c_form_form_root_c_w_pnlMain_label" class="label-widget label-left"></div><div class="content control panel" id="c5c" wicketpath="main_c_form_form_root_c_w_pnlMain_c" aria-readonly="false" aria-labelledby="label5b" data-readonly="false" data-enabled="true" data-height="280"><div class="panel-inner"><div id="lblTitle4b" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_lblTitle" data-path="pnlMain lblTitle" data-type="label" data-top="30" style="width:520px;height:40px;top:30px;left:40px;" class="widget widget-label page-title widget-enabled widget-align-center widget-absolute"><!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.LabelWidgetComponent BEGIN --><div class="content control sc-label" id="l5d" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_lblTitle_l" data-height="40"><span>Automatic Registration Done</span></div><!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.LabelWidgetComponent END --></div><div id="lblApp4d" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_lblApp" data-path="pnlMain lblApp" data-type="label" data-top="80" style="width:90px;height:30px;top:80px;left:40px;" class="widget widget-label widget-enabled widget-absolute"><!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.LabelWidgetComponent BEGIN --><div class="content control sc-label" id="l5e" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_lblApp_l" data-height="30"><span>Applicant:</span></div><!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.LabelWidgetComponent END --></div><div id="txtApp4e" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_txtApp" data-path="pnlMain txtApp" data-type="textbox" data-top="80" style="width:420px;height:30px;top:80px;left:140px;" class="widget widget-textbox bold widget-readonly widget-enabled widget-absolute"><!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.TextBoxWidgetComponent BEGIN --><label id="label5f" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_txtApp_label" for="tb60" class="label-widget label-left"></label><input type="text" class="content control field textbox" autocomplete="off" value="test.automation.b_api_20160311161023974@finfactory.com" name="root:c:w:pnlMain:c:w:txtApp:tb" id="tb60" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_txtApp_tb" readonly="readonly" aria-readonly="true" aria-labelledby="label5f" data-readonly="true" data-enabled="true" aria-required="false" data-height="30" tabindex="1002"/><!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.TextBoxWidgetComponent END --></div><div id="pnlCoapp4f" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_pnlCoapp" data-path="pnlMain pnlCoapp" data-type="panel" data-top="120" style="width:540px;height:0px;top:120px;left:40px;" data-moveup="true" class="widget widget-panel widget-enabled invisible widget-absolute" data-multi="true"><!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.PanelWidgetComponent BEGIN --><div id="label61" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_pnlCoapp_label" class="label-widget label-left"></div><div class="content control panel" id="c62" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_pnlCoapp_c" aria-readonly="false" aria-labelledby="label61" data-readonly="false" data-enabled="true" data-height="40"><div class="panel-inner"><div id="lblCoapp50" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_pnlCoapp_c_w_lblCoapp" data-path="pnlMain pnlCoapp lblCoapp" data-type="label" data-top="0" style="width:90px;height:30px;top:0px;left:0px;" class="widget widget-label widget-enabled widget-absolute"><!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.LabelWidgetComponent BEGIN --><div class="content control sc-label" id="l63" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_pnlCoapp_c_w_lblCoapp_l" data-height="30"><span>Coapplicant:</span></div><!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.LabelWidgetComponent END --></div><div id="txtCoapp51" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_pnlCoapp_c_w_txtCoapp" data-path="pnlMain pnlCoapp txtCoapp" data-type="textbox" data-top="0" style="width:420px;height:30px;top:0px;left:100px;" class="widget widget-textbox bold widget-readonly widget-enabled widget-absolute"><!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.TextBoxWidgetComponent BEGIN --><label id="label64" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_pnlCoapp_c_w_txtCoapp_label" for="tb65" class="label-widget label-left"></label><input type="text" class="content control field textbox" autocomplete="off" value="michal_t_cleverlance_test2091@finfactory.com" name="root:c:w:pnlMain:c:w:pnlCoapp:c:w:txtCoapp:tb" id="tb65" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_pnlCoapp_c_w_txtCoapp_tb" readonly="readonly" aria-readonly="true" aria-labelledby="label64" data-readonly="true" data-enabled="true" aria-required="false" data-height="30" tabindex="1003"/><!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.TextBoxWidgetComponent END --></div></div></div><div id="ce66" style="display:none"></div><!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.PanelWidgetComponent END --></div><div id="lblPass53" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_lblPass" data-path="pnlMain lblPass" data-type="label" data-top="120" style="width:90px;height:30px;top:120px;left:40px;" class="widget widget-label widget-enabled widget-absolute"><!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.LabelWidgetComponent BEGIN --><div class="content control sc-label" id="l67" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_lblPass_l" data-height="30"><span>Password:</span></div><!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.LabelWidgetComponent END --></div><div id="txtPass52" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_txtPass" data-path="pnlMain txtPass" data-type="textbox" data-top="120" style="width:420px;height:30px;top:120px;left:140px;" class="widget widget-textbox bold widget-readonly widget-enabled widget-absolute"><!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.TextBoxWidgetComponent BEGIN --><label id="label68" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_txtPass_label" for="tb69" class="label-widget label-left"></label><input type="text" class="content control field textbox" autocomplete="off" value="Password1122+" name="root:c:w:pnlMain:c:w:txtPass:tb" id="tb69" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_txtPass_tb" readonly="readonly" aria-readonly="true" aria-labelledby="label68" data-readonly="true" data-enabled="true" aria-required="false" data-height="30" tabindex="1004"/><!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.TextBoxWidgetComponent END --></div><div id="pnlQuote54" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_pnlQuote" data-path="pnlMain pnlQuote" data-type="panel" data-top="160" style="width:540px;height:0px;top:160px;left:40px;" data-moveup="true" class="widget widget-panel widget-enabled invisible widget-absolute" data-multi="true"><!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.PanelWidgetComponent BEGIN --><div id="label6a" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_pnlQuote_label" class="label-widget label-left"></div><div class="content control panel" id="c6b" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_pnlQuote_c" aria-readonly="false" aria-labelledby="label6a" data-readonly="false" data-enabled="true" data-height="40"><div class="panel-inner"><div id="lblQuote55" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_pnlQuote_c_w_lblQuote" data-path="pnlMain pnlQuote lblQuote" data-type="label" data-top="0" style="width:170px;height:30px;top:0px;left:0px;" class="widget widget-label widget-enabled widget-absolute"><!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.LabelWidgetComponent BEGIN --><div class="content control sc-label" id="l6c" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_pnlQuote_c_w_lblQuote_l" data-height="30"><span>Quotation is completed.</span></div><!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.LabelWidgetComponent END --></div><div id="lblJoint56" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_pnlQuote_c_w_lblJoint" data-path="pnlMain pnlQuote lblJoint" data-type="label" data-top="0" style="width:190px;height:30px;top:0px;left:170px;" class="widget widget-label widget-enabled widget-absolute"><!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.LabelWidgetComponent BEGIN --><div class="content control sc-label" id="l6d" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_pnlQuote_c_w_lblJoint_l" data-height="30"><span>Invitation is completed.</span></div><!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.LabelWidgetComponent END --></div></div></div><div id="ce6e" style="display:none"></div><!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.PanelWidgetComponent END --></div><div id="btnLogin57" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_btnLogin" data-path="pnlMain btnLogin" data-type="button" data-top="170" style="width:520px;height:70px;top:170px;left:40px;" class="widget widget-submit uppercase button-main red widget-enabled widget-absolute"><!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.SubmitWidgetComponent BEGIN --><a class="content control submit sc-button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="submit5a" wicketpath="main_c_form_form_root_c_w_pnlMain_c_w_btnLogin_submit" href="javascript:void(0);" aria-readonly="false" style="line-height: 66px !important;" onclick="if($('#form17').valid()&amp;&amp;SC._validate('form2')){SC._submit.apply(this,['form17','form2','scAjax.apply(this,[2,0,\'?wicket:interface=:1:main:c:form:form:root:c:w:pnlMain:c:w:btnLogin:submit::IBehaviorListener:0:&amp;${scrollPos}\',\'busyIndicator19\',0,0,2,\'root:c:w:pnlMain:c:w:btnLogin:submit\',\'form17\']^);']^);};return false;" data-readonly="false" data-enabled="true" data-height="70" tabindex="1005">Opoqo Login</a><!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.SubmitWidgetComponent END --></div></div></div><div id="ce6f" style="display:none"></div><!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.PanelWidgetComponent END --></div></div></div><div id="ce70" style="display:none"></div><!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.widget.PanelWidgetComponent END --></div>
+<div class="loading-layer"></div>
+<div style="display:none;"><input value="2" type="hidden" name="stepToken"/></div>
+</form>
+<div style="display:none;" class="dialog-wrapper" id="dialogWrapper1_1" wicketpath="main_c_form_dialogWrapper">
+<div id="dialog46" style="display:none"></div>
+</div>
+<div id="embeddedFormWrapper47" style="display:none"></div>
+
+</div>
+<!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.form.screen.ScreenFormProcessorPanel$LocalScreenFormPanel END --></div>]]></component><component id="title26" ><![CDATA[<h2 id="title26" style="display:none"></h2>]]></component><component id="formFooter48" ><![CDATA[<div id="formFooter48" style="display:none"></div>]]></component><component id="formHeader27" ><![CDATA[<div id="formHeader27" style="display:none"></div>]]></component><evaluate><![CDATA[window.showLastBusyIndicator && showLastBusyIndicator();]]></evaluate><evaluate encoding="wicket1"><![CDATA[
+var event = window.event;
+SC._setFormName('form2', 'RegistrationHiddenFinalize');
+
+SC.busyIndicator="busyIndicator19";
+SC.bigBusyIndicator="busyIndicatorBig";$('#main18').addClass('unprintable')
+SC._setCallOperationUrl("?wicket:interface=:1:main:c:form::ICallOperationListener:0:","form2");
+SC._setLazyCallUrl("?wicket:interface=:1:main:c:form::ILazyCallListener:1:","form2");
+SC._setRefreshUrl("?wicket:interface=:1:main:c:form::IRefreshListener:3:","form2");
+SC._setFormChangeUrl("?wicket:interface=:1:main:c:form::IFormChangeListener:2:","form2");
+SC._setFeedback("feedbackBox11a","form2");
+SC._setRequiredType("label", "form2");
+SC._requiredSuffix = $.parseHTML('<div></div>')[0]^.innerHTML.toLowerCase();
+SC._optionalSuffix = $.parseHTML('<div><span class=\"label-suffix\">(optional)<\/span></div>')[0]^.innerHTML.toLowerCase();
+SC._setDefaultFormats({date: 'dd/MM/yyyy', time: 'hh:mm:ss a', datetime: 'dd/MM/yyyy hh:mm:ss a',integer: '#,##0', decimal: '#,##0.##', currency: '#,##0.00'});
+
+    var time = new Date();
+$('#form2[title]^, #form2 [title]^').tooltip();
+SC.utils.timeLog(time, "tooltips have been initialized", null, 'tooltips init');
+
+    var time = new Date();
+var form = $('#form17');
+form.validate({"ignoreTitle":true,"keepBubleAfterFocusLostVisibleForTime":0,"ignoreFocusoutRequiredValidation":true,"globalFormError":true,"live":false});
+form.bind('invalid-form', function() { SC.utils.resetWidgets(form); });
+
+SC.utils.timeLog(time, "client validations have been initialized", null, 'validations init');
+
+SC._setWidgets({'lblTitle4b':{'p':'pnlMain4c','mh':40,'fw':{'lblApp4d':{'d':10},'txtApp4e':{'d':10}},'pw':{} /* pnlMain lblTitle */ },
+'lblApp4d':{'p':'pnlMain4c','mh':30,'fw':{'pnlCoapp4f':{'d':10}},'pw':{'lblTitle4b':{'d':10}} /* pnlMain lblApp */ },
+'txtApp4e':{'p':'pnlMain4c','mh':30,'fw':{'pnlCoapp4f':{'d':10}},'pw':{'lblTitle4b':{'d':10}} /* pnlMain txtApp */ },
+'lblCoapp50':{'p':'pnlCoapp4f','mh':30,'fw':{},'pw':{} /* pnlMain pnlCoapp lblCoapp */ },
+'txtCoapp51':{'p':'pnlCoapp4f','mh':30,'fw':{},'pw':{} /* pnlMain pnlCoapp txtCoapp */ },
+'pnlCoapp4f':{'p':'pnlMain4c','children':['lblCoapp50','txtCoapp51']^,'bd':10,'fw':{'txtPass52':{'d':0},'lblPass53':{'d':0}},'pw':{'lblApp4d':{'d':10},'txtApp4e':{'d':10}} /* pnlMain pnlCoapp */ },
+'lblPass53':{'p':'pnlMain4c','mh':30,'fw':{'pnlQuote54':{'d':10}},'pw':{'pnlCoapp4f':{'d':0}} /* pnlMain lblPass */ },
+'txtPass52':{'p':'pnlMain4c','mh':30,'fw':{'pnlQuote54':{'d':10}},'pw':{'pnlCoapp4f':{'d':0}} /* pnlMain txtPass */ },
+'lblQuote55':{'p':'pnlQuote54','mh':30,'fw':{},'pw':{} /* pnlMain pnlQuote lblQuote */ },
+'lblJoint56':{'p':'pnlQuote54','mh':30,'fw':{},'pw':{} /* pnlMain pnlQuote lblJoint */ },
+'pnlQuote54':{'p':'pnlMain4c','children':['lblQuote55','lblJoint56']^,'bd':10,'fw':{'btnLogin57':{'d':10}},'pw':{'txtPass52':{'d':10},'lblPass53':{'d':10}} /* pnlMain pnlQuote */ },
+'btnLogin57':{'p':'pnlMain4c','mh':70,'fw':{},'pw':{'pnlQuote54':{'d':10}} /* pnlMain btnLogin */ },
+'pnlMain4c':{'p':'root58','children':['lblTitle4b','lblApp4d','txtApp4e','pnlCoapp4f','lblPass53','txtPass52','pnlQuote54','btnLogin57']^,'bd':40,'fw':{},'pw':{} /* pnlMain */ },
+'root58':{'p':'form17','root':true,'children':['pnlMain4c']^,'bd':0 /* root */ }
+}, "form2");
+// create-dynamic-tooltip-root58
+
+    var time = new Date();
+SC._updateDynamicTooltip($('#root58 .dynamic-tooltip'));
+SC.utils.timeLog(time, "dynamic tooltips have been initialized", null, 'dynamic-tooltip init');
+
+SC._setValidation(function() {
+this.valid = true;
+return this.valid;
+}, 'form2');
+SC._setGrayLogic(function(event, scdata) {
+
+try{
+    var time = new Date();
+if (!SC.utils._eventFix(event, scdata)) {
+    return false;
+}
+SC.utils.timeLog(time, function(p) { return "" + event.type + ", " + (event.widget ? event.widget.getPath() : '-') + " (form: " + event.form + ")" }, null, 'form logic - start');
+
+
+//
+// gray logic script - begin
+//
+
+// dynamic script begin: RegistrationHiddenFinalize
+// dynamic script end: RegistrationHiddenFinalize
+
+//
+// gray logic script - end
+//
+
+SC.utils.timeLog(time, function(p) { return "" + event.type + ", " + (event.widget ? event.widget.getPath() : '-') + " (form: " + event.form + ")" }, null, 'form logic - end');
+
+}catch(err){SC.scriptCatchBody(0,'RegistrationHiddenFinalize',err);};
+}, 'form2');
+SC.init($('#form2'), false, true);
+SC.postAjaxEvents.push(function() {
+SC.initTabRestrictions('form2');
+});
+$('#form2 .form2 :input.content:not(:submit):not(.no-gray-logic)').bind('focusin change blur', function(jqevent) {
+var event={type:jqevent.type=='focusin'?'focus':jqevent.type,jqevent:jqevent};
+event.widget=SC.utils.grayLogicPrepare(jqevent,0,'form2');if (event.widget) {
+SC.fireEvent(null,'form2',typeof event!=='undefined'&&event!==null&&event.widget&&event.widget.getPath(),false,event);
+}});
+$('#form2 .form2 :text, #form2 .form2 :password, #form2 .form2 textarea').bind('keyup', function(jqevent) {
+var event={type:jqevent.type=='focusin'?'focus':jqevent.type,jqevent:jqevent};
+event.widget=SC.utils.grayLogicPrepare(jqevent,0,'form2');if (event.widget) {
+SC.fireEvent(null,'form2',typeof event!=='undefined'&&event!==null&&event.widget&&event.widget.getPath(),false,event);
+}});
+$('#form2 .form2 .clickable > .content').bind('click', function(jqevent) {
+var event={type:jqevent.type=='focusin'?'focus':jqevent.type,jqevent:jqevent};
+event.widget=SC.utils.grayLogicPrepare2(jqevent,0,'form2');if (event.widget) {
+SC.fireEvent(null,'form2',typeof event!=='undefined'&&event!==null&&event.widget&&event.widget.getPath(),false,event);
+}});
+SC.fireEvent('ready','form2',typeof event!=='undefined'&&event!==null&&event.widget&&event.widget.getPath(),false,null);
+SC.doLayout('form2');$('#form2 .loading-layer').hide();]]></evaluate><evaluate><![CDATA[Abakus.chat.init('null');]]></evaluate><evaluate><![CDATA[
+SC.utils.renderHistoryObject(2);]]></evaluate><evaluate><![CDATA[SC.utils.confirmLeaving.set(false);]]></evaluate><evaluate><![CDATA[niceButtons();]]></evaluate><evaluate><![CDATA[window.hideLastBusyIndicator && hideLastBusyIndicator();]]></evaluate><evaluate><![CDATA[
+if (window.scConsole) {
+scConsole.log('ajax request', 'server time', 1699);
+scConsole.log('ajax request', 'client time', new Date().getTime() - scTimeVar);}]]></evaluate></ajax-response>

@@ -704,7 +704,19 @@ public class XPathBuilderTest {
         Assert.assertEquals("not equals", xpath, xpath2);
 
         xpath = getXPath_DivEqualsDataPath("pnl-adv-search txtSearch") + getXPath_HasADescendantLabelEqualsText("SEARCH TEXT") + getXPath_ContainsWicketpath(input, "txtSearch");
-        
-        
+        System.out.println(xpath);
+        xpath2 = "";
+//        Assert.assertEquals("not equals", xpath, xpath2);
+
+        xpath = getXPath_DivEqualsDataPath("lnk-adv-options") + getXPath_DirectAButtonAndContainsWicketpath("lnk-adv-options_script") + getXPath_SpanEqualsText("Hide advanced options");
+        System.out.println(xpath);
+        xpath2 = "//div[@data-path='lnk-adv-options']/a[contains(@wicketpath,'lnk-adv-options_script') and contains(@wicketpath,'lnk-adv-options_script')]//span[text()='Hide advanced options']";
+        Assert.assertEquals("not equals", xpath, xpath2);
+
+        xpath = getXPath_DivEqualsDataPath("lnk-adv-options") + getXPath_DirectAButtonAndContainsWicketpath("lnk-adv-options_script") + getXPath_SpanEqualsText("Show advanced options");
+        System.out.println(xpath);
+        xpath2 = "//div[@data-path='lnk-adv-options']/a[contains(@wicketpath,'lnk-adv-options_script') and contains(@wicketpath,'lnk-adv-options_script')]//span[text()='Show advanced options']";
+        Assert.assertEquals("not equals", xpath, xpath2);
+
     }
 }

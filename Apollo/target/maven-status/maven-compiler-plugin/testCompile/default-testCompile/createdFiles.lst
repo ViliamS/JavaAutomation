@@ -1,0 +1,7 @@
+com/r2development/leveris/bdd/apollo/runner/ApolloRunner.class
+com/r2development/leveris/bdd/apollo/runner/LoginClientRunner.class
+com/r2development/leveris/tdd/apollo/sso/LoginClientTest.class
+com/r2development/leveris/bdd/apollo/runner/LoginPaymentRunner.class
+com/r2development/leveris/tdd/apollo/sso/LoginPaymentTest.class
+com/r2development/leveris/bdd/stats/CucumberListSteps.class
+com/r2development/leveris/bdd/apollo/bddtest/DemoApolloJavaNot8.class

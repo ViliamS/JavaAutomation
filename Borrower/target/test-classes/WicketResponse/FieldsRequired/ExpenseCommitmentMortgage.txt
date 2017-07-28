@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><ajax-response><evaluate><![CDATA[scTimeVar = new Date().getTime();]]></evaluate><component id="feedback1d95" ><![CDATA[<div class="feedbackbox" id="feedback1d95" wicketpath="main_c_form_dialogWrapper_dialog_feedbackBox1_feedback" aria-live="assertive"><!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.desktop.component.feedback.FormFeedbackPanel BEGIN -->
+<ul class="feedbackul" wicketpath="main_c_form_dialogWrapper_dialog_feedbackBox1_feedback_feedbackul">
+<li class="widget-label error" onclick="return feedback.clickFocus(this);" id="id01de4" wicketpath="main_c_form_dialogWrapper_dialog_feedbackBox1_feedback_feedbackul_messages_0" data-for="tb1da9">
+<a href="javascript:void(0);" class="close ui-corner-all" onclick="return feedback.close($(this), event);" wicketpath="main_c_form_dialogWrapper_dialog_feedbackBox1_feedback_feedbackul_messages_0_close" title="Hide message">
+<span class="ui-icon ui-icon-closethick">Hide message</span>
+</a>
+<div class="title" server="true" wicketpath="main_c_form_dialogWrapper_dialog_feedbackBox1_feedback_feedbackul_messages_0_title">Outstanding amount (balance)</div>
+<div class="desc" server="true" wicketpath="main_c_form_dialogWrapper_dialog_feedbackBox1_feedback_feedbackul_messages_0_desc">Field is required.</div>
+</li><li class="widget-label error" onclick="return feedback.clickFocus(this);" id="id11de5" wicketpath="main_c_form_dialogWrapper_dialog_feedbackBox1_feedback_feedbackul_messages_1" data-for="tb1daf">
+<a href="javascript:void(0);" class="close ui-corner-all" onclick="return feedback.close($(this), event);" wicketpath="main_c_form_dialogWrapper_dialog_feedbackBox1_feedback_feedbackul_messages_1_close" title="Hide message">
+<span class="ui-icon ui-icon-closethick">Hide message</span>
+</a>
+<div class="title" server="true" wicketpath="main_c_form_dialogWrapper_dialog_feedbackBox1_feedback_feedbackul_messages_1_title">Financial institution</div>
+<div class="desc" server="true" wicketpath="main_c_form_dialogWrapper_dialog_feedbackBox1_feedback_feedbackul_messages_1_desc">Field is required.</div>
+</li><li class="widget-label error" onclick="return feedback.clickFocus(this);" id="id21de6" wicketpath="main_c_form_dialogWrapper_dialog_feedbackBox1_feedback_feedbackul_messages_2" data-for="tb1d94">
+<a href="javascript:void(0);" class="close ui-corner-all" onclick="return feedback.close($(this), event);" wicketpath="main_c_form_dialogWrapper_dialog_feedbackBox1_feedback_feedbackul_messages_2_close" title="Hide message">
+<span class="ui-icon ui-icon-closethick">Hide message</span>
+</a>
+<div class="title" server="true" wicketpath="main_c_form_dialogWrapper_dialog_feedbackBox1_feedback_feedbackul_messages_2_title">Final repayment date</div>
+<div class="desc" server="true" wicketpath="main_c_form_dialogWrapper_dialog_feedbackBox1_feedback_feedbackul_messages_2_desc">Field is required.</div>
+</li><li class="widget-label error" onclick="return feedback.clickFocus(this);" id="id31de7" wicketpath="main_c_form_dialogWrapper_dialog_feedbackBox1_feedback_feedbackul_messages_3" data-for="tb1dbd">
+<a href="javascript:void(0);" class="close ui-corner-all" onclick="return feedback.close($(this), event);" wicketpath="main_c_form_dialogWrapper_dialog_feedbackBox1_feedback_feedbackul_messages_3_close" title="Hide message">
+<span class="ui-icon ui-icon-closethick">Hide message</span>
+</a>
+<div class="title" server="true" wicketpath="main_c_form_dialogWrapper_dialog_feedbackBox1_feedback_feedbackul_messages_3_title">Repayment amount</div>
+<div class="desc" server="true" wicketpath="main_c_form_dialogWrapper_dialog_feedbackBox1_feedback_feedbackul_messages_3_desc">Field is required.</div>
+</li>
+</ul>
+<!-- MARKUP FOR com.cleverlance.smartclient.frontend.wicket.desktop.component.feedback.FormFeedbackPanel END --></div>]]></component><evaluate><![CDATA[window.showLastBusyIndicator && showLastBusyIndicator();]]></evaluate><evaluate><![CDATA[
+SC.utils.resetWidgets('dialog134e');
+$('#feedbackBox11d44').show();]]></evaluate><evaluate encoding="wicket1"><![CDATA[feedback.synchronizeAriaIds([{"elm":"tb1da9","lbl":"id01de4"},{"elm":"tb1daf","lbl":"id11de5"},{"elm":"tb1d94","lbl":"id21de6"},{"elm":"tb1dbd","lbl":"id31de7"}]^);]]></evaluate><evaluate><![CDATA[niceButtons();]]></evaluate><evaluate><![CDATA[window.hideLastBusyIndicator && hideLastBusyIndicator();]]></evaluate><evaluate><![CDATA[
+if (window.scConsole) {
+scConsole.log('ajax request', 'server time', 34);
+scConsole.log('ajax request', 'client time', new Date().getTime() - scTimeVar);}]]></evaluate></ajax-response>

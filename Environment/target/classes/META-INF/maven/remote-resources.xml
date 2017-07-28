@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<remoteResourcesBundle xsi:schemaLocation="http://maven.apache.org/remote-resources/1.1.0 http://maven.apache.org/xsd/remote-resources-1.1.0.xsd"
+    xmlns="http://maven.apache.org/remote-resources/1.1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <remoteResources>
+    <remoteResource>dev1.properties</remoteResource>
+    <remoteResource>dev2.properties</remoteResource>
+    <remoteResource>it1.properties</remoteResource>
+    <remoteResource>st1.properties</remoteResource>
+    <remoteResource>stable.properties</remoteResource>
+  </remoteResources>
+  <sourceEncoding>UTF-8</sourceEncoding>
+</remoteResourcesBundle>

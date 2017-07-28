@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Apollo/Apollo.iml" filepath="$PROJECT_DIR$/Apollo/Apollo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Borrower/Borrower.iml" filepath="$PROJECT_DIR$/Borrower/Borrower.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Environment/Environment.iml" filepath="$PROJECT_DIR$/Environment/Environment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Investor/Investor.iml" filepath="$PROJECT_DIR$/Investor/Investor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Testing/Testing.iml" filepath="$PROJECT_DIR$/Testing/Testing.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Underwriter/Underwriter.iml" filepath="$PROJECT_DIR$/Underwriter/Underwriter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aut-leveris-root.iml" filepath="$PROJECT_DIR$/aut-leveris-root.iml" />
+    </modules>
+  </component>
+</project>

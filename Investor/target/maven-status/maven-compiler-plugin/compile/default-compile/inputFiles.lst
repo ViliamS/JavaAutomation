@@ -1,0 +1,8 @@
+/Users/ViliamS/Repository/14042016/qa_automation-leveris/Investor/src/main/java/com/r2development/leveris/bdd/investor/apistepdef/ApiSsoStepDef.java
+/Users/ViliamS/Repository/14042016/qa_automation-leveris/Investor/src/main/java/com/r2development/leveris/bdd/investor/apistepdef/WebSocketClient.java
+/Users/ViliamS/Repository/14042016/qa_automation-leveris/Investor/src/main/java/com/r2development/leveris/di/AInvestorHttpContext.java
+/Users/ViliamS/Repository/14042016/qa_automation-leveris/Investor/src/main/java/com/r2development/leveris/bdd/investor/apistepdef/ApiOpoqoInvestorStepDef.java
+/Users/ViliamS/Repository/14042016/qa_automation-leveris/Investor/src/main/java/com/r2development/leveris/di/IAInvestorHttpContext.java
+/Users/ViliamS/Repository/14042016/qa_automation-leveris/Investor/src/main/java/com/r2development/leveris/bdd/investor/apistepdef/ApiRegisterPageStepDef.java
+/Users/ViliamS/Repository/14042016/qa_automation-leveris/Investor/src/main/java/com/r2development/leveris/bdd/investor/apistepdef/ApiSupportHttpClientStepDef.java
+/Users/ViliamS/Repository/14042016/qa_automation-leveris/Investor/src/main/java/com/r2development/leveris/di/InvestorDependenciesModule.java

@@ -1,0 +1,12 @@
+com/r2development/leveris/bdd/investor/apistepdef/ApiRegisterPageStepDef$2.class
+com/r2development/leveris/bdd/investor/apistepdef/ApiRegisterPageStepDef$1.class
+com/r2development/leveris/di/IAInvestorHttpContext.class
+com/r2development/leveris/bdd/investor/apistepdef/ApiRegisterPageStepDef$3.class
+com/r2development/leveris/di/InvestorDependenciesModule.class
+com/r2development/leveris/bdd/investor/apistepdef/ApiRegisterPageStepDef.class
+com/r2development/leveris/bdd/investor/apistepdef/ApiSsoStepDef.class
+com/r2development/leveris/bdd/investor/apistepdef/ApiSupportHttpClientStepDef.class
+com/r2development/leveris/bdd/investor/apistepdef/ApiOpoqoInvestorStepDef.class
+com/r2development/leveris/bdd/investor/apistepdef/ApiRegisterPageStepDef$4.class
+com/r2development/leveris/bdd/investor/apistepdef/WebSocketClient.class
+com/r2development/leveris/di/AInvestorHttpContext.class

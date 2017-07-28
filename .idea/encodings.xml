@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ACMExcel" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Apollo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Borrower" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/DataValidator" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Environment" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Investor" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ORAsql" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Testing" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Underwriter" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>
