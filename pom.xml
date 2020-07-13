@@ -73,7 +73,7 @@
         <org-hamcrest.hamcrest-junit.version>2.0.0.0</org-hamcrest.hamcrest-junit.version>
         <commons-logging.commons-logging.version>1.2</commons-logging.commons-logging.version>
         <com.github.detro.version>1.2.0</com.github.detro.version>
-        <com-google-guava.guava.version>19.0</com-google-guava.guava.version>
+        <com-google-guava.guava.version>28.1-jre</com-google-guava.guava.version>
         <org-apache-commons.commons-lang3.version>3.4</org-apache-commons.commons-lang3.version>
         <commons-io.commons-io.version>2.4</commons-io.commons-io.version>
         <org-jsoup.jsoup.version>1.8.3</org-jsoup.jsoup.version>
