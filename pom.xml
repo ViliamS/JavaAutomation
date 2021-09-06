@@ -75,7 +75,7 @@
         <com.github.detro.version>1.2.0</com.github.detro.version>
         <com-google-guava.guava.version>28.1-jre</com-google-guava.guava.version>
         <org-apache-commons.commons-lang3.version>3.4</org-apache-commons.commons-lang3.version>
-        <commons-io.commons-io.version>2.4</commons-io.commons-io.version>
+        <commons-io.commons-io.version>2.7</commons-io.commons-io.version>
         <org-jsoup.jsoup.version>1.14.2</org-jsoup.jsoup.version>
         <commons-collections.commons-collections.version>3.2.2</commons-collections.commons-collections.version>
         <org-apache-commons.commons-collections4.version>4.1</org-apache-commons.commons-collections4.version>
